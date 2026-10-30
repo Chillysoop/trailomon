@@ -10,7 +10,7 @@ Review server uses Python standard library and loopback port 8765. Check `/api/h
 
 FINISH is delivered automatically only while a live `--wait` process is monitored by an active agent turn. After a turn ends, answers remain on disk for the next session. If the local server is unavailable, download/clipboard fallback and browser storage retain answers. Tests use isolated response folders, never owner answers.
 
-Setup steps 1–9 are complete locally. The first review is published, continuation instructions were given, and the setup PR still needs CI/merge. Open this folder in Codex or Claude and say "continue" in a later session. Read hosted and local responses before selecting work.
+Setup steps 1–9 are complete and delivered through PR 2. The first review is published, continuation instructions were given, and the owner's actual phone FINISH submission was received and mirrored successfully. Open this folder in Codex or Claude and say "continue" in a later session. Read hosted and local responses before selecting work.
 
 2026-10-30: Owner could not open localhost on a phone. Fixed delivery by deploying the owner-private Site recorded in `reviews/hosted-site.json`. Send its HTTPS URL by default. Same ChatGPT account sign-in is required. Hosted API, private database, and FINISH were tested locally at phone size; native Sites confirmed production deployment. Agent tools read submitted chunks and `tools/import_hosted_review.py` mirrors them into the portable file bridge. No synthetic production answers were written.
 

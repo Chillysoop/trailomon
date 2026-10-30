@@ -6,7 +6,7 @@ Updated October 30, 2026. Scope: one polished Windows expedition before new regi
 
 | ID | Goal and review link | Done means | Validation | Status |
 | --- | --- | --- | --- | --- |
-| S1 | Establish the owner's development and review workflow | Plan, roadmap, shared agent rules, durable memory, review server/template, answer bridge, and a working plan review; existing playable retained | Server unit tests; browser YES/NO/comment/autosave/FINISH and fallback tests; existing game checks; branch, PR, CI, and merge verified | doing |
+| S1 | Establish the owner's development and review workflow | Plan, roadmap, shared agent rules, durable memory, review server/template, answer bridge, and a working plan review; existing playable retained | Server unit tests; browser YES/NO/comment/autosave/FINISH and fallback tests; existing game checks; branch, PR, CI, and merge verified | done (PR #2) |
 | S2 | Record repeatable bot playtests | A command plays full seeded runs and writes per-run outcomes, decisions, resource lows, waits, and stalls; baseline stored as evidence | Fixed-seed repeatability; existing eighty-run check retained; deliberate stall/error reported with context | todo |
 
 ## Core systems
