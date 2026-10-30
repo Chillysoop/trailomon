@@ -266,6 +266,14 @@ Provide seven functional views: depot and preparation, travel, map, crew and sup
 
 Use mouse interaction with keyboard navigation, Space to pause travel, and Escape to close a noncritical panel. No timed responses or reflex requirements. Costs and outcomes use text and icons as well as color. Include independent sound controls, text speed or instant text, and an option to reduce motion. Optional flavor inspection must not secretly advance expedition time.
 
+### Creature art and Sprite Fusion workflow
+
+Use Sprite Fusion for original creature sprite studies and subsequent production variants. Establish the palette, outline treatment, scale beside the wagon, and readable silhouette with one creature before expanding the roster. The initial [Brindlehorn studies](../assets/concepts/README.md) test russet and cream fur, sage harnesses, and broad antlers. They are concept alternatives; their varying dimensions and camera angles still need production cleanup.
+
+The intended sequence is to generate a concept, edit the selected asset into the required pose, use that asset as a style reference for the next creature, then animate approved poses. Keep source asset IDs and prompts with each study. Validate actual output dimensions, transparency, pivot alignment, and frame consistency before importing images into Defold atlases. Favor a small idle loop and a readable walk cycle over many actions.
+
+Eight-direction generation is available if a later camera design needs it. The first playable uses a side view, so additional directions are outside its art budget. Normal maps are optional for a later lighting experiment; the initial presentation uses ordinary sprite lighting. Sprite Fusion requests belong in development tooling, with credentials kept outside project files and builds. See the [API reference](https://www.spritefusion.com/docs/pixel-art-generator/api/api-reference) for generation, editing, style references, directional sets, animation, and normal maps.
+
 ## 12 First playable scope
 
 The first playable proves a complete, replayable expedition with connected creature and survival decisions. It is not the full game's content foundation multiplied across many regions.
@@ -460,7 +468,9 @@ The prototype supplies defaults for these questions so implementation can procee
 
 ## 16 Design references
 
-These references explain the expedition structure and useful sequel additions. The systems and fictional content above are the proposed Trailomon design.
+The early Oregon Trail games are the primary structural references. Their sequels supply selected refinements, and creature games supply lessons about companions, readability, and discovery. The adaptations below are design proposals, not claims that the reference games implement Trailomon's systems. When influences conflict, preserve the expedition's relaxed rhythm and meaningful resource decisions.
+
+### Expedition structure: highest priority
 
 - [Surviving 1975 Oregon Trail code](https://github.com/fortran-gaming/oregon-trail-1975/blob/main/oregon-trail-1975.bas): a compact resource economy with competing uses for time and supplies.
 - [Philip Bouchard on the 1985 design framework](https://www.philipbouchard.com/oregon-trail/imagining-design.html): daily simulation inside a landmark-based journey.
@@ -470,3 +480,20 @@ These references explain the expedition structure and useful sequel additions. T
 - [Oregon Trail 3rd Edition manual](https://archive.org/details/oregon_trail_3rd_edition_manual): companions with different skills and personalities.
 - [Oregon Trail 4th Edition manual archive](https://www.old-games.ru/game/download/7738.html): preparation packages and companion assistance.
 - [Oregon Trail 5th Edition manual](https://paperzz.com/doc/9206938/oregon-trail%C2%AE-5th-edition--adventures-along-the-oregon-tr...): journey recording and varied ways to obtain supplies.
+
+### Creature identity and discovery: supporting references
+
+Include a small selection of creature games, each with a specific design question. These are references for studying systems and presentation, not sources of characters, names, sprite shapes, interfaces, or setting details.
+
+| Reference | What to study | Trailomon application | Scope boundary |
+| --- | --- | --- | --- |
+| **Pokémon Red / Blue** | How compact sprites, memorable creature identities, and a limited traveling team make individual companions easy to recognize | Give every prototype species a distinct silhouette, a clear expedition role, and a name players remember; make choosing the starting crew consequential | Keep the expedition as the central activity. Gym progression, a large elemental chart, collection quotas, and repeated battles for levels are excluded |
+| **Pokémon Mystery Dungeon: Explorers of Sky** | A persistent exploration team, preparation at a home base, food and move resources during outings, and consequences for failed expeditions | Treat a journey as an outing with a chosen crew and a shared supply budget; let returning companions accumulate memories and support another attempt | Use Trailomon's forgiving recovery rules. Dungeon grids, per-step input, extensive item management, and permanent stat grinding are outside the prototype |
+| **New Pokémon Snap** | Returning to familiar courses to discover changed encounters and behaviors; day/night and research-level variations | Give familiar trail segments different eligible wildlife scenes under rain, cold, crew composition, and prior discoveries. Journal knowledge should suggest something specific to investigate next time | Implement a few authored conditions and follow-ups. Photography, timed reactions, research-level grinding, and a full day/night simulation are excluded |
+| **Monster Sanctuary** | Creatures with useful exploration abilities as well as combat roles, and complementary team composition | Make the same physical trait useful in both contexts: Brindlehorn braces a wagon and guards cargo; Bellmoth scouts the trail and distracts a threat | Replace mandatory ability gates with alternate costs and approaches. A missing species must not block the only route; large skill trees and deep combo combat are excluded |
+
+Primary reference material: [Pokémon Red official overview](https://www.nintendo.com/en-gb/Games/Game-Boy/Pokemon-Red-Version-266109.html), [Explorers of Sky instruction booklet](https://www.nintendo.com/eu/media/downloads/games_8/emanuals/nintendo_ds_21/Manual_NintendoDS_PokemonMysteryDungeonExplorersOfSky_EN.pdf), [New Pokémon Snap official tips](https://www.pokemon.com/uk/features/top-tips-to-begin-your-new-pokemon-snap-journey), and [Monster Sanctuary developer overview](https://monster-sanctuary.com/).
+
+Mystery Dungeon is the most useful creature-side structural comparison because it connects preparation, companions, limited expedition resources, and returning home. Snap is especially useful for repeat visits and a world that feels alive. Monster Sanctuary tests whether every creature deserves a place outside battle. Early Pokémon is the reference for immediate recognition and affection for a small team.
+
+For the prototype, test those lessons with three concrete situations: the same river approached by two different crews, a discovery encounter whose eligibility changes with conditions or prior help, and a returning companion whose journal records a shared incident. These tests fit the existing content budget. A larger reference list is unnecessary until a specific unresolved design problem calls for it.

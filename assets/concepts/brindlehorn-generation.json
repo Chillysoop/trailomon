@@ -1,0 +1,120 @@
+{
+  "tool": "Sprite Fusion API",
+  "operation": "generate",
+  "prompt": "A Brindlehorn, an original gentle grassland wagon-hauling creature. Squat sturdy four-legged body, shaggy russet and warm cream fur, small rounded ears, broad branching hollow antlers like weathered reedwood, dark hooves, long low muzzle, thoughtful small dark eyes. Woven sage-green harness and a simple wooden yoke. Full body, strict side view facing right, standing calmly with four feet planted, readable chunky silhouette. Restrained earthy palette with subtle moss-green accents, warm pastoral mood, simple large color clusters and clean dark brown outline. One creature alone, no scenery, no lettering.",
+  "size": 64,
+  "date": "2026-10-30",
+  "outputs": [
+    {
+      "index": 0,
+      "label": "Study 1",
+      "asset_id": "c1d0fca6-c9a4-475f-8c59-57b966e6364d",
+      "url": "https://media.spritefusion.com/pixel-art-assets/774843fd-f725-457b-862c-1f4e2e0598a3/c1d0fca6-c9a4-475f-8c59-57b966e6364d/image.png?v=1793346586197",
+      "local_path": "assets/concepts/brindlehorn-study-1.png",
+      "width": 64,
+      "height": 64
+    },
+    {
+      "index": 1,
+      "label": "Study 2",
+      "asset_id": "4be802da-db54-4e80-8b90-5716f1a38de2",
+      "url": "https://media.spritefusion.com/pixel-art-assets/774843fd-f725-457b-862c-1f4e2e0598a3/4be802da-db54-4e80-8b90-5716f1a38de2/image.png?v=1793346586929",
+      "local_path": "assets/concepts/brindlehorn-study-2.png",
+      "width": 64,
+      "height": 64
+    },
+    {
+      "index": 2,
+      "label": "Study 3",
+      "asset_id": "b063c35c-b91c-46ce-a62c-4d71252dcede",
+      "url": "https://media.spritefusion.com/pixel-art-assets/774843fd-f725-457b-862c-1f4e2e0598a3/b063c35c-b91c-46ce-a62c-4d71252dcede/image.png?v=1793346587361",
+      "local_path": "assets/concepts/brindlehorn-study-3.png",
+      "width": 64,
+      "height": 64
+    },
+    {
+      "index": 3,
+      "label": "Study 4",
+      "asset_id": "147b3af4-80cc-43bb-ae7b-02a2be4b5241",
+      "url": "https://media.spritefusion.com/pixel-art-assets/774843fd-f725-457b-862c-1f4e2e0598a3/147b3af4-80cc-43bb-ae7b-02a2be4b5241/image.png?v=1793346587772",
+      "local_path": "assets/concepts/brindlehorn-study-4.png",
+      "width": 64,
+      "height": 64
+    },
+    {
+      "index": 4,
+      "label": "Study 5",
+      "asset_id": "48e13636-de52-43e4-9952-3be7519b0e66",
+      "url": "https://media.spritefusion.com/pixel-art-assets/774843fd-f725-457b-862c-1f4e2e0598a3/48e13636-de52-43e4-9952-3be7519b0e66/image.png?v=1793346588103",
+      "local_path": "assets/concepts/brindlehorn-study-5.png",
+      "width": 64,
+      "height": 64
+    },
+    {
+      "index": 5,
+      "label": "Study 6",
+      "asset_id": "8ef5f624-4e76-44fa-90c2-01f7371158c5",
+      "url": "https://media.spritefusion.com/pixel-art-assets/774843fd-f725-457b-862c-1f4e2e0598a3/8ef5f624-4e76-44fa-90c2-01f7371158c5/image.png?v=1793346588709",
+      "local_path": "assets/concepts/brindlehorn-study-6.png",
+      "width": 64,
+      "height": 64
+    },
+    {
+      "index": 6,
+      "label": "Study 7",
+      "asset_id": "d0d909b4-e4ca-4917-8126-f43dfb045c98",
+      "url": "https://media.spritefusion.com/pixel-art-assets/774843fd-f725-457b-862c-1f4e2e0598a3/d0d909b4-e4ca-4917-8126-f43dfb045c98/image.png?v=1793346589368",
+      "local_path": "assets/concepts/brindlehorn-study-7.png",
+      "width": 65,
+      "height": 65
+    },
+    {
+      "index": 7,
+      "label": "Study 8",
+      "asset_id": "4a351efe-7690-4918-adb6-2252c98400e1",
+      "url": "https://media.spritefusion.com/pixel-art-assets/774843fd-f725-457b-862c-1f4e2e0598a3/4a351efe-7690-4918-adb6-2252c98400e1/image.png?v=1793346590082",
+      "local_path": "assets/concepts/brindlehorn-study-8.png",
+      "width": 65,
+      "height": 65
+    },
+    {
+      "index": 8,
+      "label": "Study 9",
+      "asset_id": "0e28bfa6-1035-446d-95e0-d412006f1b5d",
+      "url": "https://media.spritefusion.com/pixel-art-assets/774843fd-f725-457b-862c-1f4e2e0598a3/0e28bfa6-1035-446d-95e0-d412006f1b5d/image.png?v=1793346590760",
+      "local_path": "assets/concepts/brindlehorn-study-9.png",
+      "width": 64,
+      "height": 64
+    },
+    {
+      "index": 9,
+      "label": "Study 10",
+      "asset_id": "b9d2f19c-8221-42fa-990d-0dab43078bbc",
+      "url": "https://media.spritefusion.com/pixel-art-assets/774843fd-f725-457b-862c-1f4e2e0598a3/b9d2f19c-8221-42fa-990d-0dab43078bbc/image.png?v=1793346591364",
+      "local_path": "assets/concepts/brindlehorn-study-10.png",
+      "width": 66,
+      "height": 66
+    },
+    {
+      "index": 10,
+      "label": "Study 11",
+      "asset_id": "b80f3c69-28e1-4562-96c1-271059cf3e51",
+      "url": "https://media.spritefusion.com/pixel-art-assets/774843fd-f725-457b-862c-1f4e2e0598a3/b80f3c69-28e1-4562-96c1-271059cf3e51/image.png?v=1793346591909",
+      "local_path": "assets/concepts/brindlehorn-study-11.png",
+      "width": 73,
+      "height": 73
+    },
+    {
+      "index": 11,
+      "label": "Study 12",
+      "asset_id": "dae80685-64c9-4418-a030-1e564053f40f",
+      "url": "https://media.spritefusion.com/pixel-art-assets/774843fd-f725-457b-862c-1f4e2e0598a3/dae80685-64c9-4418-a030-1e564053f40f/image.png?v=1793346592545",
+      "local_path": "assets/concepts/brindlehorn-study-12.png",
+      "width": 77,
+      "height": 77
+    }
+  ],
+  "request_id": "req_ddfa958f-c92a-410c-8a65-91709444438c",
+  "status": "outputs-recovered",
+  "recovery_note": "Stream interrupted during first download; all 12 saved outputs recovered via GET /assets. No generation retry."
+}

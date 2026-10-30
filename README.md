@@ -10,6 +10,8 @@ The [game design document](docs/GAME_DESIGN.md) defines the core loop, creature 
 
 The current repository contains the design baseline. A runnable Defold project has not been implemented yet.
 
+The [Brindlehorn concept studies](assets/concepts/README.md) explore the first creature's visual direction using Sprite Fusion. The design document also records the art workflow and focused creature-game references.
+
 ## First playable
 
 One complete expedition from preparation to an ending, with a small creature crew, meaningful route choices, connected survival systems, short battles, local saving, and a reason to take a second trip. Prototype quantities and scope are maintained in the design document.
