@@ -1,0 +1,253 @@
+{
+  "name": "reedskipper",
+  "request": {
+    "operation": "style-reference",
+    "size": 64,
+    "inputs": [
+      {
+        "asset_id": "c1d0fca6-c9a4-475f-8c59-57b966e6364d"
+      }
+    ],
+    "prompt": "A gentle original marsh wagon companion: squat broad-bodied amphibious mammal with teal olive fur, short rounded muzzle, four webbed feet, a wide flat paddle tail with a reed-like fringe. Simple sage harness. Strong swimmer with a friendly thoughtful face. Whole body side profile facing right, standing on four feet. One creature only. Match the reference earthy limited palette, chunky pixel clusters and dark brown outlines. No scenery or lettering."
+  },
+  "outputs": [
+    {
+      "index": 0,
+      "asset": {
+        "id": "b3992d1c-16be-4599-bee0-052cf906527f",
+        "type": "image",
+        "createdAt": "2026-10-30T08:09:09.684Z",
+        "updatedAt": "2026-10-30T08:09:09.684Z",
+        "prompt": "A gentle original marsh wagon companion: squat broad-bodied amphibious mammal with teal olive fur, short rounded muzzle, four webbed feet, a wide flat paddle tail with a reed-like fringe. Simple sage harness. Strong swimmer with a friendly thoughtful face. Whole body side profile facing right, standing on four feet. One creature only. Match the reference earthy limited palette, chunky pixel clusters and dark brown outlines. No scenery or lettering.",
+        "width": 70,
+        "height": 70,
+        "assetUrl": "https://media.spritefusion.com/pixel-art-assets/774843fd-f725-457b-862c-1f4e2e0598a3/b3992d1c-16be-4599-bee0-052cf906527f/image.png?v=1793347749684",
+        "style": "default",
+        "tags": [],
+        "contentType": "image/png",
+        "batchId": "1aac044b-0029-4696-a54f-345518ab1d67",
+        "batchIndex": 0,
+        "batchSize": 9,
+        "action": {
+          "kind": "same-style",
+          "sourceImageAssetId": "c1d0fca6-c9a4-475f-8c59-57b966e6364d",
+          "sourceImageAssetIds": [
+            "c1d0fca6-c9a4-475f-8c59-57b966e6364d"
+          ]
+        }
+      }
+    },
+    {
+      "index": 1,
+      "asset": {
+        "id": "c6efd3ff-03bc-4ef7-b967-be85727f92c5",
+        "type": "image",
+        "createdAt": "2026-10-30T08:09:10.430Z",
+        "updatedAt": "2026-10-30T08:09:10.430Z",
+        "prompt": "A gentle original marsh wagon companion: squat broad-bodied amphibious mammal with teal olive fur, short rounded muzzle, four webbed feet, a wide flat paddle tail with a reed-like fringe. Simple sage harness. Strong swimmer with a friendly thoughtful face. Whole body side profile facing right, standing on four feet. One creature only. Match the reference earthy limited palette, chunky pixel clusters and dark brown outlines. No scenery or lettering.",
+        "width": 68,
+        "height": 68,
+        "assetUrl": "https://media.spritefusion.com/pixel-art-assets/774843fd-f725-457b-862c-1f4e2e0598a3/c6efd3ff-03bc-4ef7-b967-be85727f92c5/image.png?v=1793347750430",
+        "style": "default",
+        "tags": [],
+        "contentType": "image/png",
+        "batchId": "1aac044b-0029-4696-a54f-345518ab1d67",
+        "batchIndex": 1,
+        "batchSize": 9,
+        "action": {
+          "kind": "same-style",
+          "sourceImageAssetId": "c1d0fca6-c9a4-475f-8c59-57b966e6364d",
+          "sourceImageAssetIds": [
+            "c1d0fca6-c9a4-475f-8c59-57b966e6364d"
+          ]
+        }
+      }
+    },
+    {
+      "index": 2,
+      "asset": {
+        "id": "20053761-8c98-418c-9814-2863f8bd9b40",
+        "type": "image",
+        "createdAt": "2026-10-30T08:09:11.162Z",
+        "updatedAt": "2026-10-30T08:09:11.162Z",
+        "prompt": "A gentle original marsh wagon companion: squat broad-bodied amphibious mammal with teal olive fur, short rounded muzzle, four webbed feet, a wide flat paddle tail with a reed-like fringe. Simple sage harness. Strong swimmer with a friendly thoughtful face. Whole body side profile facing right, standing on four feet. One creature only. Match the reference earthy limited palette, chunky pixel clusters and dark brown outlines. No scenery or lettering.",
+        "width": 67,
+        "height": 67,
+        "assetUrl": "https://media.spritefusion.com/pixel-art-assets/774843fd-f725-457b-862c-1f4e2e0598a3/20053761-8c98-418c-9814-2863f8bd9b40/image.png?v=1793347751162",
+        "style": "default",
+        "tags": [],
+        "contentType": "image/png",
+        "batchId": "1aac044b-0029-4696-a54f-345518ab1d67",
+        "batchIndex": 2,
+        "batchSize": 9,
+        "action": {
+          "kind": "same-style",
+          "sourceImageAssetId": "c1d0fca6-c9a4-475f-8c59-57b966e6364d",
+          "sourceImageAssetIds": [
+            "c1d0fca6-c9a4-475f-8c59-57b966e6364d"
+          ]
+        }
+      }
+    },
+    {
+      "index": 3,
+      "asset": {
+        "id": "b9840b67-a18c-41c5-ac01-47d6701c8bb8",
+        "type": "image",
+        "createdAt": "2026-10-30T08:09:11.929Z",
+        "updatedAt": "2026-10-30T08:09:11.929Z",
+        "prompt": "A gentle original marsh wagon companion: squat broad-bodied amphibious mammal with teal olive fur, short rounded muzzle, four webbed feet, a wide flat paddle tail with a reed-like fringe. Simple sage harness. Strong swimmer with a friendly thoughtful face. Whole body side profile facing right, standing on four feet. One creature only. Match the reference earthy limited palette, chunky pixel clusters and dark brown outlines. No scenery or lettering.",
+        "width": 68,
+        "height": 68,
+        "assetUrl": "https://media.spritefusion.com/pixel-art-assets/774843fd-f725-457b-862c-1f4e2e0598a3/b9840b67-a18c-41c5-ac01-47d6701c8bb8/image.png?v=1793347751929",
+        "style": "default",
+        "tags": [],
+        "contentType": "image/png",
+        "batchId": "1aac044b-0029-4696-a54f-345518ab1d67",
+        "batchIndex": 3,
+        "batchSize": 9,
+        "action": {
+          "kind": "same-style",
+          "sourceImageAssetId": "c1d0fca6-c9a4-475f-8c59-57b966e6364d",
+          "sourceImageAssetIds": [
+            "c1d0fca6-c9a4-475f-8c59-57b966e6364d"
+          ]
+        }
+      }
+    },
+    {
+      "index": 4,
+      "asset": {
+        "id": "391d6e72-73ca-4f2c-ba0f-2f0a486846d9",
+        "type": "image",
+        "createdAt": "2026-10-30T08:09:12.515Z",
+        "updatedAt": "2026-10-30T08:09:12.515Z",
+        "prompt": "A gentle original marsh wagon companion: squat broad-bodied amphibious mammal with teal olive fur, short rounded muzzle, four webbed feet, a wide flat paddle tail with a reed-like fringe. Simple sage harness. Strong swimmer with a friendly thoughtful face. Whole body side profile facing right, standing on four feet. One creature only. Match the reference earthy limited palette, chunky pixel clusters and dark brown outlines. No scenery or lettering.",
+        "width": 70,
+        "height": 70,
+        "assetUrl": "https://media.spritefusion.com/pixel-art-assets/774843fd-f725-457b-862c-1f4e2e0598a3/391d6e72-73ca-4f2c-ba0f-2f0a486846d9/image.png?v=1793347752515",
+        "style": "default",
+        "tags": [],
+        "contentType": "image/png",
+        "batchId": "1aac044b-0029-4696-a54f-345518ab1d67",
+        "batchIndex": 4,
+        "batchSize": 9,
+        "action": {
+          "kind": "same-style",
+          "sourceImageAssetId": "c1d0fca6-c9a4-475f-8c59-57b966e6364d",
+          "sourceImageAssetIds": [
+            "c1d0fca6-c9a4-475f-8c59-57b966e6364d"
+          ]
+        }
+      }
+    },
+    {
+      "index": 5,
+      "asset": {
+        "id": "ace12ef8-dc81-4395-b596-a673d469ff3c",
+        "type": "image",
+        "createdAt": "2026-10-30T08:09:13.209Z",
+        "updatedAt": "2026-10-30T08:09:13.209Z",
+        "prompt": "A gentle original marsh wagon companion: squat broad-bodied amphibious mammal with teal olive fur, short rounded muzzle, four webbed feet, a wide flat paddle tail with a reed-like fringe. Simple sage harness. Strong swimmer with a friendly thoughtful face. Whole body side profile facing right, standing on four feet. One creature only. Match the reference earthy limited palette, chunky pixel clusters and dark brown outlines. No scenery or lettering.",
+        "width": 66,
+        "height": 66,
+        "assetUrl": "https://media.spritefusion.com/pixel-art-assets/774843fd-f725-457b-862c-1f4e2e0598a3/ace12ef8-dc81-4395-b596-a673d469ff3c/image.png?v=1793347753209",
+        "style": "default",
+        "tags": [],
+        "contentType": "image/png",
+        "batchId": "1aac044b-0029-4696-a54f-345518ab1d67",
+        "batchIndex": 5,
+        "batchSize": 9,
+        "action": {
+          "kind": "same-style",
+          "sourceImageAssetId": "c1d0fca6-c9a4-475f-8c59-57b966e6364d",
+          "sourceImageAssetIds": [
+            "c1d0fca6-c9a4-475f-8c59-57b966e6364d"
+          ]
+        }
+      }
+    },
+    {
+      "index": 6,
+      "asset": {
+        "id": "70d07f42-ebbf-47ec-918f-cd55927ff7b1",
+        "type": "image",
+        "createdAt": "2026-10-30T08:09:13.958Z",
+        "updatedAt": "2026-10-30T08:09:13.958Z",
+        "prompt": "A gentle original marsh wagon companion: squat broad-bodied amphibious mammal with teal olive fur, short rounded muzzle, four webbed feet, a wide flat paddle tail with a reed-like fringe. Simple sage harness. Strong swimmer with a friendly thoughtful face. Whole body side profile facing right, standing on four feet. One creature only. Match the reference earthy limited palette, chunky pixel clusters and dark brown outlines. No scenery or lettering.",
+        "width": 68,
+        "height": 68,
+        "assetUrl": "https://media.spritefusion.com/pixel-art-assets/774843fd-f725-457b-862c-1f4e2e0598a3/70d07f42-ebbf-47ec-918f-cd55927ff7b1/image.png?v=1793347753958",
+        "style": "default",
+        "tags": [],
+        "contentType": "image/png",
+        "batchId": "1aac044b-0029-4696-a54f-345518ab1d67",
+        "batchIndex": 6,
+        "batchSize": 9,
+        "action": {
+          "kind": "same-style",
+          "sourceImageAssetId": "c1d0fca6-c9a4-475f-8c59-57b966e6364d",
+          "sourceImageAssetIds": [
+            "c1d0fca6-c9a4-475f-8c59-57b966e6364d"
+          ]
+        }
+      }
+    },
+    {
+      "index": 7,
+      "asset": {
+        "id": "f155495a-b0f7-42b0-acad-43abab457169",
+        "type": "image",
+        "createdAt": "2026-10-30T08:09:14.615Z",
+        "updatedAt": "2026-10-30T08:09:14.615Z",
+        "prompt": "A gentle original marsh wagon companion: squat broad-bodied amphibious mammal with teal olive fur, short rounded muzzle, four webbed feet, a wide flat paddle tail with a reed-like fringe. Simple sage harness. Strong swimmer with a friendly thoughtful face. Whole body side profile facing right, standing on four feet. One creature only. Match the reference earthy limited palette, chunky pixel clusters and dark brown outlines. No scenery or lettering.",
+        "width": 68,
+        "height": 68,
+        "assetUrl": "https://media.spritefusion.com/pixel-art-assets/774843fd-f725-457b-862c-1f4e2e0598a3/f155495a-b0f7-42b0-acad-43abab457169/image.png?v=1793347754615",
+        "style": "default",
+        "tags": [],
+        "contentType": "image/png",
+        "batchId": "1aac044b-0029-4696-a54f-345518ab1d67",
+        "batchIndex": 7,
+        "batchSize": 9,
+        "action": {
+          "kind": "same-style",
+          "sourceImageAssetId": "c1d0fca6-c9a4-475f-8c59-57b966e6364d",
+          "sourceImageAssetIds": [
+            "c1d0fca6-c9a4-475f-8c59-57b966e6364d"
+          ]
+        }
+      }
+    },
+    {
+      "index": 8,
+      "asset": {
+        "id": "f5931164-694f-4cfe-a2a0-fc638f1864eb",
+        "type": "image",
+        "createdAt": "2026-10-30T08:09:15.418Z",
+        "updatedAt": "2026-10-30T08:09:15.418Z",
+        "prompt": "A gentle original marsh wagon companion: squat broad-bodied amphibious mammal with teal olive fur, short rounded muzzle, four webbed feet, a wide flat paddle tail with a reed-like fringe. Simple sage harness. Strong swimmer with a friendly thoughtful face. Whole body side profile facing right, standing on four feet. One creature only. Match the reference earthy limited palette, chunky pixel clusters and dark brown outlines. No scenery or lettering.",
+        "width": 74,
+        "height": 74,
+        "assetUrl": "https://media.spritefusion.com/pixel-art-assets/774843fd-f725-457b-862c-1f4e2e0598a3/f5931164-694f-4cfe-a2a0-fc638f1864eb/image.png?v=1793347755418",
+        "style": "default",
+        "tags": [],
+        "contentType": "image/png",
+        "batchId": "1aac044b-0029-4696-a54f-345518ab1d67",
+        "batchIndex": 8,
+        "batchSize": 9,
+        "action": {
+          "kind": "same-style",
+          "sourceImageAssetId": "c1d0fca6-c9a4-475f-8c59-57b966e6364d",
+          "sourceImageAssetIds": [
+            "c1d0fca6-c9a4-475f-8c59-57b966e6364d"
+          ]
+        }
+      }
+    }
+  ],
+  "request_id": "req_fd1fee65-4e80-43cb-a108-cec3d43fd2cf",
+  "status": "succeeded",
+  "selected_index": 0,
+  "local_path": "assets/sprites/reedskipper.png"
+}

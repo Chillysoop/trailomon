@@ -1,0 +1,51 @@
+local model=require "simulation.expedition"
+local save=require "services.save"
+
+local function run()
+    local primary,backup=save.paths()
+    -- Refuse to touch anything until the isolated namespace has been verified.
+    assert(primary:find("trailomon_automated_checks",1,true))
+    assert(backup:find("trailomon_automated_checks",1,true))
+    local p=model.new(1848)
+    assert(model.command(p,"depart"))
+    assert(model.debug(p,"event","shortcut"))
+    local roll=p.run.pending.roll
+    assert(save.write(p))
+    local loaded=assert(save.load())
+    assert(loaded.run.pending.id=="shortcut" and loaded.run.pending.roll==roll)
+    assert(model.command(loaded,"choice",{id="risk"}))
+    assert(save.write(loaded))
+    local file=assert(io.open(primary,"wb"));file:write("corrupt");file:close()
+    local recovered,notice=save.load()
+    assert(recovered and notice and recovered.run.pending.id=="shortcut")
+    assert(save.write(recovered))
+    assert(model.command(recovered,"choice",{id="road"}))
+    assert(model.debug(recovered,"event","scavengers"))
+    assert(model.command(recovered,"choice",{id="battle"}))
+    assert(model.command(recovered,"battle_start",{team={1,2}}))
+    local target=recovered.run.battle.intent.target
+    assert(save.write(recovered))
+    local battle=assert(save.load())
+    assert(battle.run.battle.intent.target==target and battle.run.battle.round==1)
+    assert(model.command(battle,"withdraw"))
+    assert(model.command(battle,"return"))
+    assert(save.write(battle))
+    local ended=assert(save.load())
+    assert(ended.run.mode=="result" and #ended.profile.history==1)
+    assert(not model.command(ended,"return"))
+    for _,path in ipairs({primary,backup}) do
+        local f=assert(io.open(path,"wb"));f:write("corrupt");f:close()
+    end
+    local invalid,warning,blocked=save.load()
+    assert(not invalid and warning and blocked)
+    os.remove(primary);os.remove(backup)
+end
+function init(self)
+    local ok,why=pcall(run)
+    -- Release engines omit console logging; a small report is the durable result.
+    local path=sys.get_config_string("trailomon.check_report","engine-check-report.txt")
+    local report=assert(io.open(path,"w"))
+    report:write(ok and "PASS: native save/load, pending event, battle, result idempotency, backup recovery, corrupt-save handling.\n" or "FAIL: "..tostring(why).."\n")
+    report:close()
+    if ok then msg.post("#ui","start_checks") else msg.post("@system:","exit",{code=1}) end
+end

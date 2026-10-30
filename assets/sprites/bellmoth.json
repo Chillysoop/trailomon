@@ -1,0 +1,253 @@
+{
+  "name": "bellmoth",
+  "request": {
+    "operation": "style-reference",
+    "size": 64,
+    "inputs": [
+      {
+        "asset_id": "c1d0fca6-c9a4-475f-8c59-57b966e6364d"
+      }
+    ],
+    "prompt": "An original gentle dusk moth companion, broad rounded golden-cream wings with small moss-green reflective patches, charcoal fuzzy small body, feathery curled antennae. Quiet friendly creature with a distinct wing silhouette, no facial caricature. Side view facing right, hovering with two wings raised. One creature only. Match the reference earthy limited palette, chunky pixel clusters and dark brown outlines. No scenery or lettering."
+  },
+  "outputs": [
+    {
+      "index": 0,
+      "asset": {
+        "id": "ae5881e3-e70f-4c86-a2b7-4fca7295bd2c",
+        "type": "image",
+        "createdAt": "2026-10-30T08:11:07.475Z",
+        "updatedAt": "2026-10-30T08:11:07.475Z",
+        "prompt": "An original gentle dusk moth companion, broad rounded golden-cream wings with small moss-green reflective patches, charcoal fuzzy small body, feathery curled antennae. Quiet friendly creature with a distinct wing silhouette, no facial caricature. Side view facing right, hovering with two wings raised. One creature only. Match the reference earthy limited palette, chunky pixel clusters and dark brown outlines. No scenery or lettering.",
+        "width": 64,
+        "height": 64,
+        "assetUrl": "https://media.spritefusion.com/pixel-art-assets/774843fd-f725-457b-862c-1f4e2e0598a3/ae5881e3-e70f-4c86-a2b7-4fca7295bd2c/image.png?v=1793347867475",
+        "style": "default",
+        "tags": [],
+        "contentType": "image/png",
+        "batchId": "4d8496d8-0cc2-424a-8536-44be916db39e",
+        "batchIndex": 0,
+        "batchSize": 9,
+        "action": {
+          "kind": "same-style",
+          "sourceImageAssetId": "c1d0fca6-c9a4-475f-8c59-57b966e6364d",
+          "sourceImageAssetIds": [
+            "c1d0fca6-c9a4-475f-8c59-57b966e6364d"
+          ]
+        }
+      }
+    },
+    {
+      "index": 1,
+      "asset": {
+        "id": "987e90a2-13ed-4837-93b8-9ac384942242",
+        "type": "image",
+        "createdAt": "2026-10-30T08:11:08.361Z",
+        "updatedAt": "2026-10-30T08:11:08.361Z",
+        "prompt": "An original gentle dusk moth companion, broad rounded golden-cream wings with small moss-green reflective patches, charcoal fuzzy small body, feathery curled antennae. Quiet friendly creature with a distinct wing silhouette, no facial caricature. Side view facing right, hovering with two wings raised. One creature only. Match the reference earthy limited palette, chunky pixel clusters and dark brown outlines. No scenery or lettering.",
+        "width": 64,
+        "height": 64,
+        "assetUrl": "https://media.spritefusion.com/pixel-art-assets/774843fd-f725-457b-862c-1f4e2e0598a3/987e90a2-13ed-4837-93b8-9ac384942242/image.png?v=1793347868361",
+        "style": "default",
+        "tags": [],
+        "contentType": "image/png",
+        "batchId": "4d8496d8-0cc2-424a-8536-44be916db39e",
+        "batchIndex": 1,
+        "batchSize": 9,
+        "action": {
+          "kind": "same-style",
+          "sourceImageAssetId": "c1d0fca6-c9a4-475f-8c59-57b966e6364d",
+          "sourceImageAssetIds": [
+            "c1d0fca6-c9a4-475f-8c59-57b966e6364d"
+          ]
+        }
+      }
+    },
+    {
+      "index": 2,
+      "asset": {
+        "id": "78a6b216-172d-46cb-b1ce-508fac1eeb35",
+        "type": "image",
+        "createdAt": "2026-10-30T08:11:09.087Z",
+        "updatedAt": "2026-10-30T08:11:09.087Z",
+        "prompt": "An original gentle dusk moth companion, broad rounded golden-cream wings with small moss-green reflective patches, charcoal fuzzy small body, feathery curled antennae. Quiet friendly creature with a distinct wing silhouette, no facial caricature. Side view facing right, hovering with two wings raised. One creature only. Match the reference earthy limited palette, chunky pixel clusters and dark brown outlines. No scenery or lettering.",
+        "width": 64,
+        "height": 64,
+        "assetUrl": "https://media.spritefusion.com/pixel-art-assets/774843fd-f725-457b-862c-1f4e2e0598a3/78a6b216-172d-46cb-b1ce-508fac1eeb35/image.png?v=1793347869087",
+        "style": "default",
+        "tags": [],
+        "contentType": "image/png",
+        "batchId": "4d8496d8-0cc2-424a-8536-44be916db39e",
+        "batchIndex": 2,
+        "batchSize": 9,
+        "action": {
+          "kind": "same-style",
+          "sourceImageAssetId": "c1d0fca6-c9a4-475f-8c59-57b966e6364d",
+          "sourceImageAssetIds": [
+            "c1d0fca6-c9a4-475f-8c59-57b966e6364d"
+          ]
+        }
+      }
+    },
+    {
+      "index": 3,
+      "asset": {
+        "id": "feb75c33-0356-4269-b6a5-6e50909fb998",
+        "type": "image",
+        "createdAt": "2026-10-30T08:11:09.842Z",
+        "updatedAt": "2026-10-30T08:11:09.842Z",
+        "prompt": "An original gentle dusk moth companion, broad rounded golden-cream wings with small moss-green reflective patches, charcoal fuzzy small body, feathery curled antennae. Quiet friendly creature with a distinct wing silhouette, no facial caricature. Side view facing right, hovering with two wings raised. One creature only. Match the reference earthy limited palette, chunky pixel clusters and dark brown outlines. No scenery or lettering.",
+        "width": 64,
+        "height": 64,
+        "assetUrl": "https://media.spritefusion.com/pixel-art-assets/774843fd-f725-457b-862c-1f4e2e0598a3/feb75c33-0356-4269-b6a5-6e50909fb998/image.png?v=1793347869842",
+        "style": "default",
+        "tags": [],
+        "contentType": "image/png",
+        "batchId": "4d8496d8-0cc2-424a-8536-44be916db39e",
+        "batchIndex": 3,
+        "batchSize": 9,
+        "action": {
+          "kind": "same-style",
+          "sourceImageAssetId": "c1d0fca6-c9a4-475f-8c59-57b966e6364d",
+          "sourceImageAssetIds": [
+            "c1d0fca6-c9a4-475f-8c59-57b966e6364d"
+          ]
+        }
+      }
+    },
+    {
+      "index": 4,
+      "asset": {
+        "id": "813cf401-8ae9-4604-9349-52000cd5be07",
+        "type": "image",
+        "createdAt": "2026-10-30T08:11:10.460Z",
+        "updatedAt": "2026-10-30T08:11:10.460Z",
+        "prompt": "An original gentle dusk moth companion, broad rounded golden-cream wings with small moss-green reflective patches, charcoal fuzzy small body, feathery curled antennae. Quiet friendly creature with a distinct wing silhouette, no facial caricature. Side view facing right, hovering with two wings raised. One creature only. Match the reference earthy limited palette, chunky pixel clusters and dark brown outlines. No scenery or lettering.",
+        "width": 64,
+        "height": 64,
+        "assetUrl": "https://media.spritefusion.com/pixel-art-assets/774843fd-f725-457b-862c-1f4e2e0598a3/813cf401-8ae9-4604-9349-52000cd5be07/image.png?v=1793347870460",
+        "style": "default",
+        "tags": [],
+        "contentType": "image/png",
+        "batchId": "4d8496d8-0cc2-424a-8536-44be916db39e",
+        "batchIndex": 4,
+        "batchSize": 9,
+        "action": {
+          "kind": "same-style",
+          "sourceImageAssetId": "c1d0fca6-c9a4-475f-8c59-57b966e6364d",
+          "sourceImageAssetIds": [
+            "c1d0fca6-c9a4-475f-8c59-57b966e6364d"
+          ]
+        }
+      }
+    },
+    {
+      "index": 5,
+      "asset": {
+        "id": "1e0b923a-fcba-47d3-b3d6-bb7fb3d646da",
+        "type": "image",
+        "createdAt": "2026-10-30T08:11:11.331Z",
+        "updatedAt": "2026-10-30T08:11:11.331Z",
+        "prompt": "An original gentle dusk moth companion, broad rounded golden-cream wings with small moss-green reflective patches, charcoal fuzzy small body, feathery curled antennae. Quiet friendly creature with a distinct wing silhouette, no facial caricature. Side view facing right, hovering with two wings raised. One creature only. Match the reference earthy limited palette, chunky pixel clusters and dark brown outlines. No scenery or lettering.",
+        "width": 64,
+        "height": 64,
+        "assetUrl": "https://media.spritefusion.com/pixel-art-assets/774843fd-f725-457b-862c-1f4e2e0598a3/1e0b923a-fcba-47d3-b3d6-bb7fb3d646da/image.png?v=1793347871331",
+        "style": "default",
+        "tags": [],
+        "contentType": "image/png",
+        "batchId": "4d8496d8-0cc2-424a-8536-44be916db39e",
+        "batchIndex": 5,
+        "batchSize": 9,
+        "action": {
+          "kind": "same-style",
+          "sourceImageAssetId": "c1d0fca6-c9a4-475f-8c59-57b966e6364d",
+          "sourceImageAssetIds": [
+            "c1d0fca6-c9a4-475f-8c59-57b966e6364d"
+          ]
+        }
+      }
+    },
+    {
+      "index": 6,
+      "asset": {
+        "id": "167f7db5-f984-46e6-892d-4105b998fcd2",
+        "type": "image",
+        "createdAt": "2026-10-30T08:11:11.996Z",
+        "updatedAt": "2026-10-30T08:11:11.996Z",
+        "prompt": "An original gentle dusk moth companion, broad rounded golden-cream wings with small moss-green reflective patches, charcoal fuzzy small body, feathery curled antennae. Quiet friendly creature with a distinct wing silhouette, no facial caricature. Side view facing right, hovering with two wings raised. One creature only. Match the reference earthy limited palette, chunky pixel clusters and dark brown outlines. No scenery or lettering.",
+        "width": 64,
+        "height": 64,
+        "assetUrl": "https://media.spritefusion.com/pixel-art-assets/774843fd-f725-457b-862c-1f4e2e0598a3/167f7db5-f984-46e6-892d-4105b998fcd2/image.png?v=1793347871996",
+        "style": "default",
+        "tags": [],
+        "contentType": "image/png",
+        "batchId": "4d8496d8-0cc2-424a-8536-44be916db39e",
+        "batchIndex": 6,
+        "batchSize": 9,
+        "action": {
+          "kind": "same-style",
+          "sourceImageAssetId": "c1d0fca6-c9a4-475f-8c59-57b966e6364d",
+          "sourceImageAssetIds": [
+            "c1d0fca6-c9a4-475f-8c59-57b966e6364d"
+          ]
+        }
+      }
+    },
+    {
+      "index": 7,
+      "asset": {
+        "id": "56ea5751-8b6c-4dd7-aa10-4b2ce206442a",
+        "type": "image",
+        "createdAt": "2026-10-30T08:11:12.610Z",
+        "updatedAt": "2026-10-30T08:11:12.610Z",
+        "prompt": "An original gentle dusk moth companion, broad rounded golden-cream wings with small moss-green reflective patches, charcoal fuzzy small body, feathery curled antennae. Quiet friendly creature with a distinct wing silhouette, no facial caricature. Side view facing right, hovering with two wings raised. One creature only. Match the reference earthy limited palette, chunky pixel clusters and dark brown outlines. No scenery or lettering.",
+        "width": 64,
+        "height": 64,
+        "assetUrl": "https://media.spritefusion.com/pixel-art-assets/774843fd-f725-457b-862c-1f4e2e0598a3/56ea5751-8b6c-4dd7-aa10-4b2ce206442a/image.png?v=1793347872610",
+        "style": "default",
+        "tags": [],
+        "contentType": "image/png",
+        "batchId": "4d8496d8-0cc2-424a-8536-44be916db39e",
+        "batchIndex": 7,
+        "batchSize": 9,
+        "action": {
+          "kind": "same-style",
+          "sourceImageAssetId": "c1d0fca6-c9a4-475f-8c59-57b966e6364d",
+          "sourceImageAssetIds": [
+            "c1d0fca6-c9a4-475f-8c59-57b966e6364d"
+          ]
+        }
+      }
+    },
+    {
+      "index": 8,
+      "asset": {
+        "id": "bb41c059-d833-4e57-990c-b30a862c1344",
+        "type": "image",
+        "createdAt": "2026-10-30T08:11:13.321Z",
+        "updatedAt": "2026-10-30T08:11:13.321Z",
+        "prompt": "An original gentle dusk moth companion, broad rounded golden-cream wings with small moss-green reflective patches, charcoal fuzzy small body, feathery curled antennae. Quiet friendly creature with a distinct wing silhouette, no facial caricature. Side view facing right, hovering with two wings raised. One creature only. Match the reference earthy limited palette, chunky pixel clusters and dark brown outlines. No scenery or lettering.",
+        "width": 64,
+        "height": 64,
+        "assetUrl": "https://media.spritefusion.com/pixel-art-assets/774843fd-f725-457b-862c-1f4e2e0598a3/bb41c059-d833-4e57-990c-b30a862c1344/image.png?v=1793347873321",
+        "style": "default",
+        "tags": [],
+        "contentType": "image/png",
+        "batchId": "4d8496d8-0cc2-424a-8536-44be916db39e",
+        "batchIndex": 8,
+        "batchSize": 9,
+        "action": {
+          "kind": "same-style",
+          "sourceImageAssetId": "c1d0fca6-c9a4-475f-8c59-57b966e6364d",
+          "sourceImageAssetIds": [
+            "c1d0fca6-c9a4-475f-8c59-57b966e6364d"
+          ]
+        }
+      }
+    }
+  ],
+  "request_id": "req_721c4c29-620b-4561-b5db-32cb343ba29d",
+  "status": "succeeded",
+  "selected_index": 0,
+  "local_path": "assets/sprites/bellmoth.png"
+}

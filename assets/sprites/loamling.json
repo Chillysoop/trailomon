@@ -1,0 +1,253 @@
+{
+  "name": "loamling",
+  "request": {
+    "operation": "style-reference",
+    "size": 64,
+    "inputs": [
+      {
+        "asset_id": "c1d0fca6-c9a4-475f-8c59-57b966e6364d"
+      }
+    ],
+    "prompt": "An original small root-digging trail companion: round compact russet burrowing mammal, large shovel-shaped front paws, tiny dark eyes, sensitive long cream muzzle, soil-colored back and moss flecks in its fur. No antlers or horns. Whole body side profile facing right, low four-footed standing pose. One creature only. Match the reference earthy limited palette, chunky pixel clusters and dark brown outlines. No scenery or lettering."
+  },
+  "outputs": [
+    {
+      "index": 0,
+      "asset": {
+        "id": "23fc895d-33e3-4391-94cb-25bb884e295f",
+        "type": "image",
+        "createdAt": "2026-10-30T08:10:00.672Z",
+        "updatedAt": "2026-10-30T08:10:00.672Z",
+        "prompt": "An original small root-digging trail companion: round compact russet burrowing mammal, large shovel-shaped front paws, tiny dark eyes, sensitive long cream muzzle, soil-colored back and moss flecks in its fur. No antlers or horns. Whole body side profile facing right, low four-footed standing pose. One creature only. Match the reference earthy limited palette, chunky pixel clusters and dark brown outlines. No scenery or lettering.",
+        "width": 64,
+        "height": 64,
+        "assetUrl": "https://media.spritefusion.com/pixel-art-assets/774843fd-f725-457b-862c-1f4e2e0598a3/23fc895d-33e3-4391-94cb-25bb884e295f/image.png?v=1793347800672",
+        "style": "default",
+        "tags": [],
+        "contentType": "image/png",
+        "batchId": "cee39032-cebb-4c45-8e1b-f8b2c5b57b3f",
+        "batchIndex": 0,
+        "batchSize": 9,
+        "action": {
+          "kind": "same-style",
+          "sourceImageAssetId": "c1d0fca6-c9a4-475f-8c59-57b966e6364d",
+          "sourceImageAssetIds": [
+            "c1d0fca6-c9a4-475f-8c59-57b966e6364d"
+          ]
+        }
+      }
+    },
+    {
+      "index": 1,
+      "asset": {
+        "id": "c683b43c-29f9-44f9-bf61-90d88f5a1825",
+        "type": "image",
+        "createdAt": "2026-10-30T08:10:01.353Z",
+        "updatedAt": "2026-10-30T08:10:01.353Z",
+        "prompt": "An original small root-digging trail companion: round compact russet burrowing mammal, large shovel-shaped front paws, tiny dark eyes, sensitive long cream muzzle, soil-colored back and moss flecks in its fur. No antlers or horns. Whole body side profile facing right, low four-footed standing pose. One creature only. Match the reference earthy limited palette, chunky pixel clusters and dark brown outlines. No scenery or lettering.",
+        "width": 64,
+        "height": 64,
+        "assetUrl": "https://media.spritefusion.com/pixel-art-assets/774843fd-f725-457b-862c-1f4e2e0598a3/c683b43c-29f9-44f9-bf61-90d88f5a1825/image.png?v=1793347801353",
+        "style": "default",
+        "tags": [],
+        "contentType": "image/png",
+        "batchId": "cee39032-cebb-4c45-8e1b-f8b2c5b57b3f",
+        "batchIndex": 1,
+        "batchSize": 9,
+        "action": {
+          "kind": "same-style",
+          "sourceImageAssetId": "c1d0fca6-c9a4-475f-8c59-57b966e6364d",
+          "sourceImageAssetIds": [
+            "c1d0fca6-c9a4-475f-8c59-57b966e6364d"
+          ]
+        }
+      }
+    },
+    {
+      "index": 2,
+      "asset": {
+        "id": "106b6cdb-a772-4b2e-9f80-edee95999649",
+        "type": "image",
+        "createdAt": "2026-10-30T08:10:02.074Z",
+        "updatedAt": "2026-10-30T08:10:02.074Z",
+        "prompt": "An original small root-digging trail companion: round compact russet burrowing mammal, large shovel-shaped front paws, tiny dark eyes, sensitive long cream muzzle, soil-colored back and moss flecks in its fur. No antlers or horns. Whole body side profile facing right, low four-footed standing pose. One creature only. Match the reference earthy limited palette, chunky pixel clusters and dark brown outlines. No scenery or lettering.",
+        "width": 64,
+        "height": 64,
+        "assetUrl": "https://media.spritefusion.com/pixel-art-assets/774843fd-f725-457b-862c-1f4e2e0598a3/106b6cdb-a772-4b2e-9f80-edee95999649/image.png?v=1793347802074",
+        "style": "default",
+        "tags": [],
+        "contentType": "image/png",
+        "batchId": "cee39032-cebb-4c45-8e1b-f8b2c5b57b3f",
+        "batchIndex": 2,
+        "batchSize": 9,
+        "action": {
+          "kind": "same-style",
+          "sourceImageAssetId": "c1d0fca6-c9a4-475f-8c59-57b966e6364d",
+          "sourceImageAssetIds": [
+            "c1d0fca6-c9a4-475f-8c59-57b966e6364d"
+          ]
+        }
+      }
+    },
+    {
+      "index": 3,
+      "asset": {
+        "id": "51a2434a-8574-49bc-9adc-da4fe653c9cc",
+        "type": "image",
+        "createdAt": "2026-10-30T08:10:02.661Z",
+        "updatedAt": "2026-10-30T08:10:02.661Z",
+        "prompt": "An original small root-digging trail companion: round compact russet burrowing mammal, large shovel-shaped front paws, tiny dark eyes, sensitive long cream muzzle, soil-colored back and moss flecks in its fur. No antlers or horns. Whole body side profile facing right, low four-footed standing pose. One creature only. Match the reference earthy limited palette, chunky pixel clusters and dark brown outlines. No scenery or lettering.",
+        "width": 64,
+        "height": 64,
+        "assetUrl": "https://media.spritefusion.com/pixel-art-assets/774843fd-f725-457b-862c-1f4e2e0598a3/51a2434a-8574-49bc-9adc-da4fe653c9cc/image.png?v=1793347802661",
+        "style": "default",
+        "tags": [],
+        "contentType": "image/png",
+        "batchId": "cee39032-cebb-4c45-8e1b-f8b2c5b57b3f",
+        "batchIndex": 3,
+        "batchSize": 9,
+        "action": {
+          "kind": "same-style",
+          "sourceImageAssetId": "c1d0fca6-c9a4-475f-8c59-57b966e6364d",
+          "sourceImageAssetIds": [
+            "c1d0fca6-c9a4-475f-8c59-57b966e6364d"
+          ]
+        }
+      }
+    },
+    {
+      "index": 4,
+      "asset": {
+        "id": "8d2cb37a-280c-4b79-a099-c8bba14e9f94",
+        "type": "image",
+        "createdAt": "2026-10-30T08:10:03.386Z",
+        "updatedAt": "2026-10-30T08:10:03.386Z",
+        "prompt": "An original small root-digging trail companion: round compact russet burrowing mammal, large shovel-shaped front paws, tiny dark eyes, sensitive long cream muzzle, soil-colored back and moss flecks in its fur. No antlers or horns. Whole body side profile facing right, low four-footed standing pose. One creature only. Match the reference earthy limited palette, chunky pixel clusters and dark brown outlines. No scenery or lettering.",
+        "width": 64,
+        "height": 64,
+        "assetUrl": "https://media.spritefusion.com/pixel-art-assets/774843fd-f725-457b-862c-1f4e2e0598a3/8d2cb37a-280c-4b79-a099-c8bba14e9f94/image.png?v=1793347803386",
+        "style": "default",
+        "tags": [],
+        "contentType": "image/png",
+        "batchId": "cee39032-cebb-4c45-8e1b-f8b2c5b57b3f",
+        "batchIndex": 4,
+        "batchSize": 9,
+        "action": {
+          "kind": "same-style",
+          "sourceImageAssetId": "c1d0fca6-c9a4-475f-8c59-57b966e6364d",
+          "sourceImageAssetIds": [
+            "c1d0fca6-c9a4-475f-8c59-57b966e6364d"
+          ]
+        }
+      }
+    },
+    {
+      "index": 5,
+      "asset": {
+        "id": "192159a9-fdba-461a-819c-122e389dd268",
+        "type": "image",
+        "createdAt": "2026-10-30T08:10:03.970Z",
+        "updatedAt": "2026-10-30T08:10:03.970Z",
+        "prompt": "An original small root-digging trail companion: round compact russet burrowing mammal, large shovel-shaped front paws, tiny dark eyes, sensitive long cream muzzle, soil-colored back and moss flecks in its fur. No antlers or horns. Whole body side profile facing right, low four-footed standing pose. One creature only. Match the reference earthy limited palette, chunky pixel clusters and dark brown outlines. No scenery or lettering.",
+        "width": 64,
+        "height": 64,
+        "assetUrl": "https://media.spritefusion.com/pixel-art-assets/774843fd-f725-457b-862c-1f4e2e0598a3/192159a9-fdba-461a-819c-122e389dd268/image.png?v=1793347803970",
+        "style": "default",
+        "tags": [],
+        "contentType": "image/png",
+        "batchId": "cee39032-cebb-4c45-8e1b-f8b2c5b57b3f",
+        "batchIndex": 5,
+        "batchSize": 9,
+        "action": {
+          "kind": "same-style",
+          "sourceImageAssetId": "c1d0fca6-c9a4-475f-8c59-57b966e6364d",
+          "sourceImageAssetIds": [
+            "c1d0fca6-c9a4-475f-8c59-57b966e6364d"
+          ]
+        }
+      }
+    },
+    {
+      "index": 6,
+      "asset": {
+        "id": "9cfc6e86-f7b6-4de6-9c4d-bfb90e588a65",
+        "type": "image",
+        "createdAt": "2026-10-30T08:10:04.535Z",
+        "updatedAt": "2026-10-30T08:10:04.535Z",
+        "prompt": "An original small root-digging trail companion: round compact russet burrowing mammal, large shovel-shaped front paws, tiny dark eyes, sensitive long cream muzzle, soil-colored back and moss flecks in its fur. No antlers or horns. Whole body side profile facing right, low four-footed standing pose. One creature only. Match the reference earthy limited palette, chunky pixel clusters and dark brown outlines. No scenery or lettering.",
+        "width": 64,
+        "height": 64,
+        "assetUrl": "https://media.spritefusion.com/pixel-art-assets/774843fd-f725-457b-862c-1f4e2e0598a3/9cfc6e86-f7b6-4de6-9c4d-bfb90e588a65/image.png?v=1793347804535",
+        "style": "default",
+        "tags": [],
+        "contentType": "image/png",
+        "batchId": "cee39032-cebb-4c45-8e1b-f8b2c5b57b3f",
+        "batchIndex": 6,
+        "batchSize": 9,
+        "action": {
+          "kind": "same-style",
+          "sourceImageAssetId": "c1d0fca6-c9a4-475f-8c59-57b966e6364d",
+          "sourceImageAssetIds": [
+            "c1d0fca6-c9a4-475f-8c59-57b966e6364d"
+          ]
+        }
+      }
+    },
+    {
+      "index": 7,
+      "asset": {
+        "id": "665d62e1-3581-4c89-8a8d-a601399ba243",
+        "type": "image",
+        "createdAt": "2026-10-30T08:10:07.086Z",
+        "updatedAt": "2026-10-30T08:10:07.086Z",
+        "prompt": "An original small root-digging trail companion: round compact russet burrowing mammal, large shovel-shaped front paws, tiny dark eyes, sensitive long cream muzzle, soil-colored back and moss flecks in its fur. No antlers or horns. Whole body side profile facing right, low four-footed standing pose. One creature only. Match the reference earthy limited palette, chunky pixel clusters and dark brown outlines. No scenery or lettering.",
+        "width": 64,
+        "height": 64,
+        "assetUrl": "https://media.spritefusion.com/pixel-art-assets/774843fd-f725-457b-862c-1f4e2e0598a3/665d62e1-3581-4c89-8a8d-a601399ba243/image.png?v=1793347807086",
+        "style": "default",
+        "tags": [],
+        "contentType": "image/png",
+        "batchId": "cee39032-cebb-4c45-8e1b-f8b2c5b57b3f",
+        "batchIndex": 7,
+        "batchSize": 9,
+        "action": {
+          "kind": "same-style",
+          "sourceImageAssetId": "c1d0fca6-c9a4-475f-8c59-57b966e6364d",
+          "sourceImageAssetIds": [
+            "c1d0fca6-c9a4-475f-8c59-57b966e6364d"
+          ]
+        }
+      }
+    },
+    {
+      "index": 8,
+      "asset": {
+        "id": "92b5527a-e926-4e31-a0c9-089366cb4e17",
+        "type": "image",
+        "createdAt": "2026-10-30T08:10:07.714Z",
+        "updatedAt": "2026-10-30T08:10:07.714Z",
+        "prompt": "An original small root-digging trail companion: round compact russet burrowing mammal, large shovel-shaped front paws, tiny dark eyes, sensitive long cream muzzle, soil-colored back and moss flecks in its fur. No antlers or horns. Whole body side profile facing right, low four-footed standing pose. One creature only. Match the reference earthy limited palette, chunky pixel clusters and dark brown outlines. No scenery or lettering.",
+        "width": 64,
+        "height": 64,
+        "assetUrl": "https://media.spritefusion.com/pixel-art-assets/774843fd-f725-457b-862c-1f4e2e0598a3/92b5527a-e926-4e31-a0c9-089366cb4e17/image.png?v=1793347807714",
+        "style": "default",
+        "tags": [],
+        "contentType": "image/png",
+        "batchId": "cee39032-cebb-4c45-8e1b-f8b2c5b57b3f",
+        "batchIndex": 8,
+        "batchSize": 9,
+        "action": {
+          "kind": "same-style",
+          "sourceImageAssetId": "c1d0fca6-c9a4-475f-8c59-57b966e6364d",
+          "sourceImageAssetIds": [
+            "c1d0fca6-c9a4-475f-8c59-57b966e6364d"
+          ]
+        }
+      }
+    }
+  ],
+  "request_id": "req_f8d4e2c7-f12c-457d-9804-37ee37711977",
+  "status": "succeeded",
+  "selected_index": 2,
+  "local_path": "assets/sprites/loamling.png"
+}

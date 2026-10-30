@@ -1,0 +1,13 @@
+[project]
+title = Trailomon Checks
+
+[bootstrap]
+main_collection = /tests/engine.collectionc
+
+[trailomon]
+save_namespace = trailomon_automated_checks
+
+[display]
+width = 1280
+height = 720
+window_hidden = 1

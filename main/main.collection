@@ -1,0 +1,7 @@
+name: "main"
+embedded_instances {
+  id: "app"
+  data: "components {\n  id: \"ui\"\n  component: \"/ui/game.gui\"\n  position { x: 0.0 y: 0.0 z: 0.0 }\n  rotation { x: 0.0 y: 0.0 z: 0.0 w: 1.0 }\n}\ncomponents {\n  id: \"decision\"\n  component: \"/assets/audio/decision.sound\"\n  position { x: 0.0 y: 0.0 z: 0.0 }\n  rotation { x: 0.0 y: 0.0 z: 0.0 w: 1.0 }\n}\ncomponents {\n  id: \"arrival\"\n  component: \"/assets/audio/arrival.sound\"\n  position { x: 0.0 y: 0.0 z: 0.0 }\n  rotation { x: 0.0 y: 0.0 z: 0.0 w: 1.0 }\n}\n"
+  position { x: 0.0 y: 0.0 z: 0.0 }
+  rotation { x: 0.0 y: 0.0 z: 0.0 w: 1.0 }
+}
