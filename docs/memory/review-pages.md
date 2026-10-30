@@ -7,3 +7,5 @@
 Browser QA writes only isolated `.tools` fixtures/local preview databases. Re-read hosted and local responses before publishing, reporting a wait, omitting an idea, or closing work. A newer answer or chat correction supersedes this note.
 
 Raw answers remain local by default; durable decision summaries are committed here. FINISH writes a snapshot flag so an autosaved draft cannot change an already-submitted answer set. The waiter consumes the flag; the JSON remains. Track revision/finished_at and each implemented or rejected code here after processing.
+
+2026-10-30: combat-1 reports the implemented automatic-combat playtests. New proposals C1 contextual trigger forecast, C2 distinct guardian pattern, C3 travel-duty consequence line (top picks), C4 continuous attack clocks (recommend NO). No owner answers yet at authoring; reread hosted submissions before work. P1-P5 remain approved.

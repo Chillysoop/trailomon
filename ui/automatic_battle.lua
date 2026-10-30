@@ -78,8 +78,9 @@ function M.result(self)
     text(self,28,575,b.outcome=="won" and "There is room for the wagon." or "Bring the crew away.",27,"ink")
     text(self,28,538,b.outcome=="won" and "The threat has passed. Effort and injuries carry into the journey." or model.combat.withdraw_text(b.kind),14)
     scene.draw(self,28,340,834,175,s)
-    local costs={{"food","Provisions "..signed(r.food)},{"cargo","Cargo "..signed(r.cargo)},{"time","Days +"..r.days}}
+    local costs={{"food","Provisions "..signed(r.food)},{"cargo","Cargo "..signed(r.cargo).."%"},{"time","Days +"..r.days}}
     for n,cost in ipairs(costs) do local x=28+(n-1)*280;w.icon(self,x,303,cost[1],23,"gold");text(self,x+33,315,cost[2],17,"ink") end
+    text(self,28,290,"Net changes include any recovery during a detour.",11)
     for position,i in ipairs(b.team) do
         local c=s.crew[i];local delta=r.crew[i];local x=28+(position-1)*425
         text(self,x,270,c.name,20,"ink")

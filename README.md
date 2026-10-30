@@ -33,7 +33,7 @@ Install Java 25 or use the JDK bundled with Defold. From PowerShell in this dire
 ./tools/build.ps1
 ```
 
-The scripts download the pinned official Defold builder and verify its checksum. Testing runs deterministic Lua checks, native save/load recovery, and 26 GUI state checks in an isolated save namespace. `-SkipEngine` runs just the Lua checks. CI uses `-Headless` for machines without a graphics driver; local checks use the release renderer. Headless checks exercise screen construction and bounds but do not verify rendered pixels or human input.
+The scripts download the pinned official Defold builder and verify its checksum. Testing runs deterministic Lua checks, native save/load recovery, and 27 GUI state checks in an isolated save namespace. `-SkipEngine` runs just the Lua checks. CI uses `-Headless` for machines without a graphics driver; local checks use the release renderer. Headless checks exercise screen construction and bounds but do not verify rendered pixels or human input.
 
 The build script creates a fresh `dist/Windows-0.1.0-<timestamp>/Trailomon/` folder and a ZIP alongside it. Run `Trailomon.exe` with the four `game.*` files beside it. Release builds do not start the engine's development server. The scripts avoid replacing a running executable and work around OneDrive directory attributes by using fresh output folders.
 

@@ -10,6 +10,7 @@ local function feedback(self,arrival)
 end
 
 function init(self)
+    self.buttons={};self.animated={}
     msg.post(".","acquire_input_focus")
     self.snapshot,self.toast,self.save_blocked=save.load()
     self.snapshot=self.snapshot or model.new(1848)
@@ -83,7 +84,9 @@ function init(self)
         elseif event==window.WINDOW_EVENT_FOCUS_GAINED or event==window.WINDOW_EVENT_DEICONIFIED then self.has_focus=true end
     end)
     self.save_now()
-    self.redraw()
+    -- Mouse/focus events can arrive before the first update on Windows.
+    -- Establish the initial GUI immediately; subsequent redraws are coalesced.
+    screens.draw(self)
 end
 
 function update(self,dt)

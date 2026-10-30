@@ -39,7 +39,7 @@ try {
         }
         $report = Get-Content -LiteralPath $reportPath -Raw
         Write-Host $report
-        if ($engine.ExitCode -ne 0 -or $report.Contains('FAIL:') -or -not $report.Contains('PASS: native save/load') -or -not $report.Contains('PASS: 26 native GUI states') -or -not $report.Contains('PASS: battle readiness')) { throw 'Native persistence or GUI checks failed.' }
+        if ($engine.ExitCode -ne 0 -or $report.Contains('FAIL:') -or -not $report.Contains('PASS: native save/load') -or -not $report.Contains('PASS: 27 native GUI states') -or -not $report.Contains('PASS: battle readiness')) { throw 'Native persistence or GUI checks failed.' }
         if ($Fixture) {
             Set-Content -LiteralPath (Join-Path $TrailomonTools 'latest-playtest-namespace.txt') -Value $qaNamespace
             Write-Host "Isolated fixture ready. Launch the game with --config=trailomon.save_namespace=$qaNamespace"

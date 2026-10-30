@@ -12,12 +12,17 @@ return function(test,command,valid,equal)
             ["presentation.scene"]={update=function() end},
         }
         local env=setmetatable({
+            hash=function(value) return value end,
             require=function(name) return modules[name] or require(name) end,
             msg={post=function() end},sound={play=function() end},
             window={WINDOW_EVENT_FOCUS_LOST=1,WINDOW_EVENT_FOCUS_GAINED=2,WINDOW_EVENT_ICONIFIED=3,WINDOW_EVENT_DEICONIFIED=4,set_listener=function(fn) listener=fn end},
         },{__index=_G})
+        modules["ui.input"]=setfenv(assert(loadfile("ui/input.lua")),env)()
         setfenv(assert(loadfile("ui/game.gui_script")),env)()
-        local ui={};env.init(ui);env.update(ui,0)
+        local ui={};env.init(ui)
+        assert(type(ui.buttons)=="table" and type(ui.animated)=="table")
+        env.on_input(ui,nil,{x=100,y=100})
+        env.update(ui,0)
         ui.perform("battle_start",{team={1,2}});ui.redraw();ui.redraw()
         assert(draws==1,"Redraws must be deferred")
         env.update(ui,0);assert(draws==2)

@@ -107,6 +107,12 @@ function init(self)
         {"map",departed},{"journal",departed},{"settings",departed},{"camp",departed},
         {"return",departed},{"debug",departed},
         {"trail",function(p) departed(p);assert(model.debug(p,"event","mud")) end},
+        {"trail",function(p)
+            departed(p);local progression=require "simulation.progression"
+            p.run.crew={progression.companion("brindlehorn"),progression.companion("cindercoil"),progression.companion("slatewhorl")}
+            p.run.weather="rain";p.run.terrain="ridge";p.run.day=18
+            assert(model.debug(p,"event","territorial"))
+        end},
         {"trail",landmark(2)},{"trail",landmark(3)},{"shop",landmark(3)},
         {"trail",landmark(4)},
         {"trail",function(p) landmark(4)(p);assert(model.command(p,"river",{method="inspect"})) end},
@@ -141,7 +147,7 @@ function update(self,dt)
     local ok,why=pcall(fixture,self,case[1],case[2])
     if not ok or self.index==#self.cases then
         local report=assert(io.open(sys.get_config_string("trailomon.check_report","engine-check-report.txt"),"a"))
-        report:write(ok and "PASS: 26 native GUI states, icon rendering, scene motion, and button bounds.\n" or "FAIL: GUI case "..self.index.." / "..tostring(why).."\n")
+        report:write(ok and "PASS: 27 native GUI states, icon rendering, scene motion, and button bounds.\n" or "FAIL: GUI case "..self.index.." / "..tostring(why).."\n")
         report:close();self.index=nil
         if ok then self.interactions=coroutine.create(function() interaction_checks(self) end)
         else msg.post("@system:","exit",{code=1}) end

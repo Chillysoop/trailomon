@@ -27,6 +27,9 @@ for page in (ROOT / "reviews").glob("*.html"):
     content = page.read_text(encoding="utf-8").replace('<html lang="en">', '<html lang="en" data-hosted="true">')
     content = content.replace("Your answers stay on this computer; if the server is unavailable, FINISH downloads them and attempts to copy them for pasting.", "Your answers are saved privately to your signed-in ChatGPT account. FINISH submits them for the active agent to read. If you are offline, FINISH downloads a copy and attempts clipboard export.")
     (public / page.name).write_text(content, encoding="utf-8")
+evidence = ROOT / "reviews/evidence"
+if evidence.exists():
+    shutil.copytree(evidence, public / "evidence", dirs_exist_ok=True)
 api = checkout / "app/api/responses/[page]"
 api.mkdir(parents=True, exist_ok=True)
 shutil.copyfile(ROOT / "tools/hosted_review/route.ts", api / "route.ts")
