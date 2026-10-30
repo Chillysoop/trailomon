@@ -59,3 +59,7 @@ class HostedImportTests(unittest.TestCase):
         self.assertEqual(result.returncode, 0, result.stderr)
         saved = json.loads((self.root / "responses/plan-1.json").read_text(encoding="utf-8"))
         self.assertEqual(saved["general"], data["general"])
+        server = script.with_name("review_server.py")
+        waited = subprocess.run([sys.executable, str(server), "--root", str(self.root), "--wait", "plan-1", "--timeout", "1"], capture_output=True)
+        self.assertEqual(waited.returncode, 0, waited.stderr)
+        self.assertEqual(json.loads(waited.stdout.decode("utf-8"))["general"], data["general"])

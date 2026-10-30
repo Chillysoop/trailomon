@@ -207,7 +207,9 @@ def wait(page=None, timeout=0, root=ROOT, interval=1):
                     data = json.loads(claimed.read_text(encoding="utf-8"))
                 except ValueError:
                     data = json.loads((out / (flag.stem + ".json")).read_text(encoding="utf-8"))
-                print(json.dumps(data, ensure_ascii=False, indent=2), flush=True)
+                # Escaped JSON preserves all text on Windows pipes whose stdout
+                # encoding cannot represent every Unicode character.
+                print(json.dumps(data, ensure_ascii=True, indent=2), flush=True)
             except (OSError, ValueError):
                 if not flag.exists():
                     claimed.rename(flag)
