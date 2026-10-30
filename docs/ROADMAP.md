@@ -16,7 +16,7 @@ Updated October 30, 2026. Scope: one polished Windows expedition before new regi
 | S3 | Implement automatic combat rules, P1 | Deterministic two-position encounters with six distinct behaviors and bounded triggers available to tests; existing manual saves still work | Pairing and trigger scenarios, fatigue and exhaustion, simultaneous effects, retreat, defeat, and unchanged results across replay | done (PR #4) |
 | S4 | Put automatic combat into the playable journey, P1 | Setup preview, position selection, readable exchanges, pause/step/speed, withdrawal, result explanation, and safe old-save handling | Native input/UI checks, save/resume equivalence, complete peaceful and fighting runs, actual 1280 by 720 playtest | done (PR #4) |
 | S5 | Tune combat against expedition needs, P1 | Several viable pairings, understandable costs, and reasons to choose peaceful options; findings in a review page | Bot comparisons plus new-player and expert playtests; no universal strongest pair or endless defensive stall | todo |
-| S6 | Clarify bounded gathering, P2 | Existing foraging gives clear place, effort, depletion, carrying, and net-food feedback; hunting stays deferred if P2 is accepted | Resource accounting scenarios, depleted and full-load previews, player can explain the cost of a gathering day | todo |
+| S6 | Clarify bounded gathering, P2 | Existing foraging gives clear place, effort, depletion, carrying, and net-food feedback; hunting stays deferred under approved P2 | Resource accounting scenarios, depleted and full-load previews, player can explain the cost of a gathering day | todo |
 
 ## Content
 
@@ -24,7 +24,7 @@ Updated October 30, 2026. Scope: one polished Windows expedition before new regi
 | --- | --- | --- | --- | --- |
 | S7 | Give the route an increasing sense of remoteness, P3 | Six distinct landmark treatments and concise lore within existing content; later scenes show fewer reliable signs and shelters | Route screenshot sequence, contrast and clipping checks, player recognizes last resupply and the upland commitment | todo |
 | S8 | Refine creature anatomy and shared poses, P4 | Six coherent silhouettes at travel scale, including hollow Brindlehorn antlers and Reedskipper's paddle tail; reviewed asset records | Grayscale and roster comparison, wagon-scale inspection, pose consistency, original icon readability | todo |
-| S9 | Evaluate a tiny equipment experiment, P5 | Only if approved: one work-item slot and three objects with travel and encounter tradeoffs; otherwise record this step as cut | Capacity and save tests, competing useful choices, no mandatory item or manufactured loot from wildlife | todo |
+| S9 | Evaluate a tiny equipment experiment, P5 | Approved experiment after combat tuning: one work-item slot and three objects with travel and encounter tradeoffs | Capacity and save tests, competing useful choices, no mandatory item or manufactured loot from wildlife | todo |
 
 ## Polish
 
@@ -41,6 +41,8 @@ Updated October 30, 2026. Scope: one polished Windows expedition before new regi
 | S13 | Publish the owner-approved release | Owner explicitly authorizes public publication of the tested candidate; release notes and download link match that artifact | Recheck approval, hash/revision, downloadable asset and launch instructions | todo |
 
 ## Working rules
+
+The October 30 [next-batch review](../reviews/next-1.html) audits the current phase and proposes priorities. It does not change statuses or revoke P1-P5 approvals. S2/S5 measurement and tuning are the recommended next batch; saved owner votes and comments can change that order.
 
 Ship one step or a coherent approved batch per PR, test it, and merge after CI passes. Update the status to `done (PR #n)` with the actual number. A later failure reopens the relevant work rather than leaving a misleading done status. Preserve published review codes when editing a page.
 
