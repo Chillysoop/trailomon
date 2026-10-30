@@ -3,6 +3,10 @@
 /.editor_settings
 /build/
 /dist/
+/builds/
+/reviews/responses/*.json
+/reviews/responses/*.finished
+/reviews/responses/*.consuming
 /.DS_Store
 *.log
 *.tmp
