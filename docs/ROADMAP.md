@@ -1,6 +1,6 @@
 # Trailomon roadmap
 
-Updated October 30, 2026. Scope: one polished Windows expedition before new regions. The playable foundation already shipped in [PR 1](https://github.com/Chillysoop/trailomon/pull/1), including the complete route, manual battles, foraging, saves, and progression. Statuses describe shipped work, not proposals. A step marked `todo` is not approval to implement a rejected or unanswered review idea.
+Updated October 30, 2026. Scope: one polished Windows expedition before new regions. The playable foundation already shipped in [PR 1](https://github.com/Chillysoop/trailomon/pull/1), including the complete route, manual battles, foraging, saves, and progression. The owner approved plan-1 P1–P5 (hosted revision 7); combat comes first, equipment follows its testing. Statuses describe shipped work, not approvals.
 
 ## Playable prototype
 

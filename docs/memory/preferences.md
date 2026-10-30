@@ -10,4 +10,4 @@
 
 2026-10-30: Owner steers via short review pages; developer builds, tests, opens PRs, and merges when green without further PR approval. Ask before large deletion/history removal, changes outside the repo, public releases, or spending. YES builds; NO rejects; comments override; blank ideas after FINISH are deferred without nagging. Do not re-ask settled choices.
 
-No design proposals have been explicitly rejected via a review page yet. Hunting is unimplemented and under scope review, not an owner-rejected feature. The owner's development experience is unspecified; use beginner-friendly explanations.
+2026-10-30: plan-1 revision 7 approved P1–P5 without amendments. Keep bounded foraging and defer hunting for this milestone; prioritize automatic combat, wilderness presentation, six-species art refinement, and the three-item equipment experiment after combat. P5 is approved even though it was not a top pick. No review proposals rejected. The owner's development experience is unspecified; use beginner-friendly explanations.

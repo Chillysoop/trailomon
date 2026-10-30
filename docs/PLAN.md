@@ -52,6 +52,6 @@ Defer additional regions, a large bestiary, breeding, evolution trees, capture d
 
 ## Open decisions
 
-The first review, [plan-1](../reviews/plan-1.html), asks about the concrete combat conversion, provisioning scope, wilderness presentation, creature-art priority, and a possible equipment follow-up. Saved answers and comments take precedence over initial recommendations. Blank ideas after FINISH are deferred without repeated prompting.
+The owner approved P1–P5 in [plan-1](../reviews/plan-1.html) on October 30, 2026: automatic combat, bounded foraging with hunting deferred, wilderness presentation, six-species art refinement, and the three-item equipment experiment after combat testing. These decisions set scope; the features are not yet implemented. Saved later answers and comments take precedence over initial recommendations. Blank ideas after FINISH are deferred without repeated prompting.
 
 No reliable calendar estimate has been set. Ship small tested steps, measure the result, and revise content ambitions before promising dates. The owner's programming experience is unspecified; setup explanations should remain beginner-friendly.
