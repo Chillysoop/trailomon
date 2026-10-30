@@ -258,6 +258,8 @@ A result screen explains what happened through three or four significant moments
 
 ## 11 Presentation and usability
 
+Standing visual requirements are recorded in [AGENTS.md](../AGENTS.md) and the [visual-direction guide](VISUAL_DIRECTION.md): avoid generic AI-generated art and template-like UI, and introduce distinct, consistently used iconography from the first playable. Pair resource, role, risk, and action icons with text. Judge the result in the running game, not only in isolated assets.
+
 Use a side-view 2D travel scene with the wagon and all active companions visible. Distinct silhouettes, readable poses, changing terrain, weather, and a restrained soundtrack carry the atmosphere. Landmarks receive larger illustrated views and a brief arrival moment.
 
 Prototype art can be simple original placeholders. Prioritize a readable travel screen and event choices before detailed pixel animation. Target a 1280 by 720 layout that remains usable at common desktop sizes. Text readability takes precedence over a tiny retro font.
@@ -338,7 +340,7 @@ HTML5 is a later portability check, not a required second prototype delivery. Ad
 
 Use Defold's 2D sprites, atlases, GUI components, Lua modules, and message passing. Keep the expedition rules in Lua modules that can run without presentation components. Defold provides the documented building blocks for [Lua modules](https://defold.com/manuals/modules/), [GUI scenes](https://defold.com/manuals/gui/), [atlases](https://defold.com/manuals/atlas/), and [message passing](https://defold.com/manuals/message-passing/).
 
-Choose and record a stable Defold editor and engine version when implementation begins. This document does not depend on a particular release number.
+The first playable pins Defold 1.13.2, matching the available editor. The builder URL and checksum are recorded in `tools/defold-version.json`. Build and test commands are in the repository README.
 
 ### Proposed structure
 

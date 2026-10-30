@@ -1,0 +1,7 @@
+name: "checks"
+embedded_instances {
+  id: "checks"
+  data: "components {\n  id: \"checks\"\n  component: \"/tests/engine.script\"\n  position { x: 0.0 y: 0.0 z: 0.0 }\n  rotation { x: 0.0 y: 0.0 z: 0.0 w: 1.0 }\n}\ncomponents {\n  id: \"ui\"\n  component: \"/tests/screens.gui\"\n  position { x: 0.0 y: 0.0 z: 0.0 }\n  rotation { x: 0.0 y: 0.0 z: 0.0 w: 1.0 }\n}\n"
+  position { x: 0.0 y: 0.0 z: 0.0 }
+  rotation { x: 0.0 y: 0.0 z: 0.0 w: 1.0 }
+}

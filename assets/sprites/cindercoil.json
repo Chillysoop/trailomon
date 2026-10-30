@@ -1,0 +1,253 @@
+{
+  "name": "cindercoil",
+  "request": {
+    "operation": "style-reference",
+    "size": 64,
+    "inputs": [
+      {
+        "asset_id": "c1d0fca6-c9a4-475f-8c59-57b966e6364d"
+      }
+    ],
+    "prompt": "An original small shelter-dwelling companion: russet and ember orange furry animal with a long curled insulated tail wrapped loosely around its low body, short legs, cream chin, tiny ears and a calm narrow muzzle. Subtle warm golden belly, no fire or flames. Whole body side profile facing right, resting on four feet. One creature only. Match the reference earthy limited palette, chunky pixel clusters and dark brown outlines. No scenery or lettering."
+  },
+  "outputs": [
+    {
+      "index": 0,
+      "asset": {
+        "id": "745c9146-e255-45a2-959a-33dfb029a6c2",
+        "type": "image",
+        "createdAt": "2026-10-30T08:12:02.900Z",
+        "updatedAt": "2026-10-30T08:12:02.900Z",
+        "prompt": "An original small shelter-dwelling companion: russet and ember orange furry animal with a long curled insulated tail wrapped loosely around its low body, short legs, cream chin, tiny ears and a calm narrow muzzle. Subtle warm golden belly, no fire or flames. Whole body side profile facing right, resting on four feet. One creature only. Match the reference earthy limited palette, chunky pixel clusters and dark brown outlines. No scenery or lettering.",
+        "width": 64,
+        "height": 64,
+        "assetUrl": "https://media.spritefusion.com/pixel-art-assets/774843fd-f725-457b-862c-1f4e2e0598a3/745c9146-e255-45a2-959a-33dfb029a6c2/image.png?v=1793347922900",
+        "style": "default",
+        "tags": [],
+        "contentType": "image/png",
+        "batchId": "faeab8f9-bf58-4315-b120-0979068d5d41",
+        "batchIndex": 0,
+        "batchSize": 9,
+        "action": {
+          "kind": "same-style",
+          "sourceImageAssetId": "c1d0fca6-c9a4-475f-8c59-57b966e6364d",
+          "sourceImageAssetIds": [
+            "c1d0fca6-c9a4-475f-8c59-57b966e6364d"
+          ]
+        }
+      }
+    },
+    {
+      "index": 1,
+      "asset": {
+        "id": "da636132-5b84-40f1-92a1-d3ec65d0d3f2",
+        "type": "image",
+        "createdAt": "2026-10-30T08:12:03.719Z",
+        "updatedAt": "2026-10-30T08:12:03.719Z",
+        "prompt": "An original small shelter-dwelling companion: russet and ember orange furry animal with a long curled insulated tail wrapped loosely around its low body, short legs, cream chin, tiny ears and a calm narrow muzzle. Subtle warm golden belly, no fire or flames. Whole body side profile facing right, resting on four feet. One creature only. Match the reference earthy limited palette, chunky pixel clusters and dark brown outlines. No scenery or lettering.",
+        "width": 64,
+        "height": 64,
+        "assetUrl": "https://media.spritefusion.com/pixel-art-assets/774843fd-f725-457b-862c-1f4e2e0598a3/da636132-5b84-40f1-92a1-d3ec65d0d3f2/image.png?v=1793347923719",
+        "style": "default",
+        "tags": [],
+        "contentType": "image/png",
+        "batchId": "faeab8f9-bf58-4315-b120-0979068d5d41",
+        "batchIndex": 1,
+        "batchSize": 9,
+        "action": {
+          "kind": "same-style",
+          "sourceImageAssetId": "c1d0fca6-c9a4-475f-8c59-57b966e6364d",
+          "sourceImageAssetIds": [
+            "c1d0fca6-c9a4-475f-8c59-57b966e6364d"
+          ]
+        }
+      }
+    },
+    {
+      "index": 2,
+      "asset": {
+        "id": "ad200cbf-0b36-4eff-b232-d4e96b915a39",
+        "type": "image",
+        "createdAt": "2026-10-30T08:12:04.506Z",
+        "updatedAt": "2026-10-30T08:12:04.506Z",
+        "prompt": "An original small shelter-dwelling companion: russet and ember orange furry animal with a long curled insulated tail wrapped loosely around its low body, short legs, cream chin, tiny ears and a calm narrow muzzle. Subtle warm golden belly, no fire or flames. Whole body side profile facing right, resting on four feet. One creature only. Match the reference earthy limited palette, chunky pixel clusters and dark brown outlines. No scenery or lettering.",
+        "width": 64,
+        "height": 64,
+        "assetUrl": "https://media.spritefusion.com/pixel-art-assets/774843fd-f725-457b-862c-1f4e2e0598a3/ad200cbf-0b36-4eff-b232-d4e96b915a39/image.png?v=1793347924506",
+        "style": "default",
+        "tags": [],
+        "contentType": "image/png",
+        "batchId": "faeab8f9-bf58-4315-b120-0979068d5d41",
+        "batchIndex": 2,
+        "batchSize": 9,
+        "action": {
+          "kind": "same-style",
+          "sourceImageAssetId": "c1d0fca6-c9a4-475f-8c59-57b966e6364d",
+          "sourceImageAssetIds": [
+            "c1d0fca6-c9a4-475f-8c59-57b966e6364d"
+          ]
+        }
+      }
+    },
+    {
+      "index": 3,
+      "asset": {
+        "id": "cf40d5a9-0f1e-48c3-9724-0231553c7b5a",
+        "type": "image",
+        "createdAt": "2026-10-30T08:12:05.344Z",
+        "updatedAt": "2026-10-30T08:12:05.344Z",
+        "prompt": "An original small shelter-dwelling companion: russet and ember orange furry animal with a long curled insulated tail wrapped loosely around its low body, short legs, cream chin, tiny ears and a calm narrow muzzle. Subtle warm golden belly, no fire or flames. Whole body side profile facing right, resting on four feet. One creature only. Match the reference earthy limited palette, chunky pixel clusters and dark brown outlines. No scenery or lettering.",
+        "width": 64,
+        "height": 64,
+        "assetUrl": "https://media.spritefusion.com/pixel-art-assets/774843fd-f725-457b-862c-1f4e2e0598a3/cf40d5a9-0f1e-48c3-9724-0231553c7b5a/image.png?v=1793347925344",
+        "style": "default",
+        "tags": [],
+        "contentType": "image/png",
+        "batchId": "faeab8f9-bf58-4315-b120-0979068d5d41",
+        "batchIndex": 3,
+        "batchSize": 9,
+        "action": {
+          "kind": "same-style",
+          "sourceImageAssetId": "c1d0fca6-c9a4-475f-8c59-57b966e6364d",
+          "sourceImageAssetIds": [
+            "c1d0fca6-c9a4-475f-8c59-57b966e6364d"
+          ]
+        }
+      }
+    },
+    {
+      "index": 4,
+      "asset": {
+        "id": "0d2edd5f-de6d-41fe-aa57-b05d0d9bd22a",
+        "type": "image",
+        "createdAt": "2026-10-30T08:12:06.135Z",
+        "updatedAt": "2026-10-30T08:12:06.135Z",
+        "prompt": "An original small shelter-dwelling companion: russet and ember orange furry animal with a long curled insulated tail wrapped loosely around its low body, short legs, cream chin, tiny ears and a calm narrow muzzle. Subtle warm golden belly, no fire or flames. Whole body side profile facing right, resting on four feet. One creature only. Match the reference earthy limited palette, chunky pixel clusters and dark brown outlines. No scenery or lettering.",
+        "width": 64,
+        "height": 64,
+        "assetUrl": "https://media.spritefusion.com/pixel-art-assets/774843fd-f725-457b-862c-1f4e2e0598a3/0d2edd5f-de6d-41fe-aa57-b05d0d9bd22a/image.png?v=1793347926135",
+        "style": "default",
+        "tags": [],
+        "contentType": "image/png",
+        "batchId": "faeab8f9-bf58-4315-b120-0979068d5d41",
+        "batchIndex": 4,
+        "batchSize": 9,
+        "action": {
+          "kind": "same-style",
+          "sourceImageAssetId": "c1d0fca6-c9a4-475f-8c59-57b966e6364d",
+          "sourceImageAssetIds": [
+            "c1d0fca6-c9a4-475f-8c59-57b966e6364d"
+          ]
+        }
+      }
+    },
+    {
+      "index": 5,
+      "asset": {
+        "id": "da2c670f-2dc2-4856-93ff-e0552d0b3777",
+        "type": "image",
+        "createdAt": "2026-10-30T08:12:06.935Z",
+        "updatedAt": "2026-10-30T08:12:06.935Z",
+        "prompt": "An original small shelter-dwelling companion: russet and ember orange furry animal with a long curled insulated tail wrapped loosely around its low body, short legs, cream chin, tiny ears and a calm narrow muzzle. Subtle warm golden belly, no fire or flames. Whole body side profile facing right, resting on four feet. One creature only. Match the reference earthy limited palette, chunky pixel clusters and dark brown outlines. No scenery or lettering.",
+        "width": 64,
+        "height": 64,
+        "assetUrl": "https://media.spritefusion.com/pixel-art-assets/774843fd-f725-457b-862c-1f4e2e0598a3/da2c670f-2dc2-4856-93ff-e0552d0b3777/image.png?v=1793347926935",
+        "style": "default",
+        "tags": [],
+        "contentType": "image/png",
+        "batchId": "faeab8f9-bf58-4315-b120-0979068d5d41",
+        "batchIndex": 5,
+        "batchSize": 9,
+        "action": {
+          "kind": "same-style",
+          "sourceImageAssetId": "c1d0fca6-c9a4-475f-8c59-57b966e6364d",
+          "sourceImageAssetIds": [
+            "c1d0fca6-c9a4-475f-8c59-57b966e6364d"
+          ]
+        }
+      }
+    },
+    {
+      "index": 6,
+      "asset": {
+        "id": "0dd3f85c-2ce9-40ad-9542-ee579e54cb9c",
+        "type": "image",
+        "createdAt": "2026-10-30T08:12:07.613Z",
+        "updatedAt": "2026-10-30T08:12:07.613Z",
+        "prompt": "An original small shelter-dwelling companion: russet and ember orange furry animal with a long curled insulated tail wrapped loosely around its low body, short legs, cream chin, tiny ears and a calm narrow muzzle. Subtle warm golden belly, no fire or flames. Whole body side profile facing right, resting on four feet. One creature only. Match the reference earthy limited palette, chunky pixel clusters and dark brown outlines. No scenery or lettering.",
+        "width": 64,
+        "height": 64,
+        "assetUrl": "https://media.spritefusion.com/pixel-art-assets/774843fd-f725-457b-862c-1f4e2e0598a3/0dd3f85c-2ce9-40ad-9542-ee579e54cb9c/image.png?v=1793347927613",
+        "style": "default",
+        "tags": [],
+        "contentType": "image/png",
+        "batchId": "faeab8f9-bf58-4315-b120-0979068d5d41",
+        "batchIndex": 6,
+        "batchSize": 9,
+        "action": {
+          "kind": "same-style",
+          "sourceImageAssetId": "c1d0fca6-c9a4-475f-8c59-57b966e6364d",
+          "sourceImageAssetIds": [
+            "c1d0fca6-c9a4-475f-8c59-57b966e6364d"
+          ]
+        }
+      }
+    },
+    {
+      "index": 7,
+      "asset": {
+        "id": "0973e653-efbb-4c0e-805d-01a8c29bd480",
+        "type": "image",
+        "createdAt": "2026-10-30T08:12:08.359Z",
+        "updatedAt": "2026-10-30T08:12:08.359Z",
+        "prompt": "An original small shelter-dwelling companion: russet and ember orange furry animal with a long curled insulated tail wrapped loosely around its low body, short legs, cream chin, tiny ears and a calm narrow muzzle. Subtle warm golden belly, no fire or flames. Whole body side profile facing right, resting on four feet. One creature only. Match the reference earthy limited palette, chunky pixel clusters and dark brown outlines. No scenery or lettering.",
+        "width": 64,
+        "height": 64,
+        "assetUrl": "https://media.spritefusion.com/pixel-art-assets/774843fd-f725-457b-862c-1f4e2e0598a3/0973e653-efbb-4c0e-805d-01a8c29bd480/image.png?v=1793347928359",
+        "style": "default",
+        "tags": [],
+        "contentType": "image/png",
+        "batchId": "faeab8f9-bf58-4315-b120-0979068d5d41",
+        "batchIndex": 7,
+        "batchSize": 9,
+        "action": {
+          "kind": "same-style",
+          "sourceImageAssetId": "c1d0fca6-c9a4-475f-8c59-57b966e6364d",
+          "sourceImageAssetIds": [
+            "c1d0fca6-c9a4-475f-8c59-57b966e6364d"
+          ]
+        }
+      }
+    },
+    {
+      "index": 8,
+      "asset": {
+        "id": "61623b43-86ce-44a0-9be8-6fe678e9d669",
+        "type": "image",
+        "createdAt": "2026-10-30T08:12:09.178Z",
+        "updatedAt": "2026-10-30T08:12:09.178Z",
+        "prompt": "An original small shelter-dwelling companion: russet and ember orange furry animal with a long curled insulated tail wrapped loosely around its low body, short legs, cream chin, tiny ears and a calm narrow muzzle. Subtle warm golden belly, no fire or flames. Whole body side profile facing right, resting on four feet. One creature only. Match the reference earthy limited palette, chunky pixel clusters and dark brown outlines. No scenery or lettering.",
+        "width": 64,
+        "height": 64,
+        "assetUrl": "https://media.spritefusion.com/pixel-art-assets/774843fd-f725-457b-862c-1f4e2e0598a3/61623b43-86ce-44a0-9be8-6fe678e9d669/image.png?v=1793347929178",
+        "style": "default",
+        "tags": [],
+        "contentType": "image/png",
+        "batchId": "faeab8f9-bf58-4315-b120-0979068d5d41",
+        "batchIndex": 8,
+        "batchSize": 9,
+        "action": {
+          "kind": "same-style",
+          "sourceImageAssetId": "c1d0fca6-c9a4-475f-8c59-57b966e6364d",
+          "sourceImageAssetIds": [
+            "c1d0fca6-c9a4-475f-8c59-57b966e6364d"
+          ]
+        }
+      }
+    }
+  ],
+  "request_id": "req_cf8c296a-448b-47c6-9649-a174c70ef103",
+  "status": "succeeded",
+  "selected_index": 0,
+  "local_path": "assets/sprites/cindercoil.png"
+}

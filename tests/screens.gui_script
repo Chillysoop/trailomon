@@ -1,0 +1,60 @@
+local model=require "simulation.expedition"
+local screens=require "ui.screens"
+local scene=require "presentation.scene"
+
+local function fixture(self,page,setup)
+    self.snapshot=model.new(1848);self.page=page;self.speed=1;self.focus=1
+    self.battle_team={};self.battle_actions={};self.edit=nil;self.save_blocked=false
+    if setup then setup(self.snapshot,self) end
+    screens.draw(self)
+    scene.update(self,0.2,true,true)
+    for _,b in ipairs(self.buttons) do
+        local pos,size=gui.get_position(b.node),gui.get_size(b.node)
+        assert(pos.x-size.x/2>=0 and pos.x+size.x/2<=1280,"Button outside horizontal bounds: "..b.key)
+        assert(pos.y-size.y/2>=0 and pos.y+size.y/2<=720,"Button outside vertical bounds: "..b.key)
+    end
+end
+local function departed(p) assert(model.command(p,"depart")) end
+local function landmark(n)
+    return function(p) departed(p);p.run.target=n;p.run.progress=p.run.distance;p.run.mode="landmark" end
+end
+local function battle(p)
+    departed(p);assert(model.debug(p,"event","scavengers"));assert(model.command(p,"choice",{id="battle"}));assert(model.command(p,"battle_start",{team={1,2}}))
+end
+function init(self)
+    local noop=function() end
+    self.perform=noop;self.open_page=noop;self.redraw=noop;self.reset_clock=noop;self.save_now=noop
+    self.force_event=noop;self.debug_resupply=noop;self.finish_edit=noop
+    self.cases={
+        {"trail"},{"trail",departed},{"crew",departed},{"companion",departed},
+        {"map",departed},{"journal",departed},{"settings",departed},{"camp",departed},
+        {"return",departed},{"debug",departed},
+        {"trail",function(p) departed(p);assert(model.debug(p,"event","mud")) end},
+        {"trail",landmark(2)},{"trail",landmark(3)},{"shop",landmark(3)},
+        {"trail",landmark(4)},
+        {"trail",function(p) landmark(4)(p);assert(model.command(p,"river",{method="inspect"})) end},
+        {"trail",function(p) landmark(4)(p);assert(model.command(p,"river",{method="ferry"})) end},
+        {"trail",landmark(5)},
+        {"trail",function(p) departed(p);assert(model.debug(p,"event","scavengers"));assert(model.command(p,"choice",{id="battle"})) end},
+        {"trail",battle},
+        {"trail",function(p,ui) battle(p);ui.battle_actions={"pressure","guard"} end},
+        {"trail",function(p) departed(p);assert(model.command(p,"return")) end},
+        {"journal",function(p,ui) departed(p);assert(model.command(p,"return"));ui.journal_history=true end},
+        {"trail",function(p,ui) ui.edit={kind="seed",value="1848"} end},
+        {"trail",function(p,ui) ui.save_blocked=true end},
+    }
+end
+function on_message(self,id,message,sender)
+    if id==hash("start_checks") then self.index=1 end
+end
+function update(self,dt)
+    if not self.index then return end
+    local case=self.cases[self.index]
+    local ok,why=pcall(fixture,self,case[1],case[2])
+    if not ok or self.index==#self.cases then
+        local report=assert(io.open(sys.get_config_string("trailomon.check_report","engine-check-report.txt"),"a"))
+        report:write(ok and "PASS: 25 native GUI states, icon rendering, scene motion, and button bounds.\n" or "FAIL: GUI case "..self.index.." / "..tostring(why).."\n")
+        report:close();self.index=nil
+        msg.post("@system:","exit",{code=ok and 0 or 1})
+    else self.index=self.index+1 end
+end

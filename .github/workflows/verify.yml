@@ -1,0 +1,26 @@
+name: Verify prototype
+on:
+  push:
+  pull_request:
+permissions:
+  contents: read
+jobs:
+  windows:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '25'
+      - name: Simulation and native save checks
+        shell: pwsh
+        run: ./tools/test.ps1
+      - name: Build offline Windows bundle
+        shell: pwsh
+        run: ./tools/build.ps1
+      - uses: actions/upload-artifact@v4
+        with:
+          name: Trailomon-Windows
+          path: dist/*.zip
+          if-no-files-found: error

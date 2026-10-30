@@ -1,0 +1,253 @@
+{
+  "name": "slatewhorl",
+  "request": {
+    "operation": "style-reference",
+    "size": 64,
+    "inputs": [
+      {
+        "asset_id": "c1d0fca6-c9a4-475f-8c59-57b966e6364d"
+      }
+    ],
+    "prompt": "An original slow upland companion: broad low quadruped with overlapping slate-gray spiral stone-like plates along its back and a short heavy tail, stout feet, small rounded head and gentle amber eye. Its layered shell can brace a wagon. Whole body side profile facing right. One creature only. Match the reference earthy limited palette, chunky pixel clusters and dark brown outlines. No scenery or lettering."
+  },
+  "outputs": [
+    {
+      "index": 0,
+      "asset": {
+        "id": "d17f20ed-d6f3-4c39-8dfd-3068113ebde9",
+        "type": "image",
+        "createdAt": "2026-10-30T08:13:01.000Z",
+        "updatedAt": "2026-10-30T08:13:01.000Z",
+        "prompt": "An original slow upland companion: broad low quadruped with overlapping slate-gray spiral stone-like plates along its back and a short heavy tail, stout feet, small rounded head and gentle amber eye. Its layered shell can brace a wagon. Whole body side profile facing right. One creature only. Match the reference earthy limited palette, chunky pixel clusters and dark brown outlines. No scenery or lettering.",
+        "width": 71,
+        "height": 71,
+        "assetUrl": "https://media.spritefusion.com/pixel-art-assets/774843fd-f725-457b-862c-1f4e2e0598a3/d17f20ed-d6f3-4c39-8dfd-3068113ebde9/image.png?v=1793347981000",
+        "style": "default",
+        "tags": [],
+        "contentType": "image/png",
+        "batchId": "0d5c1285-f14b-4a0d-88d2-cdbade042e29",
+        "batchIndex": 0,
+        "batchSize": 9,
+        "action": {
+          "kind": "same-style",
+          "sourceImageAssetId": "c1d0fca6-c9a4-475f-8c59-57b966e6364d",
+          "sourceImageAssetIds": [
+            "c1d0fca6-c9a4-475f-8c59-57b966e6364d"
+          ]
+        }
+      }
+    },
+    {
+      "index": 1,
+      "asset": {
+        "id": "d3886b27-d5ae-473b-aabe-44997b46572e",
+        "type": "image",
+        "createdAt": "2026-10-30T08:13:01.718Z",
+        "updatedAt": "2026-10-30T08:13:01.718Z",
+        "prompt": "An original slow upland companion: broad low quadruped with overlapping slate-gray spiral stone-like plates along its back and a short heavy tail, stout feet, small rounded head and gentle amber eye. Its layered shell can brace a wagon. Whole body side profile facing right. One creature only. Match the reference earthy limited palette, chunky pixel clusters and dark brown outlines. No scenery or lettering.",
+        "width": 64,
+        "height": 64,
+        "assetUrl": "https://media.spritefusion.com/pixel-art-assets/774843fd-f725-457b-862c-1f4e2e0598a3/d3886b27-d5ae-473b-aabe-44997b46572e/image.png?v=1793347981718",
+        "style": "default",
+        "tags": [],
+        "contentType": "image/png",
+        "batchId": "0d5c1285-f14b-4a0d-88d2-cdbade042e29",
+        "batchIndex": 1,
+        "batchSize": 9,
+        "action": {
+          "kind": "same-style",
+          "sourceImageAssetId": "c1d0fca6-c9a4-475f-8c59-57b966e6364d",
+          "sourceImageAssetIds": [
+            "c1d0fca6-c9a4-475f-8c59-57b966e6364d"
+          ]
+        }
+      }
+    },
+    {
+      "index": 2,
+      "asset": {
+        "id": "173e01d0-204d-4545-bfbb-b753044305a5",
+        "type": "image",
+        "createdAt": "2026-10-30T08:13:02.430Z",
+        "updatedAt": "2026-10-30T08:13:02.430Z",
+        "prompt": "An original slow upland companion: broad low quadruped with overlapping slate-gray spiral stone-like plates along its back and a short heavy tail, stout feet, small rounded head and gentle amber eye. Its layered shell can brace a wagon. Whole body side profile facing right. One creature only. Match the reference earthy limited palette, chunky pixel clusters and dark brown outlines. No scenery or lettering.",
+        "width": 68,
+        "height": 68,
+        "assetUrl": "https://media.spritefusion.com/pixel-art-assets/774843fd-f725-457b-862c-1f4e2e0598a3/173e01d0-204d-4545-bfbb-b753044305a5/image.png?v=1793347982430",
+        "style": "default",
+        "tags": [],
+        "contentType": "image/png",
+        "batchId": "0d5c1285-f14b-4a0d-88d2-cdbade042e29",
+        "batchIndex": 2,
+        "batchSize": 9,
+        "action": {
+          "kind": "same-style",
+          "sourceImageAssetId": "c1d0fca6-c9a4-475f-8c59-57b966e6364d",
+          "sourceImageAssetIds": [
+            "c1d0fca6-c9a4-475f-8c59-57b966e6364d"
+          ]
+        }
+      }
+    },
+    {
+      "index": 3,
+      "asset": {
+        "id": "0143d1fc-2dff-4286-a5b6-0daf0fc47c66",
+        "type": "image",
+        "createdAt": "2026-10-30T08:13:03.129Z",
+        "updatedAt": "2026-10-30T08:13:03.129Z",
+        "prompt": "An original slow upland companion: broad low quadruped with overlapping slate-gray spiral stone-like plates along its back and a short heavy tail, stout feet, small rounded head and gentle amber eye. Its layered shell can brace a wagon. Whole body side profile facing right. One creature only. Match the reference earthy limited palette, chunky pixel clusters and dark brown outlines. No scenery or lettering.",
+        "width": 74,
+        "height": 74,
+        "assetUrl": "https://media.spritefusion.com/pixel-art-assets/774843fd-f725-457b-862c-1f4e2e0598a3/0143d1fc-2dff-4286-a5b6-0daf0fc47c66/image.png?v=1793347983129",
+        "style": "default",
+        "tags": [],
+        "contentType": "image/png",
+        "batchId": "0d5c1285-f14b-4a0d-88d2-cdbade042e29",
+        "batchIndex": 3,
+        "batchSize": 9,
+        "action": {
+          "kind": "same-style",
+          "sourceImageAssetId": "c1d0fca6-c9a4-475f-8c59-57b966e6364d",
+          "sourceImageAssetIds": [
+            "c1d0fca6-c9a4-475f-8c59-57b966e6364d"
+          ]
+        }
+      }
+    },
+    {
+      "index": 4,
+      "asset": {
+        "id": "003c7e46-1618-41ad-8e0d-c6e7be35bb29",
+        "type": "image",
+        "createdAt": "2026-10-30T08:13:04.007Z",
+        "updatedAt": "2026-10-30T08:13:04.007Z",
+        "prompt": "An original slow upland companion: broad low quadruped with overlapping slate-gray spiral stone-like plates along its back and a short heavy tail, stout feet, small rounded head and gentle amber eye. Its layered shell can brace a wagon. Whole body side profile facing right. One creature only. Match the reference earthy limited palette, chunky pixel clusters and dark brown outlines. No scenery or lettering.",
+        "width": 65,
+        "height": 65,
+        "assetUrl": "https://media.spritefusion.com/pixel-art-assets/774843fd-f725-457b-862c-1f4e2e0598a3/003c7e46-1618-41ad-8e0d-c6e7be35bb29/image.png?v=1793347984007",
+        "style": "default",
+        "tags": [],
+        "contentType": "image/png",
+        "batchId": "0d5c1285-f14b-4a0d-88d2-cdbade042e29",
+        "batchIndex": 4,
+        "batchSize": 9,
+        "action": {
+          "kind": "same-style",
+          "sourceImageAssetId": "c1d0fca6-c9a4-475f-8c59-57b966e6364d",
+          "sourceImageAssetIds": [
+            "c1d0fca6-c9a4-475f-8c59-57b966e6364d"
+          ]
+        }
+      }
+    },
+    {
+      "index": 5,
+      "asset": {
+        "id": "9512ba2c-6396-4529-bfcf-b773c83d2bb2",
+        "type": "image",
+        "createdAt": "2026-10-30T08:13:04.754Z",
+        "updatedAt": "2026-10-30T08:13:04.754Z",
+        "prompt": "An original slow upland companion: broad low quadruped with overlapping slate-gray spiral stone-like plates along its back and a short heavy tail, stout feet, small rounded head and gentle amber eye. Its layered shell can brace a wagon. Whole body side profile facing right. One creature only. Match the reference earthy limited palette, chunky pixel clusters and dark brown outlines. No scenery or lettering.",
+        "width": 66,
+        "height": 66,
+        "assetUrl": "https://media.spritefusion.com/pixel-art-assets/774843fd-f725-457b-862c-1f4e2e0598a3/9512ba2c-6396-4529-bfcf-b773c83d2bb2/image.png?v=1793347984754",
+        "style": "default",
+        "tags": [],
+        "contentType": "image/png",
+        "batchId": "0d5c1285-f14b-4a0d-88d2-cdbade042e29",
+        "batchIndex": 5,
+        "batchSize": 9,
+        "action": {
+          "kind": "same-style",
+          "sourceImageAssetId": "c1d0fca6-c9a4-475f-8c59-57b966e6364d",
+          "sourceImageAssetIds": [
+            "c1d0fca6-c9a4-475f-8c59-57b966e6364d"
+          ]
+        }
+      }
+    },
+    {
+      "index": 6,
+      "asset": {
+        "id": "3bd421d8-c40c-4d3e-b9c2-d8392ddbc520",
+        "type": "image",
+        "createdAt": "2026-10-30T08:13:05.417Z",
+        "updatedAt": "2026-10-30T08:13:05.417Z",
+        "prompt": "An original slow upland companion: broad low quadruped with overlapping slate-gray spiral stone-like plates along its back and a short heavy tail, stout feet, small rounded head and gentle amber eye. Its layered shell can brace a wagon. Whole body side profile facing right. One creature only. Match the reference earthy limited palette, chunky pixel clusters and dark brown outlines. No scenery or lettering.",
+        "width": 65,
+        "height": 65,
+        "assetUrl": "https://media.spritefusion.com/pixel-art-assets/774843fd-f725-457b-862c-1f4e2e0598a3/3bd421d8-c40c-4d3e-b9c2-d8392ddbc520/image.png?v=1793347985417",
+        "style": "default",
+        "tags": [],
+        "contentType": "image/png",
+        "batchId": "0d5c1285-f14b-4a0d-88d2-cdbade042e29",
+        "batchIndex": 6,
+        "batchSize": 9,
+        "action": {
+          "kind": "same-style",
+          "sourceImageAssetId": "c1d0fca6-c9a4-475f-8c59-57b966e6364d",
+          "sourceImageAssetIds": [
+            "c1d0fca6-c9a4-475f-8c59-57b966e6364d"
+          ]
+        }
+      }
+    },
+    {
+      "index": 7,
+      "asset": {
+        "id": "5e1f7edd-a680-4e11-acfb-9feecc5c83fb",
+        "type": "image",
+        "createdAt": "2026-10-30T08:13:06.223Z",
+        "updatedAt": "2026-10-30T08:13:06.223Z",
+        "prompt": "An original slow upland companion: broad low quadruped with overlapping slate-gray spiral stone-like plates along its back and a short heavy tail, stout feet, small rounded head and gentle amber eye. Its layered shell can brace a wagon. Whole body side profile facing right. One creature only. Match the reference earthy limited palette, chunky pixel clusters and dark brown outlines. No scenery or lettering.",
+        "width": 69,
+        "height": 69,
+        "assetUrl": "https://media.spritefusion.com/pixel-art-assets/774843fd-f725-457b-862c-1f4e2e0598a3/5e1f7edd-a680-4e11-acfb-9feecc5c83fb/image.png?v=1793347986223",
+        "style": "default",
+        "tags": [],
+        "contentType": "image/png",
+        "batchId": "0d5c1285-f14b-4a0d-88d2-cdbade042e29",
+        "batchIndex": 7,
+        "batchSize": 9,
+        "action": {
+          "kind": "same-style",
+          "sourceImageAssetId": "c1d0fca6-c9a4-475f-8c59-57b966e6364d",
+          "sourceImageAssetIds": [
+            "c1d0fca6-c9a4-475f-8c59-57b966e6364d"
+          ]
+        }
+      }
+    },
+    {
+      "index": 8,
+      "asset": {
+        "id": "949d6098-c287-4163-a314-9d2f8aee24b1",
+        "type": "image",
+        "createdAt": "2026-10-30T08:13:06.965Z",
+        "updatedAt": "2026-10-30T08:13:06.965Z",
+        "prompt": "An original slow upland companion: broad low quadruped with overlapping slate-gray spiral stone-like plates along its back and a short heavy tail, stout feet, small rounded head and gentle amber eye. Its layered shell can brace a wagon. Whole body side profile facing right. One creature only. Match the reference earthy limited palette, chunky pixel clusters and dark brown outlines. No scenery or lettering.",
+        "width": 66,
+        "height": 66,
+        "assetUrl": "https://media.spritefusion.com/pixel-art-assets/774843fd-f725-457b-862c-1f4e2e0598a3/949d6098-c287-4163-a314-9d2f8aee24b1/image.png?v=1793347986965",
+        "style": "default",
+        "tags": [],
+        "contentType": "image/png",
+        "batchId": "0d5c1285-f14b-4a0d-88d2-cdbade042e29",
+        "batchIndex": 8,
+        "batchSize": 9,
+        "action": {
+          "kind": "same-style",
+          "sourceImageAssetId": "c1d0fca6-c9a4-475f-8c59-57b966e6364d",
+          "sourceImageAssetIds": [
+            "c1d0fca6-c9a4-475f-8c59-57b966e6364d"
+          ]
+        }
+      }
+    }
+  ],
+  "request_id": "req_6882f46b-5395-46da-9962-fea0b824ebbf",
+  "status": "succeeded",
+  "selected_index": 0,
+  "local_path": "assets/sprites/slatewhorl.png"
+}

@@ -1,0 +1,9 @@
+images { image: "/assets/sprites/brindlehorn.png" }
+images { image: "/assets/sprites/reedskipper.png" }
+images { image: "/assets/sprites/loamling.png" }
+images { image: "/assets/sprites/bellmoth.png" }
+images { image: "/assets/sprites/cindercoil.png" }
+images { image: "/assets/sprites/slatewhorl.png" }
+margin: 2
+extrude_borders: 2
+inner_padding: 0

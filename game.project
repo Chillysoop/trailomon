@@ -1,0 +1,37 @@
+[project]
+title = Trailomon
+version = 0.1.0
+
+[bootstrap]
+main_collection = /main/main.collectionc
+
+[display]
+width = 1280
+height = 720
+high_dpi = 1
+vsync = 1
+dynamic_orientation = 0
+
+[input]
+game_binding = /input/game.input_bindingc
+
+[render]
+default_texture_min_filter = nearest
+default_texture_mag_filter = nearest
+clear_color_red = 0.08
+clear_color_green = 0.13
+clear_color_blue = 0.12
+
+[graphics]
+default_texture_min_filter = nearest
+default_texture_mag_filter = nearest
+
+[gui]
+max_count = 4
+
+[sound]
+max_sound_data = 8
+max_sound_buffers = 32
+
+[script]
+shared_state = 1

@@ -1,0 +1,4 @@
+sound: "/assets/audio/decision.wav"
+looping: 0
+group: "master"
+gain: 0.35

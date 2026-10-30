@@ -1,0 +1,118 @@
+local model=require "simulation.expedition"
+local save=require "services.save"
+local clock=require "services.travel_clock"
+local screens=require "ui.screens"
+local widgets=require "ui.widgets"
+local scene=require "presentation.scene"
+
+local function feedback(self,arrival)
+    if self.snapshot.settings.sound then sound.play(arrival and "#arrival" or "#decision") end
+end
+
+function init(self)
+    msg.post(".","acquire_input_focus")
+    self.snapshot,self.toast,self.save_blocked=save.load()
+    self.snapshot=self.snapshot or model.new(1848)
+    self.page="trail";self.speed=1;self.time=0;self.clock=clock.new()
+    self.battle_actions={};self.battle_team={};self.has_focus=true
+    if self.snapshot.run.mode=="traveling" then model.command(self.snapshot,"pause") end
+    self.reset_clock=function() clock.reset(self.clock) end
+    self.redraw=function() screens.draw(self) end
+    self.save_now=function()
+        if self.save_blocked then return end
+        local ok,why=save.write(self.snapshot)
+        self.save_error=not ok and why or nil
+        if ok then self.toast="Journey saved locally" end
+    end
+    self.perform=function(id,args,destination)
+        if self.save_blocked then return end
+        local previous_mode=self.snapshot.run.mode
+        local ok,why=model.command(self.snapshot,id,args)
+        if ok then
+            self.reset_clock()
+            if id=="round" or id=="battle_start" or id=="new" then self.battle_actions={} end
+            if id=="choice" or id=="new" then self.battle_team={} end
+            if destination then self.page=destination end
+            if self.snapshot.run.mode=="result" then self.page="trail" end
+            self.save_now()
+            if id~="step" or previous_mode~=self.snapshot.run.mode then feedback(self,self.snapshot.run.mode=="landmark" or self.snapshot.run.mode=="result") end
+        else self.toast=why or "That choice is unavailable" end
+        self.redraw()
+    end
+    self.open_page=function(destination)
+        if self.save_blocked then return end
+        if self.snapshot.run.mode=="traveling" then model.command(self.snapshot,"pause");self.save_now() end
+        self.reset_clock();self.page=destination;self.redraw()
+    end
+    self.finish_edit=function()
+        local edit=self.edit
+        if not edit then return end
+        local ok,why
+        if edit.kind=="seed" then
+            if edit.value=="" then self.toast="Enter a number first";self.redraw();return end
+            ok,why=model.command(self.snapshot,"seed",{value=tonumber(edit.value)})
+        else ok,why=model.command(self.snapshot,"rename",{member=edit.member,name=edit.value}) end
+        if ok then self.edit=nil;self.save_now() else self.toast=why end
+        self.redraw()
+    end
+    self.force_event=function(id)
+        local ok,why=model.debug(self.snapshot,"event",id)
+        if ok then self.page="trail";self.save_now() else self.toast=why end
+        self.reset_clock();self.redraw()
+    end
+    self.debug_resupply=function()
+        local ok,why=model.debug(self.snapshot,"resupply")
+        if ok then self.save_now() else self.toast=why end
+        self.redraw()
+    end
+    window.set_listener(function(_,event,data)
+        if event==window.WINDOW_EVENT_FOCUS_LOST or event==window.WINDOW_EVENT_ICONIFIED then
+            self.has_focus=false;self.reset_clock()
+            if self.snapshot.run.mode=="traveling" then model.command(self.snapshot,"pause");self.save_now();self.redraw() end
+        elseif event==window.WINDOW_EVENT_FOCUS_GAINED or event==window.WINDOW_EVENT_DEICONIFIED then self.has_focus=true end
+    end)
+    self.save_now()
+    self.redraw()
+end
+
+function update(self,dt)
+    self.time=self.time+math.min(dt,0.1)
+    local active=self.page=="trail" and self.snapshot.run.mode=="traveling" and not self.edit and not self.save_blocked and self.has_focus
+    if clock.tick(self.clock,dt,active,self.speed==1 and 20 or 2.5) then self.perform("step") end
+    scene.update(self,self.time,active,self.snapshot.settings.motion)
+end
+
+function on_input(self,action_id,action)
+    if self.edit then
+        if action_id==hash("text") and action.text then
+            local text=action.text:gsub(self.edit.kind=="seed" and "[^0-9]" or "[^%w _%-]","")
+            self.edit.value=(self.edit.value..text):sub(1,self.edit.kind=="seed" and 10 or 18);self.redraw();return true
+        elseif action_id==hash("erase") and (action.pressed or action.repeated) then self.edit.value=self.edit.value:sub(1,-2);self.redraw();return true
+        elseif action_id==hash("confirm") and action.pressed then self.finish_edit();return true
+        elseif action_id==hash("back") and action.pressed then self.edit=nil;self.redraw();return true end
+    end
+    if action_id==hash("click") and action.pressed then
+        self.keyboard=false
+        return widgets.activate(self,action.x,action.y)
+    elseif action_id==nil and action.x then
+        self.keyboard=false;widgets.highlight(self,action.x,action.y,false)
+    elseif action.pressed then
+        if action_id==hash("next") or action_id==hash("previous") then
+            self.keyboard=true;widgets.focus_next(self,action_id==hash("next") and 1 or -1);widgets.highlight(self,nil,nil,true);return true
+        elseif action_id==hash("confirm") then
+            local button=self.buttons[self.focus or 1]
+            if button and button.enabled then button.fn() end;return true
+        elseif action_id==hash("back") then self.open_page("trail");return true
+        elseif action_id==hash("pause") and self.page=="trail" then
+            local mode=self.snapshot.run.mode
+            if mode=="stopped" then self.perform("resume") elseif mode=="traveling" then self.perform("pause") end
+            return true
+        elseif action_id==hash("debug") then self.open_page(self.page=="debug" and "trail" or "debug");return true end
+    end
+    return false
+end
+
+function final(self)
+    self.save_now()
+    window.set_listener(nil)
+end

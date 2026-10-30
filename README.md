@@ -2,20 +2,43 @@
 
 A relaxed wagon expedition game about traveling with a small crew of original creatures. Prepare for the road, watch the journey unfold, and decide how to spend time, supplies, and your companions' energy when circumstances change.
 
-The project is planned for **Defold**, using Lua for the simulation and 2D presentation. The initial delivery target is a Windows desktop prototype with mouse and keyboard controls.
+The first playable uses **Defold 1.13.2**, Lua, and 2D presentation. It runs offline on Windows with mouse and keyboard controls.
 
 ## Design
 
 The [game design document](docs/GAME_DESIGN.md) defines the core loop, creature systems, battles, replayability, persistent progression, and the first playable prototype. It also includes the proposed Defold architecture, implementation milestones, and acceptance criteria.
 
-The current repository contains the design baseline. A runnable Defold project has not been implemented yet.
+The repository now includes a runnable Defold project. Open `game.project` in Defold 1.13.2 and build, or use the scripts below for a standalone Windows bundle.
 
-The [Brindlehorn concept studies](assets/concepts/README.md) explore the first creature's visual direction using Sprite Fusion. The design document also records the art workflow and focused creature-game references.
+The [visual-direction guide](docs/VISUAL_DIRECTION.md) and [persistent project rules](AGENTS.md) require intentional art direction and distinct, labeled iconography. [Creature art records](assets/sprites/README.md) document the selected Sprite Fusion studies and remaining art work.
 
 ## First playable
 
-One complete expedition from preparation to an ending, with a small creature crew, meaningful route choices, connected survival systems, short battles, local saving, and a reason to take a second trip. Prototype quantities and scope are maintained in the design document.
+One complete expedition from preparation to an ending: six landmarks, two route choices, six creature species, eighteen authored event definitions, two optional battle scenarios, changing weather, fatigue and supplies, recruitment, local saving, and persistent companions and discoveries. A covered wagon unlock provides a different preparation choice.
+
+Read the [playtest guide](docs/PLAYTEST.md) for controls, saves, and the current limitations. The art remains a selected concept pass with simple motion; final animation, richer scenery, and pacing need further playtesting and polish.
+
+## Build and test
+
+Install Java 25 or use the JDK bundled with Defold. From PowerShell in this directory:
+
+```powershell
+./tools/test.ps1
+./tools/build.ps1
+```
+
+The scripts download the pinned official Defold builder and verify its checksum. Testing runs deterministic Lua checks and native save/load recovery checks in an isolated save namespace. `-SkipEngine` on the test script runs just the Lua checks.
+
+The build script creates a fresh `dist/Windows-0.1.0-<timestamp>/Trailomon/` folder and a ZIP alongside it. Run `Trailomon.exe` with the four `game.*` files beside it. Release builds do not start the engine's development server. The scripts avoid replacing a running executable and work around OneDrive directory attributes by using fresh output folders.
+
+## Project layout
+
+- `simulation/` and `content/`: deterministic expedition rules and authored content.
+- `ui/` and `presentation/`: screens, original pixel icons, and the wagon scene.
+- `services/`: validated saves with backup recovery and the presentation clock.
+- `tests/`: resource, event, combat, persistence, and repeatability checks.
+- `assets/`: selected creature studies and original feedback sounds.
 
 ## Development order
 
-Build the travel simulation and a complete route first, connect creatures and encounters next, then add persistence and presentation. Test whether the expedition is worth replaying before expanding the content or progression systems.
+Test whether the expedition is worth replaying before expanding the content or progression systems. Next priorities are human playtests, more distinctive creature anatomy and consistent side-view poses, frame animation, and clearer landmark scenery. Keep the scope and standing visual rules intact during those passes.
