@@ -27,6 +27,7 @@ function M.handle(self,action_id,action)
         elseif action_id==hash("pause") and self.page=="trail" then
             local mode=self.snapshot.run.mode
             if mode=="stopped" then self.perform("resume") elseif mode=="traveling" then self.perform("pause") end
+            if mode=="combat" and self.snapshot.run.battle.rules=="automatic-v1" then self.toggle_combat() end
             return true
         elseif action_id==hash("debug") then self.open_page(self.page=="debug" and "trail" or "debug");return true end
     end

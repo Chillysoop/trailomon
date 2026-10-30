@@ -2,7 +2,7 @@ local util=require "simulation.util"
 local model=require "simulation.expedition"
 local species=require "content.species"
 local M={}
-local modes={preparation=true,traveling=true,stopped=true,event=true,landmark=true,combat_select=true,combat=true,result=true}
+local modes={preparation=true,traveling=true,stopped=true,event=true,landmark=true,combat_select=true,combat=true,combat_result=true,result=true}
 local outcomes={delivered=true,late=true,returned=true,rescued=true}
 local function number(n,lo,hi) return util.finite(n) and n>=lo and n<=hi end
 local function integer(n,lo,hi) return number(n,lo,hi) and n==math.floor(n) end
@@ -54,7 +54,7 @@ local function validate(snapshot)
         if type(s.pending)~="table" or not model.events.by_id[s.pending.id] or not model.events.by_id[s.pending.id].choices or not number(s.pending.roll,0,1) then return false,"Missing pending event" end
     end
     if s.mode=="combat_select" and s.encounter~="scavengers" and s.encounter~="territorial" then return false,"Missing encounter" end
-    if s.mode=="combat" then
+    if s.mode=="combat" or s.mode=="combat_result" then
         local b=s.battle
         if type(b)~="table" or (b.kind~="scavengers" and b.kind~="territorial") or type(b.team)~="table" or #b.team<1 or #b.team>2 or type(b.used)~="table" or type(b.intent)~="table" then return false,"Invalid battle" end
         if not integer(b.limit,3,4) or not integer(b.round,1,b.limit) or not number(b.resolve,0,75) or type(b.last)~="string" then return false,"Invalid battle round" end
@@ -62,6 +62,32 @@ local function validate(snapshot)
         for _,i in ipairs(b.team) do if not integer(i,1,#s.crew) or used[i] then return false,"Invalid battle team" end; used[i]=true end
         if b.intent.target~="cargo" and not used[b.intent.target] then return false,"Invalid battle target" end
         if not number(b.intent.damage,0,100) then return false,"Invalid battle damage" end
+        if b.rules~=nil and not model.combat.automatic(b) then return false,"Unknown battle rules" end
+        for i,v in pairs(b.used) do if not used[i] or v~=true then return false,"Invalid used ability" end end
+        if model.combat.automatic(b) then
+            if b.limit~=(b.kind=="scavengers" and 3 or 4) or (b.intent.kind~="rush" and b.intent.kind~="heavy") then return false,"Invalid automatic threat" end
+            if b.intent.target~="cargo" and b.intent.target~=b.team[1] then return false,"Threat must target the approach or cargo" end
+            if type(b.history)~="table" or #b.history>b.limit or type(b.initial)~="table" or type(b.initial.crew)~="table" then return false,"Missing combat accounting" end
+            if not number(b.initial.cargo,0,100) or not integer(b.initial.food,0,10000) or not integer(b.initial.day,1,s.day) then return false,"Invalid starting resources" end
+            for _,i in ipairs(b.team) do
+                local c=b.initial.crew[i]
+                if type(c)~="table" or not number(c.stamina,0,100) or not number(c.condition,0,100) then return false,"Invalid starting companion" end
+            end
+            for index,entry in ipairs(b.history) do
+                if type(entry)~="table" or entry.round~=index or type(entry.notes)~="table" or #entry.notes>6 or type(entry.summary)~="string" or #entry.summary>200 then return false,"Invalid exchange history" end
+                for _,note in ipairs(entry.notes) do if type(note)~="string" or #note>200 then return false,"Invalid exchange note" end end
+                if entry.target~="cargo" and not used[entry.target] then return false,"Invalid historical target" end
+                for _,key in ipairs({"damage","pressure","cover"}) do if not number(entry[key],0,100) then return false,"Invalid exchange cost" end end
+            end
+            if s.mode=="combat_result" then
+                if b.outcome~="won" and b.outcome~="withdraw" and b.outcome~="fallback" then return false,"Missing battle outcome" end
+                if type(b.result)~="table" or type(b.result.crew)~="table" or not integer(b.result.days,0,1) or not integer(b.result.food,-10000,0) or not number(b.result.cargo,-100,0) then return false,"Invalid battle result" end
+                for _,i in ipairs(b.team) do
+                    local c=b.result.crew[i]
+                    if type(c)~="table" or not number(c.stamina,-100,100) or not number(c.condition,-100,100) then return false,"Invalid companion result" end
+                end
+            elseif b.outcome~=nil or #b.history~=b.round-1 or b.resolve<=0 then return false,"Invalid pending exchange" end
+        elseif s.mode=="combat_result" then return false,"Legacy battle cannot have an automatic result" end
     end
     if s.mode=="result" then
         if not outcomes[s.outcome] or type(s.ending)~="string" or p.last_committed~=s.id then return false,"Uncommitted result" end

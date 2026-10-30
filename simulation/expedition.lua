@@ -297,16 +297,26 @@ end
 
 local function battle_end(snapshot,outcome)
     local s=snapshot.run
+    local battle=s.battle
     local kind=s.battle and s.battle.kind or s.encounter
     if outcome~="won" then
         if kind=="scavengers" then effects(s,{food=-8,cargo=-8}); log(s,"You leave a little cargo and food, and lead the crew away.")
         else log(s,"You take a day-long detour around the territorial creature."); day(snapshot,false,false) end
     else
         log(s,"The wild creatures give you space. Your journey can continue.")
-        for _, c in ipairs(s.crew) do progression.memory(c,"Helped protect the wagon on the trail.") end
+        for _,i in ipairs(battle and battle.team or {}) do progression.memory(s.crew[i],"Helped protect the wagon on the trail.") end
     end
-    s.battle,s.encounter=nil,nil
-    if s.mode~="result" then s.mode="stopped"; check_warnings(s) end
+    s.encounter=nil
+    if s.mode~="result" then
+        if combat.automatic(battle) then
+            battle.outcome=outcome;s.mode="combat_result"
+            battle.result={food=s.food-battle.initial.food,cargo=s.cargo-battle.initial.cargo,days=s.day-battle.initial.day,crew={}}
+            for _,i in ipairs(battle.team) do
+                battle.result.crew[i]={stamina=s.crew[i].stamina-battle.initial.crew[i].stamina,condition=s.crew[i].condition-battle.initial.crew[i].condition}
+            end
+        else s.battle=nil;s.mode="stopped" end
+        check_warnings(s)
+    end
 end
 
 local function stopped(s)
@@ -427,6 +437,16 @@ function M.command(snapshot,command,arg)
     elseif command=="river" and s.mode=="landmark" and s.target==4 then return cross(snapshot,arg.method)
     elseif command=="choice" and s.mode=="event" then return resolve(snapshot,arg.id)
     elseif command=="battle_start" and s.mode=="combat_select" then return combat.start(s,s.encounter,arg.team)
+    elseif command=="battle_step" and s.mode=="combat" then
+        local ok,outcome=combat.step(s)
+        if ok then
+            local entry=s.battle.history[#s.battle.history]
+            log(s,"Exchange "..entry.round..": "..table.concat(entry.notes," ").." "..entry.summary)
+            if outcome then battle_end(snapshot,outcome) end
+        end
+        return ok,not ok and outcome or nil
+    elseif command=="battle_continue" and s.mode=="combat_result" then
+        s.battle=nil;s.mode="stopped";return true
     elseif command=="round" and s.mode=="combat" then
         local ok,outcome=combat.round(s,arg.actions)
         if ok then

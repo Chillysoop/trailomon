@@ -12,19 +12,19 @@ Deliver the orchard cuttings by day 26 if possible. The road closes on day 32. C
 
 Use **Crew** to rotate haulers, set duties, treat injuries, rename companions, and read memories. Camp actions cost a day and meals. Foraging can find food, but each stretch depletes. Mossbell is the only intermediate supply shop. Willowford offers a reliable paid ferry and riskier alternatives.
 
-Battles are optional. Choose up to two companions, read the threat's next intent, and select one action per companion. Pressure costs stamina, Guard protects the acting companion and cargo, and Assist is once per companion per encounter. Clear selected actions before choosing Withdraw. Battles have short round limits and no experience grind.
+Battles are optional. Choose up to two companions and their positions: approach for pressure, wagon for cover. Each species acts automatically, with one additional ability when its visible trigger occurs. Use Pause or Space to inspect, Step exchange to advance once, and Resume to watch. Calm runs at five seconds per exchange; brisk at 1.5. Menus, focus loss, and loading pause combat. Withdraw before the next exchange to pay the displayed loss once. The result screen shows actual energy, condition, cargo, provisions, and days spent. Older saved manual encounters keep their original action buttons until finished.
 
 Two original species can join after you help them on the trail. Companions, observations, and memories persist across expeditions. Inspecting and crossing Willowford unlocks a covered wagon after that trip ends. The cover protects against rain but reduces carrying capacity.
 
 ## Controls and saves
 
 - Mouse: select labeled controls.
-- Space: resume or pause travel.
+- Space: resume or pause travel and automatic combat.
 - Tab / arrows: move keyboard focus; Enter: activate.
 - Escape: return to the journey or cancel text entry.
 - F3: developer controls, including forced encounters and resupply. These alter the active trip and are intended for testing.
 
-The game saves after decisions, completed days, and battle rounds. Options includes a manual Save action. Save failures are shown in the footer. Keep the application open if a save error appears and retry when local storage is available.
+The game saves after decisions, completed days, and exchange boundaries. Options includes a manual Save action. Save failures are shown in the footer. Keep the application open if a save error appears and retry when local storage is available.
 
 Saves use Defold's application save directory for `trailomon`, with an active snapshot and a last-good backup. A damaged active save loads the backup with a recovery message. If both files fail validation, the game offers an explicit fresh start. Test scripts use a separate namespace.
 
@@ -35,3 +35,5 @@ One six-landmark route with two branches, six creature species, eighteen event d
 This is an early playable for checking the decisions and rhythm. Creature art uses selected Sprite Fusion studies with simple procedural motion. Detailed frame animation, final anatomy and camera consistency, richer landmark art, ambient music, and broader content are still art and polish work. The visual rules in `docs/VISUAL_DIRECTION.md` remain requirements for those passes.
 
 For feedback, note the seed and the decision involved. Most useful: whether a cost was unclear, a creature felt unnecessary, a setback felt arbitrary, a quiet stretch felt too long, or you wanted to try a specific different plan afterward.
+
+For isolated developer fixtures, run `./tools/test.ps1 -Fixture scavengers` (or `territorial`, `legacy`) and launch the release executable using the printed save namespace. Use the release renderer locally; `-Headless` is intended for CI and can start Defold debug services on Windows.

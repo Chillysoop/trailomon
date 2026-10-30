@@ -11,6 +11,7 @@ end
 local function fixture(self,page,setup)
     self.snapshot=model.new(1848);self.page=page;self.speed=1;self.focus=1
     self.battle_team={};self.battle_actions={};self.edit=nil;self.save_blocked=false
+    self.combat_paused=true;self.combat_speed=1;self.combat_log=nil
     if setup then setup(self.snapshot,self) end
     screens.draw(self)
     scene.update(self,0.2,true,true)
@@ -31,25 +32,41 @@ local function interaction_checks(self)
     fixture(self,"trail",battle)
     coroutine.yield()
     self.redraw=function() screens.draw(self) end
-    assert(not button(self,"Choose an action for each companion").enabled)
-    button(self,"action1guard").fn()
+    self.perform=function(id,args) assert(model.command(self.snapshot,id,args));self.combat_log=nil;self.redraw() end
+    self.toggle_combat=function() self.combat_paused=not self.combat_paused;self.redraw() end
+    assert(button(self,"combat_step").enabled)
+    input.handle(self,hash("pause"),{pressed=true})
     coroutine.yield()
-    assert(gui.get_text(button(self,"action1guard").label):find("chosen",1,true))
-    assert(not button(self,"Choose an action for each companion").enabled)
-    button(self,"action2pressure").fn()
+    assert(not self.combat_paused,"Space must resume automatic combat")
+    button(self,"combat_pause").fn()
     coroutine.yield()
-    assert(button(self,"Resolve this round").enabled)
-    button(self,"Clear selected actions").fn()
+    assert(self.combat_paused)
+    button(self,"combat_step").fn()
     coroutine.yield()
-    assert(not next(self.battle_actions))
-    assert(not button(self,"Choose an action for each companion").enabled)
+    assert(#self.snapshot.run.battle.history==1 and self.combat_paused)
+    button(self,"combat_speed").fn()
+    coroutine.yield()
+    assert(self.combat_speed==2)
+    button(self,"battle_withdraw").fn()
+    coroutine.yield()
+    assert(self.snapshot.run.mode=="combat_result")
+    button(self,"combat_continue").fn()
+    assert(self.snapshot.run.mode=="stopped")
 
     fixture(self,"trail",function(p) departed(p);model.debug(p,"event","scavengers");model.command(p,"choice",{id="battle"}) end)
     coroutine.yield()
-    assert(not button(self,"Choose a companion first").enabled)
+    assert(not button(self,"battle_begin").enabled)
     button(self,"battler1").fn()
     coroutine.yield()
-    assert(button(self,"Stand together").enabled)
+    assert(button(self,"battle_begin").enabled)
+    button(self,"battler2").fn()
+    coroutine.yield()
+    button(self,"swap_positions").fn()
+    coroutine.yield()
+    assert(self.battle_team[1]==2 and self.battle_team[2]==1)
+    button(self,"battle_begin").fn()
+    coroutine.yield()
+    assert(self.snapshot.run.battle.team[1]==2)
 
     fixture(self,"trail",function(p,ui) ui.edit={kind="seed",value="1848"} end)
     coroutine.yield()
@@ -90,6 +107,12 @@ function init(self)
         {"map",departed},{"journal",departed},{"settings",departed},{"camp",departed},
         {"return",departed},{"debug",departed},
         {"trail",function(p) departed(p);assert(model.debug(p,"event","mud")) end},
+        {"trail",function(p)
+            departed(p);local progression=require "simulation.progression"
+            p.run.crew={progression.companion("brindlehorn"),progression.companion("cindercoil"),progression.companion("slatewhorl")}
+            p.run.weather="rain";p.run.terrain="ridge";p.run.day=18
+            assert(model.debug(p,"event","territorial"))
+        end},
         {"trail",landmark(2)},{"trail",landmark(3)},{"shop",landmark(3)},
         {"trail",landmark(4)},
         {"trail",function(p) landmark(4)(p);assert(model.command(p,"river",{method="inspect"})) end},
@@ -97,7 +120,8 @@ function init(self)
         {"trail",landmark(5)},
         {"trail",function(p) departed(p);assert(model.debug(p,"event","scavengers"));assert(model.command(p,"choice",{id="battle"})) end},
         {"trail",battle},
-        {"trail",function(p,ui) battle(p);ui.battle_actions={"pressure","guard"} end},
+        {"trail",function(p) battle(p);assert(require("simulation.combat_manual").start(p.run,"scavengers",{1,2})) end},
+        {"trail",function(p,ui) battle(p);assert(model.command(p,"withdraw")) end},
         {"trail",function(p) departed(p);assert(model.command(p,"return")) end},
         {"journal",function(p,ui) departed(p);assert(model.command(p,"return"));ui.journal_history=true end},
         {"trail",function(p,ui) ui.edit={kind="seed",value="1848"} end},
@@ -112,7 +136,7 @@ function update(self,dt)
         local ok,why=coroutine.resume(self.interactions)
         if not ok or coroutine.status(self.interactions)=="dead" then
             local report=assert(io.open(sys.get_config_string("trailomon.check_report","engine-check-report.txt"),"a"))
-            report:write(ok and "PASS: battle readiness, chosen actions, modal keyboard routing, editing, and persistent focus.\n" or "FAIL: interaction checks / "..tostring(why).."\n")
+            report:write(ok and "PASS: battle readiness, automatic steps, positions, result acknowledgement, modal keyboard routing, editing, and persistent focus.\n" or "FAIL: interaction checks / "..tostring(why).."\n")
             report:close();self.interactions=nil
             msg.post("@system:","exit",{code=ok and 0 or 1})
         end
@@ -123,7 +147,7 @@ function update(self,dt)
     local ok,why=pcall(fixture,self,case[1],case[2])
     if not ok or self.index==#self.cases then
         local report=assert(io.open(sys.get_config_string("trailomon.check_report","engine-check-report.txt"),"a"))
-        report:write(ok and "PASS: 25 native GUI states, icon rendering, scene motion, and button bounds.\n" or "FAIL: GUI case "..self.index.." / "..tostring(why).."\n")
+        report:write(ok and "PASS: 27 native GUI states, icon rendering, scene motion, and button bounds.\n" or "FAIL: GUI case "..self.index.." / "..tostring(why).."\n")
         report:close();self.index=nil
         if ok then self.interactions=coroutine.create(function() interaction_checks(self) end)
         else msg.post("@system:","exit",{code=1}) end

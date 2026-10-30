@@ -5,3 +5,4 @@
 - [review-pages.md](review-pages.md): published review codes, answers acted on, and pending submissions.
 - [validation.md](validation.md): baseline evidence, testing limits, and known production gaps.
 - [delivery.md](delivery.md): merged foundation and provenance of shareable builds.
+- [combat.md](combat.md): automatic-combat rules, compatibility, tests, and current delivery status.

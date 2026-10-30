@@ -1,4 +1,4 @@
-param([switch]$SkipEngine, [switch]$Headless)
+param([switch]$SkipEngine, [switch]$Headless, [ValidateSet('', 'scavengers', 'territorial', 'legacy')][string]$Fixture='')
 . (Join-Path $PSScriptRoot 'common.ps1')
 Initialize-TrailomonTools
 Add-Type -AssemblyName System.IO.Compression.FileSystem
@@ -26,7 +26,12 @@ try {
         $reportPath = Join-Path $checkFolder 'engine-check-report.txt'
         $stdoutPath = Join-Path $checkFolder 'engine-stdout.txt'
         $stderrPath = Join-Path $checkFolder 'engine-stderr.txt'
-        $engine = Start-Process -FilePath (Join-Path $checkFolder 'TrailomonChecks.exe') -WorkingDirectory $checkFolder -ArgumentList '--config=engine.run_while_iconified=1' -WindowStyle Hidden -RedirectStandardOutput $stdoutPath -RedirectStandardError $stderrPath -PassThru
+        $engineArgs = @('--config=engine.run_while_iconified=1')
+        if ($Fixture) {
+            $qaNamespace = 'trailomon_qa_' + $Fixture + '_' + [DateTime]::UtcNow.ToString('yyyyMMddHHmmss')
+            $engineArgs += @("--config=trailomon.fixture=$Fixture", "--config=trailomon.save_namespace=$qaNamespace")
+        }
+        $engine = Start-Process -FilePath (Join-Path $checkFolder 'TrailomonChecks.exe') -WorkingDirectory $checkFolder -ArgumentList $engineArgs -WindowStyle Hidden -RedirectStandardOutput $stdoutPath -RedirectStandardError $stderrPath -PassThru
         if (-not $engine.WaitForExit(15000)) { Stop-Process -Id $engine.Id; throw 'Native persistence checks timed out.' }
         if (-not (Test-Path -LiteralPath $reportPath)) {
             Get-Content -LiteralPath $stdoutPath,$stderrPath
@@ -34,6 +39,10 @@ try {
         }
         $report = Get-Content -LiteralPath $reportPath -Raw
         Write-Host $report
-        if ($engine.ExitCode -ne 0 -or $report.Contains('FAIL:') -or -not $report.Contains('PASS: native save/load') -or -not $report.Contains('PASS: 25 native GUI states') -or -not $report.Contains('PASS: battle readiness')) { throw 'Native persistence or GUI checks failed.' }
+        if ($engine.ExitCode -ne 0 -or $report.Contains('FAIL:') -or -not $report.Contains('PASS: native save/load') -or -not $report.Contains('PASS: 27 native GUI states') -or -not $report.Contains('PASS: battle readiness')) { throw 'Native persistence or GUI checks failed.' }
+        if ($Fixture) {
+            Set-Content -LiteralPath (Join-Path $TrailomonTools 'latest-playtest-namespace.txt') -Value $qaNamespace
+            Write-Host "Isolated fixture ready. Launch the game with --config=trailomon.save_namespace=$qaNamespace"
+        }
     }
 } finally { Pop-Location }

@@ -10,7 +10,7 @@ Trailomon is a calm expedition game about one traveler, a wagon, and a small cre
 
 Prepare a crew and load at Fernwake, travel toward a landmark, observe changing conditions, choose an approach to a problem or opportunity, recover or resupply, and continue toward Lantern Reach. At an ending, retain eligible companions, discoveries, and memories and prepare another trip.
 
-During a typical half-minute the player watches the wagon travel, reads a change in circumstances, or makes one consequential choice. Important decisions pause time. Automatic combat is a planned replacement for the current manual battles; it will remain a short part of the journey.
+During a typical half-minute the player watches the wagon travel, reads a change in circumstances, or makes one consequential choice. Important decisions pause time. Automatic combat replaces new manual battles and remains a short part of the journey. Astronarch is the primary combat reference; Automon informs the creature-party appeal.
 
 ## Pillars
 
@@ -34,7 +34,7 @@ During a typical half-minute the player watches the wagon travel, reads a change
 | Usability | Clear goals, labeled icons, mouse and keyboard control, readable 1280 by 720 presentation, pause, save/resume, basic audio controls |
 | Delivery | Offline Windows ZIP, launch instructions, exact source revision, repeatable build and test scripts |
 
-The current game already implements the journey, manual encounters, foraging, saving, and initial progression. See [GAME_DESIGN.md](GAME_DESIGN.md) for current rules, [AUTO_BATTLES.md](AUTO_BATTLES.md) for the combat proposal, and [WORLD_LORE.md](WORLD_LORE.md) for creative possibilities. Proposal documents do not automatically add every idea to scope. Review votes and the [roadmap](ROADMAP.md) determine implementation priorities.
+The current game already implements the journey, automatic encounters, foraging, saving, and initial progression. See [GAME_DESIGN.md](GAME_DESIGN.md) for current rules, [AUTO_BATTLES.md](AUTO_BATTLES.md) for the reference study and future proposals, and [WORLD_LORE.md](WORLD_LORE.md) for creative possibilities. Proposal documents do not automatically add every idea to scope. Review votes and the [roadmap](ROADMAP.md) determine implementation priorities.
 
 ## Art and audio direction
 
@@ -52,6 +52,6 @@ Defer additional regions, a large bestiary, breeding, evolution trees, capture d
 
 ## Open decisions
 
-The owner approved P1–P5 in [plan-1](../reviews/plan-1.html) on October 30, 2026: automatic combat, bounded foraging with hunting deferred, wilderness presentation, six-species art refinement, and the three-item equipment experiment after combat testing. These decisions set scope; the features are not yet implemented. Saved later answers and comments take precedence over initial recommendations. Blank ideas after FINISH are deferred without repeated prompting.
+The owner approved P1–P5 in [plan-1](../reviews/plan-1.html) on October 30, 2026: automatic combat, bounded foraging with hunting deferred, wilderness presentation, six-species art refinement, and the three-item equipment experiment after combat testing. These decisions set scope. P1 is implemented in the automatic-combat batch; other approved features retain their roadmap status. Saved later answers and comments take precedence over initial recommendations. Blank ideas after FINISH are deferred without repeated prompting.
 
 No reliable calendar estimate has been set. Ship small tested steps, measure the result, and revise content ambitions before promising dates. The owner's programming experience is unspecified; setup explanations should remain beginner-friendly.

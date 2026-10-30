@@ -1,85 +1,125 @@
-local resources = require "simulation.resources"
-local species = require "content.species"
-local rng = require "simulation.rng"
-local util = require "simulation.util"
-local M = {}
+local resources=require "simulation.resources"
+local species=require "content.species"
+local rng=require "simulation.rng"
+local util=require "simulation.util"
+local manual=require "simulation.combat_manual"
+local M={RULES="automatic-v1", ORDINARY_COST=4, ABILITY_COST=8}
 
-local function intention(s)
-    local b = s.battle
-    if rng.next(s.rng,"combat") < 0.55 then
-        b.intent = {target="cargo", damage=b.kind=="scavengers" and 13 or 10}
-    else
-        b.intent = {target=b.team[rng.int(s.rng,"combat",1,#b.team)], damage=12}
-    end
+function M.automatic(b) return b and b.rules==M.RULES end
+function M.soft_ground(s) return s.terrain~="ridge" and s.terrain~="gorge" end
+function M.withdraw_text(kind)
+    return kind=="scavengers" and "Leave up to 8 provisions and 8 cargo integrity." or "Take a one-day detour, including meals and weather."
 end
-function M.start(s, kind, team)
+function M.ability_text(s,id)
+    local texts={
+        brindlehorn="First unblocked rush at cargo or partner: brace for 14 cover.",
+        reedskipper="First unblocked rush: sweep removes 10 harm and adds 4 pressure.",
+        loamling=M.soft_ground(s) and "First unblocked rush: soft ground gives everyone 8 cover." or "First unblocked rush: hard rock gives everyone only 4 cover.",
+        bellmoth=s.weather=="rain" and "First unblocked heavy rush: rain weakens shimmer to 8 cover." or "First unblocked heavy rush: shimmer removes 16 harm.",
+        cindercoil="When partner cover helps stop a hit fully: add 20 pressure.",
+        slatewhorl="By the wagon only: first unblocked cargo rush gains 18 cover.",
+    }
+    return texts[id]
+end
+function M.ordinary(s,i,position)
+    local pressure=species.defs[s.crew[i].species].pressure
+    return position==1 and pressure or math.floor(pressure/2), position==2 and 6 or 0
+end
+local function intention(s)
+    local b=s.battle;local heavy=b.round%2==0
+    b.intent={kind=heavy and "heavy" or "rush",target=rng.next(s.rng,"combat")<0.55 and "cargo" or b.team[1],
+        damage=(b.kind=="scavengers" and 12 or 14)+(heavy and 6 or 0)}
+end
+function M.start(s,kind,team)
     if kind~="scavengers" and kind~="territorial" then return false,"Unknown encounter" end
     if type(team)~="table" or #team<1 or #team>2 then return false,"Choose one or two companions" end
     local seen={}
-    for _, i in ipairs(team) do
-        if seen[i] or not resources.ready(s.crew[i],6) then return false,"Choose different, ready companions" end
+    for _,i in ipairs(team) do
+        if type(i)~="number" or i~=math.floor(i) or seen[i] or not resources.ready(s.crew[i],4) then return false,"Choose different companions with at least 4 energy" end
         seen[i]=true
     end
-    s.battle={kind=kind,team=util.copy(team),round=1,limit=kind=="scavengers" and 3 or 4,
-        resolve=kind=="scavengers" and 65 or 75,used={},last="",intent={}}
-    intention(s)
-    s.mode="combat"
+    local initial={food=s.food,cargo=s.cargo,day=s.day,crew={}}
+    for _,i in ipairs(team) do initial.crew[i]={stamina=s.crew[i].stamina,condition=s.crew[i].condition} end
+    s.battle={rules=M.RULES,kind=kind,team=util.copy(team),round=1,limit=kind=="scavengers" and 3 or 4,
+        resolve=kind=="scavengers" and 65 or 75,used={},last="",history={},initial=initial}
+    intention(s);s.mode="combat"
     return true
 end
 function M.intent_text(s)
-    local intent=s.battle.intent
-    local target=intent.target=="cargo" and "the cargo" or s.crew[intent.target].name
-    return "Next: strike " .. target .. " for " .. intent.damage .. ". Guard can reduce it."
-end
-function M.round(s, actions)
     local b=s.battle
-    if type(actions)~="table" or #actions~=#b.team then return false,"Choose one action per companion" end
-    local allowed, seen, costs={}, {}, {pressure=6,guard=3,assist=12}
-    for _, i in ipairs(b.team) do allowed[i]=true end
-    for _, a in ipairs(actions) do
-        if not allowed[a.member] or seen[a.member] or not costs[a.kind] then return false,"Invalid battle actions" end
-        local c=s.crew[a.member]
-        -- An exhausted member can guard weakly at zero cost so a round cannot deadlock.
-        if a.kind~="guard" and not resources.ready(c,costs[a.kind]) then return false,c.name .. " needs rest" end
-        if a.kind=="assist" and b.used[a.member] then return false,"Assist is once per battle" end
-        seen[a.member]=true
+    if not M.automatic(b) then return manual.intent_text(s) end
+    local target=b.intent.target=="cargo" and "cargo" or s.crew[b.intent.target].name.." at the approach"
+    return (b.intent.kind=="heavy" and "Heavy rush" or "Rush").." toward "..target.." / "..b.intent.damage.." harm before cover"
+end
+function M.round(s,actions)
+    if M.automatic(s.battle) then return false,"Companions act automatically; advance an exchange" end
+    return manual.round(s,actions)
+end
+function M.step(s)
+    local b=s.battle
+    if not M.automatic(b) or b.outcome then return false,"No automatic exchange is pending" end
+    local target=b.intent.target
+    local guard={cargo=0};local contribution={};local pressure=0;local notes={}
+    local function cover(i,who,value)
+        guard[who]=(guard[who] or 0)+value
+        if who==target then contribution[i]=(contribution[i] or 0)+value end
     end
-    local guard, pressure={},0
-    guard.cargo=0
-    for _, a in ipairs(actions) do
-        local c=s.crew[a.member]
-        local def=species.defs[c.species]
-        local able=resources.ready(c,3)
-        local awake=c.condition>0
-        c.stamina=math.max(0,c.stamina-((a.kind=="guard" and not awake) and 0 or costs[a.kind]))
-        if a.kind=="pressure" then pressure=pressure+def.pressure
-        elseif a.kind=="guard" then
-            guard[a.member]=(guard[a.member] or 0)+(able and 10 or (awake and 3 or 0))
-            guard.cargo=guard.cargo+(able and 7 or (awake and 2 or 0))
+    local function all_cover(i,value)
+        cover(i,"cargo",value)
+        for _,j in ipairs(b.team) do cover(i,j,value) end
+    end
+    local function remaining() return math.max(0,b.intent.damage-(guard[target] or 0)) end
+    -- Ordinary actions are simultaneous. Defense resolves in position order,
+    -- then one follow-up, resolve, and incoming harm. Triggers never recurse.
+    for position,i in ipairs(b.team) do
+        local c=s.crew[i];local p,g=M.ordinary(s,i,position)
+        if resources.ready(c,4) then
+            c.stamina=c.stamina-4;pressure=pressure+p
+            cover(i,"cargo",g);cover(i,b.team[1],g)
+            notes[#notes+1]=c.name..": "..p.." pressure"..(g>0 and ", 6 cover" or "").."."
         else
-            b.used[a.member]=true
-            local defensive=c.species=="brindlehorn" or c.species=="slatewhorl"
-            pressure=pressure+(defensive and 8 or 21)
-            guard.cargo=guard.cargo+(defensive and 18 or 5)
-            for _, i in ipairs(b.team) do guard[i]=(guard[i] or 0)+(defensive and 12 or 4) end
+            if c.condition>0 then cover(i,position==1 and i or "cargo",1) end
+            notes[#notes+1]=c.name..": exhausted; "..(c.condition>0 and "1 cover, no pressure." or "cannot act.")
+        end
+    end
+    if b.resolve>pressure then
+        for position,i in ipairs(b.team) do
+            local c=s.crew[i];local id=c.species;local triggered=false
+            if b.resolve>pressure and not b.used[i] and resources.ready(c,8) and remaining()>0 then
+                if id=="brindlehorn" and target~=i then cover(i,target,14);triggered=true
+                elseif id=="reedskipper" then cover(i,target,10);pressure=pressure+4;triggered=true
+                elseif id=="loamling" then all_cover(i,M.soft_ground(s) and 8 or 4);triggered=true
+                elseif id=="bellmoth" and b.intent.kind=="heavy" then cover(i,target,s.weather=="rain" and 8 or 16);triggered=true
+                elseif id=="slatewhorl" and position==2 and target=="cargo" then cover(i,target,18);triggered=true end
+                if triggered then
+                    b.used[i]=true;c.stamina=c.stamina-8
+                    notes[#notes+1]=c.name..": "..species.defs[id].assist.."."
+                end
+            end
+        end
+        for _,i in ipairs(b.team) do
+            local c=s.crew[i];local partner_cover=0
+            for _,j in ipairs(b.team) do if j~=i then partner_cover=partner_cover+(contribution[j] or 0) end end
+            if b.resolve>pressure and c.species=="cindercoil" and not b.used[i] and resources.ready(c,8) and remaining()==0 and partner_cover>0 then
+                b.used[i]=true;c.stamina=c.stamina-8;pressure=pressure+20
+                notes[#notes+1]=c.name..": Warmth display after partner cover."
+            end
         end
     end
     b.resolve=math.max(0,b.resolve-pressure)
-    local damage=0
-    if b.resolve>0 then
-        damage=math.max(0,b.intent.damage-(guard[b.intent.target] or 0))
-        if b.intent.target=="cargo" then s.cargo=math.max(0,s.cargo-damage)
-        else local c=s.crew[b.intent.target]; c.condition=math.max(0,c.condition-damage) end
-    end
-    b.last="Resolve -" .. pressure .. ". Incoming harm " .. damage .. "."
+    local harm=b.resolve>0 and remaining() or 0
+    if target=="cargo" then s.cargo=math.max(0,s.cargo-harm)
+    else s.crew[target].condition=math.max(0,s.crew[target].condition-harm) end
     local all_down=true
-    for _, i in ipairs(b.team) do if resources.ready(s.crew[i],1) then all_down=false end end
+    for _,i in ipairs(b.team) do if resources.ready(s.crew[i],4) then all_down=false end end
     local outcome
-    if b.resolve<=0 or (b.kind=="scavengers" and b.round>=b.limit) then outcome="won"
-    elseif all_down or b.round>=b.limit then outcome="fallback" end
+    if b.resolve<=0 then outcome="won"
+    elseif all_down then outcome="fallback"
+    elseif b.round>=b.limit then outcome=b.kind=="scavengers" and "won" or "fallback" end
+    b.last="Pressure "..pressure.." / Cover "..(guard[target] or 0).." / Harm "..harm..(b.resolve==0 and " (repelled before the hit)." or ".")
+    b.history[#b.history+1]={round=b.round,notes=notes,summary=b.last,target=target,damage=harm,pressure=pressure,cover=guard[target] or 0}
     if outcome then return true,outcome end
-    b.round=b.round+1
-    intention(s)
+    b.round=b.round+1;intention(s)
     return true
 end
 return M
