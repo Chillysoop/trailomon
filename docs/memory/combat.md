@@ -12,4 +12,4 @@ Found/fixed: multiple redraws in one frame could exceed the GUI node limit; the 
 
 Additional fixed bug: input could arrive before a deferred first draw initialized buttons, causing startup errors/crashes. Initial draw is immediate; later redraws coalesce. Actual corrected launch and reopen both passed. Local headless checks triggered a Windows Security prompt; it was dismissed by the owner. Use release-renderer tests locally, headless in CI.
 
-Current delivery: prepare the tested PR and private combat-1 report; merge after CI, then build a clean Windows bundle. S3/S4 are implemented; S5 remains tuning rather than claiming final balance. New C1-C4 are optional follow-ups, not a second approval request for existing P1-P5.
+Delivery: PR #4 ships S3/S4 and the private combat-1 report after passing CI. S5 remains tuning rather than claiming final balance. Rebuild the Windows bundle from the clean merged commit; builds/Trailomon-windows.json and the ZIP's build-info.json are the authoritative source revision and cleanliness record. New C1-C4 are optional follow-ups, not a second approval request for existing P1-P5.

@@ -13,8 +13,8 @@ Updated October 30, 2026. Scope: one polished Windows expedition before new regi
 
 | ID | Goal and review link | Done means | Validation | Status |
 | --- | --- | --- | --- | --- |
-| S3 | Implement automatic combat rules, P1 | Deterministic two-position encounters with six distinct behaviors and bounded triggers available to tests; existing manual saves still work | Pairing and trigger scenarios, fatigue and exhaustion, simultaneous effects, retreat, defeat, and unchanged results across replay | doing |
-| S4 | Put automatic combat into the playable journey, P1 | Setup preview, position selection, readable exchanges, pause/step/speed, withdrawal, result explanation, and safe old-save handling | Native input/UI checks, save/resume equivalence, complete peaceful and fighting runs, actual 1280 by 720 playtest | doing |
+| S3 | Implement automatic combat rules, P1 | Deterministic two-position encounters with six distinct behaviors and bounded triggers available to tests; existing manual saves still work | Pairing and trigger scenarios, fatigue and exhaustion, simultaneous effects, retreat, defeat, and unchanged results across replay | done (PR #4) |
+| S4 | Put automatic combat into the playable journey, P1 | Setup preview, position selection, readable exchanges, pause/step/speed, withdrawal, result explanation, and safe old-save handling | Native input/UI checks, save/resume equivalence, complete peaceful and fighting runs, actual 1280 by 720 playtest | done (PR #4) |
 | S5 | Tune combat against expedition needs, P1 | Several viable pairings, understandable costs, and reasons to choose peaceful options; findings in a review page | Bot comparisons plus new-player and expert playtests; no universal strongest pair or endless defensive stall | todo |
 | S6 | Clarify bounded gathering, P2 | Existing foraging gives clear place, effort, depletion, carrying, and net-food feedback; hunting stays deferred if P2 is accepted | Resource accounting scenarios, depleted and full-load previews, player can explain the cost of a gathering day | todo |
 
