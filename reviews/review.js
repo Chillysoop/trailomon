@@ -4,6 +4,7 @@
   const PAGE = location.pathname.split('/').pop().replace(/\.html?$/, '') || 'page';
   const API = (location.protocol.startsWith('http') ? '' : 'http://localhost:8765') + '/api/responses/' + PAGE;
   const KEY = 'trailomon-review:v1:' + PAGE;
+  const HOSTED = document.documentElement.dataset.hosted === 'true';
   const $ = s => document.querySelector(s);
   const ideas = [...document.querySelectorAll('.idea')];
   let state = {page: PAGE, title: document.title, general: '', general_at: '', answers: {}, finished: false, updated_at: ''};
@@ -80,7 +81,7 @@
         }
         if (!response.ok) throw new Error(data.error || 'Save failed');
         revision = data.revision; state.revision = revision; state.saved_at = data.saved_at; store();
-        status(payload.finished ? 'FINISH saved. The active agent waiter will receive your answers.' : 'Saved on this computer');
+        status(payload.finished ? 'FINISH saved. The active agent waiter will receive your answers.' : (HOSTED ? 'Saved securely online' : 'Saved on this computer'));
         document.body.classList.remove('fallback'); return true;
       }
       throw new Error('Another tab is saving; export or try FINISH again.');

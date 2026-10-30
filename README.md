@@ -6,7 +6,7 @@ The first playable uses **Defold 1.13.2**, Lua, and 2D presentation. It runs off
 
 ## Design
 
-Start with the [current plan](docs/PLAN.md), [roadmap](docs/ROADMAP.md), and [project memory](docs/memory/MEMORY.md). The owner has selected one polished Windows expedition before additional regions. [Review pages](reviews/README.md) carry design decisions: run `./tools/start_review.ps1` and open `http://localhost:8765/plan-1.html`.
+Start with the [current plan](docs/PLAN.md), [roadmap](docs/ROADMAP.md), and [project memory](docs/memory/MEMORY.md). The owner has selected one polished Windows expedition before additional regions. The [private plan review](https://trailomon-owner-reviews.dusky-owlet-9260.chatgpt.site/plan-1.html) works on a phone or computer after ChatGPT sign-in. [Review workflow instructions](reviews/README.md) include the desktop localhost fallback.
 
 The [game design document](docs/GAME_DESIGN.md) defines the core loop, creature systems, battles, replayability, persistent progression, and the first playable prototype. It also includes the proposed Defold architecture, implementation milestones, and acceptance criteria.
 
