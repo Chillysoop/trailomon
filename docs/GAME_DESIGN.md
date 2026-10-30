@@ -8,6 +8,8 @@ The central experience is a relaxed journey with consequential decisions. Travel
 
 The core direction is established. Creature names, world names, balance values, and duration targets below are initial design choices to test. The first playable scope in section 12 takes precedence over ideas marked for later development.
 
+The subsequent [world and lore proposal](WORLD_LORE.md) expands the setting and the progression toward wilder, less explored country. The [auto-battle proposal](AUTO_BATTLES.md) develops an Automon- and Astronarch-informed alternative to the current manual combat. Neither proposal expands the implemented first playable by itself.
+
 ## 1 Product direction
 
 | Item | Direction |
@@ -42,6 +44,8 @@ Creatures belong to this world's ecology. People befriend them by understanding 
 Species concepts begin with a habitat, a physical adaptation, and a behavior. Combat uses those same adaptations. Avoid franchise-derived silhouettes, terminology, capture devices, move lists, or progression structures. Names and appearance concepts in this draft are provisional original concepts; final naming and art direction remain future production decisions.
 
 The main goal is completing expeditions. A field journal records discoveries, while a small persistent roster provides attachment. There are no gyms, competitive leagues, universal elemental matchup chart, or mandatory collection completion objective in the current design.
+
+Longer-term progression carries the traveler beyond maintained roads into surveyed fringes and then poorly mapped wilderness. Shops, shelters, and dependable reports become less frequent, increasing the value of preparation and creature knowledge. Lantern Reach is a small settlement at the edge of reliable travel. Farther destinations should offer unfamiliar landscapes and ecological discoveries while preserving the calm decision rhythm and readable consequences.
 
 ## 3 Core gameplay loop
 
@@ -184,6 +188,8 @@ The individual encounters are authored; their consequences combine through share
 
 ## 7 Battles
 
+### Current playable system
+
 Battles are short, turn-based expedition encounters. Their purpose is to protect something, secure passage, or escape. They consume the same creature stamina and condition used on the road.
 
 Select up to two ready companions from the crew for the encounter. Each selected companion receives one action per round. Show the threat's next intention before the player commits actions. Resolve a complete round, update persistent costs, and allow the next decision without a real-time timer.
@@ -200,6 +206,10 @@ Withdrawal is a party decision made before round actions are committed. It canno
 The prototype has two scenarios: protect cargo for three rounds, and persuade a territorial creature to retreat within four rounds. The latter uses a visible resolve meter. At the round limit, resolve the stated fallback, such as a detour or cargo loss; encounters cannot continue indefinitely.
 
 Victory preserves expedition resources or provides access to a route or opportunity. There is no repeatable battle XP or money farming. Injuries and fatigue persist. De-escalation, payment, distraction, and avoiding an encounter remain valid options. A player can complete the prototype without fighting, while fixed demonstration seeds make both scenarios easy to test.
+
+### Proposed automatic combat iteration
+
+The next design candidate moves decisions into companion selection, two physical positions beside the wagon, and complementary automatic abilities. Short exchanges resolve without choosing an action every round; pause, inspection, and withdrawal remain available. Fatigue, injuries, and supplies connect the outcome to the journey. See [Auto battles and gathering](AUTO_BATTLES.md) for the reference comparison, proposed species behaviors, equipment follow-up, wilderness context, and bounded implementation experiment. This is not yet the behavior of the Windows build.
 
 ## 8 Replayability
 
@@ -463,6 +473,7 @@ The prototype supplies defaults for these questions so implementation can procee
 - Whether a seven-point starting budget and three-creature maximum create enough variety.
 - Whether the covered wagon is a meaningful alternative and whether its unlock occurs at the right time.
 - Whether forage, recovery, and combat consume enough time to matter without creating a scarcity spiral.
+- Whether automatic combat built around crew composition and position provides more satisfying encounters than manual round commands, while remaining a small part of the expedition.
 - Whether players want longer trips, more routes, or greater variation within the existing route first.
 - Whether one individual temperament is sufficient, and which remembered experiences deserve mechanical effects.
 - Whether the next contract should emphasize discovery, rescue, or trade.
@@ -493,8 +504,12 @@ Include a small selection of creature games, each with a specific design questio
 | **Pokémon Mystery Dungeon: Explorers of Sky** | A persistent exploration team, preparation at a home base, food and move resources during outings, and consequences for failed expeditions | Treat a journey as an outing with a chosen crew and a shared supply budget; let returning companions accumulate memories and support another attempt | Use Trailomon's forgiving recovery rules. Dungeon grids, per-step input, extensive item management, and permanent stat grinding are outside the prototype |
 | **New Pokémon Snap** | Returning to familiar courses to discover changed encounters and behaviors; day/night and research-level variations | Give familiar trail segments different eligible wildlife scenes under rain, cold, crew composition, and prior discoveries. Journal knowledge should suggest something specific to investigate next time | Implement a few authored conditions and follow-ups. Photography, timed reactions, research-level grinding, and a full day/night simulation are excluded |
 | **Monster Sanctuary** | Creatures with useful exploration abilities as well as combat roles, and complementary team composition | Make the same physical trait useful in both contexts: Brindlehorn braces a wagon and guards cargo; Bellmoth scouts the trail and distracts a threat | Replace mandatory ability gates with alternate costs and approaches. A missing species must not block the only route; large skill trees and deep combo combat are excluded |
+| **Automon** | A creature party whose distinct abilities and composition shape automatic fights | Let a selected crew carry out readable behaviors after preparation | Keep encounter rewards tied to expedition needs; do not import a capture loop, elemental chart, or champion ladder |
+| **Astronarch** | Distinct party roles, battlefield positioning, role-changing equipment, and route suitability | Test two positions, complementary abilities, and later a small selection of practical work equipment | Preserve a small crew and short optional encounters; a large loot inventory and combat-driven progression remain outside the first experiment |
 
 Primary reference material: [Pokémon Red official overview](https://www.nintendo.com/en-gb/Games/Game-Boy/Pokemon-Red-Version-266109.html), [Explorers of Sky instruction booklet](https://www.nintendo.com/eu/media/downloads/games_8/emanuals/nintendo_ds_21/Manual_NintendoDS_PokemonMysteryDungeonExplorersOfSky_EN.pdf), [New Pokémon Snap official tips](https://www.pokemon.com/uk/features/top-tips-to-begin-your-new-pokemon-snap-journey), and [Monster Sanctuary developer overview](https://monster-sanctuary.com/).
+
+Automatic combat references: [Automon developer store page](https://store.steampowered.com/app/1822710/Automon/) and [Astronarch developer store page](https://store.steampowered.com/app/1234940/Astronarch/). Their specific adaptations and scope boundaries are developed in the [auto-battle proposal](AUTO_BATTLES.md).
 
 Mystery Dungeon is the most useful creature-side structural comparison because it connects preparation, companions, limited expedition resources, and returning home. Snap is especially useful for repeat visits and a world that feels alive. Monster Sanctuary tests whether every creature deserves a place outside battle. Early Pokémon is the reference for immediate recognition and affection for a small team.
 

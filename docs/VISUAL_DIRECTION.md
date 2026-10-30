@@ -10,6 +10,8 @@ Use ink-dark green for structure, warm paper for legibility, muted plant colors 
 
 The main composition follows the wagon's journey. A narrow status ledger holds supplies and crew condition. Decision screens concentrate on the situation, its visible cause, and the available responses. Avoid presenting every piece of information as an equally prominent card.
 
+The [world and lore proposal](WORLD_LORE.md) develops a progression from worked valleys into poorly mapped wilderness. Future scenery should express the growing distance from dependable help: fewer roofs and maintained markers, less obvious wheel tracks, wider horizons, and more landmarks shaped by wildlife. Keep the wagon and companions recognizable as the landscape grows less familiar. Proposed motifs include graft ties, ferry water marks, hollow antlers, and overlapping shelter plates; select details for their function and silhouette rather than spreading decoration across every surface.
+
 ## Icon language
 
 The first icon set is authored in code on a shared pixel grid. It uses simple silhouettes, consistent stroke weight, and enough negative space to remain legible at small sizes. The same source is used everywhere in the interface.

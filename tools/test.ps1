@@ -1,8 +1,6 @@
 param([switch]$SkipEngine, [switch]$Headless)
 . (Join-Path $PSScriptRoot 'common.ps1')
 Initialize-TrailomonTools
-& python -m unittest discover -s (Join-Path $TrailomonRoot 'tests') -p 'test_review*.py'
-if ($LASTEXITCODE -ne 0) { throw 'Review server checks failed.' }
 Add-Type -AssemblyName System.IO.Compression.FileSystem
 $luaPath = Join-Path $TrailomonTools 'luajit-64.exe'
 $builderArchive = [System.IO.Compression.ZipFile]::OpenRead($TrailomonBob)
@@ -14,6 +12,8 @@ try {
 } finally { $builderArchive.Dispose() }
 Push-Location $TrailomonRoot
 try {
+    & python -m unittest discover -s tests -p 'test_review*.py'
+    if ($LASTEXITCODE -ne 0) { throw 'Review server checks failed.' }
     & $luaPath 'tests/run.lua'
     if ($LASTEXITCODE -ne 0) { throw 'Simulation checks failed.' }
     if (-not $SkipEngine) {
