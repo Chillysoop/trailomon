@@ -56,7 +56,9 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--root", type=Path, default=ROOT / "reviews")
     args = parser.parse_args()
-    data = json.load(sys.stdin)
+    # PowerShell sends UTF-8 through a pipe even when Python's Windows stdin
+    # text wrapper uses a legacy code page. Decode the byte stream explicitly.
+    data = json.loads(sys.stdin.buffer.read().decode("utf-8-sig"))
     if data.get("model_projection", {}).get("truncated"):
         raise ValueError("Refusing truncated rows")
     print(json.dumps(import_rows(data["rows"], args.root)))

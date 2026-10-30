@@ -42,7 +42,7 @@ Use intentional pixel art with strong silhouettes, a restrained earthy palette, 
 
 The landscape becomes less maintained toward the uplands: fewer roofs, fading wheel ruts, larger horizons, and more wildlife-shaped landmarks. Lantern Reach is a small settlement at the edge of dependable travel. Larger wilderness regions belong to a later expansion.
 
-Use restrained work sounds, weather, creature calls, and short feedback tones. Add practical audio controls and perform a listening review. New paid art generation requires the owner's spending approval under the project workflow; existing approved assets can be edited and integrated within the repository.
+Use restrained work sounds, weather, creature calls, and short feedback tones. Retain the existing sound and reduced-motion options, validate their persistence, and perform a listening review. New paid art generation requires the owner's spending approval under the project workflow; existing approved assets can be edited and integrated within the repository.
 
 ## Platform and scope boundaries
 

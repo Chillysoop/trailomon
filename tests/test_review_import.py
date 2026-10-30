@@ -2,6 +2,8 @@ import json
 from pathlib import Path
 import tempfile
 import unittest
+import subprocess
+import sys
 from tools.import_hosted_review import import_rows
 
 
@@ -45,3 +47,15 @@ class HostedImportTests(unittest.TestCase):
         file.write_text(json.dumps(data))
         self.assertEqual(import_rows(self.rows(), self.root)["newer_local_answers"], ["plan-1"])
         self.assertEqual(json.loads(file.read_text())["general"], "Newer local note")
+
+    def test_cli_preserves_unicode_in_piped_phone_notes(self):
+        rows = self.rows()
+        data = json.loads("".join(r["payload_chunk"] for r in rows))
+        data["general"] = "Café — 雨 🌿"
+        payload = json.dumps(data, ensure_ascii=False)
+        rows = [{"page":"plan-1","revision":2,"part":0,"parts":1,"payload_chunk":payload}]
+        script = Path(__file__).resolve().parent.parent / "tools/import_hosted_review.py"
+        result = subprocess.run([sys.executable, str(script), "--root", str(self.root)], input=json.dumps({"rows":rows},ensure_ascii=False).encode("utf-8"), capture_output=True)
+        self.assertEqual(result.returncode, 0, result.stderr)
+        saved = json.loads((self.root / "responses/plan-1.json").read_text(encoding="utf-8"))
+        self.assertEqual(saved["general"], data["general"])
