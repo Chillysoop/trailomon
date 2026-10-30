@@ -32,6 +32,6 @@ try {
         }
         $report = Get-Content -LiteralPath $reportPath -Raw
         Write-Host $report
-        if ($engine.ExitCode -ne 0 -or $report.Contains('FAIL:') -or -not $report.Contains('PASS: native save/load') -or -not $report.Contains('PASS: 25 native GUI states')) { throw 'Native persistence or GUI checks failed.' }
+        if ($engine.ExitCode -ne 0 -or $report.Contains('FAIL:') -or -not $report.Contains('PASS: native save/load') -or -not $report.Contains('PASS: 25 native GUI states') -or -not $report.Contains('PASS: battle readiness')) { throw 'Native persistence or GUI checks failed.' }
     }
 } finally { Pop-Location }

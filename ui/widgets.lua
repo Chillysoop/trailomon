@@ -40,10 +40,12 @@ function M.button(self,x,y,w,h,label,fn,options)
     local enabled=options.enabled~=false
     local base=options.primary and "sage" or (options.selected and "edge" or "raised")
     local node=M.rect(self,x,y,w,h,enabled and base or "panel")
-    if options.icon then M.icon(self,x+10,y+(h-20)/2,options.icon,20,options.primary and "dark" or "muted") end
+    if options.icon then M.icon(self,x+10,y+(h-20)/2,options.icon,20,enabled and options.primary and "dark" or "muted") end
     local text=M.text(self,x+w/2+(options.icon and 9 or 0),y+h/2,label,options.size or 15,enabled and (options.primary and "dark" or "ink") or "muted")
     gui.set_pivot(text,gui.PIVOT_CENTER)
-    self.buttons[#self.buttons+1]={node=node,label=text,fn=fn,key=options.key or label,enabled=enabled,base=base,primary=options.primary}
+    local focus_mark=M.rect(self,x+3,y+3,3,h-6,options.primary and "dark" or "gold")
+    gui.set_enabled(focus_mark,false)
+    self.buttons[#self.buttons+1]={node=node,label=text,focus_mark=focus_mark,fn=fn,key=options.key or label,enabled=enabled,base=base,primary=options.primary}
     return node
 end
 function M.bar(self,x,y,w,value,color,h)
@@ -63,12 +65,15 @@ function M.finish(self)
     if self.focus_key then
         for i,b in ipairs(self.buttons) do if b.key==self.focus_key then self.focus=i; break end end
     end
+    if not self.buttons[self.focus] or not self.buttons[self.focus].enabled then M.focus_next(self,1) end
+    if self.keyboard then M.highlight(self,nil,nil,true) end
 end
 function M.highlight(self,x,y,keyboard)
     for i,b in ipairs(self.buttons) do
         local hovered=x and gui.pick_node(b.node,x,y)
         local active=b.enabled and (hovered or (keyboard and i==self.focus))
         gui.set_color(b.node,M.color(not b.enabled and "panel" or (active and (b.primary and "gold" or "edge") or b.base)))
+        gui.set_enabled(b.focus_mark,b.enabled and keyboard and i==self.focus or false)
     end
 end
 function M.activate(self,x,y)

@@ -1,6 +1,7 @@
 local definitions = require "content.events"
 local resources = require "simulation.resources"
 local rng = require "simulation.rng"
+local species = require "content.species"
 local M = {defs=definitions, by_id={}}
 for _, event in ipairs(definitions) do M.by_id[event.id] = event end
 
@@ -42,7 +43,7 @@ end
 function M.available(s, choice, profile)
     local ok, why = resources.can_pay(s, choice.cost)
     if not ok then return false, why end
-    if choice.species and not resources.find(s, choice.species, choice.effort) then return false, "Needs a ready " .. choice.species end
+    if choice.species and not resources.find(s, choice.species, choice.effort) then return false, "Needs a ready " .. species.defs[choice.species].name end
     if choice.recruit then
         if #s.crew >= 3 then return false, "Crew is full (3 companions)" end
         if profile.roster[choice.recruit] then return false, "Already at your depot" end

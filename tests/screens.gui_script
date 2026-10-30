@@ -1,6 +1,12 @@
 local model=require "simulation.expedition"
 local screens=require "ui.screens"
 local scene=require "presentation.scene"
+local input=require "ui.input"
+
+local function button(self,key)
+    for _,b in ipairs(self.buttons) do if b.key==key then return b end end
+    error("Missing button: "..key)
+end
 
 local function fixture(self,page,setup)
     self.snapshot=model.new(1848);self.page=page;self.speed=1;self.focus=1
@@ -20,6 +26,60 @@ local function landmark(n)
 end
 local function battle(p)
     departed(p);assert(model.debug(p,"event","scavengers"));assert(model.command(p,"choice",{id="battle"}));assert(model.command(p,"battle_start",{team={1,2}}))
+end
+local function interaction_checks(self)
+    fixture(self,"trail",battle)
+    coroutine.yield()
+    self.redraw=function() screens.draw(self) end
+    assert(not button(self,"Choose an action for each companion").enabled)
+    button(self,"action1guard").fn()
+    coroutine.yield()
+    assert(gui.get_text(button(self,"action1guard").label):find("chosen",1,true))
+    assert(not button(self,"Choose an action for each companion").enabled)
+    button(self,"action2pressure").fn()
+    coroutine.yield()
+    assert(button(self,"Resolve this round").enabled)
+    button(self,"Clear selected actions").fn()
+    coroutine.yield()
+    assert(not next(self.battle_actions))
+    assert(not button(self,"Choose an action for each companion").enabled)
+
+    fixture(self,"trail",function(p) departed(p);model.debug(p,"event","scavengers");model.command(p,"choice",{id="battle"}) end)
+    coroutine.yield()
+    assert(not button(self,"Choose a companion first").enabled)
+    button(self,"battler1").fn()
+    coroutine.yield()
+    assert(button(self,"Stand together").enabled)
+
+    fixture(self,"trail",function(p,ui) ui.edit={kind="seed",value="1848"} end)
+    coroutine.yield()
+    local calls=0
+    self.perform=function() calls=calls+1 end
+    self.open_page=function() calls=calls+1 end
+    self.finish_edit=function() calls=calls+1 end
+    input.handle(self,hash("pause"),{pressed=true})
+    input.handle(self,hash("debug"),{pressed=true})
+    assert(calls==0 and self.edit,"Dialog leaked a global shortcut")
+    input.handle(self,hash("next"),{pressed=true})
+    assert(self.buttons[self.focus].key=="Cancel")
+    assert(gui.is_enabled(self.buttons[self.focus].focus_mark))
+    self.redraw()
+    coroutine.yield()
+    assert(self.buttons[self.focus].key=="Cancel" and gui.is_enabled(self.buttons[self.focus].focus_mark),"Focus disappeared on redraw")
+    input.handle(self,hash("confirm"),{pressed=true})
+    coroutine.yield()
+    assert(not self.edit and calls==0,"Enter did not activate the focused Cancel button")
+
+    self.edit={kind="seed",value="12"};self.redraw()
+    coroutine.yield()
+    input.handle(self,hash("text"),{text="3a"})
+    coroutine.yield()
+    assert(self.edit.value=="123")
+    input.handle(self,hash("erase"),{pressed=true})
+    coroutine.yield()
+    assert(self.edit.value=="12")
+    input.handle(self,hash("back"),{pressed=true})
+    assert(not self.edit)
 end
 function init(self)
     local noop=function() end
@@ -48,6 +108,16 @@ function on_message(self,id,message,sender)
     if id==hash("start_checks") then self.index=1 end
 end
 function update(self,dt)
+    if self.interactions then
+        local ok,why=coroutine.resume(self.interactions)
+        if not ok or coroutine.status(self.interactions)=="dead" then
+            local report=assert(io.open(sys.get_config_string("trailomon.check_report","engine-check-report.txt"),"a"))
+            report:write(ok and "PASS: battle readiness, chosen actions, modal keyboard routing, editing, and persistent focus.\n" or "FAIL: interaction checks / "..tostring(why).."\n")
+            report:close();self.interactions=nil
+            msg.post("@system:","exit",{code=ok and 0 or 1})
+        end
+        return
+    end
     if not self.index then return end
     local case=self.cases[self.index]
     local ok,why=pcall(fixture,self,case[1],case[2])
@@ -55,6 +125,7 @@ function update(self,dt)
         local report=assert(io.open(sys.get_config_string("trailomon.check_report","engine-check-report.txt"),"a"))
         report:write(ok and "PASS: 25 native GUI states, icon rendering, scene motion, and button bounds.\n" or "FAIL: GUI case "..self.index.." / "..tostring(why).."\n")
         report:close();self.index=nil
-        msg.post("@system:","exit",{code=ok and 0 or 1})
+        if ok then self.interactions=coroutine.create(function() interaction_checks(self) end)
+        else msg.post("@system:","exit",{code=1}) end
     else self.index=self.index+1 end
 end

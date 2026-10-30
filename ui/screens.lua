@@ -121,7 +121,7 @@ local function travel(self)
     w.button(self,662,232,184,40,"Meals: "..s.rations,function()
         local next={sparse="normal",normal="generous",generous="sparse"};self.perform("policy",{key="rations",value=next[s.rations]})
     end,{size=12})
-    label(self,44,209,"Per day: "..forecast.food.." food / ~"..forecast.progress.." km / "..forecast.effort.." hauling energy, +"..forecast.recovery.." recovery")
+    label(self,44,209,"Base day: "..forecast.food.." food / "..forecast.progress.." km / "..forecast.effort.." haul energy, +"..forecast.recovery.." recovery. Crew and conditions can change this.")
     w.button(self,44,179,180,23,"Camp & recover",page(self,"camp"),{size=12,icon="rest"})
     w.button(self,236,179,180,23,"Request help",page(self,"return"),{size=12})
     label(self,440,189,"Space pauses. Every choice waits for you.")
@@ -196,20 +196,20 @@ local function camp(self)
     local s=self.snapshot.run;local forage=model.forage_preview(s);local food=model.resources.daily_food(s)
     local available=s.mode=="stopped" or s.mode=="landmark" or s.mode=="traveling"
     choices(self,"A little time to recover.","Every camp action uses one day and the crew's meals. Well-fed companions regain more strength. You can always request help.",{
-        {label="Rest the whole crew",detail="1 day / "..food.." food / up to +25 stamina and +8 condition",enabled=available,fn=cmd(self,"rest")},
-        {label="Gather nearby provisions",detail="1 day / "..forage.gross.." food gathered / "..(forage.net>=0 and "+" or "")..forage.net.." net / "..forage.effort.." digging stamina",enabled=available and forage.gross>0,fn=cmd(self,"forage")},
-        {label="Repair the wagon",detail="1 day + meals + 1 repair material / +30 wagon condition",enabled=available and s.repairs>0 and s.wagon<100,fn=cmd(self,"repair")},
-        {label="Treat the traveler",detail="1 day + meals + 1 medicine / +35 condition and rest",enabled=available and s.medicine>0 and s.traveler<100,fn=cmd(self,"treat")}},"CAMP / THE CLOCK IS STOPPED")
-    w.button(self,50,100,200,32,"Back to the journey",page(self,"trail"),{size=12})
+        {label="Rest the whole crew",icon="rest",detail="1 day / "..food.." food / up to +25 stamina and +8 condition",enabled=available,fn=cmd(self,"rest")},
+        {label="Gather nearby provisions",icon="food",detail=forage.gross<=0 and "This stretch has been gathered clean." or "1 day / "..forage.gross.." food found / "..forage.packed.." packed / "..(forage.net>=0 and "+" or "")..forage.net.." net / "..forage.effort.." digging stamina",enabled=available and forage.gross>0,fn=cmd(self,"forage")},
+        {label="Repair the wagon",icon="repairs",detail=s.wagon>=100 and "The wagon needs no repairs." or (s.repairs<1 and "Needs 1 repair material." or "1 day + meals + 1 repair material / +30 wagon condition"),enabled=available and s.repairs>0 and s.wagon<100,fn=cmd(self,"repair")},
+        {label="Treat the traveler",icon="medicine",detail=s.traveler>=100 and "The traveler is already in good condition." or (s.medicine<1 and "Needs 1 medicine." or "1 day + meals + 1 medicine / +35 condition and rest"),enabled=available and s.medicine>0 and s.traveler<100,fn=cmd(self,"treat")}},"CAMP / THE CLOCK IS STOPPED")
+    w.button(self,50,151,220,31,"Back to the journey",page(self,"trail"),{size=12,icon="trail"})
 end
 local function shop(self)
     local s=self.snapshot.run
     local can=s.mode=="landmark" and s.target==3
     choices(self,"Mossbell supply counter","Pack what the next stretch needs. Your wagon carries "..model.resources.weight(s).." / "..model.resources.capacity(s)..". Purchases do not pass time.",{
-        {label="Ten provisions",detail="6 coins / 10 load",enabled=can and s.coins>=6 and model.resources.weight(s)+10<=model.resources.capacity(s),fn=cmd(self,"buy",{item="food"})},
-        {label="A bundle of repair materials",detail="8 coins / 4 load",enabled=can and s.coins>=8 and model.resources.weight(s)+4<=model.resources.capacity(s),fn=cmd(self,"buy",{item="repairs"})},
-        {label="Medicine and clean bandages",detail="7 coins / 2 load",enabled=can and s.coins>=7 and model.resources.weight(s)+2<=model.resources.capacity(s),fn=cmd(self,"buy",{item="medicine"})},
-        {label="Return to the outpost",detail="Review the road ahead",fn=page(self,"trail")}},"MOSSBELL / "..s.coins.." COINS")
+        {label="Ten provisions",icon="food",detail="6 coins / 10 load",enabled=can and s.coins>=6 and model.resources.weight(s)+10<=model.resources.capacity(s),fn=cmd(self,"buy",{item="food"})},
+        {label="A bundle of repair materials",icon="repairs",detail="8 coins / 4 load",enabled=can and s.coins>=8 and model.resources.weight(s)+4<=model.resources.capacity(s),fn=cmd(self,"buy",{item="repairs"})},
+        {label="Medicine and clean bandages",icon="medicine",detail="7 coins / 2 load",enabled=can and s.coins>=7 and model.resources.weight(s)+2<=model.resources.capacity(s),fn=cmd(self,"buy",{item="medicine"})},
+        {label="Return to the outpost",icon="trail",detail="Review the road ahead",fn=page(self,"trail")}},"MOSSBELL / "..s.coins.." COINS")
 end
 local function crew(self)
     local s=self.snapshot.run
@@ -235,7 +235,7 @@ local function companion(self)
     if not c then return end
     label(self,28,611,"A TRAVELING COMPANION")
     w.panel(self,28,90,834,493)
-    w.sprite(self,c.species,164,423,220)
+    w.sprite(self,c.species,164,443,190)
     w.text(self,304,517,c.name,30,"ink")
     w.text(self,304,481,model.species.defs[c.species].name.." / "..c.temperament,16,"muted")
     w.text(self,304,449,model.species.defs[c.species].ability,14,"muted",500)
@@ -253,12 +253,13 @@ local function map(self)
     w.rect(self,90,372,704,3,"edge")
     for i,spot in ipairs(model.route) do
         local x=90+(i-1)*140
-        local visited=i<s.target or (i==s.target and s.mode=="landmark") or s.mode=="result"
+        local visited=i<s.target or (i==s.target and s.progress>=s.distance)
         w.rect(self,x-6,367,14,14,visited and "gold" or "muted")
         w.text(self,x-25,413,string.format("%02d",i),25,visited and "gold" or "muted")
         local first,last=spot.name:match("^(%S+)%s(.+)$")
         w.text(self,x-35,345,first or spot.name,13,"ink")
         if last then w.text(self,x-35,325,last,13,"ink") end
+        label(self,x-35,299,visited and "REACHED" or (i==s.target and (s.mode=="result" and "TURNED BACK" or "NEXT STOP") or "AHEAD"))
     end
     label(self,59,475,"DEPARTURE: FERNWAKE    /    DELIVERY: LANTERN REACH")
     label(self,59,260,"Split Oak: "..(s.branches.first or "meadow or woodland"))
@@ -318,10 +319,12 @@ local function battle_select(self)
             self.redraw()
         end,{selected=self.battle_team[i],enabled=model.resources.ready(c,6),size=12,key="battler"..i})
     end
-    w.button(self,28,181,395,42,"Stand together",function()
+    local team_ready=false
+    for i in pairs(self.battle_team) do if model.resources.ready(s.crew[i],6) then team_ready=true end end
+    w.button(self,28,181,395,42,team_ready and "Stand together" or "Choose a companion first",function()
         local team={};for i=1,#s.crew do if self.battle_team[i] then team[#team+1]=i end end
         self.perform("battle_start",{team=team})
-    end,{primary=true,size=15})
+    end,{primary=true,enabled=team_ready,size=15})
     w.button(self,437,181,425,42,"Withdraw from the encounter",cmd(self,"withdraw"),{size=14})
     label(self,28,150,s.encounter=="scavengers" and "Withdrawal costs up to 8 food and 8 cargo integrity." or "Withdrawal takes a one-day detour and the day's meals.")
 end
@@ -336,23 +339,26 @@ local function battle(self)
     for row,i in ipairs(b.team) do
         local idx=i; local c=s.crew[i];local x=28+(row-1)*425;local def=model.species.defs[c.species]
         w.panel(self,x,237,409,235)
-        w.sprite(self,c.species,x+65,399,106)
+        w.sprite(self,c.species,x+65,408,92)
         w.text(self,x+128,435,c.name,22,"ink")
         label(self,x+128,406,"Energy "..util.round(c.stamina))
         label(self,x+128,384,"Condition "..util.round(c.condition))
         local selected=self.battle_actions[i]
-        local options={{id="pressure",label="Pressure (-6)",enabled=model.resources.ready(c,6)},
-            {id="guard",label="Guard (-3)",enabled=true},
-            {id="assist",label=def.assist.." (-12)",enabled=not b.used[i] and model.resources.ready(c,12)}}
+        local guard_cost=c.condition>0 and math.min(3,c.stamina) or 0
+        local options={{id="pressure",label="Pressure (-6 energy)",enabled=model.resources.ready(c,6)},
+            {id="guard",label="Guard (-"..guard_cost.." energy)",enabled=true},
+            {id="assist",label=def.assist..(b.used[i] and " (used)" or " (-12 energy)"),enabled=not b.used[i] and model.resources.ready(c,12)}}
         for n,option in ipairs(options) do
             local kind=option.id
-            w.button(self,x+16,338-(n-1)*33,377,27,option.label,function() self.battle_actions[idx]=kind;self.redraw() end,{selected=selected==kind,enabled=option.enabled,size=12,key="action"..i..kind,icon=kind})
+            w.button(self,x+16,338-(n-1)*33,377,27,option.label..(selected==kind and " / chosen" or ""),function() self.battle_actions[idx]=kind;self.redraw() end,{selected=selected==kind,enabled=option.enabled,size=12,key="action"..i..kind,icon=kind})
         end
     end
-    w.button(self,28,171,409,42,"Resolve this round",function()
+    local complete=true
+    for _,i in ipairs(b.team) do if not self.battle_actions[i] then complete=false end end
+    w.button(self,28,171,409,42,complete and "Resolve this round" or "Choose an action for each companion",function()
         local actions={};for _,i in ipairs(b.team) do actions[#actions+1]={member=i,kind=self.battle_actions[i]} end
         self.perform("round",{actions=actions})
-    end,{primary=true,size=15})
+    end,{primary=true,enabled=complete,size=complete and 15 or 12})
     local selected=next(self.battle_actions)~=nil
     w.button(self,453,171,409,42,selected and "Clear selected actions" or "Withdraw",function()
         if selected then self.battle_actions={};self.redraw() else self.perform("withdraw") end
@@ -397,7 +403,7 @@ local function overlay(self)
         w.rect(self,0,0,1280,720,"dark",0.88);w.panel(self,300,240,680,230)
         w.text(self,330,433,edit.kind=="seed" and "Choose an expedition seed" or "Name your companion",24,"ink")
         w.rect(self,330,337,620,60,"dark");w.text(self,350,368,edit.value.."_",25,"gold")
-        label(self,330,313,"Type a short name or number. Enter saves; Escape cancels.")
+        label(self,330,313,"Type a name or number. Tab selects; Enter activates; Escape cancels.")
         w.button(self,330,257,295,37,"Keep this",function() self.finish_edit() end,{primary=true,size=14})
         w.button(self,641,257,309,37,"Cancel",function() self.edit=nil;self.redraw() end,{size=14})
     elseif self.save_blocked then

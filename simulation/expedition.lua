@@ -81,6 +81,7 @@ local function add_food(s,amount)
     local kept=math.min(space,amount)
     s.food=s.food+kept
     if kept<amount then log(s,"The wagon holds " .. kept .. " of the " .. amount .. " found provisions. The rest stays behind.") end
+    return kept
 end
 
 local function effects(s,values)
@@ -194,7 +195,10 @@ function M.forage_preview(s)
     local digger=resources.find(s,"loamling",18)
     local base=(s.terrain=="meadow" or s.terrain=="woodland") and 10 or 6
     local gross=math.max(0,base+(digger and 8 or 0)-count*5)
-    return {gross=gross,net=gross-resources.daily_food(s),effort=digger and 18 or 0,member=digger}
+    local meals=math.min(s.food,resources.daily_food(s))
+    local space=math.max(0,resources.capacity(s)-resources.weight(s)+meals)
+    local packed=math.min(gross,space)
+    return {gross=gross,packed=packed,net=packed-meals,effort=digger and 18 or 0,member=digger}
 end
 
 local function leave(snapshot,branch)
@@ -413,7 +417,11 @@ function M.command(snapshot,command,arg)
         s.forage[tostring(s.target)]=(s.forage[tostring(s.target)] or 0)+1
         if preview.member then preview.member.stamina=preview.member.stamina-preview.effort end
         day(snapshot,false,false)
-        if s.mode~="result" then add_food(s,preview.gross); log(s,"Gathered " .. preview.gross .. " provisions; today's meals cost " .. resources.daily_food(s) .. "."); if s.mode=="traveling" then s.mode="stopped" end end
+        if s.mode~="result" then
+            local packed=add_food(s,preview.gross)
+            log(s,"Packed " .. packed .. " of " .. preview.gross .. " found provisions after today's meals.")
+            if s.mode=="traveling" then s.mode="stopped" end
+        end
         return true
     elseif command=="leave" and s.mode=="landmark" then return leave(snapshot,arg.branch)
     elseif command=="river" and s.mode=="landmark" and s.target==4 then return cross(snapshot,arg.method)

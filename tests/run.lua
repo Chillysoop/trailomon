@@ -94,6 +94,18 @@ test("forage consumes a day and food and depletes a site",function()
     assert(p.run.day==day+1 and p.run.food==food+preview.net)
     assert(model.forage_preview(p.run).gross<preview.gross)
 end)
+test("forage preview matches capacity limits and the food actually available",function()
+    for _,case in ipairs({{wagon="covered",food=90,packed=4,net=1},{wagon="standard",food=119,packed=3,net=0},{wagon="standard",food=1,packed=18,net=17}}) do
+        local p=model.new(1848);p.profile.covered=true
+        command(p,"wagon",{id=case.wagon});command(p,"depart")
+        p.run.food=case.food;valid(p)
+        local preview=model.forage_preview(p.run)
+        assert(preview.packed==case.packed and preview.net==case.net)
+        command(p,"forage")
+        assert(p.run.food==case.food+preview.net)
+        assert(model.resources.weight(p.run)<=model.resources.capacity(p.run))
+    end
+end)
 test("battle validates all actions before spending stamina",function()
     local p=depart(3);assert(model.debug(p,"event","scavengers"));command(p,"choice",{id="battle"})
     command(p,"battle_start",{team={1,2}})

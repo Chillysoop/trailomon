@@ -18,6 +18,8 @@ One complete expedition from preparation to an ending: six landmarks, two route 
 
 Read the [playtest guide](docs/PLAYTEST.md) for controls, saves, and the current limitations. The art remains a selected concept pass with simple motion; final animation, richer scenery, and pacing need further playtesting and polish.
 
+The [validation record](docs/VALIDATION.md) describes the completed Windows journey, fixes, automated coverage, and remaining testing limits.
+
 ## Build and test
 
 Install Java 25 or use the JDK bundled with Defold. From PowerShell in this directory:
