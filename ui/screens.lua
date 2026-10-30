@@ -3,6 +3,8 @@ local scene=require "presentation.scene"
 local model=require "simulation.expedition"
 local util=require "simulation.util"
 local wagons=require "content.wagons"
+local auto_battle=require "ui.automatic_battle"
+local legacy_battle=require "ui.legacy_battle"
 local M={}
 local titles={delivered="New roots, at last.",late="You made it through.",returned="There is always another road.",rescued="Everyone comes home."}
 local function cmd(self,id,args,page) return function() self.perform(id,args,page) end end
@@ -302,70 +304,6 @@ local function settings(self)
         {label="Save this moment",detail="Save now; it is safe to close the window afterward",fn=function() self.save_now();self.redraw() end},
         {label="Expedition seed: "..s.seed,detail=s.mode=="preparation" and "Change the seed before leaving the depot" or "Replay this seed from the result screen",enabled=s.mode=="preparation",fn=function() self.edit={kind="seed",value=tostring(s.seed)};self.redraw() end}},"OPTIONS")
 end
-local function battle_select(self)
-    local s=self.snapshot.run
-    label(self,28,611,"ENCOUNTER / CHOOSE YOUR COMPANIONS")
-    w.text(self,28,574,s.encounter=="scavengers" and "Keep the provisions safe." or "Make a little room to pass.",27,"ink")
-    w.text(self,28,537,"Choose one or two ready companions. Effort and injuries stay with them.",14,"muted")
-    self.battle_team=self.battle_team or {}
-    for i,c in ipairs(s.crew) do
-        local idx=i;local x=28+(i-1)*280
-        w.panel(self,x,255,263,245);w.sprite(self,c.species,x+132,414,128)
-        w.text(self,x+17,333,c.name,19,"ink")
-        label(self,x+17,307,"Energy "..util.round(c.stamina).." / Condition "..util.round(c.condition))
-        w.button(self,x+17,269,229,28,self.battle_team[i] and "Selected" or "Choose",function()
-            local count=0;for _ in pairs(self.battle_team) do count=count+1 end
-            if self.battle_team[idx] then self.battle_team[idx]=nil elseif count<2 then self.battle_team[idx]=true end
-            self.redraw()
-        end,{selected=self.battle_team[i],enabled=model.resources.ready(c,6),size=12,key="battler"..i})
-    end
-    local team_ready=false
-    for i in pairs(self.battle_team) do if model.resources.ready(s.crew[i],6) then team_ready=true end end
-    w.button(self,28,181,395,42,team_ready and "Stand together" or "Choose a companion first",function()
-        local team={};for i=1,#s.crew do if self.battle_team[i] then team[#team+1]=i end end
-        self.perform("battle_start",{team=team})
-    end,{primary=true,enabled=team_ready,size=15})
-    w.button(self,437,181,425,42,"Withdraw from the encounter",cmd(self,"withdraw"),{size=14})
-    label(self,28,150,s.encounter=="scavengers" and "Withdrawal costs up to 8 food and 8 cargo integrity." or "Withdrawal takes a one-day detour and the day's meals.")
-end
-local function battle(self)
-    local s=self.snapshot.run;local b=s.battle
-    label(self,28,611,"ROUND "..b.round.." / "..b.limit.."  /  "..(b.kind=="scavengers" and "PROTECT CARGO" or "SECURE PASSAGE"))
-    w.text(self,28,575,b.kind=="scavengers" and "Hold the wagon for three rounds." or "Persuade the guardian to retreat.",23,"ink")
-    w.text(self,28,535,model.combat.intent_text(s),14,"gold")
-    w.bar(self,28,510,834,b.resolve/75*100,"red",8)
-    label(self,28,493,"THREAT RESOLVE "..b.resolve.." / Each companion acts once per round")
-    self.battle_actions=self.battle_actions or {}
-    for row,i in ipairs(b.team) do
-        local idx=i; local c=s.crew[i];local x=28+(row-1)*425;local def=model.species.defs[c.species]
-        w.panel(self,x,237,409,235)
-        w.sprite(self,c.species,x+65,408,92)
-        w.text(self,x+128,435,c.name,22,"ink")
-        label(self,x+128,406,"Energy "..util.round(c.stamina))
-        label(self,x+128,384,"Condition "..util.round(c.condition))
-        local selected=self.battle_actions[i]
-        local guard_cost=c.condition>0 and math.min(3,c.stamina) or 0
-        local options={{id="pressure",label="Pressure (-6 energy)",enabled=model.resources.ready(c,6)},
-            {id="guard",label="Guard (-"..guard_cost.." energy)",enabled=true},
-            {id="assist",label=def.assist..(b.used[i] and " (used)" or " (-12 energy)"),enabled=not b.used[i] and model.resources.ready(c,12)}}
-        for n,option in ipairs(options) do
-            local kind=option.id
-            w.button(self,x+16,338-(n-1)*33,377,27,option.label..(selected==kind and " / chosen" or ""),function() self.battle_actions[idx]=kind;self.redraw() end,{selected=selected==kind,enabled=option.enabled,size=12,key="action"..i..kind,icon=kind})
-        end
-    end
-    local complete=true
-    for _,i in ipairs(b.team) do if not self.battle_actions[i] then complete=false end end
-    w.button(self,28,171,409,42,complete and "Resolve this round" or "Choose an action for each companion",function()
-        local actions={};for _,i in ipairs(b.team) do actions[#actions+1]={member=i,kind=self.battle_actions[i]} end
-        self.perform("round",{actions=actions})
-    end,{primary=true,enabled=complete,size=complete and 15 or 12})
-    local selected=next(self.battle_actions)~=nil
-    w.button(self,453,171,409,42,selected and "Clear selected actions" or "Withdraw",function()
-        if selected then self.battle_actions={};self.redraw() else self.perform("withdraw") end
-    end,{size=14})
-    w.text(self,28,142,"Guard protects the acting companion and cargo. Assist is once per battle. Clear actions before withdrawing.",12,"muted",834)
-    w.text(self,28,86,b.last,14,"gold")
-end
 local function result(self)
     local s=self.snapshot.run;local p=self.snapshot.profile
     label(self,28,611,"EXPEDITION COMPLETE / SEED "..s.seed)
@@ -432,8 +370,10 @@ function M.draw(self)
             {label="Request assistance and return home",detail="End this expedition; retain discoveries and companions",fn=cmd(self,"return",nil,"trail")}},"A WAY HOME")
         elseif s.mode=="event" then event(self)
         elseif s.mode=="landmark" then landmark(self)
-        elseif s.mode=="combat_select" then battle_select(self)
-        elseif s.mode=="combat" then battle(self)
+        elseif s.mode=="combat_select" then auto_battle.select(self)
+        elseif s.mode=="combat" then
+            if model.combat.automatic(s.battle) then auto_battle.draw(self) else legacy_battle.draw(self) end
+        elseif s.mode=="combat_result" then auto_battle.result(self)
         elseif s.mode=="result" then result(self)
         else travel(self) end
     end

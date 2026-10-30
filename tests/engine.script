@@ -4,8 +4,9 @@ local save=require "services.save"
 local function run()
     local primary,backup=save.paths()
     -- Refuse to touch anything until the isolated namespace has been verified.
-    assert(primary:find("trailomon_automated_checks",1,true))
-    assert(backup:find("trailomon_automated_checks",1,true))
+    local namespace=sys.get_config_string("trailomon.save_namespace","")
+    assert(namespace=="trailomon_automated_checks" or namespace:match("^trailomon_qa_[a-z]+_%d+$"))
+    assert(primary:find(namespace,1,true) and backup:find(namespace,1,true))
     local p=model.new(1848)
     assert(model.command(p,"depart"))
     assert(model.debug(p,"event","shortcut"))
@@ -27,7 +28,15 @@ local function run()
     assert(save.write(recovered))
     local battle=assert(save.load())
     assert(battle.run.battle.intent.target==target and battle.run.battle.round==1)
+    assert(model.command(battle,"battle_step"))
+    assert(save.write(battle))
+    battle=assert(save.load())
+    assert(#battle.run.battle.history==1)
     assert(model.command(battle,"withdraw"))
+    assert(save.write(battle))
+    battle=assert(save.load())
+    assert(battle.run.mode=="combat_result" and battle.run.battle.result)
+    assert(model.command(battle,"battle_continue"))
     assert(model.command(battle,"return"))
     assert(save.write(battle))
     local ended=assert(save.load())
@@ -42,6 +51,24 @@ local function run()
 end
 function init(self)
     local ok,why=pcall(run)
+    local fixture=sys.get_config_string("trailomon.fixture","")
+    if ok and fixture~="" then
+        ok,why=pcall(function()
+            assert(sys.get_config_string("trailomon.save_namespace",""):match("^trailomon_qa_"),"Fixtures require a separate QA save namespace")
+            local p=model.new(1848);assert(model.command(p,"depart"))
+            if fixture=="territorial" then
+                local progression=require "simulation.progression"
+                p.run.crew={progression.companion("brindlehorn"),progression.companion("cindercoil"),progression.companion("slatewhorl")}
+                p.run.crew[1].stamina=20;p.run.crew[2].stamina=40;p.run.day=18;p.run.terrain="ridge";p.run.weather="rain"
+            end
+            assert(model.debug(p,"event",fixture=="territorial" and "territorial" or "scavengers"))
+            if fixture=="legacy" then
+                assert(model.command(p,"choice",{id="battle"}))
+                assert(require("simulation.combat_manual").start(p.run,"scavengers",{1,2}))
+            end
+            assert(save.write(p))
+        end)
+    end
     -- Release engines omit console logging; a small report is the durable result.
     local path=sys.get_config_string("trailomon.check_report","engine-check-report.txt")
     local report=assert(io.open(path,"w"))

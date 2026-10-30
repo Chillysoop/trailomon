@@ -2,11 +2,11 @@
 
 Design proposal | October 30, 2026
 
-Keep Oregon Trail's expedition structure and growing distance from dependable help. Use Automon and Astronarch to move combat decisions into crew selection, positioning, preparation, and useful combinations. A short automatic encounter should reveal how well that preparation suits the situation, with consequences that matter on the following travel days.
+Keep Oregon Trail's expedition structure and growing distance from dependable help. Use Astronarch as the primary combat reference to move combat decisions into crew selection, positioning, preparation, and useful combinations. A short automatic encounter should reveal how well that preparation suits the situation, with consequences that matter on the following travel days.
 
-This proposal has not replaced the playable combat code. The first experiment is bounded to the existing six species and two encounter scenarios.
+The owner clarified on October 30, 2026 that Astronarch is the primary reference for actual auto-battle mechanics; Automon informs creature-party identity. The first experiment is bounded to the existing six species and two encounter scenarios.
 
-## What the game currently has
+## Baseline before automatic combat
 
 | System | Playable behavior |
 | --- | --- |
@@ -126,6 +126,8 @@ Use small, readable bodily actions: a brace, a sweep, a flash, a scrape, a retre
 An optional log explains each exchange. Mouse and keyboard can select the crew, change positions, inspect abilities, start, pause, step, and withdraw. Verify this at the game's 1280 by 720 window size.
 
 ## The first implementation experiment
+
+The implemented rules are now recorded in [COMBAT_RULES.md](COMBAT_RULES.md). The following brief preserves the experiment's original scope and acceptance criteria.
 
 Replace manual action selection in the two existing scenarios with the proposed setup and automatic exchanges. Retain the six-species limit, two active companions, peaceful choices, encounter limits, visible resolve, and persistent expedition costs. Do not add equipment, new opponents, hunting, regions, or permanent skill trees in the same pass.
 

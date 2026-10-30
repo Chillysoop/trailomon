@@ -10,7 +10,7 @@ Start with the [current plan](docs/PLAN.md), [roadmap](docs/ROADMAP.md), and [pr
 
 The [game design document](docs/GAME_DESIGN.md) defines the core loop, creature systems, battles, replayability, persistent progression, and the first playable prototype. It also includes the proposed Defold architecture, implementation milestones, and acceptance criteria.
 
-The [world and lore proposal](docs/WORLD_LORE.md) develops the creatures, people, landmarks, and progression from maintained roads into poorly mapped wilderness. The [auto-battle and gathering proposal](docs/AUTO_BATTLES.md) considers Automon and Astronarch as references for the next combat iteration. These are design proposals; the current build still uses manual battle commands and camp foraging.
+The [world and lore proposal](docs/WORLD_LORE.md) develops the creatures, people, landmarks, and progression from maintained roads into poorly mapped wilderness. The [auto-battle and gathering proposal](docs/AUTO_BATTLES.md) records the reference study and future ideas. New encounters use [automatic combat](docs/COMBAT_RULES.md), led by Astronarch-style preparation and partner roles; Automon informs creature-party identity. Camp foraging remains deliberate, and older saved manual battles retain their original controls until completion.
 
 The repository now includes a runnable Defold project. Open `game.project` in Defold 1.13.2 and build, or use the scripts below for a standalone Windows bundle.
 
@@ -33,7 +33,7 @@ Install Java 25 or use the JDK bundled with Defold. From PowerShell in this dire
 ./tools/build.ps1
 ```
 
-The scripts download the pinned official Defold builder and verify its checksum. Testing runs deterministic Lua checks, native save/load recovery, and 25 GUI state checks in an isolated save namespace. `-SkipEngine` runs just the Lua checks. CI uses `-Headless` for machines without a graphics driver; local checks use the release renderer. Headless checks exercise screen construction and bounds but do not verify rendered pixels or human input.
+The scripts download the pinned official Defold builder and verify its checksum. Testing runs deterministic Lua checks, native save/load recovery, and 26 GUI state checks in an isolated save namespace. `-SkipEngine` runs just the Lua checks. CI uses `-Headless` for machines without a graphics driver; local checks use the release renderer. Headless checks exercise screen construction and bounds but do not verify rendered pixels or human input.
 
 The build script creates a fresh `dist/Windows-0.1.0-<timestamp>/Trailomon/` folder and a ZIP alongside it. Run `Trailomon.exe` with the four `game.*` files beside it. Release builds do not start the engine's development server. The scripts avoid replacing a running executable and work around OneDrive directory attributes by using fresh output folders.
 

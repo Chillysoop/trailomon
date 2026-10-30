@@ -43,13 +43,17 @@ local function act(p,strategy)
         for _,c in ipairs(event.choices) do
             if model.events.available(s,c,p.profile) and (strategy~="peaceful" or not c.battle) then pick=c;break end
         end
+        if strategy=="fighter" then
+            for _,c in ipairs(event.choices) do if c.battle and model.events.available(s,c,p.profile) then pick=c;break end end
+        end
         assert(pick,"No valid event choice")
         command(p,"choice",{id=pick.id})
-    elseif s.mode=="combat_select" then command(p,"battle_start",{team={1,2}})
+    elseif s.mode=="combat_select" then
+        local team={};for i,c in ipairs(s.crew) do if #team<2 and model.resources.ready(c,4) then team[#team+1]=i end end
+        if #team>0 then command(p,"battle_start",{team=team}) else command(p,"withdraw") end
     elseif s.mode=="combat" then
-        local actions={}
-        for _,i in ipairs(s.battle.team) do actions[#actions+1]={member=i,kind=s.crew[i].stamina>=6 and "pressure" or "guard"} end
-        command(p,"round",{actions=actions})
+        command(p,"battle_step")
+    elseif s.mode=="combat_result" then command(p,"battle_continue")
     end
 end
 local function journey(seed,strategy,checkpoint)
@@ -106,9 +110,10 @@ test("forage preview matches capacity limits and the food actually available",fu
         assert(model.resources.weight(p.run)<=model.resources.capacity(p.run))
     end
 end)
-test("battle validates all actions before spending stamina",function()
+test("legacy manual saves retain action validation and once-only assists",function()
     local p=depart(3);assert(model.debug(p,"event","scavengers"));command(p,"choice",{id="battle"})
     command(p,"battle_start",{team={1,2}})
+    assert(require("simulation.combat_manual").start(p.run,"scavengers",{1,2}));valid(p)
     local before=util.copy(p)
     assert(not model.command(p,"round",{actions={{member=1,kind="pressure"},{member=1,kind="guard"}}}));assert_equal(p,before)
     command(p,"round",{actions={{member=1,kind="assist"},{member=2,kind="guard"}}})
@@ -123,10 +128,10 @@ test("recruitment, river and battle survive a checkpoint",function()
     assert(model.debug(p,"event","territorial"));command(p,"choice",{id="battle"});command(p,"battle_start",{team={1,3}})
     local copy=util.copy(p);valid(copy)
     while p.run.mode=="combat" do
-        local actions={{member=1,kind="pressure"},{member=3,kind="pressure"}}
-        command(p,"round",{actions=actions});command(copy,"round",{actions=actions})
+        command(p,"battle_step");command(copy,"battle_step")
     end
     assert_equal(p,copy)
+    command(p,"battle_continue")
     p.run.mode="landmark";p.run.target=4;p.run.progress=p.run.distance
     command(p,"river",{method="inspect"});command(p,"river",{method="ferry"})
     command(p,"return")
@@ -185,6 +190,19 @@ test("reference strategies finish without negative resources or deadlocks",funct
     assert((counts.delivered or 0)>0,"No on-time deliveries")
     for key,value in pairs(counts) do print("  "..key..": "..value) end
 end)
+
+test("a fighting strategy completes full expeditions and checkpointed replays",function()
+    local outcomes={};local encounters=0
+    for seed=1,40 do
+        local p=journey(seed,"fighter")
+        assert_equal(p,journey(seed,"fighter",2));valid(p)
+        outcomes[p.run.outcome]=(outcomes[p.run.outcome] or 0)+1
+        for _,entry in ipairs(p.run.log) do if entry.text:find("Exchange ",1,true) then encounters=encounters+1 end end
+    end
+    assert(encounters>0 and (outcomes.delivered or 0)>0)
+    for key,n in pairs(outcomes) do print("  fighting "..key..": "..n) end
+    print("  fighting exchange journal entries: "..encounters)
+end)
 test("river alternatives and both route branches remain available",function()
     for _,method in ipairs({"ferry","rope","anchor","swim"}) do
         local p=depart(23)
@@ -219,4 +237,6 @@ test("all authored choices have a reachable resolution",function()
         end
     end
 end)
+require("tests.combat")(test,command,valid,assert_equal)
+require("tests.playback")(test,command,valid,assert_equal)
 print("OK "..passed.." tests")

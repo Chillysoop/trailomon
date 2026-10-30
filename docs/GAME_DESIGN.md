@@ -8,7 +8,7 @@ The central experience is a relaxed journey with consequential decisions. Travel
 
 The core direction is established. Creature names, world names, balance values, and duration targets below are initial design choices to test. The first playable scope in section 12 takes precedence over ideas marked for later development.
 
-The subsequent [world and lore proposal](WORLD_LORE.md) expands the setting and the progression toward wilder, less explored country. The [auto-battle proposal](AUTO_BATTLES.md) develops an Automon- and Astronarch-informed alternative to the current manual combat. Neither proposal expands the implemented first playable by itself.
+The subsequent [world and lore proposal](WORLD_LORE.md) expands the setting and the progression toward wilder, less explored country. The [auto-battle proposal](AUTO_BATTLES.md) records the reference study and future gathering/equipment ideas. Approved automatic combat is specified in [COMBAT_RULES.md](COMBAT_RULES.md); other proposals do not expand scope by themselves.
 
 ## 1 Product direction
 
@@ -190,26 +190,11 @@ The individual encounters are authored; their consequences combine through share
 
 ### Current playable system
 
-Battles are short, turn-based expedition encounters. Their purpose is to protect something, secure passage, or escape. They consume the same creature stamina and condition used on the road.
+New encounters use automatic combat: choose one or two companions, assign the approach and wagon positions, then watch complementary species abilities resolve. Astronarch is the stronger combat reference; Automon informs the creature-party appeal. Pause, step, speed, withdrawal, and exchange inspection remain available. Each encounter shows its next threat and ends with an accounting of persistent costs.
 
-Select up to two ready companions from the crew for the encounter. Each selected companion receives one action per round. Show the threat's next intention before the player commits actions. Resolve a complete round, update persistent costs, and allow the next decision without a real-time timer.
+The two scenarios remain protecting cargo for at most three exchanges and securing passage within four. Peaceful alternatives stay available. There is no combat XP or money farming. Fatigue, injuries, and supplies connect every encounter to the road ahead.
 
-| Command | Function |
-| --- | --- |
-| Pressure | Reduce a threat's willingness to continue through a species-appropriate action |
-| Guard | Protect a selected companion or the wagon from the displayed threat |
-| Assist | Use that species' distinctive ability, consuming more stamina and limited to once per creature per battle in the prototype |
-| Withdraw | End the encounter through an explicit retreat choice with its known costs |
-
-Withdrawal is a party decision made before round actions are committed. It cannot accidentally discard actions already selected. The interface states whether leaving costs cargo, provisions, or a detour.
-
-The prototype has two scenarios: protect cargo for three rounds, and persuade a territorial creature to retreat within four rounds. The latter uses a visible resolve meter. At the round limit, resolve the stated fallback, such as a detour or cargo loss; encounters cannot continue indefinitely.
-
-Victory preserves expedition resources or provides access to a route or opportunity. There is no repeatable battle XP or money farming. Injuries and fatigue persist. De-escalation, payment, distraction, and avoiding an encounter remain valid options. A player can complete the prototype without fighting, while fixed demonstration seeds make both scenarios easy to test.
-
-### Proposed automatic combat iteration
-
-The next design candidate moves decisions into companion selection, two physical positions beside the wagon, and complementary automatic abilities. Short exchanges resolve without choosing an action every round; pause, inspection, and withdrawal remain available. Fatigue, injuries, and supplies connect the outcome to the journey. See [Auto battles and gathering](AUTO_BATTLES.md) for the reference comparison, proposed species behaviors, equipment follow-up, wilderness context, and bounded implementation experiment. This is not yet the behavior of the Windows build.
+See [Automatic encounter rules](COMBAT_RULES.md) for exact positions, six abilities, resolution order, costs, save compatibility, and verification commands. Older saved manual battles finish with their original controls; subsequent encounters use the new rules. [Auto battles and gathering](AUTO_BATTLES.md) retains the reference study and later equipment/gathering proposals.
 
 ## 8 Replayability
 
