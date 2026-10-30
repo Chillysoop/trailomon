@@ -1,0 +1,9 @@
+# Next-batch review
+
+2026-10-30: Owner asked "What's next?" Audited current main against PLAN/ROADMAP and saved answers. Phase is building core systems: S3/S4 shipped, S2 reusable bot reporting and S5 expedition tuning remain. Fresh 29 Lua and 12 Python checks pass; native/visual evidence is from the preceding combat batch, not a new desktop playtest. Saves, backup recovery, sound toggle, and reduced motion already exist. Audio listening, physical keyboard usability, full post-combat journey pacing, art, and wilderness presentation remain gaps.
+
+`next-1` has eight stable codes. N1 selects S2/S5 measurement/tuning first; N2 approves combat-1 C1+C3 (contextual trigger and travel consequence); N3 approves C2's guardian-pattern experiment; N4 schedules approved P2 gathering clarity; N5 schedules approved P3 wilderness; N6 schedules approved P4 six-species art; N7 schedules approved P5 three-item experiment after tuning; N8 brings S10/S11 whole-journey usability/audio earlier. Top picks N1/N2/N5/N6. No new regions or combat-clock rewrite proposed.
+
+N2/N3 are optional implementation approvals. Other rows select priority slots for existing scope: NO removes that suggested slot from the next batch, not the earlier feature approval. Comments can change scope. Do not ask for P1-P5 approval again. Blank next-batch choices do not add work. Latest explicit decision wins across next-1 and combat-1; preserve underlying codes in the processing record. Published privately at /next-1.html; no answers at publication. Read hosted submissions and local files before choosing work.
+
+Recommended sequence: N1 measurements, N2 clarity, N5/N6 identity, N4 before N7, N8 before release. These are recommendations, not synthetic votes. S2 reports should include commands, day/resource minima, stalls and source revision; compare matching encounter snapshots under the same downstream policy before interpreting combat balance causally.

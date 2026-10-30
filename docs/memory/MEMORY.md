@@ -6,3 +6,4 @@
 - [validation.md](validation.md): baseline evidence, testing limits, and known production gaps.
 - [delivery.md](delivery.md): merged foundation and provenance of shareable builds.
 - [combat.md](combat.md): automatic-combat rules, compatibility, tests, and current delivery status.
+- [next-steps.md](next-steps.md): current phase audit, next-1 codes, priority semantics, and cross-page decision mapping.

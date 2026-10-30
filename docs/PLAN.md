@@ -26,8 +26,8 @@ During a typical half-minute the player watches the wagon travel, reads a change
 | --- | --- |
 | Journey | One complete route, six landmarks, two branch choices, one river crossing; target 20–35 minutes |
 | Crew | Six original species; one or two at departure and at most three traveling; two active in encounters |
-| Combat | Replace two manual scenarios with readable automatic abilities and two positions; preserve peaceful alternatives and persistent costs |
-| Provisioning | Food, medicine, repairs, coins, cargo, and capacity; existing foraging with finite local yields; hunting is a review decision, not implemented |
+| Combat | Two automatic scenarios with readable abilities and two positions; preserve peaceful alternatives and persistent costs; tune against the whole journey |
+| Provisioning | Food, medicine, repairs, coins, cargo, and capacity; existing foraging with finite local yields; hunting deferred by approved P2 |
 | Survival | Weather, pace, rations, hauling, stamina, injuries, wagon wear, and cargo condition |
 | Progression | Named companions, discoveries, memories, ten journey summaries, and standard/covered wagon alternatives |
 | Narrative | Give existing landmarks and species distinct ecological and local details within the current eighteen authored events |
@@ -48,7 +48,7 @@ Use restrained work sounds, weather, creature calls, and short feedback tones. R
 
 The first milestone supports Windows desktop, offline, with mouse and keyboard. macOS, Linux, and HTML5 are deferred by the owner's October 30, 2026 decision.
 
-Defer additional regions, a large bestiary, breeding, evolution trees, capture devices, elemental charts, repeatable combat XP, permanent stat grinding, a crafting tree, base construction, multiplayer, online accounts, cloud saves, monetization, and a large narrative campaign. Equipment is a small later experiment only if approved after combat is readable. Public releases and spending require explicit approval; ordinary tested PRs are merged by the developer.
+Defer additional regions, a large bestiary, breeding, evolution trees, capture devices, elemental charts, repeatable combat XP, permanent stat grinding, a crafting tree, base construction, multiplayer, online accounts, cloud saves, monetization, and a large narrative campaign. Equipment is approved as a small later experiment, scheduled after combat is readable and tested. Public releases and spending require explicit approval; ordinary tested PRs are merged by the developer.
 
 ## Open decisions
 
