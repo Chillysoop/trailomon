@@ -12,6 +12,8 @@ try {
 } finally { $builderArchive.Dispose() }
 Push-Location $TrailomonRoot
 try {
+    & python -m unittest discover -s tests -p 'test_review*.py'
+    if ($LASTEXITCODE -ne 0) { throw 'Review server checks failed.' }
     & $luaPath 'tests/run.lua'
     if ($LASTEXITCODE -ne 0) { throw 'Simulation checks failed.' }
     if (-not $SkipEngine) {

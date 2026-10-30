@@ -1,0 +1,9 @@
+# Review pages
+
+2026-10-30: `plan-1` is published at `https://trailomon-owner-reviews.dusky-owlet-9260.chatgpt.site/plan-1.html` for phone and desktop. Localhost remains a desktop fallback. Codes are stable: P1 automatic combat conversion; P2 keep bounded foraging and defer hunting; P3 wilderness progression within the existing route; P4 prioritize six-species anatomy and pose refinement; P5 a later three-item equipment experiment. P1–P4 are recommendations, not synthetic owner votes.
+
+2026-10-30: The owner submitted plan-1 from the phone at 22:24:59 UTC, hosted revision 7. **P1, P2, P3, P4, and P5 all YES; no notes or general comment.** Received through Sites, mirrored to the portable response file, and acknowledged without a chat "done". All five are approved and unimplemented. Start with P1 automatic combat, retain P2 bounded gathering, then P3 route/lore and P4 art. P5 is approved despite the initial recommendation to defer; implement the three-item experiment after combat testing. No ideas rejected or left blank.
+
+Browser QA writes only isolated `.tools` fixtures/local preview databases. Re-read hosted and local responses before publishing, reporting a wait, omitting an idea, or closing work. A newer answer or chat correction supersedes this note.
+
+Raw answers remain local by default; durable decision summaries are committed here. FINISH writes a snapshot flag so an autosaved draft cannot change an already-submitted answer set. The waiter consumes the flag; the JSON remains. Track revision/finished_at and each implemented or rejected code here after processing.

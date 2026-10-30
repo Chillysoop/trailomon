@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Trailomon — First expedition plan</title><link rel="icon" href="data:,"><link rel="stylesheet" href="review.css"><script src="review.js" defer></script></head>
+<body><main>
+<p class="eyebrow">Trailomon · Plan review 1</p><h1>Make the first expedition worth replaying.</h1>
+<p class="lede">Your scope is set: one polished expedition, Windows first, Defold and Lua. These five choices steer the next work. Vote YES or NO, add any changes, and press FINISH. You do not need to type “done” in chat.</p>
+<section class="general"><label for="general">General comments</label><textarea id="general" maxlength="20000" placeholder="What should this expedition make you feel? Anything to change in the plan?"></textarea></section>
+<h2>The plan we are building toward</h2>
+<p>One traveler, a wagon, and a small crew of original creatures venture farther from dependable help. Prepare supplies, read the country, choose a route, and decide how to spend time and the crew’s energy. Companions help with work and short automatic encounters. Discoveries and shared history give the next journey a different starting point.</p>
+<ul class="summary"><li>One route, six landmarks, six species, and two encounter scenarios.</li><li>Calm travel, consequential stops, and a target of 20–35 minutes per expedition.</li><li>Deliberate pixel art, distinct creature silhouettes, and consistent labeled icons.</li><li>New regions come after this expedition works well. Public release publication requires your approval.</li></ul>
+<div class="notice"><strong>Where we actually are:</strong> the first playable is merged in <a href="https://github.com/Chillysoop/trailomon/pull/1">PR #1</a>. The route, manual battles, foraging, saving, recruitment, and initial progression work. Current checks pass: 17 simulation tests, native saves, and 25 headless GUI states. Headless checks do not prove visual quality.</div>
+<h2>Next work for your review</h2>
+<section class="idea" data-code="P1" data-top><h3><span class="code">P1</span>Prepare the crew, then let it fight</h3>
+<p>Replace per-round commands with two positions beside the wagon and distinctive automatic abilities. Use Automon for creature identity and automatic encounters, and Astronarch for positioning and combinations. Keep peaceful choices, visible costs, pause, and withdrawal.</p>
+<p class="evidence"><strong>Evidence:</strong> both current battles require repeated Pressure, Guard, or Assist selections. You asked for automatic combat. The existing stamina and condition systems already connect a fight to tomorrow’s travel.</p>
+<p class="cost"><strong>Cost:</strong> three small PRs for rules, playable UI/save handling, and tuning. No new species or encounters in that conversion. <strong>Recommendation:</strong> YES.</p></section>
+<section class="idea" data-code="P2" data-top><h3><span class="code">P2</span>Keep gathering focused and leave hunting for later</h3>
+<p>Improve the existing foraging feedback: where food comes from, the companion’s effort, local depletion, how much fits, and what remains after meals. Keep hunting and fishing outside this first polished expedition.</p>
+<p class="evidence"><strong>Evidence:</strong> camp foraging and a root-patch event already work. There is no hunting or pursuit system. Carrying limits and meals already prevent gathering from becoming free supplies.</p>
+<p class="cost"><strong>Cost:</strong> one focused clarity and presentation pass. Choosing NO can mean a different provisioning direction; use a note to explain. <strong>Recommendation:</strong> YES.</p></section>
+<section class="idea" data-code="P3" data-top><h3><span class="code">P3</span>Make the last miles feel like the edge of the map</h3>
+<p>Give the six landmarks clear silhouettes and short, useful lore. Move from worked valleys and repair yards to sparse markers, an unstaffed shelter, and a large unfamiliar horizon. Lantern Reach becomes a small settlement at the edge of reliable travel.</p>
+<p class="evidence"><strong>Evidence:</strong> you asked to preserve the feeling of venturing into wilder country. The current route has one intermediate shop, a river, and a high-road choice, but the scenery does not yet express that progression strongly.</p>
+<p class="cost"><strong>Cost:</strong> a bounded scenery and existing-text pass; keep the six landmarks and eighteen events. No new region or settlement simulation. <strong>Recommendation:</strong> YES.</p></section>
+<section class="idea" data-code="P4" data-top><h3><span class="code">P4</span>Give the six companions a coherent finished direction</h3>
+<p>Prioritize anatomy and shared poses before adding creatures: unmistakable hollow Brindlehorn antlers, a readable Reedskipper paddle tail, and consistent scale, perspective, and effort poses across the roster. Review each beside the wagon and in grayscale.</p>
+<p class="evidence"><strong>Evidence:</strong> the selected Sprite Fusion studies still have documented silhouette and camera-angle issues. Your standing requirement is intentional, distinctive art and useful iconography.</p>
+<p class="cost"><strong>Cost:</strong> one staged art pass with explicit acceptance checks; any new paid generation needs separate spending approval. This sets the next art priority without relaxing the standing visual rules. <strong>Recommendation:</strong> YES.</p></section>
+<section class="idea" data-code="P5"><h3><span class="code">P5</span>Add three practical equipment choices after combat works</h3>
+<p>Test one work-item slot per active companion, with only three objects: a padded trace, a release rope, and a dry wrap. Each changes a travel or encounter tradeoff and consumes capacity.</p>
+<p class="evidence"><strong>Evidence:</strong> Astronarch makes equipment a useful reference for varying a small party. We have not yet shown that our automatic abilities need another layer of choices.</p>
+<p class="cost"><strong>Cost:</strong> an additional system, inventory UI, save fields, and balancing. <strong>Recommendation:</strong> NO for this milestone; prove the crew combinations first. YES schedules the bounded experiment after combat testing.</p></section>
+<h2>How the work ships</h2><p>The roadmap moves through a tested prototype and bot baseline, automatic combat, route and creature content, sound and usability, then a Windows candidate. Each small step gets a tested PR that I merge. A new-player and expert playtest will reassess the real gaps before release preparation.</p>
+<p class="lede">Comments override these descriptions. A note without a vote is still read. Blank ideas after FINISH are left unbuilt. Your answers stay on this computer; if the server is unavailable, FINISH downloads them and attempts to copy them for pasting.</p>
+</main><footer class="bar"><div class="bar-inner"><span id="tally" aria-live="polite"></span><button id="allTop" type="button">Yes to all top picks</button><button id="finish" type="button">FINISH</button><button id="export" type="button">Download answers</button><span id="status" role="status" aria-live="polite">Loading answers…</span></div></footer>
+</body></html>
