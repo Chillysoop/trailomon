@@ -55,6 +55,8 @@ Updated October 31, 2026. Scope: one polished Windows expedition before new regi
 
 ## Working rules
 
+October 31 post-creature audit: all S22–S25 are shipped. [Next discovery loop](../reviews/next-2.html) proposes only new D1–D5 choices, with D1→D2→D3 recommended. They are not approved roadmap implementation steps yet. S5 tuning and S10 reliability remain authorized work; current saves/settings and tests work. Art stays deferred.
+
 October 31 creature-direction brainstorm: [wild-1](../reviews/wild-1.html) proposes sightings, field observations and one courier spar, with later relationship/acquisition/growth options. [Integration analysis](CREATURE_ENCOUNTERS.md) distinguishes reusable systems from new work. The owner approved W1–W6 in hosted revision 7. S22–S25 schedule the bounded additions; existing balance/reliability work remains open.
 
 October 31 minimal-text follow-up to S21: compact daily readings and shorter depot/camp/gathering guidance; latest road note only; live combat omits repeated setup descriptions. Keep all costs, warnings, action labels and guide/journal details. This is interface copy/layout work; S5 balance and S10 reliability gaps retain their status.
