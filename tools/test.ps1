@@ -9,6 +9,8 @@ try {
         if ($LASTEXITCODE -ne 0) { throw 'Review server checks failed.' }
     }
     if ($Suite -in @('All','Game')) {
+        & python -m unittest discover -s tests -p 'test_capture.py'
+        if ($LASTEXITCODE -ne 0) { throw 'Capture isolation checks failed.' }
         & $luaPath 'tests/run.lua'
         if ($LASTEXITCODE -ne 0) { throw 'Simulation checks failed.' }
     }

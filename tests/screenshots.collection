@@ -1,0 +1,7 @@
+name: "capture"
+embedded_instances {
+  id: "capture"
+  data: "components {\n  id: \"ui\"\n  component: \"/tests/screenshots.gui\"\n  position { x: 0.0 y: 0.0 z: 0.0 }\n  rotation { x: 0.0 y: 0.0 z: 0.0 w: 1.0 }\n}\n"
+  position { x: 0.0 y: 0.0 z: 0.0 }
+  rotation { x: 0.0 y: 0.0 z: 0.0 w: 1.0 }
+}
