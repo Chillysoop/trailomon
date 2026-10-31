@@ -43,3 +43,5 @@ This is an early playable for checking the decisions and rhythm. Creature art us
 For feedback, note the seed and the decision involved. Most useful: whether a cost was unclear, a creature felt unnecessary, a setback felt arbitrary, a quiet stretch felt too long, or you wanted to try a specific different plan afterward.
 
 For isolated developer fixtures, run `./tools/test.ps1 -Fixture scavengers` (or `territorial`, `legacy`) and launch the release executable using the printed save namespace. Use the release renderer locally; `-Headless` is intended for CI and can start Defold debug services on Windows.
+
+At Split Oak and Cairn Gate, read the trail report before choosing a route. Known terrain is separate from uncertain conditions; crew and work-item advice updates with your preparations. Reading takes no time.

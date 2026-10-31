@@ -47,6 +47,24 @@ local function interaction_checks(self)
     assert(self.page=="crew")
     button(self,"open_items").fn();coroutine.yield()
     assert(self.page=="work_items")
+    for _,target in ipairs({2,5}) do
+        for index=1,2 do
+            fixture(self,"trail",landmark(target));coroutine.yield()
+            local path=model.trail_reports.get(self.snapshot.run).routes[index]
+            for i,b in ipairs(self.buttons) do if b.key==path.label then self.focus=i end end
+            input.handle(self,hash("confirm"),{pressed=true});coroutine.yield()
+            assert(self.snapshot.run.mode=="traveling" and self.snapshot.run.terrain==path.id and self.snapshot.run.distance==path.distance)
+        end
+    end
+    fixture(self,"trail",landmark(2));coroutine.yield()
+    button(self,"report_crew").fn();coroutine.yield()
+    assert(self.page=="crew" and self.snapshot.run.day==1)
+    self.open_page("trail");coroutine.yield()
+    button(self,"Rest beneath the oak").fn();coroutine.yield()
+    assert(self.snapshot.run.day==2 and self.snapshot.run.mode=="landmark")
+    fixture(self,"trail",landmark(5));coroutine.yield()
+    button(self,"Prepare for the last stretch").fn();coroutine.yield()
+    assert(self.page=="camp" and self.snapshot.run.day==1)
     fixture(self,"settings",departed)
     coroutine.yield()
     local seed=button(self,"settings_seed")

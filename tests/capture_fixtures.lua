@@ -74,6 +74,16 @@ end
 function M.route_outpost(self) stop(self,3) end
 function M.route_river(self) stop(self,4) end
 function M.route_gate(self) stop(self,5) end
+function M.report_equipment(self)
+    M.route_gate(self);local s=self.snapshot.run
+    s.day=23;s.weather="rain";s.work_items={padded_trace=true};s.crew[1].work_item="padded_trace"
+    s.crew[2].stamina=17;self.redraw()
+end
+function M.report_rain(self)
+    M.route_oak(self);local s=self.snapshot.run
+    s.weather="rain";s.crew[2]=require("simulation.progression").companion("cindercoil")
+    s.crew[2].duty="rest";self.redraw()
+end
 function M.route_ridge(self)
     M.route_gate(self);self.capture_actions={"Take the ridge road"}
     self.capture_assert=function() assert(self.snapshot.run.terrain=="ridge" and self.snapshot.run.target==6) end
