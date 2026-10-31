@@ -29,6 +29,16 @@ local function battle(p)
     departed(p);assert(model.debug(p,"event","scavengers"));assert(model.command(p,"choice",{id="battle"}));assert(model.command(p,"battle_start",{team={1,2}}))
 end
 local function interaction_checks(self)
+    fixture(self,"trail",function(p)
+        departed(p);p.run.food=0;for _,c in ipairs(p.run.crew) do c.stamina=0 end
+        assert(model.debug(p,"event","scavengers"))
+    end);coroutine.yield()
+    self.redraw=function() screens.draw(self) end
+    self.perform=function(id,args,destination) assert(model.command(self.snapshot,id,args));self.page=destination or self.page;self.redraw() end
+    assert(not button(self,"event_food").enabled and not button(self,"event_battle").enabled)
+    for i,b in ipairs(self.buttons) do if b.key=="event_withdraw" then self.focus=i end end
+    input.handle(self,hash("confirm"),{pressed=true});coroutine.yield()
+    assert(self.snapshot.run.mode=="stopped" and self.snapshot.run.cargo==92)
     fixture(self,"trail")
     self.redraw=function() screens.draw(self) end
     self.open_page=function(id) self.page=id;self.redraw() end

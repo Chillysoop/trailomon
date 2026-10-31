@@ -197,4 +197,14 @@ end
 function M.aims_legacy(self)
     reset(self,"aims");self.snapshot.profile.aims=nil;self.snapshot.run.aim_journey=nil;self.redraw()
 end
+function M.exhausted_encounter(self)
+    reset(self,"trail");local p=self.snapshot;p.run.food=0
+    for _,c in ipairs(p.run.crew) do c.stamina=0 end
+    assert(model.debug(p,"event","scavengers"));self.redraw()
+end
+function M.closure_arrival(self)
+    reset(self,"trail");local s=self.snapshot.run;s.target=6;s.distance=35;s.progress=34.5;s.day=31
+    assert(model.command(self.snapshot,"resume"));assert(model.command(self.snapshot,"step"))
+    assert(s.outcome=="rescued" and s.progress==35);self.redraw()
+end
 return M

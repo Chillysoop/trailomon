@@ -163,6 +163,9 @@ local function event(self)
         if choice.cost and not choice.species and not choice.recruit then for _,key in ipairs({"food","coins","medicine","repairs"}) do if choice.cost[key] then icon=key;break end end end
         options[#options+1]={label=choice.label,enabled=enabled,detail=enabled and model.events.cost_text(s,choice) or why,fn=cmd(self,"choice",{id=choice.id}),key="event_"..choice.id,icon=icon}
     end
+    if definition.kind=="encounter" then
+        options[#options+1]={label="Lead the crew away",detail=model.combat.withdraw_text(definition.id,s),fn=cmd(self,"withdraw"),key="event_withdraw",icon="trail"}
+    end
     choices(self,definition.title,definition.text,options,"DAY "..s.day.."  /  TRAVEL PAUSED")
 end
 local function road_story(self)

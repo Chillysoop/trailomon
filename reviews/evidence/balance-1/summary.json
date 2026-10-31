@@ -1,0 +1,784 @@
+{
+  "policy": "balance-v1",
+  "seeds": 12,
+  "runs": 4032,
+  "matched_starts": 292,
+  "executions": 9816,
+  "repeated_exactly": true,
+  "groups": [
+    {
+      "config": {
+        "first": "meadow",
+        "item": "dry_wrap",
+        "last": "ridge",
+        "order": 1,
+        "pace": "hurried",
+        "river": "ferry",
+        "style": "fight"
+      },
+      "runs": 144,
+      "outcomes": {
+        "delivered": 138,
+        "late": 6
+      },
+      "means": {
+        "day": 23.7153,
+        "cargo": 70.7861,
+        "wagon": 60.4694,
+        "energy": 103.7222,
+        "condition": 195.6806,
+        "food": 15.2569,
+        "coins": 32.0833,
+        "recovery": 2.1875,
+        "exchanges": 4.3472
+      }
+    },
+    {
+      "config": {
+        "first": "meadow",
+        "item": "dry_wrap",
+        "last": "ridge",
+        "order": 1,
+        "pace": "hurried",
+        "river": "ferry",
+        "style": "peaceful"
+      },
+      "runs": 144,
+      "outcomes": {
+        "delivered": 136,
+        "late": 8
+      },
+      "means": {
+        "day": 23.2431,
+        "cargo": 79.6472,
+        "wagon": 61.1764,
+        "energy": 108.3264,
+        "condition": 199.5833,
+        "food": 13.9931,
+        "coins": 31.9167,
+        "recovery": 1.6806,
+        "exchanges": 0
+      }
+    },
+    {
+      "config": {
+        "first": "meadow",
+        "item": "dry_wrap",
+        "last": "ridge",
+        "order": 1,
+        "pace": "steady",
+        "river": "ferry",
+        "style": "fight"
+      },
+      "runs": 144,
+      "outcomes": {
+        "delivered": 85,
+        "late": 56,
+        "rescued": 3
+      },
+      "means": {
+        "day": 26.3194,
+        "cargo": 74.7153,
+        "wagon": 76.2361,
+        "energy": 109.5764,
+        "condition": 190.1944,
+        "food": 10.0278,
+        "coins": 32.0972,
+        "recovery": 0.5903,
+        "exchanges": 5.3889
+      }
+    },
+    {
+      "config": {
+        "first": "meadow",
+        "item": "dry_wrap",
+        "last": "ridge",
+        "order": 1,
+        "pace": "steady",
+        "river": "ferry",
+        "style": "peaceful"
+      },
+      "runs": 144,
+      "outcomes": {
+        "delivered": 93,
+        "late": 50,
+        "rescued": 1
+      },
+      "means": {
+        "day": 26.0139,
+        "cargo": 85.7694,
+        "wagon": 76.5931,
+        "energy": 124.6667,
+        "condition": 197.25,
+        "food": 8.4306,
+        "coins": 31.5139,
+        "recovery": 0.2708,
+        "exchanges": 0
+      }
+    },
+    {
+      "config": {
+        "first": "meadow",
+        "item": "none",
+        "last": "gorge",
+        "order": 1,
+        "pace": "steady",
+        "river": "ferry",
+        "style": "fight"
+      },
+      "runs": 144,
+      "outcomes": {
+        "late": 96,
+        "delivered": 21,
+        "rescued": 27
+      },
+      "means": {
+        "day": 28.9028,
+        "cargo": 72.6153,
+        "wagon": 78.3403,
+        "energy": 104.1944,
+        "condition": 186.0417,
+        "food": 5.7222,
+        "coins": 40.0139,
+        "recovery": 1.2569,
+        "exchanges": 5.7708
+      }
+    },
+    {
+      "config": {
+        "first": "meadow",
+        "item": "none",
+        "last": "gorge",
+        "order": 1,
+        "pace": "steady",
+        "river": "ferry",
+        "style": "peaceful"
+      },
+      "runs": 144,
+      "outcomes": {
+        "late": 98,
+        "delivered": 25,
+        "rescued": 21
+      },
+      "means": {
+        "day": 28.4514,
+        "cargo": 84.8458,
+        "wagon": 79.5167,
+        "energy": 111.875,
+        "condition": 191.4167,
+        "food": 5.4861,
+        "coins": 39.4722,
+        "recovery": 0.7361,
+        "exchanges": 0
+      }
+    },
+    {
+      "config": {
+        "first": "meadow",
+        "item": "none",
+        "last": "ridge",
+        "order": 1,
+        "pace": "hurried",
+        "river": "ferry",
+        "style": "fight"
+      },
+      "runs": 144,
+      "outcomes": {
+        "delivered": 128,
+        "late": 16
+      },
+      "means": {
+        "day": 24.2569,
+        "cargo": 70.3694,
+        "wagon": 61.1264,
+        "energy": 101.4097,
+        "condition": 196.6736,
+        "food": 13.9722,
+        "coins": 40.0833,
+        "recovery": 2.7153,
+        "exchanges": 4.3264
+      }
+    },
+    {
+      "config": {
+        "first": "meadow",
+        "item": "none",
+        "last": "ridge",
+        "order": 1,
+        "pace": "hurried",
+        "river": "ferry",
+        "style": "peaceful"
+      },
+      "runs": 144,
+      "outcomes": {
+        "delivered": 127,
+        "late": 17
+      },
+      "means": {
+        "day": 23.7917,
+        "cargo": 79.7444,
+        "wagon": 61.3569,
+        "energy": 102.7639,
+        "condition": 199.5,
+        "food": 13.0625,
+        "coins": 39.9167,
+        "recovery": 2.1667,
+        "exchanges": 0
+      }
+    },
+    {
+      "config": {
+        "first": "meadow",
+        "item": "none",
+        "last": "ridge",
+        "order": 1,
+        "pace": "steady",
+        "river": "ferry",
+        "style": "fight"
+      },
+      "runs": 144,
+      "outcomes": {
+        "delivered": 73,
+        "late": 65,
+        "rescued": 6
+      },
+      "means": {
+        "day": 26.9375,
+        "cargo": 74.7986,
+        "wagon": 76.5472,
+        "energy": 108.0486,
+        "condition": 191.7361,
+        "food": 8.6597,
+        "coins": 40.0972,
+        "recovery": 1.0972,
+        "exchanges": 5.2639
+      }
+    },
+    {
+      "config": {
+        "first": "meadow",
+        "item": "none",
+        "last": "ridge",
+        "order": 1,
+        "pace": "steady",
+        "river": "ferry",
+        "style": "peaceful"
+      },
+      "runs": 144,
+      "outcomes": {
+        "delivered": 77,
+        "late": 63,
+        "rescued": 4
+      },
+      "means": {
+        "day": 26.5417,
+        "cargo": 85.7111,
+        "wagon": 77.1389,
+        "energy": 116.7153,
+        "condition": 197,
+        "food": 8.2569,
+        "coins": 39.5139,
+        "recovery": 0.6458,
+        "exchanges": 0
+      }
+    },
+    {
+      "config": {
+        "first": "meadow",
+        "item": "none",
+        "last": "ridge",
+        "order": 1,
+        "pace": "steady",
+        "river": "rope",
+        "style": "fight"
+      },
+      "runs": 144,
+      "outcomes": {
+        "late": 82,
+        "delivered": 54,
+        "rescued": 8
+      },
+      "means": {
+        "day": 27.3542,
+        "cargo": 61.1083,
+        "wagon": 72.2125,
+        "energy": 105.3819,
+        "condition": 184.7778,
+        "food": 6.2222,
+        "coins": 52.0139,
+        "recovery": 1.0764,
+        "exchanges": 5.125
+      }
+    },
+    {
+      "config": {
+        "first": "meadow",
+        "item": "none",
+        "last": "ridge",
+        "order": 1,
+        "pace": "steady",
+        "river": "rope",
+        "style": "peaceful"
+      },
+      "runs": 144,
+      "outcomes": {
+        "delivered": 68,
+        "late": 70,
+        "rescued": 6
+      },
+      "means": {
+        "day": 27.0208,
+        "cargo": 71.2222,
+        "wagon": 72.2875,
+        "energy": 114.1389,
+        "condition": 189.5833,
+        "food": 5.7639,
+        "coins": 51.3889,
+        "recovery": 0.6042,
+        "exchanges": 0
+      }
+    },
+    {
+      "config": {
+        "first": "meadow",
+        "item": "none",
+        "last": "ridge",
+        "order": 2,
+        "pace": "steady",
+        "river": "ferry",
+        "style": "fight"
+      },
+      "runs": 144,
+      "outcomes": {
+        "late": 66,
+        "delivered": 73,
+        "rescued": 5
+      },
+      "means": {
+        "day": 27.0556,
+        "cargo": 74.1389,
+        "wagon": 76.7056,
+        "energy": 109.6111,
+        "condition": 192.375,
+        "food": 8.5625,
+        "coins": 40.0972,
+        "recovery": 1.1806,
+        "exchanges": 5.2361
+      }
+    },
+    {
+      "config": {
+        "first": "meadow",
+        "item": "none",
+        "last": "ridge",
+        "order": 2,
+        "pace": "steady",
+        "river": "ferry",
+        "style": "peaceful"
+      },
+      "runs": 144,
+      "outcomes": {
+        "delivered": 77,
+        "late": 63,
+        "rescued": 4
+      },
+      "means": {
+        "day": 26.5417,
+        "cargo": 85.7111,
+        "wagon": 77.1389,
+        "energy": 116.7153,
+        "condition": 197,
+        "food": 8.2569,
+        "coins": 39.5139,
+        "recovery": 0.6458,
+        "exchanges": 0
+      }
+    },
+    {
+      "config": {
+        "first": "meadow",
+        "item": "padded_trace",
+        "last": "ridge",
+        "order": 1,
+        "pace": "hurried",
+        "river": "ferry",
+        "style": "fight"
+      },
+      "runs": 144,
+      "outcomes": {
+        "delivered": 144
+      },
+      "means": {
+        "day": 22.4653,
+        "cargo": 71.4722,
+        "wagon": 61.4139,
+        "energy": 107.7292,
+        "condition": 198.4028,
+        "food": 18.7361,
+        "coins": 28.0833,
+        "recovery": 1.0556,
+        "exchanges": 4.1111
+      }
+    },
+    {
+      "config": {
+        "first": "meadow",
+        "item": "padded_trace",
+        "last": "ridge",
+        "order": 1,
+        "pace": "hurried",
+        "river": "ferry",
+        "style": "peaceful"
+      },
+      "runs": 144,
+      "outcomes": {
+        "delivered": 144
+      },
+      "means": {
+        "day": 22.0694,
+        "cargo": 79.5375,
+        "wagon": 61.1819,
+        "energy": 112.9861,
+        "condition": 199.8333,
+        "food": 16.8889,
+        "coins": 27.9167,
+        "recovery": 0.5694,
+        "exchanges": 0
+      }
+    },
+    {
+      "config": {
+        "first": "meadow",
+        "item": "padded_trace",
+        "last": "ridge",
+        "order": 1,
+        "pace": "steady",
+        "river": "ferry",
+        "style": "fight"
+      },
+      "runs": 144,
+      "outcomes": {
+        "delivered": 73,
+        "late": 65,
+        "rescued": 6
+      },
+      "means": {
+        "day": 26.9375,
+        "cargo": 74.7986,
+        "wagon": 76.5472,
+        "energy": 108.0486,
+        "condition": 195.1667,
+        "food": 8.6597,
+        "coins": 28.0972,
+        "recovery": 1.0972,
+        "exchanges": 5.2639
+      }
+    },
+    {
+      "config": {
+        "first": "meadow",
+        "item": "padded_trace",
+        "last": "ridge",
+        "order": 1,
+        "pace": "steady",
+        "river": "ferry",
+        "style": "peaceful"
+      },
+      "runs": 144,
+      "outcomes": {
+        "delivered": 77,
+        "late": 63,
+        "rescued": 4
+      },
+      "means": {
+        "day": 26.5417,
+        "cargo": 85.7111,
+        "wagon": 77.1389,
+        "energy": 116.7153,
+        "condition": 197,
+        "food": 8.2569,
+        "coins": 27.5139,
+        "recovery": 0.6458,
+        "exchanges": 0
+      }
+    },
+    {
+      "config": {
+        "first": "meadow",
+        "item": "release_rope",
+        "last": "ridge",
+        "order": 1,
+        "pace": "hurried",
+        "river": "ferry",
+        "style": "fight"
+      },
+      "runs": 144,
+      "outcomes": {
+        "delivered": 128,
+        "late": 16
+      },
+      "means": {
+        "day": 24.2569,
+        "cargo": 70.3694,
+        "wagon": 61.1264,
+        "energy": 101.4097,
+        "condition": 196.6736,
+        "food": 13.9722,
+        "coins": 30.0833,
+        "recovery": 2.7153,
+        "exchanges": 4.3264
+      }
+    },
+    {
+      "config": {
+        "first": "meadow",
+        "item": "release_rope",
+        "last": "ridge",
+        "order": 1,
+        "pace": "hurried",
+        "river": "ferry",
+        "style": "peaceful"
+      },
+      "runs": 144,
+      "outcomes": {
+        "delivered": 127,
+        "late": 17
+      },
+      "means": {
+        "day": 23.7917,
+        "cargo": 79.7722,
+        "wagon": 61.3569,
+        "energy": 102.7639,
+        "condition": 199.5,
+        "food": 13.0625,
+        "coins": 29.9167,
+        "recovery": 2.1667,
+        "exchanges": 0
+      }
+    },
+    {
+      "config": {
+        "first": "meadow",
+        "item": "release_rope",
+        "last": "ridge",
+        "order": 1,
+        "pace": "steady",
+        "river": "ferry",
+        "style": "fight"
+      },
+      "runs": 144,
+      "outcomes": {
+        "delivered": 73,
+        "late": 65,
+        "rescued": 6
+      },
+      "means": {
+        "day": 26.9375,
+        "cargo": 74.7986,
+        "wagon": 76.5472,
+        "energy": 108.0486,
+        "condition": 191.7361,
+        "food": 8.6597,
+        "coins": 30.0972,
+        "recovery": 1.0972,
+        "exchanges": 5.2639
+      }
+    },
+    {
+      "config": {
+        "first": "meadow",
+        "item": "release_rope",
+        "last": "ridge",
+        "order": 1,
+        "pace": "steady",
+        "river": "ferry",
+        "style": "peaceful"
+      },
+      "runs": 144,
+      "outcomes": {
+        "delivered": 77,
+        "late": 63,
+        "rescued": 4
+      },
+      "means": {
+        "day": 26.5417,
+        "cargo": 85.7111,
+        "wagon": 77.1389,
+        "energy": 116.7153,
+        "condition": 197,
+        "food": 8.2569,
+        "coins": 29.5139,
+        "recovery": 0.6458,
+        "exchanges": 0
+      }
+    },
+    {
+      "config": {
+        "first": "meadow",
+        "item": "release_rope",
+        "last": "ridge",
+        "order": 1,
+        "pace": "steady",
+        "river": "rope",
+        "style": "fight"
+      },
+      "runs": 144,
+      "outcomes": {
+        "delivered": 64,
+        "late": 74,
+        "rescued": 6
+      },
+      "means": {
+        "day": 27.1111,
+        "cargo": 67.7181,
+        "wagon": 71.7625,
+        "energy": 105.7014,
+        "condition": 188.8472,
+        "food": 7.2222,
+        "coins": 42.0972,
+        "recovery": 1.0278,
+        "exchanges": 5.2986
+      }
+    },
+    {
+      "config": {
+        "first": "meadow",
+        "item": "release_rope",
+        "last": "ridge",
+        "order": 1,
+        "pace": "steady",
+        "river": "rope",
+        "style": "peaceful"
+      },
+      "runs": 144,
+      "outcomes": {
+        "delivered": 65,
+        "late": 75,
+        "rescued": 4
+      },
+      "means": {
+        "day": 26.8542,
+        "cargo": 78.5,
+        "wagon": 71.9819,
+        "energy": 115.6042,
+        "condition": 193.5833,
+        "food": 6.75,
+        "coins": 41.3889,
+        "recovery": 0.625,
+        "exchanges": 0
+      }
+    },
+    {
+      "config": {
+        "first": "woodland",
+        "item": "none",
+        "last": "gorge",
+        "order": 1,
+        "pace": "steady",
+        "river": "ferry",
+        "style": "fight"
+      },
+      "runs": 144,
+      "outcomes": {
+        "late": 92,
+        "delivered": 2,
+        "rescued": 50
+      },
+      "means": {
+        "day": 30.1875,
+        "cargo": 73.0403,
+        "wagon": 77.6708,
+        "energy": 102.6458,
+        "condition": 183.9167,
+        "food": 5.9583,
+        "coins": 39.5417,
+        "recovery": 1.4306,
+        "exchanges": 5.3194
+      }
+    },
+    {
+      "config": {
+        "first": "woodland",
+        "item": "none",
+        "last": "gorge",
+        "order": 1,
+        "pace": "steady",
+        "river": "ferry",
+        "style": "peaceful"
+      },
+      "runs": 144,
+      "outcomes": {
+        "late": 105,
+        "delivered": 2,
+        "rescued": 37
+      },
+      "means": {
+        "day": 29.7708,
+        "cargo": 84.1569,
+        "wagon": 77.1931,
+        "energy": 108.1667,
+        "condition": 189.75,
+        "food": 5.9444,
+        "coins": 38.2083,
+        "recovery": 0.9167,
+        "exchanges": 0
+      }
+    },
+    {
+      "config": {
+        "first": "woodland",
+        "item": "none",
+        "last": "ridge",
+        "order": 1,
+        "pace": "steady",
+        "river": "ferry",
+        "style": "fight"
+      },
+      "runs": 144,
+      "outcomes": {
+        "delivered": 22,
+        "late": 106,
+        "rescued": 16
+      },
+      "means": {
+        "day": 28.3889,
+        "cargo": 74.7292,
+        "wagon": 75.4597,
+        "energy": 106.5139,
+        "condition": 189.8472,
+        "food": 7.8056,
+        "coins": 39.5833,
+        "recovery": 1.2778,
+        "exchanges": 4.9722
+      }
+    },
+    {
+      "config": {
+        "first": "woodland",
+        "item": "none",
+        "last": "ridge",
+        "order": 1,
+        "pace": "steady",
+        "river": "ferry",
+        "style": "peaceful"
+      },
+      "runs": 144,
+      "outcomes": {
+        "delivered": 27,
+        "late": 107,
+        "rescued": 10
+      },
+      "means": {
+        "day": 28.0208,
+        "cargo": 84.8819,
+        "wagon": 74.9431,
+        "energy": 113.5347,
+        "condition": 194.6667,
+        "food": 7.8958,
+        "coins": 38.25,
+        "recovery": 0.8333,
+        "exchanges": 0
+      }
+    }
+  ]
+}
