@@ -11,6 +11,7 @@ local gathering=require "ui.gathering"
 local work_items=require "ui.work_items"
 local trail_reports=require "ui.trail_reports"
 local journal_aims=require "ui.journal_aims"
+local field_guide=require "ui.field_guide"
 local aims=require "simulation.journal_aims"
 local M={}
 local titles={delivered="New roots, at last.",late="You made it through.",returned="There is always another road.",rescued="Everyone comes home."}
@@ -177,6 +178,7 @@ local function event(self)
         options[#options+1]={label="Lead the crew away",detail=model.combat.withdraw_text(definition.id,s),fn=cmd(self,"withdraw"),key="event_withdraw",icon="trail"}
     end
     choices(self,definition.title,definition.text,options,"DAY "..s.day.."  /  TRAVEL PAUSED")
+    if definition.kind=="wildlife" then w.sprite(self,definition.choices[1].observe,800,562,70) end
 end
 local function road_story(self)
     label(self,28,611,"FROM AN EARLIER CHOICE / TRAVEL PAUSED")
@@ -336,10 +338,11 @@ local function journal(self)
     w.button(self,49,117,180,29,"Earlier notes",function() self.journal_offset=math.min(math.max(0,#s.log-11),offset+11);self.redraw() end,{size=12,enabled=start>1})
     w.button(self,239,117,180,29,"Latest notes",function() self.journal_offset=0;self.redraw() end,{size=12,enabled=offset>0})
     end
+    w.button(self,650,68,191,29,"Species field guide",page(self,"field_guide"),{key="field_guide",size=12,icon="journal"})
     local known=0;for _ in pairs(p.discoveries) do known=known+1 end
     w.button(self,437,117,201,29,"Optional aims",page(self,"aims"),{key="open_aims",size=12,icon="journal"})
     w.button(self,650,117,191,29,"Symbol guide",page(self,"symbols"),{key="symbol_guide",size=12,icon="journal"})
-    label(self,28,70,known.." species recorded / "..#p.history.." recent expeditions / "..(p.covered and "covered wagon researched" or "study and cross Willowford for a wagon design"))
+    label(self,28,70,known.." species known / "..#p.history.." recent expeditions")
 end
 local function settings(self)
     local s=self.snapshot.run
@@ -357,7 +360,9 @@ local function result(self)
     scene.draw(self,28,307,834,230,s)
     w.text(self,28,279,s.ending,16,"ink",834)
     w.text(self,28,221,"Day "..s.day.." / Cargo "..util.round(s.cargo).."% / "..#s.crew.." companions home",15,"gold")
-    w.text(self,28,203,"Companions, discoveries and memories stay with you. Everyone recovers at the depot.",13,"muted",834)
+    local count=0;for _ in pairs(s.new_observations or {}) do count=count+1 end
+    w.text(self,28,203,"New wild observations: "..count.." / Companions recover at the depot.",13,"muted",834)
+    w.button(self,646,211,216,29,"Species field guide",page(self,"field_guide"),{key="field_guide",size=12,icon="journal"})
     local new_aims=0;local records=aims.records(p)
     for _,id in ipairs(aims.order) do if records.completed[id]==s.id then new_aims=new_aims+1 end end
     w.button(self,543,151,319,29,new_aims>0 and (new_aims.." journal aim"..(new_aims==1 and "" or "s").." completed") or "View optional journal aims",page(self,"aims"),{key="open_aims",size=12,icon="journal"})
@@ -412,6 +417,7 @@ function M.draw(self)
         elseif self.page=="work_items" then work_items.draw(self)
         elseif self.page=="map" then map(self)
         elseif self.page=="journal" then journal(self)
+        elseif self.page=="field_guide" then field_guide.draw(self)
         elseif self.page=="aims" then journal_aims.draw(self)
         elseif self.page=="symbols" then symbol_guide.draw(self)
         elseif self.page=="forage" then gathering.draw(self)

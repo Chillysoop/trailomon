@@ -14,6 +14,12 @@ function M.click(self,key)
     end
     error("Missing fixture action: "..key)
 end
+function M.wildlife(self) reset(self,"trail");assert(model.debug(self.snapshot,"event","wild_brindlehorn"));self.redraw() end
+function M.field_guide(self)
+    M.wildlife(self);assert(model.command(self.snapshot,"choice",{id="watch"}));self.page="journal";self.redraw();self.capture_actions={"field_guide"}
+    self.capture_assert=function() assert(self.page=="field_guide") end
+end
+function M.field_result(self) M.wildlife(self);assert(model.command(self.snapshot,"choice",{id="watch"}));assert(model.command(self.snapshot,"return"));self.redraw() end
 function M.options(self) reset(self,"settings");self.redraw() end
 function M.options_brisk(self)
     M.options(self);self.capture_actions={"travel_speed"}

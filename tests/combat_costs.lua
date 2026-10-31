@@ -63,7 +63,9 @@ return function(test,command,valid,equal)
         for _,strategy in ipairs({"careful","peaceful","fighter"}) do
             counts[strategy]=0
             for seed=1,40 do
-                local a=runner.run(model.new(seed),strategy);local b=runner.run(model.new(seed),strategy)
+                -- Keep this historical cost-only benchmark on its original event rules.
+                local initial=model.new(seed);initial.run.wildlife_rules=nil
+                local a=runner.run(initial,strategy);local b=runner.run(initial,strategy)
                 assert(a.status=="completed");equal(a,b)
                 if a.outcome=="delivered" then counts[strategy]=counts[strategy]+1 end
             end

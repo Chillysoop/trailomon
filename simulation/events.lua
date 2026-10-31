@@ -10,6 +10,12 @@ for _, event in ipairs(definitions) do M.by_id[event.id] = event end
 function M.eligible(s, event, profile)
     if s.seen[event.id] then return false end
     local condition = event.condition
+    if event.kind=="wildlife" then
+        if s.wildlife_rules~="wildlife-v1" then return false end
+        return (condition=="wild_meadow" and s.terrain=="meadow" and s.target<=3) or
+            (condition=="wild_woods" and s.terrain=="woodland") or
+            (condition=="wild_river" and s.target==4 and s.terrain=="marsh")
+    end
     if condition == "any" then return true end
     if condition == "mud" then return s.rainfall >= 2 end
     if condition == "worn" then return s.wagon < 85 end
@@ -27,10 +33,11 @@ end
 
 function M.select(s, profile)
     local roll = rng.next(s.rng, "events")
-    local majors, ambient, followups = {}, {}, {}
+    local majors, ambient, followups, wildlife = {}, {}, {}, {}
     for _, event in ipairs(definitions) do
         if M.eligible(s, event, profile) then
-            if event.kind == "ambient" then ambient[#ambient+1] = event
+            if event.kind == "wildlife" then wildlife[#wildlife+1]=event
+            elseif event.kind == "ambient" then ambient[#ambient+1] = event
             elseif event.condition:find("follow") then followups[#followups+1] = event
             else majors[#majors+1] = event end
         end
@@ -39,6 +46,7 @@ function M.select(s, profile)
         if #followups > 0 then return followups[1] end
         if roll < 0.60 and #majors > 0 then return majors[rng.int(s.rng,"events",1,#majors)] end
     end
+    if roll>0.65 and s.cooldown<=0 and #wildlife>0 then return wildlife[rng.int(s.rng,"events",1,#wildlife)] end
     if roll > 0.65 and #ambient > 0 then return ambient[rng.int(s.rng,"events",1,#ambient)] end
 end
 
