@@ -1,6 +1,7 @@
 local util=require "simulation.util"
 local model=require "simulation.expedition"
 local species=require "content.species"
+local aims=require "simulation.journal_aims"
 local M={}
 local modes={preparation=true,traveling=true,stopped=true,event=true,landmark=true,combat_select=true,combat=true,combat_result=true,result=true}
 local outcomes={delivered=true,late=true,returned=true,rescued=true}
@@ -25,6 +26,7 @@ local function validate(snapshot)
     if snapshot.settings.travel_speed~=nil and not integer(snapshot.settings.travel_speed,1,2) then return false,"Invalid viewing speed" end
     if type(p.roster)~="table" or type(p.history)~="table" or #p.history>10 or type(p.discoveries)~="table" or type(p.covered)~="boolean" then return false,"Invalid depot" end
     if not integer(p.next_id,1,1e9) or not integer(p.last_committed,0,p.next_id-1) or not integer(s.id,1,p.next_id-1) then return false,"Invalid journey identity" end
+    if not aims.valid_profile(p.aims,p.last_committed) or not aims.valid_journey(s.aim_journey) then return false,"Invalid journal aims" end
     local roster_count=0
     for id,c in pairs(p.roster) do
         if not companion(c) or c.species~=id or c.work_item~=nil then return false,"Invalid saved companion" end

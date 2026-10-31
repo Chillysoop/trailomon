@@ -29,6 +29,20 @@ local function battle(p)
     departed(p);assert(model.debug(p,"event","scavengers"));assert(model.command(p,"choice",{id="battle"}));assert(model.command(p,"battle_start",{team={1,2}}))
 end
 local function interaction_checks(self)
+    fixture(self,"trail")
+    self.redraw=function() screens.draw(self) end
+    self.open_page=function(id) self.page=id;self.redraw() end
+    coroutine.yield()
+    for i,b in ipairs(self.buttons) do if b.key=="open_aims" then self.focus=i end end
+    input.handle(self,hash("confirm"),{pressed=true});coroutine.yield()
+    assert(self.page=="aims" and self.snapshot.run.mode=="preparation")
+    button(self,"aims_back").fn();coroutine.yield();assert(self.page=="journal")
+    button(self,"open_aims").fn();coroutine.yield();assert(self.page=="aims")
+    fixture(self,"trail",function(p)
+        departed(p);p.run.branches.last="ridge";model.finish(p,"delivered","Fixture arrival")
+    end);coroutine.yield()
+    button(self,"open_aims").fn();coroutine.yield()
+    assert(self.page=="aims" and self.snapshot.profile.aims.completed.peaceful==1)
     fixture(self,"work_items")
     coroutine.yield()
     self.redraw=function() screens.draw(self) end

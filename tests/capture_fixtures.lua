@@ -161,4 +161,40 @@ function M.chain_repair(self)
     assert(model.command(p,"choice",{id="risk"}));assert(model.command(p,"repair"))
     assert(p.run.road_story and not p.run.flags.axle_lashed);self.redraw()
 end
+function M.aims_departure(self)
+    reset(self,"trail");self.snapshot=model.new(1848);self.redraw()
+end
+function M.aims_fresh(self)
+    M.aims_departure(self);self.capture_actions={"open_aims"}
+    self.capture_assert=function() assert(self.page=="aims" and self.snapshot.run.mode=="preparation") end
+end
+local function aim_arrival(p,path)
+    local s=p.run;s.mode="landmark";s.target=5;s.progress=s.distance;s.day=20
+    assert(model.command(p,"leave",{branch=path}));s.progress=s.distance-1
+    assert(model.command(p,"step"));assert(s.outcome=="delivered")
+end
+function M.aims_progress(self)
+    reset(self,"trail");local p=self.snapshot
+    assert(model.debug(p,"event","scavengers"));assert(model.command(p,"choice",{id="battle"}))
+    assert(model.command(p,"battle_start",{team={1,2}}));assert(model.command(p,"battle_step"))
+    assert(model.command(p,"withdraw"));aim_arrival(p,"ridge")
+    assert(model.command(p,"new"));assert(model.command(p,"depart"))
+    self.page="journal";self.redraw();self.capture_actions={"open_aims"}
+end
+function M.aims_result(self)
+    M.aims_progress(self);local p=self.snapshot;self.capture_actions={}
+    -- The second departure uses a different pair, selected before leaving.
+    p.run.mode="preparation";assert(model.command(p,"crew",{species="loamling"}))
+    assert(model.command(p,"crew",{species="bellmoth"}));assert(model.command(p,"depart"))
+    aim_arrival(p,"gorge");self.page="trail";self.redraw()
+    self.capture_assert=function()
+        for _,id in ipairs({"company","paths","peaceful"}) do assert(p.profile.aims.completed[id]==2) end
+    end
+end
+function M.aims_complete(self)
+    M.aims_result(self);self.capture_actions={"open_aims"}
+end
+function M.aims_legacy(self)
+    reset(self,"aims");self.snapshot.profile.aims=nil;self.snapshot.run.aim_journey=nil;self.redraw()
+end
 return M

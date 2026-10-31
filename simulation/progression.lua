@@ -1,12 +1,13 @@
 local species=require "content.species"
 local util=require "simulation.util"
+local aims=require "simulation.journal_aims"
 local M={}
 function M.companion(id)
     local def=species.defs[id]
     return {species=id,name=def.friend,temperament=def.temperament,condition=100,stamina=100,trust=1,memories={},duty="work"}
 end
 function M.profile()
-    local p={roster={},discoveries={},history={},covered=false,next_id=1,last_committed=0}
+    local p={roster={},discoveries={},history={},covered=false,next_id=1,last_committed=0,aims=aims.empty()}
     for _, id in ipairs(species.order) do
         if species.defs[id].initial then p.roster[id]=M.companion(id); p.discoveries[id]=true end
     end
@@ -19,6 +20,10 @@ function M.memory(c, text)
 end
 function M.commit(p,s)
     if s.id<=p.last_committed then return false end
+    for _,id in ipairs(aims.commit(p,s)) do
+        s.log[#s.log+1]={day=s.day,text="Journal aim completed: "..aims.defs[id].title.."."}
+        if #s.log>70 then table.remove(s.log,1) end
+    end
     for _, c in ipairs(s.crew) do
         M.memory(c, s.outcome=="delivered" and "Brought orchard cuttings to Lantern Reach." or "Came home after a difficult journey.")
         local home=util.copy(c)

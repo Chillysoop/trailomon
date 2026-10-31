@@ -10,6 +10,8 @@ local symbol_guide=require "ui.symbol_guide"
 local gathering=require "ui.gathering"
 local work_items=require "ui.work_items"
 local trail_reports=require "ui.trail_reports"
+local journal_aims=require "ui.journal_aims"
+local aims=require "simulation.journal_aims"
 local M={}
 local titles={delivered="New roots, at last.",late="You made it through.",returned="There is always another road.",rescued="Everyone comes home."}
 local function cmd(self,id,args,page) return function() self.perform(id,args,page) end end
@@ -74,6 +76,7 @@ local function preparation(self)
     local selected,budget={},0
     for _,c in ipairs(s.crew) do selected[c.species]=true;budget=budget+model.species.defs[c.species].cost end
     label(self,28,508,"CREW "..#s.crew.." / 2    STARTING BUDGET "..budget.." / 7")
+    w.button(self,583,495,268,29,"Optional journal aims",page(self,"aims"),{key="open_aims",size=12,icon="journal"})
     for i,id in ipairs(model.species.order) do
         local def=model.species.defs[id]
         local x=28+((i-1)%3)*280; local y=292-math.floor((i-1)/3)*210
@@ -318,6 +321,7 @@ local function journal(self)
     w.button(self,239,117,180,29,"Latest notes",function() self.journal_offset=0;self.redraw() end,{size=12,enabled=offset>0})
     end
     local known=0;for _ in pairs(p.discoveries) do known=known+1 end
+    w.button(self,437,117,201,29,"Optional aims",page(self,"aims"),{key="open_aims",size=12,icon="journal"})
     w.button(self,650,117,191,29,"Symbol guide",page(self,"symbols"),{key="symbol_guide",size=12,icon="journal"})
     label(self,28,70,known.." species recorded / "..#p.history.." recent expeditions / "..(p.covered and "covered wagon researched" or "study and cross Willowford for a wagon design"))
 end
@@ -337,7 +341,10 @@ local function result(self)
     scene.draw(self,28,307,834,230,s)
     w.text(self,28,279,s.ending,16,"ink",834)
     w.text(self,28,221,"Day "..s.day.." / Cargo "..util.round(s.cargo).."% / "..#s.crew.." companions home",15,"gold")
-    w.text(self,28,185,"Your companions, discoveries, and memories stay with you. Everyone recovers before the next departure.",13,"muted",834)
+    w.text(self,28,203,"Companions, discoveries and memories stay with you. Everyone recovers at the depot.",13,"muted",834)
+    local new_aims=0;local records=aims.records(p)
+    for _,id in ipairs(aims.order) do if records.completed[id]==s.id then new_aims=new_aims+1 end end
+    w.button(self,543,151,319,29,new_aims>0 and (new_aims.." journal aim"..(new_aims==1 and "" or "s").." completed") or "View optional journal aims",page(self,"aims"),{key="open_aims",size=12,icon="journal"})
     w.button(self,28,100,407,45,"Plan another journey",cmd(self,"new",{seed=s.seed+1},"trail"),{primary=true,size=16})
     w.button(self,453,100,409,45,"Replay this seed",cmd(self,"new",{seed=s.seed},"trail"),{size=15})
     label(self,28,69,p.covered and "Depot design available: covered wagon / less capacity, better rain protection" or "Try a different crew, or investigate Willowford to learn a wagon design.")
@@ -389,6 +396,7 @@ function M.draw(self)
         elseif self.page=="work_items" then work_items.draw(self)
         elseif self.page=="map" then map(self)
         elseif self.page=="journal" then journal(self)
+        elseif self.page=="aims" then journal_aims.draw(self)
         elseif self.page=="symbols" then symbol_guide.draw(self)
         elseif self.page=="forage" then gathering.draw(self)
         elseif self.page=="settings" then settings(self)
