@@ -23,6 +23,20 @@ function Invoke-TrailomonBob {
     if ($LASTEXITCODE -ne 0) { throw "Defold build failed with exit code $LASTEXITCODE." }
 }
 
+function Initialize-TrailomonLua {
+    Initialize-TrailomonTools
+    Add-Type -AssemblyName System.IO.Compression.FileSystem
+    $builderArchive = [System.IO.Compression.ZipFile]::OpenRead($TrailomonBob)
+    try {
+        foreach ($assetName in @('luajit-64.exe','libwinpthread-1.dll')) {
+            $entry = $builderArchive.GetEntry("libexec/x86_64-win32/$assetName")
+            if (-not $entry) { throw "Pinned builder is missing $assetName" }
+            [System.IO.Compression.ZipFileExtensions]::ExtractToFile($entry, (Join-Path $TrailomonTools $assetName), $true)
+        }
+    } finally { $builderArchive.Dispose() }
+    return (Join-Path $TrailomonTools 'luajit-64.exe')
+}
+
 function New-TrailomonOutput {
     param([string]$Parent, [string]$Prefix)
     # A fresh bundle directory avoids replacing an executable that is running,

@@ -31,13 +31,16 @@ Install Java 25 or use the JDK bundled with Defold. From PowerShell in this dire
 ```powershell
 ./tools/test.ps1
 ./tools/build.ps1
+./tools/expedition_report.ps1 -Compare
 ```
 
-The scripts download the pinned official Defold builder and verify its checksum. Testing runs deterministic Lua checks, native save/load recovery, and 34 GUI state checks in an isolated save namespace. `-SkipEngine` runs just the Lua checks. CI uses `-Headless` for machines without a graphics driver; local checks use the release renderer. Headless checks exercise screen construction and bounds but do not verify rendered pixels or human input.
+The scripts download the pinned official Defold builder and verify its checksum. Testing runs deterministic Lua checks, review/reporter integration checks, native save/load recovery, and 34 GUI state checks in an isolated save namespace. `-SkipEngine` skips native checks. CI uses `-Headless` for machines without a graphics driver; local checks use the release renderer. Headless checks exercise screen construction and bounds but do not verify rendered pixels or human input.
 
 The build script creates a fresh `dist/Windows-0.1.0-<timestamp>/Trailomon/` folder and a ZIP alongside it. Run `Trailomon.exe` with the four `game.*` files beside it. Release builds do not start the engine's development server. The scripts avoid replacing a running executable and work around OneDrive directory attributes by using fresh output folders.
 
 The latest shareable copy is `builds/Trailomon-windows.zip`. Each bundle includes controls, launch instructions, and `build-info.json` with its source commit and working-tree state. Python 3 is also required for review-server tests. Public release publication is a separate owner-approved step.
+
+The [full-expedition report tool](docs/EXPEDITION_REPORTS.md) exports JSON traces, CSV comparisons and a readable summary under `reports/`. It repeats every run, checks source/runtime provenance, and can replay an individual trace. The default policies preserve the original test benchmarks; matched encounters compare fight, peaceful resolution and withdrawal before tuning game balance.
 
 ## Project layout
 

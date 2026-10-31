@@ -1,5 +1,7 @@
 # Review pages
 
+2026-10-30 N1 tool delivery: next-1 includes the committed expedition baseline and download links, with S2 reporting complete and S5 tuning still open. Original votes/codes remain; no new approval request. Evidence and limits: reporting.md.
+
 2026-10-30: `plan-1` is published at `https://trailomon-owner-reviews.dusky-owlet-9260.chatgpt.site/plan-1.html` for phone and desktop. Localhost remains a desktop fallback. Codes are stable: P1 automatic combat conversion; P2 keep bounded foraging and defer hunting; P3 wilderness progression within the existing route; P4 prioritize six-species anatomy and pose refinement; P5 a later three-item equipment experiment. P1–P4 are recommendations, not synthetic owner votes.
 
 2026-10-30: The owner submitted plan-1 from the phone at 22:24:59 UTC, hosted revision 7. **P1, P2, P3, P4, and P5 all YES; no notes or general comment.** Received through Sites, mirrored to the portable response file, and acknowledged without a chat "done". P1 implementation ships in PR #4 (S3/S4); S5 balance tuning remains. P2 bounded gathering, P3 route/lore, P4 art, and P5 equipment are approved but still pending. P5 is approved despite the initial recommendation to defer; implement the three-item experiment after combat testing. No ideas rejected or left blank.

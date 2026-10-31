@@ -4,6 +4,7 @@
 /build/
 /dist/
 /builds/
+/reports/
 /reviews/responses/*.json
 /reviews/responses/*.finished
 /reviews/responses/*.consuming
