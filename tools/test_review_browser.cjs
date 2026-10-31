@@ -41,7 +41,10 @@ async function run() {
     const read=async()=>JSON.parse(await fs.readFile(path.join(root,'responses','fixture.json'),'utf8'));
     await eventually(async()=>{const d=await read();assert.equal(d.answers.X3.note,'Note without a vote');assert.equal(d.finished,false);});
     await page.reload(); await page.waitForFunction(()=>!document.querySelector('#finish').disabled);
-    assert.equal(await page.getByRole('button',{name:'YES for X1',exact:true}).getAttribute('aria-pressed'),'true');
+    assert.equal(await page.locator('[data-code=X1]').isVisible(),false);
+    assert.equal(await page.locator('[data-code=X2]').isVisible(),false);
+    assert.equal(await page.locator('[data-code=X1] .yes').getAttribute('aria-pressed'),'true');
+    assert.equal(await page.locator('[data-code=X3]').isVisible(),true);
     assert.equal(await page.getByLabel('Comment on X3',{exact:true}).inputValue(),'Note without a vote');
     // Finish immediately after typing: a delayed autosave must not undo submission.
     await page.getByLabel('General comments',{exact:true}).fill('Final note immediately before FINISH');
@@ -53,8 +56,33 @@ async function run() {
     assert.equal(JSON.parse(output).answers.X2.vote,'no');
     assert.equal(await fs.stat(path.join(root,'responses','fixture.finished')).then(()=>true,()=>false),false);
     await page.getByRole('button',{name:'Yes to all top picks',exact:true}).click();
+    assert.equal(await page.locator('[data-code=X3]').isVisible(),true,'New vote remains visible for a note before FINISH');
     assert.equal(await page.getByRole('button',{name:'YES for X3',exact:true}).getAttribute('aria-pressed'),'true');
-    assert.equal(await page.getByRole('button',{name:'NO for X2',exact:true}).getAttribute('aria-pressed'),'true');
+    assert.equal(await page.locator('[data-code=X2] .no').getAttribute('aria-pressed'),'true');
+    await page.getByRole('button',{name:'FINISH',exact:true}).click();
+    await eventually(async()=>assert.equal((await read()).finished,true));
+    await page.waitForFunction(()=>document.querySelector('#finish').hidden);
+    assert.equal(await page.locator('.idea:visible').count(),0);
+    assert.equal(await page.locator('#review-empty').textContent(),'No open decisions. Your answers are saved.');
+    await page.reload();await page.waitForFunction(()=>!document.querySelector('#finish').disabled);
+    assert.equal(await page.locator('.idea:visible').count(),0);
+    assert.equal(await page.locator('#finish').isVisible(),false);
+    assert.equal(await page.locator('#allTop').isVisible(),false);
+    await page.getByRole('button',{name:'Show answered items (3)',exact:true}).click();
+    assert.equal(await page.locator('.idea:visible').count(),3);
+    assert.equal(await page.getByLabel('Comment on X3',{exact:true}).inputValue(),'Note without a vote');
+    // Adding a new idea to a completed page must not resurrect earlier decisions.
+    await fs.writeFile(path.join(root,'fixture.html'),template.replace('</main>',third+'<section class="idea" data-code="X4" data-top><h3>X4 A new decision</h3></section></main>'));
+    await page.reload();await page.waitForFunction(()=>!document.querySelector('#finish').disabled);
+    assert.equal(await page.locator('.idea:visible').count(),1);
+    assert.equal(await page.locator('[data-code=X4]').isVisible(),true);
+    assert.equal(await page.locator('#review-empty').isVisible(),false);
+    const beforeTop=await read();
+    await page.getByRole('button',{name:'Yes to all top picks',exact:true}).click();
+    await page.getByRole('button',{name:'FINISH',exact:true}).click();
+    await page.waitForFunction(()=>document.querySelector('#finish').hidden);
+    const afterTop=await read();
+    for(const code of ['X1','X2','X3'])assert.deepEqual(afterTop.answers[code],beforeTop.answers[code],'Top picks must preserve earlier votes, notes and timestamps');
     await page.screenshot({path:path.join(root,'desktop-light.png'),fullPage:true});
     await page.setViewportSize({width:390,height:844}); await page.emulateMedia({colorScheme:'dark'});
     assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),true);
@@ -62,15 +90,17 @@ async function run() {
     // API outage: browser storage, downloadable JSON, and truthful clipboard status.
     assert.deepEqual(errors,[]); offline=true;
     await page.route('**/api/responses/**',route=>route.abort());
+    await page.getByRole('button',{name:'Show answered items (4)',exact:true}).click();
     await page.getByLabel('Comment on X2',{exact:true}).fill('Offline note');
     const downloadPromise=page.waitForEvent('download');
     await page.getByRole('button',{name:'FINISH',exact:true}).click();
     const download=await downloadPromise; const file=path.join(root,'fallback.json'); await download.saveAs(file);
     const fallback=JSON.parse(await fs.readFile(file,'utf8')); assert.equal(fallback.page,'fixture');assert.equal(fallback.finished,true);assert.equal(fallback.answers.X2.note,'Offline note');
     await page.reload();await page.waitForFunction(()=>!document.querySelector('#finish').disabled);
+    assert.equal(await page.locator('.idea:visible').count(),0);
     assert.equal(await page.getByLabel('Comment on X2',{exact:true}).inputValue(),'Offline note');
     assert.deepEqual(errors,[]);
-    console.log('PASS browser: YES/NO, note-only answer, autosave/reload, FINISH race, waiter, top picks, phone/dark layout, offline download and restore.');
+    console.log('PASS browser: hidden answered items, no-open state, new decisions, history, preserved top-pick votes, YES/NO, note-only, autosave, FINISH/waiter, phone/dark, offline restore.');
     console.log('Evidence: '+root);
     await context.close();
   } finally { if(browser)await browser.close();server.kill();if(serverError)process.stderr.write(serverError); }

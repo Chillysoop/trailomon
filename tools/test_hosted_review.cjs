@@ -12,6 +12,7 @@ async function run(){
   const p=await c.newPage();const errors=[];p.on('pageerror',e=>errors.push(e.message));
   await p.goto(base+'/signin-with-chatgpt?return_to=%2Fplan-1.html');
   await p.waitForFunction(()=>!document.querySelector('#finish')?.disabled&&document.querySelector('#finish'));
+  if(await p.locator('#answered-toggle').isVisible())await p.locator('#answered-toggle').click();
   await p.getByLabel('General comments',{exact:true}).fill('LOCAL QA ONLY — phone-size hosted review');
   if(await p.getByRole('button',{name:'YES for P1',exact:true}).getAttribute('aria-pressed')!=='true')await p.getByRole('button',{name:'YES for P1',exact:true}).click();
   if(await p.getByRole('button',{name:'NO for P2',exact:true}).getAttribute('aria-pressed')!=='true')await p.getByRole('button',{name:'NO for P2',exact:true}).click();

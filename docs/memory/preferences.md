@@ -17,3 +17,5 @@
 2026-10-30: Owner clarified Astronarch is the stronger reference for actual automatic combat: positions, distinct roles, and partner-triggered abilities. Automon informs the original creature-party appeal. Preserve the quiet expedition pace.
 
 2026-10-30: next-1 N1-N8 all approved. The general comment makes visible clarity and simplicity critical path: a thoughtful iconography system must cover existing resources and provide rules for future features. Prioritize a coherent semantic catalog, recognizable silhouettes, consistent labels, and contextual reasons over adding ornamental symbols.
+
+2026-10-31: Only send/open YES/NO reviews for genuinely unanswered decisions. Hide previous YES (and other settled votes) by default, keeping history available explicitly. Approved but unfinished development is not an open owner decision. No completed-review links after routine feature delivery. New drafts stay visible for notes until FINISH; do not invent proposals just to populate a page.
