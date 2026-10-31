@@ -7,7 +7,8 @@ local combat = require "simulation.combat"
 local species = require "content.species"
 local route = require "content.route"
 local wagons = require "content.wagons"
-local M = {SCHEMA=1, CONTENT=1, route=route, species=species, resources=resources, events=events, combat=combat}
+local equipment=require "simulation.equipment"
+local M = {SCHEMA=1, CONTENT=1, route=route, species=species, resources=resources, events=events, combat=combat, equipment=equipment}
 
 local function log(s,text)
     s.log[#s.log+1]={day=s.day,text=text}
@@ -107,7 +108,7 @@ function M.forecast(s)
     local count=resources.daily_food(s)
     local pace=resources.paces[s.pace]
     return {food=count,days=math.floor(s.food/count),progress=pace.speed,
-        effort=pace.effort, recovery=resources.rations[s.rations].recovery}
+        effort=resources.haul_effort(s,s.crew[s.hauler]), recovery=resources.rations[s.rations].recovery}
 end
 
 local function check_warnings(s)
@@ -147,9 +148,10 @@ local function day(snapshot,moving,resting)
     s.traveler=util.clamp(s.traveler+(fed and (resting and 12 or 0.5) or -12)-exposure,0,100)
     for _, c in ipairs(s.crew) do
         local working=moving and c.duty=="work"
-        local effort=c==hauler and resources.paces[s.pace].effort or (working and 2 or 0)
+        local effort=c==hauler and resources.haul_effort(s,c) or (working and 2 or 0)
         if c==hauler and c.species=="reedskipper" and s.weather=="clear" and s.terrain~="marsh" then effort=effort+2 end
         local gain=fed and (resting and 25 or recovery+(working and 0 or 4)) or 0
+        if fed and s.weather=="rain" and equipment.has(c,"dry_wrap") then gain=gain+3 end
         c.stamina=util.clamp(c.stamina-effort+gain-exposure,0,100)
         c.condition=util.clamp(c.condition+(fed and (resting and 8 or 0) or -6),0,100)
     end
@@ -247,13 +249,15 @@ local function cross(snapshot,method)
     -- Outcome is fixed for this run; inspecting, saving, or changing menus never rerolls it.
     if helper then helper.stamina=helper.stamina-22; progression.memory(helper,"Helped the wagon cross Willowford.") end
     local bad=method~="ferry" and s.river_roll<risk
+    local secured=equipment.wearer(s,"release_rope")~=nil
     day(snapshot,false,false)
     if s.mode=="result" then return true end
     if bad then
         local wet=wagons[s.wagon_type].wet_factor
-        effects(s,{food=-math.ceil(8*wet),cargo=-18*wet,wagon=-6})
+        local loss=secured and 0.5 or 1
+        effects(s,{food=-math.ceil(8*wet*loss),cargo=-18*wet*loss,wagon=-6})
         if helper then helper.condition=math.max(0,helper.condition-6) end
-        log(s,"Across, but a strong current soaked supplies and jolted the wagon.")
+        log(s,"Across, but a strong current soaked supplies and jolted the wagon."..(secured and " Release rope halved food and cargo loss; wagon and crew harm remain." or ""))
     else log(s,method=="ferry" and "The ferryman brings the wagon safely across." or "The crossing goes cleanly. Everyone reaches the far bank.") end
     s.flags.river_crossed=true
     s.mode="landmark"
@@ -331,7 +335,9 @@ local function battle_end(snapshot,outcome)
     local battle=s.battle
     local kind=s.battle and s.battle.kind or s.encounter
     if outcome~="won" then
-        if kind=="scavengers" then effects(s,{food=-8,cargo=-8}); log(s,"You leave a little cargo and food, and lead the crew away.")
+        if kind=="scavengers" then
+            local loss=equipment.retreat_loss(s)
+            effects(s,{food=-loss,cargo=-loss}); log(s,"You leave up to "..loss.." food and "..loss.." cargo, and lead the crew away."..(loss==4 and " The release rope kept the rest attached." or ""))
         else log(s,"You take a day-long detour around the territorial creature."); day(snapshot,false,false) end
     else
         log(s,"The wild creatures give you space. Your journey can continue.")
@@ -394,6 +400,24 @@ function M.command(snapshot,command,arg)
         if not draft then return false,"Choose a companion that can pull the wagon" end
         s.hauler=draft; s.mode="stopped"
         log(s,"Left Fernwake with " .. #s.crew .. " companions. Space follows the road; every decision waits for you.")
+        return true
+    elseif command=="equip_work_item" then return equipment.equip(s,arg.member,arg.item)
+    elseif command=="buy_work_item" or command=="sell_work_item" then
+        if not equipment.shop(s) then return false,"Work items are sold at Fernwake and Mossbell" end
+        local item=equipment.defs[arg.item]
+        if not item then return false,"Unknown work item" end
+        local owned=(s.work_items or {})[arg.item]
+        if command=="buy_work_item" then
+            if owned then return false,"One of each work item per expedition" end
+            if s.coins<item.price then return false,"Need "..item.price.." coins" end
+            if resources.weight(s)+item.weight>resources.capacity(s) then return false,"The wagon is full" end
+            s.work_items=s.work_items or {};s.work_items[arg.item]=true;s.coins=s.coins-item.price
+        else
+            if s.mode~="preparation" then return false,"Returns are available before departure" end
+            if not owned then return false,"This work item is not packed" end
+            for _,c in ipairs(s.crew) do if c.work_item==arg.item then c.work_item=nil end end
+            s.work_items[arg.item]=nil;s.coins=s.coins+item.price
+        end
         return true
     elseif command=="buy" or command=="sell" then
         if s.mode~="preparation" and not (s.mode=="landmark" and s.target==3) then return false,"Supplies are sold at the depot and Mossbell" end
@@ -517,7 +541,7 @@ function M.debug(snapshot,action,value)
     if action=="event" and stopped(s) and events.by_id[value] and events.by_id[value].choices then
         s.pending={id=value,roll=rng.next(s.rng,"events")}; s.seen[value]=true; s.mode="event"; return true
     elseif action=="resupply" and stopped(s) then
-        s.food=math.min(100,resources.capacity(s)-25-s.repairs*4-s.medicine*2)
+        s.food=math.min(100,resources.capacity(s)-25-s.repairs*4-s.medicine*2-equipment.weight(s))
         s.coins=80; s.wagon=100; s.traveler=100
         for _,c in ipairs(s.crew) do c.stamina=100;c.condition=100 end
         return true

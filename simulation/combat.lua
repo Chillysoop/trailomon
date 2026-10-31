@@ -3,6 +3,7 @@ local species=require "content.species"
 local rng=require "simulation.rng"
 local util=require "simulation.util"
 local manual=require "simulation.combat_manual"
+local equipment=require "simulation.equipment"
 local M={RULES="automatic-v1", GUARDIAN_PATTERN="guardian-shove-v1", EFFORT="trail-effort-v2"}
 
 -- The journey and active battle retain their effort version across saves.
@@ -39,15 +40,16 @@ end
 
 function M.automatic(b) return b and b.rules==M.RULES end
 function M.soft_ground(s) return s.terrain~="ridge" and s.terrain~="gorge" end
-function M.withdraw_text(kind)
-    return kind=="scavengers" and "Leave up to 8 provisions and 8 cargo integrity." or "Take a one-day detour, including meals and weather."
+function M.withdraw_text(kind,s)
+    local loss=s and equipment.retreat_loss(s) or 8
+    return kind=="scavengers" and ("Leave up to "..loss.." provisions and "..loss.." cargo integrity.") or "Take a one-day detour, including meals and weather."
 end
-function M.ability_text(s,id)
+function M.ability_text(s,id,c)
     local texts={
         brindlehorn="First unblocked rush at cargo or partner: brace for 14 cover.",
         reedskipper="First unblocked rush: sweep removes 10 harm and adds 4 pressure.",
         loamling=M.soft_ground(s) and "First unblocked rush: soft ground gives everyone 8 cover." or "First unblocked rush: hard rock gives everyone only 4 cover.",
-        bellmoth=s.weather=="rain" and "First unblocked heavy rush: rain weakens shimmer to 8 cover." or "First unblocked heavy rush: shimmer removes 16 harm.",
+        bellmoth=s.weather=="rain" and not equipment.has(c,"dry_wrap") and "First unblocked heavy rush: rain weakens shimmer to 8 cover." or "First unblocked heavy rush: shimmer removes 16 harm.",
         cindercoil="When partner cover helps stop a hit fully: add 20 pressure.",
         slatewhorl="By the wagon only: first unblocked cargo rush gains 18 cover.",
     }
@@ -144,7 +146,7 @@ function M.step(s)
                 if id=="brindlehorn" and target~=i then cover(i,target,14);triggered=true
                 elseif id=="reedskipper" then cover(i,target,10);pressure=pressure+4;triggered=true
                 elseif id=="loamling" then all_cover(i,M.soft_ground(s) and 8 or 4);triggered=true
-                elseif id=="bellmoth" and b.intent.kind=="heavy" then cover(i,target,s.weather=="rain" and 8 or 16);triggered=true
+                elseif id=="bellmoth" and b.intent.kind=="heavy" then cover(i,target,s.weather=="rain" and not equipment.has(c,"dry_wrap") and 8 or 16);triggered=true
                 elseif id=="slatewhorl" and position==2 and target=="cargo" then cover(i,target,18);triggered=true end
                 if triggered then
                     b.used[i]=true;c.stamina=c.stamina-ability
@@ -169,6 +171,11 @@ function M.step(s)
         end
     b.resolve=math.max(0,b.resolve-pressure)
     local harm=b.resolve>0 and remaining() or 0
+    if harm>0 and target==b.team[1] and equipment.has(s.crew[target],"padded_trace") and not (b.item_used or {}).padded_trace then
+        local softened=math.min(6,harm);harm=harm-softened
+        b.item_used=b.item_used or {};b.item_used.padded_trace=true
+        notes[#notes+1]=s.crew[target].name..": padded trace softened "..softened.." harm."
+    end
     if target=="cargo" then s.cargo=math.max(0,s.cargo-harm)
     else s.crew[target].condition=math.max(0,s.crew[target].condition-harm) end
     local all_down=true

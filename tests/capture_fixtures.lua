@@ -88,4 +88,43 @@ function M.route_reach(self)
 end
 function M.route_map(self) M.route_outpost(self);self.page="map";self.redraw() end
 function M.route_rain(self) M.route_river(self);self.snapshot.run.weather="rain";self.redraw() end
+function M.items_prep(self)
+    reset(self,"trail");self.snapshot=model.new(1848);self.redraw()
+end
+function M.items_shop(self)
+    stop(self,3);self.page="shop";self.redraw()
+end
+function M.items_depot(self)
+    reset(self,"trail");self.snapshot=model.new(1848);self.redraw()
+    self.capture_actions={"open_items"}
+end
+function M.items_equipped(self)
+    M.items_depot(self)
+    self.capture_actions={"open_items","item_padded_trace","item_padded_trace","item_release_rope","item_member2","item_release_rope"}
+    self.capture_assert=function()
+        local s=self.snapshot.run
+        assert(s.crew[1].work_item=="padded_trace" and s.crew[2].work_item=="release_rope")
+        assert(s.coins==28 and model.resources.weight(s)==138)
+    end
+end
+function M.items_battle(self)
+    reset(self,"trail");local p=self.snapshot
+    p.run.mode="preparation"
+    assert(model.command(p,"buy_work_item",{item="padded_trace"}))
+    assert(model.command(p,"equip_work_item",{member=1,item="padded_trace"}))
+    assert(model.command(p,"buy_work_item",{item="release_rope"}))
+    assert(model.command(p,"equip_work_item",{member=2,item="release_rope"}))
+    assert(model.command(p,"depart"));assert(model.debug(p,"event","territorial"))
+    assert(model.command(p,"choice",{id="battle"}));self.redraw()
+    self.capture_actions={"battler1","battler2","battle_begin","combat_step","combat_step","combat_step"}
+    self.capture_assert=function() assert(p.run.battle.item_used.padded_trace and p.run.crew[1].condition==100) end
+end
+function M.items_locked(self)
+    M.items_battle(self);self.capture_actions={};self.page="work_items";self.redraw()
+    self.capture_assert=function() assert(not model.equipment.can_equip(self.snapshot.run)) end
+end
+function M.items_crew(self)
+    M.items_battle(self);self.capture_actions={};self.page="crew";self.redraw()
+    self.capture_assert=function() assert(self.snapshot.run.crew[1].work_item=="padded_trace") end
+end
 return M

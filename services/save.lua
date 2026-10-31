@@ -9,6 +9,7 @@ local function integer(n,lo,hi) return number(n,lo,hi) and n==math.floor(n) end
 local function companion(c)
     if type(c)~="table" or not species.defs[c.species] or type(c.name)~="string" or #c.name>72 then return false end
     if not number(c.condition,0,100) or not number(c.stamina,0,100) or not integer(c.trust,1,3) then return false end
+    if c.work_item~=nil and not model.equipment.defs[c.work_item] then return false end
     if c.duty~="work" and c.duty~="rest" then return false end
     if type(c.temperament)~="string" or type(c.memories)~="table" or #c.memories>6 then return false end
     for _,text in ipairs(c.memories) do if type(text)~="string" or #text>250 then return false end end
@@ -26,7 +27,7 @@ local function validate(snapshot)
     if not integer(p.next_id,1,1e9) or not integer(p.last_committed,0,p.next_id-1) or not integer(s.id,1,p.next_id-1) then return false,"Invalid journey identity" end
     local roster_count=0
     for id,c in pairs(p.roster) do
-        if not companion(c) or c.species~=id then return false,"Invalid saved companion" end
+        if not companion(c) or c.species~=id or c.work_item~=nil then return false,"Invalid saved companion" end
         roster_count=roster_count+1
     end
     if roster_count>6 then return false,"Roster too large" end
@@ -43,10 +44,23 @@ local function validate(snapshot)
     if not terrains[s.terrain] or not number(s.rainfall,0,6) or not integer(s.cooldown,0,3) then return false,"Invalid conditions" end
     for _,key in ipairs({"food","coins","repairs","medicine"}) do if not integer(s[key],0,10000) then return false,"Invalid supply: " .. key end end
     for _,key in ipairs({"wagon","cargo","traveler"}) do if not number(s[key],0,100) then return false,"Invalid condition" end end
+    if s.work_items~=nil then
+        if type(s.work_items)~="table" then return false,"Invalid work items" end
+        for id,owned in pairs(s.work_items) do
+            if not model.equipment.defs[id] or owned~=true then return false,"Invalid packed work item" end
+        end
+    end
     if model.resources.weight(s)>model.resources.capacity(s) then return false,"Wagon is over capacity" end
     if type(s.crew)~="table" or #s.crew>3 or (s.mode~="preparation" and #s.crew<1) then return false,"Invalid crew" end
-    local crew={}
-    for _,c in ipairs(s.crew) do if not companion(c) or crew[c.species] then return false,"Invalid crew member" end; crew[c.species]=true end
+    local crew,assigned={},{}
+    for _,c in ipairs(s.crew) do
+        if not companion(c) or crew[c.species] then return false,"Invalid crew member" end
+        crew[c.species]=true
+        if c.work_item then
+            if not (s.work_items or {})[c.work_item] or assigned[c.work_item] then return false,"Invalid work-item assignment" end
+            assigned[c.work_item]=true
+        end
+    end
     for _,key in ipairs({"seen","flags","discoveries","branches","forage","warnings","rng","log"}) do if type(s[key])~="table" then return false,"Missing " .. key end end
     for _,name in ipairs({"weather","events","combat"}) do if not integer(s.rng[name],1,2147483646) then return false,"Invalid random state" end end
     if not number(s.river_roll,0,1) or #s.log>70 then return false,"Invalid journal" end
@@ -71,6 +85,12 @@ local function validate(snapshot)
         local b=s.battle
         if type(b)~="table" or (b.kind~="scavengers" and b.kind~="territorial") or type(b.team)~="table" or #b.team<1 or #b.team>2 or type(b.used)~="table" or type(b.intent)~="table" then return false,"Invalid battle" end
         if not integer(b.limit,3,4) or not integer(b.round,1,b.limit) or not number(b.resolve,0,75) or type(b.last)~="string" then return false,"Invalid battle round" end
+        if b.item_used~=nil then
+            if type(b.item_used)~="table" then return false,"Invalid spent work items" end
+            for id,spent in pairs(b.item_used) do
+                if id~="padded_trace" or spent~=true or not model.equipment.has(s.crew[b.team[1]],id) then return false,"Invalid spent work item" end
+            end
+        end
         local used={}
         for _,i in ipairs(b.team) do if not integer(i,1,#s.crew) or used[i] then return false,"Invalid battle team" end; used[i]=true end
         if b.intent.target~="cargo" and not used[b.intent.target] then return false,"Invalid battle target" end

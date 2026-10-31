@@ -73,6 +73,19 @@ local function run()
     end
     assert(save.write(guardian));guardian=assert(save.load())
     assert(guardian.run.mode=="combat_result")
+    local equipped=model.new(1848)
+    assert(model.command(equipped,"buy_work_item",{item="padded_trace"}))
+    assert(model.command(equipped,"equip_work_item",{member=1,item="padded_trace"}))
+    assert(save.write(equipped));equipped=assert(save.load())
+    assert(equipped.run.work_items.padded_trace and equipped.run.crew[1].work_item=="padded_trace")
+    assert(model.command(equipped,"depart"));assert(model.debug(equipped,"event","territorial"))
+    assert(model.command(equipped,"choice",{id="battle"}));assert(model.command(equipped,"battle_start",{team={1,2}}))
+    for _=1,3 do assert(model.command(equipped,"battle_step")) end
+    assert(equipped.run.battle.item_used.padded_trace)
+    assert(save.write(equipped));equipped=assert(save.load())
+    assert(equipped.run.battle.item_used.padded_trace and equipped.run.crew[1].condition==100)
+    assert(model.command(equipped,"battle_step"));assert(save.write(equipped))
+    equipped=assert(save.load());assert(equipped.run.mode=="combat_result")
     for _,path in ipairs({primary,backup}) do
         local f=assert(io.open(path,"wb"));f:write("corrupt");f:close()
     end
