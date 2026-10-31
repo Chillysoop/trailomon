@@ -8,7 +8,8 @@ local species = require "content.species"
 local route = require "content.route"
 local wagons = require "content.wagons"
 local equipment=require "simulation.equipment"
-local M = {SCHEMA=1, CONTENT=1, route=route, species=species, resources=resources, events=events, combat=combat, equipment=equipment}
+local forks=require "content.forks"
+local M = {SCHEMA=1, CONTENT=1, route=route, species=species, resources=resources, events=events, combat=combat, equipment=equipment, trail_reports=require "simulation.trail_reports"}
 
 local function log(s,text)
     s.log[#s.log+1]={day=s.day,text=text}
@@ -208,19 +209,17 @@ end
 
 local function leave(snapshot,branch)
     local s=snapshot.run
-    if s.target==2 then
-        if branch~="meadow" and branch~="woodland" then return false,"Choose a path" end
-        s.branches.first=branch
-    elseif s.target==5 then
-        if branch~="ridge" and branch~="gorge" then return false,"Choose a path" end
-        s.branches.last=branch
+    local path
+    if forks[s.target] then
+        for _,candidate in ipairs(forks[s.target]) do if candidate.id==branch then path=candidate end end
+        if not path then return false,"Choose a path" end
+        s.branches[s.target==2 and "first" or "last"]=branch
     elseif s.target==4 and not s.flags.river_crossed then return false,"Cross the river first" end
     s.target=s.target+1
     s.progress=0
     s.distance=route[s.target].distance
     s.terrain=route[s.target].terrain
-    if s.target==3 then s.terrain=s.branches.first; if s.terrain=="woodland" then s.distance=s.distance+3 end end
-    if s.target==6 then s.terrain=s.branches.last; if s.terrain=="gorge" then s.distance=s.distance+5 end end
+    if path then s.terrain=path.id;s.distance=path.distance end
     s.mode="traveling"
     log(s,"Set out for " .. route[s.target].name .. ".")
     return true

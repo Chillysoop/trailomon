@@ -9,6 +9,7 @@ local iconography=require "ui.iconography"
 local symbol_guide=require "ui.symbol_guide"
 local gathering=require "ui.gathering"
 local work_items=require "ui.work_items"
+local trail_reports=require "ui.trail_reports"
 local M={}
 local titles={delivered="New roots, at last.",late="You made it through.",returned="There is always another road.",rescued="Everyone comes home."}
 local function cmd(self,id,args,page) return function() self.perform(id,args,page) end end
@@ -162,14 +163,10 @@ local function event(self)
 end
 local function landmark(self)
     local s=self.snapshot.run; local options={}; local spot=model.route[s.target]
+    local report=model.trail_reports.get(s)
+    if report then return trail_reports.draw(self,report) end
     local body=spot.subtitle
-    if s.target==2 then
-        body="Lightning split the oak; both halves still grow. The meadow road is easier on the wagon. The woodland holds roots, shelter, and more to discover."
-        options={
-            {label="Across the meadows",detail="27 km / open ground / reliable progress",fn=cmd(self,"leave",{branch="meadow"})},
-            {label="Through the woodland",detail="30 km / slower going / rich foraging",fn=cmd(self,"leave",{branch="woodland"})},
-            {label="Rest beneath the oak",detail="1 day + "..model.resources.daily_food(s).." food / recover condition and energy",fn=cmd(self,"rest")}}
-    elseif s.target==3 then
+    if s.target==3 then
         body="Spare rims and drying shelves crowd the last supply shop. There is no buying supplies beyond here. Keep 12 coins for Willowford's dependable ferry."
         options={
             {label="Visit the supply counter",detail="Buy provisions, repair materials, and medicine",fn=page(self,"shop")},
@@ -191,11 +188,7 @@ local function landmark(self)
                 detail=(method~="rope" and "22 energy / " or "No creature assistance / ")..util.round(model.river_risk(s,method)*100).."% risk of wet supplies and damage",fn=cmd(self,"river",{method=method})}
             options[#options+1]={label="Wait and watch the water",detail="1 day + meals / rest; weather may improve or worsen",fn=cmd(self,"river",{method="wait"})}
         end
-    elseif s.target==5 then
-        body="The last maintained shelter sits between repaired cairns. Beyond it: exposed ridge or sheltered gorge, with no more shops. The road closes on day 32."
-        options={{label="Take the ridge road",detail="30 km / quick passage / more wagon wear",fn=cmd(self,"leave",{branch="ridge"})},
-            {label="Follow the sheltered gorge",detail="35 km / slower, gentler travel",fn=cmd(self,"leave",{branch="gorge"})},
-            {label="Prepare for the last stretch",detail="Camp, repair, and care for your companions",fn=page(self,"camp")}}
+
     end
     local cue=s.target==3 and "LAST SUPPLY SHOP" or (s.target==5 and "LAST SHELTER / HIGH COUNTRY AHEAD" or "TRAVEL PAUSED")
     w.icon(self,28,599,s.target==3 and "food" or (s.target==5 and "rest" or "flag"),12,"gold")

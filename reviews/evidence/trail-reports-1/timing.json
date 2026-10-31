@@ -1,0 +1,9 @@
+{
+  "seconds": 5.56,
+  "scenes": [
+    "route_oak",
+    "route_gate",
+    "report_equipment",
+    "report_rain"
+  ]
+}
