@@ -1,6 +1,6 @@
 # Road-choice clarity
 
-2026-10-30: Owner FINISH on journey-1 revision 5 approved J1–J4, no notes or blanks. Imported and consumed automatically in the active session. S15 is this coherent implementation batch; the earlier N3/S5, N5/N6 and N7 queue remains approved.
+2026-10-30: Owner FINISH on journey-1 revision 5 approved J1–J4, no notes or blanks. Imported and consumed automatically in the active session. PR #14 implements S15 as this coherent batch; the earlier N3/S5, N5/N6 and N7 queue remains approved.
 
 J1 keeps the original pending event until the first exchange or withdrawal. Setup and the first intent can return freely, restoring combat RNG; later withdrawal retains its original cost. Legacy saved setups without the original event retain their existing exit. No invented event is reconstructed. Repeated inspection, save/resume, same next intent and subsequent peaceful choice are covered by exact-state comparisons.
 
