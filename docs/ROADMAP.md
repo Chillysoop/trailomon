@@ -29,7 +29,7 @@ Updated October 31, 2026. Scope: one polished Windows expedition before new regi
 | S9 | Evaluate a tiny equipment experiment, P5 / N7 | Three purchasable work items, one slot per companion, stopped-only swaps, travel/combat tradeoffs and compatible saves | 64 Lua checks, native persistence/GUI, targeted captures and 144 repeated full journeys; see WORK_ITEMS.md | done (PR #24) |
 | S18 | Add condition reports at the two forks, N9 | Reliable terrain and labeled uncertain conditions support preparation, with less information deeper in wilderness | 70 Lua checks, native controls, four rendered views; no RNG consumption or save changes | done (PR #25) |
 | S19 | Extend two roadside choices into later consequences, N10 | Two short chains within the event pool, one clear later consequence each | 77 Lua checks, native checkpoint/Continue checks, five rendered views | done (PR #27) |
-| S20 | Add three optional journal aims, N11 | Two delivered departure pairs, both final paths across arrivals, peaceful arrival; permanent journal records only | 85 Lua scenarios, native saves/navigation, six rendered views | doing |
+| S20 | Add three optional journal aims, N11 | Two delivered departure pairs, both final paths across arrivals, peaceful arrival; permanent journal records only | 85 Lua scenarios, native saves/navigation, six rendered views | done (PR #28) |
 
 ## Polish
 

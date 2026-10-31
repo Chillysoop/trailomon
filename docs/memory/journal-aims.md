@@ -1,6 +1,6 @@
 # Optional journal aims
 
-2026-10-31: owner said Proceed on approved N11/S20. Hosted next-1 revision42 remains all YES without amendments. No new vote or hosted deployment is needed.
+2026-10-31: PR #28 delivers approved N11/S20 after the owner said Proceed. Hosted next-1 revision42 remains all YES without amendments. No new vote or hosted deployment is needed.
 
 All three aims track automatically, with no opt-in contract or stat/resource reward. Fresh company records two different species pairs at departure, on delivered outcomes only. The first delivery establishes a pair; a second distinct pair completes it. Order, renaming and roadside recruits do not count as new pairs. Solo departures cannot record a pair. Both ways through records ridge/gorge only after reaching Lantern Reach (delivered or late). A quiet passage requires arrival without any automatic or legacy combat exchange; setup/back and withdrawal before an exchange remain peaceful. Early returns/rescues do not count as arrivals.
 
