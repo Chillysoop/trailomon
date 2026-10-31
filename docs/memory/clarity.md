@@ -1,6 +1,6 @@
 # Clarity and symbols
 
-2026-10-30: next-1 revision 34 approved all eight options and made visible clarity/simplicity critical path. PR #7 implements the requested icon system, N2 (C1+C3 / appended S14), and N4/S6. It does not finish N1 balance, N3 guardian behavior, N5 wilderness, N6 art, N7 equipment, or N8's full-journey pass. N1/S2 measurements are next. The illustrated report is deployed on the existing owner-private Site, source 7b1a67381f14138d513528687b96dca0e59daa3c; votes and audience retained.
+2026-10-30: next-1 revision 34 approved all eight options and made visible clarity/simplicity critical path. PR #7 is merged: requested icon system, N2 (C1+C3 / appended S14), and N4/S6. It does not finish N1 balance, N3 guardian behavior, N5 wilderness, N6 art, N7 equipment, or N8's full-journey pass. N1/S2 measurements are next. The illustrated report is deployed on the existing owner-private Site, source 7b1a67381f14138d513528687b96dca0e59daa3c; votes and audience retained. Clean Windows archive and hidden-launch limitation are recorded in delivery.md.
 
 27 concepts have canonical labels, meanings, shapes and categories in ui/iconography.lua; original 12-pixel drawings remain in ui/icons.lua. New distinct marks separate hauling from the wagon, gathering from food, and approach position from pressure. Whole-pixel rendering; guide under Journal. AGENTS and docs/ICONOGRAPHY.md define extension rules for future features. No generated/paid assets were needed.
 
