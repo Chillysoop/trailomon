@@ -50,6 +50,8 @@ Updated October 31, 2026. Scope: one polished Windows expedition before new regi
 
 ## Working rules
 
+October 31 creature-direction brainstorm: [wild-1](../reviews/wild-1.html) proposes sightings, field observations and one courier spar, with later relationship/acquisition/growth options. [Integration analysis](CREATURE_ENCOUNTERS.md) distinguishes reusable systems from new work. These are unapproved choices; no implementation step or change to the current expedition scope is scheduled yet.
+
 October 31 minimal-text follow-up to S21: compact daily readings and shorter depot/camp/gathering guidance; latest road note only; live combat omits repeated setup descriptions. Keep all costs, warnings, action labels and guide/journal details. This is interface copy/layout work; S5 balance and S10 reliability gaps retain their status.
 
 The October 30 [next-batch review](../reviews/next-1.html) received N1-N8 YES, reaffirmed at revision 37. The owner's comment made icon consistency and player clarity immediate priority: N2 and N4 shipped in PR #7, alongside the shared symbol system. S14 was appended without renumbering existing steps. PR #10 delivers N1's S2 measurement tool, including 120 journeys and 339 matched continuations repeated exactly. N3's guardian experiment shipped in PR #18. PR #20's N1/S5 bounded cost pass adopts it for new journeys with 3/6/1 energy costs; existing saves keep their rules. Broader S5 tuning remains unfinished; N7 equipment is complete; N6 art is deferred to the owner-led overhaul; N5/S7 scenery is implemented in this batch. N8 developer-role journeys shipped in PR #11; physical input, listening, pacing and native reliability remain S10 gaps. P1-P5 approvals remain in force.

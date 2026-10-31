@@ -1,5 +1,7 @@
 # Owner preferences
 
+2026-10-31: Owner wants to brainstorm more creature-adventure appeal: wild encounters, other handlers/trainers and collecting. Ground proposals in existing systems and integration costs. This is exploration, not approval to replace expedition priorities or implement all ideas; see CREATURE_ENCOUNTERS.md and wild-1.
+
 2026-10-31: "Minimal text" after the icon/color pass. Use compact icons, values and labels in play; remove duplicate instructions and live ability descriptions already available in setup. Retain costs, warnings and eligibility requirements. Keep chat concise.
 
 2026-10-31: Owner says not to focus much on art or animation; they will do a large art overhaul later. Gameplay and useful decisions take priority. Defer dedicated N6/S8 creature redesign, scenery polish and animation work. Existing art is sufficient for development; retain functional readability, coherent labeled icons and necessary feedback. This overrides the earlier N6 art-priority recommendation without changing historical votes or rejecting the eventual overhaul.
