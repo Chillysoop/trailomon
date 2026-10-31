@@ -33,7 +33,7 @@ Updated October 30, 2026. Scope: one polished Windows expedition before new regi
 | --- | --- | --- | --- | --- |
 | S10 | Finish sound, settings, and interface basics | Audio controls persist; sounds reviewed; focus, readable costs, disabled explanations, and timing consistent | Settings persistence, mouse/keyboard journeys, listening review, actual window inspection | todo |
 | S15 | Make road decisions readable and reversible, J1–J4 | Free return before combat's first exchange; exact recruitment food outlook; three authored road receipts; remembered viewing speed | Repeated inspection/RNG, old-save and native persistence checks; actual setup/receipt/recruit/restart screens | done (PR #14) |
-| S16 | Capture rendered test screens automatically, F1 | One CLI command opens isolated production UI fixtures, performs actions, saves 1280×720 PNGs and exits | Options/speed and combat setup/first-intent captures inspected; isolation regressions; no player-save access | doing |
+| S16 | Capture rendered test screens automatically, F1 | One CLI command opens isolated production UI fixtures, performs actions, saves 1280×720 PNGs and exits | Options/speed and combat setup/first-intent captures inspected; isolation regressions; no player-save access | done (PR #17) |
 | S11 | Run a complete new-player and expert playtest | Report page separates already-fixed bugs from design proposals and reassesses the plan | Fresh-profile journey, resumed journey, failure/return path, optimized and exploit-seeking run; evidence images and metrics | done (PR #11) |
 
 ## Release
