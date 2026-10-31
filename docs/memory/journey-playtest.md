@@ -17,3 +17,5 @@ New choices: J1 top—return from initial combat setup to original event without
 Fixed report summary's hardcoded reproduction command; now reflects custom seeds/policies/limits/compare or replay path, with quote regression. Final local40Lua/18Python pass; native save/recovery34GUIstates passed earlier batch. No gameplay edits. Original baseline needs its original reporter fingerprint for replay. Fresh phone/dark+desktop/light fixture validates votes/notes/FINISH/JSON/images/width; production owner answers never used for tests.
 
 Published owner-private successfully at /journey-1.html; Site source d0445feecd12ac893545f7c5aac6df98788638d4. Metadata retains the returned version. Root opens the new page; next-1 links it.
+
+PR #11 delivers S11 and the report-command fix. S10/N8 physical checks remain open. No new Windows bundle is needed: simulation/rendering/assets are unchanged.
