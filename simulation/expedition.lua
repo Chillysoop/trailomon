@@ -10,6 +10,7 @@ local wagons = require "content.wagons"
 local equipment=require "simulation.equipment"
 local forks=require "content.forks"
 local aims=require "simulation.journal_aims"
+local field_guide=require "simulation.field_guide"
 local M = {SCHEMA=1, CONTENT=1, route=route, species=species, resources=resources, events=events, combat=combat, equipment=equipment, trail_reports=require "simulation.trail_reports"}
 
 local function log(s,text)
@@ -27,7 +28,7 @@ local function prepare(snapshot,seed)
         crew={util.copy(p.roster.brindlehorn),util.copy(p.roster.loamling)},hauler=1,
         rng={weather=rng.seed(seed+11),events=rng.seed(seed+173),combat=rng.seed(seed+1019)},
         seen={},flags={},discoveries={},branches={},forage={},cooldown=1,log={},warnings={},
-        outcome="",ending="",combat_effort=combat.EFFORT,river_roll=rng.seed(seed+923)%100/100}
+        outcome="",ending="",wildlife_rules="wildlife-v1",combat_effort=combat.EFFORT,river_roll=rng.seed(seed+923)%100/100}
     p.next_id=p.next_id+1
     snapshot.run=s
     log(s,"Orchard cuttings for Lantern Reach. Preferred arrival: day 26. Road closes on day 32.")
@@ -207,7 +208,7 @@ local function day(snapshot,moving,resting)
     if moving and s.mode=="traveling" then
         local event=events.select(s,snapshot.profile)
         if event then
-            s.seen[event.id]=true
+            s.seen[event.id]=true;field_guide.encounter(s,event.id)
             if event.kind=="ambient" then effects(s,event.effects); log(s,event.text)
             else
                 s.mode="event"
@@ -326,6 +327,7 @@ local function resolve(snapshot,id)
     end
     if choice.flag then s.flags[choice.flag]=true end
     if event.id=="axle" and choice.id~="risk" then secure_axle(s) end
+    if choice.observe then field_guide.observe(s,choice.observe) end
     if choice.discovery then s.discoveries[choice.discovery]=true end
     if choice.recruit then
         s.crew[#s.crew+1]=progression.companion(choice.recruit)
@@ -573,7 +575,7 @@ function M.debug(snapshot,action,value)
         return ok,why
     end
     if action=="event" and stopped(s) and events.by_id[value] and events.by_id[value].choices then
-        s.pending={id=value,roll=rng.next(s.rng,"events")}; s.seen[value]=true; s.mode="event"; return true
+        s.pending={id=value,roll=rng.next(s.rng,"events")}; s.seen[value]=true;field_guide.encounter(s,value); s.mode="event"; return true
     elseif action=="resupply" and stopped(s) then
         s.food=math.min(100,resources.capacity(s)-25-s.repairs*4-s.medicine*2-equipment.weight(s))
         s.coins=80; s.wagon=100; s.traveler=100

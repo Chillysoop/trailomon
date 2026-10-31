@@ -21,6 +21,9 @@ local function validate(snapshot)
     if type(snapshot)~="table" or snapshot.schema~=model.SCHEMA or snapshot.content~=model.CONTENT then return false,"Unsupported save version" end
     local s,p=snapshot.run,snapshot.profile
     if type(s)~="table" or type(p)~="table" or not modes[s.mode] then return false,"Missing journey state" end
+    local guide=require "simulation.field_guide"
+    if s.wildlife_rules~=nil and s.wildlife_rules~="wildlife-v1" then return false,"Unknown wildlife rules" end
+    if not guide.valid(s.observations) or not guide.valid(s.new_observations) or not guide.valid(p.observations) or not guide.valid(p.traveled) then return false,"Invalid field observations" end
     if s.combat_effort~=nil and s.combat_effort~=model.combat.EFFORT then return false,"Unknown journey combat effort" end
     if type(snapshot.settings)~="table" or type(snapshot.settings.sound)~="boolean" or type(snapshot.settings.motion)~="boolean" then return false,"Invalid settings" end
     if snapshot.settings.travel_speed~=nil and not integer(snapshot.settings.travel_speed,1,2) then return false,"Invalid viewing speed" end

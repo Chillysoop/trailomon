@@ -9,7 +9,7 @@ return function(test,equal,legacy_journey)
         for _,name in ipairs(policy.names) do
             counts[name]={}
             for seed=1,40 do
-                local input=model.new(seed);input.run.combat_effort=nil;local before=util.copy(input)
+                local input=model.new(seed);input.run.combat_effort=nil;input.run.wildlife_rules=nil;local before=util.copy(input)
                 local report,final=runner.run(input,name)
                 assert(report.status=='completed');equal(final,legacy_journey(seed,name,nil,true));equal(input,before)
                 counts[name][report.outcome]=(counts[name][report.outcome] or 0)+1

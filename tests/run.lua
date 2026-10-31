@@ -59,7 +59,7 @@ local function act(p,strategy)
 end
 local function journey(seed,strategy,checkpoint,legacy)
     local p=model.new(seed)
-    if legacy then p.run.combat_effort=nil end
+    if legacy then p.run.combat_effort=nil;p.run.wildlife_rules=nil end
     for i=1,250 do
         if p.run.mode=="result" then return p end
         act(p,strategy)
@@ -70,7 +70,7 @@ end
 
 test("initial snapshot and content budgets",function()
     local p=model.new(1848);valid(p)
-    assert(#model.events.defs==18 and #model.route==6 and #model.species.order==6)
+    assert(#model.events.defs==21 and #model.route==6 and #model.species.order==6)
 end)
 test("new journeys do not share mutable state",function()
     local a,b=model.new(9),model.new(9)
@@ -239,6 +239,7 @@ test("all authored choices have a reachable resolution",function()
         end
     end
 end)
+require("tests.wildlife")(test,command,valid,assert_equal)
 require("tests.combat")(test,command,valid,assert_equal)
 require("tests.guardian")(test,command,valid,assert_equal)
 require("tests.combat_costs")(test,command,valid,assert_equal)
