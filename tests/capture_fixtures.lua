@@ -137,4 +137,28 @@ function M.items_crew(self)
     M.items_battle(self);self.capture_actions={};self.page="crew";self.redraw()
     self.capture_assert=function() assert(self.snapshot.run.crew[1].work_item=="padded_trace") end
 end
+function M.chain_tree(self)
+    reset(self,"trail");local p=self.snapshot
+    p.run.target=3;p.run.terrain="woodland";p.run.progress=p.run.distance-1
+    assert(model.debug(p,"event","tree"));self.redraw()
+end
+function M.chain_thanks(self)
+    M.chain_tree(self);local p=self.snapshot
+    assert(model.command(p,"choice",{id="haul"}));assert(model.command(p,"resume"));assert(model.command(p,"step"))
+    assert(p.run.flags.road_repaid and p.run.road_story);self.redraw()
+end
+function M.chain_axle(self)
+    reset(self,"trail");assert(model.debug(self.snapshot,"event","axle"));self.redraw()
+end
+function M.chain_failure(self)
+    M.chain_axle(self);local p=self.snapshot
+    assert(model.command(p,"choice",{id="risk"}));p.run.terrain="ridge"
+    assert(model.command(p,"resume"));assert(model.command(p,"step"))
+    assert(p.run.road_story and not p.run.flags.axle_lashed);self.redraw()
+end
+function M.chain_repair(self)
+    M.chain_axle(self);local p=self.snapshot
+    assert(model.command(p,"choice",{id="risk"}));assert(model.command(p,"repair"))
+    assert(p.run.road_story and not p.run.flags.axle_lashed);self.redraw()
+end
 return M

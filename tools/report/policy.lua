@@ -1,7 +1,7 @@
 -- Frozen reference policies from tests/run.lua. These are benchmark behaviors,
 -- not optimal players. Keep versioning explicit when a policy changes.
 local model=require 'simulation.expedition'
-local M={VERSION='reference-v1',names={'careful','peaceful','fighter'}}
+local M={VERSION='reference-v1+road-receipts',names={'careful','peaceful','fighter'}}
 function M.choice(p,kind)
     local event=model.events.by_id[p.run.pending.id]
     for _,c in ipairs(event.choices) do
@@ -11,7 +11,8 @@ function M.choice(p,kind)
 end
 function M.next(p,strategy)
     local s=p.run
-    if s.mode=='preparation' then return 'depart',{},'default crew and supplies'
+    if s.road_story then return 'ack_story',{},'read the earlier-choice consequence'
+    elseif s.mode=='preparation' then return 'depart',{},'default crew and supplies'
     elseif s.mode=='stopped' or s.mode=='traveling' then
         if s.food<model.resources.daily_food(s)*3 and model.forage_preview(s).net>0 then return 'forage',{},'fewer than three food days; positive gathering yield'
         elseif s.wagon<28 and s.repairs>0 then return 'repair',{},'wagon below 28'
