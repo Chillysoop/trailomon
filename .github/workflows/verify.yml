@@ -1,7 +1,10 @@
 name: Verify prototype
 on:
-  push:
   pull_request:
+  workflow_dispatch:
+concurrency:
+  group: verify-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
 permissions:
   contents: read
 jobs:
@@ -9,17 +12,38 @@ jobs:
     runs-on: windows-latest
     steps:
       - uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
+      - name: Check verification selection
+        run: python -m unittest discover -s tests -p "test_ci_scope.py"
+      - name: Select verification scope
+        id: scope
+        env:
+          BASE_SHA: ${{ github.event.pull_request.base.sha }}
+          HEAD_SHA: ${{ github.event.pull_request.head.sha }}
+        run: python tools/ci_scope.py
       - uses: actions/setup-java@v6
+        if: steps.scope.outputs.scope == 'all'
         with:
           distribution: temurin
           java-version: '25'
       - name: Simulation and native save checks
+        if: steps.scope.outputs.scope == 'all'
         shell: pwsh
         run: ./tools/test.ps1 -Headless
+      - name: Review checks
+        if: steps.scope.outputs.scope == 'review'
+        shell: pwsh
+        run: ./tools/test.ps1 -Suite Review
+      - name: Document verification
+        if: steps.scope.outputs.scope == 'docs'
+        run: echo "Only documentation or evidence changed; game inputs are unchanged."
       - name: Build offline Windows bundle
+        if: steps.scope.outputs.scope == 'all'
         shell: pwsh
         run: ./tools/build.ps1
       - uses: actions/upload-artifact@v4
+        if: steps.scope.outputs.scope == 'all'
         with:
           name: Trailomon-Windows
           path: dist/*.zip

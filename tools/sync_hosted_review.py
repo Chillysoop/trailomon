@@ -34,6 +34,6 @@ api = checkout / "app/api/responses/[page]"
 api.mkdir(parents=True, exist_ok=True)
 shutil.copyfile(ROOT / "tools/hosted_review/route.ts", api / "route.ts")
 shutil.copyfile(ROOT / "tools/hosted_review/schema.ts", checkout / "db/schema.ts")
-(checkout / "app/page.tsx").write_text('import { redirect } from "next/navigation";\nexport default function Page(){redirect("/journey-1.html");}\n', encoding="utf-8")
+(checkout / "app/page.tsx").write_text('import { redirect } from "next/navigation";\nexport default function Page(){redirect("/speed-1.html");}\n', encoding="utf-8")
 (checkout / "app/layout.tsx").write_text('import type { Metadata } from "next";\nexport const metadata: Metadata = {title:"Trailomon owner reviews", description:"Private expedition design reviews"};\nexport default function Layout({children}:{children:React.ReactNode}) {return <html lang="en"><body>{children}</body></html>;}\n', encoding="utf-8")
 print("Shared review UI and private storage routes synchronized; Site identity preserved.")

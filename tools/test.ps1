@@ -1,15 +1,22 @@
-param([switch]$SkipEngine, [switch]$Headless, [ValidateSet('', 'scavengers', 'territorial', 'legacy')][string]$Fixture='')
+param([switch]$SkipEngine, [switch]$Headless, [ValidateSet('All','Game','Review','Report')][string]$Suite='All', [ValidateSet('', 'scavengers', 'territorial', 'legacy')][string]$Fixture='')
 . (Join-Path $PSScriptRoot 'common.ps1')
-$luaPath = Initialize-TrailomonLua
+if ($Fixture -and $Suite -notin @('All','Game')) { throw 'Fixtures require the All or Game suite.' }
+if ($Suite -in @('All','Game','Report')) { $luaPath = Initialize-TrailomonLua }
 Push-Location $TrailomonRoot
 try {
-    & python -m unittest discover -s tests -p 'test_review*.py'
-    if ($LASTEXITCODE -ne 0) { throw 'Review server checks failed.' }
-    & $luaPath 'tests/run.lua'
-    if ($LASTEXITCODE -ne 0) { throw 'Simulation checks failed.' }
-    & python -m unittest discover -s tests -p 'test_report*.py'
-    if ($LASTEXITCODE -ne 0) { throw 'Expedition reporter checks failed.' }
-    if (-not $SkipEngine) {
+    if ($Suite -in @('All','Review')) {
+        & python -m unittest discover -s tests -p 'test_review*.py'
+        if ($LASTEXITCODE -ne 0) { throw 'Review server checks failed.' }
+    }
+    if ($Suite -in @('All','Game')) {
+        & $luaPath 'tests/run.lua'
+        if ($LASTEXITCODE -ne 0) { throw 'Simulation checks failed.' }
+    }
+    if ($Suite -in @('All','Report')) {
+        & python -m unittest discover -s tests -p 'test_report*.py'
+        if ($LASTEXITCODE -ne 0) { throw 'Expedition reporter checks failed.' }
+    }
+    if (-not $SkipEngine -and $Suite -in @('All','Game')) {
         $output = New-TrailomonOutput -Parent '.tools' -Prefix 'engine-checks'
         # Hosted runners need Defold's null graphics backend. Local checks keep
         # the release renderer so they exercise real GUI nodes without a debug server.
