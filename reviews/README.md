@@ -8,7 +8,7 @@ For a desktop-only local fallback, run `./tools/start_review.ps1`, then open `ht
 
 `hosted-site.json` records the verified Site identity and private URL. Read Sites database overview first, then every page of the exact returned `review_submissions` table. Use returned pagination offsets, verify no values were truncated, and pass the combined `{"rows": [...]}` through stdin to `python tools/import_hosted_review.py`. It validates chunk order and revision, restores the normal response JSON and FINISH flag, and avoids duplicate processing. Newer local answers are preserved as a conflict for the agent to reconcile. Submission chunks remain immutable across later draft autosaves.
 
-During an active session, poll the table about every 15–30 seconds while doing independent work. FINISH requires no extra chat message. After a turn ends, the next session must check hosted submissions before choosing work. An agent without Sites access can still consume a JSON download or pasted answer block; it must not claim to be monitoring the hosted page.
+During active work with an unanswered relevant decision, poll about every 15–30 seconds. Once answers are consumed, check at session start and closeout. Optional tooling proposals do not hold a finished update open for an idle hour. FINISH requires no extra chat message while the agent is active. After a turn ends, the next session checks hosted submissions before choosing work. An agent without Sites access must not claim to be monitoring the hosted page.
 
 ## Updating the hosted page
 
