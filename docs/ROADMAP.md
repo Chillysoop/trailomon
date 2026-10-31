@@ -16,7 +16,8 @@ Updated October 30, 2026. Scope: one polished Windows expedition before new regi
 | S3 | Implement automatic combat rules, P1 | Deterministic two-position encounters with six distinct behaviors and bounded triggers available to tests; existing manual saves still work | Pairing and trigger scenarios, fatigue and exhaustion, simultaneous effects, retreat, defeat, and unchanged results across replay | done (PR #4) |
 | S4 | Put automatic combat into the playable journey, P1 | Setup preview, position selection, readable exchanges, pause/step/speed, withdrawal, result explanation, and safe old-save handling | Native input/UI checks, save/resume equivalence, complete peaceful and fighting runs, actual 1280 by 720 playtest | done (PR #4) |
 | S5 | Tune combat against expedition needs, P1 | Several viable pairings, understandable costs, and reasons to choose peaceful options; findings in a review page | Bot comparisons plus new-player and expert playtests; no universal strongest pair or endless defensive stall | todo |
-| S6 | Clarify bounded gathering, P2 | Existing foraging gives clear place, effort, depletion, carrying, and net-food feedback; hunting stays deferred under approved P2 | Resource accounting scenarios, depleted and full-load previews, player can explain the cost of a gathering day | todo |
+| S6 | Clarify bounded gathering, P2 / N4 | Existing foraging gives clear place, effort, depletion, carrying, and net-food feedback; hunting stays deferred under approved P2 | Resource accounting scenarios, depleted and full-load previews, player can explain the cost of a gathering day | done (PR #7) |
+| S14 | Explain crew readiness and establish shared symbols, N2 / owner note | Canonical icon catalog and Journal guide; combat trigger reasons and energy costs; contextual travel-duty result | Shared-resolver forecast and threshold scenarios; native guide/input checks; actual Windows readability and combat playtest | done (PR #7) |
 
 ## Content
 
@@ -42,7 +43,7 @@ Updated October 30, 2026. Scope: one polished Windows expedition before new regi
 
 ## Working rules
 
-The October 30 [next-batch review](../reviews/next-1.html) audits the current phase and proposes priorities. It does not change statuses or revoke P1-P5 approvals. S2/S5 measurement and tuning are the recommended next batch; saved owner votes and comments can change that order.
+The October 30 [next-batch review](../reviews/next-1.html) received N1-N8 YES at revision 34. The owner's comment made icon consistency and player clarity immediate priority: N2 and N4 ship in PR #7, alongside the shared symbol system. S14 was appended without renumbering existing steps. N1 (S2/S5) expedition measurement is next; N3 guardian behavior, N5/N6 wilderness/art, N7 equipment after tuning, and N8 whole-journey usability remain approved and unfinished. P1-P5 approvals remain in force.
 
 Ship one step or a coherent approved batch per PR, test it, and merge after CI passes. Update the status to `done (PR #n)` with the actual number. A later failure reopens the relevant work rather than leaving a misleading done status. Preserve published review codes when editing a page.
 

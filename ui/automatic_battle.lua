@@ -2,6 +2,7 @@ local w=require "ui.widgets"
 local model=require "simulation.expedition"
 local util=require "simulation.util"
 local scene=require "presentation.scene"
+local clarity=require "simulation.clarity"
 local M={}
 local function text(self,x,y,t,size,color,width) return w.text(self,x,y,t,size or 12,color or "muted",width) end
 local function stats(self,x,y,c)
@@ -25,7 +26,7 @@ function M.select(self)
         w.button(self,x+16,254,231,32,position and (position==1 and "1 / Approach" or "2 / Wagon") or "Choose",function()
             if position then table.remove(team,position) elseif #team<2 then team[#team+1]=idx end
             self.redraw()
-        end,{key="battler"..i,selected=position~=nil,enabled=position~=nil or (#team<2 and model.resources.ready(c,4)),size=13,icon=position==2 and "wagon" or "pressure"})
+        end,{key="battler"..i,selected=position~=nil,enabled=position~=nil or (#team<2 and model.resources.ready(c,4)),size=13,icon=position==2 and "wagon" or "approach"})
     end
     text(self,28,220,"Energy: 4 per exchange +8 for one ability (up to "..(s.encounter=="scavengers" and 20 or 24).." each). Under 4: no pressure, at most 1 cover.",12)
     text(self,28,195,"Ground: "..s.terrain.." / Weather: "..s.weather.." / Reserve companions do not fight.",12)
@@ -47,19 +48,22 @@ local function log_view(self,b,y)
 end
 function M.draw(self)
     local s=self.snapshot.run;local b=s.battle
+    local preview=model.combat.preview(s)
     text(self,28,611,"EXCHANGE "..b.round.." / "..b.limit.."  /  "..(self.combat_paused and "PAUSED" or "AUTOMATIC"))
     text(self,28,579,b.kind=="scavengers" and "Hold the wagon." or "Win room to pass.",26,"ink")
     text(self,28,548,model.combat.intent_text(s),14,"gold")
     w.bar(self,28,527,834,b.resolve/(b.kind=="scavengers" and 65 or 75)*100,"red",6)
     text(self,28,514,"THREAT RESOLVE "..b.resolve.." / zero ends the threat before its hit",11)
-    scene.draw(self,28,324,834,175,s)
+    scene.draw(self,28,344,834,155,s)
     for position,i in ipairs(b.team) do
         local c=s.crew[i];local x=28+(position-1)*425
-        w.icon(self,x,294,position==1 and "pressure" or "wagon",20,"sage")
-        text(self,x+28,305,(position==1 and "APPROACH / " or "WAGON / ")..c.name,15,"ink")
-        local ability=b.used[i] and "ability spent" or (model.resources.ready(c,12) and "ability ready" or "ability needs rest")
-        text(self,x,279,"Energy "..util.round(c.stamina).." / Condition "..util.round(c.condition).." / "..ability,12)
-        text(self,x,260,model.combat.ability_text(s,c.species),12,"muted",409)
+        w.icon(self,x,317,position==1 and "approach" or "wagon",24,"sage")
+        text(self,x+34,329,(position==1 and "APPROACH / " or "WAGON / ")..c.name,15,"ink")
+        text(self,x,306,"Energy "..util.round(c.stamina).." / Condition "..util.round(c.condition).." / Next: "..preview.energy[i].." energy",12)
+        local readiness=preview.abilities[i]
+        w.icon(self,x,276,"assist",24,readiness.code=="trigger" and "gold" or "muted")
+        text(self,x+34,288,readiness.text,12,readiness.code=="trigger" and "gold" or "ink")
+        text(self,x,267,model.combat.ability_text(s,c.species),12,"muted",409)
     end
     w.button(self,28,190,194,39,self.combat_paused and "Resume" or "Pause",function() self.toggle_combat() end,{key="combat_pause",primary=true,size=14,icon="time"})
     w.button(self,235,190,194,39,"Step exchange",function() self.combat_paused=true;self.perform("battle_step") end,{key="combat_step",size=14})
@@ -77,16 +81,18 @@ function M.result(self)
     text(self,28,611,"ENCOUNTER / WHAT IT COST")
     text(self,28,575,b.outcome=="won" and "There is room for the wagon." or "Bring the crew away.",27,"ink")
     text(self,28,538,b.outcome=="won" and "The threat has passed. Effort and injuries carry into the journey." or model.combat.withdraw_text(b.kind),14)
-    scene.draw(self,28,340,834,175,s)
+    scene.draw(self,28,366,834,149,s)
     local costs={{"food","Provisions "..signed(r.food)},{"cargo","Cargo "..signed(r.cargo).."%"},{"time","Days +"..r.days}}
-    for n,cost in ipairs(costs) do local x=28+(n-1)*280;w.icon(self,x,303,cost[1],23,"gold");text(self,x+33,315,cost[2],17,"ink") end
-    text(self,28,290,"Net changes include any recovery during a detour.",11)
+    for n,cost in ipairs(costs) do local x=28+(n-1)*280;w.icon(self,x,329,cost[1],24,"gold");text(self,x+34,341,cost[2],17,"ink") end
+    text(self,28,316,"Net changes include any recovery during a detour.",11)
     for position,i in ipairs(b.team) do
         local c=s.crew[i];local delta=r.crew[i];local x=28+(position-1)*425
-        text(self,x,270,c.name,20,"ink")
-        w.icon(self,x,232,"stamina",20,"sage");text(self,x+28,244,"Energy "..signed(delta.stamina).." / now "..util.round(c.stamina),14)
-        w.icon(self,x,204,"condition",20,"gold");text(self,x+28,216,"Condition "..signed(delta.condition).." / now "..util.round(c.condition),14)
+        text(self,x,296,c.name,20,"ink")
+        w.reading(self,x,270,"stamina",signed(delta.stamina).." / now "..util.round(c.stamina),{size=14})
+        w.reading(self,x,242,"condition",signed(delta.condition).." / now "..util.round(c.condition),{size=14,color="gold"})
     end
+    local duty=clarity.next_duty(s)
+    w.reading(self,28,206,duty.icon,nil,{label=duty.text,size=13})
     log_view(self,b,181)
     w.button(self,28,64,409,43,"Return to the journey",function() self.perform("battle_continue") end,{key="combat_continue",primary=true,size=15,icon="trail"})
     w.button(self,453,64,194,43,"Previous exchange",function() self.combat_log=math.max(1,(self.combat_log or #b.history)-1);self.redraw() end,{enabled=#b.history>1,size=12})

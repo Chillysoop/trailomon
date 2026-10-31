@@ -12,6 +12,8 @@ Deliver the orchard cuttings by day 26 if possible. The road closes on day 32. C
 
 Use **Crew** to rotate haulers, set duties, treat injuries, rename companions, and read memories. Camp actions cost a day and meals. Foraging can find food, but each stretch depletes. Mossbell is the only intermediate supply shop. Willowford offers a reliable paid ferry and riskier alternatives.
 
+**Camp → Gather nearby provisions** opens the day's preview: food found, carrying room after meals, food packed, creature energy spent, and expected net provisions. Confirm once to spend the day; the journal records the actual receipt. **Journal → Symbol guide** explains all resource, role, and action marks. In combat, each ability now states its next trigger or the reason it will not fire; the result connects remaining energy to the crew's next job.
+
 Battles are optional. Choose up to two companions and their positions: approach for pressure, wagon for cover. Each species acts automatically, with one additional ability when its visible trigger occurs. Use Pause or Space to inspect, Step exchange to advance once, and Resume to watch. Calm runs at five seconds per exchange; brisk at 1.5. Menus, focus loss, and loading pause combat. Withdraw before the next exchange to pay the displayed loss once. The result screen shows actual energy, condition, cargo, provisions, and days spent. Older saved manual encounters keep their original action buttons until finished.
 
 Two original species can join after you help them on the trail. Companions, observations, and memories persist across expeditions. Inspecting and crossing Willowford unlocks a covered wagon after that trip ends. The cover protects against rain but reduces carrying capacity.

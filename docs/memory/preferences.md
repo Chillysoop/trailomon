@@ -13,3 +13,5 @@
 2026-10-30: plan-1 revision 7 approved P1–P5 without amendments. Keep bounded foraging and defer hunting for this milestone; prioritize automatic combat, wilderness presentation, six-species art refinement, and the three-item equipment experiment after combat. P5 is approved even though it was not a top pick. No review proposals rejected. The owner's development experience is unspecified; use beginner-friendly explanations.
 
 2026-10-30: Owner clarified Astronarch is the stronger reference for actual automatic combat: positions, distinct roles, and partner-triggered abilities. Automon informs the original creature-party appeal. Preserve the quiet expedition pace.
+
+2026-10-30: next-1 N1-N8 all approved. The general comment makes visible clarity and simplicity critical path: a thoughtful iconography system must cover existing resources and provide rules for future features. Prioritize a coherent semantic catalog, recognizable silhouettes, consistent labels, and contextual reasons over adding ornamental symbols.
