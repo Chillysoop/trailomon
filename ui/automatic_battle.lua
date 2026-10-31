@@ -32,13 +32,13 @@ function M.select(self)
         end,{key="battler"..i,selected=position~=nil,enabled=position~=nil or (#team<2 and model.resources.ready(c,ordinary)),size=13,icon=position==2 and "wagon" or "approach"})
     end
     text(self,28,220,model.combat.setup_cost_text(s),12)
-    text(self,28,195,"Ground: "..s.terrain.." / Weather: "..s.weather.." / Reserve companions do not fight.",12)
+    text(self,28,195,s.terrain.." / "..s.weather.." / Reserves sit out",12)
     w.button(self,638,185,224,30,"Swap positions",function() team[1],team[2]=team[2],team[1];self.redraw() end,{key="swap_positions",enabled=#team==2,size=12})
-    w.button(self,28,129,409,43,#team>0 and "Begin automatic encounter" or "Choose a companion first",function() self.perform("battle_start",{team=team}) end,{key="battle_begin",primary=true,enabled=#team>0,size=15,icon="crew"})
+    w.button(self,28,129,409,43,#team>0 and "Begin encounter" or "Choose a companion",function() self.perform("battle_start",{team=team}) end,{key="battle_begin",primary=true,enabled=#team>0,size=15,icon="crew"})
     local reversible=model.can_back_to_event(s)
     w.button(self,453,129,409,43,reversible and "Back to the encounter" or "Withdraw",function() self.perform(reversible and "battle_back" or "withdraw") end,{key=reversible and "battle_back" or "battle_withdraw",size=14,icon=reversible and "trail" or nil})
-    text(self,28,110,reversible and "Return to the original choices. No time, supplies or energy spent." or model.combat.withdraw_text(s.encounter,s),12)
-    text(self,28,79,s.encounter=="scavengers" and "Hold for 3 exchanges or reduce resolve to zero. An exhausted crew must retreat." or "Reduce resolve to zero within 4 exchanges, or take the detour.",12,"gold",834)
+    text(self,28,110,reversible and "Back: no cost." or model.combat.withdraw_text(s.encounter,s),12)
+    text(self,28,79,s.encounter=="scavengers" and "Hold 3 exchanges or break resolve. Exhaustion forces retreat." or "Break resolve in 4 exchanges or detour.",12,"gold",834)
 end
 local function log_view(self,b,y)
     local n=self.combat_log or #b.history
@@ -47,7 +47,7 @@ local function log_view(self,b,y)
     if entry then
         text(self,28,y,"EXCHANGE "..entry.round.." / "..entry.summary,12,"gold")
         text(self,28,y-22,table.concat(entry.notes," "),12,"ink",834)
-    else text(self,28,y,"The next rush is shown above. Pause, step, or withdraw before it resolves.",12) end
+    end
     return n
 end
 function M.draw(self)
@@ -57,7 +57,7 @@ function M.draw(self)
     text(self,28,579,b.kind=="scavengers" and "Hold the wagon." or "Win room to pass.",26,"ink")
     text(self,28,548,model.combat.intent_text(s),14,"gold")
     w.bar(self,28,527,834,b.resolve/(b.kind=="scavengers" and 65 or 75)*100,"red",6)
-    text(self,28,514,"THREAT RESOLVE "..b.resolve.." / zero ends the threat before its hit",11)
+    text(self,28,514,"RESOLVE "..b.resolve.." / 0 = repelled",11)
     scene.draw(self,28,344,834,155,s)
     for position,i in ipairs(b.team) do
         local c=s.crew[i];local x=28+(position-1)*425
@@ -69,21 +69,20 @@ function M.draw(self)
         local readiness=preview.abilities[i]
         w.icon(self,x,276,"assist",24,readiness.code=="trigger" and w.tint("assist") or "muted")
         text(self,x+34,288,readiness.text,12,readiness.code=="trigger" and "gold" or "ink")
-        text(self,x,267,model.combat.ability_text(s,c.species,c),12,"muted",409)
     end
     w.button(self,28,190,194,39,self.combat_paused and "Resume" or "Pause",function() self.toggle_combat() end,{key="combat_pause",primary=true,size=14,icon="time"})
     w.button(self,235,190,194,39,"Step exchange",function() self.combat_paused=true;self.perform("battle_step") end,{key="combat_step",size=14})
     w.button(self,442,190,194,39,self.combat_speed==2 and "Speed: brisk" or "Speed: calm",function() self.combat_speed=self.combat_speed==2 and 1 or 2;self.reset_clock();self.redraw() end,{key="combat_speed",size=13})
     w.button(self,649,190,213,39,"Withdraw",function() self.perform("withdraw") end,{key="battle_withdraw",size=14})
-    text(self,28,174,model.combat.withdraw_text(b.kind,s).." Costs apply once, before the next exchange.",11)
+    text(self,28,174,model.combat.withdraw_text(b.kind,s),11)
     log_view(self,b,144)
     if not model.can_back_to_event(s) then
         w.button(self,28,58,180,27,"Previous exchange",function() self.combat_paused=true;self.combat_log=math.max(1,(self.combat_log or #b.history)-1);self.reset_clock();self.redraw() end,{key="combat_previous",enabled=#b.history>1,size=11})
         w.button(self,221,58,180,27,"Latest exchange",function() self.combat_log=#b.history;self.redraw() end,{key="combat_latest",enabled=#b.history>0,size=11})
     end
-    text(self,425,72,"Menus and focus loss pause. Resume when ready.",11)
+    text(self,425,72,"Menus pause combat.",11)
     if model.can_back_to_event(s) then
-        w.button(self,28,58,373,27,"Back to encounter / no cost before first exchange",function() self.perform("battle_back") end,{key="battle_back",size=11})
+        w.button(self,28,58,373,27,"Back / no cost yet",function() self.perform("battle_back") end,{key="battle_back",size=11})
     end
 end
 local function signed(n) return (n>0 and "+" or "")..util.round(n) end
@@ -91,11 +90,11 @@ function M.result(self)
     local s=self.snapshot.run;local b=s.battle;local r=b.result
     text(self,28,611,"ENCOUNTER / WHAT IT COST")
     text(self,28,575,b.outcome=="won" and "There is room for the wagon." or "Bring the crew away.",27,"ink")
-    text(self,28,538,b.outcome=="won" and "The threat has passed. Effort and injuries carry into the journey." or model.combat.withdraw_text(b.kind,s),14)
+    if b.outcome~="won" then text(self,28,538,model.combat.withdraw_text(b.kind,s),14) end
     scene.draw(self,28,366,834,149,s)
     local costs={{"food","Provisions "..signed(r.food)},{"cargo","Cargo "..signed(r.cargo).."%"},{"time","Days +"..r.days}}
     for n,cost in ipairs(costs) do local x=28+(n-1)*280;w.icon(self,x,329,cost[1],24);text(self,x+34,341,cost[2],17,"ink") end
-    text(self,28,316,"Net changes include any recovery during a detour.",11)
+    text(self,28,316,"Net changes include detour recovery.",11)
     for position,i in ipairs(b.team) do
         local c=s.crew[i];local delta=r.crew[i];local x=28+(position-1)*425
         text(self,x,296,c.name,20,"ink")

@@ -210,6 +210,7 @@ function M.clarity_crew(self)
 end
 function M.clarity_travel(self) M.clarity_crew(self);self.page="trail";self.redraw() end
 function M.clarity_gather(self) reset(self,"forage");self.redraw() end
+function M.minimal_camp(self) reset(self,"camp");self.redraw() end
 function M.clarity_symbols(self) reset(self,"symbols");self.symbol_group=1;self.redraw() end
 function M.clarity_symbols_crew(self) M.clarity_symbols(self);self.capture_actions={"symbol_group2"} end
 function M.clarity_symbols_road(self) M.clarity_symbols(self);self.capture_actions={"symbol_group3"} end

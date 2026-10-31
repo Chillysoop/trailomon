@@ -164,6 +164,7 @@ local function interaction_checks(self)
     coroutine.yield()
     assert(self.snapshot.run.mode=="combat_result")
     button(self,"combat_continue").fn()
+    coroutine.yield() -- Match production's one redraw per frame before the next fixture.
     assert(self.snapshot.run.mode=="stopped")
 
     fixture(self,"trail",function(p) departed(p);model.debug(p,"event","scavengers");model.command(p,"choice",{id="battle"}) end)

@@ -41,7 +41,7 @@ local function sidebar(self)
         label(self,x,y,stat[1]);w.icon(self,x,y-40,stat[3],24);w.text(self,x+30,y-27,tostring(stat[2]),23,"ink")
     end
     w.rect(self,910,432,322,1,"edge")
-    label(self,910,411,"YOUR TRAVELING COMPANY")
+    label(self,910,411,"CREW")
     for i,c in ipairs(s.crew) do
         local y=315-(i-1)*88
         w.sprite(self,c.species,944,y+34,76,c.condition<=0)
@@ -60,7 +60,7 @@ local function sidebar(self)
 end
 local function recent_log(self,x,y,width,count)
     local s=self.snapshot.run
-    label(self,x,y,"NOTES FROM THE ROAD")
+    label(self,x,y,"LATEST")
     for row=1,count do
         local entry=s.log[#s.log-count+row]
         if entry then
@@ -75,7 +75,7 @@ local function preparation(self)
     local s=self.snapshot.run;local p=self.snapshot.profile
     label(self,28,611,"FERNWAKE DEPOT  /  DEPARTURE "..s.seed)
     w.text(self,28,572,"A small crew. A long road.",30,"ink")
-    w.text(self,28,537,"Choose up to two companions. One must haul the wagon.",15,"muted")
+    w.text(self,28,537,"Up to 2 companions. At least 1 hauler.",15,"muted")
     local selected,budget={},0
     for _,c in ipairs(s.crew) do selected[c.species]=true;budget=budget+model.species.defs[c.species].cost end
     label(self,28,508,"CREW "..#s.crew.." / 2    CREW POINTS "..budget.." / 7")
@@ -91,12 +91,12 @@ local function preparation(self)
         w.text(self,x+161,y+120,def.draft and "CAN HAUL" or "SUPPORT",10,"muted")
         w.text(self,x+15,y+83,def.name,19,"ink")
         label(self,x+15,y+59,def.role)
-        w.button(self,x+15,y+14,233,29,p.roster[id] and (selected[id] and "Traveling with you" or "Choose companion") or "Meet on the trail",cmd(self,"crew",{species=id}),{enabled=p.roster[id]~=nil,selected=selected[id],size=12,key="select_"..id})
+        w.button(self,x+15,y+14,233,29,p.roster[id] and (selected[id] and "Selected" or "Choose") or "Meet on the trail",cmd(self,"crew",{species=id}),{enabled=p.roster[id]~=nil,selected=selected[id],size=12,key="select_"..id})
     end
     w.panel(self,890,58,362,562)
     label(self,910,593,"THE FIRST DELIVERY")
     w.text(self,910,560,"Orchard cuttings",23,"ink")
-    w.text(self,910,529,"Carry living trees to Lantern Reach. Arrive by day 26; the road closes on day 32.",14,"muted",320)
+    w.text(self,910,529,"To Lantern Reach\nDue: day 26 / Road closes: day 32",14,"muted",320)
     w.rect(self,910,449,322,1,"edge")
     label(self,910,429,"PACK YOUR WAGON")
     w.reading(self,910,405,"coins",s.coins,{size=12})
@@ -111,8 +111,8 @@ local function preparation(self)
         w.button(self,1098,y,58,33,"-"..item.amount,cmd(self,"sell",{item=id}),{key="sell_"..id,size=12,enabled=s[id]>=item.amount})
         w.button(self,1164,y,68,33,"+"..item.amount,cmd(self,"buy",{item=id}),{key="buy_"..id,size=12,enabled=s.coins>=item.price and model.resources.weight(s)+item.weight<=model.resources.capacity(s)})
     end
-    w.text(self,910,237,"+ buys a pack / - returns it for the same coins.",10,"muted")
-    label(self,910,218,"Meals: "..model.resources.daily_food(s).." / day, about "..model.forecast(s).days.." days packed")
+    w.text(self,910,237,"+ Buy / - Refund",10,"muted")
+    label(self,910,218,model.resources.daily_food(s).." meals/day / "..model.forecast(s).days.." days packed")
     w.button(self,910,163,154,32,"Open wagon",cmd(self,"wagon",{id="standard"}),{selected=s.wagon_type=="standard",size=12})
     w.button(self,1074,163,158,32,"Covered",cmd(self,"wagon",{id="covered"}),{selected=s.wagon_type=="covered",enabled=p.covered,size=12})
     label(self,910,152,p.covered and "Canvas trades capacity for rain protection." or "Study Willowford to unlock a covered wagon.")
@@ -139,11 +139,14 @@ local function travel(self)
     w.button(self,662,232,184,40,"Meals: "..s.rations,function()
         local next={sparse="normal",normal="generous",generous="sparse"};self.perform("policy",{key="rations",value=next[s.rations]})
     end,{size=12})
-    label(self,44,209,"Base day: "..forecast.food.." food / "..forecast.progress.." km / "..forecast.effort.." haul energy, +"..forecast.recovery.." recovery. Crew and conditions can change this.")
+    w.reading(self,44,209,"food","-"..forecast.food,{label="Meals",size=11,icon_size=12})
+    w.reading(self,235,209,"trail",forecast.progress.." km",{label="Travel",size=11,icon_size=12})
+    w.reading(self,440,209,"stamina","-"..forecast.effort,{label="Haul",size=11,icon_size=12})
+    w.reading(self,640,209,"stamina","+"..forecast.recovery,{label="Recover",size=11,icon_size=12})
     w.button(self,44,179,180,23,"Camp & recover",page(self,"camp"),{size=12,icon="rest"})
     w.button(self,236,179,180,23,"Request help",page(self,"return"),{size=12})
-    label(self,440,189,"Space pauses. Every choice waits for you.")
-    recent_log(self,28,145,834,3)
+    label(self,440,189,"Base/day. Crew & weather vary.")
+    recent_log(self,28,145,834,1)
     local notice=s.notice or (s.flags.axle_lashed and "Loose axle: rain, woodland, ridge or gorge can cause 6 more wagon damage. Repair at camp to prevent it.")
     if notice then w.text(self,28,58,notice,12,"gold",834) end
 end
@@ -158,7 +161,7 @@ local function choices(self,title,body,options,kicker)
         w.button(self,50,y,790,39,option.label,option.fn,{primary=i==1,enabled=option.enabled~=false,size=14,key=option.key,icon=option.icon})
         w.text(self,59,y-14,option.detail or "",11,option.enabled==false and "red" or "muted")
     end
-    recent_log(self,28,114,834,2)
+    recent_log(self,28,114,834,1)
 end
 local function event(self)
     local s=self.snapshot.run
@@ -227,7 +230,7 @@ end
 local function camp(self)
     local s=self.snapshot.run;local forage=model.forage_preview(s);local food=model.resources.daily_food(s)
     local available=s.mode=="stopped" or s.mode=="landmark" or s.mode=="traveling"
-    choices(self,"A little time to recover.","Every camp action uses one day and the crew's meals. Well-fed companions regain more strength. You can always request help.",{
+    choices(self,"A little time to recover.","Each action: 1 day + meals.",{
         {label="Rest the whole crew",icon="rest",detail="1 day / "..food.." food / up to +25 energy and +8 condition",enabled=available,fn=cmd(self,"rest")},
         {label="Gather nearby provisions",icon="forage",detail=forage.closing and "The road closes tomorrow; no harvest can be brought back." or (forage.gross<=0 and "This stretch has been gathered clean." or "Review 1 day, meals, carrying room and "..(forage.net>=0 and "+" or "")..forage.net.." expected provisions."),enabled=available and forage.gross>0 and not forage.closing,fn=page(self,"forage"),key="gather_preview"},
         {label="Repair the wagon",icon="repairs",detail=s.wagon>=100 and "The wagon needs no repairs." or (s.repairs<1 and "Needs 1 repair material." or "1 day + meals + 1 repair material / +30 wagon"..(s.flags.axle_lashed and " / secures the loose axle" or " condition")),enabled=available and s.repairs>0 and s.wagon<100,fn=cmd(self,"repair")},
