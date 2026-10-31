@@ -1,0 +1,19 @@
+[project]
+title = Trailomon Capture
+dependencies#0 = https://github.com/britzl/defold-screenshot/archive/5f3098e3bfc37e8f26bde9428436b4d4499d1d50.zip
+
+[bootstrap]
+main_collection = /tests/screenshots.collectionc
+
+[display]
+width = 1280
+height = 720
+high_dpi = 0
+window_hidden = 1
+
+[engine]
+run_while_iconified = 1
+
+[trailomon]
+save_namespace = trailomon_capture_unused
+capture_cases = options,combat_setup

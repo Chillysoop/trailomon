@@ -1,0 +1,63 @@
+-- Test-only: draw the production UI, activate its callbacks, capture post-render.
+-- No save service, player profile, desktop input, or debug server is involved.
+local model=require "simulation.expedition"
+local screens=require "ui.screens"
+local scene=require "presentation.scene"
+local fixtures=require "tests.capture_fixtures"
+
+local function stop(self,ok,why)
+    self.finished=true
+    local file=assert(io.open("capture-result.json","wb"))
+    file:write(json.encode({ok=ok,error=why or "",captures=self.captured}))
+    file:close()
+    msg.post("@system:","exit",{code=ok and 0 or 1})
+end
+
+function init(self)
+    -- Windows can apply desktop scaling to the initial size. Request our actual
+    -- pixel size after creation; the callback below verifies the framebuffer.
+    window.set_size(1280,720)
+    self.captured={};self.cases={};self.index=1;self.frames=0
+    for name in sys.get_config_string("trailomon.capture_cases","options,combat_setup"):gmatch("[^,]+") do
+        self.cases[#self.cases+1]=name
+    end
+    self.redraw=function() self.needs_draw=true end
+    self.perform=function(id,args,page)
+        assert(model.command(self.snapshot,id,args));self.page=page or self.page;self.redraw()
+    end
+    self.open_page=function(page) self.page=page;self.redraw() end
+    self.reset_clock=function() end
+    self.save_now=function() error("Screenshot fixtures must never save player data") end
+    self.toggle_combat=function() self.combat_paused=not self.combat_paused;self.redraw() end
+end
+
+function update(self,dt)
+    if self.finished or self.pending then return end
+    local ok,why=pcall(function()
+        if self.frames==0 then
+            local name=self.cases[self.index]
+            if not name then stop(self,true);return end
+            assert(fixtures[name],"Unknown screenshot fixture: "..name)(self)
+            self.frames=1
+        elseif #self.capture_actions>0 then
+            fixtures.click(self,table.remove(self.capture_actions,1));self.frames=1
+        elseif self.frames<4 then self.frames=self.frames+1
+        else
+            if self.capture_assert then self.capture_assert() end
+            self.pending=true
+            local name=self.cases[self.index]
+            screenshot.png(function(_,png,width,height)
+                local captured,err=pcall(function()
+                    assert(width==1280 and height==720,"Unexpected capture dimensions: "..tostring(width).."x"..tostring(height))
+                    assert(type(png)=="string" and #png>1000,"Empty screenshot")
+                    local file=assert(io.open(name..".png","wb"));file:write(png);file:close()
+                    self.captured[#self.captured+1]={name=name,width=width,height=height,bytes=#png}
+                    self.index=self.index+1;self.frames=0;self.pending=false
+                end)
+                if not captured then stop(self,false,tostring(err)) end
+            end)
+        end
+        if self.needs_draw then screens.draw(self);scene.update(self,0,true,false);self.needs_draw=false end
+    end)
+    if not ok then stop(self,false,tostring(why)) end
+end

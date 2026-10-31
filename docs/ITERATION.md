@@ -30,4 +30,4 @@ Build one shareable ZIP after a meaningful gameplay batch or on request. Generat
 
 ## Optional next investment
 
-See `reviews/speed-1.html`: scripted rendered captures, a stable native test executable location, and an explicit verification-evidence ledger. These require their own bounded implementation; none is claimed to exist yet. Do not build the entire tooling backlog before returning to game design.
+The owner approved speed-1 F1 in chat. `./tools/capture.ps1` now captures actual Options and combat screens through a test-only release renderer; see [SCREENSHOTS.md](SCREENSHOTS.md). Inspect affected PNGs directly and add cases as features need them. F2 (stable launcher) and F3 (evidence-reuse ledger) remain unapproved. Return to approved gameplay rather than building the rest of the tooling backlog.
