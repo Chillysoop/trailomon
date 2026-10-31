@@ -9,9 +9,17 @@
   const ideas = [...document.querySelectorAll('.idea')];
   let state = {page: PAGE, title: document.title, general: '', general_at: '', answers: {}, finished: false, updated_at: ''};
   let revision = 0, timer, queue = Promise.resolve(), busy = false;
+  let showAnswered = false;
+  const reviewed = new Set();
   const clone = x => JSON.parse(JSON.stringify(x));
   const now = () => new Date().toISOString();
   const status = text => { $('#status').textContent = text; };
+  function rememberAnswers() {
+    for (const el of ideas) {
+      const code = el.dataset.code;
+      if (state.answers[code]?.vote) reviewed.add(code);
+    }
+  }
   function store() { try { localStorage.setItem(KEY, JSON.stringify(state)); } catch { status('Browser storage unavailable. Keep the local server running.'); } }
   function merge(local, remote) {
     const result = {...remote, answers: {...(remote.answers || {})}};
@@ -25,7 +33,7 @@
     return {...result, page: PAGE, title: document.title};
   }
   function render() {
-    let yes = 0, no = 0, open = 0;
+    let yes = 0, no = 0, open = 0, hidden = 0;
     for (const el of ideas) {
       const a = state.answers[el.dataset.code] || {vote: '', note: ''};
       el.querySelector('.yes').setAttribute('aria-pressed', String(a.vote === 'yes'));
@@ -33,9 +41,20 @@
       const input = el.querySelector('textarea');
       if (document.activeElement !== input) input.value = a.note || '';
       if (a.vote === 'yes') yes++; else if (a.vote === 'no') no++; else open++;
+      // Keep this session's new choices visible for notes until FINISH.
+      const answered = reviewed.has(el.dataset.code) && Boolean(a.vote);
+      el.hidden = answered && !showAnswered;
+      if (answered) hidden++;
     }
     if (document.activeElement !== $('#general')) $('#general').value = state.general || '';
     $('#tally').textContent = `${yes} yes · ${no} no · ${open} open`;
+    $('#answered-toggle').hidden = hidden === 0;
+    $('#answered-toggle').textContent = showAnswered ? 'Hide answered items' : `Show answered items (${hidden})`;
+    $('#answered-toggle').setAttribute('aria-expanded', String(showAnswered));
+    $('#review-empty').hidden = open !== 0;
+    $('#review-empty').textContent = state.finished ? 'No open decisions. Your answers are saved.' : 'All choices answered. Press FINISH to send your answers.';
+    $('#allTop').hidden = !ideas.some(el => el.hasAttribute('data-top') && !state.answers[el.dataset.code]?.vote);
+    $('#finish').hidden = open === 0 && state.finished && !showAnswered;
   }
   function answer(code) { return state.answers[code] ||= {vote: '', note: '', at: ''}; }
   function changed() {
@@ -108,7 +127,8 @@
     busy = true; clearTimeout(timer); disable(true);
     state.general = $('#general').value; state.finished = true; state.finished_at = now(); state.updated_at = now(); store();
     status('Sending FINISH…');
-    try { if (!(await enqueue(true))) await exportAnswers(); } finally { busy = false; disable(false); }
+    try { if (!(await enqueue(true))) await exportAnswers(); }
+    finally { rememberAnswers(); busy = false; disable(false); render(); }
   }
   async function load() {
     disable(true); let local;
@@ -117,13 +137,17 @@
     try {
       const r = await request(); if (!r.ok) throw new Error('Load failed'); const remote = await r.json();
       if (remote.answers) { revision = remote.revision || 0; state = merge(state, remote); }
-      status(state.finished ? 'Previously finished. Edit answers and press FINISH to send an update.' : 'Ready. Changes save automatically.');
+      status(state.finished ? 'Your previous answers are saved.' : 'Ready. Changes save automatically.');
     } catch { status('Server unavailable. Answers stay in this browser; FINISH exports a copy.'); document.body.classList.add('fallback'); }
-    state.page = PAGE; state.title = document.title; store(); render(); disable(false);
+    state.page = PAGE; state.title = document.title; rememberAnswers(); store(); render(); disable(false);
   }
+  const filter = document.createElement('section'); filter.className = 'review-filter';
+  filter.innerHTML = '<p id="review-empty" role="status" hidden></p><button id="answered-toggle" type="button" aria-expanded="false" hidden>Show answered items</button>';
+  $('.general').before(filter);
+  $('#answered-toggle').onclick = () => { showAnswered = !showAnswered; render(); };
   ideas.forEach(controls);
   $('#general').oninput = e => { state.general = e.target.value; state.general_at = now(); changed(); };
-  $('#allTop').onclick = () => { for (const el of ideas.filter(el => el.hasAttribute('data-top'))) Object.assign(answer(el.dataset.code), {vote: 'yes', at: now()}); changed(); };
+  $('#allTop').onclick = () => { for (const el of ideas.filter(el => el.hasAttribute('data-top') && !state.answers[el.dataset.code]?.vote)) Object.assign(answer(el.dataset.code), {vote: 'yes', at: now()}); changed(); };
   $('#finish').onclick = finish; $('#export').onclick = exportAnswers;
   new ResizeObserver(() => { document.body.style.paddingBottom = `${$('.bar').getBoundingClientRect().height + 28}px`; }).observe($('.bar'));
   window.addEventListener('pagehide', store);
