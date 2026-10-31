@@ -35,6 +35,23 @@ M.defs={
     settings={label="Options",meaning="Sound, motion, saves, and seed.",shape="cog"},
 }
 local roles={brindlehorn="haul",reedskipper="water",loamling="dig",bellmoth="scout",cindercoil="warm",slatewhorl="guard"}
+-- Recognition colors, not good/bad states. Shape, label and value stay visible.
+M.palette={leaf="b6d39a",brass="e8c47e",rose="efb7bd",river="a2cfdf",violet="d0bfea",stone="bdcbc7",clay="edb08d",linen="e2dbc7"}
+local tones={
+    leaf={"food","cargo","forage","dig"},
+    brass={"coins","time","stamina","haul","warm"},
+    rose={"condition","medicine"},
+    river={"guard","water","rest"},
+    violet={"assist","scout","crew","journal"},
+    stone={"repairs","wagon","capacity","settings"},
+    clay={"pressure"},linen={"trail","map","flag","approach"},
+}
+for tone,ids in pairs(tones) do for _,id in ipairs(ids) do M.defs[id].tone=tone end end
 function M.role(id) return assert(roles[id],"Missing species symbol: "..tostring(id)) end
 function M.get(id) return assert(M.defs[id],"Unknown symbol: "..tostring(id)) end
+function M.color(id)
+    local color=M.palette[M.get(id).tone]
+    assert(color,"Missing symbol color: "..id)
+    return color
+end
 return M

@@ -33,26 +33,29 @@ end
 local function sidebar(self)
     local s=self.snapshot.run
     w.panel(self,890,58,362,562)
-    w.icon(self,910,584,"time",22,"gold")
+    w.icon(self,910,584,"time",22)
     label(self,942,595,"DAY "..string.format("%02d",s.day).."  /  "..s.weather:upper())
     local stats={{"PROVISIONS",s.food,"food"},{"COINS",s.coins,"coins"},{"WAGON",util.round(s.wagon).."%","wagon"},{"CARGO",util.round(s.cargo).."%","cargo"},{"TRAVELER",util.round(s.traveler).."%","condition"},{"FOOD DAYS",model.forecast(s).days,"time"}}
     for i,stat in ipairs(stats) do
         local x=910+((i-1)%3)*111; local y=562-math.floor((i-1)/3)*68
-        label(self,x,y,stat[1]);w.icon(self,x,y-40,stat[3],23,"sage");w.text(self,x+30,y-27,tostring(stat[2]),23,"ink")
+        label(self,x,y,stat[1]);w.icon(self,x,y-40,stat[3],24);w.text(self,x+30,y-27,tostring(stat[2]),23,"ink")
     end
     w.rect(self,910,432,322,1,"edge")
     label(self,910,411,"YOUR TRAVELING COMPANY")
     for i,c in ipairs(s.crew) do
-        local y=311-(i-1)*83
+        local y=315-(i-1)*88
         w.sprite(self,c.species,944,y+34,76,c.condition<=0)
         w.text(self,987,y+59,c.name,16,"ink")
-        w.text(self,987,y+39,(i==s.hauler and "HAULING" or c.duty:upper()).." / "..util.round(c.stamina).." energy",11,"muted")
-        w.icon(self,987,y+18,"stamina",13,"sage");w.bar(self,1006,y+22,205,c.stamina,"sage",5)
-        w.icon(self,987,y+5,"condition",13,"gold");w.bar(self,1006,y+11,205,c.condition,"gold",3)
+        local duty=c.condition<=0 and "NEEDS CARE" or (c.stamina<=0 and "EXHAUSTED" or (i==s.hauler and "HAULING" or c.duty:upper()))
+        w.text(self,987,y+39,duty,11,(c.condition<=0 or c.stamina<=0) and "red" or "muted")
+        w.icon(self,987,y+13,"stamina",12);w.text(self,1006,y+20,"Energy "..util.round(c.stamina),11,"ink")
+        w.bar(self,1120,y+17,100,c.stamina,w.tint("stamina"),5)
+        w.icon(self,987,y-7,"condition",12);w.text(self,1006,y,"Condition "..util.round(c.condition),11,"ink")
+        w.bar(self,1120,y-3,100,c.condition,w.tint("condition"),5)
     end
-    w.icon(self,910,101,"capacity",16);label(self,932,111,model.resources.weight(s).."/"..model.resources.capacity(s))
-    w.icon(self,1010,101,"repairs",16);label(self,1032,111,"Repair "..s.repairs)
-    w.icon(self,1121,101,"medicine",16);label(self,1143,111,"Med "..s.medicine)
+    w.icon(self,910,101,"capacity",12);w.text(self,928,108,"Load "..model.resources.weight(s).."/"..model.resources.capacity(s),10,"ink")
+    w.icon(self,1033,101,"repairs",12);w.text(self,1051,108,"Repairs "..s.repairs,10,"ink")
+    w.icon(self,1130,101,"medicine",12);w.text(self,1148,108,"Medicine "..s.medicine,10,"ink")
     w.button(self,910,68,322,28,"Crew, duties & care",page(self,"crew"),{size=12})
 end
 local function recent_log(self,x,y,width,count)
@@ -75,7 +78,7 @@ local function preparation(self)
     w.text(self,28,537,"Choose up to two companions. One must haul the wagon.",15,"muted")
     local selected,budget={},0
     for _,c in ipairs(s.crew) do selected[c.species]=true;budget=budget+model.species.defs[c.species].cost end
-    label(self,28,508,"CREW "..#s.crew.." / 2    STARTING BUDGET "..budget.." / 7")
+    label(self,28,508,"CREW "..#s.crew.." / 2    CREW POINTS "..budget.." / 7")
     w.button(self,583,495,268,29,"Optional journal aims",page(self,"aims"),{key="open_aims",size=12,icon="journal"})
     for i,id in ipairs(model.species.order) do
         local def=model.species.defs[id]
@@ -83,9 +86,9 @@ local function preparation(self)
         w.panel(self,x,y,263,195)
         if selected[id] then w.rect(self,x,y+191,263,4,"sage") end
         w.sprite(self,id,x+61,y+127,108,not p.roster[id])
-        w.text(self,x+124,y+157,"COST "..def.cost,12,"gold")
-        w.icon(self,x+124,y+106,iconography.role(id),24,"sage")
-        w.text(self,x+161,y+120,def.draft and "DRAFT" or "SUPPORT",10,"muted")
+        w.text(self,x+124,y+157,def.cost.." crew points",11,"ink")
+        w.icon(self,x+124,y+106,iconography.role(id),24)
+        w.text(self,x+161,y+120,def.draft and "CAN HAUL" or "SUPPORT",10,"muted")
         w.text(self,x+15,y+83,def.name,19,"ink")
         label(self,x+15,y+59,def.role)
         w.button(self,x+15,y+14,233,29,p.roster[id] and (selected[id] and "Traveling with you" or "Choose companion") or "Meet on the trail",cmd(self,"crew",{species=id}),{enabled=p.roster[id]~=nil,selected=selected[id],size=12,key="select_"..id})
@@ -96,20 +99,24 @@ local function preparation(self)
     w.text(self,910,529,"Carry living trees to Lantern Reach. Arrive by day 26; the road closes on day 32.",14,"muted",320)
     w.rect(self,910,449,322,1,"edge")
     label(self,910,429,"PACK YOUR WAGON")
-    label(self,910,405,"COINS "..s.coins.."   LOAD "..model.resources.weight(s).." / "..model.resources.capacity(s))
-    local items={{"food","Provisions",10},{"repairs","Repairs",1},{"medicine","Medicine",1}}
-    for i,item in ipairs(items) do
+    w.reading(self,910,405,"coins",s.coins,{size=12})
+    w.reading(self,1056,405,"capacity",model.resources.weight(s).."/"..model.resources.capacity(s),{size=12})
+    local items={"food","repairs","medicine"}
+    for i,id in ipairs(items) do
+        local item=model.resources.goods[id]
         local y=349-(i-1)*48
-        w.icon(self,910,y+5,item[1],22,"sage")
-        w.text(self,942,y+17,item[2].." "..s[item[1]],14,"ink")
-        w.button(self,1111,y,48,33,"-",cmd(self,"sell",{item=item[1]}),{key="sell_"..item[1]})
-        w.button(self,1167,y,65,33,"+"..item[3],cmd(self,"buy",{item=item[1]}),{key="buy_"..item[1]})
+        w.icon(self,910,y+5,id,24)
+        w.text(self,942,y+20,iconography.get(id).label.." "..s[id],14,"ink")
+        w.text(self,942,y+2,item.price.." coins / "..item.weight.." load",10,"muted")
+        w.button(self,1098,y,58,33,"-"..item.amount,cmd(self,"sell",{item=id}),{key="sell_"..id,size=12,enabled=s[id]>=item.amount})
+        w.button(self,1164,y,68,33,"+"..item.amount,cmd(self,"buy",{item=id}),{key="buy_"..id,size=12,enabled=s.coins>=item.price and model.resources.weight(s)+item.weight<=model.resources.capacity(s)})
     end
+    w.text(self,910,237,"+ buys a pack / - returns it for the same coins.",10,"muted")
     label(self,910,218,"Meals: "..model.resources.daily_food(s).." / day, about "..model.forecast(s).days.." days packed")
     w.button(self,910,163,154,32,"Open wagon",cmd(self,"wagon",{id="standard"}),{selected=s.wagon_type=="standard",size=12})
     w.button(self,1074,163,158,32,"Covered",cmd(self,"wagon",{id="covered"}),{selected=s.wagon_type=="covered",enabled=p.covered,size=12})
     label(self,910,152,p.covered and "Canvas trades capacity for rain protection." or "Study Willowford to unlock a covered wagon.")
-    w.button(self,910,116,322,26,"Pack work items",page(self,"work_items"),{size=12,key="open_items"})
+    w.button(self,910,116,322,26,"Pack work items",page(self,"work_items"),{icon="capacity",size=12,key="open_items"})
     w.button(self,910,68,322,40,"BEGIN THE JOURNEY",cmd(self,"depart",nil,"trail"),{primary=true,size=16,icon="trail"})
 end
 local function travel(self)
@@ -206,7 +213,7 @@ local function landmark(self)
 
     end
     local cue=s.target==3 and "LAST SUPPLY SHOP" or (s.target==5 and "LAST SHELTER / HIGH COUNTRY AHEAD" or "TRAVEL PAUSED")
-    w.icon(self,28,599,s.target==3 and "food" or (s.target==5 and "rest" or "flag"),12,"gold")
+    w.icon(self,28,599,s.target==3 and "food" or (s.target==5 and "rest" or "flag"),12)
     label(self,50,611,"LANDMARK "..s.target.." / 6  /  "..cue)
     w.text(self,28,578,spot.name,27,"ink")
     scene.draw(self,28,370,834,180,s)
@@ -239,21 +246,24 @@ local function shop(self)
 end
 local function crew(self)
     local s=self.snapshot.run
-    w.button(self,642,550,220,31,"Work items",page(self,"work_items"),{key="open_items",size=13})
+    w.button(self,642,550,220,31,"Work items",page(self,"work_items"),{icon="capacity",key="open_items",size=13})
     label(self,28,611,"COMPANIONS / SMALL CREW, SHARED HISTORY")
     w.text(self,28,575,"Who you bring changes the road.",27,"ink")
+    w.reading(self,28,546,"medicine",nil,{label="Treat: 1 day + meals + 1 medicine; up to +35 condition.",size=12,icon_size=12})
     local can=s.mode=="preparation" or s.mode=="stopped" or s.mode=="landmark" or s.mode=="traveling"
     for i,c in ipairs(s.crew) do
         local idx=i;local def=model.species.defs[c.species];local y=391-(i-1)*156
         w.panel(self,28,y,834,143)
         w.sprite(self,c.species,94,y+74,128,c.condition<=0)
         w.text(self,169,y+113,c.name.." / "..def.name,19,"ink")
-        label(self,169,y+88,c.temperament.." / Trust "..c.trust.." / Condition "..util.round(c.condition).." / Energy "..util.round(c.stamina))
+        label(self,169,y+88,c.temperament.." / Trust "..c.trust)
+        w.reading(self,444,y+88,"stamina",util.round(c.stamina),{size=12,icon_size=12})
+        w.reading(self,620,y+88,"condition",util.round(c.condition),{size=12,icon_size=12})
         w.text(self,169,y+66,def.ability,12,"muted")
         w.text(self,169,y+48,"Work item: "..model.equipment.label(c),11,"gold")
         w.button(self,169,y+15,145,30,"Duty: "..c.duty,cmd(self,"duty",{member=idx}),{enabled=can,size=12,key="duty"..idx})
         w.button(self,324,y+15,144,30,i==s.hauler and "Hauler" or "Assign haul",cmd(self,"hauler",{member=idx}),{enabled=can and def.draft,selected=i==s.hauler,size=12,key="haul"..idx,icon="haul"})
-        w.button(self,478,y+15,170,30,"Treat (+35)",cmd(self,"treat",{member=idx}),{enabled=can and s.mode~="preparation" and s.medicine>0 and c.condition<100,size=12,key="treat"..idx})
+        w.button(self,478,y+15,170,30,"Treat (+35)",cmd(self,"treat",{member=idx}),{enabled=can and s.mode~="preparation" and s.medicine>0 and c.condition<100,size=12,key="treat"..idx,icon="medicine"})
         w.button(self,658,y+15,184,30,"Name & memories",function() self.detail=idx;self.open_page("companion") end,{size=12,key="detail"..idx})
     end
     if #s.crew<3 then w.text(self,28,75,"Make room for a friend you have not met yet.",14,"muted") end
@@ -289,7 +299,7 @@ local function map(self)
         if last then w.text(self,x-35,325,last,13,"ink") end
         label(self,x-35,299,visited and "REACHED" or (i==s.target and (s.mode=="result" and "TURNED BACK" or "NEXT STOP") or "AHEAD"))
         if i==3 or i==5 then
-            w.icon(self,x-35,267,i==3 and "food" or "rest",12,"gold")
+            w.icon(self,x-35,267,i==3 and "food" or "rest",12)
             w.text(self,x-16,273,i==3 and "LAST SHOP" or "LAST SHELTER",10,"gold")
         end
     end

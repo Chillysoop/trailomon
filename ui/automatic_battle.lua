@@ -6,8 +6,8 @@ local clarity=require "simulation.clarity"
 local M={}
 local function text(self,x,y,t,size,color,width) return w.text(self,x,y,t,size or 12,color or "muted",width) end
 local function stats(self,x,y,c)
-    w.icon(self,x,y-9,"stamina",18,"sage");text(self,x+25,y,"Energy "..util.round(c.stamina),13,"ink")
-    w.icon(self,x,y-34,"condition",18,"gold");text(self,x+25,y-25,"Condition "..util.round(c.condition),13,"ink")
+    w.icon(self,x,y-9,"stamina",18);text(self,x+25,y,"Energy "..util.round(c.stamina),13,"ink")
+    w.icon(self,x,y-34,"condition",18);text(self,x+25,y-25,"Condition "..util.round(c.condition),13,"ink")
 end
 function M.select(self)
     local s=self.snapshot.run;local team=self.battle_team or {};self.battle_team=team
@@ -23,7 +23,8 @@ function M.select(self)
         w.sprite(self,c.species,x+60,408,90);stats(self,x+115,423,c)
         text(self,x+115,376,model.equipment.label(c),10,"gold")
         local p,g=model.combat.ordinary(s,i,position or 1)
-        text(self,x+16,355,position==2 and (p.." pressure + "..g.." cover / "..ordinary.." energy") or (p.." pressure / "..ordinary.." energy"),12,"gold")
+        w.reading(self,x+16,355,"pressure",p,{size=12,icon_size=12})
+        w.reading(self,x+143,355,"guard",g,{size=12,icon_size=12})
         text(self,x+16,332,model.combat.ability_text(s,c.species,c),12,"ink",229)
         w.button(self,x+16,254,231,32,position and (position==1 and "1 / Approach" or "2 / Wagon") or "Choose",function()
             if position then table.remove(team,position) elseif #team<2 then team[#team+1]=idx end
@@ -60,11 +61,13 @@ function M.draw(self)
     scene.draw(self,28,344,834,155,s)
     for position,i in ipairs(b.team) do
         local c=s.crew[i];local x=28+(position-1)*425
-        w.icon(self,x,317,position==1 and "approach" or "wagon",24,"sage")
+        w.icon(self,x,317,position==1 and "approach" or "wagon",24)
         text(self,x+34,329,(position==1 and "APPROACH / " or "WAGON / ")..c.name,15,"ink")
-        text(self,x,306,"Energy "..util.round(c.stamina).." / Condition "..util.round(c.condition).." / Next: "..preview.energy[i].." energy / "..model.equipment.label(c),11)
+        w.reading(self,x,306,"stamina",util.round(c.stamina),{size=11,icon_size=12})
+        w.reading(self,x+125,306,"condition",util.round(c.condition),{size=11,icon_size=12})
+        text(self,x+270,306,"Next: -"..preview.energy[i].." energy",11,w.tint("stamina"))
         local readiness=preview.abilities[i]
-        w.icon(self,x,276,"assist",24,readiness.code=="trigger" and "gold" or "muted")
+        w.icon(self,x,276,"assist",24,readiness.code=="trigger" and w.tint("assist") or "muted")
         text(self,x+34,288,readiness.text,12,readiness.code=="trigger" and "gold" or "ink")
         text(self,x,267,model.combat.ability_text(s,c.species,c),12,"muted",409)
     end
@@ -91,13 +94,13 @@ function M.result(self)
     text(self,28,538,b.outcome=="won" and "The threat has passed. Effort and injuries carry into the journey." or model.combat.withdraw_text(b.kind,s),14)
     scene.draw(self,28,366,834,149,s)
     local costs={{"food","Provisions "..signed(r.food)},{"cargo","Cargo "..signed(r.cargo).."%"},{"time","Days +"..r.days}}
-    for n,cost in ipairs(costs) do local x=28+(n-1)*280;w.icon(self,x,329,cost[1],24,"gold");text(self,x+34,341,cost[2],17,"ink") end
+    for n,cost in ipairs(costs) do local x=28+(n-1)*280;w.icon(self,x,329,cost[1],24);text(self,x+34,341,cost[2],17,"ink") end
     text(self,28,316,"Net changes include any recovery during a detour.",11)
     for position,i in ipairs(b.team) do
         local c=s.crew[i];local delta=r.crew[i];local x=28+(position-1)*425
         text(self,x,296,c.name,20,"ink")
         w.reading(self,x,270,"stamina",signed(delta.stamina).." / now "..util.round(c.stamina),{size=14})
-        w.reading(self,x,242,"condition",signed(delta.condition).." / now "..util.round(c.condition),{size=14,color="gold"})
+        w.reading(self,x,242,"condition",signed(delta.condition).." / now "..util.round(c.condition),{size=14})
     end
     local duty=clarity.next_duty(s)
     w.reading(self,28,206,duty.icon,nil,{label=duty.text,size=13})

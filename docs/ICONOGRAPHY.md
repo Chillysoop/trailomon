@@ -6,6 +6,25 @@ October 30, 2026. The owner's next-1 comment makes visible clarity and simplicit
 
 `ui/iconography.lua` owns each symbol's canonical label, short meaning, silhouette description, field-guide group, and species-role mapping. `ui/icons.lua` owns the authored 12 by 12 pixel drawing. `ui/widgets.lua` renders symbols and shared labeled readings. The journal's **Symbol guide** shows the same catalog in the game. A new resource does not get an unrelated stock symbol, a second meaning for an old symbol, or a local mapping inside one screen.
 
+## Recognition colors
+
+October 31 player-clarity pass: the catalog also owns the palette and each symbol's tone. Use `w.icon` / `w.reading` without a local tint, and `w.tint(id)` for matching meters. Keep ordinary reading text in the shared neutral ink. These accents identify concepts; green does not imply a gain and rose does not mean an emergency. Signed numbers, explicit warnings and disabled explanations carry outcome/state meaning.
+
+| Tone | Concepts |
+| --- | --- |
+| Leaf green | Provisions, living cargo, gathering, digging |
+| Brass gold | Coins, time, energy, hauling, warmth |
+| Rose | Condition and medicine |
+| River blue | Cover, water, rest |
+| Violet | Ability, scouting, crew, journal |
+| Stone | Wagon, repair materials, load, settings |
+| Clay | Pressure |
+| Linen | Journey, map, landmark, approach position |
+
+Primary controls use dark symbols for contrast on their light fill; disabled controls use muted ink. These are explicit state exceptions, not new meanings. New tones must retain at least 4.5:1 contrast on normal reading surfaces and 3:1 on selected control fills. Tests cover the full catalog. Distinct silhouettes and written labels remain mandatory, including for concepts that share a tone.
+
+The sidebar shows **Energy** and **Condition** with numbers and matching meters, plus explicit **EXHAUSTED / NEEDS CARE** states. Crew points are labeled separately from coins. Depot pack quantities, prices and load come from the same goods table as buying/returning; show the quantities on both controls. Combat setup separates labeled Pressure and Cover readings. Review evidence is in `reviews/evidence/player-clarity/`.
+
 The catalog has three groups: supplies/time; crew/encounters; road actions/places. It currently covers 27 concepts. Provisions use a grain stalk; gathering uses a basket and shoot. Wagon condition uses the vehicle; hauling uses a yoke. Approach uses an arrow meeting a boundary; pressure uses the angular strike. These distinctions keep an action, its cost, and its result from looking interchangeable.
 
 Energy is the player-facing name for the saved `stamina` field. Condition is health. Cargo is the living orchard delivery, while Load is packed weight relative to capacity. Cover reduces harm; an Ability is a triggered species action. Keep those names consistent when equipment or new duties arrive.

@@ -29,6 +29,18 @@ local function battle(p)
     departed(p);assert(model.debug(p,"event","scavengers"));assert(model.command(p,"choice",{id="battle"}));assert(model.command(p,"battle_start",{team={1,2}}))
 end
 local function interaction_checks(self)
+    fixture(self,"trail");coroutine.yield()
+    self.redraw=function() screens.draw(self) end
+    self.perform=function(id,args,destination) assert(model.command(self.snapshot,id,args));self.page=destination or self.page;self.redraw() end
+    local s=self.snapshot.run;local item=model.resources.goods.food;local food,coins=s.food,s.coins
+    button(self,"buy_food").fn();coroutine.yield()
+    assert(s.food==food+item.amount and s.coins==coins-item.price)
+    button(self,"sell_food").fn();coroutine.yield()
+    assert(s.food==food and s.coins==coins)
+    s.food=model.resources.capacity(s)-model.resources.weight(s)+s.food;self.redraw();coroutine.yield()
+    assert(not button(self,"buy_food").enabled and not button(self,"buy_medicine").enabled)
+    assert(button(self,"sell_food").enabled)
+    button(self,"sell_food").fn();coroutine.yield();assert(button(self,"buy_food").enabled)
     fixture(self,"trail",function(p)
         departed(p);p.run.food=0;for _,c in ipairs(p.run.crew) do c.stamina=0 end
         assert(model.debug(p,"event","scavengers"))
