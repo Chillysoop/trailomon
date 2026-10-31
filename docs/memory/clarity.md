@@ -1,0 +1,11 @@
+# Clarity and symbols
+
+2026-10-30: next-1 revision 34 approved all eight options and made visible clarity/simplicity critical path. This batch implements the requested icon system, N2 (C1+C3), and N4/S6. It does not finish N1 balance, N3 guardian behavior, N5 wilderness, N6 art, N7 equipment, or N8's full-journey pass.
+
+27 concepts have canonical labels, meanings, shapes and categories in ui/iconography.lua; original 12-pixel drawings remain in ui/icons.lua. New distinct marks separate hauling from the wagon, gathering from food, and approach position from pressure. Whole-pixel rendering; guide under Journal. AGENTS and docs/ICONOGRAPHY.md define extension rules for future features. No generated/paid assets were needed.
+
+Combat readiness previews the shared resolver on a copied run, never live RNG/state. Reasons include trigger, spent, energy, care, position, target, heavy rush, already covered, partner cover, and early repulsion. Gross exchange effort is separate from subsequent detour recovery. Result advice uses existing hauling, crossing (22) and digging (18) thresholds.
+
+Gathering gets a review/confirm page with place, prior visits, effort, meals, space, found/packed/net food and an actual journal receipt. Fixed a preview bug: day 31 previously promised food despite day-32 rescue happening before packing. UI prevents that doomed gathering day; model preview reports zero packed. Internal stamina fields stay compatible; player labels say Energy.
+
+34 Lua tests, 12 Python tests, native persistence and 34 GUI states pass. Actual Windows 1280x720 checks: all guide groups; final trigger/covered/spent messages; scavenger victory; expert Flint/Ember follow-up and withdrawal; travel advice; hand gathering +2; fresh-profile capacity-limited gathering +9 (18 found, 12 packed, 3 meals), wagon exactly 160/160, Buttons 89 energy after recovery. Updated next-1 contains the report and screenshots, with original votes retained and no second approval request. Physical keyboard, listening and whole-run pacing remain open. UI test namespaces were isolated from owner saves.

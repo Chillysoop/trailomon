@@ -1,4 +1,5 @@
 local icons=require "ui.icons"
+local iconography=require "ui.iconography"
 local M={}
 M.colors={bg="152c29",panel="203b34",raised="2d4940",edge="3e594c",ink="efe7cf",muted="adbc9f",gold="e1bc70",sage="a9bd83",dark="142620",red="e6a184",sky="c2c9a2"}
 function M.color(hex,alpha)
@@ -53,7 +54,14 @@ function M.bar(self,x,y,w,value,color,h)
     M.rect(self,x,y,w*math.max(0,math.min(100,value))/100,h or 5,color or "sage")
 end
 function M.icon(self,x,y,name,size,color)
+    iconography.get(name)
     icons.draw(self,M.rect,x,y,name,size,color)
+end
+function M.reading(self,x,y,id,value,options)
+    options=options or {}
+    local def=iconography.get(id)
+    M.icon(self,x,y-12,id,24,options.color or "sage")
+    return M.text(self,x+34,y,(options.label or def.label)..(value~=nil and " "..tostring(value) or ""),options.size or 15,options.ink or "ink",options.width)
 end
 function M.sprite(self,id,x,y,size,dim)
     local node=attach(self,gui.new_box_node(vmath.vector3(x,y,0),vmath.vector3(size,size,0)))

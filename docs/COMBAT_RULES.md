@@ -25,6 +25,8 @@ Each ability costs 8 additional energy, once per encounter, when its condition a
 
 Resolve ordinary actions together, then defensive abilities in position order, then Cindercoil's follow-up, then threat resolve and incoming harm. No recursive triggers. A fully repelled threat cannot deliver its last hit. The journal records the creatures' actions, cover, pressure, and actual harm. Initial condition, stamina, ground, and weather are visible; there are no undisclosed relationship multipliers.
 
+The pending-exchange readiness line runs this same resolver on a private snapshot. It shows the actual trigger or blocking condition and gross exchange effort without consuming live RNG. Result advice checks existing travel-duty thresholds after all encounter costs and any detour recovery. Neither preview changes combat rules.
+
 ## Threats and expedition costs
 
 Both threats target cargo (55%) or the approach (45%) using the saved combat RNG stream. Every second exchange is a heavy rush, telegraphed before resolution. Normal harm is 12 for scavengers and 14 for the guardian; heavy harm adds 6.

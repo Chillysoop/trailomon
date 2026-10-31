@@ -16,6 +16,8 @@ The [world and lore proposal](WORLD_LORE.md) develops a progression from worked 
 
 The first icon set is authored in code on a shared pixel grid. It uses simple silhouettes, consistent stroke weight, and enough negative space to remain legible at small sizes. The same source is used everywhere in the interface.
 
+The semantic catalog and extension rules are in [ICONOGRAPHY.md](ICONOGRAPHY.md). Players can open **Journal → Symbol guide**. Hauling now has a yoke distinct from wagon condition; gathering has a basket distinct from provisions; approach has a boundary arrow distinct from pressure. All drawings use whole-pixel scale steps.
+
 | Concept | Visual cue | Meaning beside the label |
 | --- | --- | --- |
 | Provisions | Grain stalk | Food available or consumed |
@@ -23,7 +25,7 @@ The first icon set is authored in code on a shared pixel grid. It uses simple si
 | Wagon | Cart and wheels | Vehicle condition and hauling |
 | Cargo | Sprouting cutting | The living orchard delivery |
 | Condition | Heart | Health or injury |
-| Stamina | Hoof print | Available effort |
+| Energy | Hoof print | Available effort; stored as stamina |
 | Repairs | Hammer | Repair stock or repair action |
 | Medicine | Marked bottle | Treatment supplies |
 | Time | Sun dial | Days, waiting, and duration |

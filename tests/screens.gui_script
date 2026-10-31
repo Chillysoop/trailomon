@@ -10,7 +10,7 @@ end
 
 local function fixture(self,page,setup)
     self.snapshot=model.new(1848);self.page=page;self.speed=1;self.focus=1
-    self.battle_team={};self.battle_actions={};self.edit=nil;self.save_blocked=false
+    self.battle_team={};self.battle_actions={};self.edit=nil;self.save_blocked=false;self.symbol_group=1
     self.combat_paused=true;self.combat_speed=1;self.combat_log=nil
     if setup then setup(self.snapshot,self) end
     screens.draw(self)
@@ -29,6 +29,29 @@ local function battle(p)
     departed(p);assert(model.debug(p,"event","scavengers"));assert(model.command(p,"choice",{id="battle"}));assert(model.command(p,"battle_start",{team={1,2}}))
 end
 local function interaction_checks(self)
+    fixture(self,"journal",departed)
+    coroutine.yield()
+    self.redraw=function() screens.draw(self) end
+    self.open_page=function(id) self.page=id;self.redraw() end
+    button(self,"symbol_guide").fn()
+    coroutine.yield()
+    assert(self.page=="symbols")
+    button(self,"symbol_group3").fn()
+    coroutine.yield()
+    assert(self.symbol_group==3)
+    button(self,"symbols_back").fn()
+    coroutine.yield()
+    assert(self.page=="journal")
+    fixture(self,"camp",departed)
+    coroutine.yield()
+    button(self,"gather_preview").fn()
+    coroutine.yield()
+    assert(self.page=="forage" and button(self,"gather_confirm").enabled)
+    self.perform=function(id,args,destination) assert(model.command(self.snapshot,id,args));self.page=destination or self.page;self.redraw() end
+    local day=self.snapshot.run.day
+    button(self,"gather_confirm").fn()
+    coroutine.yield()
+    assert(self.page=="camp" and self.snapshot.run.day==day+1)
     fixture(self,"trail",battle)
     coroutine.yield()
     self.redraw=function() screens.draw(self) end
@@ -126,6 +149,13 @@ function init(self)
         {"journal",function(p,ui) departed(p);assert(model.command(p,"return"));ui.journal_history=true end},
         {"trail",function(p,ui) ui.edit={kind="seed",value="1848"} end},
         {"trail",function(p,ui) ui.save_blocked=true end},
+        {"symbols",departed},
+        {"symbols",function(p,ui) departed(p);ui.symbol_group=2 end},
+        {"symbols",function(p,ui) departed(p);ui.symbol_group=3 end},
+        {"forage",departed},
+        {"forage",function(p) departed(p);p.run.food=119 end},
+        {"forage",function(p) departed(p);p.run.forage[tostring(p.run.target)]=10 end},
+        {"forage",function(p) departed(p);p.run.day=31 end},
     }
 end
 function on_message(self,id,message,sender)
@@ -147,7 +177,7 @@ function update(self,dt)
     local ok,why=pcall(fixture,self,case[1],case[2])
     if not ok or self.index==#self.cases then
         local report=assert(io.open(sys.get_config_string("trailomon.check_report","engine-check-report.txt"),"a"))
-        report:write(ok and "PASS: 27 native GUI states, icon rendering, scene motion, and button bounds.\n" or "FAIL: GUI case "..self.index.." / "..tostring(why).."\n")
+        report:write(ok and "PASS: 34 native GUI states, icon rendering, scene motion, and button bounds.\n" or "FAIL: GUI case "..self.index.." / "..tostring(why).."\n")
         report:close();self.index=nil
         if ok then self.interactions=coroutine.create(function() interaction_checks(self) end)
         else msg.post("@system:","exit",{code=1}) end

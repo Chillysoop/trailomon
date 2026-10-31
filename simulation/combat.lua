@@ -59,7 +59,17 @@ function M.step(s)
     local b=s.battle
     if not M.automatic(b) or b.outcome then return false,"No automatic exchange is pending" end
     local target=b.intent.target
-    local guard={cargo=0};local contribution={};local pressure=0;local notes={}
+    local guard={cargo=0};local contribution={};local pressure=0;local notes={};local abilities={}
+    local function status(i,code,text) abilities[i]={code=code,text=text} end
+    local function unavailable(i)
+        local c=s.crew[i]
+        if b.used[i] then status(i,"spent","Spent this encounter")
+        elseif c.condition<=0 then status(i,"condition","Cannot act: needs care")
+        elseif not resources.ready(c,8) then status(i,"energy","Needs 12 energy before exchange")
+        elseif b.resolve<=pressure then status(i,"repelled","Not needed: threat repelled")
+        else return false end
+        return true
+    end
     local function cover(i,who,value)
         guard[who]=(guard[who] or 0)+value
         if who==target then contribution[i]=(contribution[i] or 0)+value end
@@ -82,10 +92,15 @@ function M.step(s)
             notes[#notes+1]=c.name..": exhausted; "..(c.condition>0 and "1 cover, no pressure." or "cannot act.")
         end
     end
-    if b.resolve>pressure then
-        for position,i in ipairs(b.team) do
-            local c=s.crew[i];local id=c.species;local triggered=false
-            if b.resolve>pressure and not b.used[i] and resources.ready(c,8) and remaining()>0 then
+    for position,i in ipairs(b.team) do
+        local c=s.crew[i];local id=c.species;local triggered=false
+        if id~="cindercoil" and not unavailable(i) then
+            if id=="slatewhorl" and position~=2 then status(i,"position","Needs the wagon position")
+            elseif id=="brindlehorn" and target==i then status(i,"target","Needs a rush at cargo or partner")
+            elseif id=="slatewhorl" and target~="cargo" then status(i,"target","Needs a rush at cargo")
+            elseif id=="bellmoth" and b.intent.kind~="heavy" then status(i,"heavy","Waits for a heavy rush")
+            elseif remaining()==0 then status(i,"covered","Not needed: hit already covered")
+            else
                 if id=="brindlehorn" and target~=i then cover(i,target,14);triggered=true
                 elseif id=="reedskipper" then cover(i,target,10);pressure=pressure+4;triggered=true
                 elseif id=="loamling" then all_cover(i,M.soft_ground(s) and 8 or 4);triggered=true
@@ -93,19 +108,25 @@ function M.step(s)
                 elseif id=="slatewhorl" and position==2 and target=="cargo" then cover(i,target,18);triggered=true end
                 if triggered then
                     b.used[i]=true;c.stamina=c.stamina-8
+                    status(i,"trigger",id=="bellmoth" and "Triggers: heavy rush" or (target=="cargo" and "Triggers: rush at cargo" or "Triggers: unblocked rush"))
                     notes[#notes+1]=c.name..": "..species.defs[id].assist.."."
                 end
             end
         end
+    end
         for _,i in ipairs(b.team) do
             local c=s.crew[i];local partner_cover=0
             for _,j in ipairs(b.team) do if j~=i then partner_cover=partner_cover+(contribution[j] or 0) end end
-            if b.resolve>pressure and c.species=="cindercoil" and not b.used[i] and resources.ready(c,8) and remaining()==0 and partner_cover>0 then
-                b.used[i]=true;c.stamina=c.stamina-8;pressure=pressure+20
-                notes[#notes+1]=c.name..": Warmth display after partner cover."
+            if c.species=="cindercoil" and not unavailable(i) then
+                if partner_cover<=0 then status(i,"partner","Needs cover from a partner")
+                elseif remaining()>0 then status(i,"cover","Partner cover must stop all harm")
+                else
+                    b.used[i]=true;c.stamina=c.stamina-8;pressure=pressure+20
+                    status(i,"trigger","Triggers: partner blocks the hit")
+                    notes[#notes+1]=c.name..": Warmth display after partner cover."
+                end
             end
         end
-    end
     b.resolve=math.max(0,b.resolve-pressure)
     local harm=b.resolve>0 and remaining() or 0
     if target=="cargo" then s.cargo=math.max(0,s.cargo-harm)
@@ -118,8 +139,19 @@ function M.step(s)
     elseif b.round>=b.limit then outcome=b.kind=="scavengers" and "won" or "fallback" end
     b.last="Pressure "..pressure.." / Cover "..(guard[target] or 0).." / Harm "..harm..(b.resolve==0 and " (repelled before the hit)." or ".")
     b.history[#b.history+1]={round=b.round,notes=notes,summary=b.last,target=target,damage=harm,pressure=pressure,cover=guard[target] or 0}
-    if outcome then return true,outcome end
+    if outcome then return true,outcome,abilities end
     b.round=b.round+1;intention(s)
-    return true
+    return true,nil,abilities
+end
+-- Preview the pending exchange with the same resolver on a private snapshot.
+-- The saved RNG and live state are untouched; cosmetic timing cannot affect it.
+function M.preview(s)
+    if not M.automatic(s.battle) or s.battle.outcome then return nil end
+    local copy=util.copy(s)
+    local ok,outcome,abilities=M.step(copy)
+    if not ok then return nil end
+    local result={abilities=abilities,outcome=outcome,energy={}}
+    for _,i in ipairs(s.battle.team) do result.energy[i]=s.crew[i].stamina-copy.crew[i].stamina end
+    return result
 end
 return M

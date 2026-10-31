@@ -52,7 +52,7 @@ function M.available(s, choice, profile)
     if choice.battle then
         local ready = false
         for _, c in ipairs(s.crew) do if resources.ready(c, 6) then ready = true end end
-        if not ready then return false, "No companion has enough stamina" end
+        if not ready then return false, "No companion has enough energy" end
     end
     return true
 end
@@ -62,12 +62,12 @@ function M.cost_text(s, choice)
     for _, key in ipairs({"coins","food","repairs","medicine"}) do
         if choice.cost and choice.cost[key] then pieces[#pieces+1] = choice.cost[key] .. " " .. key end
     end
-    if choice.effort then pieces[#pieces+1] = choice.effort .. " stamina" end
+    if choice.effort then pieces[#pieces+1] = choice.effort .. " energy" end
     if choice.days then pieces[#pieces+1] = choice.days .. " day + " .. resources.daily_food(s)*choice.days .. " food" end
     if choice.effects then
         for _, key in ipairs({"food","wagon","cargo","traveler","stamina","progress"}) do
             local value=choice.effects[key]
-            if value then pieces[#pieces+1] = (value>0 and "+" or "") .. value .. " " .. key end
+            if value then pieces[#pieces+1] = (value>0 and "+" or "") .. value .. " " .. (key=="stamina" and "energy" or key) end
         end
     end
     if choice.recruit then pieces[#pieces+1]="+1 companion; higher daily food" end

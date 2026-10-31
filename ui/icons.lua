@@ -1,6 +1,9 @@
 -- Original field-guide marks on a 12 x 12 grid. X = ink; + = accent.
 -- Every use retains a text label. Horizontal runs reduce GUI node count.
 local M={glyphs={
+ haul=".XX......XX./.XX......XX./..XXXXXXXX../..X......X../..X......X../..X......X../..XX....XX../...XXXXXX.../.....XX...../.....XX...../............/............",
+ approach="........X.../........X.../..X.....X.../...X....X.../....X...X.../XXXXX...X.../....X...X.../...X....X.../..X.....X.../........X.../........X.../............",
+ forage=".....X....../...X.X.X..../....XXX...../.....X....../.X.......X../.XXXXXXXXX../..X.X.X.X.../..X.X.X.X.../...XXXXX..../............/............/............",
  food=".....X....../..X..X..X.../..XX.X.XX.../...XXXXX..../.....X....../.XX..X..XX../..XX.X.XX.../...XXXXX..../.....X....../.....X....../....XXX...../............",
  coins="...XXXXXX.../..XX....XX../.XX......XX./.X...++...X./.X..+..+..X./.X..+..+..X./.X...++...X./.XX......XX./..XX....XX../...XXXXXX.../............/............",
  wagon="..XXXXXX..../.XX....XX.../.X......X.../.X......X.../.XXXXXXXX.../.X......XXX./.XXXXXXXX.../..X....X..../.XXX..XXX.../..X....X..../............/............",
@@ -28,7 +31,10 @@ local M={glyphs={
 }}
 function M.draw(self,rect,x,y,name,size,ink,accent)
     local glyph=assert(M.glyphs[name],"Unknown interface icon: "..tostring(name))
-    local unit=(size or 24)/12
+    -- Whole-pixel marks at 12/24/36 px, centered in the requested space.
+    local unit=math.max(1,math.floor((size or 24)/12+0.5))
+    x=math.floor(x+((size or 24)-unit*12)/2+0.5)
+    y=math.floor(y+((size or 24)-unit*12)/2+0.5)
     local row=0
     for line in glyph:gmatch("[^/]+") do
         row=row+1

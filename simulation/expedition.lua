@@ -197,8 +197,10 @@ function M.forage_preview(s)
     local gross=math.max(0,base+(digger and 8 or 0)-count*5)
     local meals=math.min(s.food,resources.daily_food(s))
     local space=math.max(0,resources.capacity(s)-resources.weight(s)+meals)
-    local packed=math.min(gross,space)
-    return {gross=gross,packed=packed,net=packed-meals,effort=digger and 18 or 0,member=digger}
+    local closing=s.day>=31
+    local packed=closing and 0 or math.min(gross,space)
+    return {gross=gross,packed=packed,net=packed-meals,effort=digger and 18 or 0,member=digger,
+        count=count,meals=meals,need=resources.daily_food(s),space=space,closing=closing}
 end
 
 local function leave(snapshot,branch)
@@ -423,13 +425,15 @@ function M.command(snapshot,command,arg)
         return true
     elseif command=="forage" and stopped(s) then
         local preview=M.forage_preview(s)
+        local before=s.food
         if preview.gross<=0 then return false,"This stretch has been picked clean" end
         s.forage[tostring(s.target)]=(s.forage[tostring(s.target)] or 0)+1
         if preview.member then preview.member.stamina=preview.member.stamina-preview.effort end
         day(snapshot,false,false)
         if s.mode~="result" then
             local packed=add_food(s,preview.gross)
-            log(s,"Packed " .. packed .. " of " .. preview.gross .. " found provisions after today's meals.")
+            local net=s.food-before
+            log(s,"Gathered "..preview.gross.."; packed "..packed.."; meals "..preview.meals.."; provisions "..(net>=0 and "+" or "")..net..".")
             if s.mode=="traveling" then s.mode="stopped" end
         end
         return true

@@ -5,6 +5,9 @@ local util=require "simulation.util"
 local wagons=require "content.wagons"
 local auto_battle=require "ui.automatic_battle"
 local legacy_battle=require "ui.legacy_battle"
+local iconography=require "ui.iconography"
+local symbol_guide=require "ui.symbol_guide"
+local gathering=require "ui.gathering"
 local M={}
 local titles={delivered="New roots, at last.",late="You made it through.",returned="There is always another road.",rescued="Everyone comes home."}
 local function cmd(self,id,args,page) return function() self.perform(id,args,page) end end
@@ -76,8 +79,7 @@ local function preparation(self)
         if selected[id] then w.rect(self,x,y+191,263,4,"sage") end
         w.sprite(self,id,x+61,y+127,108,not p.roster[id])
         w.text(self,x+124,y+157,"COST "..def.cost,12,"gold")
-        local roles={brindlehorn="wagon",reedskipper="water",loamling="dig",bellmoth="scout",cindercoil="warm",slatewhorl="guard"}
-        w.icon(self,x+124,y+106,roles[id],26,"sage")
+        w.icon(self,x+124,y+106,iconography.role(id),24,"sage")
         w.text(self,x+161,y+120,def.draft and "DRAFT" or "SUPPORT",10,"muted")
         w.text(self,x+15,y+83,def.name,19,"ink")
         label(self,x+15,y+59,def.role)
@@ -115,7 +117,7 @@ local function travel(self)
     w.panel(self,28,169,834,122)
     local main_label=s.mode=="traveling" and "Pause the wagon" or "Follow the road"
     local main_command=s.mode=="traveling" and "pause" or "resume"
-    w.button(self,44,232,250,40,main_label,cmd(self,main_command),{primary=true,size=15,icon="wagon"})
+    w.button(self,44,232,250,40,main_label,cmd(self,main_command),{primary=true,size=15,icon="trail"})
     w.button(self,306,232,162,40,self.speed==1 and "Speed: calm" or "Speed: brisk",function() self.speed=self.speed==1 and 2 or 1;self.reset_clock();self.redraw() end,{size=13})
     w.button(self,480,232,170,40,"Pace: "..s.pace,function()
         local next={easy="steady",steady="hurried",hurried="easy"};self.perform("policy",{key="pace",value=next[s.pace]})
@@ -148,8 +150,7 @@ local function event(self)
     local options={}
     for _,choice in ipairs(definition.choices) do
         local enabled,why=model.events.available(s,choice,self.snapshot.profile)
-        local roles={brindlehorn="wagon",reedskipper="water",loamling="dig",bellmoth="scout",cindercoil="warm",slatewhorl="guard"}
-        local icon=choice.species and roles[choice.species] or (choice.battle and "guard" or (choice.days and "time" or (choice.recruit and "crew" or "journal")))
+        local icon=choice.species and iconography.role(choice.species) or (choice.battle and "pressure" or (choice.days and "time" or (choice.recruit and "crew" or "journal")))
         if choice.cost and not choice.species then for _,key in ipairs({"food","coins","medicine","repairs"}) do if choice.cost[key] then icon=key;break end end end
         options[#options+1]={label=choice.label,enabled=enabled,detail=enabled and model.events.cost_text(s,choice) or why,fn=cmd(self,"choice",{id=choice.id}),key="event_"..choice.id,icon=icon}
     end
@@ -163,7 +164,7 @@ local function landmark(self)
         options={
             {label="Across the meadows",detail="27 km / open ground / reliable progress",fn=cmd(self,"leave",{branch="meadow"})},
             {label="Through the woodland",detail="30 km / slower going / rich foraging",fn=cmd(self,"leave",{branch="woodland"})},
-            {label="Rest beneath the oak",detail="1 day + "..model.resources.daily_food(s).." food / recover condition and stamina",fn=cmd(self,"rest")}}
+            {label="Rest beneath the oak",detail="1 day + "..model.resources.daily_food(s).." food / recover condition and energy",fn=cmd(self,"rest")}}
     elseif s.target==3 then
         body="This is the only supply shop before Lantern Reach. The ferryman at Willowford charges 12 coins; leave some room in your purse."
         options={
@@ -183,7 +184,7 @@ local function landmark(self)
             options[#options+1]={label="Take the ferry",detail="12 coins + 1 day of meals / dependable crossing",enabled=s.coins>=12,fn=cmd(self,"river",{method="ferry"})}
             local method=model.resources.find(s,"reedskipper",22) and "swim" or ((model.resources.find(s,"brindlehorn",22) or model.resources.find(s,"slatewhorl",22)) and "anchor" or "rope")
             options[#options+1]={label=method=="swim" and "Secure a line with Reedskipper" or (method=="anchor" and "Anchor a line with your companion" or "Use the wagon's crossing ropes"),
-                detail=(method~="rope" and "22 stamina / " or "No creature assistance / ")..util.round(model.river_risk(s,method)*100).."% risk of wet supplies and damage",fn=cmd(self,"river",{method=method})}
+                detail=(method~="rope" and "22 energy / " or "No creature assistance / ")..util.round(model.river_risk(s,method)*100).."% risk of wet supplies and damage",fn=cmd(self,"river",{method=method})}
             options[#options+1]={label="Wait and watch the water",detail="1 day + meals / rest; weather may improve or worsen",fn=cmd(self,"river",{method="wait"})}
         end
     elseif s.target==5 then
@@ -198,8 +199,8 @@ local function camp(self)
     local s=self.snapshot.run;local forage=model.forage_preview(s);local food=model.resources.daily_food(s)
     local available=s.mode=="stopped" or s.mode=="landmark" or s.mode=="traveling"
     choices(self,"A little time to recover.","Every camp action uses one day and the crew's meals. Well-fed companions regain more strength. You can always request help.",{
-        {label="Rest the whole crew",icon="rest",detail="1 day / "..food.." food / up to +25 stamina and +8 condition",enabled=available,fn=cmd(self,"rest")},
-        {label="Gather nearby provisions",icon="food",detail=forage.gross<=0 and "This stretch has been gathered clean." or "1 day / "..forage.gross.." food found / "..forage.packed.." packed / "..(forage.net>=0 and "+" or "")..forage.net.." net / "..forage.effort.." digging stamina",enabled=available and forage.gross>0,fn=cmd(self,"forage")},
+        {label="Rest the whole crew",icon="rest",detail="1 day / "..food.." food / up to +25 energy and +8 condition",enabled=available,fn=cmd(self,"rest")},
+        {label="Gather nearby provisions",icon="forage",detail=forage.closing and "The road closes tomorrow; no harvest can be brought back." or (forage.gross<=0 and "This stretch has been gathered clean." or "Review 1 day, meals, carrying room and "..(forage.net>=0 and "+" or "")..forage.net.." expected provisions."),enabled=available and forage.gross>0 and not forage.closing,fn=page(self,"forage"),key="gather_preview"},
         {label="Repair the wagon",icon="repairs",detail=s.wagon>=100 and "The wagon needs no repairs." or (s.repairs<1 and "Needs 1 repair material." or "1 day + meals + 1 repair material / +30 wagon condition"),enabled=available and s.repairs>0 and s.wagon<100,fn=cmd(self,"repair")},
         {label="Treat the traveler",icon="medicine",detail=s.traveler>=100 and "The traveler is already in good condition." or (s.medicine<1 and "Needs 1 medicine." or "1 day + meals + 1 medicine / +35 condition and rest"),enabled=available and s.medicine>0 and s.traveler<100,fn=cmd(self,"treat")}},"CAMP / THE CLOCK IS STOPPED")
     w.button(self,50,151,220,31,"Back to the journey",page(self,"trail"),{size=12,icon="trail"})
@@ -226,7 +227,7 @@ local function crew(self)
         label(self,169,y+88,c.temperament.." / Trust "..c.trust.." / Condition "..util.round(c.condition).." / Energy "..util.round(c.stamina))
         w.text(self,169,y+66,def.ability,12,"muted")
         w.button(self,169,y+15,145,30,"Duty: "..c.duty,cmd(self,"duty",{member=idx}),{enabled=can,size=12,key="duty"..idx})
-        w.button(self,324,y+15,144,30,i==s.hauler and "Hauler" or "Assign haul",cmd(self,"hauler",{member=idx}),{enabled=can and def.draft,selected=i==s.hauler,size=12,key="haul"..idx})
+        w.button(self,324,y+15,144,30,i==s.hauler and "Hauler" or "Assign haul",cmd(self,"hauler",{member=idx}),{enabled=can and def.draft,selected=i==s.hauler,size=12,key="haul"..idx,icon="haul"})
         w.button(self,478,y+15,170,30,"Treat (+35)",cmd(self,"treat",{member=idx}),{enabled=can and s.mode~="preparation" and s.medicine>0 and c.condition<100,size=12,key="treat"..idx})
         w.button(self,658,y+15,184,30,"Name & memories",function() self.detail=idx;self.open_page("companion") end,{size=12,key="detail"..idx})
     end
@@ -294,6 +295,7 @@ local function journal(self)
     w.button(self,239,117,180,29,"Latest notes",function() self.journal_offset=0;self.redraw() end,{size=12,enabled=offset>0})
     end
     local known=0;for _ in pairs(p.discoveries) do known=known+1 end
+    w.button(self,650,117,191,29,"Symbol guide",page(self,"symbols"),{key="symbol_guide",size=12,icon="journal"})
     label(self,28,70,known.." species recorded / "..#p.history.." recent expeditions / "..(p.covered and "covered wagon researched" or "study and cross Willowford for a wagon design"))
 end
 local function settings(self)
@@ -361,6 +363,8 @@ function M.draw(self)
         elseif self.page=="companion" then companion(self)
         elseif self.page=="map" then map(self)
         elseif self.page=="journal" then journal(self)
+        elseif self.page=="symbols" then symbol_guide.draw(self)
+        elseif self.page=="forage" then gathering.draw(self)
         elseif self.page=="settings" then settings(self)
         elseif self.page=="camp" then camp(self)
         elseif self.page=="shop" then shop(self)
