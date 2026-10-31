@@ -2,8 +2,8 @@
   "project_id": "appgprj_6ae516c6754c8191a04fcfcf15434bc8",
   "url": "https://trailomon-owner-reviews.dusky-owlet-9260.chatgpt.site",
   "audience": "owner-private",
-  "version_id": "appgprj_6ae516c6754c8191a04fcfcf15434bc8~appgver_f462103db4cc8191a25f82c17a79396d",
-  "source_commit": "19c16f3c525d1ab6d1754ff6fcabf4d9bf06b44d",
+  "version_id": "appgprj_6ae516c6754c8191a04fcfcf15434bc8~appgver_6154fe8d6f588191be55bd0ec60aba9b",
+  "source_commit": "0347e57186cb3f3fd9bc317150ee2f93ab173a38",
   "checkout": ".tools/phone-review-site",
   "binding": "DB",
   "submission_table": "review_submissions"

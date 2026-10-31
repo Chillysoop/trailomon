@@ -2,6 +2,8 @@
 
 ## Art and interface direction
 
+Priority update, October 31, 2026: the owner will handle a large art overhaul later. Prioritize gameplay, expedition decisions, combat, replayability and reliability. Defer dedicated creature-art, scenery-polish and animation passes, including N6/S8, until the owner asks to resume them. Keep existing visuals functional and readable; fix confusing icons, clipping or missing gameplay feedback as needed. The visual-quality and consistent-icon rules below still apply to necessary work, but do not justify spending a feature update on cosmetic polish.
+
 These are standing user requirements, established October 30, 2026. Apply them from the beginning of every feature and art pass.
 
 - Art and UI must avoid generic AI-generated aesthetics and template-like presentation. Make intentional choices about silhouette, palette, composition, hierarchy, spacing, and the game's pastoral travel identity. Do not treat the first generated output as finished art.
