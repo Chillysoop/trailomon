@@ -28,7 +28,7 @@ Updated October 31, 2026. Scope: one polished Windows expedition before new regi
 | S8 | Refine creature anatomy and shared poses, P4 — deferred to the owner-led art overhaul | Six coherent silhouettes at travel scale, including hollow Brindlehorn antlers and Reedskipper's paddle tail; reviewed asset records | Grayscale and roster comparison, wagon-scale inspection, pose consistency, original icon readability | todo |
 | S9 | Evaluate a tiny equipment experiment, P5 / N7 | Three purchasable work items, one slot per companion, stopped-only swaps, travel/combat tradeoffs and compatible saves | 64 Lua checks, native persistence/GUI, targeted captures and 144 repeated full journeys; see WORK_ITEMS.md | done (PR #24) |
 | S18 | Add condition reports at the two forks, N9 | Reliable terrain and labeled uncertain conditions support preparation, with less information deeper in wilderness | 70 Lua checks, native controls, four rendered views; no RNG consumption or save changes | done (PR #25) |
-| S19 | Extend two roadside choices into later consequences, N10 | Two short chains within the event pool, one clear later consequence each | 77 Lua checks, native checkpoint/Continue checks, five rendered views | doing |
+| S19 | Extend two roadside choices into later consequences, N10 | Two short chains within the event pool, one clear later consequence each | 77 Lua checks, native checkpoint/Continue checks, five rendered views | done (PR #27) |
 | S20 | Add three optional journal aims, N11 | New delivery crew, both final branches across trips, peaceful completion; recorded accomplishments only | Goal evaluation, saved progress, no stat rewards or duplicate awards | todo |
 
 ## Polish

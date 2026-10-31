@@ -1,6 +1,6 @@
 # Two roadside follow-ups
 
-2026-10-31: N10/S19 implements two short consequences within the existing18-event pool. No new art, region or review decision.
+2026-10-31: N10/S19 is delivered in PR #27 with two short consequences within the existing18-event pool. No new art, region or review decision. Closeout rechecked hosted next-1 revision42: all N1–N11 remain approved, without amendments.
 
 - Tree/haul: Brindlehorn clears the trunk; road_cleared is saved. At the next reached landmark a following cart shares6 food, limited by carrying room after meals. road_repaid prevents a second reward. The reminder names the trunk and actual packed amount. Other tree choices do not earn this consequence.
 - Axle/risk: the original12 damage is split into6 now and up to6 on the next moving day with rain or woodland/ridge/gorge terrain. axle_lashed clears after that single slip. Rest or smooth travel does not clear it. A completed camp repair (or proper axle event repair) prevents it. Crossing/camping days never trigger a road slip. Previously resolved older saves get no retroactive damage.
