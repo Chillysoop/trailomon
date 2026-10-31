@@ -13,3 +13,5 @@ Decisions:
 - 2026-10-31 next-1 revision42: N1–N11 all YES, no amendments; N9–N11 add trail reports, two event chains and three journal aims. N9 shipped PR25; N10/N11 need building, not another vote. N6's old YES is superseded by the owner-led art deferral. No rejected ideas in these three submissions.
 
 Raw answers remain git-ignored. Summarize decisions here and in subject notes; do not copy credentials from comments. Chat corrections override prior votes. Blank ideas after FINISH remain unbuilt and must not be repeatedly proposed. No new owner votes were written during the answered-item UI change. Browser QA covers loaded approvals, new decisions added later, history, saved notes, top-pick preservation, FINISH, offline fallback, and phone/light/dark layouts.
+
+Publication: shared open-only view deployed to the same owner-private Site. The deployment now returns https://trailomon-owner-reviews.chillysoop.chatgpt.site; hosted-site.json records that canonical URL. Existing revision42 approvals were unchanged at closeout. No new review link was sent because nothing needs a decision.
