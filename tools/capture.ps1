@@ -1,4 +1,4 @@
-param([ValidateSet('options','options_brisk','combat_setup','combat_ready')][string[]]$Scenes=@('options','combat_setup'))
+param([ValidateSet('options','options_brisk','combat_setup','combat_ready','guardian_setup','guardian_warning','guardian_rush','developer')][string[]]$Scenes=@('options','combat_setup'))
 . (Join-Path $PSScriptRoot 'common.ps1')
 $captureClock = [Diagnostics.Stopwatch]::StartNew()
 Initialize-TrailomonTools

@@ -24,6 +24,10 @@ function init(self)
     self.redraw=function() self.needs_draw=true end
     self.perform=function(id,args,page)
         assert(model.command(self.snapshot,id,args));self.page=page or self.page;self.redraw()
+        self.speed=self.snapshot.settings.travel_speed or 1
+        if id=="battle_start" or id=="battle_step" then self.combat_log=nil end
+        if id=="battle_step" then self.exchange_started=self.time end
+        if id=="choice" or id=="battle_back" or id=="new" then self.battle_team={} end
     end
     self.open_page=function(page) self.page=page;self.redraw() end
     self.reset_clock=function() end

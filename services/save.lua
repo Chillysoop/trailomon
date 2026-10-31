@@ -53,6 +53,7 @@ local function validate(snapshot)
     for key,n in pairs(s.forage) do if type(key)~="string" or not integer(n,0,100) then return false,"Invalid forage record" end end
     if s.mode=="event" or s.pending~=nil then
         if type(s.pending)~="table" or not model.events.by_id[s.pending.id] or not model.events.by_id[s.pending.id].choices or not number(s.pending.roll,0,1) then return false,"Missing pending event" end
+        if s.pending.pattern~=nil and (s.pending.id~="territorial" or s.pending.pattern~=model.combat.GUARDIAN_PATTERN) then return false,"Invalid pending guardian pattern" end
         if s.mode~="event" then
             if s.mode~="combat_select" and s.mode~="combat" then return false,"Unexpected pending event" end
             local matching=false
@@ -74,9 +75,16 @@ local function validate(snapshot)
         if b.intent.target~="cargo" and not used[b.intent.target] then return false,"Invalid battle target" end
         if not number(b.intent.damage,0,100) then return false,"Invalid battle damage" end
         if b.rules~=nil and not model.combat.automatic(b) then return false,"Unknown battle rules" end
+        if b.pattern and not model.combat.automatic(b) then return false,"Legacy battle cannot have a guardian pattern" end
+        if s.pending and b.pattern~=s.pending.pattern then return false,"Mismatched pending pattern" end
         for i,v in pairs(b.used) do if not used[i] or v~=true then return false,"Invalid used ability" end end
         if model.combat.automatic(b) then
-            if b.limit~=(b.kind=="scavengers" and 3 or 4) or (b.intent.kind~="rush" and b.intent.kind~="heavy") then return false,"Invalid automatic threat" end
+            if b.pattern~=nil then
+                if b.pattern~=model.combat.GUARDIAN_PATTERN or b.kind~="territorial" then return false,"Invalid guardian pattern" end
+                local expected=model.combat.pattern_intent(b)
+                if not expected or b.intent.kind~=expected.kind or b.intent.target~=expected.target or b.intent.damage~=expected.damage then return false,"Invalid guardian stage" end
+            end
+            if b.limit~=(b.kind=="scavengers" and 3 or 4) or (b.intent.kind~="rush" and b.intent.kind~="heavy" and not (b.pattern and b.intent.kind=="warning")) then return false,"Invalid automatic threat" end
             if b.intent.target~="cargo" and b.intent.target~=b.team[1] then return false,"Threat must target the approach or cargo" end
             if type(b.history)~="table" or #b.history>b.limit or type(b.initial)~="table" or type(b.initial.crew)~="table" then return false,"Missing combat accounting" end
             if not number(b.initial.cargo,0,100) or not integer(b.initial.food,0,10000) or not integer(b.initial.day,1,s.day) then return false,"Invalid starting resources" end

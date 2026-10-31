@@ -13,3 +13,4 @@
 - [native-crash.md](native-crash.md): verified Windows fault symbol/offset, binary provenance, investigation limits and next reproduction.
 - [choice-clarity.md](choice-clarity.md): J1–J4 approvals, reversible combat setup, exact food previews, road receipts and saved viewing speed.
 - [iteration.md](iteration.md): owner-requested fast workflow, scoped verification, batching, direct Git push and optional testing tools.
+- [guardian.md](guardian.md): N3 authored-pattern experiment, exact comparisons, save/capture checks and pending S5 adoption.
