@@ -1,19 +1,22 @@
-# Review pages
-
-2026-10-30 N1 tool delivery: next-1 includes the committed expedition baseline and download links, with S2 reporting complete and S5 tuning still open. Original votes/codes remain; no new approval request. Evidence and limits: reporting.md.
-
-2026-10-30: `plan-1` is published at `https://trailomon-owner-reviews.dusky-owlet-9260.chatgpt.site/plan-1.html` for phone and desktop. Localhost remains a desktop fallback. Codes are stable: P1 automatic combat conversion; P2 keep bounded foraging and defer hunting; P3 wilderness progression within the existing route; P4 prioritize six-species anatomy and pose refinement; P5 a later three-item equipment experiment. P1–P4 are recommendations, not synthetic owner votes.
-
-2026-10-30: The owner submitted plan-1 from the phone at 22:24:59 UTC, hosted revision 7. **P1, P2, P3, P4, and P5 all YES; no notes or general comment.** Received through Sites, mirrored to the portable response file, and acknowledged without a chat "done". P1 implementation ships in PR #4 (S3/S4); S5 balance tuning remains. P2 bounded gathering, P3 route/lore, P4 art, and P5 equipment are approved but still pending. P5 is approved despite the initial recommendation to defer; implement the three-item experiment after combat testing. No ideas rejected or left blank.
-
-Browser QA writes only isolated `.tools` fixtures/local preview databases. Re-read hosted and local responses before publishing, reporting a wait, omitting an idea, or closing work. A newer answer or chat correction supersedes this note.
-
-Raw answers remain local by default; durable decision summaries are committed here. FINISH writes a snapshot flag so an autosaved draft cannot change an already-submitted answer set. The waiter consumes the flag; the JSON remains. Track revision/finished_at and each implemented or rejected code here after processing.
-
-2026-10-30: combat-1 is published on the same owner-private Site at /combat-1.html, source 748014f033d978888858c2be5cca111057043319. It reports the implemented automatic-combat playtests. New proposals C1 contextual trigger forecast, C2 distinct guardian pattern, C3 travel-duty consequence line (top picks), C4 continuous attack clocks (recommend NO). No owner answers yet at publication; reread hosted submissions before work. P1-P5 remain approved.
-
-2026-10-30: next-1 published at /next-1.html, Site source 0ca05da55ec9dca271ca5c63dbd22f5e89f491ab. It answers "What's next?" with the core-systems phase verdict, existing basics, real gaps, and eight next-batch options. Top picks N1/N2/N5/N6. See next-steps.md for exact code mapping and priority-vote semantics. N2 maps C1+C3; N3 maps C2. No new answers at publication. Isolated phone/dark and desktop/light QA covered YES/NO/note/FINISH and all top picks; screenshots contain test votes, never owner responses. Game rules and the Windows archive are unchanged.
-
-2026-10-30: Received next-1 revision 34, finished at 23:39:03 UTC: N1-N8 all YES. General note prioritizes thoughtful iconography for current resources/future features and makes visible clarity/simplicity critical path. Mirrored locally and consumed FINISH; no rejected or blank selections. N2 authorizes C1+C3, N3 authorizes C2. PR #7 covers icon catalog/guide, N2 and N4; the rest remain approved. The existing next-1 page has a deployed illustrated playtest update without new proposals or a second vote request. See clarity.md for evidence and limits.
-
-2026-10-30: Follow-up "What's next?" refresh uses that same page and saved votes: six remaining directions, N2/N4 marked shipped, top picks N1/N8/N5/N6. Current audit is first; prior focused playtest evidence is expandable. No new approval gate or outstanding unanswered page was created. Phone/dark and desktop/light browser QA passed on an isolated copy, including YES/NO/note/FINISH, JSON, images and overflow. See next-steps.md for sequencing and evidence limits.
+# Review pages
+
+2026-10-30 N1 tool delivery: next-1 includes the committed expedition baseline and download links, with S2 reporting complete and S5 tuning still open. Original votes/codes remain; no new approval request. Evidence and limits: reporting.md.
+
+2026-10-30: `plan-1` is published at `https://trailomon-owner-reviews.dusky-owlet-9260.chatgpt.site/plan-1.html` for phone and desktop. Localhost remains a desktop fallback. Codes are stable: P1 automatic combat conversion; P2 keep bounded foraging and defer hunting; P3 wilderness progression within the existing route; P4 prioritize six-species anatomy and pose refinement; P5 a later three-item equipment experiment. P1–P4 are recommendations, not synthetic owner votes.
+
+2026-10-30: The owner submitted plan-1 from the phone at 22:24:59 UTC, hosted revision 7. **P1, P2, P3, P4, and P5 all YES; no notes or general comment.** Received through Sites, mirrored to the portable response file, and acknowledged without a chat "done". P1 implementation ships in PR #4 (S3/S4); S5 balance tuning remains. P2 bounded gathering, P3 route/lore, P4 art, and P5 equipment are approved but still pending. P5 is approved despite the initial recommendation to defer; implement the three-item experiment after combat testing. No ideas rejected or left blank.
+
+Browser QA writes only isolated `.tools` fixtures/local preview databases. Re-read hosted and local responses before publishing, reporting a wait, omitting an idea, or closing work. A newer answer or chat correction supersedes this note.
+
+Raw answers remain local by default; durable decision summaries are committed here. FINISH writes a snapshot flag so an autosaved draft cannot change an already-submitted answer set. The waiter consumes the flag; the JSON remains. Track revision/finished_at and each implemented or rejected code here after processing.
+
+2026-10-30: combat-1 is published on the same owner-private Site at /combat-1.html, source 748014f033d978888858c2be5cca111057043319. It reports the implemented automatic-combat playtests. New proposals C1 contextual trigger forecast, C2 distinct guardian pattern, C3 travel-duty consequence line (top picks), C4 continuous attack clocks (recommend NO). No owner answers yet at publication; reread hosted submissions before work. P1-P5 remain approved.
+
+2026-10-30: next-1 published at /next-1.html, Site source 0ca05da55ec9dca271ca5c63dbd22f5e89f491ab. It answers "What's next?" with the core-systems phase verdict, existing basics, real gaps, and eight next-batch options. Top picks N1/N2/N5/N6. See next-steps.md for exact code mapping and priority-vote semantics. N2 maps C1+C3; N3 maps C2. No new answers at publication. Isolated phone/dark and desktop/light QA covered YES/NO/note/FINISH and all top picks; screenshots contain test votes, never owner responses. Game rules and the Windows archive are unchanged.
+
+2026-10-30: Received next-1 revision 34, finished at 23:39:03 UTC: N1-N8 all YES. General note prioritizes thoughtful iconography for current resources/future features and makes visible clarity/simplicity critical path. Mirrored locally and consumed FINISH; no rejected or blank selections. N2 authorizes C1+C3, N3 authorizes C2. PR #7 covers icon catalog/guide, N2 and N4; the rest remain approved. The existing next-1 page has a deployed illustrated playtest update without new proposals or a second vote request. See clarity.md for evidence and limits.
+
+2026-10-30: The subsequent priority audit reused next-1 and its votes; it did not create a new approval request. See next-steps.md.
+
+
+2026-10-30: Owner explicitly reaffirmed the YES/NO workflow. New journey-1 has four NEW J1–J4 proposals, top picks J1–J3, with full-trip evidence below the decisions. The Site root now opens this latest review; older pages/answers remain. See journey-playtest.md for definitions and remaining checks. No answers yet at authoring; re-read before closing.

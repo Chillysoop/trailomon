@@ -159,7 +159,21 @@ def paired_summary(rows):
             for (event,method),pairs in sorted(samples.items())]
 
 
-def summarize(rows, source, repeatable):
+def reproduction_command(options, replay=None):
+    def quote(value):
+        return "'"+str(value).replace("'", "''")+"'"
+    command = './tools/expedition_report.ps1'
+    if replay is not None:
+        return command+' -Replay '+quote(replay)
+    selected = options['seeds']
+    seed_text = (f'{selected[0]}:{selected[-1]}' if len(selected)>1 and selected==list(range(selected[0],selected[-1]+1))
+                 else ','.join(map(str,selected)))
+    command += ' -Seeds '+quote(seed_text)+' -Strategies '+quote(','.join(options['policies']))
+    command += f" -MaxActions {options['max_actions']} -StallVisits {options['stall_visits']}"
+    return command+(' -Compare' if options['compare'] else '')
+
+
+def summarize(rows, source, repeatable, options, replay=None):
     journeys = [r for r in rows if r['kind']=='journey']
     branches = [r for r in rows if r['kind']=='comparison']
     lines = ['# Full-expedition report', '', f"Source: `{source['commit']}`; working tree changed: `{source['working_tree_changes']}`.",
@@ -191,7 +205,8 @@ def summarize(rows, source, repeatable):
               '- Recovery counts cover rest, treatment, repair and river waiting. Event delays and combat detours remain visible under days_by_command and individual steps.',
               '- Decision gates record entry into a mode needing input, including the starting mode. longest_travel_stretch counts consecutive travel-day commands. The headless bot does not measure human waiting, audio, usability, or the 20–35 minute playtime target.',
               '- runs.csv contains summaries; comparisons.csv contains immediate encounter deltas and downstream results. Each runs/*.json file contains initial/final diagnostic snapshots, every command and argument, before/after resources, deltas, messages, minima, gates and failure context.', '',
-              '## Reproduce', '', '```powershell', './tools/expedition_report.ps1 -Seeds "1:40" -Compare', './tools/expedition_report.ps1 -Replay "reports/<folder>/runs/<id>.json"', '```', '',
+              '## Reproduce', '', 'Run from the project root; the command creates a fresh output folder.', '', '```powershell', reproduction_command(options,replay), '```', '',
+              'For an individual trace, use `./tools/expedition_report.ps1 -Replay "reports/<folder>/runs/<id>.json"`.', '',
               'Replay requires the same source/runtime fingerprint and checks the complete recorded result. Diagnostic JSON snapshots are not player-save files; reproduction regenerates the state through the real commands.', '']
     failures = [r for r in rows if r['status']!='completed']
     if failures:
@@ -270,7 +285,7 @@ def main(argv=None):
                 'ending_cargo':row['final']['cargo'], 'downstream_recovery_days':sum(s['delta']['days'] for s in row['steps'] if s['index']>row.get('intervention_result',{}).get('action',row['actions']) and (s['command'] in ('rest','repair','treat') or s['command']=='river' and s['args'].get('method')=='wait'))})
         write_csv(output/'comparisons.csv',comparisons)
         write_csv(output/'paired-summary.csv',paired_summary(rows))
-        (output/'summary.md').write_text(summarize(rows,source,repeatable),encoding='utf-8')
+        (output/'summary.md').write_text(summarize(rows,source,repeatable,options,args.replay),encoding='utf-8')
         manifest.update(status='complete' if repeatable and all(r['status']=='completed' for r in rows) else 'failed',
                         exact_repeat=repeatable, run_count=len(rows), execution_seconds=round(time.monotonic()-started,3),
                         replay_matches=True if expected else None)

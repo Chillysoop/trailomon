@@ -74,6 +74,15 @@ class ReportTests(unittest.TestCase):
         self.run_cli('limited','--seeds','1',expected=2)
         self.assertEqual((folder/'manifest.json').read_bytes(),prior)
 
+    def test_summary_reproduces_custom_options_and_selected_replay(self):
+        folder=self.run_cli('custom','--seeds','1848','--strategies','fighter','--compare','--max-actions','150','--stall-visits','4')
+        self.assertIn("./tools/expedition_report.ps1 -Seeds '1848' -Strategies 'fighter' -MaxActions 150 -StallVisits 4 -Compare",(folder/'summary.md').read_text())
+        trace=folder/'runs/seed-1848-fighter-encounter-1-withdraw.json'
+        replay=self.run_cli('single replay','--replay',str(trace))
+        self.assertIn("./tools/expedition_report.ps1 -Replay '"+str(trace)+"'",(replay/'summary.md').read_text())
+        self.assertEqual(json.loads((replay/'manifest.json').read_text())['run_count'],1)
+        self.assertEqual(reporter.reproduction_command({},"a'b.json"),"./tools/expedition_report.ps1 -Replay 'a''b.json'")
+
     def test_replay_detects_changed_evidence_and_source(self):
         folder=self.run_cli('original','--seeds','1','--strategies','careful')
         path=folder/'runs/seed-1-careful.json';data=json.loads(path.read_text())

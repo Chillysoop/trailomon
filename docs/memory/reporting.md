@@ -15,3 +15,5 @@ Every action validates state; failures/stalls/budgets return context and a nonze
 Next: N8 full-trip player validation, then evidence-led S5/N3 work. Normal game build and gameplay code are unchanged by the reporting tool.
 
 The existing owner-private Site published the report successfully from source 3c90bdabd6a50fb5752db1f24728474277e2bd49; metadata retains the returned version. Isolated phone/dark and desktop/light browser checks covered votes, notes, FINISH, persisted JSON, no console errors, width, and all six evidence links. Review screenshots contain synthetic fixture votes, never owner answers. No new approval is required. Existing Windows ZIP still matches shipped gameplay.
+
+2026-10-30 N8 follow-up: fixed summaries that printed default reproduction arguments for custom runs. Six reporter tests now cover actual options/replay paths and quoting. Reporter source fingerprint changed; replay old baseline with its recorded revision. Game model and archive remain unchanged.
