@@ -45,6 +45,8 @@ Updated October 30, 2026. Scope: one polished Windows expedition before new regi
 
 The October 30 [next-batch review](../reviews/next-1.html) received N1-N8 YES at revision 34. The owner's comment made icon consistency and player clarity immediate priority: N2 and N4 ship in PR #7, alongside the shared symbol system. S14 was appended without renumbering existing steps. N1 (S2/S5) expedition measurement is next; N3 guardian behavior, N5/N6 wilderness/art, N7 equipment after tuning, and N8 whole-journey usability remain approved and unfinished. P1-P5 approvals remain in force.
 
+After the clarity batch, the refreshed audit keeps the phase at core systems. Recommended execution order: S2 reports (N1), S10/S11 whole-trip validation (N8), the approved N3 guardian experiment and evidence-led S5 tuning, S7/S8 identity work (N5/N6), then S9 equipment (N7). The six remaining options retain their original approval codes; N2/N4 are marked shipped. No additional scope or repeated approval is requested.
+
 Ship one step or a coherent approved batch per PR, test it, and merge after CI passes. Update the status to `done (PR #n)` with the actual number. A later failure reopens the relevant work rather than leaving a misleading done status. Preserve published review codes when editing a page.
 
 At phase boundaries and on "what's next," compare the actual build with [PLAN.md](PLAN.md). Check basic systems and failing tests, identify the real phase, and publish five to twelve options with three to six top picks. Read all saved answers before proposing or closing work. Owner comments override the initial descriptions.
