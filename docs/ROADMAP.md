@@ -24,7 +24,7 @@ Updated October 31, 2026. Scope: one polished Windows expedition before new regi
 
 | ID | Goal and review link | Done means | Validation | Status |
 | --- | --- | --- | --- | --- |
-| S7 | Give the route an increasing sense of remoteness, P3 | Six distinct landmark treatments and concise lore within existing content; later scenes show fewer reliable signs and shelters | Route screenshot sequence, contrast and clipping checks, player recognizes last resupply and the upland commitment | doing |
+| S7 | Give the route an increasing sense of remoteness, P3 | Six distinct landmark treatments and concise lore within existing content; later scenes show fewer reliable signs and shelters | Route screenshot sequence, contrast and clipping checks, player recognizes last resupply and the upland commitment | done (PR #21) |
 | S8 | Refine creature anatomy and shared poses, P4 | Six coherent silhouettes at travel scale, including hollow Brindlehorn antlers and Reedskipper's paddle tail; reviewed asset records | Grayscale and roster comparison, wagon-scale inspection, pose consistency, original icon readability | todo |
 | S9 | Evaluate a tiny equipment experiment, P5 | Approved experiment after combat tuning: one work-item slot and three objects with travel and encounter tradeoffs | Capacity and save tests, competing useful choices, no mandatory item or manufactured loot from wildlife | todo |
 

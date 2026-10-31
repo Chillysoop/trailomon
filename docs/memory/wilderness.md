@@ -15,3 +15,5 @@ Found/fixed during checks: extra hill rectangles exceeded Defold's deferred node
 Reproduce: tools/capture.ps1 -Scenes route_depot,route_oak,route_outpost,route_river,route_gate,route_ridge,route_gorge,route_reach,route_map,route_rain,guardian_warning. Evidence and source hashes are in reviews/evidence/wilderness-1/. The next-1 page retains the original YES/NO codes and submitted votes.
 
 Additional meadow/woodland captures exercised both Split Oak buttons and were inspected; 13 distinct views total. Private review source 19c16f3c525d1ab6d1754ff6fcabf4d9bf06b44d deployed successfully. Isolated phone/dark and desktop/light YES/NO/note/FINISH, JSON, image and overflow checks passed. Synthetic answers never touched the owner page.
+
+Delivery: PR #21. Rebuild the Windows ZIP once from its clean merged head; builds/Trailomon-windows.json records authoritative provenance.
