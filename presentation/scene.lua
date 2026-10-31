@@ -1,14 +1,8 @@
 -- The landscape is native GUI geometry, so it can move independently of the
 -- creature atlas. No simulation RNG is consumed by presentation.
 local w=require "ui.widgets"
+local landscape=require "presentation.landscape"
 local M={}
-local function pixel_tree(self,x,y,size,color)
-    w.rect(self,x-3,y,6,size*0.6,"6d6846")
-    for i=1,4 do
-        local width=size*(1.12-i*0.17)
-        w.rect(self,x-width/2,y+size*0.28+i*size*0.13,width,size*0.26,color)
-    end
-end
 local function circle(self,x,y,r,color)
     local n=gui.new_pie_node(vmath.vector3(x,y,0),vmath.vector3(r*2,r*2,0))
     gui.set_parent(n,self.root,false);gui.set_color(n,w.color(color));gui.set_perimeter_vertices(n,12)
@@ -16,23 +10,7 @@ local function circle(self,x,y,r,color)
 end
 function M.draw(self,x,y,width,height,s)
     local rainy=s.weather=="rain"
-    w.rect(self,x,y,width,height,rainy and "8baba4" or "bec9a0")
-    circle(self,x+width*0.76,y+height*0.76,26,rainy and "c6c9ad" or "efe1ad")
-    for layer=1,3 do
-        local colors={"98ad8c","7f9d7d","648a6d"}
-        for j=0,math.floor(width/16) do
-            local hill=height*(0.24+0.075*layer)+math.sin(j*0.105+layer*1.8)*height*0.12+math.sin(j*0.24+layer)*7
-            w.rect(self,x+j*16,y,math.min(16,width-j*16),hill,colors[layer])
-        end
-    end
-    local floor=y+height*0.22
-    w.rect(self,x,y,width,height*0.23,"507454")
-    w.rect(self,x,floor-8,width,21,"aa986b")
-    w.rect(self,x,floor-11,width,4,"c2af7b")
-    for j=1,9 do
-        local tx=x+23+j*(width-45)/10
-        pixel_tree(self,tx,floor+26,35+(j%3)*12,j%2==0 and "3e684e" or "426f54")
-    end
+    local _,floor=landscape.draw(self,w,x,y,width,height,s)
     -- Wagon, canvas, traveler, and wheels: deliberately modest prototype props.
     local wx=x+width*0.52
     local wy=floor+11
@@ -83,11 +61,11 @@ function M.draw(self,x,y,width,height,s)
         w.rect(self,tx,wy+81,4,8,"gold")
         if battle.intent.target=="cargo" then w.rect(self,wx-43,wy+4,86,3,"gold") end
     end
-    for j=1,24 do
+    for j=1,(s.target>=5 and 12 or 24) do
         local px=x+12+((j*107)%math.floor(width-25))
         local py=y+8+(j%4)*9
         w.rect(self,px,py,3,6,"719663")
-        if j%4==0 then w.rect(self,px-1,py+5,5,4,"e1bc70") end
+        if j%4==0 and s.target<5 then w.rect(self,px-1,py+5,5,4,"e1bc70") end
     end
     if rainy then
         for j=1,28 do

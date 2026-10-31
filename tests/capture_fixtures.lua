@@ -55,4 +55,37 @@ function M.guardian_rush(self)
     self.capture_assert=function() assert(self.snapshot.run.battle.intent.kind=="heavy" and self.snapshot.run.battle.round==3) end
 end
 function M.developer(self) reset(self,"debug");self.redraw() end
+function M.route_depot(self) reset(self,"trail");self.redraw() end
+local function stop(self,target)
+    reset(self,"trail");local s=self.snapshot.run
+    s.target=target;s.distance=model.route[target].distance;s.progress=s.distance
+    s.terrain=model.route[target].terrain;s.mode="landmark"
+    self.redraw()
+end
+function M.route_oak(self) stop(self,2) end
+function M.route_meadow(self)
+    M.route_oak(self);self.capture_actions={"Across the meadows"}
+    self.capture_assert=function() assert(self.snapshot.run.terrain=="meadow" and self.snapshot.run.target==3) end
+end
+function M.route_woodland(self)
+    M.route_oak(self);self.capture_actions={"Through the woodland"}
+    self.capture_assert=function() assert(self.snapshot.run.terrain=="woodland" and self.snapshot.run.target==3) end
+end
+function M.route_outpost(self) stop(self,3) end
+function M.route_river(self) stop(self,4) end
+function M.route_gate(self) stop(self,5) end
+function M.route_ridge(self)
+    M.route_gate(self);self.capture_actions={"Take the ridge road"}
+    self.capture_assert=function() assert(self.snapshot.run.terrain=="ridge" and self.snapshot.run.target==6) end
+end
+function M.route_gorge(self)
+    M.route_gate(self);self.capture_actions={"Follow the sheltered gorge"}
+    self.capture_assert=function() assert(self.snapshot.run.terrain=="gorge" and self.snapshot.run.target==6) end
+end
+function M.route_reach(self)
+    stop(self,6);model.finish(self.snapshot,"delivered","The orchard cuttings reach Lantern Reach in time. There will be new trees here next spring.")
+    self.redraw()
+end
+function M.route_map(self) M.route_outpost(self);self.page="map";self.redraw() end
+function M.route_rain(self) M.route_river(self);self.snapshot.run.weather="rain";self.redraw() end
 return M

@@ -113,6 +113,7 @@ local function travel(self)
     w.bar(self,28,551,834,s.progress/s.distance*100,"gold",5)
     scene.draw(self,28,307,834,230,s)
     local forecast=model.forecast(s)
+    w.rect(self,36,313,246,23,"dark")
     label(self,44,324,util.round(s.distance-s.progress).." km to the next landmark")
     w.panel(self,28,169,834,122)
     local main_label=s.mode=="traveling" and "Pause the wagon" or "Follow the road"
@@ -161,24 +162,24 @@ local function landmark(self)
     local s=self.snapshot.run; local options={}; local spot=model.route[s.target]
     local body=spot.subtitle
     if s.target==2 then
-        body="The meadow road is shorter and easier on the wagon. The woodland path offers roots, shelter, and more to discover."
+        body="Lightning split the oak; both halves still grow. The meadow road is easier on the wagon. The woodland holds roots, shelter, and more to discover."
         options={
             {label="Across the meadows",detail="27 km / open ground / reliable progress",fn=cmd(self,"leave",{branch="meadow"})},
             {label="Through the woodland",detail="30 km / slower going / rich foraging",fn=cmd(self,"leave",{branch="woodland"})},
             {label="Rest beneath the oak",detail="1 day + "..model.resources.daily_food(s).." food / recover condition and energy",fn=cmd(self,"rest")}}
     elseif s.target==3 then
-        body="This is the only supply shop before Lantern Reach. The ferryman at Willowford charges 12 coins; leave some room in your purse."
+        body="Spare rims and drying shelves crowd the last supply shop. There is no buying supplies beyond here. Keep 12 coins for Willowford's dependable ferry."
         options={
             {label="Visit the supply counter",detail="Buy provisions, repair materials, and medicine",fn=page(self,"shop")},
             {label="Make a quiet camp",detail="Rest, forage, and repair before the next stretch",fn=page(self,"camp")},
             {label="Set out for Willowford",detail="28 km / marsh road / a river crossing ahead",fn=cmd(self,"leave")}}
     elseif s.target==4 then
         if s.flags.river_crossed then
-            body="Your wagon rests on the far bank. The high country lies ahead."
+            body="The old water mark stands on dry ground behind you. Your wagon rests on the far bank; the high country lies ahead."
             options={{label="Continue to Cairn Gate",detail="24 km / upland road",fn=cmd(self,"leave")},
                 {label="Rest beside the river",detail="1 day + meals / recover before the climb",fn=cmd(self,"rest")}}
         else
-            body="Recent rainfall: "..s.rainfall.." / 6. "..(s.rainfall>=4 and "The current is strong." or "The channel is passable, but cold.").." Crossing takes one day and today's meals."
+            body="Old water marks trace a different channel. Rainfall: "..s.rainfall.." / 6. "..(s.rainfall>=4 and "The current is strong." or "The channel is cold but passable.").." Crossing takes one day and today's meals."
             if not s.flags.river_inspected then
                 options[#options+1]={label="Inspect the river",detail="Record conditions / no time or supplies / unlock research after this trip",fn=cmd(self,"river",{method="inspect"})}
             end
@@ -189,12 +190,22 @@ local function landmark(self)
             options[#options+1]={label="Wait and watch the water",detail="1 day + meals / rest; weather may improve or worsen",fn=cmd(self,"river",{method="wait"})}
         end
     elseif s.target==5 then
-        body="The ridge is shorter but rough on the wheels. The sheltered gorge adds distance. Watch the date: the road closes on day 32."
+        body="The last maintained shelter sits between repaired cairns. Beyond it: exposed ridge or sheltered gorge, with no more shops. The road closes on day 32."
         options={{label="Take the ridge road",detail="30 km / quick passage / more wagon wear",fn=cmd(self,"leave",{branch="ridge"})},
             {label="Follow the sheltered gorge",detail="35 km / slower, gentler travel",fn=cmd(self,"leave",{branch="gorge"})},
             {label="Prepare for the last stretch",detail="Camp, repair, and care for your companions",fn=page(self,"camp")}}
     end
-    choices(self,spot.name,body,options,"LANDMARK "..s.target.." / 6")
+    local cue=s.target==3 and "LAST SUPPLY SHOP" or (s.target==5 and "LAST SHELTER / HIGH COUNTRY AHEAD" or "TRAVEL PAUSED")
+    w.icon(self,28,599,s.target==3 and "food" or (s.target==5 and "rest" or "flag"),12,"gold")
+    label(self,50,611,"LANDMARK "..s.target.." / 6  /  "..cue)
+    w.text(self,28,578,spot.name,27,"ink")
+    scene.draw(self,28,370,834,180,s)
+    w.text(self,28,354,body,14,"muted",834)
+    for i,option in ipairs(options) do
+        local y=259-(i-1)*62
+        w.button(self,28,y,834,37,option.label,option.fn,{primary=i==1,enabled=option.enabled~=false,size=14,key=option.key,icon=option.icon})
+        w.text(self,38,y-14,option.detail or "",11,option.enabled==false and "red" or "muted")
+    end
 end
 local function camp(self)
     local s=self.snapshot.run;local forage=model.forage_preview(s);local food=model.resources.daily_food(s)
@@ -264,10 +275,14 @@ local function map(self)
         w.text(self,x-35,345,first or spot.name,13,"ink")
         if last then w.text(self,x-35,325,last,13,"ink") end
         label(self,x-35,299,visited and "REACHED" or (i==s.target and (s.mode=="result" and "TURNED BACK" or "NEXT STOP") or "AHEAD"))
+        if i==3 or i==5 then
+            w.icon(self,x-35,267,i==3 and "food" or "rest",12,"gold")
+            w.text(self,x-16,273,i==3 and "LAST SHOP" or "LAST SHELTER",10,"gold")
+        end
     end
     label(self,59,475,"DEPARTURE: FERNWAKE    /    DELIVERY: LANTERN REACH")
-    label(self,59,260,"Split Oak: "..(s.branches.first or "meadow or woodland"))
-    label(self,439,260,"Cairn Gate: "..(s.branches.last or "ridge or gorge"))
+    label(self,59,246,"Split Oak: "..(s.branches.first or "meadow or woodland"))
+    label(self,439,246,"Cairn Gate: "..(s.branches.last or "ridge or gorge"))
     w.text(self,59,226,"Preferred arrival: day 26. The road closes on day 32.",14,"gold")
     w.text(self,28,141,"Rain affects the river. Rough roads wear the wagon. A crew that knows one route may surprise you on another.",15,"muted",834)
 end
