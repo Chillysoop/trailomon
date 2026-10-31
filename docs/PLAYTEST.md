@@ -2,6 +2,8 @@
 
 Run `Trailomon.exe` beside the four `game.*` data files. This is an offline Windows build; the Defold editor is not required. Unzip the whole folder before starting.
 
+For the optional guardian experiment, begin a journey, press F3 and choose **Guardian pattern / developer experiment**, then **Secure passage**. Its authored sequence is shown before choosing companions. Ordinary encounters retain the current rules while the experiment is evaluated.
+
 ## Take a journey
 
 Choose one or two companions at Fernwake Depot, within the seven-point crew budget. Bring a draft companion: Brindlehorn or Reedskipper initially. Buy supplies, then begin the journey. The default crew and loadout are playable starting choices.
