@@ -202,6 +202,17 @@ function M.exhausted_encounter(self)
     for _,c in ipairs(p.run.crew) do c.stamina=0 end
     assert(model.debug(p,"event","scavengers"));self.redraw()
 end
+function M.clarity_crew(self)
+    reset(self,"crew");local s=self.snapshot.run
+    s.crew[3]=require("simulation.progression").companion("bellmoth")
+    s.crew[1].stamina=38;s.crew[1].condition=72;s.crew[2].stamina=0;s.crew[3].condition=0
+    self.redraw()
+end
+function M.clarity_travel(self) M.clarity_crew(self);self.page="trail";self.redraw() end
+function M.clarity_gather(self) reset(self,"forage");self.redraw() end
+function M.clarity_symbols(self) reset(self,"symbols");self.symbol_group=1;self.redraw() end
+function M.clarity_symbols_crew(self) M.clarity_symbols(self);self.capture_actions={"symbol_group2"} end
+function M.clarity_symbols_road(self) M.clarity_symbols(self);self.capture_actions={"symbol_group3"} end
 function M.closure_arrival(self)
     reset(self,"trail");local s=self.snapshot.run;s.target=6;s.distance=35;s.progress=34.5;s.day=31
     assert(model.command(self.snapshot,"resume"));assert(model.command(self.snapshot,"step"))

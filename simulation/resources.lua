@@ -2,6 +2,7 @@ local species = require "content.species"
 local wagons = require "content.wagons"
 local equipment=require "simulation.equipment"
 local M = {}
+M.goods={food={amount=10,price=6,weight=10},repairs={amount=1,price=8,weight=4},medicine={amount=1,price=7,weight=2}}
 M.paces = {easy={speed=5.5, effort=4, wear=0.4}, steady={speed=7.2, effort=7, wear=0.8}, hurried={speed=9.1, effort=11, wear=2}}
 M.rations = {sparse={food=0.65, recovery=0}, normal={food=1, recovery=3}, generous={food=1.35, recovery=6}}
 function M.weight(s) return s.food + s.repairs * 4 + s.medicine * 2 + 25 + equipment.weight(s) end

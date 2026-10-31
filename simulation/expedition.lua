@@ -449,8 +449,7 @@ function M.command(snapshot,command,arg)
         return true
     elseif command=="buy" or command=="sell" then
         if s.mode~="preparation" and not (s.mode=="landmark" and s.target==3) then return false,"Supplies are sold at the depot and Mossbell" end
-        local goods={food={amount=10,price=6,weight=10},repairs={amount=1,price=8,weight=4},medicine={amount=1,price=7,weight=2}}
-        local item=goods[arg.item]
+        local item=resources.goods[arg.item]
         if not item then return false,"Unknown supply" end
         if command=="sell" then
             if s.mode~="preparation" then return false,"Returns are available before departure" end

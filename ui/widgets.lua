@@ -41,7 +41,7 @@ function M.button(self,x,y,w,h,label,fn,options)
     local enabled=options.enabled~=false
     local base=options.primary and "sage" or (options.selected and "edge" or "raised")
     local node=M.rect(self,x,y,w,h,enabled and base or "panel")
-    if options.icon then M.icon(self,x+10,y+(h-20)/2,options.icon,20,enabled and options.primary and "dark" or "muted") end
+    if options.icon then M.icon(self,x+10,y+(h-20)/2,options.icon,20,not enabled and "muted" or (options.primary and "dark" or nil)) end
     local text=M.text(self,x+w/2+(options.icon and 9 or 0),y+h/2,label,options.size or 15,enabled and (options.primary and "dark" or "ink") or "muted")
     gui.set_pivot(text,gui.PIVOT_CENTER)
     local focus_mark=M.rect(self,x+3,y+3,3,h-6,options.primary and "dark" or "gold")
@@ -54,14 +54,16 @@ function M.bar(self,x,y,w,value,color,h)
     M.rect(self,x,y,w*math.max(0,math.min(100,value))/100,h or 5,color or "sage")
 end
 function M.icon(self,x,y,name,size,color)
-    iconography.get(name)
-    icons.draw(self,M.rect,x,y,name,size,color)
+    local ink=color or iconography.color(name)
+    icons.draw(self,M.rect,x,y,name,size,ink,ink)
 end
+M.tint=iconography.color
 function M.reading(self,x,y,id,value,options)
     options=options or {}
     local def=iconography.get(id)
-    M.icon(self,x,y-12,id,24,options.color or "sage")
-    return M.text(self,x+34,y,(options.label or def.label)..(value~=nil and " "..tostring(value) or ""),options.size or 15,options.ink or "ink",options.width)
+    local size=options.icon_size or 24
+    M.icon(self,x,y-size/2,id,size,options.color)
+    return M.text(self,x+size+10,y,(options.label or def.label)..(value~=nil and " "..tostring(value) or ""),options.size or 15,options.ink or "ink",options.width)
 end
 function M.sprite(self,id,x,y,size,dim)
     local node=attach(self,gui.new_box_node(vmath.vector3(x,y,0),vmath.vector3(size,size,0)))

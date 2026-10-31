@@ -5,6 +5,37 @@ local clarity=require "simulation.clarity"
 local symbols=require "ui.iconography"
 local pixels=require "ui.icons"
 return function(test,command,valid,equal)
+    test("recognition colors retain contrast and distinguish easily confused readings",function()
+        local function luminance(hex)
+            local values={}
+            for i=1,3 do local v=tonumber(hex:sub(i*2-1,i*2),16)/255;values[i]=v<=0.04045 and v/12.92 or ((v+0.055)/1.055)^2.4 end
+            return values[1]*0.2126+values[2]*0.7152+values[3]*0.0722
+        end
+        local colors=require("ui.widgets").colors
+        for id,def in pairs(symbols.defs) do
+            local ink=symbols.color(id);assert(#ink==6 and def.label and def.shape)
+            assert(select("#",symbols.color(id))==1,"Color helper must not pass extra values into GUI arguments")
+            for _,surface in ipairs({"bg","panel","raised"}) do
+                local contrast=(luminance(ink)+0.05)/(luminance(colors[surface])+0.05)
+                assert(contrast>=4.5,id.." has poor contrast on "..surface)
+            end
+            assert((luminance(ink)+0.05)/(luminance(colors.edge)+0.05)>=3,id.." disappears on selected controls")
+        end
+        for _,pair in ipairs({{"stamina","condition"},{"food","coins"},{"repairs","medicine"},{"pressure","guard"},{"guard","assist"}}) do
+            assert(symbols.color(pair[1])~=symbols.color(pair[2]))
+            assert(pixels.glyphs[pair[1]]~=pixels.glyphs[pair[2]],"Color cannot be the only distinction")
+        end
+    end)
+    test("supply pack previews use the exact purchase and return quantities",function()
+        for id,item in pairs(model.resources.goods) do
+            local p=model.new(1848);local s=p.run;local before=util.copy(p)
+            local weight=model.resources.weight(s)
+            command(p,"buy",{item=id})
+            assert(s[id]==before.run[id]+item.amount and s.coins==before.run.coins-item.price)
+            assert(model.resources.weight(s)==weight+item.weight)
+            command(p,"sell",{item=id});equal(p,before)
+        end
+    end)
     test("symbol catalog is complete, distinct and drawn on whole pixels",function()
         local seen,shapes={},{}
         for _,group in ipairs(symbols.groups) do
