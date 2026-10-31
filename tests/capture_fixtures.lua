@@ -45,6 +45,37 @@ function M.habit_gather(self)
     M.habits(self);self.capture_actions={};self.page="forage";local c=self.snapshot.run.crew[2];c.habit=true;c.stamina=12;self.redraw();self.capture_assert=function() assert(model.forage_preview(self.snapshot.run).effort==12) end
 end
 function M.depot_options(self) reset(self,"settings");self.redraw() end
+function M.tracks_preview(self)
+    reset(self,"trail");self.redraw();self.capture_actions={"open_tracking"}
+    self.capture_assert=function() assert(self.page=="tracking" and self.snapshot.run.day==1) end
+end
+function M.tracks_found(self)
+    M.tracks_preview(self)
+    for seed=1,24 do local p=model.new(seed);assert(model.command(p,"depart"));if not p.run.tracks['2'].empty then self.snapshot=p;break end end
+    self.redraw();self.capture_actions={"open_tracking","follow_tracks"}
+    self.capture_assert=function() assert(self.page=="trail" and self.snapshot.run.mode=="event" and self.snapshot.run.day==2) end
+end
+function M.tracks_spent(self)
+    M.tracks_found(self);assert(model.command(self.snapshot,"follow_tracks"))
+    local choices=model.events.by_id[self.snapshot.run.pending.id].choices
+    assert(model.command(self.snapshot,"choice",{id=choices[#choices].id}))
+    self.page="tracking";self.capture_actions={};self.redraw()
+    self.capture_assert=function() assert(not require("simulation.tracking").preview(self.snapshot).available) end
+end
+function M.hauler_meeting(self)
+    reset(self,"trail");self.snapshot=model.new(1848,"discovery");assert(model.command(self.snapshot,"depart"))
+    local s=self.snapshot.run;s.target=4;s.terrain="marsh";s.progress=s.distance;s.mode="landmark"
+    self.redraw();self.capture_actions={"open_tracking","meet_wild"}
+    self.capture_assert=function() assert(s.pending.id=="meet_reedskipper" and s.day==1) end
+end
+function M.hauler_joined(self)
+    M.hauler_meeting(self);self.capture_actions={"open_tracking","meet_wild","event_invite"}
+    self.capture_assert=function() assert(#self.snapshot.run.crew==2 and self.snapshot.run.food==86) end
+end
+function M.tracks_closing(self)
+    M.tracks_preview(self);self.snapshot.run.day=31;self.redraw()
+    self.capture_assert=function() assert(not require("simulation.tracking").preview(self.snapshot).available) end
+end
 function M.options(self) reset(self,"settings");self.redraw() end
 function M.options_brisk(self)
     M.options(self);self.capture_actions={"travel_speed"}

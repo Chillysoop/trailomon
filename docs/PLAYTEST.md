@@ -8,7 +8,7 @@ New expeditions use the guardian's readable four-exchange sequence: cargo shove,
 
 Choose one or two companions at Fernwake Depot, within the seven-point crew budget. Bring a draft companion: Brindlehorn or Reedskipper initially. Buy supplies, then begin the journey. The default crew and loadout are playable starting choices.
 
-For a discovery-led start, choose **Options → Open discovery depot**. This keeps a separate save. Pick Brindlehorn or Reedskipper before your first departure, then meet Loamling at Split Oak and Bellmoth at Mossbell. Their optional invitations each cost four provisions, with the extra daily meals shown before you accept. Recruited companions stay available for later trips. Switch back through Options to resume the Classic depot. The other starting hauler is available in Classic; this slice has no Discovery recruitment scene for it.
+For a discovery-led start, choose **Options → Open discovery depot**. This keeps a separate save. Pick Brindlehorn or Reedskipper before your first departure, then meet Loamling at Split Oak and Bellmoth at Mossbell. Their optional invitations each cost four provisions, with the extra daily meals shown before you accept. Recruited companions stay available for later trips. Switch back through Options to resume the Classic depot. To meet the other starting hauler, choose **Wildlife nearby** at Split Oak (Brindlehorn) or Willowford (Reedskipper). Meeting takes no time; invitation costs four provisions and needs a free crew space.
 
 Press **Space** or choose **Follow the road** to travel. Important events and landmarks stop the clock. Opening a menu or moving focus to another window also pauses the wagon. **Calm** speed presents a day in twenty seconds; **brisk** uses 2.5 seconds. Both use the same daily rules.
 
@@ -46,7 +46,7 @@ Classic uses `expedition_v1`; Discovery uses `discovery_v1`. Each has its own ba
 
 ## What this build covers
 
-One six-landmark route with two branches, six creature species, twenty-five event definitions, two road battle scenarios plus courier practice, weather, resource management, recovery, recruitment, two wagon configurations, two separate depot modes, saved companions and habits, a field journal, and repeatable seeds. Menus include labeled original pixel icons for resources, roles, and actions.
+One six-landmark route with two branches, six creature species, twenty-eight event definitions, two road battle scenarios plus courier practice, weather, resource management, recovery, recruitment, two wagon configurations, two separate depot modes, saved companions and habits, a field journal, and repeatable seeds. Menus include labeled original pixel icons for resources, roles, and actions.
 
 This is an early playable for checking the decisions and rhythm. Creature art uses selected Sprite Fusion studies with simple procedural motion. Detailed frame animation, final anatomy and camera consistency, finer scenery detail, ambient music, and broader content are still art and polish work. The visual rules in `docs/VISUAL_DIRECTION.md` remain requirements for those passes.
 
@@ -59,3 +59,7 @@ At Split Oak and Cairn Gate, read the trail report before choosing a route. Know
 Earlier choices can return later: clearing the fallen tree lets a grateful cart catch up; a temporary axle lashing can slip on rough travel unless repaired. The road pauses to explain each result. Continue closes the message without spending time.
 
 **Journal > Optional aims** tracks three accomplishments across trips: deliver on time with two different departure species pairs, reach Lantern Reach along both final paths, and arrive without a combat exchange. Late arrivals count for paths and peaceful travel; early returns do not. Inspection and withdrawal before the first exchange are peaceful. Recruitment and renaming do not change a departure pair. All aims track automatically, persist beyond the ten-trip history, and award journal entries without stat bonuses. Departure and ending screens also link to them. Old saves recover provable arrival paths; crew/combat tracking begins on the next departure.
+
+**Journey → Wildlife nearby** opens a free preview while stopped outside encounters. **Follow these tracks** spends one day and the displayed meals. One search per stretch; the clue and hidden result are saved when you enter the stretch. Some tracks end at empty shelter. Passing or reopening menus costs nothing, and reloads cannot reroll the result. The day uses normal weather and recovery; any invitation or assistance afterward shows its own additional cost. Searches require enough food and stop before the last closing day.
+
+**Journal → Species field guide** now gives habitat and method hints, separating unconfirmed reports from firsthand sightings. Existing saved journeys keep their original rules and enable searches on the next departure. The new hauler meetings are available in existing Discovery journeys when you reach their landmarks.

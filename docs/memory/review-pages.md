@@ -1,6 +1,6 @@
 # Review decisions and delivery
 
-2026-10-31 next-2: five new D1–D5 options after the creature batch; top picks D1/D2/D3. Initially unanswered. Published owner-private at /next-2.html; 12 review tests and isolated Edge YES/NO/comment/FINISH/hide-answered/phone checks passed. See next-steps.md for meanings, dependencies and audit. No previously approved controls are repeated.
+2026-10-31 next-2: five new D1–D5 options after the creature batch; top picks D1/D2/D3. Chat “proceed” approved the recommended D1–D3; no next-2 submission or draft exists. D4/D5 remain undecided. D1–D3 descriptions move into completed history without fabricating votes. Published owner-private at /next-2.html; 12 review tests and isolated Edge YES/NO/comment/FINISH/hide-answered/phone checks passed. See next-steps.md for meanings, dependencies and audit. No previously approved controls are repeated.
 
 2026-10-31 wild-1 revision 7: W1–W6 all YES, no notes. Implement in dependency order: W1/W2 wildlife and guide; W3/W4 courier spar and recognition; W5 discovery starts; W6 learned habits. These approvals expand the first expedition, not its geography or art scope. See creature-encounters.md for delivery. No rejected or blank items.
 

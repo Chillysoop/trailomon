@@ -13,6 +13,7 @@ local aims=require "simulation.journal_aims"
 local field_guide=require "simulation.field_guide"
 local courier=require "simulation.courier"
 local habits=require "simulation.habits"
+local tracking=require "simulation.tracking"
 local M = {SCHEMA=1, CONTENT=1, route=route, species=species, resources=resources, events=events, combat=combat, equipment=equipment, trail_reports=require "simulation.trail_reports"}
 
 local function log(s,text)
@@ -37,7 +38,7 @@ local function prepare(snapshot,seed)
         wagon=100,wagon_type="standard",cargo=100,traveler=100,pace="steady",rations="normal",
         crew=crew,hauler=1,
         rng={weather=rng.seed(seed+11),events=rng.seed(seed+173),combat=rng.seed(seed+1019)},
-        seen={},flags={},discoveries={},branches={},forage={},cooldown=1,log={},warnings={},
+        seen={},flags={},discoveries={},branches={},forage={},tracks={},cooldown=1,log={},warnings={},
         outcome="",ending="",wildlife_rules="wildlife-v1",courier_rules=courier.RULES,combat_effort=combat.EFFORT,river_roll=rng.seed(seed+923)%100/100}
     p.next_id=p.next_id+1
     snapshot.run=s
@@ -268,6 +269,7 @@ local function leave(snapshot,branch)
     s.terrain=route[s.target].terrain
     if path then s.terrain=path.id;s.distance=path.distance end
     s.mode="traveling"
+    tracking.enter(snapshot)
     log(s,"Set out for " .. route[s.target].name .. ".")
     return true
 end
@@ -425,6 +427,7 @@ function M.command(snapshot,command,arg)
     local s=snapshot.run
     arg=arg or {}
     if command=="habit" then return habits.toggle(snapshot,arg.species) end
+    if command=="meet_wild" then return require("simulation.discovery").meet(snapshot) end
     if command=="starter" then return require("simulation.discovery").starter(snapshot,arg.species) end
     if command=="settings" then
         if arg.key=="travel_speed" then
@@ -464,6 +467,7 @@ function M.command(snapshot,command,arg)
         if not draft then return false,"Choose a companion that can pull the wagon" end
         s.hauler=draft; s.mode="stopped"
         aims.depart(s)
+        tracking.enter(snapshot)
         log(s,"Left Fernwake with " .. #s.crew .. " companions. Space follows the road; every decision waits for you.")
         return true
     elseif command=="equip_work_item" then return equipment.equip(s,arg.member,arg.item)
@@ -542,6 +546,23 @@ function M.command(snapshot,command,arg)
             else s.traveler=math.min(100,s.traveler+35) end
             log(s,"Medicine and a day of care helped " .. (member and member.name or "the traveler") .. ".")
             if s.mode=="traveling" then s.mode="stopped" end
+        end
+        return true
+    elseif command=="follow_tracks" then
+        local preview=tracking.preview(snapshot)
+        if not preview.available then return false,preview.reason end
+        local record=preview.record;record.used=true
+        day(snapshot,false,false)
+        if s.mode=="result" then return true end
+        s.mode="stopped"
+        log(s,"Followed "..tracking.signs[record.species]:lower()..": 1 day / "..preview.meals.." provisions.")
+        if record.empty then
+            road_story(s,"The tracks end at an empty shelter. Search: 1 day / "..preview.meals.." provisions. No further search on this stretch.")
+            reached(snapshot)
+        else
+            s.seen[record.event]=true;s.pending={id=record.event,roll=record.roll};s.mode="event"
+            field_guide.encounter(s,record.event)
+            log(s,events.by_id[record.event].title..".")
         end
         return true
     elseif command=="forage" and stopped(s) then

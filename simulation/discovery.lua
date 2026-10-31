@@ -1,6 +1,22 @@
 local species=require "content.species"
 local progression=require "simulation.progression"
 local M={}
+function M.invitation(snapshot)
+    local s,p=snapshot.run,snapshot.profile
+    if p.start_mode~="discovery" or s.mode~="landmark" or s.road_story then return end
+    local id=s.target==2 and "brindlehorn" or (s.target==4 and "reedskipper")
+    if not id or p.roster[id] or s.seen["meet_"..id] then return end
+    for _,c in ipairs(s.crew) do if c.species==id then return end end
+    return id
+end
+function M.meet(snapshot)
+    local id=M.invitation(snapshot)
+    if not id then return false,"No new hauler is waiting here" end
+    local s=snapshot.run;local event="meet_"..id
+    s.seen[event]=true;s.pending={id=event,roll=0};s.mode="event"
+    require("simulation.field_guide").observe(s,id)
+    return true
+end
 function M.arrive(snapshot)
     local s,p=snapshot.run,snapshot.profile
     if p.start_mode~="discovery" or s.mode~="landmark" then return end

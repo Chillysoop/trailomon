@@ -13,6 +13,7 @@ local trail_reports=require "ui.trail_reports"
 local journal_aims=require "ui.journal_aims"
 local field_guide=require "ui.field_guide"
 local habits=require "ui.habits"
+local tracking=require "ui.tracking"
 local aims=require "simulation.journal_aims"
 local M={}
 local titles={delivered="New roots, at last.",late="You made it through.",returned="There is always another road.",rescued="Everyone comes home."}
@@ -94,7 +95,7 @@ local function preparation(self)
         w.text(self,x+15,y+83,def.name,19,"ink")
         label(self,x+15,y+59,def.role)
         local starter=p.start_mode=="discovery" and p.last_committed==0 and s.id==1 and (id=="brindlehorn" or id=="reedskipper")
-        w.button(self,x+15,y+14,233,29,starter and (selected[id] and "First hauler" or "Choose first hauler") or (p.roster[id] and (selected[id] and "Selected" or "Choose") or ((p.start_mode=="discovery" and (id=="brindlehorn" or id=="reedskipper")) and "Other starting companion" or "Meet on the trail")),cmd(self,starter and "starter" or "crew",{species=id}),{enabled=starter or p.roster[id]~=nil,selected=selected[id],size=12,key="select_"..id})
+        w.button(self,x+15,y+14,233,29,starter and (selected[id] and "First hauler" or "Choose first hauler") or (p.roster[id] and (selected[id] and "Selected" or "Choose") or "Meet on the trail"),cmd(self,starter and "starter" or "crew",{species=id}),{enabled=starter or p.roster[id]~=nil,selected=selected[id],size=12,key="select_"..id})
     end
     w.panel(self,890,58,362,562)
     label(self,910,593,"THE FIRST DELIVERY")
@@ -429,6 +430,7 @@ function M.draw(self)
         elseif self.page=="journal" then journal(self)
         elseif self.page=="habits" then habits.draw(self)
         elseif self.page=="field_guide" then field_guide.draw(self)
+        elseif self.page=="tracking" then tracking.draw(self)
         elseif self.page=="aims" then journal_aims.draw(self)
         elseif self.page=="symbols" then symbol_guide.draw(self)
         elseif self.page=="forage" then gathering.draw(self)
@@ -448,6 +450,9 @@ function M.draw(self)
         elseif s.mode=="combat_result" then auto_battle.result(self)
         elseif s.mode=="result" then result(self)
         else travel(self) end
+    end
+    if self.page=="trail" and not s.road_story and (s.mode=="stopped" or s.mode=="traveling" or s.mode=="landmark") then
+        w.button(self,650,565,212,31,"Wildlife nearby",page(self,"tracking"),{key="open_tracking",icon="scout",size=12})
     end
     if self.save_blocked or self.edit then self.buttons={};overlay(self) end
     w.finish(self)

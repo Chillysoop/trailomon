@@ -70,7 +70,7 @@ end
 
 test("initial snapshot and content budgets",function()
     local p=model.new(1848);valid(p)
-    assert(#model.events.defs==25 and #model.route==6 and #model.species.order==6)
+    assert(#model.events.defs==28 and #model.route==6 and #model.species.order==6)
 end)
 test("new journeys do not share mutable state",function()
     local a,b=model.new(9),model.new(9)
@@ -233,7 +233,10 @@ test("all authored choices have a reachable resolution",function()
     for _,event in ipairs(model.events.defs) do
         for _,choice in ipairs(event.choices or {}) do
             local p=event.kind=="discovery_start" and model.new(7,"discovery") or depart(7)
-            if event.kind=="discovery_start" then command(p,"depart") end
+            if event.kind=="discovery_start" then
+                if event.id=="meet_brindlehorn" then command(p,"starter",{species="reedskipper"}) end
+                command(p,"depart")
+            end
             local s=p.run
             if choice.species then s.crew[2]=progression.companion(choice.species);if s.crew[1].species==choice.species then s.crew[2]=progression.companion("loamling") end end
             assert(model.debug(p,"event",event.id));command(p,"choice",{id=choice.id})
@@ -241,6 +244,7 @@ test("all authored choices have a reachable resolution",function()
         end
     end
 end)
+require("tests.tracking")(test,command,valid,assert_equal)
 require("tests.discovery_habits")(test,command,valid,assert_equal)
 require("tests.courier")(test,command,valid,assert_equal)
 require("tests.wildlife")(test,command,valid,assert_equal)

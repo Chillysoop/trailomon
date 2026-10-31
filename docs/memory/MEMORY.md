@@ -25,3 +25,5 @@
 - [balance-study.md](balance-study.md): S5 crew/item/route comparison, encounter/save fixes, evidence limits and new E1/E2 choices.
 
 - [creature-encounters.md](creature-encounters.md): W1–W6 approvals, wildlife/guide/courier/acquisition/habit integration and verification.
+
+- [discovery-tracks.md](discovery-tracks.md): D1–D3 chat approval, missing-hauler recruitment, field clues, saved searches and validation.
