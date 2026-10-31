@@ -21,3 +21,5 @@ QA gotcha: launching this Defold release through a hidden PowerShell window, the
 Keep public release publication separate from ordinary PR merging. The owner must approve a public release. Windows is the only current target.
 
 2026-10-30: PR #11 merged as 7bb1e6d887098ffd27578644918d71a7db4b9d34 after both Windows checks passed on 6e94124. It delivers S11, the private journey-1 review, and custom report reproduction fixes. Two actual UI journeys plus return/resume/settings are recorded in journey-playtest.md. Gameplay and the current Windows ZIP remain unchanged.
+
+2026-10-31 creature batch: PR33–35 merged. Windows ZIP built from clean 649e02e6c440e28a3e8d73024d15cee4c02d06bd; SHA256 41d3a86a6e8699a3dec6cf6d8df610676d351100b9ddf92bc53989122a822ed2. 104 Lua, native persistence/36 GUI states, CI and targeted rendered checks passed. Source manifest and local delivery record remain in builds/Trailomon-windows.json and .tools/creature-delivery.json.
