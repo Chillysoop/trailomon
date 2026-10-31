@@ -12,6 +12,7 @@ local work_items=require "ui.work_items"
 local trail_reports=require "ui.trail_reports"
 local journal_aims=require "ui.journal_aims"
 local field_guide=require "ui.field_guide"
+local habits=require "ui.habits"
 local aims=require "simulation.journal_aims"
 local M={}
 local titles={delivered="New roots, at last.",late="You made it through.",returned="There is always another road.",rescued="Everyone comes home."}
@@ -20,7 +21,7 @@ local function page(self,id) return function() self.open_page(id) end end
 local function label(self,x,y,text) w.text(self,x,y,text,12,"muted") end
 local function header(self)
     w.text(self,28,681,"TRAILOMON",27,"ink")
-    w.text(self,28,654,"THE FERNWAKE ROAD",11,"gold")
+    w.text(self,28,654,self.snapshot.profile.start_mode=="discovery" and "DISCOVERY DEPOT / FERNWAKE" or "CLASSIC DEPOT / FERNWAKE",11,"gold")
     local pages={{"trail","Journey"},{"crew","Crew"},{"map","Map"},{"journal","Journal"},{"settings","Options"}}
     for i,item in ipairs(pages) do
         w.button(self,657+(i-1)*118,655,108,38,item[2],page(self,item[1]),{selected=self.page==item[1],size=12,icon=item[1]})
@@ -92,7 +93,8 @@ local function preparation(self)
         w.text(self,x+161,y+120,def.draft and "CAN HAUL" or "SUPPORT",10,"muted")
         w.text(self,x+15,y+83,def.name,19,"ink")
         label(self,x+15,y+59,def.role)
-        w.button(self,x+15,y+14,233,29,p.roster[id] and (selected[id] and "Selected" or "Choose") or "Meet on the trail",cmd(self,"crew",{species=id}),{enabled=p.roster[id]~=nil,selected=selected[id],size=12,key="select_"..id})
+        local starter=p.start_mode=="discovery" and p.last_committed==0 and s.id==1 and (id=="brindlehorn" or id=="reedskipper")
+        w.button(self,x+15,y+14,233,29,starter and (selected[id] and "First hauler" or "Choose first hauler") or (p.roster[id] and (selected[id] and "Selected" or "Choose") or ((p.start_mode=="discovery" and (id=="brindlehorn" or id=="reedskipper")) and "Other starting companion" or "Meet on the trail")),cmd(self,starter and "starter" or "crew",{species=id}),{enabled=starter or p.roster[id]~=nil,selected=selected[id],size=12,key="select_"..id})
     end
     w.panel(self,890,58,362,562)
     label(self,910,593,"THE FIRST DELIVERY")
@@ -162,7 +164,7 @@ local function choices(self,title,body,options,kicker)
         w.button(self,50,y,790,39,option.label,option.fn,{primary=i==1,enabled=option.enabled~=false,size=14,key=option.key,icon=option.icon})
         w.text(self,59,y-14,option.detail or "",11,option.enabled==false and "red" or "muted")
     end
-    recent_log(self,28,114,834,1)
+    if kicker~="OPTIONS" then recent_log(self,28,114,834,1) end
 end
 local function event(self)
     local s=self.snapshot.run
@@ -211,9 +213,10 @@ local function landmark(self)
                 options[#options+1]={label="Inspect the river",detail="Record conditions / no time or supplies / unlock research after this trip",fn=cmd(self,"river",{method="inspect"})}
             end
             options[#options+1]={label="Take the ferry",detail="12 coins + 1 day of meals / dependable crossing",enabled=s.coins>=12,fn=cmd(self,"river",{method="ferry"})}
-            local method=model.resources.find(s,"reedskipper",22) and "swim" or ((model.resources.find(s,"brindlehorn",22) or model.resources.find(s,"slatewhorl",22)) and "anchor" or "rope")
+            local method=model.crossing_helper(s,"swim") and "swim" or (model.crossing_helper(s,"anchor") and "anchor" or "rope")
+            local _,_,effort=model.crossing_helper(s,method)
             options[#options+1]={label=method=="swim" and "Secure a line with Reedskipper" or (method=="anchor" and "Anchor a line with your companion" or "Use the wagon's crossing ropes"),
-                detail=(method~="rope" and "22 energy / " or "No creature assistance / ")..util.round(model.river_risk(s,method)*100).."% risk of wet supplies and damage",fn=cmd(self,"river",{method=method})}
+                detail=(method~="rope" and (effort.." energy / ") or "No creature assistance / ")..util.round(model.river_risk(s,method)*100).."% risk of wet supplies and damage",fn=cmd(self,"river",{method=method})}
             options[#options+1]={label="Wait and watch the water",detail="1 day + meals / rest; weather may improve or worsen",fn=cmd(self,"river",{method="wait"})}
         end
 
@@ -251,10 +254,11 @@ local function shop(self)
         {label="Return to the outpost",icon="trail",detail="Review the road ahead",fn=page(self,"trail")}},"MOSSBELL / "..s.coins.." COINS")
 end
 local function crew(self)
+    w.button(self,440,550,190,31,"Learned habits",page(self,"habits"),{key="open_habits",icon="assist",size=12})
     local s=self.snapshot.run
     w.button(self,642,550,220,31,"Work items",page(self,"work_items"),{icon="capacity",key="open_items",size=13})
     label(self,28,611,"COMPANIONS / SMALL CREW, SHARED HISTORY")
-    w.text(self,28,575,"Who you bring changes the road.",27,"ink")
+    w.text(self,28,575,"Your traveling crew.",27,"ink")
     w.reading(self,28,546,"medicine",nil,{label="Treat: 1 day + meals + 1 medicine; up to +35 condition.",size=12,icon_size=12})
     local can=s.mode=="preparation" or s.mode=="stopped" or s.mode=="landmark" or s.mode=="traveling"
     for i,c in ipairs(s.crew) do
@@ -353,6 +357,8 @@ local function settings(self)
         {label="Travel view: "..((self.snapshot.settings.travel_speed or 1)==1 and "calm" or "brisk"),detail="Remembered between visits; travel pace and daily costs stay the same",fn=cmd(self,"settings",{key="travel_speed"}),key="travel_speed",icon="time"},
         {label="Save this moment",detail="Save now; it is safe to close the window afterward",fn=function() self.save_now();self.redraw() end},
         {label="Expedition seed: "..s.seed,detail=s.mode=="preparation" and "Change the seed before leaving the depot" or "Replay this seed from the result screen",enabled=s.mode=="preparation",key="settings_seed",fn=function() self.edit={kind="seed",value=tostring(s.seed)};self.redraw() end}},"OPTIONS")
+    local destination=self.snapshot.profile.start_mode=="discovery" and "classic" or "discovery"
+    w.button(self,50,67,790,32,"Open "..destination.." depot / separate save",function() self.switch_depot(destination) end,{key="switch_depot",size=12,icon="crew"})
 end
 local function result(self)
     local s=self.snapshot.run;local p=self.snapshot.profile
@@ -376,14 +382,17 @@ local function debug(self)
     label(self,28,611,"DEVELOPER CONTROLS / F3 TO CLOSE")
     w.text(self,28,575,"Explore the authored encounters.",25,"ink")
     label(self,28,538,"Forces a test event. Only available while traveling or stopped.")
-    local row=0
-    for _,event in ipairs(model.events.defs) do
-        if event.choices then
-            local id=event.id;row=row+1
-            local x=28+((row-1)%2)*425;local y=477-math.floor((row-1)/2)*52
+    local list={};for _,event in ipairs(model.events.defs) do if event.choices then list[#list+1]=event end end
+    local total=math.ceil(#list/14);local current=math.min(self.debug_page or 1,total);self.debug_page=current
+    for row=1,14 do
+        local event=list[(current-1)*14+row]
+        if event then
+            local id=event.id;local x=28+((row-1)%2)*425;local y=477-math.floor((row-1)/2)*52
             w.button(self,x,y,409,39,event.title,function() self.force_event(id) end,{size=12,key="debug"..id})
         end
     end
+    w.button(self,28,126,409,28,"Previous events",function() self.debug_page=current-1;self.redraw() end,{key="debug_previous",enabled=current>1,size=12})
+    w.button(self,453,126,409,28,"More events / "..current.." of "..total,function() self.debug_page=current+1;self.redraw() end,{key="debug_next",enabled=current<total,size=12})
     w.button(self,28,91,834,30,"Guardian pattern / test encounter",function() self.force_event("guardian_pattern") end,{size=12,key="debugguardian_pattern"})
     w.button(self,28,48,409,35,"Restore supplies & condition",function() self.debug_resupply() end,{size=12})
     w.button(self,453,48,409,35,"Advance one travel day",function()
@@ -418,6 +427,7 @@ function M.draw(self)
         elseif self.page=="work_items" then work_items.draw(self)
         elseif self.page=="map" then map(self)
         elseif self.page=="journal" then journal(self)
+        elseif self.page=="habits" then habits.draw(self)
         elseif self.page=="field_guide" then field_guide.draw(self)
         elseif self.page=="aims" then journal_aims.draw(self)
         elseif self.page=="symbols" then symbol_guide.draw(self)

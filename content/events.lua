@@ -91,4 +91,10 @@ return {
  {id="courier_spar",title="Mara's practice load",text="Brindlehorn shoves; Bellmoth covers. Three exchanges. Spend energy, protect a practice load. Cargo and health stay safe.",kind="courier",condition="courier",
   choices={{id="battle",label="Prepare a friendly spar",battle="courier",hint="Real energy spent / no cargo or health loss"},
    {id="pass",label="Pass for this journey",flag="courier_done"}}},
+ {id="discover_loamling",title="A burrow beneath the oak",text="A young Loamling noses your food sack. It follows when you walk back toward the wagon.",kind="discovery_start",condition="discovery_start",
+  choices={{id="invite",label="Share food and invite Loamling",cost={food=4},recruit="loamling"},
+   {id="pass",label="Leave it on its home trail"}}},
+ {id="discover_bellmoth",title="A dry corner at Mossbell",text="A wild Bellmoth settles beneath your wagon canopy. It stays as the other moths leave the drying shed.",kind="discovery_start",condition="discovery_start",
+  choices={{id="invite",label="Offer food and a traveling roost",cost={food=4},recruit="bellmoth"},
+   {id="pass",label="Let it return to the shed"}}},
 }

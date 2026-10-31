@@ -55,5 +55,14 @@ return function(test,command,valid,equal)
         moving.perform("resume");local reload={};env.init(reload)
         assert(reload.speed==2 and reload.snapshot.run.mode=="stopped","Remember viewing speed but never resume travel on load")
         stored.settings.travel_speed=nil;local old={};env.init(old);assert(old.speed==1)
+        local classic=util.copy(old.snapshot)
+        modules["services.save"].select=function(snapshot,slot)
+            if fail_save then return nil,"No space" end
+            return slot=="discovery" and model.new(1848,"discovery") or util.copy(classic)
+        end
+        old.battle_team={1,2};old.switch_depot("discovery");assert(old.snapshot.profile.start_mode=="discovery" and old.page=="trail" and #old.battle_team==0 and old.combat_paused)
+        fail_save=true;old.switch_depot("classic");assert(old.snapshot.profile.start_mode=="discovery" and old.toast=="No space")
+        fail_save=false;old.switch_depot("classic");equal(old.snapshot,classic)
+
     end)
 end

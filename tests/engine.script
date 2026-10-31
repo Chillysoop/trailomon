@@ -8,6 +8,7 @@ local function run()
     local namespace=sys.get_config_string("trailomon.save_namespace","")
     assert(namespace=="trailomon_automated_checks" or namespace:match("^trailomon_qa_[a-z]+_%d+$"))
     assert(primary:find(namespace,1,true) and backup:find(namespace,1,true))
+    os.remove(sys.get_save_file(namespace,"depot_selection"))
     local p=model.new(1848)
     p.run.combat_effort=nil -- Existing journeys retain original 4/8 costs.
     p.settings.travel_speed=nil -- A pre-J4 native save remains readable.
@@ -131,6 +132,24 @@ local function run()
     assert(closure.run.outcome=="rescued" and closure.run.progress==35)
     assert(save.write(closure));closure=assert(save.load())
     assert(closure.run.mode=="result" and closure.profile.last_committed==closure.run.id)
+    -- Both slots live inside the already-verified automated namespace.
+    local dp,db=save.paths("discovery");os.remove(dp);os.remove(db)
+    local original=closure
+    local discovery=assert(save.select(original,"discovery"))
+    assert(discovery.profile.start_mode=="discovery" and #discovery.run.crew==1)
+    assert(model.command(discovery,"starter",{species="reedskipper"}));assert(model.command(discovery,"depart"))
+    for _=1,3 do assert(model.advance_day(discovery,true,false)) end
+    assert(discovery.run.crew[1].habit_days==3)
+    assert(model.command(discovery,"return"));assert(model.command(discovery,"new"));assert(model.command(discovery,"habit",{species="reedskipper"}))
+    assert(save.write(discovery));local check=assert(save.load());assert(check.run.crew[1].habit)
+    package.loaded["services.save"]=nil
+    local restarted=require "services.save";local resumed=assert(restarted.load())
+    assert(restarted.slot()=="discovery" and resumed.run.crew[1].habit)
+    local classic=assert(save.select(discovery,"classic"));assert(classic.run.seed==original.run.seed and classic.run.outcome==original.run.outcome)
+    assert(classic.run.day==original.run.day and classic.profile.last_committed==original.profile.last_committed)
+    local again=assert(save.select(classic,"discovery"));assert(again.run.crew[1].species=="reedskipper" and again.run.crew[1].habit)
+    assert(save.select(again,"classic"));os.remove(dp);os.remove(db);os.remove(sys.get_save_file(namespace,"depot_selection"))
+    package.loaded["services.save"]=save
     for _,path in ipairs({primary,backup}) do
         local f=assert(io.open(path,"wb"));f:write("corrupt");f:close()
     end
