@@ -13,7 +13,7 @@ function M.select(self)
     local s=self.snapshot.run;local team=self.battle_team or {};self.battle_team=team
     text(self,28,611,"ENCOUNTER / PREPARE YOUR POSITIONS")
     text(self,28,576,s.encounter=="scavengers" and "Keep the provisions safe." or "Make a little room to pass.",27,"ink")
-    text(self,28,541,"Approach presses; wagon covers cargo and its partner. Rushes target cargo or the approach; every second rush is heavy. Selection order sets positions.",12,"muted",834)
+    text(self,28,541,model.combat.setup_text(s),12,"muted",834)
     for i,c in ipairs(s.crew) do
         local idx=i;local x=28+(i-1)*280;local position
         for n,j in ipairs(team) do if i==j then position=n end end

@@ -479,7 +479,7 @@ function M.command(snapshot,command,arg)
         return true
     elseif command=="battle_start" and s.mode=="combat_select" then
         local before=s.rng.combat
-        local ok,why=combat.start(s,s.encounter,arg.team)
+        local ok,why=combat.start(s,s.encounter,arg.team,s.pending and s.pending.pattern)
         if ok and s.pending then s.return_rng=before end
         return ok,why
     elseif command=="battle_step" and s.mode=="combat" then
@@ -509,6 +509,11 @@ end
 -- Developer-only entry point. The UI explicitly labels these as test controls.
 function M.debug(snapshot,action,value)
     local s=snapshot.run
+    if action=="event" and value=="guardian_pattern" and stopped(s) then
+        local ok,why=M.debug(snapshot,"event","territorial")
+        if ok then s.pending.pattern=combat.GUARDIAN_PATTERN end
+        return ok,why
+    end
     if action=="event" and stopped(s) and events.by_id[value] and events.by_id[value].choices then
         s.pending={id=value,roll=rng.next(s.rng,"events")}; s.seen[value]=true; s.mode="event"; return true
     elseif action=="resupply" and stopped(s) then

@@ -2,6 +2,7 @@ local model=require "simulation.expedition"
 local save=require "services.save"
 
 local function run()
+    assert(screenshot==nil,"Capture extension leaked into the ordinary game test engine")
     local primary,backup=save.paths()
     -- Refuse to touch anything until the isolated namespace has been verified.
     local namespace=sys.get_config_string("trailomon.save_namespace","")
@@ -55,6 +56,19 @@ local function run()
     local ended=assert(save.load())
     assert(ended.run.mode=="result" and #ended.profile.history==1)
     assert(not model.command(ended,"return"))
+    local guardian=model.new(1848);assert(model.command(guardian,"depart"))
+    assert(model.debug(guardian,"event","guardian_pattern"))
+    assert(model.command(guardian,"choice",{id="battle"}))
+    assert(save.write(guardian));guardian=assert(save.load())
+    assert(guardian.run.pending.pattern==model.combat.GUARDIAN_PATTERN)
+    assert(model.command(guardian,"battle_start",{team={1,2}}))
+    while guardian.run.mode=="combat" do
+        assert(save.write(guardian));guardian=assert(save.load())
+        assert(guardian.run.battle.pattern==model.combat.GUARDIAN_PATTERN)
+        assert(model.command(guardian,"battle_step"))
+    end
+    assert(save.write(guardian));guardian=assert(save.load())
+    assert(guardian.run.mode=="combat_result")
     for _,path in ipairs({primary,backup}) do
         local f=assert(io.open(path,"wb"));f:write("corrupt");f:close()
     end

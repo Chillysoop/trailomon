@@ -5,6 +5,7 @@ Owner-approved speed-1 F1, October 30, 2026. From PowerShell at the project root
 ```powershell
 ./tools/capture.ps1
 ./tools/capture.ps1 -Scenes options,options_brisk,combat_setup,combat_ready
+./tools/capture.ps1 -Scenes guardian_setup,guardian_warning,guardian_rush,developer
 ```
 
 The command opens an isolated hidden Windows release renderer, draws the production interface, performs scripted production button callbacks, saves real PNGs at 1280×720 and exits. It does not require Computer Use, desktop focus or a debug server. The first run downloads/builds the pinned native capture dependency; subsequent runs retain that cache. A graphics-capable Windows session is required; the null/headless renderer cannot produce visual evidence.
@@ -16,6 +17,8 @@ The first proof covers Options, changing its viewing-speed button, combat select
 ## Isolation and extension
 
 `tools/capture_prepare.py` mirrors only game/test inputs into `.tools/capture-project`. Unchanged inputs and its native cache survive subsequent runs. The test-only `tests/screenshots.project` supplies its collection and dependency; the player's `game.project` and executable do not gain a capture extension. Fixtures construct fresh deterministic state and do not import the save service. Attempting an explicit save fails the fixture. No player profile is loaded or written.
+
+The root `.defignore` excludes `.tools` explicitly: Git ignores alone do not stop Defold from discovering cached native-extension sources. Ordinary native tests assert that the screenshot API is absent. The mirror copies this exclusion file while resolving its own explicit capture dependency. See [Defold project ignores](https://defold.com/manuals/project-defignore/).
 
 Add a case to `tests/capture_fixtures.lua` and the script's `Scenes` allow-list when a feature needs another screen. Use queued action keys to run one real button callback per frame; coalesce redraws as the game does. Set a state assertion where useful. Four settled frames precede asynchronous post-render capture. Windows desktop scaling is normalized by `window.set_size`, and the returned framebuffer dimensions are checked.
 

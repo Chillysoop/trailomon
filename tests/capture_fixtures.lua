@@ -27,4 +27,18 @@ function M.combat_ready(self)
     M.combat_setup(self);self.capture_actions={"battler1","battler2","battle_begin"}
     self.capture_assert=function() assert(self.snapshot.run.mode=="combat" and #self.snapshot.run.battle.history==0) end
 end
+function M.guardian_setup(self)
+    reset(self,"trail");assert(model.debug(self.snapshot,"event","guardian_pattern"))
+    assert(model.command(self.snapshot,"choice",{id="battle"}));self.redraw()
+end
+function M.guardian_warning(self)
+    M.guardian_setup(self)
+    self.capture_actions={"battler1","battler2","battle_begin","combat_step"}
+    self.capture_assert=function() assert(self.snapshot.run.battle.intent.kind=="warning") end
+end
+function M.guardian_rush(self)
+    M.guardian_warning(self);self.capture_actions[#self.capture_actions+1]="combat_step"
+    self.capture_assert=function() assert(self.snapshot.run.battle.intent.kind=="heavy" and self.snapshot.run.battle.round==3) end
+end
+function M.developer(self) reset(self,"debug");self.redraw() end
 return M

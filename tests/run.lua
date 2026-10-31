@@ -238,6 +238,7 @@ test("all authored choices have a reachable resolution",function()
     end
 end)
 require("tests.combat")(test,command,valid,assert_equal)
+require("tests.guardian")(test,command,valid,assert_equal)
 require("tests.playback")(test,command,valid,assert_equal)
 require("tests.clarity")(test,command,valid,assert_equal)
 require("tests.journey_choices")(test,command,valid,assert_equal)

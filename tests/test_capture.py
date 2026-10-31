@@ -19,6 +19,7 @@ class CaptureProjectTests(unittest.TestCase):
         self.root = Path(self.temp.name)
         self.project = self.root / ".tools" / "capture-project"
         (self.root / "game.project").write_text("[project]\ntitle = Player\n")
+        (self.root / ".defignore").write_text("/.tools\n")
         (self.root / "ui").mkdir()
         (self.root / "ui" / "screens.lua").write_text("return {}")
         for name, value in [("ROOT", self.root), ("PROJECT", self.project)]:
@@ -44,6 +45,7 @@ class CaptureProjectTests(unittest.TestCase):
         self.assertEqual(player.read_text(), "[project]\ntitle = Player\n")
         self.prepare()
         self.assertEqual(mirror.read_bytes(), player.read_bytes())
+        self.assertEqual((self.project / ".defignore").read_text(), "/.tools\n")
 
     def test_removed_inputs_are_removed_but_build_cache_is_retained(self):
         self.prepare()

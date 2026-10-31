@@ -3,7 +3,20 @@ local species=require "content.species"
 local rng=require "simulation.rng"
 local util=require "simulation.util"
 local manual=require "simulation.combat_manual"
-local M={RULES="automatic-v1", ORDINARY_COST=4, ABILITY_COST=8}
+local M={RULES="automatic-v1", GUARDIAN_PATTERN="guardian-shove-v1", ORDINARY_COST=4, ABILITY_COST=8}
+
+function M.pattern_intent(b)
+    local stages={{"rush","cargo",14},{"warning",b.team[1],0},{"heavy",b.team[1],20},{"heavy","cargo",20}}
+    local stage=stages[b.round]
+    if not stage then return nil end
+    return {kind=stage[1],target=stage[2],damage=stage[3]}
+end
+function M.setup_text(s)
+    if s.pending and s.pending.pattern==M.GUARDIAN_PATTERN then
+        return "Approach presses; wagon covers. Pattern: cargo shove 14 > approach warning 0 > heavy approach 20 > heavy cargo 20. Selection order sets positions."
+    end
+    return "Approach presses; wagon covers cargo and its partner. Rushes target cargo or the approach; every second rush is heavy. Selection order sets positions."
+end
 
 function M.automatic(b) return b and b.rules==M.RULES end
 function M.soft_ground(s) return s.terrain~="ridge" and s.terrain~="gorge" end
@@ -27,11 +40,13 @@ function M.ordinary(s,i,position)
 end
 local function intention(s)
     local b=s.battle;local heavy=b.round%2==0
+    if b.pattern==M.GUARDIAN_PATTERN then b.intent=M.pattern_intent(b);return end
     b.intent={kind=heavy and "heavy" or "rush",target=rng.next(s.rng,"combat")<0.55 and "cargo" or b.team[1],
         damage=(b.kind=="scavengers" and 12 or 14)+(heavy and 6 or 0)}
 end
-function M.start(s,kind,team)
+function M.start(s,kind,team,pattern)
     if kind~="scavengers" and kind~="territorial" then return false,"Unknown encounter" end
+    if pattern~=nil and (pattern~=M.GUARDIAN_PATTERN or kind~="territorial") then return false,"Unknown encounter pattern" end
     if type(team)~="table" or #team<1 or #team>2 then return false,"Choose one or two companions" end
     local seen={}
     for _,i in ipairs(team) do
@@ -40,7 +55,7 @@ function M.start(s,kind,team)
     end
     local initial={food=s.food,cargo=s.cargo,day=s.day,crew={}}
     for _,i in ipairs(team) do initial.crew[i]={stamina=s.crew[i].stamina,condition=s.crew[i].condition} end
-    s.battle={rules=M.RULES,kind=kind,team=util.copy(team),round=1,limit=kind=="scavengers" and 3 or 4,
+    s.battle={rules=M.RULES,pattern=pattern,kind=kind,team=util.copy(team),round=1,limit=kind=="scavengers" and 3 or 4,
         resolve=kind=="scavengers" and 65 or 75,used={},last="",history={},initial=initial}
     intention(s);s.mode="combat"
     return true
@@ -48,8 +63,10 @@ end
 function M.intent_text(s)
     local b=s.battle
     if not M.automatic(b) then return manual.intent_text(s) end
+    if b.intent.kind=="warning" then return "Approach warning / no harm now / heavy approach rush next: 20 before cover" end
     local target=b.intent.target=="cargo" and "cargo" or s.crew[b.intent.target].name.." at the approach"
-    return (b.intent.kind=="heavy" and "Heavy rush" or "Rush").." toward "..target.." / "..b.intent.damage.." harm before cover"
+    local title=b.pattern==M.GUARDIAN_PATTERN and b.round==1 and "Cargo shove" or (b.intent.kind=="heavy" and "Heavy rush" or "Rush")
+    return title.." toward "..target.." / "..b.intent.damage.." harm before cover"
 end
 function M.round(s,actions)
     if M.automatic(s.battle) then return false,"Companions act automatically; advance an exchange" end
@@ -64,6 +81,7 @@ function M.step(s)
     local function unavailable(i)
         local c=s.crew[i]
         if b.used[i] then status(i,"spent","Spent this encounter")
+        elseif b.intent.kind=="warning" then status(i,"warning","Waits: warning only, no incoming hit")
         elseif c.condition<=0 then status(i,"condition","Cannot act: needs care")
         elseif not resources.ready(c,8) then status(i,"energy","Needs 12 energy before exchange")
         elseif b.resolve<=pressure then status(i,"repelled","Not needed: threat repelled")

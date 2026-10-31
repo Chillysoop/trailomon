@@ -13,6 +13,8 @@ FOLDERS = ("assets", "content", "simulation", "services", "ui", "presentation", 
 def prepare():
     PROJECT.mkdir(parents=True, exist_ok=True)
     files = [ROOT / "game.project"]
+    if (ROOT / ".defignore").exists():
+        files.append(ROOT / ".defignore")
     for folder in FOLDERS:
         files += [p for p in (ROOT / folder).rglob("*") if p.is_file()
                   and "__pycache__" not in p.parts and p.suffix not in {".pyc"}]
