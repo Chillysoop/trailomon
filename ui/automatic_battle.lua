@@ -13,8 +13,9 @@ function M.select(self)
     local s=self.snapshot.run;local team=self.battle_team or {};self.battle_team=team
     local ordinary=model.combat.costs(s)
     text(self,28,611,"ENCOUNTER / PREPARE YOUR POSITIONS")
-    text(self,28,576,s.encounter=="scavengers" and "Keep the provisions safe." or "Make a little room to pass.",27,"ink")
+    text(self,28,576,s.encounter=="courier" and "Practice with Mara." or (s.encounter=="scavengers" and "Keep the provisions safe." or "Make a little room to pass."),27,"ink")
     text(self,28,541,model.combat.setup_text(s),12,"muted",834)
+    if s.encounter=="courier" then w.sprite(self,"brindlehorn",751,585,65);w.sprite(self,"bellmoth",821,585,65) end
     for i,c in ipairs(s.crew) do
         local idx=i;local x=28+(i-1)*280;local position
         for n,j in ipairs(team) do if i==j then position=n end end
@@ -38,7 +39,7 @@ function M.select(self)
     local reversible=model.can_back_to_event(s)
     w.button(self,453,129,409,43,reversible and "Back to the encounter" or "Withdraw",function() self.perform(reversible and "battle_back" or "withdraw") end,{key=reversible and "battle_back" or "battle_withdraw",size=14,icon=reversible and "trail" or nil})
     text(self,28,110,reversible and "Back: no cost." or model.combat.withdraw_text(s.encounter,s),12)
-    text(self,28,79,s.encounter=="scavengers" and "Hold 3 exchanges or break resolve. Exhaustion forces retreat." or "Break resolve in 4 exchanges or detour.",12,"gold",834)
+    text(self,28,79,s.encounter=="courier" and "Practice load 30 / 3 exchanges / one attempt / no supply rewards." or (s.encounter=="scavengers" and "Hold 3 exchanges or break resolve. Exhaustion forces retreat." or "Break resolve in 4 exchanges or detour."),12,"gold",834)
 end
 local function log_view(self,b,y)
     local n=self.combat_log or #b.history
@@ -54,11 +55,15 @@ function M.draw(self)
     local s=self.snapshot.run;local b=s.battle
     local preview=model.combat.preview(s)
     text(self,28,611,"EXCHANGE "..b.round.." / "..b.limit.."  /  "..(self.combat_paused and "PAUSED" or "AUTOMATIC"))
-    text(self,28,579,b.kind=="scavengers" and "Hold the wagon." or "Win room to pass.",26,"ink")
+    text(self,28,579,b.kind=="courier" and "Practice beside Mara." or (b.kind=="scavengers" and "Hold the wagon." or "Win room to pass."),26,"ink")
     text(self,28,548,model.combat.intent_text(s),14,"gold")
-    w.bar(self,28,527,834,b.resolve/(b.kind=="scavengers" and 65 or 75)*100,"red",6)
-    text(self,28,514,"RESOLVE "..b.resolve.." / 0 = repelled",11)
+    w.bar(self,28,527,834,b.resolve/(b.kind=="courier" and 45 or (b.kind=="scavengers" and 65 or 75))*100,"red",6)
+    text(self,28,514,"RESOLVE "..b.resolve..(b.kind=="courier" and (" / PRACTICE LOAD "..b.practice.." of 30") or " / 0 = repelled"),11)
     scene.draw(self,28,344,834,155,s)
+    if b.kind=="courier" then
+        text(self,671,480,"MARA / CREW",11,"ink");w.sprite(self,"brindlehorn",719,423,76);w.sprite(self,"bellmoth",811,423,70)
+        text(self,678,366,"Shove",11,"ink");text(self,784,366,"Cover",11,"ink")
+    end
     for position,i in ipairs(b.team) do
         local c=s.crew[i];local x=28+(position-1)*425
         w.icon(self,x,317,position==1 and "approach" or "wagon",24)
@@ -89,12 +94,13 @@ local function signed(n) return (n>0 and "+" or "")..util.round(n) end
 function M.result(self)
     local s=self.snapshot.run;local b=s.battle;local r=b.result
     text(self,28,611,"ENCOUNTER / WHAT IT COST")
-    text(self,28,575,b.outcome=="won" and "There is room for the wagon." or "Bring the crew away.",27,"ink")
-    if b.outcome~="won" then text(self,28,538,model.combat.withdraw_text(b.kind,s),14) end
+    text(self,28,575,b.kind=="courier" and (b.outcome=="won" and "Mara concedes." or "Practice is finished.") or (b.outcome=="won" and "There is room for the wagon." or "Bring the crew away."),27,"ink")
+    if b.kind=="courier" then text(self,28,538,"Practice load "..b.practice.." / 30. Cargo and companion condition unchanged.",14)
+    elseif b.outcome~="won" then text(self,28,538,model.combat.withdraw_text(b.kind,s),14) end
     scene.draw(self,28,366,834,149,s)
     local costs={{"food","Provisions "..signed(r.food)},{"cargo","Cargo "..signed(r.cargo).."%"},{"time","Days +"..r.days}}
     for n,cost in ipairs(costs) do local x=28+(n-1)*280;w.icon(self,x,329,cost[1],24);text(self,x+34,341,cost[2],17,"ink") end
-    text(self,28,316,"Net changes include detour recovery.",11)
+    text(self,28,316,b.kind=="courier" and "Energy is the only lasting practice cost." or "Net changes include detour recovery.",11)
     for position,i in ipairs(b.team) do
         local c=s.crew[i];local delta=r.crew[i];local x=28+(position-1)*425
         text(self,x,296,c.name,20,"ink")

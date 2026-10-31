@@ -11,6 +11,7 @@ local equipment=require "simulation.equipment"
 local forks=require "content.forks"
 local aims=require "simulation.journal_aims"
 local field_guide=require "simulation.field_guide"
+local courier=require "simulation.courier"
 local M = {SCHEMA=1, CONTENT=1, route=route, species=species, resources=resources, events=events, combat=combat, equipment=equipment, trail_reports=require "simulation.trail_reports"}
 
 local function log(s,text)
@@ -28,7 +29,7 @@ local function prepare(snapshot,seed)
         crew={util.copy(p.roster.brindlehorn),util.copy(p.roster.loamling)},hauler=1,
         rng={weather=rng.seed(seed+11),events=rng.seed(seed+173),combat=rng.seed(seed+1019)},
         seen={},flags={},discoveries={},branches={},forage={},cooldown=1,log={},warnings={},
-        outcome="",ending="",wildlife_rules="wildlife-v1",combat_effort=combat.EFFORT,river_roll=rng.seed(seed+923)%100/100}
+        outcome="",ending="",wildlife_rules="wildlife-v1",courier_rules=courier.RULES,combat_effort=combat.EFFORT,river_roll=rng.seed(seed+923)%100/100}
     p.next_id=p.next_id+1
     snapshot.run=s
     log(s,"Orchard cuttings for Lantern Reach. Preferred arrival: day 26. Road closes on day 32.")
@@ -92,6 +93,7 @@ local function reached(snapshot)
     else
         s.mode="landmark"
         log(s,"Reached " .. route[s.target].name .. ".")
+        courier.arrive(snapshot)
         if s.target==3 and s.flags.helped_traveler and not s.flags.thanked then
             s.flags.thanked=true; s.coins=s.coins+8
             log(s,"The traveler you helped left 8 coins for you at Mossbell.")
@@ -349,6 +351,7 @@ function M.can_back_to_event(s)
 end
 
 local function commit_encounter(s)
+    if s.encounter=="courier" then s.flags.courier_done=true end
     if s.pending then
         for _,choice in ipairs(events.by_id[s.pending.id].choices) do
             if choice.battle==s.encounter then log(s,choice.label..".");break end
@@ -362,7 +365,11 @@ local function battle_end(snapshot,outcome)
     local s=snapshot.run
     local battle=s.battle
     local kind=s.battle and s.battle.kind or s.encounter
-    if outcome~="won" then
+    if kind=="courier" then
+        s.flags.courier_done=true
+        log(s,outcome=="won" and "Mara concedes the practice match. Your delivery is untouched." or "Practice ends. Your delivery and companions are unharmed.")
+        for _,i in ipairs(battle and battle.team or {}) do progression.memory(s.crew[i],"Practiced beside Mara at Mossbell.") end
+    elseif outcome~="won" then
         if kind=="scavengers" then
             local loss=equipment.retreat_loss(s)
             effects(s,{food=-loss,cargo=-loss}); log(s,"You leave up to "..loss.." food and "..loss.." cargo, and lead the crew away."..(loss==4 and " The release rope kept the rest attached." or ""))
@@ -379,7 +386,7 @@ local function battle_end(snapshot,outcome)
             for _,i in ipairs(battle.team) do
                 battle.result.crew[i]={stamina=s.crew[i].stamina-battle.initial.crew[i].stamina,condition=s.crew[i].condition-battle.initial.crew[i].condition}
             end
-        else s.battle=nil;s.mode="stopped" end
+        else s.battle=nil;s.mode=kind=="courier" and "landmark" or "stopped" end
         check_warnings(s)
     end
 end
@@ -523,6 +530,9 @@ function M.command(snapshot,command,arg)
             if s.mode=="traveling" then s.mode="stopped" end
         end
         return true
+    elseif command=="courier" and s.mode=="landmark" and s.target==3 then
+        if not courier.enabled(s) or s.flags.courier_done then return false,"Practice is finished for this journey" end
+        courier.open(s,"courier_spar");return true
     elseif command=="leave" and s.mode=="landmark" then return leave(snapshot,arg.branch)
     elseif command=="river" and s.mode=="landmark" and s.target==4 then return cross(snapshot,arg.method)
     elseif command=="choice" and s.mode=="event" then return resolve(snapshot,arg.id)
@@ -539,6 +549,7 @@ function M.command(snapshot,command,arg)
         local ok,outcome=combat.step(s)
         if ok then
             aims.exchange(s)
+            if s.battle.kind=="courier" then s.flags.courier_sparred=true end
             commit_encounter(s)
             local entry=s.battle.history[#s.battle.history]
             log(s,"Exchange "..entry.round..": "..table.concat(entry.notes," ").." "..entry.summary)
@@ -546,7 +557,8 @@ function M.command(snapshot,command,arg)
         end
         return ok,not ok and outcome or nil
     elseif command=="battle_continue" and s.mode=="combat_result" then
-        s.battle=nil;s.mode="stopped";return true
+        local practice=s.battle.kind=="courier"
+        s.battle=nil;s.mode=practice and "landmark" or "stopped";return true
     elseif command=="round" and s.mode=="combat" then
         local ok,outcome=combat.round(s,arg.actions)
         if ok then

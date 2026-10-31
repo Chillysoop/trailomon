@@ -10,6 +10,7 @@ for _, event in ipairs(definitions) do M.by_id[event.id] = event end
 function M.eligible(s, event, profile)
     if s.seen[event.id] then return false end
     local condition = event.condition
+    if event.kind=="courier" then return false end -- Offered at a specific landmark, outside random selection.
     if event.kind=="wildlife" then
         if s.wildlife_rules~="wildlife-v1" then return false end
         return (condition=="wild_meadow" and s.terrain=="meadow" and s.target<=3) or

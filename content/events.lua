@@ -85,4 +85,10 @@ return {
   choices={{id="watch",label="Watch the shallows",observe="reedskipper",outcome="You record the resting platforms along the shallow margin."},
    {id="help",label="Leave food on the bank",cost={food=2},observe="reedskipper",outcome="The Reedskipper takes a meal, then returns to its platform."},
    {id="pass",label="Pass quietly"}}},
+ {id="courier_intro",title="Mara at Split Oak",text="A courier checks her Brindlehorn's trace. A Bellmoth rests on her wagon. Her crew could use a meal.",kind="courier",condition="courier",
+  choices={{id="share",label="Share a meal",cost={food=3},flag="courier_helped",memory="Shared a meal with Mara at Split Oak.",outcome="Mara thanks you. She hopes to see your wagon at Mossbell."},
+   {id="pass",label="Wish her a safe road",outcome="Mara waves as you return to your wagon."}}},
+ {id="courier_spar",title="Mara's practice load",text="Brindlehorn shoves; Bellmoth covers. Three exchanges. Spend energy, protect a practice load. Cargo and health stay safe.",kind="courier",condition="courier",
+  choices={{id="battle",label="Prepare a friendly spar",battle="courier",hint="Real energy spent / no cargo or health loss"},
+   {id="pass",label="Pass for this journey",flag="courier_done"}}},
 }

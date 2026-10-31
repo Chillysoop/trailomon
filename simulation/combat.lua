@@ -4,6 +4,7 @@ local rng=require "simulation.rng"
 local util=require "simulation.util"
 local manual=require "simulation.combat_manual"
 local equipment=require "simulation.equipment"
+local courier=require "simulation.courier"
 local M={RULES="automatic-v1", GUARDIAN_PATTERN="guardian-shove-v1", EFFORT="trail-effort-v2"}
 
 -- The journey and active battle retain their effort version across saves.
@@ -19,6 +20,7 @@ function M.selected_pattern(s)
 end
 function M.setup_cost_text(s)
     local ordinary,ability,warning=M.costs(s)
+    if s.encounter=="courier" then return "Energy: "..ordinary.." per exchange +"..ability.." once (up to "..(3*ordinary+ability).." each). No cargo or health loss." end
     local maximum=(s.encounter=="scavengers" and 3 or 4)*ordinary+ability
     local extra=""
     if M.selected_pattern(s) then maximum=3*ordinary+warning+ability;extra=" Warning: "..warning.." energy." end
@@ -32,6 +34,7 @@ function M.pattern_intent(b)
     return {kind=stage[1],target=stage[2],damage=stage[3]}
 end
 function M.setup_text(s)
+    if s.encounter=="courier" then return "Mara: Brindlehorn shove 14 > Bellmoth cover 8 + heavy approach 18 > heavy load shove 20. Break Resolve 45; keep practice load above 0." end
     if M.selected_pattern(s)==M.GUARDIAN_PATTERN then
         return "Approach presses; wagon covers. Pattern: cargo shove 14 > approach warning 0 > heavy approach 20 > heavy cargo 20. Selection order sets positions."
     end
@@ -41,6 +44,7 @@ end
 function M.automatic(b) return b and b.rules==M.RULES end
 function M.soft_ground(s) return s.terrain~="ridge" and s.terrain~="gorge" end
 function M.withdraw_text(kind,s)
+    if kind=="courier" then return "End practice freely; spent energy stays spent." end
     local loss=s and equipment.retreat_loss(s) or 8
     return kind=="scavengers" and ("Leave up to "..loss.." provisions and "..loss.." cargo integrity.") or "Take a one-day detour, including meals and weather."
 end
@@ -61,12 +65,13 @@ function M.ordinary(s,i,position)
 end
 local function intention(s)
     local b=s.battle;local heavy=b.round%2==0
+    if b.kind=="courier" then b.intent=courier.intent(b);return end
     if b.pattern==M.GUARDIAN_PATTERN then b.intent=M.pattern_intent(b);return end
     b.intent={kind=heavy and "heavy" or "rush",target=rng.next(s.rng,"combat")<0.55 and "cargo" or b.team[1],
         damage=(b.kind=="scavengers" and 12 or 14)+(heavy and 6 or 0)}
 end
 function M.start(s,kind,team,pattern)
-    if kind~="scavengers" and kind~="territorial" then return false,"Unknown encounter" end
+    if kind~="scavengers" and kind~="territorial" and kind~="courier" then return false,"Unknown encounter" end
     if pattern~=nil and (pattern~=M.GUARDIAN_PATTERN or kind~="territorial") then return false,"Unknown encounter pattern" end
     if type(team)~="table" or #team<1 or #team>2 then return false,"Choose one or two companions" end
     local ordinary=s.combat_effort==M.EFFORT and 3 or 4
@@ -77,14 +82,15 @@ function M.start(s,kind,team,pattern)
     end
     local initial={food=s.food,cargo=s.cargo,day=s.day,crew={}}
     for _,i in ipairs(team) do initial.crew[i]={stamina=s.crew[i].stamina,condition=s.crew[i].condition} end
-    s.battle={rules=M.RULES,effort=s.combat_effort,pattern=pattern,kind=kind,team=util.copy(team),round=1,limit=kind=="scavengers" and 3 or 4,
-        resolve=kind=="scavengers" and 65 or 75,used={},last="",history={},initial=initial}
+    s.battle={rules=M.RULES,effort=s.combat_effort,pattern=pattern,kind=kind,team=util.copy(team),round=1,limit=kind=="territorial" and 4 or 3,
+        resolve=kind=="courier" and 45 or (kind=="scavengers" and 65 or 75),practice=kind=="courier" and 30 or nil,used={},last="",history={},initial=initial}
     intention(s);s.mode="combat"
     return true
 end
 function M.intent_text(s)
     local b=s.battle
     if not M.automatic(b) then return manual.intent_text(s) end
+    if b.kind=="courier" then return (b.round==2 and "Bellmoth cover 8 / " or "Brindlehorn / ")..(b.intent.kind=="heavy" and "Heavy " or "")..(b.intent.target=="cargo" and "practice load" or "approach").." / "..b.intent.damage.." practice harm" end
     if b.intent.kind=="warning" then return "Approach warning / no harm now / heavy approach rush next: 20 before cover" end
     local target=b.intent.target=="cargo" and "cargo" or s.crew[b.intent.target].name.." at the approach"
     local title=b.pattern==M.GUARDIAN_PATTERN and b.round==1 and "Cargo shove" or (b.intent.kind=="heavy" and "Heavy rush" or "Rush")
@@ -134,6 +140,7 @@ function M.step(s)
             notes[#notes+1]=c.name..": exhausted; "..(c.condition>0 and "1 cover, no pressure." or "cannot act.")
         end
     end
+    pressure=math.max(0,pressure-(b.intent.cover or 0))
     for position,i in ipairs(b.team) do
         local c=s.crew[i];local id=c.species;local triggered=false
         if id~="cindercoil" and not unavailable(i) then
@@ -176,15 +183,17 @@ function M.step(s)
         b.item_used=b.item_used or {};b.item_used.padded_trace=true
         notes[#notes+1]=s.crew[target].name..": padded trace softened "..softened.." harm."
     end
-    if target=="cargo" then s.cargo=math.max(0,s.cargo-harm)
+    if b.kind=="courier" then b.practice=math.max(0,b.practice-harm)
+    elseif target=="cargo" then s.cargo=math.max(0,s.cargo-harm)
     else s.crew[target].condition=math.max(0,s.crew[target].condition-harm) end
     local all_down=true
     for _,i in ipairs(b.team) do if resources.ready(s.crew[i],ordinary) then all_down=false end end
     local outcome
-    if b.resolve<=0 then outcome="won"
+    if b.kind=="courier" and b.practice<=0 then outcome="fallback"
+    elseif b.resolve<=0 then outcome="won"
     elseif all_down then outcome="fallback"
     elseif b.round>=b.limit then outcome=b.kind=="scavengers" and "won" or "fallback" end
-    b.last="Pressure "..pressure.." / Cover "..(guard[target] or 0).." / Harm "..harm..(b.resolve==0 and " (repelled before the hit)." or ".")
+    b.last=(b.intent.cover and b.intent.cover>0 and "Opponent cover "..b.intent.cover.." / " or "").."Pressure "..pressure.." / Cover "..(guard[target] or 0).." / Harm "..harm..(b.resolve==0 and " (repelled before the hit)." or ".")
     b.history[#b.history+1]={round=b.round,notes=notes,summary=b.last,target=target,damage=harm,pressure=pressure,cover=guard[target] or 0}
     if outcome then return true,outcome,abilities end
     b.round=b.round+1;intention(s)

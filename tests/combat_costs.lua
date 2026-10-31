@@ -64,7 +64,7 @@ return function(test,command,valid,equal)
             counts[strategy]=0
             for seed=1,40 do
                 -- Keep this historical cost-only benchmark on its original event rules.
-                local initial=model.new(seed);initial.run.wildlife_rules=nil
+                local initial=model.new(seed);initial.run.wildlife_rules=nil;initial.run.courier_rules=nil
                 local a=runner.run(initial,strategy);local b=runner.run(initial,strategy)
                 assert(a.status=="completed");equal(a,b)
                 if a.outcome=="delivered" then counts[strategy]=counts[strategy]+1 end

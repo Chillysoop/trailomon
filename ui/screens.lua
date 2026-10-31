@@ -198,6 +198,7 @@ local function landmark(self)
         options={
             {label="Visit the supply counter",detail="Buy provisions, repair materials, and medicine",fn=page(self,"shop")},
             {label="Make a quiet camp",detail="Rest, forage, and repair before the next stretch",fn=page(self,"camp")},
+            {label="Meet Mara for practice",detail="Optional / energy spent / cargo and health safe",fn=cmd(self,"courier"),key="courier",enabled=require("simulation.courier").enabled(s) and not s.flags.courier_done,icon="crew"},
             {label="Set out for Willowford",detail="28 km / marsh road / a river crossing ahead",fn=cmd(self,"leave")}}
     elseif s.target==4 then
         if s.flags.river_crossed then
