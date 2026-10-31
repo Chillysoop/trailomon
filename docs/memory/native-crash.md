@@ -1,0 +1,13 @@
+# Native activation fault
+
+2026-10-30: unresolved S10 reliability issue. Windows reports Trailomon.exe access violation `0xc0000005` at RVA `0x5dc031`. Earlier hidden-launch activation and the N8 visible-game reactivation after a firewall interruption reached the same offset. User canceled the firewall prompt; no security settings changed. Exact day-six save restored, and later normal close/reopen succeeded. Recovery is not a crash fix.
+
+Offline symbol investigation (no game process injection or binary modification): downloaded matching Defold 1.13.2 release PDB from `https://d.defold.com/archive/8620195789abcf164992cc82103a16189d22f675/engine/x86_64-win32/dmengine_release.pdb`. Windows DbgHelp loaded the test executable and resolved the fault to `glfwPollEventsWin32 + 225` (hex `+0xe1`). No source-line information was returned. The image base was `0x140000000`; fault instruction at `0x1405dc031` is `cmp byte ptr [rbx + 0x1ec], 1`.
+
+Executable SHA256: `0090f74b19c6a83de4909b43854704315aae613c21ce48ba19cf896fa1815160`. PDB SHA256: `82603317ed812f67843e1295c8cc9e0c8a67c09d1fc98e86760733d7e933b892`. Ignored local evidence: `.tools/resolve_crash.py`, `.tools/defold-symbols/`, and the isolated `.tools/n8-player-new/Trailomon.exe`. Capstone was installed only under `.tools/crash-python` to inspect the saved executable bytes. Do not ship those files.
+
+The pinned [Defold GLFW build script](https://github.com/defold/defold/blob/8620195789abcf164992cc82103a16189d22f675/share/ext/glfw/build_glfw.sh) selects GLFW 3.4. Its [Windows event poller](https://github.com/glfw/glfw/blob/3.4/src/win32_window.c#L1970) retrieves the active window's GLFW property and checks modifier-key state. The surrounding disassembly is consistent with that path. This narrows the failure location; it does not establish the originating bug or prove that simulation/Lua code caused or could prevent it.
+
+Unknowns: no fault-time registers, window handle, pointer ownership, or full stack were captured. Multiple older game windows were open; whether focus automation or cross-window ownership contributed is a hypothesis only. Do not close the owner's unrelated windows or change security settings to test it. Do not patch engine bytes, upgrade on speculation, or label the issue hidden-launch-only.
+
+Next useful investigation: a controlled single-instance versus multi-instance focus reproduction with a debugger/crash dump, then verify the window pointer and calling context. A native-engine fix or upstream report needs that evidence. No upstream issue was posted. Keep physical keyboard, listening and human pacing checks separately open; this investigation did not verify them.
