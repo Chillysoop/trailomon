@@ -183,7 +183,7 @@ local function day(snapshot,moving,resting)
         if s.terrain=="ridge" then factor=factor*1.05 end
         if hauler.species=="slatewhorl" then factor=factor*0.88 end
         if resources.weight(s)>resources.capacity(s)*0.9 then factor=factor*0.94 end
-        s.progress=s.progress+resources.paces[s.pace].speed*factor
+        s.progress=math.min(s.distance,s.progress+resources.paces[s.pace].speed*factor)
         local wear=resources.paces[s.pace].wear+(s.weather=="rain" and 0.4 or 0)+(s.terrain=="ridge" and 0.6 or 0)
         s.wagon=util.clamp(s.wagon-wear,0,100)
         if s.flags.axle_lashed and (s.weather=="rain" or s.terrain=="woodland" or s.terrain=="ridge" or s.terrain=="gorge") then
@@ -554,7 +554,12 @@ function M.command(snapshot,command,arg)
             if outcome then battle_end(snapshot,outcome) end
         end
         return ok,not ok and outcome or nil
-    elseif command=="withdraw" and (s.mode=="combat" or s.mode=="combat_select") then commit_encounter(s);battle_end(snapshot,"withdraw"); return true
+    elseif command=="withdraw" and (s.mode=="combat" or s.mode=="combat_select" or
+        (s.mode=="event" and events.by_id[s.pending.id].kind=="encounter")) then
+        if s.mode=="event" then
+            for _,choice in ipairs(events.by_id[s.pending.id].choices) do if choice.battle then s.encounter=choice.battle;break end end
+        end
+        commit_encounter(s);battle_end(snapshot,"withdraw"); return true
     elseif command=="return" and s.mode~="preparation" then return M.finish(snapshot,"returned","You call for help and bring the crew home. The delivery waits for another journey.")
     end
     return false,"That action is unavailable right now"

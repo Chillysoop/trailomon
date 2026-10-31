@@ -14,4 +14,6 @@ Decisions:
 
 Raw answers remain git-ignored. Summarize decisions here and in subject notes; do not copy credentials from comments. Chat corrections override prior votes. Blank ideas after FINISH remain unbuilt and must not be repeatedly proposed. No new owner votes were written during the answered-item UI change. Browser QA covers loaded approvals, new decisions added later, history, saved notes, top-pick preservation, FINISH, offline fallback, and phone/light/dark layouts.
 
+2026-10-31 balance-1: two new unanswered choices after the S5 study, E1 richer woodland gathering and E2 Slatewhorl sure footing. Both top picks; numerical proposals remain unbuilt until answered. The page includes the automated report and already-fixed bugs in expandable sections. See balance-study.md. Existing N1–N11 approvals are not shown again.
+
 Publication: shared open-only view deployed to the same owner-private Site. The deployment now returns https://trailomon-owner-reviews.chillysoop.chatgpt.site; hosted-site.json records that canonical URL. Existing revision42 approvals were unchanged at closeout. No new review link was sent because nothing needs a decision.

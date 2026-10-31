@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Trailomon — Expedition balance</title><link rel="icon" href="data:,"><link rel="stylesheet" href="review.css"><script src="review.js" defer></script>
+<style>img{width:100%;height:auto;border:1px solid var(--rule)}summary{cursor:pointer;font-weight:600}details{margin:24px 0}figure{margin:18px 0}figcaption{font-size:14px;color:var(--muted)}.results{overflow-x:auto}table{border-collapse:collapse;width:100%;font-size:14px}th,td{text-align:left;padding:8px;border-bottom:1px solid var(--rule)}th:first-child{min-width:150px}</style></head>
+<body><main>
+<p class="eyebrow">Trailomon · expedition balance · October 31, 2026</p><h1>Give the slower road a reason</h1>
+<p class="lede">Two new decisions. The broader comparison is complete and three bugs are fixed. The game remains in core systems; art is still deferred.</p>
+<section class="general"><label for="general">General comments</label><textarea id="general" maxlength="20000" placeholder="Anything that is not tied to an idea"></textarea></section>
+<p>My recommendation: strengthen woodland supplies and Slatewhorl's footing. Keep the current combat and equipment values for now: their benefits depend on preparation and crew.</p>
+<section class="idea" data-code="E1" data-top><h3><span class="code">E1</span>Make woodland worth a gathering stop</h3>
+<p>Raise woodland's base gathering yield from 10 to 16 food. Keep its longer, slower road, existing depletion, meals, carrying limit and Loamling bonus. Explain the extra food before choosing the route.</p>
+<p class="evidence"><strong>Evidence:</strong> Woodland currently has the same gathering yield as meadow. In 144 matched peaceful journeys per route, woodland/ridge delivered on time 27 times versus 77 on meadow/ridge, averaging 1.48 days later.</p>
+<p class="cost"><strong>Cost:</strong> One small balance change, updated previews and a focused comparison; preserve ongoing journeys' rules. Richer gathering may make Loamling especially useful here. <strong>Recommendation:</strong> YES. Make the detour offer supplies, then verify it does not become the automatic choice.</p></section>
+<section class="idea" data-code="E2" data-top><h3><span class="code">E2</span>Give Slatewhorl sure footing in woodland and gorge</h3>
+<p>When Slatewhorl hauls, ignore those terrains' 10% slowdown. Keep its own 12% slower pace, existing crossing support and combat shield. Show this advantage in the trail report.</p>
+<p class="evidence"><strong>Evidence:</strong> Slatewhorl as the only hauler delivered on time in 0 of 36 default peaceful runs; 32 arrived late and four needed rescue. Reedskipper + Slatewhorl delivered 10 of 12, so this is a specific hauling weakness rather than a reason to raise every stat.</p>
+<p class="cost"><strong>Cost:</strong> One terrain exception, clear preview and focused crew/route checks; preserve ongoing journeys' rules. Woodland and gorge become a more natural fit for this creature, though still slower routes. <strong>Recommendation:</strong> YES.</p></section>
+<details><summary>What the comparison found</summary>
+<p>4,032 journeys plus 292 matched encounter starts. Every trace replayed identically. This is a fixed-policy bot study, not a new human playtest. Each row below has 144 journeys: 12 legal two-creature pairs × seeds 1–12, all species unlocked. Default: peaceful choices, steady pace, no item, meadow/ridge, ferry.</p>
+<div class="results"><table><thead><tr><th>Choice</th><th>On time</th><th>Late</th><th>Rescued</th><th>Mean day</th><th>Cargo</th></tr></thead><tbody>
+<tr><th>Default</th><td>77</td><td>63</td><td>4</td><td>26.54</td><td>85.71</td></tr>
+<tr><th>Fight when available</th><td>73</td><td>65</td><td>6</td><td>26.94</td><td>74.80</td></tr>
+<tr><th>Woodland / ridge</th><td>27</td><td>107</td><td>10</td><td>28.02</td><td>84.88</td></tr>
+<tr><th>Meadow / gorge</th><td>25</td><td>98</td><td>21</td><td>28.45</td><td>84.85</td></tr>
+<tr><th>Hurried + padded trace</th><td>144</td><td>0</td><td>0</td><td>22.07</td><td>79.54</td></tr>
+</tbody></table></div>
+<p><strong>Combat:</strong> Fighting saves provisions at scavengers but often costs cargo and energy. Brindlehorn + Cindercoil repelled all 12 sampled guardians without an immediate cargo loss or detour; its peaceful option took a detour in all 12. Other pairs often did better by avoiding the fight. Keep those preparation choices meaningful.</p>
+<p><strong>Equipment:</strong> Padded trace helps hurried hauling; dry wrap reduces weather fatigue. Release rope raised mean cargo from 71.22 to 78.50 in the risky-crossing cohort, but did not guarantee earlier delivery. Purchases use their real prices and weight.</p>
+<p><strong>Limits:</strong> Fixed routes and strategies, only 12 seeds, two-member veteran crews. These are not optimal strategies or human playtime measurements. Matched encounter starts can overlap across parent strategies. Listening, physical input and the recorded activation crash remain separate work.</p>
+<p><a href="evidence/balance-1/report.md">Full report and method</a> · <a href="evidence/balance-1/summary.json">Summary data</a> · <a href="evidence/balance-1/manifest.json">Source fingerprint</a> · <a href="evidence/balance-1/results.json.gz">Complete compressed results</a></p>
+</details>
+<details><summary>Already fixed and tested</summary><ul>
+<li>Exhausted, foodless crews can now withdraw from a threat using the existing costs.</li>
+<li>Battle entry uses the actual energy requirement: three on new journeys, four for legacy rules.</li>
+<li>Rescue on an overshooting travel day no longer produces an invalid ending save.</li></ul>
+<p>88 Lua scenarios, native persistence and 36 native GUI states passed. These two actual 1280×720 captures were inspected.</p>
+<figure><img src="evidence/balance-1/exhausted_encounter.png" alt="An exhausted crew with no food can still select Lead the crew away."><figcaption>The existing withdrawal action is always available at the encounter.</figcaption></figure>
+<figure><img src="evidence/balance-1/closure_arrival.png" alt="A day 32 road closure returns the entire crew safely home."><figcaption>The closure ending now survives a native save and reload.</figcaption></figure></details>
+</main><footer class="bar"><div class="bar-inner"><span id="tally" aria-live="polite"></span><button id="allTop" type="button">Yes to all top picks</button><button id="finish" type="button">FINISH</button><button id="export" type="button">Download answers</button><span id="status" role="status" aria-live="polite">Loading answers…</span></div></footer>
+</body></html>

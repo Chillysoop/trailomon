@@ -1,0 +1,13 @@
+# Full-expedition balance
+
+2026-10-31: owner authorized the broader S5 comparison after N11. All existing hosted approvals remain consumed (next-1 rev42, plan-1 rev7, journey-1 rev5). No art pass.
+
+`python tools/balance_study.py --seeds 12 --output reports/NEW-NAME` reuses the report runner, three workers and pinned Lua runtime. Use a new output folder. All-six-unlocked veteran cohort, 12 legal pairs, 28 configurations, 12 seeds: 4,032 journeys plus 876 continuations from 292 natural encounter starts, each repeated exactly (9,816 executions). Approximately 101 seconds. Manifest fingerprints the fixed dirty tree based on 13479b1; its per-input hashes identify the tested source. Archived results/manifest are in reviews/evidence/balance-1; details in docs/BALANCE_STUDY.md.
+
+Findings: peaceful meadow/ridge default 77/144 on-time, woodland/ridge 27/144 and 1.48 days later. Slatewhorl as sole hauler 0/36 on-time under that default, versus Reedskipper+Slatewhorl 10/12. Hurried+trace 144/144 with lower cargo than steady. Rope improves cargo in risky crossings; wrap reduces weather fatigue. Combat has useful crew-dependent trades: Brindlehorn+Cindercoil repelled all 12 sampled guardians without a detour, while peace detoured all 12. No global combat/item rebalance is justified by this cohort alone.
+
+Already fixed: direct encounter withdrawal prevents exhausted/foodless softlock; battle entry uses actual 3/legacy4 energy gate; travel progress clamps before terminal rescue to keep ending saves valid. Existing withdrawal costs and rescue priority retained. 88 Lua scenarios, native persistence/36 GUI states, two rendered screenshots passed. Review page QA passed YES/NO, top picks, notes, FINISH JSON/flag, answered hiding, links/images, phone width and light/dark with no console errors. 12 Python review tests passed. No Computer Use required.
+
+New balance-1 decisions: E1 woodland base forage 10→16 with existing depletion/meal/load costs; E2 Slatewhorl ignores woodland/gorge's 10% terrain slowdown while keeping its own 12% hauling penalty. Both recommended, not implemented without answers. Future changes should preserve ongoing journey rules. Only these two new choices are shown; no repeats of old YES items. Private Site identity/audience retained.
+
+Limits: fixed visible-state policy, not optimal/human play; only two-member veteran crews, normal rations, standard wagon and selected item/route combinations. Matched starts can overlap across parent policies. S5 remains doing; physical input, sound, human pacing and native activation-crash follow-up remain S10 work. Do not treat this study as completion of those checks.

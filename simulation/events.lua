@@ -3,6 +3,7 @@ local resources = require "simulation.resources"
 local rng = require "simulation.rng"
 local species = require "content.species"
 local util = require "simulation.util"
+local combat = require "simulation.combat"
 local M = {defs=definitions, by_id={}}
 for _, event in ipairs(definitions) do M.by_id[event.id] = event end
 
@@ -52,8 +53,9 @@ function M.available(s, choice, profile)
     end
     if choice.battle then
         local ready = false
-        for _, c in ipairs(s.crew) do if resources.ready(c, 6) then ready = true end end
-        if not ready then return false, "No companion has enough energy" end
+        local ordinary=combat.costs(s)
+        for _, c in ipairs(s.crew) do if resources.ready(c, ordinary) then ready = true end end
+        if not ready then return false, "Needs a companion with "..ordinary.." energy" end
     end
     return true
 end

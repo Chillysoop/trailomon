@@ -22,3 +22,4 @@
 - [event-consequences.md](event-consequences.md): N10 tree/axle follow-ups, save rules, receipts and focused validation.
 
 - [journal-aims.md](journal-aims.md): N11 optional accomplishments, compatibility, award rules and focused validation.
+- [balance-study.md](balance-study.md): S5 crew/item/route comparison, encounter/save fixes, evidence limits and new E1/E2 choices.

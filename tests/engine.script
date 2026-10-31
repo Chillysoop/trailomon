@@ -116,6 +116,12 @@ local function run()
     assert(not model.finish(goals,"delivered","Duplicate"));assert(model.command(goals,"new"))
     assert(save.write(goals));goals=assert(save.load())
     assert(goals.profile.aims.completed.company==2 and not goals.run.aim_journey)
+    local closure=model.new(1848);assert(model.command(closure,"depart"))
+    closure.run.day=31;closure.run.target=6;closure.run.distance=35;closure.run.progress=34.5
+    assert(model.command(closure,"resume"));assert(model.command(closure,"step"))
+    assert(closure.run.outcome=="rescued" and closure.run.progress==35)
+    assert(save.write(closure));closure=assert(save.load())
+    assert(closure.run.mode=="result" and closure.profile.last_committed==closure.run.id)
     for _,path in ipairs({primary,backup}) do
         local f=assert(io.open(path,"wb"));f:write("corrupt");f:close()
     end
