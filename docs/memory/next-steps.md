@@ -1,5 +1,7 @@
 # Next-batch review
 
+2026-10-30 current: N1's S2 report tool is implemented and its baseline is in reporting.md. S5 is still open. N8 whole-trip validation is next, then N3/S5 tuning, wilderness/art, equipment. Earlier paragraphs below preserve the decision history.
+
 2026-10-30: Owner asked "What's next?" Audited current main against PLAN/ROADMAP and saved answers. Phase is building core systems: S3/S4 shipped, S2 reusable bot reporting and S5 expedition tuning remain. Fresh 29 Lua and 12 Python checks pass; native/visual evidence is from the preceding combat batch, not a new desktop playtest. Saves, backup recovery, sound toggle, and reduced motion already exist. Audio listening, physical keyboard usability, full post-combat journey pacing, art, and wilderness presentation remain gaps.
 
 `next-1` has eight stable codes. N1 selects S2/S5 measurement/tuning first; N2 approves combat-1 C1+C3 (contextual trigger and travel consequence); N3 approves C2's guardian-pattern experiment; N4 schedules approved P2 gathering clarity; N5 schedules approved P3 wilderness; N6 schedules approved P4 six-species art; N7 schedules approved P5 three-item experiment after tuning; N8 brings S10/S11 whole-journey usability/audio earlier. Top picks N1/N2/N5/N6. No new regions or combat-clock rewrite proposed.

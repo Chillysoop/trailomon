@@ -1,0 +1,5 @@
+event,choice_vs_peaceful,matched_starts,on_time_gained,on_time_lost,median_extra_days,median_extra_recovery_days,median_cargo_difference
+scavengers,fight,75,0,24,1,1,-6.0
+scavengers,withdraw,75,1,5,0,0,-8
+territorial,fight,38,1,2,0.0,1.0,-8.0
+territorial,withdraw,38,0,0,0.0,0.0,0.0

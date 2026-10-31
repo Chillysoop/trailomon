@@ -1,5 +1,7 @@
 # Validation and gaps
 
+2026-10-30 N1 reporting: 40 Lua / 17 Python checks pass, with native persistence and 34 GUI states retained. Clean baseline 81e7004 produced 120 journeys and 339 continuations, all complete and exactly repeated. Original reference outcomes and player rules are unchanged. See reporting.md for provenance, matched results, replay and diagnostic coverage. This is headless model evidence; N8's full human playtest remains open.
+
 2026-10-30 automatic combat: 29 Lua checks pass, including 80 baseline journeys (37 delivered, 43 late), 40 fighting journeys (5 delivered, 35 late), checkpoint replays, and 360 combat scenarios. Separate evidence covers 5,760 encounter trials. Native save/backup/recovery, automatic results, 27 GUI states, and battle/modal/focus checks pass. Actual release-renderer playtests verified positioning, partner abilities, pause/step, quit/resume, victory, and one-time withdrawal costs at 1280 by 720. See combat.md and reviews/combat-1.html. Strategy comparisons are tuning evidence, not isolated causal measurements or final balance.
 
 The earlier actual Windows expedition reached Lantern Reach on day 25 with 94% cargo and three companions. It covered combat win/withdrawal, battle restart, camp, shop, recruitment, river, replay, covered wagon, and early return. User confirmed physical F3 works. Tool-injected keys did not reach the engine; native handler checks cover routing but do not replace physical keyboard usability. Detailed record: `docs/VALIDATION.md`.

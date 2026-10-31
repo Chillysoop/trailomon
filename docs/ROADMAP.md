@@ -7,7 +7,7 @@ Updated October 30, 2026. Scope: one polished Windows expedition before new regi
 | ID | Goal and review link | Done means | Validation | Status |
 | --- | --- | --- | --- | --- |
 | S1 | Establish the owner's development and review workflow | Plan, roadmap, shared agent rules, durable memory, review server/template, answer bridge, and a working plan review; existing playable retained | Server unit tests; browser YES/NO/comment/autosave/FINISH and fallback tests; existing game checks; branch, PR, CI, and merge verified | done (PR #2) |
-| S2 | Record repeatable bot playtests | A command plays full seeded runs and writes per-run outcomes, decisions, resource lows, waits, and stalls; baseline stored as evidence | Fixed-seed repeatability; existing eighty-run check retained; deliberate stall/error reported with context | doing |
+| S2 | Record repeatable bot playtests | A command plays full seeded runs and writes per-run outcomes, decisions, resource lows, waits, and stalls; baseline stored as evidence | Fixed-seed repeatability; original benchmark checks retained; deliberate stall/error reported with context | done (PR #10) |
 
 ## Core systems
 
@@ -43,9 +43,9 @@ Updated October 30, 2026. Scope: one polished Windows expedition before new regi
 
 ## Working rules
 
-The October 30 [next-batch review](../reviews/next-1.html) received N1-N8 YES at revision 34. The owner's comment made icon consistency and player clarity immediate priority: N2 and N4 ship in PR #7, alongside the shared symbol system. S14 was appended without renumbering existing steps. N1 (S2/S5) expedition measurement is next; N3 guardian behavior, N5/N6 wilderness/art, N7 equipment after tuning, and N8 whole-journey usability remain approved and unfinished. P1-P5 approvals remain in force.
+The October 30 [next-batch review](../reviews/next-1.html) received N1-N8 YES at revision 34. The owner's comment made icon consistency and player clarity immediate priority: N2 and N4 shipped in PR #7, alongside the shared symbol system. S14 was appended without renumbering existing steps. PR #10 delivers N1's S2 measurement tool, including 120 journeys and 339 matched continuations repeated exactly. N1's S5 tuning, N3 guardian behavior, N5/N6 wilderness/art, N7 equipment after tuning, and N8 whole-journey usability remain approved and unfinished. P1-P5 approvals remain in force.
 
-After the clarity batch, the refreshed audit keeps the phase at core systems. Recommended execution order: S2 reports (N1), S10/S11 whole-trip validation (N8), the approved N3 guardian experiment and evidence-led S5 tuning, S7/S8 identity work (N5/N6), then S9 equipment (N7). The six remaining options retain their original approval codes; N2/N4 are marked shipped. No additional scope or repeated approval is requested.
+The phase remains core systems. With S2 reporting complete, recommended execution order is S10/S11 whole-trip validation (N8), the approved N3 guardian experiment and evidence-led S5 tuning, S7/S8 identity work (N5/N6), then S9 equipment (N7). Reporting shows that reference scavenger fights often add recovery time; it does not prove optimal balance or human pacing. Original approval codes remain stable. No additional scope or repeated approval is requested.
 
 Ship one step or a coherent approved batch per PR, test it, and merge after CI passes. Update the status to `done (PR #n)` with the actual number. A later failure reopens the relevant work rather than leaving a misleading done status. Preserve published review codes when editing a page.
 
