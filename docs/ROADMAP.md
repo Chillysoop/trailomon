@@ -35,8 +35,8 @@ Updated October 31, 2026. Scope: one polished Windows expedition before new regi
 | S23 | Courier practice and recognition, W3/W4 | One optional Mossbell spar and two personal meetings | Practice isolation, triggers, forecast/save replay and focused captures | done (PR #34) |
 | S24 | Optional discovery-led profile, W5 | One chosen hauler, two early recruit paths, normal profiles preserved | Recruitment/food/capacity, native two-depot saves and 64 repeated full journeys | done (PR #35) |
 | S25 | One learned habit per companion, W6 | Feat unlocks a depot-selected travel tradeoff | Exact costs/previews, native persistence, equipment and focused captures | done (PR #35) |
-| S26 | Complete Discovery haulers and guide clues, D1/D2 | Optional missing-hauler invitations at Split Oak/Willowford, clear food/space costs, useful habitat and method clues | Both starters, retention, capacity/food rejection, pure guide reads, native saves and actual screens | doing (implemented and validated) |
-| S27 | Follow saved wildlife tracks, D3 | One optional day-and-meals search per stretch, fixed saved outcome, no rerolls or extra search loops | Saved plans/results, closure/hunger/death, 24 repeated full journeys and focused captures | doing (implemented and validated) |
+| S26 | Complete Discovery haulers and guide clues, D1/D2 | Optional missing-hauler invitations at Split Oak/Willowford, clear food/space costs, useful habitat and method clues | Both starters, retention, capacity/food rejection, pure guide reads, native saves and actual screens | done (PR #37) |
+| S27 | Follow saved wildlife tracks, D3 | One optional day-and-meals search per stretch, fixed saved outcome, no rerolls or extra search loops | Saved plans/results, closure/hunger/death, 24 repeated full journeys and focused captures | done (PR #37) |
 
 ## Polish
 

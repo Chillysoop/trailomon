@@ -1,6 +1,6 @@
 # Discovery tracks
 
-2026-10-31: chat “proceed” accepts the last explicit D1/D2/D3 recommendation. Hosted next-2 has no submitted/draft votes. D4/D5 and balance E1/E2 remain unapproved. Existing art retained.
+2026-10-31: chat “proceed” accepts the last explicit D1/D2/D3 recommendation. Hosted next-2 has no submitted/draft votes. D4/D5 and balance E1/E2 remain unapproved. Existing art retained. S26/S27 ship together in PR #37.
 
 D1: Discovery can meet the missing Brindlehorn at Split Oak or Reedskipper at Willowford through Journey → Wildlife nearby. Meeting is free, invitation costs 4 food, max crew 3; daily meals and remaining food days use existing preview. Pass is always available. Invitations are once per run and returning retains the recruit. Full crews must leave room on a later expedition; there is no roadside dismissal added.
 
