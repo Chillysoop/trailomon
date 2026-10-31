@@ -33,8 +33,8 @@ Updated October 31, 2026. Scope: one polished Windows expedition before new regi
 
 | S22 | Habitat wildlife and species observations, W1/W2 | Three habitat sightings, distinct guide records, saved observations and result count | Eligibility/cooldown/replay scenarios, native save round trips, three rendered views | done (PR #33) |
 | S23 | Courier practice and recognition, W3/W4 | One optional Mossbell spar and two personal meetings | Practice isolation, triggers, forecast/save replay and focused captures | done (PR #34) |
-| S24 | Optional discovery-led profile, W5 | One chosen hauler, two early recruit paths, normal profiles preserved | Recruitment/food/capacity, native two-depot saves and 64 repeated full journeys | doing (implemented and validated) |
-| S25 | One learned habit per companion, W6 | Feat unlocks a depot-selected travel tradeoff | Exact costs/previews, native persistence, equipment and focused captures | doing (implemented and validated) |
+| S24 | Optional discovery-led profile, W5 | One chosen hauler, two early recruit paths, normal profiles preserved | Recruitment/food/capacity, native two-depot saves and 64 repeated full journeys | done (PR #35) |
+| S25 | One learned habit per companion, W6 | Feat unlocks a depot-selected travel tradeoff | Exact costs/previews, native persistence, equipment and focused captures | done (PR #35) |
 
 ## Polish
 
