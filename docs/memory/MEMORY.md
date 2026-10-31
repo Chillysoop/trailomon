@@ -10,3 +10,4 @@
 - [clarity.md](clarity.md): shared icon system, N2/N4 implementation, preview limits, and focused playtest evidence.
 - [reporting.md](reporting.md): N1/S2 report commands, reproducibility, committed baseline, findings and measurement limits.
 - [journey-playtest.md](journey-playtest.md): N8 whole-trip outcomes, new J1–J4 proposals, crash/recovery evidence and remaining physical checks.
+- [native-crash.md](native-crash.md): verified Windows fault symbol/offset, binary provenance, investigation limits and next reproduction.
