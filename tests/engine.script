@@ -126,6 +126,12 @@ local function run()
     assert(model.command(wild,"choice",{id="watch"}));assert(save.write(wild));wild=assert(save.load())
     assert(wild.run.observations.brindlehorn);assert(model.command(wild,"return"));assert(save.write(wild));wild=assert(save.load())
     assert(wild.profile.observations.brindlehorn and wild.profile.traveled.brindlehorn and wild.run.new_observations.brindlehorn)
+    local tracks=model.new(11);assert(model.command(tracks,"depart"))
+    local clue=tracks.run.tracks['2'];local clue_event,clue_roll=clue.event,clue.roll
+    assert(save.write(tracks));tracks=assert(save.load())
+    assert(tracks.run.tracks['2'].event==clue_event and tracks.run.tracks['2'].roll==clue_roll)
+    assert(model.command(tracks,"follow_tracks"));assert(save.write(tracks));tracks=assert(save.load())
+    assert(tracks.run.tracks['2'].used and not require("simulation.tracking").preview(tracks).available)
     local closure=model.new(1848);assert(model.command(closure,"depart"))
     closure.run.day=31;closure.run.target=6;closure.run.distance=35;closure.run.progress=34.5
     assert(model.command(closure,"resume"));assert(model.command(closure,"step"))
@@ -148,6 +154,11 @@ local function run()
     local classic=assert(save.select(discovery,"classic"));assert(classic.run.seed==original.run.seed and classic.run.outcome==original.run.outcome)
     assert(classic.run.day==original.run.day and classic.profile.last_committed==original.profile.last_committed)
     local again=assert(save.select(classic,"discovery"));assert(again.run.crew[1].species=="reedskipper" and again.run.crew[1].habit)
+    assert(model.command(again,"depart"));again.run.mode="landmark";again.run.progress=again.run.distance
+    again.run.seen.courier_intro=true;again.run.seen.discover_loamling=true
+    assert(model.command(again,"meet_wild"));assert(save.write(again));again=assert(save.load())
+    assert(again.run.pending.id=="meet_brindlehorn");assert(model.command(again,"choice",{id="invite"}))
+    assert(model.command(again,"return"));assert(save.write(again));again=assert(save.load());assert(again.profile.roster.brindlehorn)
     assert(save.select(again,"classic"));os.remove(dp);os.remove(db);os.remove(sys.get_save_file(namespace,"depot_selection"))
     package.loaded["services.save"]=save
     for _,path in ipairs({primary,backup}) do

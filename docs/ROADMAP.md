@@ -35,6 +35,8 @@ Updated October 31, 2026. Scope: one polished Windows expedition before new regi
 | S23 | Courier practice and recognition, W3/W4 | One optional Mossbell spar and two personal meetings | Practice isolation, triggers, forecast/save replay and focused captures | done (PR #34) |
 | S24 | Optional discovery-led profile, W5 | One chosen hauler, two early recruit paths, normal profiles preserved | Recruitment/food/capacity, native two-depot saves and 64 repeated full journeys | done (PR #35) |
 | S25 | One learned habit per companion, W6 | Feat unlocks a depot-selected travel tradeoff | Exact costs/previews, native persistence, equipment and focused captures | done (PR #35) |
+| S26 | Complete Discovery haulers and guide clues, D1/D2 | Optional missing-hauler invitations at Split Oak/Willowford, clear food/space costs, useful habitat and method clues | Both starters, retention, capacity/food rejection, pure guide reads, native saves and actual screens | doing (implemented and validated) |
+| S27 | Follow saved wildlife tracks, D3 | One optional day-and-meals search per stretch, fixed saved outcome, no rerolls or extra search loops | Saved plans/results, closure/hunger/death, 24 repeated full journeys and focused captures | doing (implemented and validated) |
 
 ## Polish
 
@@ -55,7 +57,7 @@ Updated October 31, 2026. Scope: one polished Windows expedition before new regi
 
 ## Working rules
 
-October 31 post-creature audit: all S22–S25 are shipped. [Next discovery loop](../reviews/next-2.html) proposes only new D1–D5 choices, with D1→D2→D3 recommended. They are not approved roadmap implementation steps yet. S5 tuning and S10 reliability remain authorized work; current saves/settings and tests work. Art stays deferred.
+October 31 post-creature audit: all S22–S25 are shipped. [Next discovery loop](../reviews/next-2.html) proposes only new D1–D5 choices, with D1→D2→D3 recommended. The owner then said proceed; D1–D3 are approved in chat and implemented as S26/S27. D4/D5 remain undecided. S5 tuning and S10 reliability remain authorized work; current saves/settings and tests work. Art stays deferred.
 
 October 31 creature-direction brainstorm: [wild-1](../reviews/wild-1.html) proposes sightings, field observations and one courier spar, with later relationship/acquisition/growth options. [Integration analysis](CREATURE_ENCOUNTERS.md) distinguishes reusable systems from new work. The owner approved W1–W6 in hosted revision 7. S22–S25 schedule the bounded additions; existing balance/reliability work remains open.
 

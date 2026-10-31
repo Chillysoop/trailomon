@@ -27,6 +27,7 @@ local function validate(snapshot)
     local s,p=snapshot.run,snapshot.profile
     if type(s)~="table" or type(p)~="table" or not modes[s.mode] then return false,"Missing journey state" end
     local guide=require "simulation.field_guide"
+    if not require("simulation.tracking").valid(s.tracks) then return false,"Invalid wildlife tracks" end
     if s.courier_rules~=nil and s.courier_rules~=require("simulation.courier").RULES then return false,"Unknown courier rules" end
     if not require("simulation.courier").valid(p.courier) then return false,"Invalid courier memory" end
     if s.wildlife_rules~=nil and s.wildlife_rules~="wildlife-v1" then return false,"Unknown wildlife rules" end
