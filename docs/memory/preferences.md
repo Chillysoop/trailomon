@@ -1,5 +1,7 @@
 # Owner preferences
 
+2026-10-31: Owner says not to focus much on art or animation; they will do a large art overhaul later. Gameplay and useful decisions take priority. Defer dedicated N6/S8 creature redesign, scenery polish and animation work. Existing art is sufficient for development; retain functional readability, coherent labeled icons and necessary feedback. This overrides the earlier N6 art-priority recommendation without changing historical votes or rejecting the eventual overhaul.
+
 2026-10-30: Approved working pitch/title Trailomon and selected option 1: polish one complete expedition before adding regions. One traveler, one wagon, small original creature crew. Oregon Trail supplies the primary expedition rhythm; increasing remoteness must remain central.
 
 2026-10-30: Selected option 2 for platforms: Windows only initially. macOS, Linux, and HTML5 are deferred, not current acceptance requirements. Continue with the previously chosen Defold and Lua.

@@ -1,5 +1,7 @@
 # Next-batch review
 
+2026-10-31 owner override: defer dedicated art/animation, including N6/S8; the owner will overhaul art later. Prioritize gameplay, S5 battle/expedition decisions and the approved S9 work-item experiment after its balance checkpoint. Maintain functional UI/icons. This chat direction supersedes the art recommendation below; saved YES votes are historical and must not restart art work.
+
 2026-10-31 latest: revision 38 reaffirms all N1–N8 YES. N5/S7 scenery is implemented and verified; see wilderness.md. Next is N6/S8 creature silhouettes. PR #20 shipped the cost pass; the earlier audit below is historical.
 
 2026-10-31 update: next-1 revision 37 received and acted on, all N1–N8 YES unchanged. Bounded N1/S5 costs and normal guardian adoption for new journeys implemented; see combat-costs.md. Next is N5/S7 visual wilderness, then N6/S8 silhouettes. S5 stays doing for broader balance; no repeat approval or extra tooling. The October 30 audit below is historical.

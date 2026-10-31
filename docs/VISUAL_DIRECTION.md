@@ -1,5 +1,7 @@
 # Trailomon visual direction
 
+October 31, 2026 priority: the owner will do a large art overhaul later. Defer dedicated art and animation passes. The requirements below guide necessary UI/readability work; they do not make cosmetic polish the next development task.
+
 Standing requirements: avoid generic AI-generated art and interface patterns; use distinct iconography as a practical aid from the first playable onward.
 
 The visual idea is a well-used field guide brought to life: a small wagon, readable animal silhouettes, changing country, and clear marks for the things a traveler needs to notice. A quiet journey should occupy more attention than its controls.
