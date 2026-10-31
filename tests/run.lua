@@ -56,8 +56,9 @@ local function act(p,strategy)
     elseif s.mode=="combat_result" then command(p,"battle_continue")
     end
 end
-local function journey(seed,strategy,checkpoint)
+local function journey(seed,strategy,checkpoint,legacy)
     local p=model.new(seed)
+    if legacy then p.run.combat_effort=nil end
     for i=1,250 do
         if p.run.mode=="result" then return p end
         act(p,strategy)
@@ -239,6 +240,7 @@ test("all authored choices have a reachable resolution",function()
 end)
 require("tests.combat")(test,command,valid,assert_equal)
 require("tests.guardian")(test,command,valid,assert_equal)
+require("tests.combat_costs")(test,command,valid,assert_equal)
 require("tests.playback")(test,command,valid,assert_equal)
 require("tests.clarity")(test,command,valid,assert_equal)
 require("tests.journey_choices")(test,command,valid,assert_equal)

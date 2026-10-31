@@ -5,7 +5,8 @@ local save=require "services.save"
 local clock=require "services.travel_clock"
 return function(test,command,valid,equal)
     local function encounter(ids,kind,seed)
-        local p=model.new(seed or 1848);command(p,"depart")
+        -- Keep the original exact-cost regressions as old-save coverage.
+        local p=model.new(seed or 1848);p.run.combat_effort=nil;command(p,"depart")
         p.run.crew={};for _,id in ipairs(ids) do p.run.crew[#p.run.crew+1]=progression.companion(id) end
         p.run.mode="combat_select";p.run.encounter=kind or "territorial"
         local team={1};if #ids>1 then team[2]=2 end

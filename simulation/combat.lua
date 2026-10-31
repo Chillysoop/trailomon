@@ -3,7 +3,26 @@ local species=require "content.species"
 local rng=require "simulation.rng"
 local util=require "simulation.util"
 local manual=require "simulation.combat_manual"
-local M={RULES="automatic-v1", GUARDIAN_PATTERN="guardian-shove-v1", ORDINARY_COST=4, ABILITY_COST=8}
+local M={RULES="automatic-v1", GUARDIAN_PATTERN="guardian-shove-v1", EFFORT="trail-effort-v2"}
+
+-- The journey and active battle retain their effort version across saves.
+-- Missing versions are the original 4/8 rules, including old pending events.
+function M.costs(s)
+    local version=s.battle and s.battle.effort or (not s.battle and s.combat_effort)
+    if version==M.EFFORT then return 3,6,1 end
+    return 4,8,4
+end
+function M.selected_pattern(s)
+    if s.pending and s.pending.pattern then return s.pending.pattern end
+    if s.combat_effort==M.EFFORT and s.encounter=="territorial" then return M.GUARDIAN_PATTERN end
+end
+function M.setup_cost_text(s)
+    local ordinary,ability,warning=M.costs(s)
+    local maximum=(s.encounter=="scavengers" and 3 or 4)*ordinary+ability
+    local extra=""
+    if M.selected_pattern(s) then maximum=3*ordinary+warning+ability;extra=" Warning: "..warning.." energy." end
+    return "Energy: "..ordinary.." per exchange +"..ability.." once (up to "..maximum.." each)."..extra.." Under "..ordinary..": no pressure, at most 1 cover."
+end
 
 function M.pattern_intent(b)
     local stages={{"rush","cargo",14},{"warning",b.team[1],0},{"heavy",b.team[1],20},{"heavy","cargo",20}}
@@ -12,7 +31,7 @@ function M.pattern_intent(b)
     return {kind=stage[1],target=stage[2],damage=stage[3]}
 end
 function M.setup_text(s)
-    if s.pending and s.pending.pattern==M.GUARDIAN_PATTERN then
+    if M.selected_pattern(s)==M.GUARDIAN_PATTERN then
         return "Approach presses; wagon covers. Pattern: cargo shove 14 > approach warning 0 > heavy approach 20 > heavy cargo 20. Selection order sets positions."
     end
     return "Approach presses; wagon covers cargo and its partner. Rushes target cargo or the approach; every second rush is heavy. Selection order sets positions."
@@ -48,14 +67,15 @@ function M.start(s,kind,team,pattern)
     if kind~="scavengers" and kind~="territorial" then return false,"Unknown encounter" end
     if pattern~=nil and (pattern~=M.GUARDIAN_PATTERN or kind~="territorial") then return false,"Unknown encounter pattern" end
     if type(team)~="table" or #team<1 or #team>2 then return false,"Choose one or two companions" end
+    local ordinary=s.combat_effort==M.EFFORT and 3 or 4
     local seen={}
     for _,i in ipairs(team) do
-        if type(i)~="number" or i~=math.floor(i) or seen[i] or not resources.ready(s.crew[i],4) then return false,"Choose different companions with at least 4 energy" end
+        if type(i)~="number" or i~=math.floor(i) or seen[i] or not resources.ready(s.crew[i],ordinary) then return false,"Choose different companions with at least "..ordinary.." energy" end
         seen[i]=true
     end
     local initial={food=s.food,cargo=s.cargo,day=s.day,crew={}}
     for _,i in ipairs(team) do initial.crew[i]={stamina=s.crew[i].stamina,condition=s.crew[i].condition} end
-    s.battle={rules=M.RULES,pattern=pattern,kind=kind,team=util.copy(team),round=1,limit=kind=="scavengers" and 3 or 4,
+    s.battle={rules=M.RULES,effort=s.combat_effort,pattern=pattern,kind=kind,team=util.copy(team),round=1,limit=kind=="scavengers" and 3 or 4,
         resolve=kind=="scavengers" and 65 or 75,used={},last="",history={},initial=initial}
     intention(s);s.mode="combat"
     return true
@@ -75,6 +95,8 @@ end
 function M.step(s)
     local b=s.battle
     if not M.automatic(b) or b.outcome then return false,"No automatic exchange is pending" end
+    local ordinary,ability,warning=M.costs(s)
+    local effort=b.intent.kind=="warning" and warning or ordinary
     local target=b.intent.target
     local guard={cargo=0};local contribution={};local pressure=0;local notes={};local abilities={}
     local function status(i,code,text) abilities[i]={code=code,text=text} end
@@ -83,7 +105,7 @@ function M.step(s)
         if b.used[i] then status(i,"spent","Spent this encounter")
         elseif b.intent.kind=="warning" then status(i,"warning","Waits: warning only, no incoming hit")
         elseif c.condition<=0 then status(i,"condition","Cannot act: needs care")
-        elseif not resources.ready(c,8) then status(i,"energy","Needs 12 energy before exchange")
+        elseif not resources.ready(c,ability) then status(i,"energy","Needs "..(ordinary+ability).." energy before exchange")
         elseif b.resolve<=pressure then status(i,"repelled","Not needed: threat repelled")
         else return false end
         return true
@@ -101,8 +123,8 @@ function M.step(s)
     -- then one follow-up, resolve, and incoming harm. Triggers never recurse.
     for position,i in ipairs(b.team) do
         local c=s.crew[i];local p,g=M.ordinary(s,i,position)
-        if resources.ready(c,4) then
-            c.stamina=c.stamina-4;pressure=pressure+p
+        if resources.ready(c,ordinary) then
+            c.stamina=c.stamina-effort;pressure=pressure+p
             cover(i,"cargo",g);cover(i,b.team[1],g)
             notes[#notes+1]=c.name..": "..p.." pressure"..(g>0 and ", 6 cover" or "").."."
         else
@@ -125,7 +147,7 @@ function M.step(s)
                 elseif id=="bellmoth" and b.intent.kind=="heavy" then cover(i,target,s.weather=="rain" and 8 or 16);triggered=true
                 elseif id=="slatewhorl" and position==2 and target=="cargo" then cover(i,target,18);triggered=true end
                 if triggered then
-                    b.used[i]=true;c.stamina=c.stamina-8
+                    b.used[i]=true;c.stamina=c.stamina-ability
                     status(i,"trigger",id=="bellmoth" and "Triggers: heavy rush" or (target=="cargo" and "Triggers: rush at cargo" or "Triggers: unblocked rush"))
                     notes[#notes+1]=c.name..": "..species.defs[id].assist.."."
                 end
@@ -139,7 +161,7 @@ function M.step(s)
                 if partner_cover<=0 then status(i,"partner","Needs cover from a partner")
                 elseif remaining()>0 then status(i,"cover","Partner cover must stop all harm")
                 else
-                    b.used[i]=true;c.stamina=c.stamina-8;pressure=pressure+20
+                    b.used[i]=true;c.stamina=c.stamina-ability;pressure=pressure+20
                     status(i,"trigger","Triggers: partner blocks the hit")
                     notes[#notes+1]=c.name..": Warmth display after partner cover."
                 end
@@ -150,7 +172,7 @@ function M.step(s)
     if target=="cargo" then s.cargo=math.max(0,s.cargo-harm)
     else s.crew[target].condition=math.max(0,s.crew[target].condition-harm) end
     local all_down=true
-    for _,i in ipairs(b.team) do if resources.ready(s.crew[i],4) then all_down=false end end
+    for _,i in ipairs(b.team) do if resources.ready(s.crew[i],ordinary) then all_down=false end end
     local outcome
     if b.resolve<=0 then outcome="won"
     elseif all_down then outcome="fallback"

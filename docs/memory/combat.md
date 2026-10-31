@@ -1,5 +1,7 @@
 # Automatic combat
 
+Current costs, 2026-10-31: new journeys use 3 ordinary / 6 ability / 1 guardian warning energy and the authored guardian. Old journeys retain the historical rules below. See combat-costs.md.
+
 2026-10-30: Owner explicitly requested implementation and clarified Astronarch is the stronger mechanical influence; Automon is for creature-party inspiration. Approved P1 covers two positions, six species, existing two encounters. Equipment remains the later P5 experiment.
 
 Implemented on codex/automatic-combat: automatic-v1 battle records, approach/wagon roles, six bounded triggers, persistent costs, pause/step/speed, encounter reports, retained legacy manual resolver/UI. Exact rules are in docs/COMBAT_RULES.md. Ordinary energy 4; ability +8 once. Calm exchanges 5 seconds, brisk 1.5; menus/focus loss/load pause. Reserve companions have no hidden bonuses or battle memories.

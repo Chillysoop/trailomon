@@ -28,7 +28,7 @@ return function(test,command,valid,equal)
     test("contextual ability forecasts match actual costs without mutating state or RNG",function()
         for _,a in ipairs(model.species.order) do
             for _,b in ipairs(model.species.order) do if a~=b then
-                for _,energy in ipairs({4,11,12,100}) do
+                for _,energy in ipairs({3,8,9,16,100}) do
                     local p=model.new(37);command(p,"depart")
                     p.run.crew={progression.companion(a),progression.companion(b)}
                     for _,c in ipairs(p.run.crew) do c.stamina=energy end
@@ -51,7 +51,7 @@ return function(test,command,valid,equal)
         end
     end)
     test("ability explanations distinguish wrong role, heavy rush, partner cover and fatigue",function()
-        local p=model.new(11);command(p,"depart")
+        local p=model.new(11);p.run.combat_effort=nil;command(p,"depart")
         p.run.crew={progression.companion("slatewhorl"),progression.companion("bellmoth")}
         p.run.mode="combat_select";p.run.encounter="territorial";command(p,"battle_start",{team={1,2}})
         p.run.battle.intent={kind="rush",target="cargo",damage=14}

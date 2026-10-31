@@ -1,0 +1,157 @@
+{
+  "date": "2026-10-31",
+  "source": {
+    "dirty": true,
+    "commit": "2d3336b00438273604055c7d69bd5ab9163c0895",
+    "repeated_exactly": true,
+    "inputs": {
+      "simulation\\progression.lua": "9ADFEEE1F71845AD036573641BC485037053CD34BE298974E5880D408F136F79",
+      "simulation\\util.lua": "80225DACB51784F5ED39075790EA4F91A411E269D4E125473E93CC5E500B764C",
+      "content\\species.lua": "C6F3EFF702C77ED0C94ABF49D84FF088EBF85937A506FCB9FDD32280D659EABD",
+      "simulation\\combat.lua": "C58FCC7820C063ECB90935A31874B47C0173F052D00D5BD010C99E016AA08C34",
+      "simulation\\combat_manual.lua": "9755B9110DF5F4C5B20934FA8180C1DF8570B667F6A206D9930B3781EEE60A96",
+      "simulation\\rng.lua": "87E6EBEE058CFCFCDC56CA3AA6381109AE48E88B351ED04AEE91D565D4CC7C9F",
+      "simulation\\expedition.lua": "BC84A69CDAE754C781488914973093EA30CD3B2EAAA6D3E50BCE74C0E6A77AF0",
+      "content\\wagons.lua": "0713DAE40D0C33A40183A07ED9A6DD9554A7A3C459A8C404975F514AA3E3A506",
+      "services\\travel_clock.lua": "FF122F756F58B007F5F923B819D3BE2A64FEAD364C6A1571F2080E94BFFDB171",
+      "tools\\report\\policy.lua": "8DF94CD5A85F8A3BEAD3CAC99729579DC92962DDBE34390E00B11AA859FAE72C",
+      "simulation\\events.lua": "5E3307504440A94CD106032609FA92E7F7A3129B44684354982395FD3E351E24",
+      "tools\\report\\runner.lua": "4EB21FF41E00E3E400BF74F9ECFFA9D0EBF0AAB4184A4AFC94867B6A283DFD6E",
+      "content\\route.lua": "DAD0756793D585169AEB587CB9EC0298FA6E3160A39BE65CF9DC9E89E9B5C69D",
+      "tools\\report\\main.lua": "C95873401908283C3BF6B9901EBB73D8D0C21738222CA6C92FC74CCD3F30D4EB",
+      "tools\\report\\json.lua": "845508ECD8FE07FAA6D4B485C8D85C3D09D246CBD7B6101AC7B08547D9B8373E",
+      "tools/guardian_compare.lua": "F725E75CBE04A43D3719224E4E866BD099B3BAC0AED5E45D03B0AFD40351F17E",
+      "simulation\\clarity.lua": "0AD8BA79BF260B948D682375A9A988265DB45EC64C99E450D64D50434B99467F",
+      "services\\save.lua": "C7994AEB86CADE8262F937DDA652E03920CCDF1A91060A52105446805A21EA42",
+      "simulation\\resources.lua": "1179D6DF6D8E83317B51DD960A882750AB292A7CAA2F3FFAAAFECC79EAB0026F",
+      "content\\events.lua": "96EF1F8FB1F78966BE6266EF95B1F16FA1385481D4BA19011CCD0F2F7B1EEE41"
+    }
+  },
+  "meaning": {
+    "current": "original 4/8 random guardian",
+    "authored": "original 4/8 authored prototype",
+    "balanced": "new 3/6/1 with authored guardian",
+    "net_energy": "includes detour recovery; harm sums direct hits",
+    "continuations": "same starting snapshot and policy; balanced uses new rules for all remaining battles"
+  },
+  "matrix": [
+    {
+      "variant": "current",
+      "energy": 100,
+      "n": 1200,
+      "wins": 420,
+      "cargo_loss": 13.8867,
+      "condition_harm": 10.58,
+      "net_energy_spent": 35
+    },
+    {
+      "variant": "current",
+      "energy": 16,
+      "n": 1200,
+      "wins": 0,
+      "cargo_loss": 10.1233,
+      "condition_harm": 6.945,
+      "net_energy_spent": 18
+    },
+    {
+      "variant": "authored",
+      "energy": 100,
+      "n": 1200,
+      "wins": 420,
+      "cargo_loss": 9.3333,
+      "condition_harm": 5.9333,
+      "net_energy_spent": 35.0333
+    },
+    {
+      "variant": "authored",
+      "energy": 16,
+      "n": 1200,
+      "wins": 40,
+      "cargo_loss": 12.6833,
+      "condition_harm": 11.6333,
+      "net_energy_spent": 18.4667
+    },
+    {
+      "variant": "balanced",
+      "energy": 100,
+      "n": 1200,
+      "wins": 420,
+      "cargo_loss": 9.3333,
+      "condition_harm": 5.9333,
+      "net_energy_spent": 20
+    },
+    {
+      "variant": "balanced",
+      "energy": 16,
+      "n": 1200,
+      "wins": 420,
+      "cargo_loss": 9.3333,
+      "condition_harm": 5.9333,
+      "net_energy_spent": 20
+    }
+  ],
+  "continuations": {
+    "current": {
+      "n": 38,
+      "delivered": 11,
+      "final_day": 27.6579,
+      "recovery_days": 1.3947
+    },
+    "authored": {
+      "n": 38,
+      "delivered": 11,
+      "final_day": 27.6579,
+      "recovery_days": 1.3947
+    },
+    "balanced": {
+      "n": 38,
+      "delivered": 13,
+      "final_day": 27.1316,
+      "recovery_days": 1.0789
+    }
+  },
+  "journeys": {
+    "careful": {
+      "original": {
+        "n": 40,
+        "delivered": 23,
+        "final_day": 26.375,
+        "recovery_days": 0.5
+      },
+      "updated": {
+        "n": 40,
+        "delivered": 23,
+        "final_day": 26.375,
+        "recovery_days": 0.5
+      }
+    },
+    "peaceful": {
+      "original": {
+        "n": 40,
+        "delivered": 14,
+        "final_day": 27.25,
+        "recovery_days": 0.775
+      },
+      "updated": {
+        "n": 40,
+        "delivered": 14,
+        "final_day": 27.25,
+        "recovery_days": 0.775
+      }
+    },
+    "fighter": {
+      "original": {
+        "n": 40,
+        "delivered": 5,
+        "final_day": 28.075,
+        "recovery_days": 1.625
+      },
+      "updated": {
+        "n": 40,
+        "delivered": 6,
+        "final_day": 27.8,
+        "recovery_days": 1.4
+      }
+    }
+  }
+}

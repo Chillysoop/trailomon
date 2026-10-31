@@ -28,8 +28,22 @@ function M.combat_ready(self)
     self.capture_assert=function() assert(self.snapshot.run.mode=="combat" and #self.snapshot.run.battle.history==0) end
 end
 function M.guardian_setup(self)
-    reset(self,"trail");assert(model.debug(self.snapshot,"event","guardian_pattern"))
+    reset(self,"trail");assert(model.debug(self.snapshot,"event","territorial"))
     assert(model.command(self.snapshot,"choice",{id="battle"}));self.redraw()
+end
+function M.guardian_tired_result(self)
+    M.guardian_setup(self)
+    for _,c in ipairs(self.snapshot.run.crew) do c.stamina=16 end
+    self.redraw()
+    self.capture_actions={"battler1","battler2","battle_begin","combat_step","combat_step","combat_step","combat_step"}
+    self.capture_assert=function()
+        local s=self.snapshot.run
+        assert(s.mode=="combat_result" and s.battle.outcome=="won")
+        assert(s.crew[1].stamina==0 and s.crew[2].stamina==0)
+    end
+end
+function M.legacy_guardian_setup(self)
+    M.guardian_setup(self);self.snapshot.run.combat_effort=nil;self.redraw()
 end
 function M.guardian_warning(self)
     M.guardian_setup(self)
