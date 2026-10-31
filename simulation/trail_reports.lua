@@ -9,10 +9,11 @@ end
 local function forage_help(s)
     local c=member(s,"loamling")
     if not c then return end
-    if resources.ready(c,18) then
-        return {icon="forage",text=c.name..": ready to find +8 food for 18 energy. Gathering still takes a day and meals."}
+    local effort=resources.effort(s,"loamling",18,"forage");local extra=8+require("simulation.habits").yield(c)
+    if resources.ready(c,effort) then
+        return {icon="forage",text=c.name..": ready to find +"..extra.." food for "..effort.." energy. Gathering still takes a day and meals."}
     end
-    return {icon="forage",text=c.name..": needs care or at least 18 energy to help gather. Recover before relying on extra food."}
+    return {icon="forage",text=c.name..": needs care or at least "..effort.." energy to help gather. Recover before relying on extra food."}
 end
 local function rain_help(s)
     local c=member(s,"cindercoil")

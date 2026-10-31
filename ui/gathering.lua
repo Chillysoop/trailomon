@@ -13,7 +13,7 @@ function M.draw(self)
     w.reading(self,453,487,"stamina",p.effort,{label="Energy spent"})
     local helper=p.member and (p.member.name.." digs / "..util.round(p.member.stamina).." energy") or "Hand gathering / no crew energy cost"
     w.text(self,28,451,helper,14,"ink")
-    w.text(self,28,427,"Loamling: 18 energy, condition >0 / Yield: -5 per visit",12,"muted")
+    w.text(self,28,427,"Loamling: "..model.resources.effort(s,"loamling",18,"forage").." energy, condition >0 / Yield: -5 per visit",12,"muted")
     w.reading(self,28,383,"food",p.gross,{label="Found"})
     w.reading(self,310,383,"food",p.packed,{label="Can pack"})
     w.reading(self,592,383,"food","-"..p.meals,{label="Meals"})

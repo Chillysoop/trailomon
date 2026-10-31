@@ -6,8 +6,9 @@ function M.companion(id)
     local def=species.defs[id]
     return {species=id,name=def.friend,temperament=def.temperament,condition=100,stamina=100,trust=1,memories={},duty="work"}
 end
-function M.profile()
-    local p={roster={},discoveries={},history={},covered=false,next_id=1,last_committed=0,aims=aims.empty()}
+function M.profile(mode)
+    local p={roster={},discoveries={},history={},covered=false,next_id=1,last_committed=0,aims=aims.empty(),start_mode=mode=="discovery" and "discovery" or nil}
+    if mode=="discovery" then p.starter="brindlehorn";p.roster.brindlehorn=M.companion("brindlehorn");p.discoveries.brindlehorn=true;return p end
     for _, id in ipairs(species.order) do
         if species.defs[id].initial then p.roster[id]=M.companion(id); p.discoveries[id]=true end
     end

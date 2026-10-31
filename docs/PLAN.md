@@ -25,11 +25,11 @@ During a typical half-minute the player watches the wagon travel, reads a change
 | Area | First polished expedition |
 | --- | --- |
 | Journey | One complete route, six landmarks, two branch choices, one river crossing; target 20–35 minutes |
-| Crew | Six original species; one or two at departure and at most three traveling; two active in encounters |
-| Combat | Two automatic scenarios with readable abilities and two positions; preserve peaceful alternatives and persistent costs; tune against the whole journey |
+| Crew | Six original species; one or two at departure and at most three traveling; two active in encounters; optional Discovery depot starts with one chosen hauler |
+| Combat | Two road scenarios plus optional courier practice, readable abilities and two positions; preserve peaceful alternatives and persistent costs; tune against the whole journey |
 | Provisioning | Food, medicine, repairs, coins, cargo, and capacity; existing foraging with finite local yields; hunting deferred by approved P2 |
 | Survival | Weather, pace, rations, hauling, stamina, injuries, wagon wear, and cargo condition |
-| Progression | Named companions, discoveries, memories, ten journey summaries, and standard/covered wagon alternatives |
+| Progression | Named companions, species observations, courier recognition, selectable learned habits, memories, ten journey summaries, and standard/covered wagon alternatives |
 | Narrative | Give existing landmarks and species distinct ecological and local details within the current eighteen original events plus the approved wildlife/courier/discovery-start additions |
 | Usability | Clear goals, labeled icons, mouse and keyboard control, readable 1280 by 720 presentation, pause, save/resume, basic audio controls |
 | Delivery | Offline Windows ZIP, launch instructions, exact source revision, repeatable build and test scripts |

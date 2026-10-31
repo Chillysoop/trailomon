@@ -3,6 +3,10 @@ local model=require "simulation.expedition"
 local species=require "content.species"
 local aims=require "simulation.journal_aims"
 local M={}
+local active_slot="classic"
+local selected=false
+function M.slot() return active_slot end
+local function selection_path() return sys.get_save_file(sys.get_config_string("trailomon.save_namespace","trailomon"),"depot_selection") end
 local modes={preparation=true,traveling=true,stopped=true,event=true,landmark=true,combat_select=true,combat=true,combat_result=true,result=true}
 local outcomes={delivered=true,late=true,returned=true,rescued=true}
 local function number(n,lo,hi) return util.finite(n) and n>=lo and n<=hi end
@@ -10,6 +14,7 @@ local function integer(n,lo,hi) return number(n,lo,hi) and n==math.floor(n) end
 local function companion(c)
     if type(c)~="table" or not species.defs[c.species] or type(c.name)~="string" or #c.name>72 then return false end
     if not number(c.condition,0,100) or not number(c.stamina,0,100) or not integer(c.trust,1,3) then return false end
+    if not require("simulation.habits").valid(c) then return false end
     if c.work_item~=nil and not model.equipment.defs[c.work_item] then return false end
     if c.duty~="work" and c.duty~="rest" then return false end
     if type(c.temperament)~="string" or type(c.memories)~="table" or #c.memories>6 then return false end
@@ -38,7 +43,10 @@ local function validate(snapshot)
         roster_count=roster_count+1
     end
     if roster_count>6 then return false,"Roster too large" end
-    for _,id in ipairs({"brindlehorn","reedskipper","loamling","bellmoth"}) do if not p.roster[id] then return false,"Missing depot companion" end end
+    if p.start_mode=="discovery" then
+        if (p.starter~="brindlehorn" and p.starter~="reedskipper") or not p.roster[p.starter] then return false,"Missing discovery hauler" end
+    elseif p.start_mode~=nil then return false,"Unknown depot mode"
+    else for _,id in ipairs({"brindlehorn","reedskipper","loamling","bellmoth"}) do if not p.roster[id] then return false,"Missing depot companion" end end end
     for _,record in ipairs(p.history) do
         if type(record)~="table" or not integer(record.id,1,p.last_committed) or not outcomes[record.outcome] or not integer(record.seed,0,2147483646) or not number(record.day,1,32) or not number(record.cargo,0,100) or type(record.summary)~="string" or type(record.route)~="table" then return false,"Invalid history" end
     end
@@ -157,9 +165,10 @@ function M.validate(snapshot)
     if not ok then return false,"Malformed save data" end
     return valid,why
 end
-function M.paths()
+function M.paths(slot)
     local namespace=sys.get_config_string("trailomon.save_namespace","trailomon")
-    return sys.get_save_file(namespace,"expedition_v1"),sys.get_save_file(namespace,"expedition_v1.backup")
+    local name=(slot or active_slot)=="discovery" and "discovery_v1" or "expedition_v1"
+    return sys.get_save_file(namespace,name),sys.get_save_file(namespace,name..".backup")
 end
 local function load_valid(path)
     local ok,data=pcall(sys.load,path)
@@ -174,8 +183,8 @@ local function load_valid(path)
     if valid then return data end
     return nil,why
 end
-function M.load()
-    local primary,backup=M.paths()
+local function load_pair(slot)
+    local primary,backup=M.paths(slot)
     local data,why=load_valid(primary)
     if data then return data end
     local fallback,fallback_why=load_valid(backup)
@@ -183,9 +192,20 @@ function M.load()
     if why=="empty" and fallback_why=="empty" then return nil end
     return nil,"The save could not be read. Start a new depot to continue.",true
 end
+function M.load()
+    if not selected then
+        local ok,record=pcall(sys.load,selection_path())
+        if ok and type(record)=="table" and (record.slot=="classic" or record.slot=="discovery") then active_slot=record.slot end
+        selected=true
+    end
+    local data,notice,blocked=load_pair(active_slot)
+    if data and ((data.profile.start_mode=="discovery")~=(active_slot=="discovery")) then return nil,"Depot mode does not match its save",true end
+    return data,notice,blocked
+end
 function M.write(snapshot)
     local valid,why=M.validate(snapshot)
     if not valid then return false,"Save rejected: " .. tostring(why) end
+    if (snapshot.profile.start_mode=="discovery")~=(active_slot=="discovery") then return false,"Refusing to overwrite a different depot" end
     local primary,backup=M.paths()
     local old=load_valid(primary)
     if old then
@@ -195,5 +215,22 @@ function M.write(snapshot)
     local ok,saved=pcall(sys.save,primary,snapshot)
     if not ok or not saved then return false,"Save could not be written; the last good backup is available" end
     return true
+end
+function M.select(snapshot,slot)
+    if slot~="classic" and slot~="discovery" then return nil,"Unknown depot" end
+    if slot==active_slot then return snapshot end
+    local ok,why=M.write(snapshot)
+    if not ok then return nil,why end
+    local target,notice,blocked=load_pair(slot)
+    if blocked then return nil,notice end
+    target=target or model.new(1848,slot)
+    if (target.profile.start_mode=="discovery")~=(slot=="discovery") then return nil,"Depot mode does not match its save" end
+    local previous=active_slot;active_slot=slot
+    ok,why=M.write(target)
+    if not ok then active_slot=previous;return nil,why end
+    local wrote,saved=pcall(sys.save,selection_path(),{slot=slot})
+    if not wrote or not saved then active_slot=previous;return nil,"Could not remember the selected depot" end
+    selected=true
+    return target,notice or "Depot switched; both saves are kept."
 end
 return M

@@ -27,6 +27,24 @@ function M.courier_setup(self)
 end
 function M.courier_active(self) M.courier_setup(self);self.capture_actions={"battler1","battler2","battle_begin","combat_step"} end
 function M.courier_result(self) M.courier_setup(self);self.capture_actions={"battler1","battler2","battle_begin","combat_step","combat_step","combat_step"} end
+function M.discovery_start(self)
+    reset(self,"trail");self.snapshot=model.new(1848,"discovery");self.redraw()
+    self.capture_actions={"select_reedskipper"};self.capture_assert=function() assert(self.snapshot.run.crew[1].species=="reedskipper") end
+end
+function M.discovery_recruit(self)
+    reset(self,"trail");self.snapshot=model.new(1848,"discovery");assert(model.command(self.snapshot,"depart"))
+    assert(model.debug(self.snapshot,"event","discover_loamling"));self.redraw()
+end
+function M.habits(self)
+    reset(self,"crew");self.snapshot=model.new(1848)
+    for _,c in ipairs(self.snapshot.run.crew) do c.habit_days=3;self.snapshot.profile.roster[c.species].habit_days=3 end
+    self.redraw();self.capture_actions={"open_habits","habit_brindlehorn"}
+    self.capture_assert=function() assert(self.page=="habits" and self.snapshot.run.crew[1].habit) end
+end
+function M.habit_gather(self)
+    M.habits(self);self.capture_actions={};self.page="forage";local c=self.snapshot.run.crew[2];c.habit=true;c.stamina=12;self.redraw();self.capture_assert=function() assert(model.forage_preview(self.snapshot.run).effort==12) end
+end
+function M.depot_options(self) reset(self,"settings");self.redraw() end
 function M.options(self) reset(self,"settings");self.redraw() end
 function M.options_brisk(self)
     M.options(self);self.capture_actions={"travel_speed"}
@@ -67,7 +85,8 @@ function M.guardian_rush(self)
     M.guardian_warning(self);self.capture_actions[#self.capture_actions+1]="combat_step"
     self.capture_assert=function() assert(self.snapshot.run.battle.intent.kind=="heavy" and self.snapshot.run.battle.round==3) end
 end
-function M.developer(self) reset(self,"debug");self.redraw() end
+function M.developer(self) reset(self,"debug");self.debug_page=1;self.redraw() end
+function M.developer_next(self) M.developer(self);self.capture_actions={"debug_next"} end
 function M.route_depot(self) reset(self,"trail");self.redraw() end
 local function stop(self,target)
     reset(self,"trail");local s=self.snapshot.run

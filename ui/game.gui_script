@@ -13,7 +13,7 @@ function init(self)
     self.buttons={};self.animated={}
     msg.post(".","acquire_input_focus")
     self.snapshot,self.toast,self.save_blocked=save.load()
-    self.snapshot=self.snapshot or model.new(1848)
+    self.snapshot=self.snapshot or model.new(1848,save.slot and save.slot() or nil)
     self.page="trail";self.speed=self.snapshot.settings.travel_speed or 1;self.time=0;self.clock=clock.new()
     self.battle_actions={};self.battle_team={};self.has_focus=true
     self.combat_paused=true;self.combat_speed=1
@@ -55,6 +55,16 @@ function init(self)
         if self.snapshot.run.mode=="combat" then self.combat_paused=true end
         if self.snapshot.run.mode=="traveling" then model.command(self.snapshot,"pause");self.save_now() end
         self.reset_clock();self.page=destination;self.redraw()
+    end
+    self.switch_depot=function(slot)
+        if self.save_blocked then return end
+        local next_snapshot,notice=save.select(self.snapshot,slot)
+        if not next_snapshot then self.toast=notice;self.redraw();return end
+        self.snapshot=next_snapshot;self.toast=notice;self.save_error=nil;self.page="trail";self.detail=nil
+        self.battle_team={};self.battle_actions={};self.combat_paused=true;self.combat_log=nil
+        self.speed=self.snapshot.settings.travel_speed or 1;self.reset_clock()
+        if self.snapshot.run.mode=="traveling" then model.command(self.snapshot,"pause");self.save_now() end
+        self.redraw()
     end
     self.finish_edit=function()
         local edit=self.edit

@@ -11,11 +11,11 @@ function M.next_duty(s)
         return {icon="haul",text="Assign a ready draft companion in Crew before traveling."}
     end
     for _,member in ipairs(s.crew) do
-        if member.species=="loamling" and not resources.ready(member,18) then
-            return {icon="dig",text=member.name.." cannot help gather: needs 18 energy and positive condition."}
+        if member.species=="loamling" and not resources.ready(member,resources.effort(s,"loamling",18,"forage")) then
+            return {icon="dig",text=member.name.." cannot help gather: needs "..resources.effort(s,"loamling",18,"forage").." energy and positive condition."}
         end
-        if s.target<=4 and not s.flags.river_crossed and (member.species=="brindlehorn" or member.species=="reedskipper" or member.species=="slatewhorl") and not resources.ready(member,22) then
-            return {icon="water",text=member.name.." cannot help at the crossing: needs 22 energy and positive condition."}
+        if s.target<=4 and not s.flags.river_crossed and (member.species=="brindlehorn" or member.species=="reedskipper" or member.species=="slatewhorl") and not resources.ready(member,resources.effort(s,member.species,22,"river")) then
+            return {icon="water",text=member.name.." cannot help at the crossing: needs "..resources.effort(s,member.species,22,"river").." energy and positive condition."}
         end
     end
     return {icon="haul",text=c.name.." is ready to haul at "..s.pace.." pace ("..effort.." energy needed to set off)."}

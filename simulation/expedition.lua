@@ -12,6 +12,7 @@ local forks=require "content.forks"
 local aims=require "simulation.journal_aims"
 local field_guide=require "simulation.field_guide"
 local courier=require "simulation.courier"
+local habits=require "simulation.habits"
 local M = {SCHEMA=1, CONTENT=1, route=route, species=species, resources=resources, events=events, combat=combat, equipment=equipment, trail_reports=require "simulation.trail_reports"}
 
 local function log(s,text)
@@ -23,10 +24,18 @@ M.log=log
 local function prepare(snapshot,seed)
     local p=snapshot.profile
     seed=rng.seed(seed)-1
+    local crew={}
+    local first=p.starter or "brindlehorn"
+    if p.roster[first] then crew[1]=util.copy(p.roster[first]) end
+    for _,id in ipairs(species.order) do
+        if #crew==1 and id~=first and p.roster[id] and species.defs[id].cost+species.defs[first].cost<=7 then crew[2]=util.copy(p.roster[id]);break end
+    end
+    -- Preserve the familiar normal departure pair.
+    if p.start_mode~="discovery" then crew={util.copy(p.roster.brindlehorn),util.copy(p.roster.loamling)} end
     local s={id=p.next_id,seed=seed,mode="preparation",day=1,target=2,progress=0,distance=route[2].distance,
         terrain="meadow",weather="clear",rainfall=0,food=90,coins=50,repairs=3,medicine=2,
         wagon=100,wagon_type="standard",cargo=100,traveler=100,pace="steady",rations="normal",
-        crew={util.copy(p.roster.brindlehorn),util.copy(p.roster.loamling)},hauler=1,
+        crew=crew,hauler=1,
         rng={weather=rng.seed(seed+11),events=rng.seed(seed+173),combat=rng.seed(seed+1019)},
         seen={},flags={},discoveries={},branches={},forage={},cooldown=1,log={},warnings={},
         outcome="",ending="",wildlife_rules="wildlife-v1",courier_rules=courier.RULES,combat_effort=combat.EFFORT,river_roll=rng.seed(seed+923)%100/100}
@@ -36,8 +45,8 @@ local function prepare(snapshot,seed)
     return s
 end
 
-function M.new(seed)
-    local snapshot={schema=M.SCHEMA,content=M.CONTENT,profile=progression.profile(),settings={sound=true,motion=true,travel_speed=1}}
+function M.new(seed,mode)
+    local snapshot={schema=M.SCHEMA,content=M.CONTENT,profile=progression.profile(mode),settings={sound=true,motion=true,travel_speed=1}}
     prepare(snapshot,seed or 1848)
     return snapshot
 end
@@ -94,6 +103,7 @@ local function reached(snapshot)
         s.mode="landmark"
         log(s,"Reached " .. route[s.target].name .. ".")
         courier.arrive(snapshot)
+        require("simulation.discovery").arrive(snapshot)
         if s.target==3 and s.flags.helped_traveler and not s.flags.thanked then
             s.flags.thanked=true; s.coins=s.coins+8
             log(s,"The traveler you helped left 8 coins for you at Mossbell.")
@@ -172,8 +182,15 @@ local function day(snapshot,moving,resting)
     s.traveler=util.clamp(s.traveler+(fed and (resting and 12 or 0.5) or -12)-exposure,0,100)
     for _, c in ipairs(s.crew) do
         local working=moving and c.duty=="work"
+        if fed and working and c.condition>0 then
+            local before=c.habit_days or 0;habits.work(c)
+            if before<3 and c.habit_days==3 then
+                progression.memory(c,"Learned "..habits.defs[c.species].name.." on the road.")
+                log(s,c.name.." learned "..habits.defs[c.species].name..". Select it at the departure depot.")
+            end
+        end
         local effort=c==hauler and resources.haul_effort(s,c) or (working and 2 or 0)
-        if c==hauler and c.species=="reedskipper" and s.weather=="clear" and s.terrain~="marsh" then effort=effort+2 end
+        if c==hauler and c.species=="reedskipper" and s.weather=="clear" and s.terrain~="marsh" then effort=effort+2+habits.dry_haul(c) end
         local gain=fed and (resting and 25 or recovery+(working and 0 or 4)) or 0
         if fed and s.weather=="rain" and equipment.has(c,"dry_wrap") then gain=gain+3 end
         c.stamina=util.clamp(c.stamina-effort+gain-exposure,0,100)
@@ -185,6 +202,7 @@ local function day(snapshot,moving,resting)
         if s.terrain=="woodland" or s.terrain=="gorge" then factor=factor*0.9 end
         if s.terrain=="ridge" then factor=factor*1.05 end
         if hauler.species=="slatewhorl" then factor=factor*0.88 end
+        factor=factor*habits.speed(hauler)
         if resources.weight(s)>resources.capacity(s)*0.9 then factor=factor*0.94 end
         s.progress=math.min(s.distance,s.progress+resources.paces[s.pace].speed*factor)
         local wear=resources.paces[s.pace].wear+(s.weather=="rain" and 0.4 or 0)+(s.terrain=="ridge" and 0.6 or 0)
@@ -225,14 +243,14 @@ M.advance_day=day
 
 function M.forage_preview(s)
     local count=s.forage[tostring(s.target)] or 0
-    local digger=resources.find(s,"loamling",18)
+    local digger,_,effort=resources.find(s,"loamling",18,"forage")
     local base=(s.terrain=="meadow" or s.terrain=="woodland") and 10 or 6
-    local gross=math.max(0,base+(digger and 8 or 0)-count*5)
+    local gross=math.max(0,base+(digger and 8+habits.yield(digger) or 0)-count*5)
     local meals=math.min(s.food,resources.daily_food(s))
     local space=math.max(0,resources.capacity(s)-resources.weight(s)+meals)
     local closing=s.day>=31
     local packed=closing and 0 or math.min(gross,space)
-    return {gross=gross,packed=packed,net=packed-meals,effort=digger and 18 or 0,member=digger,
+    return {gross=gross,packed=packed,net=packed-meals,effort=digger and effort or 0,member=digger,
         count=count,meals=meals,need=resources.daily_food(s),space=space,closing=closing}
 end
 
@@ -261,6 +279,14 @@ function M.river_risk(s,method)
     return util.clamp(risk,0.05,0.85)
 end
 
+function M.crossing_helper(s,method)
+    if method=="swim" then return resources.find(s,"reedskipper",22,"river") end
+    if method=="anchor" then
+        local c,i,cost=resources.find(s,"slatewhorl",22,"river")
+        if c then return c,i,cost end
+        return resources.find(s,"brindlehorn",22,"river")
+    end
+end
 local function cross(snapshot,method)
     local s=snapshot.run
     if s.flags.river_crossed then return false,"Already across" end
@@ -270,12 +296,12 @@ local function cross(snapshot,method)
     if method=="ferry" then
         if s.coins<12 then return false,"Ferry fare: 12 coins" end
         s.coins=s.coins-12
-    elseif method=="swim" then helper=resources.find(s,"reedskipper",22); if not helper then return false,"Need a Reedskipper with 22 stamina" end
-    elseif method=="anchor" then helper=resources.find(s,"slatewhorl",22) or resources.find(s,"brindlehorn",22); if not helper then return false,"Need an anchor companion with 22 stamina" end
+    elseif method=="swim" then helper=M.crossing_helper(s,method); if not helper then return false,"Need a Reedskipper with "..resources.effort(s,"reedskipper",22,"river").." energy" end
+    elseif method=="anchor" then helper=M.crossing_helper(s,method); if not helper then return false,"Need an anchor companion with 22 stamina" end
     elseif method~="rope" then return false,"Unknown crossing" end
     local risk=M.river_risk(s,method)
     -- Outcome is fixed for this run; inspecting, saving, or changing menus never rerolls it.
-    if helper then helper.stamina=helper.stamina-22; progression.memory(helper,"Helped the wagon cross Willowford.") end
+    if helper then helper.stamina=helper.stamina-habits.cost(helper,"river",22); progression.memory(helper,"Helped the wagon cross Willowford.") end
     local bad=method~="ferry" and s.river_roll<risk
     local secured=equipment.wearer(s,"release_rope")~=nil
     day(snapshot,false,false)
@@ -309,8 +335,8 @@ local function resolve(snapshot,id)
     local before=choice.outcome and util.copy(s)
     local roll=s.pending.roll
     resources.pay(s,choice.cost)
-    local helper=choice.species and resources.find(s,choice.species,choice.effort)
-    if helper then helper.stamina=helper.stamina-choice.effort end
+    local helper=choice.species and resources.find(s,choice.species,choice.effort,"event")
+    if helper then helper.stamina=helper.stamina-events.effort(s,choice) end
     s.mode="stopped"
     s.pending=nil
     s.cooldown=3 -- two full quiet travel days, then eligible on the third.
@@ -398,6 +424,8 @@ end
 function M.command(snapshot,command,arg)
     local s=snapshot.run
     arg=arg or {}
+    if command=="habit" then return habits.toggle(snapshot,arg.species) end
+    if command=="starter" then return require("simulation.discovery").starter(snapshot,arg.species) end
     if command=="settings" then
         if arg.key=="travel_speed" then
             snapshot.settings.travel_speed=(snapshot.settings.travel_speed or 1)==1 and 2 or 1

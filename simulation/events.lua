@@ -10,7 +10,7 @@ for _, event in ipairs(definitions) do M.by_id[event.id] = event end
 function M.eligible(s, event, profile)
     if s.seen[event.id] then return false end
     local condition = event.condition
-    if event.kind=="courier" then return false end -- Offered at a specific landmark, outside random selection.
+    if event.kind=="courier" or event.kind=="discovery_start" then return false end -- Offered at a specific landmark, outside random selection.
     if event.kind=="wildlife" then
         if s.wildlife_rules~="wildlife-v1" then return false end
         return (condition=="wild_meadow" and s.terrain=="meadow" and s.target<=3) or
@@ -51,10 +51,11 @@ function M.select(s, profile)
     if roll > 0.65 and #ambient > 0 then return ambient[rng.int(s.rng,"events",1,#ambient)] end
 end
 
+function M.effort(s,choice) return choice.species and resources.effort(s,choice.species,choice.effort,"event") or choice.effort end
 function M.available(s, choice, profile)
     local ok, why = resources.can_pay(s, choice.cost)
     if not ok then return false, why end
-    if choice.species and not resources.find(s, choice.species, choice.effort) then return false, "Needs a ready " .. species.defs[choice.species].name end
+    if choice.species and not resources.find(s, choice.species, choice.effort,"event") then return false, "Needs a ready " .. species.defs[choice.species].name end
     if choice.recruit then
         if #s.crew >= 3 then return false, "Crew is full (3 companions)" end
         if profile.roster[choice.recruit] then return false, "Already at your depot" end
@@ -105,7 +106,7 @@ function M.cost_text(s, choice)
     for _, key in ipairs({"coins","food","repairs","medicine"}) do
         if choice.cost and choice.cost[key] then pieces[#pieces+1] = choice.cost[key] .. " " .. key end
     end
-    if choice.effort then pieces[#pieces+1] = choice.effort .. " energy" end
+    if choice.effort then pieces[#pieces+1] = M.effort(s,choice) .. " energy" end
     if choice.days then pieces[#pieces+1] = choice.days .. " day + " .. resources.daily_food(s)*choice.days .. " food" end
     if choice.effects then
         for _, key in ipairs({"food","wagon","cargo","traveler","stamina","progress"}) do
