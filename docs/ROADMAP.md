@@ -32,7 +32,7 @@ Updated October 30, 2026. Scope: one polished Windows expedition before new regi
 | ID | Goal and review link | Done means | Validation | Status |
 | --- | --- | --- | --- | --- |
 | S10 | Finish sound, settings, and interface basics | Audio controls persist; sounds reviewed; focus, readable costs, disabled explanations, and timing consistent | Settings persistence, mouse/keyboard journeys, listening review, actual window inspection | todo |
-| S11 | Run a complete new-player and expert playtest | Report page separates already-fixed bugs from design proposals and reassesses the plan | Fresh-profile journey, resumed journey, failure/return path, optimized and exploit-seeking run; evidence images and metrics | todo |
+| S11 | Run a complete new-player and expert playtest | Report page separates already-fixed bugs from design proposals and reassesses the plan | Fresh-profile journey, resumed journey, failure/return path, optimized and exploit-seeking run; evidence images and metrics | doing |
 
 ## Release
 
@@ -45,7 +45,7 @@ Updated October 30, 2026. Scope: one polished Windows expedition before new regi
 
 The October 30 [next-batch review](../reviews/next-1.html) received N1-N8 YES at revision 34. The owner's comment made icon consistency and player clarity immediate priority: N2 and N4 shipped in PR #7, alongside the shared symbol system. S14 was appended without renumbering existing steps. PR #10 delivers N1's S2 measurement tool, including 120 journeys and 339 matched continuations repeated exactly. N1's S5 tuning, N3 guardian behavior, N5/N6 wilderness/art, N7 equipment after tuning, and N8 whole-journey usability remain approved and unfinished. P1-P5 approvals remain in force.
 
-The phase remains core systems. With S2 reporting complete, recommended execution order is S10/S11 whole-trip validation (N8), the approved N3 guardian experiment and evidence-led S5 tuning, S7/S8 identity work (N5/N6), then S9 equipment (N7). Reporting shows that reference scavenger fights often add recovery time; it does not prove optimal balance or human pacing. Original approval codes remain stable. No additional scope or repeated approval is requested.
+The phase remains core systems. The [whole-trip review](../reviews/journey-1.html) records two actual developer-role deliveries (days 25 and 23), resume, settings, gathering and voluntary return. S11 is being delivered; S10 still holds a native activation crash, physical keyboard, listening and human pacing checks. New J1–J4 clarity proposals need their own answers; old approvals remain valid. Next approved implementation: N3 guardian experiment and evidence-led S5 tuning, S7/S8 identity work (N5/N6), then S9 equipment (N7). Reference bot results do not prove optimal balance or human pacing.
 
 Ship one step or a coherent approved batch per PR, test it, and merge after CI passes. Update the status to `done (PR #n)` with the actual number. A later failure reopens the relevant work rather than leaving a misleading done status. Preserve published review codes when editing a page.
 
