@@ -1,5 +1,7 @@
 # Next-batch review
 
+2026-10-31 update: next-1 revision 37 received and acted on, all N1–N8 YES unchanged. Bounded N1/S5 costs and normal guardian adoption for new journeys implemented; see combat-costs.md. Next is N5/S7 visual wilderness, then N6/S8 silhouettes. S5 stays doing for broader balance; no repeat approval or extra tooling. The October 30 audit below is historical.
+
 2026-10-30 current audit: building core systems; the complete expedition is playable but release prep is premature. S2 reports, N2/N4 clarity, S11 developer-role journeys, J1–J4 decisions, F1 screenshots and N3 guardian experiment are delivered. S5 combat costs, S7 scenery, S8 anatomy, S9 equipment and S10 physical input/audio/pacing/reliability remain.
 
 Refreshed the existing next-1 page instead of creating another approval request. Five unfinished choices retain original codes: N1 bounded guardian/scavenger fatigue and recovery pass; N5 increasing wilderness within six landmarks; N6 six-species silhouettes/poses; N8 remaining physical keyboard/listening/pacing and native reliability; N7 one-slot/three-item experiment after tuning. Top picks N1/N5/N6. Completed N2/N3/N4 and historical evidence remain expandable. No new code or vote was invented. N3 is a delivered opt-in experiment, not adopted default combat.

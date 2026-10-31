@@ -333,7 +333,7 @@ local function debug(self)
             w.button(self,x,y,409,39,event.title,function() self.force_event(id) end,{size=12,key="debug"..id})
         end
     end
-    w.button(self,28,91,834,30,"Guardian pattern / developer experiment",function() self.force_event("guardian_pattern") end,{size=12,key="debugguardian_pattern"})
+    w.button(self,28,91,834,30,"Guardian pattern / test encounter",function() self.force_event("guardian_pattern") end,{size=12,key="debugguardian_pattern"})
     w.button(self,28,48,409,35,"Restore supplies & condition",function() self.debug_resupply() end,{size=12})
     w.button(self,453,48,409,35,"Advance one travel day",function()
         if s.mode=="stopped" then self.perform("resume") end

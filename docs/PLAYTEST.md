@@ -2,7 +2,7 @@
 
 Run `Trailomon.exe` beside the four `game.*` data files. This is an offline Windows build; the Defold editor is not required. Unzip the whole folder before starting.
 
-For the optional guardian experiment, begin a journey, press F3 and choose **Guardian pattern / developer experiment**, then **Secure passage**. Its authored sequence is shown before choosing companions. Ordinary encounters retain the current rules while the experiment is evaluated.
+New expeditions use the guardian's readable four-exchange sequence: cargo shove, harmless warning, heavy approach rush, heavy cargo rush. Ordinary actions cost 3 energy, abilities add 6 once, and the warning costs 1. Existing saved journeys retain their earlier rules until the next expedition. To inspect the sequence directly, begin a journey, press F3 and choose **Guardian pattern / test encounter**, then **Secure passage**.
 
 ## Take a journey
 

@@ -19,6 +19,7 @@ local function validate(snapshot)
     if type(snapshot)~="table" or snapshot.schema~=model.SCHEMA or snapshot.content~=model.CONTENT then return false,"Unsupported save version" end
     local s,p=snapshot.run,snapshot.profile
     if type(s)~="table" or type(p)~="table" or not modes[s.mode] then return false,"Missing journey state" end
+    if s.combat_effort~=nil and s.combat_effort~=model.combat.EFFORT then return false,"Unknown journey combat effort" end
     if type(snapshot.settings)~="table" or type(snapshot.settings.sound)~="boolean" or type(snapshot.settings.motion)~="boolean" then return false,"Invalid settings" end
     if snapshot.settings.travel_speed~=nil and not integer(snapshot.settings.travel_speed,1,2) then return false,"Invalid viewing speed" end
     if type(p.roster)~="table" or type(p.history)~="table" or #p.history>10 or type(p.discoveries)~="table" or type(p.covered)~="boolean" then return false,"Invalid depot" end
@@ -76,7 +77,8 @@ local function validate(snapshot)
         if not number(b.intent.damage,0,100) then return false,"Invalid battle damage" end
         if b.rules~=nil and not model.combat.automatic(b) then return false,"Unknown battle rules" end
         if b.pattern and not model.combat.automatic(b) then return false,"Legacy battle cannot have a guardian pattern" end
-        if s.pending and b.pattern~=s.pending.pattern then return false,"Mismatched pending pattern" end
+        if b.effort~=nil and b.effort~=model.combat.EFFORT then return false,"Unknown battle effort" end
+        if s.pending and b.pattern~=model.combat.selected_pattern(s) then return false,"Mismatched pending pattern" end
         for i,v in pairs(b.used) do if not used[i] or v~=true then return false,"Invalid used ability" end end
         if model.combat.automatic(b) then
             if b.pattern~=nil then

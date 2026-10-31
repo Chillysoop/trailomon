@@ -24,7 +24,7 @@ local function prepare(snapshot,seed)
         crew={util.copy(p.roster.brindlehorn),util.copy(p.roster.loamling)},hauler=1,
         rng={weather=rng.seed(seed+11),events=rng.seed(seed+173),combat=rng.seed(seed+1019)},
         seen={},flags={},discoveries={},branches={},forage={},cooldown=1,log={},warnings={},
-        outcome="",ending="",river_roll=rng.seed(seed+923)%100/100}
+        outcome="",ending="",combat_effort=combat.EFFORT,river_roll=rng.seed(seed+923)%100/100}
     p.next_id=p.next_id+1
     snapshot.run=s
     log(s,"Orchard cuttings for Lantern Reach. Preferred arrival: day 26. Road closes on day 32.")
@@ -479,7 +479,7 @@ function M.command(snapshot,command,arg)
         return true
     elseif command=="battle_start" and s.mode=="combat_select" then
         local before=s.rng.combat
-        local ok,why=combat.start(s,s.encounter,arg.team,s.pending and s.pending.pattern)
+        local ok,why=combat.start(s,s.encounter,arg.team,combat.selected_pattern(s))
         if ok and s.pending then s.return_rng=before end
         return ok,why
     elseif command=="battle_step" and s.mode=="combat" then

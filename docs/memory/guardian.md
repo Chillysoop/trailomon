@@ -1,5 +1,7 @@
 # Guardian experiment
 
+Current status, 2026-10-31: adopted for new journeys with reduced effort; see combat-costs.md. The following records the original experiment and its evidence.
+
 2026-10-30: After shipping F1 automatic captures, resumed approved next-1 N3 / combat-1 C2. Implemented opt-in F3 developer encounter "Guardian pattern / developer experiment". Normal road encounters retain their prior random pattern; the experiment is not adopted as the default yet.
 
 Sequence: cargo shove 14, approach warning 0, approach heavy 20, cargo heavy 20. Four-exchange cap, ordinary pressure and 4 energy per exchange remain. Warning spends no defensive ability and cannot trigger Cindercoil's follow-up. Pattern is visible before commitment; save/resume and free back preserve it. Missing pattern keeps old automatic and manual saves playable. No new enemy, region, loot or combat clock.

@@ -4,7 +4,7 @@ local progression=require "simulation.progression"
 local save=require "services.save"
 return function(test,command,valid,equal)
     local function setup(ids)
-        local p=model.new(1848);command(p,"depart")
+        local p=model.new(1848);p.run.combat_effort=nil;command(p,"depart")
         p.run.crew={}
         for _,id in ipairs(ids or {"bellmoth"}) do p.run.crew[#p.run.crew+1]=progression.companion(id) end
         assert(model.debug(p,"event","guardian_pattern"));valid(p)
@@ -53,7 +53,7 @@ return function(test,command,valid,equal)
             function(b) b.intent.damage=0 end,function(b) b.intent.target=1 end}) do
             local bad=util.copy(p);change(bad.run.battle);assert(not save.validate(bad))
         end
-        local old=model.new(1848);command(old,"depart")
+        local old=model.new(1848);old.run.combat_effort=nil;command(old,"depart")
         assert(model.debug(old,"event","territorial"));command(old,"choice",{id="battle"});command(old,"battle_start",{team={1,2}})
         assert(old.run.battle.pattern==nil)
         command(old,"battle_step");assert(old.run.battle.intent.kind=="heavy")
