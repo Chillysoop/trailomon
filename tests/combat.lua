@@ -107,7 +107,7 @@ return function(test,command,valid,equal)
         local p=encounter({"brindlehorn","loamling"})
         local fields={function(b) b.rules="future" end,function(b) b.initial=nil end,function(b) b.used[3]=true end,function(b) b.intent.target=2 end,function(b) b.history[1]={} end}
         for _,mutate in ipairs(fields) do local copy=util.copy(p);mutate(copy.run.battle);assert(not save.validate(copy)) end
-        local legacy=util.copy(p);assert(require("simulation.combat_manual").start(legacy.run,"scavengers",{1,2}));valid(legacy)
+        local legacy=util.copy(p);legacy.run.pending=nil;legacy.run.return_rng=nil;assert(require("simulation.combat_manual").start(legacy.run,"scavengers",{1,2}));valid(legacy)
         while legacy.run.mode=="combat" do command(legacy,"round",{actions={{member=1,kind="pressure"},{member=2,kind="pressure"}}}) end
         assert(legacy.run.mode=="stopped")
     end)

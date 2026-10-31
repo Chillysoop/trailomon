@@ -2,6 +2,7 @@ local definitions = require "content.events"
 local resources = require "simulation.resources"
 local rng = require "simulation.rng"
 local species = require "content.species"
+local util = require "simulation.util"
 local M = {defs=definitions, by_id={}}
 for _, event in ipairs(definitions) do M.by_id[event.id] = event end
 
@@ -57,7 +58,38 @@ function M.available(s, choice, profile)
     return true
 end
 
+function M.recruit_preview(s, choice)
+    if not choice.recruit then return nil end
+    local after=util.copy(s)
+    resources.pay(after,choice.cost)
+    after.crew[#after.crew+1]={species=choice.recruit}
+    local before_meals,after_meals=resources.daily_food(s),resources.daily_food(after)
+    return {food_before=s.food,food_after=after.food,meals_before=before_meals,meals_after=after_meals,
+        days_before=math.floor(s.food/before_meals),days_after=math.floor(after.food/after_meals)}
+end
+
+function M.receipt(before,after)
+    local pieces={}
+    local function add(label,delta,suffix)
+        if math.abs(delta)<0.00001 then return end
+        local value=string.format("%.1f",delta):gsub("%.0$","")
+        pieces[#pieces+1]=label.." "..(delta>0 and "+" or "")..value..(suffix or "")
+    end
+    for _,entry in ipairs({{"day","Days"},{"food","Provisions"},{"coins","Coins"},{"repairs","Repair"},{"medicine","Medicine"},{"wagon","Wagon","%"},{"cargo","Cargo","%"},{"traveler","Traveler","%"}}) do
+        add(entry[2],after[entry[1]]-before[entry[1]],entry[3])
+    end
+    for i,c in ipairs(before.crew) do
+        add(c.name.." energy",after.crew[i].stamina-c.stamina)
+        add(c.name.." condition",after.crew[i].condition-c.condition)
+    end
+    return #pieces>0 and table.concat(pieces," / ").."." or "No supplies or energy spent."
+end
+
 function M.cost_text(s, choice)
+    if choice.recruit then
+        local p=M.recruit_preview(s,choice)
+        return "Provisions "..p.food_before.." -> "..p.food_after.." / Meals per day "..p.meals_before.." -> "..p.meals_after.." / Food days "..p.days_before.." -> "..p.days_after
+    end
     local pieces = {}
     for _, key in ipairs({"coins","food","repairs","medicine"}) do
         if choice.cost and choice.cost[key] then pieces[#pieces+1] = choice.cost[key] .. " " .. key end
@@ -70,7 +102,6 @@ function M.cost_text(s, choice)
             if value then pieces[#pieces+1] = (value>0 and "+" or "") .. value .. " " .. (key=="stamina" and "energy" or key) end
         end
     end
-    if choice.recruit then pieces[#pieces+1]="+1 companion; higher daily food" end
     if choice.gamble then pieces[#pieces+1]="Chance of saved distance or wagon damage" end
     if choice.battle then pieces[#pieces+1]="Short battle; injuries and fatigue persist" end
     return #pieces > 0 and table.concat(pieces, " / ") or "No supplies required"

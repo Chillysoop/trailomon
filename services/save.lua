@@ -20,6 +20,7 @@ local function validate(snapshot)
     local s,p=snapshot.run,snapshot.profile
     if type(s)~="table" or type(p)~="table" or not modes[s.mode] then return false,"Missing journey state" end
     if type(snapshot.settings)~="table" or type(snapshot.settings.sound)~="boolean" or type(snapshot.settings.motion)~="boolean" then return false,"Invalid settings" end
+    if snapshot.settings.travel_speed~=nil and not integer(snapshot.settings.travel_speed,1,2) then return false,"Invalid viewing speed" end
     if type(p.roster)~="table" or type(p.history)~="table" or #p.history>10 or type(p.discoveries)~="table" or type(p.covered)~="boolean" then return false,"Invalid depot" end
     if not integer(p.next_id,1,1e9) or not integer(p.last_committed,0,p.next_id-1) or not integer(s.id,1,p.next_id-1) then return false,"Invalid journey identity" end
     local roster_count=0
@@ -50,9 +51,19 @@ local function validate(snapshot)
     if not number(s.river_roll,0,1) or #s.log>70 then return false,"Invalid journal" end
     for _,entry in ipairs(s.log) do if type(entry)~="table" or not integer(entry.day,1,32) or type(entry.text)~="string" or #entry.text>1000 then return false,"Invalid journal entry" end end
     for key,n in pairs(s.forage) do if type(key)~="string" or not integer(n,0,100) then return false,"Invalid forage record" end end
-    if s.mode=="event" then
+    if s.mode=="event" or s.pending~=nil then
         if type(s.pending)~="table" or not model.events.by_id[s.pending.id] or not model.events.by_id[s.pending.id].choices or not number(s.pending.roll,0,1) then return false,"Missing pending event" end
+        if s.mode~="event" then
+            if s.mode~="combat_select" and s.mode~="combat" then return false,"Unexpected pending event" end
+            local matching=false
+            for _,choice in ipairs(model.events.by_id[s.pending.id].choices) do
+                if choice.battle and choice.battle==s.encounter then matching=true end
+            end
+            if not matching then return false,"Mismatched encounter return" end
+            if s.mode=="combat" and (not model.combat.automatic(s.battle) or #s.battle.history~=0 or not integer(s.return_rng,1,2147483646)) then return false,"Invalid encounter return" end
+        end
     end
+    if s.return_rng~=nil and (s.mode~="combat" or not s.pending) then return false,"Unexpected return random state" end
     if s.mode=="combat_select" and s.encounter~="scavengers" and s.encounter~="territorial" then return false,"Missing encounter" end
     if s.mode=="combat" or s.mode=="combat_result" then
         local b=s.battle

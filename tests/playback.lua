@@ -47,5 +47,13 @@ return function(test,command,valid,equal)
         for _=1,100 do env.update(resumed,0.1) end
         equal(saved,resumed.snapshot)
         assert(resumed.save_error,"An unsaved combat must stop its automatic clock")
+        fail_save=false
+        local travel=model.new(1848);command(travel,"depart");command(travel,"resume")
+        stored=travel;local moving={};env.init(moving)
+        assert(moving.speed==1 and moving.snapshot.run.mode=="stopped")
+        moving.perform("settings",{key="travel_speed"});assert(moving.speed==2 and stored.settings.travel_speed==2)
+        moving.perform("resume");local reload={};env.init(reload)
+        assert(reload.speed==2 and reload.snapshot.run.mode=="stopped","Remember viewing speed but never resume travel on load")
+        stored.settings.travel_speed=nil;local old={};env.init(old);assert(old.speed==1)
     end)
 end

@@ -32,8 +32,9 @@ function M.select(self)
     text(self,28,195,"Ground: "..s.terrain.." / Weather: "..s.weather.." / Reserve companions do not fight.",12)
     w.button(self,638,185,224,30,"Swap positions",function() team[1],team[2]=team[2],team[1];self.redraw() end,{key="swap_positions",enabled=#team==2,size=12})
     w.button(self,28,129,409,43,#team>0 and "Begin automatic encounter" or "Choose a companion first",function() self.perform("battle_start",{team=team}) end,{key="battle_begin",primary=true,enabled=#team>0,size=15,icon="crew"})
-    w.button(self,453,129,409,43,"Withdraw",function() self.perform("withdraw") end,{key="battle_withdraw",size=14})
-    text(self,28,110,model.combat.withdraw_text(s.encounter),12)
+    local reversible=model.can_back_to_event(s)
+    w.button(self,453,129,409,43,reversible and "Back to the encounter" or "Withdraw",function() self.perform(reversible and "battle_back" or "withdraw") end,{key=reversible and "battle_back" or "battle_withdraw",size=14,icon=reversible and "trail" or nil})
+    text(self,28,110,reversible and "Return to the original choices. No time, supplies or energy spent." or model.combat.withdraw_text(s.encounter),12)
     text(self,28,79,s.encounter=="scavengers" and "Hold for 3 exchanges or reduce resolve to zero. An exhausted crew must retreat." or "Reduce resolve to zero within 4 exchanges, or take the detour.",12,"gold",834)
 end
 local function log_view(self,b,y)
@@ -71,9 +72,14 @@ function M.draw(self)
     w.button(self,649,190,213,39,"Withdraw",function() self.perform("withdraw") end,{key="battle_withdraw",size=14})
     text(self,28,174,model.combat.withdraw_text(b.kind).." Costs apply once, before the next exchange.",11)
     log_view(self,b,144)
-    w.button(self,28,58,180,27,"Previous exchange",function() self.combat_paused=true;self.combat_log=math.max(1,(self.combat_log or #b.history)-1);self.reset_clock();self.redraw() end,{key="combat_previous",enabled=#b.history>1,size=11})
-    w.button(self,221,58,180,27,"Latest exchange",function() self.combat_log=#b.history;self.redraw() end,{key="combat_latest",enabled=#b.history>0,size=11})
+    if not model.can_back_to_event(s) then
+        w.button(self,28,58,180,27,"Previous exchange",function() self.combat_paused=true;self.combat_log=math.max(1,(self.combat_log or #b.history)-1);self.reset_clock();self.redraw() end,{key="combat_previous",enabled=#b.history>1,size=11})
+        w.button(self,221,58,180,27,"Latest exchange",function() self.combat_log=#b.history;self.redraw() end,{key="combat_latest",enabled=#b.history>0,size=11})
+    end
     text(self,425,72,"Menus and focus loss pause. Resume when ready.",11)
+    if model.can_back_to_event(s) then
+        w.button(self,28,58,373,27,"Back to encounter / no cost before first exchange",function() self.perform("battle_back") end,{key="battle_back",size=11})
+    end
 end
 local function signed(n) return (n>0 and "+" or "")..util.round(n) end
 function M.result(self)

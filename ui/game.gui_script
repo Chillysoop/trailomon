@@ -14,7 +14,7 @@ function init(self)
     msg.post(".","acquire_input_focus")
     self.snapshot,self.toast,self.save_blocked=save.load()
     self.snapshot=self.snapshot or model.new(1848)
-    self.page="trail";self.speed=1;self.time=0;self.clock=clock.new()
+    self.page="trail";self.speed=self.snapshot.settings.travel_speed or 1;self.time=0;self.clock=clock.new()
     self.battle_actions={};self.battle_team={};self.has_focus=true
     self.combat_paused=true;self.combat_speed=1
     if self.snapshot.run.mode=="traveling" then model.command(self.snapshot,"pause") end
@@ -37,11 +37,12 @@ function init(self)
         local ok,why=model.command(self.snapshot,id,args)
         if ok then
             self.reset_clock()
+            self.speed=self.snapshot.settings.travel_speed or 1
             if id=="battle_start" then self.combat_paused=false;self.combat_log=nil end
             if id=="battle_step" then self.combat_log=nil;self.exchange_started=self.time end
             if self.snapshot.run.mode~="combat" then self.combat_paused=true end
             if id=="round" or id=="battle_start" or id=="new" then self.battle_actions={} end
-            if id=="choice" or id=="new" then self.battle_team={} end
+            if id=="choice" or id=="battle_back" or id=="new" then self.battle_team={} end
             if destination then self.page=destination end
             if self.snapshot.run.mode=="result" then self.page="trail" end
             self.save_now()

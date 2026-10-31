@@ -29,6 +29,11 @@ local function battle(p)
     departed(p);assert(model.debug(p,"event","scavengers"));assert(model.command(p,"choice",{id="battle"}));assert(model.command(p,"battle_start",{team={1,2}}))
 end
 local function interaction_checks(self)
+    fixture(self,"settings",departed)
+    coroutine.yield()
+    local seed=button(self,"settings_seed")
+    local pos,size=gui.get_position(seed.node),gui.get_size(seed.node)
+    assert(pos.y-size.y/2-14>=140,"Final settings detail overlaps the road notes")
     fixture(self,"journal",departed)
     coroutine.yield()
     self.redraw=function() screens.draw(self) end
@@ -78,6 +83,11 @@ local function interaction_checks(self)
 
     fixture(self,"trail",function(p) departed(p);model.debug(p,"event","scavengers");model.command(p,"choice",{id="battle"}) end)
     coroutine.yield()
+    button(self,"battle_back").fn()
+    coroutine.yield()
+    assert(self.snapshot.run.mode=="event")
+    button(self,"event_battle").fn()
+    coroutine.yield()
     assert(not button(self,"battle_begin").enabled)
     button(self,"battler1").fn()
     coroutine.yield()
@@ -90,6 +100,15 @@ local function interaction_checks(self)
     button(self,"battle_begin").fn()
     coroutine.yield()
     assert(self.snapshot.run.battle.team[1]==2)
+    button(self,"battle_back").fn()
+    coroutine.yield()
+    assert(self.snapshot.run.mode=="event")
+
+    fixture(self,"trail",departed)
+    coroutine.yield()
+    button(self,"travel_speed").fn()
+    coroutine.yield()
+    assert(self.snapshot.settings.travel_speed==2)
 
     fixture(self,"trail",function(p,ui) ui.edit={kind="seed",value="1848"} end)
     coroutine.yield()
@@ -143,7 +162,7 @@ function init(self)
         {"trail",landmark(5)},
         {"trail",function(p) departed(p);assert(model.debug(p,"event","scavengers"));assert(model.command(p,"choice",{id="battle"})) end},
         {"trail",battle},
-        {"trail",function(p) battle(p);assert(require("simulation.combat_manual").start(p.run,"scavengers",{1,2})) end},
+        {"trail",function(p) battle(p);p.run.pending=nil;p.run.return_rng=nil;assert(require("simulation.combat_manual").start(p.run,"scavengers",{1,2})) end},
         {"trail",function(p,ui) battle(p);assert(model.command(p,"withdraw")) end},
         {"trail",function(p) departed(p);assert(model.command(p,"return")) end},
         {"journal",function(p,ui) departed(p);assert(model.command(p,"return"));ui.journal_history=true end},
@@ -156,6 +175,8 @@ function init(self)
         {"forage",function(p) departed(p);p.run.food=119 end},
         {"forage",function(p) departed(p);p.run.forage[tostring(p.run.target)]=10 end},
         {"forage",function(p) departed(p);p.run.day=31 end},
+        {"trail",function(p) departed(p);assert(model.debug(p,"event","cinder_return"));p.run.food=70 end},
+        {"trail",function(p) departed(p);assert(model.debug(p,"event","slate_return"));p.run.rations="generous" end},
     }
 end
 function on_message(self,id,message,sender)
@@ -177,7 +198,7 @@ function update(self,dt)
     local ok,why=pcall(fixture,self,case[1],case[2])
     if not ok or self.index==#self.cases then
         local report=assert(io.open(sys.get_config_string("trailomon.check_report","engine-check-report.txt"),"a"))
-        report:write(ok and "PASS: 34 native GUI states, icon rendering, scene motion, and button bounds.\n" or "FAIL: GUI case "..self.index.." / "..tostring(why).."\n")
+        report:write(ok and "PASS: 36 native GUI states, icon rendering, scene motion, and button bounds.\n" or "FAIL: GUI case "..self.index.." / "..tostring(why).."\n")
         report:close();self.index=nil
         if ok then self.interactions=coroutine.create(function() interaction_checks(self) end)
         else msg.post("@system:","exit",{code=1}) end

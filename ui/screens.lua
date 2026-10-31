@@ -118,7 +118,7 @@ local function travel(self)
     local main_label=s.mode=="traveling" and "Pause the wagon" or "Follow the road"
     local main_command=s.mode=="traveling" and "pause" or "resume"
     w.button(self,44,232,250,40,main_label,cmd(self,main_command),{primary=true,size=15,icon="trail"})
-    w.button(self,306,232,162,40,self.speed==1 and "Speed: calm" or "Speed: brisk",function() self.speed=self.speed==1 and 2 or 1;self.reset_clock();self.redraw() end,{size=13})
+    w.button(self,306,232,162,40,(self.snapshot.settings.travel_speed or 1)==1 and "Speed: calm" or "Speed: brisk",cmd(self,"settings",{key="travel_speed"}),{key="travel_speed",size=13})
     w.button(self,480,232,170,40,"Pace: "..s.pace,function()
         local next={easy="steady",steady="hurried",hurried="easy"};self.perform("policy",{key="pace",value=next[s.pace]})
     end,{size=12})
@@ -137,8 +137,9 @@ local function choices(self,title,body,options,kicker)
     w.panel(self,28,140,834,450)
     w.text(self,50,554,title,25,"ink")
     w.text(self,50,519,body,15,"muted",786)
+    local row_gap=#options>4 and 60 or 69
     for i,option in ipairs(options) do
-        local y=410-(i-1)*69
+        local y=410-(i-1)*row_gap
         w.button(self,50,y,790,39,option.label,option.fn,{primary=i==1,enabled=option.enabled~=false,size=14,key=option.key,icon=option.icon})
         w.text(self,59,y-14,option.detail or "",11,option.enabled==false and "red" or "muted")
     end
@@ -151,7 +152,7 @@ local function event(self)
     for _,choice in ipairs(definition.choices) do
         local enabled,why=model.events.available(s,choice,self.snapshot.profile)
         local icon=choice.species and iconography.role(choice.species) or (choice.battle and "pressure" or (choice.days and "time" or (choice.recruit and "crew" or "journal")))
-        if choice.cost and not choice.species then for _,key in ipairs({"food","coins","medicine","repairs"}) do if choice.cost[key] then icon=key;break end end end
+        if choice.cost and not choice.species and not choice.recruit then for _,key in ipairs({"food","coins","medicine","repairs"}) do if choice.cost[key] then icon=key;break end end end
         options[#options+1]={label=choice.label,enabled=enabled,detail=enabled and model.events.cost_text(s,choice) or why,fn=cmd(self,"choice",{id=choice.id}),key="event_"..choice.id,icon=icon}
     end
     choices(self,definition.title,definition.text,options,"DAY "..s.day.."  /  TRAVEL PAUSED")
@@ -303,8 +304,9 @@ local function settings(self)
     choices(self,"Make yourself comfortable.","The expedition is saved after every completed day and decision. Menus pause travel. Calm speed takes 20 seconds per day; brisk speed takes 2.5.",{
         {label="Sound: "..(self.snapshot.settings.sound and "on" or "off"),detail="Quiet feedback for decisions and arrivals",fn=cmd(self,"settings",{key="sound"})},
         {label="Motion: "..(self.snapshot.settings.motion and "gentle" or "reduced"),detail="Stops ambient movement when reduced",fn=cmd(self,"settings",{key="motion"})},
+        {label="Travel view: "..((self.snapshot.settings.travel_speed or 1)==1 and "calm" or "brisk"),detail="Remembered between visits; travel pace and daily costs stay the same",fn=cmd(self,"settings",{key="travel_speed"}),key="travel_speed",icon="time"},
         {label="Save this moment",detail="Save now; it is safe to close the window afterward",fn=function() self.save_now();self.redraw() end},
-        {label="Expedition seed: "..s.seed,detail=s.mode=="preparation" and "Change the seed before leaving the depot" or "Replay this seed from the result screen",enabled=s.mode=="preparation",fn=function() self.edit={kind="seed",value=tostring(s.seed)};self.redraw() end}},"OPTIONS")
+        {label="Expedition seed: "..s.seed,detail=s.mode=="preparation" and "Change the seed before leaving the depot" or "Replay this seed from the result screen",enabled=s.mode=="preparation",key="settings_seed",fn=function() self.edit={kind="seed",value=tostring(s.seed)};self.redraw() end}},"OPTIONS")
 end
 local function result(self)
     local s=self.snapshot.run;local p=self.snapshot.profile

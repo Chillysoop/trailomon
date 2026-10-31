@@ -5,9 +5,19 @@
 <body><main>
 <p class="eyebrow">Trailomon · journey review · October 30, 2026</p>
 <h1>The trip works. Make the choices easier to read.</h1>
-<p class="lede">A fresh YES/NO page from the full-expedition playtest. These four choices are new; your earlier approvals still stand. My top picks are J1–J3.</p>
+<p class="lede">Your FINISH arrived: J1–J4 are all YES. All four changes are implemented and tested. Your answers and the original proposals remain below; no repeat vote is needed.</p>
 <p class="nav"><a href="next-1.html">Approved priorities &amp; bot report</a> · <a href="combat-1.html">Combat review</a> · <a href="plan-1.html">Expedition plan</a></p>
 <section class="general"><label for="general">General comments</label><textarea id="general" maxlength="20000" placeholder="What should the journey feel like? What did I miss?"></textarea></section>
+<section aria-labelledby="implementation"><h2 id="implementation">Built from your answers</h2>
+<p><strong>J1:</strong> return to the original encounter freely before the first exchange, with its random state preserved. <strong>J2:</strong> invitations show provisions, daily meals and food days before and after. <strong>J3:</strong> shelter aid, peaceful scavengers and spare-brace repair now leave a short outcome and actual receipt. <strong>J4:</strong> calm or brisk travel viewing speed survives restart; the journey still loads paused.</p>
+<p>Verification: 45 Lua checks, 18 Python checks, native save/recovery and 36 GUI states pass. A fresh Windows playtest verified setup Back, peaceful and shelter receipts, recruitment accounting, and a normal restart. It also caught an Options overlap, now fixed and covered by a native layout check. No balance rules changed.</p>
+<details><summary>See the implemented changes</summary>
+<figure><a href="evidence/journey-1-j1-setup.png"><img src="evidence/journey-1-j1-setup.png" alt="Combat setup offers Back to the encounter with no time, supplies or energy spent"></a><figcaption>J1: Back returned to the original day-two choices with 87 provisions, 98% cargo and Moss at 96 energy unchanged. Native tests also verify return from the first intent before an exchange.</figcaption></figure>
+<figure><a href="evidence/journey-1-j2-preview.png"><img src="evidence/journey-1-j2-preview.png" alt="Cindercoil invitation forecasts 57 to 53 provisions, three to four daily meals and nineteen to thirteen food days"></a><figcaption>J2: accepting this invitation matched all three numbers. Both recruitable species and every ration setting are covered by deterministic checks.</figcaption></figure>
+<figure><a href="evidence/journey-1-j3-shelter.png"><img src="evidence/journey-1-j3-shelter.png" alt="Road note describes the sheltered Cindercoil settling and shows Medicine minus one"></a><figcaption>J3: the world acknowledges the choice without another popup or spoiling its follow-up. Repair receipts account for capped gains.</figcaption></figure>
+<figure><a href="evidence/journey-1-j4-options.png"><img src="evidence/journey-1-j4-options.png" alt="Options includes remembered brisk travel viewing speed with all five rows above the road notes"></a><figcaption>J4: a normal close and reopen restored day ten, 53 provisions, the three companions, brisk viewing and a paused journey. Travel pace and daily costs stayed unchanged.</figcaption></figure>
+<p>The pre-first-exchange Back click is covered by native input and save tests; tool latency prevented a successful timed click in the visible pass. Physical keyboard, listening, human pacing and the earlier native activation crash remain open in S10.</p>
+</details></section>
 <p><strong>Verdict: still building core systems.</strong> The journey supports planning, recovery, branching routes and another departure. The remaining work is combat tuning and a stronger sense of wilderness, with several small clarity improvements below. A native crash remains unresolved; this is not a release-ready verdict.</p>
 
 <section class="idea" data-code="J1" data-top><h3><span class="code">J1</span>Inspect the crew before committing to a fight</h3>
@@ -32,7 +42,7 @@
 
 <p class="notice"><strong>Already approved:</strong> N3’s guardian pattern, S5 combat tuning, N5’s increasing wilderness, N6’s creature refinement, and N7’s later equipment experiment. You do not need to approve them again. This page does not expand the route or roster.</p>
 
-<details><summary>Read the playtest report and screenshots</summary>
+<details><summary>Read the original whole-journey report and screenshots</summary>
 <h2>What worked</h2>
 <p>The last-shop warning made resupply matter. River preparation traded coins against companion effort. Crew fatigue, daily meals and the covered wagon’s smaller capacity created linked decisions. The map kept the six-stop destination and closing date clear. Gathering matched its preview and visibly depleted. Finishing unlocked a wagon and retained a befriended creature for the next departure.</p>
 <h2>Actual Windows playtest</h2>
