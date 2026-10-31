@@ -1,5 +1,7 @@
 # Next-batch review
 
+2026-10-31 latest: revision 38 reaffirms all N1–N8 YES. N5/S7 scenery is implemented and verified; see wilderness.md. Next is N6/S8 creature silhouettes. PR #20 shipped the cost pass; the earlier audit below is historical.
+
 2026-10-31 update: next-1 revision 37 received and acted on, all N1–N8 YES unchanged. Bounded N1/S5 costs and normal guardian adoption for new journeys implemented; see combat-costs.md. Next is N5/S7 visual wilderness, then N6/S8 silhouettes. S5 stays doing for broader balance; no repeat approval or extra tooling. The October 30 audit below is historical.
 
 2026-10-30 current audit: building core systems; the complete expedition is playable but release prep is premature. S2 reports, N2/N4 clarity, S11 developer-role journeys, J1–J4 decisions, F1 screenshots and N3 guardian experiment are delivered. S5 combat costs, S7 scenery, S8 anatomy, S9 equipment and S10 physical input/audio/pacing/reliability remain.

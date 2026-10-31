@@ -17,3 +17,5 @@ Reproduce with tools/guardian_report.ps1; compact committed evidence is reviews/
 Known native activation crash remains unresolved. Use release renderer locally; headless engine may open a firewall prompt. Package once at the merged gameplay head; authoritative provenance is builds/Trailomon-windows.json.
 
 Review published privately at next-1#cost-pass, source 34d529c668746f9a5e9942d93863658680b21c1f. Isolated YES/NO/note/FINISH and saved JSON checks passed on phone/dark and desktop/light; original eight codes retained. No synthetic owner votes.
+
+Delivery: PR #20 merged as d8bcb3865a21a4078293ca9d3b3909686f921dfe. The clean Windows archive passed CRC/contents/provenance checks, SHA-256 28f7a7563f8bb3367807a22ba90b0770a4dcb91bfcb5e5e45e75a67e2bca0bda. Later builds supersede it via builds/Trailomon-windows.json.

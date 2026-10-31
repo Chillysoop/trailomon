@@ -44,3 +44,7 @@ The current creature PNGs are selected Sprite Fusion studies. They establish an 
 Before a creature is considered finished, inspect it at its on-road size beside the wagon, in grayscale, and beside the other five species. Its role should be visible without copying a familiar franchise silhouette. Avoid noisy micro-detail, unrelated anatomy, ornamental accessories, and inconsistent perspective. Approve a pose before producing frame animation or other directions.
 
 Normal maps and eight-direction sheets are outside the current side-view prototype budget. The landscape and interface symbols are native code; creature generation must support the overall art direction rather than determine it by default.
+
+## First-route scenery, October 31, 2026
+
+The six landmark silhouettes and their travel surroundings now live in `presentation/landscape.lua`, authored on a three-pixel grid. Nursery rows and wheel tracks give way to broken ruts, sparse cairns, larger horizons and a small lit settlement. The chosen woodland/meadow and ridge/gorge branches remain visibly different. Landmark captions use existing resource/place symbols with words; no decorative icon set was added. This establishes composition and local identity. Creature anatomy and pose consistency remain S8 work.

@@ -15,3 +15,4 @@
 - [iteration.md](iteration.md): owner-requested fast workflow, scoped verification, batching, direct Git push and optional testing tools.
 - [guardian.md](guardian.md): N3 authored-pattern experiment, historical comparisons and capture gotchas.
 - [combat-costs.md](combat-costs.md): N1/S5 reduced effort, guardian adoption, compatibility and remaining balance limits.
+- [wilderness.md](wilderness.md): N5/S7 landmark scenes, growing remoteness, last-shop/shelter cues and visual checks.

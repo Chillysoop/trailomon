@@ -7,6 +7,7 @@ Owner-approved speed-1 F1, October 30, 2026. From PowerShell at the project root
 ./tools/capture.ps1 -Scenes options,options_brisk,combat_setup,combat_ready
 ./tools/capture.ps1 -Scenes guardian_setup,guardian_warning,guardian_rush,developer
 ./tools/capture.ps1 -Scenes guardian_tired_result,legacy_guardian_setup
+./tools/capture.ps1 -Scenes route_depot,route_meadow,route_woodland,route_oak,route_outpost,route_river,route_gate,route_ridge,route_gorge,route_reach,route_map,route_rain
 ```
 
 The command opens an isolated hidden Windows release renderer, draws the production interface, performs scripted production button callbacks, saves real PNGs at 1280×720 and exits. It does not require Computer Use, desktop focus or a debug server. The first run downloads/builds the pinned native capture dependency; subsequent runs retain that cache. A graphics-capable Windows session is required; the null/headless renderer cannot produce visual evidence.

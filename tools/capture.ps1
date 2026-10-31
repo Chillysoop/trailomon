@@ -1,4 +1,4 @@
-param([ValidateSet('options','options_brisk','combat_setup','combat_ready','guardian_setup','guardian_warning','guardian_rush','guardian_tired_result','legacy_guardian_setup','developer')][string[]]$Scenes=@('options','combat_setup'))
+param([ValidateSet('options','options_brisk','combat_setup','combat_ready','guardian_setup','guardian_warning','guardian_rush','guardian_tired_result','legacy_guardian_setup','developer','route_depot','route_meadow','route_woodland','route_oak','route_outpost','route_river','route_gate','route_ridge','route_gorge','route_reach','route_map','route_rain')][string[]]$Scenes=@('options','combat_setup'))
 . (Join-Path $PSScriptRoot 'common.ps1')
 $captureClock = [Diagnostics.Stopwatch]::StartNew()
 Initialize-TrailomonTools
