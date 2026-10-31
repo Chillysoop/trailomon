@@ -1,5 +1,7 @@
 # Review decisions and delivery
 
+2026-10-31 wild-1: new brainstorm grounded in the implemented game. W1 habitat sightings, W2 species observations, W3 one courier practice encounter are top picks; W4 returning courier, W5 optional discovery start, W6 learned habits are larger/later choices. No votes yet. The one-threat combat model and species-keyed roster are explicit limits. See docs/CREATURE_ENCOUNTERS.md; current gameplay and approved roadmap remain unchanged.
+
 2026-10-31 owner direction: only send or open a YES/NO review when there are genuinely unanswered decisions. Approved implementation work is not an open question. Previously voted items are hidden by default, with explicit Show answered items history. Votes and notes stay saved. New draft votes remain visible for comments until FINISH. Completed pages say No open decisions and hide redundant actions; top picks never overwrite existing answers. Do not resend completed reviews after each feature or invent choices to fill a quota.
 
 Phone reviews use the owner-private Site in reviews/hosted-site.json. Source is maintained through Sites in the ignored .tools/phone-review-site checkout. Canonical UI is reviews/review.js and review.css; sync with tools/sync_hosted_review.py. Preserve the Site identity, private audience, codes and stored answers. Test only isolated local fixtures/databases; never write synthetic production votes. Credentials belong in memory/stdin only.
