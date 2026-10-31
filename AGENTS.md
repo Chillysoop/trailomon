@@ -49,7 +49,8 @@ Keep chat short and plain. Lead with the result or decision and its link. Do rev
 ## Commands and delivery
 
 - Run the game: `./tools/build.ps1`, then launch the executable path it prints. A Defold editor can also open `game.project`.
-- Tests: `./tools/test.ps1`; `-Headless` for CI; `-SkipEngine` for Lua simulation only.
+- Tests: `./tools/test.ps1`; `-Headless` for CI; `-SkipEngine` skips the native engine checks.
+- Expedition reports: `./tools/expedition_report.ps1 -Compare`; see `docs/EXPEDITION_REPORTS.md`. Keep fixed seeds/policies and source fingerprints with evidence. Read net command deltas as net, and do not substitute headless decision gates for human playtime.
 - Review-server tests: `py -m unittest discover -s tests -p "test_review*.py"`.
 - Review server: `py tools/review_server.py` at `http://localhost:8765/`; start hidden in the background on Windows. It uses Python's standard library only. `--wait PAGE --timeout 540` prints a finished answer snapshot and consumes the flag.
 - Windows bundle: `./tools/build.ps1`. Keep timestamped working bundles in `dist/` and the shareable archive at `builds/Trailomon-windows.zip`, with launch instructions and the source revision. Do not commit ZIPs. Public upload/release requires owner approval.

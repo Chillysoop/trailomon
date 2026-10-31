@@ -1,21 +1,14 @@
 param([switch]$SkipEngine, [switch]$Headless, [ValidateSet('', 'scavengers', 'territorial', 'legacy')][string]$Fixture='')
 . (Join-Path $PSScriptRoot 'common.ps1')
-Initialize-TrailomonTools
-Add-Type -AssemblyName System.IO.Compression.FileSystem
-$luaPath = Join-Path $TrailomonTools 'luajit-64.exe'
-$builderArchive = [System.IO.Compression.ZipFile]::OpenRead($TrailomonBob)
-try {
-    foreach ($assetName in @('luajit-64.exe','libwinpthread-1.dll')) {
-        $entry = $builderArchive.GetEntry("libexec/x86_64-win32/$assetName")
-        if ($entry) { [System.IO.Compression.ZipFileExtensions]::ExtractToFile($entry, (Join-Path $TrailomonTools $assetName), $true) }
-    }
-} finally { $builderArchive.Dispose() }
+$luaPath = Initialize-TrailomonLua
 Push-Location $TrailomonRoot
 try {
     & python -m unittest discover -s tests -p 'test_review*.py'
     if ($LASTEXITCODE -ne 0) { throw 'Review server checks failed.' }
     & $luaPath 'tests/run.lua'
     if ($LASTEXITCODE -ne 0) { throw 'Simulation checks failed.' }
+    & python -m unittest discover -s tests -p 'test_report*.py'
+    if ($LASTEXITCODE -ne 0) { throw 'Expedition reporter checks failed.' }
     if (-not $SkipEngine) {
         $output = New-TrailomonOutput -Parent '.tools' -Prefix 'engine-checks'
         # Hosted runners need Defold's null graphics backend. Local checks keep
