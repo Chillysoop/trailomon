@@ -134,7 +134,8 @@ local function travel(self)
     w.button(self,236,179,180,23,"Request help",page(self,"return"),{size=12})
     label(self,440,189,"Space pauses. Every choice waits for you.")
     recent_log(self,28,145,834,3)
-    if s.notice then w.text(self,28,58,s.notice,12,"gold",834) end
+    local notice=s.notice or (s.flags.axle_lashed and "Loose axle: rain, woodland, ridge or gorge can cause 6 more wagon damage. Repair at camp to prevent it.")
+    if notice then w.text(self,28,58,notice,12,"gold",834) end
 end
 local function choices(self,title,body,options,kicker)
     label(self,28,611,kicker or "A MOMENT ON THE TRAIL")
@@ -160,6 +161,14 @@ local function event(self)
         options[#options+1]={label=choice.label,enabled=enabled,detail=enabled and model.events.cost_text(s,choice) or why,fn=cmd(self,"choice",{id=choice.id}),key="event_"..choice.id,icon=icon}
     end
     choices(self,definition.title,definition.text,options,"DAY "..s.day.."  /  TRAVEL PAUSED")
+end
+local function road_story(self)
+    label(self,28,611,"FROM AN EARLIER CHOICE / TRAVEL PAUSED")
+    w.panel(self,28,140,834,450)
+    w.reading(self,50,554,"journal",nil,{label="The road remembers.",size=25})
+    w.text(self,50,507,self.snapshot.run.road_story,16,"ink",786)
+    w.button(self,50,180,790,39,"Continue the journey",cmd(self,"ack_story"),{key="story_continue",icon="trail",primary=true})
+    label(self,50,164,"Recorded in your journal. Reading takes no time.")
 end
 local function landmark(self)
     local s=self.snapshot.run; local options={}; local spot=model.route[s.target]
@@ -208,7 +217,7 @@ local function camp(self)
     choices(self,"A little time to recover.","Every camp action uses one day and the crew's meals. Well-fed companions regain more strength. You can always request help.",{
         {label="Rest the whole crew",icon="rest",detail="1 day / "..food.." food / up to +25 energy and +8 condition",enabled=available,fn=cmd(self,"rest")},
         {label="Gather nearby provisions",icon="forage",detail=forage.closing and "The road closes tomorrow; no harvest can be brought back." or (forage.gross<=0 and "This stretch has been gathered clean." or "Review 1 day, meals, carrying room and "..(forage.net>=0 and "+" or "")..forage.net.." expected provisions."),enabled=available and forage.gross>0 and not forage.closing,fn=page(self,"forage"),key="gather_preview"},
-        {label="Repair the wagon",icon="repairs",detail=s.wagon>=100 and "The wagon needs no repairs." or (s.repairs<1 and "Needs 1 repair material." or "1 day + meals + 1 repair material / +30 wagon condition"),enabled=available and s.repairs>0 and s.wagon<100,fn=cmd(self,"repair")},
+        {label="Repair the wagon",icon="repairs",detail=s.wagon>=100 and "The wagon needs no repairs." or (s.repairs<1 and "Needs 1 repair material." or "1 day + meals + 1 repair material / +30 wagon"..(s.flags.axle_lashed and " / secures the loose axle" or " condition")),enabled=available and s.repairs>0 and s.wagon<100,fn=cmd(self,"repair")},
         {label="Treat the traveler",icon="medicine",detail=s.traveler>=100 and "The traveler is already in good condition." or (s.medicine<1 and "Needs 1 medicine." or "1 day + meals + 1 medicine / +35 condition and rest"),enabled=available and s.medicine>0 and s.traveler<100,fn=cmd(self,"treat")}},"CAMP / THE CLOCK IS STOPPED")
     w.button(self,50,151,220,31,"Back to the journey",page(self,"trail"),{size=12,icon="trail"})
 end
@@ -389,6 +398,7 @@ function M.draw(self)
         elseif self.page=="return" then choices(self,"Bring everyone home.","Requesting assistance ends this delivery. Your companions and discoveries return with you; you can prepare another journey right away.",{
             {label="Keep traveling",detail="Return to the stopped wagon",fn=page(self,"trail")},
             {label="Request assistance and return home",detail="End this expedition; retain discoveries and companions",fn=cmd(self,"return",nil,"trail")}},"A WAY HOME")
+        elseif s.road_story then road_story(self)
         elseif s.mode=="event" then event(self)
         elseif s.mode=="landmark" then landmark(self)
         elseif s.mode=="combat_select" then auto_battle.select(self)

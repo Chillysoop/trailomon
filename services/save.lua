@@ -62,6 +62,10 @@ local function validate(snapshot)
         end
     end
     for _,key in ipairs({"seen","flags","discoveries","branches","forage","warnings","rng","log"}) do if type(s[key])~="table" then return false,"Missing " .. key end end
+    for _,key in ipairs({"road_cleared","road_repaid","axle_lashed"}) do
+        if s.flags[key]~=nil and type(s.flags[key])~="boolean" then return false,"Invalid road consequence" end
+    end
+    if s.road_story~=nil and (type(s.road_story)~="string" or #s.road_story>1000) then return false,"Invalid road story" end
     for _,name in ipairs({"weather","events","combat"}) do if not integer(s.rng[name],1,2147483646) then return false,"Invalid random state" end end
     if not number(s.river_roll,0,1) or #s.log>70 then return false,"Invalid journal" end
     for _,entry in ipairs(s.log) do if type(entry)~="table" or not integer(entry.day,1,32) or type(entry.text)~="string" or #entry.text>1000 then return false,"Invalid journal entry" end end

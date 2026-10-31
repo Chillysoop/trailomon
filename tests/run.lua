@@ -25,7 +25,8 @@ local function depart(seed)
 end
 local function act(p,strategy)
     local s=p.run
-    if s.mode=="preparation" then command(p,"depart")
+    if s.road_story then command(p,"ack_story")
+    elseif s.mode=="preparation" then command(p,"depart")
     elseif s.mode=="stopped" or s.mode=="traveling" then
         if s.food<model.resources.daily_food(s)*3 and model.forage_preview(s).net>0 then command(p,"forage")
         elseif s.wagon<28 and s.repairs>0 then command(p,"repair")
@@ -243,6 +244,7 @@ require("tests.guardian")(test,command,valid,assert_equal)
 require("tests.combat_costs")(test,command,valid,assert_equal)
 require("tests.equipment")(test,command,valid,assert_equal)
 require("tests.trail_reports")(test,command,valid,assert_equal)
+require("tests.road_consequences")(test,command,valid,assert_equal)
 require("tests.landscape")(test,assert_equal)
 require("tests.playback")(test,command,valid,assert_equal)
 require("tests.clarity")(test,command,valid,assert_equal)

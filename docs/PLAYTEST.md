@@ -45,3 +45,5 @@ For feedback, note the seed and the decision involved. Most useful: whether a co
 For isolated developer fixtures, run `./tools/test.ps1 -Fixture scavengers` (or `territorial`, `legacy`) and launch the release executable using the printed save namespace. Use the release renderer locally; `-Headless` is intended for CI and can start Defold debug services on Windows.
 
 At Split Oak and Cairn Gate, read the trail report before choosing a route. Known terrain is separate from uncertain conditions; crew and work-item advice updates with your preparations. Reading takes no time.
+
+Earlier choices can return later: clearing the fallen tree lets a grateful cart catch up; a temporary axle lashing can slip on rough travel unless repaired. The road pauses to explain each result. Continue closes the message without spending time.

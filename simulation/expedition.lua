@@ -58,10 +58,29 @@ local function terminal(snapshot)
     return false
 end
 
+local add_food
+local function road_story(s,text)
+    log(s,text)
+    s.road_story=(s.road_story and s.road_story.."\n\n" or "")..text
+    if s.mode=="traveling" then s.mode="stopped" end
+end
+
+local function secure_axle(s)
+    if s.flags.axle_lashed then
+        s.flags.axle_lashed=nil
+        road_story(s,"You replace the earlier axle lashing with a firm repair. Its extra 6 wagon damage is prevented.")
+    end
+end
+
 local function reached(snapshot)
     local s=snapshot.run
     if s.progress<s.distance then return false end
     s.progress=s.distance
+    if s.flags.road_cleared and not s.flags.road_repaid then
+        s.flags.road_repaid=true
+        local kept=add_food(s,6)
+        road_story(s,"A cart catches up at "..route[s.target].name..". Thanks to the trunk you cleared, it got through. Its driver shares 6 provisions; you pack "..kept..".")
+    end
     if s.target==#route then
         if s.cargo>=20 and s.day<=26 then
             M.finish(snapshot,"delivered","The orchard cuttings reach Lantern Reach in time. There will be new trees here next spring.")
@@ -79,7 +98,7 @@ local function reached(snapshot)
     return true
 end
 
-local function add_food(s,amount)
+add_food=function(s,amount)
     local space=math.max(0,resources.capacity(s)-resources.weight(s))
     local kept=math.min(space,amount)
     s.food=s.food+kept
@@ -166,6 +185,12 @@ local function day(snapshot,moving,resting)
         s.progress=s.progress+resources.paces[s.pace].speed*factor
         local wear=resources.paces[s.pace].wear+(s.weather=="rain" and 0.4 or 0)+(s.terrain=="ridge" and 0.6 or 0)
         s.wagon=util.clamp(s.wagon-wear,0,100)
+        if s.flags.axle_lashed and (s.weather=="rain" or s.terrain=="woodland" or s.terrain=="ridge" or s.terrain=="gorge") then
+            s.flags.axle_lashed=nil
+            local loss=math.min(6,s.wagon);s.wagon=s.wagon-loss
+            local shown=string.format("%.1f",loss):gsub("%.0$","")
+            road_story(s,"The axle you lashed earlier slips on the rough road. Wagon -"..shown..". The extra damage happens only once.")
+        end
         if s.pace=="hurried" and s.terrain=="ridge" then s.cargo=math.max(0,s.cargo-2) end
         if s.weather=="rain" then
             local drying=resources.find(s,"cindercoil",8)
@@ -299,6 +324,7 @@ local function resolve(snapshot,id)
         else effects(s,{wagon=-10}); log(s,"The shortcut is rougher than it looked. Wagon -10.") end
     end
     if choice.flag then s.flags[choice.flag]=true end
+    if event.id=="axle" and choice.id~="risk" then secure_axle(s) end
     if choice.discovery then s.discoveries[choice.discovery]=true end
     if choice.recruit then
         s.crew[#s.crew+1]=progression.companion(choice.recruit)
@@ -374,6 +400,7 @@ function M.command(snapshot,command,arg)
         if s.mode~="result" then return false,"Finish this journey first" end
         prepare(snapshot,arg.seed or s.seed+1); return true
     end
+    if command=="ack_story" and s.road_story then s.road_story=nil; return true end
     if s.mode=="result" then return false,"This journey has ended" end
     if command=="seed" and s.mode=="preparation" then
         local n=rng.seed(arg.value)-1; s.seed=n
@@ -464,7 +491,7 @@ function M.command(snapshot,command,arg)
         if s.repairs<1 then return false,"Need one repair material" end
         if s.wagon>=100 then return false,"The wagon is already sound" end
         s.repairs=s.repairs-1; day(snapshot,false,false)
-        if s.mode~="result" then s.wagon=math.min(100,s.wagon+30); log(s,"Refitted the wagon. Condition +30."); if s.mode=="traveling" then s.mode="stopped" end end
+        if s.mode~="result" then s.wagon=math.min(100,s.wagon+30); log(s,"Refitted the wagon. Condition +30."); secure_axle(s); if s.mode=="traveling" then s.mode="stopped" end end
         return true
     elseif command=="treat" and stopped(s) then
         if s.medicine<1 then return false,"Need one medicine" end

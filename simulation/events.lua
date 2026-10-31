@@ -104,6 +104,7 @@ function M.cost_text(s, choice)
     end
     if choice.gamble then pieces[#pieces+1]="Chance of saved distance or wagon damage" end
     if choice.battle then pieces[#pieces+1]="Short battle; injuries and fatigue persist" end
+    if choice.hint then pieces[#pieces+1]=choice.hint end
     return #pieces > 0 and table.concat(pieces, " / ") or "No supplies required"
 end
 return M

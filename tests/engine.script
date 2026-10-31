@@ -86,6 +86,18 @@ local function run()
     assert(equipped.run.battle.item_used.padded_trace and equipped.run.crew[1].condition==100)
     assert(model.command(equipped,"battle_step"));assert(save.write(equipped))
     equipped=assert(save.load());assert(equipped.run.mode=="combat_result")
+    for _,id in ipairs({"tree","axle"}) do
+        local p=model.new(1848);assert(model.command(p,"depart"))
+        p.run.target=3;p.run.terrain="woodland";p.run.progress=p.run.distance-1
+        assert(model.debug(p,"event",id));assert(model.command(p,"choice",{id=id=="tree" and "haul" or "risk"}))
+        assert(save.write(p));p=assert(save.load())
+        assert(p.run.flags[id=="tree" and "road_cleared" or "axle_lashed"])
+        assert(model.command(p,"resume"));assert(model.command(p,"step"));assert(p.run.road_story)
+        local story=p.run.road_story;local food=p.run.food;local wagon=p.run.wagon
+        assert(save.write(p));p=assert(save.load());assert(p.run.road_story==story)
+        assert(model.command(p,"ack_story"));assert(save.write(p));p=assert(save.load())
+        assert(not p.run.road_story and p.run.food==food and p.run.wagon==wagon)
+    end
     for _,path in ipairs({primary,backup}) do
         local f=assert(io.open(path,"wb"));f:write("corrupt");f:close()
     end

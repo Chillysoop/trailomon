@@ -11,7 +11,7 @@ return {
    {id="fix", label="Fit a spare brace", cost={repairs=1}, effects={wagon=12}, outcome="The new brace holds. The axle turns quietly again."},
    {id="anchor", label="Have Slatewhorl steady a field repair", species="slatewhorl", effort=15, effects={wagon=8}},
    {id="slow", label="Take a day to refit the axle", days=1, effects={wagon=6}},
-   {id="risk", label="Lash it and carry on", effects={wagon=-12}}}},
+   {id="risk", label="Lash it and carry on", effects={wagon=-6}, flag="axle_lashed", hint="Another -6 wagon on rough travel; repair prevents it.", outcome="The temporary lashing holds for now. A proper repair will prevent it slipping later."}}},
  {id="damp", title="Damp provisions", text="Rain has found its way into a food sack. A little attention now can save most of it.", kind="choice", condition="rain",
   choices={
    {id="warm", label="Ask Cindercoil to dry the sacks", species="cindercoil", effort=15, cost={food=2}},
@@ -24,7 +24,7 @@ return {
    {id="huddle", label="Huddle under the blankets", effects={traveler=-5, stamina=-8}}}},
  {id="tree", title="A tree across the road", text="A fallen trunk blocks the track. There is room to work, or a longer path around.", kind="choice", condition="woods",
   choices={
-   {id="haul", label="Have Brindlehorn shift the trunk", species="brindlehorn", effort=20},
+   {id="haul", label="Have Brindlehorn shift the trunk", species="brindlehorn", effort=20, flag="road_cleared", hint="Leaves the road clear for travelers behind you."},
    {id="scout", label="Follow Bellmoth's smaller trail", species="bellmoth", effort=14, effects={wagon=-3}},
    {id="detour", label="Take the long way around", days=1}}},
  {id="roots", title="A tempting root patch", text="Fresh shoots mark a patch of edible roots. Gathering them will take a day.", kind="choice", condition="soft",
