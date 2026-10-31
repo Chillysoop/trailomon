@@ -1,6 +1,6 @@
 # Work items and the pre-equipment checkpoint
 
-2026-10-31: owner said Proceed; hosted next-1 revision 42 also approved N9/N10/N11 with no notes. Complete N1 checkpoint + N7/S9 as one coherent gameplay batch. Queue new approved work after it; N6 art remains deferred. See next-steps.md for priority.
+2026-10-31: owner said Proceed; hosted next-1 revision 42 also approved N9/N10/N11 with no notes. PR #24 completes N1 checkpoint + N7/S9 as one coherent gameplay batch. Queue new approved work after it; N6 art remains deferred. See next-steps.md for priority.
 
 No base combat changes. 5,760 baseline scenarios at e5e5809 and no-item reruns match byte-for-byte. Multiple crews have useful contexts: Cindercoil/Slatewhorl is strong against the guardian, Reedskipper/Bellmoth takes less scavenger harm, default Brindlehorn/Loamling can win the guardian while retaining digging. Peaceful costs still matter. S5 remains doing for broader balance; checkpoint no longer blocks S9.
 
