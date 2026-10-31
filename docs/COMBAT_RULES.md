@@ -33,7 +33,7 @@ Scavengers target cargo (55%) or the approach (45%) using the saved combat RNG s
 
 Scavengers begin at 65 resolve. Repel them or hold for three exchanges with a crew still capable of acting. The territorial guardian begins at 75 resolve and must be repelled within four exchanges. If nobody can perform an ordinary action, retreat unless the threat has already been repelled. Encounters cannot stall indefinitely.
 
-A retreat or unsuccessful defense leaves up to 8 food and 8 cargo integrity to scavengers, or takes a one-day territorial detour including ordinary meals and weather. There is no victory XP, money, equipment, capture, or meat. The result screen shows actual net food, cargo, days, energy, and condition changes, including detour recovery. Acknowledging it has no additional cost. Peaceful event choices remain available before committing.
+A retreat or unsuccessful defense leaves up to 8 food and 8 cargo integrity to scavengers (4 each with a participating release-rope wearer), or takes a one-day territorial detour including ordinary meals and weather. There is no victory XP, money, equipment, capture, or meat. The result screen shows actual net food, cargo, days, energy, and condition changes, including detour recovery. Acknowledging it has no additional cost. Peaceful event choices remain available before committing.
 
 ## Save compatibility and verification
 
@@ -43,4 +43,4 @@ Battle records carry `rules="automatic-v1"`, ordered participants, initial resou
 
 Run `./tools/test.ps1` for Lua and real-renderer native checks; CI uses `-Headless`. For an isolated playable encounter, use `./tools/test.ps1 -Fixture scavengers` (or `territorial`, `legacy`) and launch the release game with the namespace argument printed by the command. This keeps the owner's normal save untouched. Headless engines may trigger Windows network prompts locally; use the release renderer for local fixtures.
 
-Run `.tools/luajit-64.exe tests/combat_matrix.lua` to emit deterministic CSV for all ordered pairs and single creatures across two scenarios, two conditions, two starting-energy levels, and twenty seeds. The committed evidence is a balance baseline, not a claim of final tuning. Distinct action animation, broader threat behavior, and equipment remain later work.
+Run `.tools/luajit-64.exe tests/combat_matrix.lua` to emit deterministic CSV for all ordered pairs and single creatures across two scenarios, two conditions, two starting-energy levels, and twenty seeds. The committed evidence is a balance baseline, not a claim of final tuning. The [three work items](WORK_ITEMS.md) now add bounded travel and encounter effects. Distinct action animation is deferred to the owner-led art overhaul; broader threat behavior remains later work.

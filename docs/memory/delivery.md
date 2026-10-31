@@ -1,6 +1,6 @@
 # Delivery
 
-Latest Windows build: see [choice-clarity.md](choice-clarity.md), PR #14 provenance.
+Latest Windows build: use `builds/Trailomon-windows.json` for authoritative commit/dirty-state provenance. Current gameplay delivery notes: [work-items.md](work-items.md). Historical archives below are superseded.
 
 2026-10-30: PR 1 merged as `fad1aa228ed38cdff23c1a76b7e70d0f810300b1`. It contains the already-tested first playable; both Windows CI checks passed before merge. No public release was published.
 

@@ -29,6 +29,24 @@ local function battle(p)
     departed(p);assert(model.debug(p,"event","scavengers"));assert(model.command(p,"choice",{id="battle"}));assert(model.command(p,"battle_start",{team={1,2}}))
 end
 local function interaction_checks(self)
+    fixture(self,"work_items")
+    coroutine.yield()
+    self.redraw=function() screens.draw(self) end
+    self.perform=function(id,args,destination) assert(model.command(self.snapshot,id,args));self.page=destination or self.page;self.redraw() end
+    self.open_page=function(id) self.page=id;self.redraw() end
+    for i,b in ipairs(self.buttons) do if b.key=="item_padded_trace" then self.focus=i end end
+    input.handle(self,hash("confirm"),{pressed=true});coroutine.yield()
+    button(self,"item_padded_trace").fn();coroutine.yield()
+    assert(self.snapshot.run.crew[1].work_item=="padded_trace")
+    button(self,"item_member2").fn();coroutine.yield()
+    button(self,"item_padded_trace").fn();coroutine.yield()
+    assert(not self.snapshot.run.crew[1].work_item and self.snapshot.run.crew[2].work_item=="padded_trace")
+    button(self,"return_padded_trace").fn();coroutine.yield()
+    assert(not self.snapshot.run.crew[2].work_item and self.snapshot.run.coins==50)
+    button(self,"items_back").fn();coroutine.yield()
+    assert(self.page=="crew")
+    button(self,"open_items").fn();coroutine.yield()
+    assert(self.page=="work_items")
     fixture(self,"settings",departed)
     coroutine.yield()
     local seed=button(self,"settings_seed")

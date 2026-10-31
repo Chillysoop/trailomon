@@ -3,7 +3,7 @@ local util=require "simulation.util"
 local M={}
 -- Existing readiness thresholds, not new penalties or a promise about weather.
 function M.next_duty(s)
-    local c=s.crew[s.hauler];local effort=resources.paces[s.pace].effort
+    local c=s.crew[s.hauler];local effort=resources.haul_effort(s,c)
     if not resources.hauler(s) then
         if c and c.condition<=0 then return {icon="condition",text=c.name.." needs care before hauling. Treat or reassign."} end
         if c and c.duty=="rest" then return {icon="haul",text=c.name.." is resting. Assign a working draft companion before travel."} end

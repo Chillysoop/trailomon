@@ -23,6 +23,7 @@ function M.commit(p,s)
         M.memory(c, s.outcome=="delivered" and "Brought orchard cuttings to Lantern Reach." or "Came home after a difficult journey.")
         local home=util.copy(c)
         home.condition,home.stamina,home.duty=100,100,"work"
+        home.work_item=nil -- Supplies are packed afresh for each expedition.
         home.trust=math.min(3,home.trust+1)
         p.roster[c.species]=home
         p.discoveries[c.species]=true

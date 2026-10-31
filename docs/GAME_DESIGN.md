@@ -8,7 +8,7 @@ The central experience is a relaxed journey with consequential decisions. Travel
 
 The core direction is established. Creature names, world names, balance values, and duration targets below are initial design choices to test. The first playable scope in section 12 takes precedence over ideas marked for later development.
 
-The subsequent [world and lore proposal](WORLD_LORE.md) expands the setting and the progression toward wilder, less explored country. The [auto-battle proposal](AUTO_BATTLES.md) records the reference study and future gathering/equipment ideas. Approved automatic combat is specified in [COMBAT_RULES.md](COMBAT_RULES.md); other proposals do not expand scope by themselves.
+The subsequent [world and lore proposal](WORLD_LORE.md) expands the setting and the progression toward wilder, less explored country. The [auto-battle proposal](AUTO_BATTLES.md) records the reference study and future gathering/equipment ideas. Approved automatic combat is specified in [COMBAT_RULES.md](COMBAT_RULES.md), and the implemented three-item experiment in [WORK_ITEMS.md](WORK_ITEMS.md); other proposals do not expand scope by themselves.
 
 ## 1 Product direction
 

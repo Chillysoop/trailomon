@@ -8,6 +8,7 @@ local legacy_battle=require "ui.legacy_battle"
 local iconography=require "ui.iconography"
 local symbol_guide=require "ui.symbol_guide"
 local gathering=require "ui.gathering"
+local work_items=require "ui.work_items"
 local M={}
 local titles={delivered="New roots, at last.",late="You made it through.",returned="There is always another road.",rescued="Everyone comes home."}
 local function cmd(self,id,args,page) return function() self.perform(id,args,page) end end
@@ -103,8 +104,9 @@ local function preparation(self)
     label(self,910,218,"Meals: "..model.resources.daily_food(s).." / day, about "..model.forecast(s).days.." days packed")
     w.button(self,910,163,154,32,"Open wagon",cmd(self,"wagon",{id="standard"}),{selected=s.wagon_type=="standard",size=12})
     w.button(self,1074,163,158,32,"Covered",cmd(self,"wagon",{id="covered"}),{selected=s.wagon_type=="covered",enabled=p.covered,size=12})
-    label(self,910,144,p.covered and "Canvas trades capacity for rain protection." or "Study Willowford to unlock a covered wagon.")
-    w.button(self,910,80,322,45,"BEGIN THE JOURNEY",cmd(self,"depart",nil,"trail"),{primary=true,size=16,icon="trail"})
+    label(self,910,152,p.covered and "Canvas trades capacity for rain protection." or "Study Willowford to unlock a covered wagon.")
+    w.button(self,910,116,322,26,"Pack work items",page(self,"work_items"),{size=12,key="open_items"})
+    w.button(self,910,68,322,40,"BEGIN THE JOURNEY",cmd(self,"depart",nil,"trail"),{primary=true,size=16,icon="trail"})
 end
 local function travel(self)
     local s=self.snapshot.run
@@ -224,10 +226,12 @@ local function shop(self)
         {label="Ten provisions",icon="food",detail="6 coins / 10 load",enabled=can and s.coins>=6 and model.resources.weight(s)+10<=model.resources.capacity(s),fn=cmd(self,"buy",{item="food"})},
         {label="A bundle of repair materials",icon="repairs",detail="8 coins / 4 load",enabled=can and s.coins>=8 and model.resources.weight(s)+4<=model.resources.capacity(s),fn=cmd(self,"buy",{item="repairs"})},
         {label="Medicine and clean bandages",icon="medicine",detail="7 coins / 2 load",enabled=can and s.coins>=7 and model.resources.weight(s)+2<=model.resources.capacity(s),fn=cmd(self,"buy",{item="medicine"})},
+        {label="Work items",detail="Three practical tools / buy here and equip while stopped",fn=page(self,"work_items"),key="open_items"},
         {label="Return to the outpost",icon="trail",detail="Review the road ahead",fn=page(self,"trail")}},"MOSSBELL / "..s.coins.." COINS")
 end
 local function crew(self)
     local s=self.snapshot.run
+    w.button(self,642,550,220,31,"Work items",page(self,"work_items"),{key="open_items",size=13})
     label(self,28,611,"COMPANIONS / SMALL CREW, SHARED HISTORY")
     w.text(self,28,575,"Who you bring changes the road.",27,"ink")
     local can=s.mode=="preparation" or s.mode=="stopped" or s.mode=="landmark" or s.mode=="traveling"
@@ -238,6 +242,7 @@ local function crew(self)
         w.text(self,169,y+113,c.name.." / "..def.name,19,"ink")
         label(self,169,y+88,c.temperament.." / Trust "..c.trust.." / Condition "..util.round(c.condition).." / Energy "..util.round(c.stamina))
         w.text(self,169,y+66,def.ability,12,"muted")
+        w.text(self,169,y+48,"Work item: "..model.equipment.label(c),11,"gold")
         w.button(self,169,y+15,145,30,"Duty: "..c.duty,cmd(self,"duty",{member=idx}),{enabled=can,size=12,key="duty"..idx})
         w.button(self,324,y+15,144,30,i==s.hauler and "Hauler" or "Assign haul",cmd(self,"hauler",{member=idx}),{enabled=can and def.draft,selected=i==s.hauler,size=12,key="haul"..idx,icon="haul"})
         w.button(self,478,y+15,170,30,"Treat (+35)",cmd(self,"treat",{member=idx}),{enabled=can and s.mode~="preparation" and s.medicine>0 and c.condition<100,size=12,key="treat"..idx})
@@ -379,6 +384,7 @@ function M.draw(self)
         sidebar(self)
         if self.page=="crew" then crew(self)
         elseif self.page=="companion" then companion(self)
+        elseif self.page=="work_items" then work_items.draw(self)
         elseif self.page=="map" then map(self)
         elseif self.page=="journal" then journal(self)
         elseif self.page=="symbols" then symbol_guide.draw(self)
