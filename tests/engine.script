@@ -116,6 +116,11 @@ local function run()
     assert(not model.finish(goals,"delivered","Duplicate"));assert(model.command(goals,"new"))
     assert(save.write(goals));goals=assert(save.load())
     assert(goals.profile.aims.completed.company==2 and not goals.run.aim_journey)
+    local practice=model.new(1848);assert(model.command(practice,"depart"));practice.run.target=3;practice.run.progress=practice.run.distance;practice.run.mode="landmark"
+    assert(model.command(practice,"courier"));assert(model.command(practice,"choice",{id="battle"}));assert(model.command(practice,"battle_start",{team={1,2}}))
+    while practice.run.mode=="combat" do assert(save.write(practice));practice=assert(save.load());assert(model.command(practice,"battle_step")) end
+    assert(save.write(practice));practice=assert(save.load());assert(practice.run.battle.practice>0 and practice.run.cargo==100)
+    assert(model.command(practice,"battle_continue"));assert(practice.run.mode=="landmark");assert(model.command(practice,"return"));assert(save.write(practice));practice=assert(save.load());assert(practice.profile.courier.sparred)
     local wild=model.new(1848);assert(model.command(wild,"depart"));assert(model.debug(wild,"event","wild_brindlehorn"))
     assert(model.command(wild,"choice",{id="watch"}));assert(save.write(wild));wild=assert(save.load())
     assert(wild.run.observations.brindlehorn);assert(model.command(wild,"return"));assert(save.write(wild));wild=assert(save.load())

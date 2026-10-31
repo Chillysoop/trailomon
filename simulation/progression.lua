@@ -21,6 +21,7 @@ end
 function M.commit(p,s)
     if s.id<=p.last_committed then return false end
     require("simulation.field_guide").commit(p,s)
+    require("simulation.courier").commit(p,s)
     for _,id in ipairs(aims.commit(p,s)) do
         s.log[#s.log+1]={day=s.day,text="Journal aim completed: "..aims.defs[id].title.."."}
         if #s.log>70 then table.remove(s.log,1) end

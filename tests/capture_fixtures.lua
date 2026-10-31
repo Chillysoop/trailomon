@@ -20,6 +20,13 @@ function M.field_guide(self)
     self.capture_assert=function() assert(self.page=="field_guide") end
 end
 function M.field_result(self) M.wildlife(self);assert(model.command(self.snapshot,"choice",{id="watch"}));assert(model.command(self.snapshot,"return"));self.redraw() end
+function M.courier_intro(self) reset(self,"trail");assert(model.debug(self.snapshot,"event","courier_intro"));self.redraw() end
+function M.courier_setup(self)
+    reset(self,"trail");local s=self.snapshot.run;s.target=3;s.progress=s.distance;s.mode="landmark"
+    assert(model.command(self.snapshot,"courier"));assert(model.command(self.snapshot,"choice",{id="battle"}));self.redraw()
+end
+function M.courier_active(self) M.courier_setup(self);self.capture_actions={"battler1","battler2","battle_begin","combat_step"} end
+function M.courier_result(self) M.courier_setup(self);self.capture_actions={"battler1","battler2","battle_begin","combat_step","combat_step","combat_step"} end
 function M.options(self) reset(self,"settings");self.redraw() end
 function M.options_brisk(self)
     M.options(self);self.capture_actions={"travel_speed"}

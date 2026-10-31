@@ -55,7 +55,7 @@ function M.draw(self,x,y,width,height,s)
         end
     end
     if battle and s.mode=="combat" then
-        w.sprite(self,battle.kind=="scavengers" and "loamling" or "slatewhorl",x+width*0.91,wy+23,88)
+        if battle.kind~="courier" then w.sprite(self,battle.kind=="scavengers" and "loamling" or "slatewhorl",x+width*0.91,wy+23,88) end
         local tx=battle.intent.target=="cargo" and wx or x+width*0.72
         w.rect(self,tx,wy+84,x+width*0.91-tx,2,"gold")
         w.rect(self,tx,wy+81,4,8,"gold")

@@ -22,6 +22,8 @@ local function validate(snapshot)
     local s,p=snapshot.run,snapshot.profile
     if type(s)~="table" or type(p)~="table" or not modes[s.mode] then return false,"Missing journey state" end
     local guide=require "simulation.field_guide"
+    if s.courier_rules~=nil and s.courier_rules~=require("simulation.courier").RULES then return false,"Unknown courier rules" end
+    if not require("simulation.courier").valid(p.courier) then return false,"Invalid courier memory" end
     if s.wildlife_rules~=nil and s.wildlife_rules~="wildlife-v1" then return false,"Unknown wildlife rules" end
     if not guide.valid(s.observations) or not guide.valid(s.new_observations) or not guide.valid(p.observations) or not guide.valid(p.traveled) then return false,"Invalid field observations" end
     if s.combat_effort~=nil and s.combat_effort~=model.combat.EFFORT then return false,"Unknown journey combat effort" end
@@ -67,7 +69,7 @@ local function validate(snapshot)
         end
     end
     for _,key in ipairs({"seen","flags","discoveries","branches","forage","warnings","rng","log"}) do if type(s[key])~="table" then return false,"Missing " .. key end end
-    for _,key in ipairs({"road_cleared","road_repaid","axle_lashed"}) do
+    for _,key in ipairs({"road_cleared","road_repaid","axle_lashed","courier_helped","courier_greeted","courier_done","courier_sparred"}) do
         if s.flags[key]~=nil and type(s.flags[key])~="boolean" then return false,"Invalid road consequence" end
     end
     if s.road_story~=nil and (type(s.road_story)~="string" or #s.road_story>1000) then return false,"Invalid road story" end
@@ -89,10 +91,11 @@ local function validate(snapshot)
         end
     end
     if s.return_rng~=nil and (s.mode~="combat" or not s.pending) then return false,"Unexpected return random state" end
-    if s.mode=="combat_select" and s.encounter~="scavengers" and s.encounter~="territorial" then return false,"Missing encounter" end
+    if s.mode=="combat_select" and s.encounter~="scavengers" and s.encounter~="territorial" and s.encounter~="courier" then return false,"Missing encounter" end
     if s.mode=="combat" or s.mode=="combat_result" then
         local b=s.battle
-        if type(b)~="table" or (b.kind~="scavengers" and b.kind~="territorial") or type(b.team)~="table" or #b.team<1 or #b.team>2 or type(b.used)~="table" or type(b.intent)~="table" then return false,"Invalid battle" end
+        if type(b)~="table" or (b.kind~="scavengers" and b.kind~="territorial" and b.kind~="courier") or type(b.team)~="table" or #b.team<1 or #b.team>2 or type(b.used)~="table" or type(b.intent)~="table" then return false,"Invalid battle" end
+        if b.kind=="courier" and not model.combat.automatic(b) then return false,"Practice requires automatic rules" end
         if not integer(b.limit,3,4) or not integer(b.round,1,b.limit) or not number(b.resolve,0,75) or type(b.last)~="string" then return false,"Invalid battle round" end
         if b.item_used~=nil then
             if type(b.item_used)~="table" then return false,"Invalid spent work items" end
@@ -115,7 +118,11 @@ local function validate(snapshot)
                 local expected=model.combat.pattern_intent(b)
                 if not expected or b.intent.kind~=expected.kind or b.intent.target~=expected.target or b.intent.damage~=expected.damage then return false,"Invalid guardian stage" end
             end
-            if b.limit~=(b.kind=="scavengers" and 3 or 4) or (b.intent.kind~="rush" and b.intent.kind~="heavy" and not (b.pattern and b.intent.kind=="warning")) then return false,"Invalid automatic threat" end
+            if b.kind=="courier" then
+                local expected=require("simulation.courier").intent(b)
+                if not number(b.practice,0,30) or b.pattern or b.intent.kind~=expected.kind or b.intent.target~=expected.target or b.intent.damage~=expected.damage or b.intent.cover~=expected.cover then return false,"Invalid practice exchange" end
+            elseif b.practice~=nil or b.intent.cover~=nil then return false,"Unexpected practice values" end
+            if b.limit~=(b.kind=="territorial" and 4 or 3) or (b.intent.kind~="rush" and b.intent.kind~="heavy" and not (b.pattern and b.intent.kind=="warning")) then return false,"Invalid automatic threat" end
             if b.intent.target~="cargo" and b.intent.target~=b.team[1] then return false,"Threat must target the approach or cargo" end
             if type(b.history)~="table" or #b.history>b.limit or type(b.initial)~="table" or type(b.initial.crew)~="table" then return false,"Missing combat accounting" end
             if not number(b.initial.cargo,0,100) or not integer(b.initial.food,0,10000) or not integer(b.initial.day,1,s.day) then return false,"Invalid starting resources" end
@@ -136,7 +143,7 @@ local function validate(snapshot)
                     local c=b.result.crew[i]
                     if type(c)~="table" or not number(c.stamina,-100,100) or not number(c.condition,-100,100) then return false,"Invalid companion result" end
                 end
-            elseif b.outcome~=nil or #b.history~=b.round-1 or b.resolve<=0 then return false,"Invalid pending exchange" end
+            elseif (b.kind=="courier" and b.practice<=0) or b.outcome~=nil or #b.history~=b.round-1 or b.resolve<=0 then return false,"Invalid pending exchange" end
         elseif s.mode=="combat_result" then return false,"Legacy battle cannot have an automatic result" end
     end
     if s.mode=="result" then

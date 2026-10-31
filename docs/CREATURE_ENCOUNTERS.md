@@ -6,7 +6,7 @@ October 31, 2026. W1–W6 approved in wild-1 revision 7; implementation status i
 
 Make creatures something the player anticipates along the road. A habitat suggests who might live there; meeting one offers a choice; the journal remembers what happened; another departure lets the player pursue a different discovery or crew. Human companion handlers make the inhabited road feel social, then become scarce as the route grows wilder.
 
-Start with **W1 sightings, W2 field observations, W3 one courier spar**. These add discovery, collection and another creature crew without changing the delivery objective. W3 is substantially more work than W1/W2. Build and assess the wildlife slice before the spar; no calendar promise. W4â€“W6 are independent expansion choices, not prerequisites.
+Start with **W1 sightings, W2 field observations, W3 one courier spar**. These add discovery, collection and another creature crew without changing the delivery objective. W3 is substantially more work than W1/W2. Build and assess the wildlife slice before the spar; no calendar promise. W4–W6 are independent expansion choices, not prerequisites.
 
 ## What the game actually supports
 
@@ -22,15 +22,15 @@ Start with **W1 sightings, W2 field observations, W3 one courier spar**. These a
 
 ## Proposed additions
 
-### W1 â€” Habitat sightings (top pick)
+### W1 — Habitat sightings (top pick)
 
 Add three bounded wildlife scenes to the existing route: a Brindlehorn herd on meadow, Bellmoths at woodland shelter, and a Reedskipper reed platform near Willowford. Each has **Watch / Help / Pass** where appropriate. Watch records a sighting without a supply reward; help has one previewed cost and a concrete response; passing is free. Use existing species art and short labeled icons. No forced battle or recruitment roll.
 
 Replace generic ambient opportunities for these sightings rather than adding a new interrupt stream. If a sighting offers a consequential choice, it obeys the existing major-event cooldown. Each scene is once per journey, not farmable by camping. Cindercoil/Slatewhorl recruitment follow-ups retain priority. Phase-one habitats use existing terrain/route gates; weather can qualify a small authored variation, not simulate populations or migration.
 
-**Cost:** smallâ€“medium: content, eligibility/selection changes, receipts and replay tests. **Value:** the road gains recognizable wildlife without extra survival pressure. With W2 declined, records use the current journey log only.
+**Cost:** small–medium: content, eligibility/selection changes, receipts and replay tests. **Value:** the road gains recognizable wildlife without extra survival pressure. With W2 declined, records use the current journey log only.
 
-### W2 â€” Species field observations (top pick)
+### W2 — Species field observations (top pick)
 
 Add a compact Journal field guide for the six current species: **Known / Seen wild / Traveled with**, plus one learned habitat or behavior note per species. Known starting species are not falsely marked observed. Seeing a wild animal counts even if it never joins. Record current Loamling/Slatewhorl confrontations and Cindercoil/Slatewhorl discovery scenes too, so this option works without W1.
 
@@ -38,27 +38,27 @@ Persist genuine observations at journey resolution, consistent with existing dis
 
 **Cost:** medium: a small observation map, old-save defaults, event hooks and Journal view. Existing boolean discoveries cannot distinguish ownership from a wild sighting, and historical facts cannot all be reconstructed. Older profiles keep their roster; unknown observations start unrecorded.
 
-### W3 â€” One optional courier spar (top pick)
+### W3 — One optional courier spar (top pick)
 
 At Mossbell, meet a courier with a Brindlehorn/Bellmoth pair. Preview their roles and accept one short automatic practice encounter or pass freely. Use a **practice load** in place of orchard cargo, preserving the purpose of our wagon-protection abilities. Real energy is spent; practice harm scores against the exercise rather than damaging cargo or companion condition. Refusal and defeat do not block the road.
 
 Prototype the opposing pair as two visible contributors to one shared Resolve track with a disclosed three-exchange pattern. Give each a meaningful effect: the Brindlehorn's shove tests cover; the Bellmoth's cover reduces one pressure exchange. Repel their resolve before the limit while protecting the practice load to win. This requires a new encounter kind, effect handling and outcome, not merely renaming the guardian. Keep player abilities, positions and viewing controls. A result note is the reward; no repeatable money or XP. One attempt per run, preview the effort budget before commitment.
 
-**Cost:** mediumâ€“large: authored opponent behavior, practice-state isolation, forecasts, saves, UI and balance. The prototype deliberately does not promise fully independent enemy units. If that proves essential to the desired feel, review a larger two-team design afterward. W3 works without W1/W2; records use the current log/memories.
+**Cost:** medium–large: authored opponent behavior, practice-state isolation, forecasts, saves, UI and balance. The prototype deliberately does not promise fully independent enemy units. If that proves essential to the desired feel, review a larger two-team design afterward. W3 works without W1/W2; records use the current log/memories.
 
-### W4 â€” A familiar fellow traveler
+### W4 — A familiar fellow traveler
 
 Make one named courier recur at two existing stops: a first meeting near Split Oak and recognition at Mossbell. They remember whether the player helped, passed or later spared energy for practice. Keep one bounded personal flag and one later acknowledgment, using the existing follow-up approach. No standings, universal reputation, timed race or adaptive team that secretly counters the player.
 
-**Cost:** smallâ€“medium: two scenes, saved recognition and conditions. **Recommendation:** after W1â€“W3. If W3 is approved this is the same courier; otherwise the meetings remain social. This develops the rival/friend feeling without making human encounters crowd the remote final stretch.
+**Cost:** small–medium: two scenes, saved recognition and conditions. **Recommendation:** after W1–W3. If W3 is approved this is the same courier; otherwise the meetings remain social. This develops the rival/friend feeling without making human encounters crowd the remote final stretch.
 
-### W5 â€” Discovery-led departure mode
+### W5 — Discovery-led departure mode
 
 For a new profile only, offer a separately selectable start with one chosen hauler (Brindlehorn or Reedskipper); meet and befriend Bellmoth and Loamling along the first route. Keep the normal four-species departure available and existing profiles intact. Preserve Cindercoil/Slatewhorl's current later recruitment. This changes collecting from discovering two additional species to assembling a crew through travel.
 
 **Cost:** large: an alternate starting economy, two recruitment paths, guarantees against hauling/food soft-locks, profile labeling and full-run balance. The three-companion cap still matters; the first version must not require collecting everybody in one journey. **Recommendation:** later, if wildlife acquisition becomes a core priority. This is the most direct collection change, but it cannot safely be treated as a content-only tweak.
 
-### W6 â€” One learned habit per companion
+### W6 — One learned habit per companion
 
 After a specific journey feat, let a companion select one bounded, clearly previewed travel habit at the depot. Example design space: save effort when scouting but spend more when hauling. Habits are alternatives with a cost, not permanent stat stacking; keep the existing three work items as separate physical equipment.
 
