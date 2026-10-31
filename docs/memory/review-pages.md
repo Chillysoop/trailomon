@@ -1,6 +1,6 @@
 # Review pages
 
-2026-10-30 N1 tool delivery: next-1 includes the committed expedition baseline and download links, with S2 reporting complete and S5 tuning still open. Original votes/codes remain; no new approval request. Evidence and limits: reporting.md.
+2026-10-30: next-1 records N1 reporting delivery; S5 tuning remains open. See reporting.md.
 
 2026-10-30: `plan-1` is published at `https://trailomon-owner-reviews.dusky-owlet-9260.chatgpt.site/plan-1.html` for phone and desktop. Localhost remains a desktop fallback. Codes are stable: P1 automatic combat conversion; P2 keep bounded foraging and defer hunting; P3 wilderness progression within the existing route; P4 prioritize six-species anatomy and pose refinement; P5 a later three-item equipment experiment. P1–P4 are recommendations, not synthetic owner votes.
 
@@ -20,3 +20,5 @@ Raw answers remain local by default; durable decision summaries are committed he
 
 
 2026-10-30: Owner explicitly reaffirmed the YES/NO workflow. New journey-1 has four NEW J1–J4 proposals, top picks J1–J3, with full-trip evidence below the decisions. The Site root now opens this latest review; older pages/answers remain. See journey-playtest.md for definitions and remaining checks. No answers yet at authoring; re-read before closing.
+
+2026-10-30: journey-1 FINISH arrived automatically, revision 5 at 2026-10-31T01:49:10.529Z. J1-J4 all YES; no notes, rejection or blanks. Mirrored locally and consumed the flag. All four built/tested; private page updated with evidence. See choice-clarity.md.

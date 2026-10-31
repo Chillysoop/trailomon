@@ -32,7 +32,7 @@ local function prepare(snapshot,seed)
 end
 
 function M.new(seed)
-    local snapshot={schema=M.SCHEMA,content=M.CONTENT,profile=progression.profile(),settings={sound=true,motion=true}}
+    local snapshot={schema=M.SCHEMA,content=M.CONTENT,profile=progression.profile(),settings={sound=true,motion=true,travel_speed=1}}
     prepare(snapshot,seed or 1848)
     return snapshot
 end
@@ -42,6 +42,7 @@ function M.finish(snapshot,outcome,description)
     if s.mode=="result" then return false end
     s.mode,s.outcome,s.ending="result",outcome,description
     s.pending,s.battle,s.encounter=nil,nil,nil
+    s.return_rng=nil
     log(s,description)
     progression.commit(snapshot.profile,s)
     return true
@@ -267,6 +268,13 @@ local function resolve(snapshot,id)
     if not choice then return false,"Unknown choice" end
     local ok,why=events.available(s,choice,snapshot.profile)
     if not ok then return false,why end
+    if choice.battle then
+        -- Looking at positions is reversible. Keep the event's fixed roll and
+        -- quiet-day counter until an exchange or withdrawal commits the choice.
+        s.mode="combat_select";s.encounter=choice.battle
+        return true
+    end
+    local before=choice.outcome and util.copy(s)
     local roll=s.pending.roll
     resources.pay(s,choice.cost)
     local helper=choice.species and resources.find(s,choice.species,choice.effort)
@@ -274,8 +282,14 @@ local function resolve(snapshot,id)
     s.mode="stopped"
     s.pending=nil
     s.cooldown=3 -- two full quiet travel days, then eligible on the third.
-    log(s,choice.label .. ".")
-    for _=1,choice.days or 0 do day(snapshot,false,false); if s.mode=="result" then return true end end
+    if not before then log(s,choice.label .. ".") end
+    for _=1,choice.days or 0 do
+        day(snapshot,false,false)
+        if s.mode=="result" then
+            if before then log(s,"The journey ended before the work was finished. "..events.receipt(before,s)) end
+            return true
+        end
+    end
     effects(s,choice.effects)
     if choice.gamble then
         if roll<0.55 then s.progress=s.progress+5; log(s,"The shortcut rejoins the road sooner.")
@@ -292,9 +306,24 @@ local function resolve(snapshot,id)
         if helper then progression.memory(helper,choice.memory)
         else for _, c in ipairs(s.crew) do progression.memory(c,choice.memory) end end
     end
-    if choice.battle then s.mode="combat_select"; s.encounter=choice.battle
-    else reached(snapshot); check_warnings(s) end
+    if before then log(s,choice.outcome.." "..events.receipt(before,s)) end
+    reached(snapshot); check_warnings(s)
     return true
+end
+
+function M.can_back_to_event(s)
+    return s.pending~=nil and (s.mode=="combat_select" or
+        (s.mode=="combat" and combat.automatic(s.battle) and #s.battle.history==0))
+end
+
+local function commit_encounter(s)
+    if s.pending then
+        for _,choice in ipairs(events.by_id[s.pending.id].choices) do
+            if choice.battle==s.encounter then log(s,choice.label..".");break end
+        end
+        s.pending=nil;s.cooldown=3
+    end
+    s.return_rng=nil
 end
 
 local function battle_end(snapshot,outcome)
@@ -329,6 +358,10 @@ function M.command(snapshot,command,arg)
     local s=snapshot.run
     arg=arg or {}
     if command=="settings" then
+        if arg.key=="travel_speed" then
+            snapshot.settings.travel_speed=(snapshot.settings.travel_speed or 1)==1 and 2 or 1
+            return true
+        end
         if arg.key~="sound" and arg.key~="motion" then return false,"Unknown setting" end
         snapshot.settings[arg.key]=not snapshot.settings[arg.key]; return true
     end
@@ -440,10 +473,19 @@ function M.command(snapshot,command,arg)
     elseif command=="leave" and s.mode=="landmark" then return leave(snapshot,arg.branch)
     elseif command=="river" and s.mode=="landmark" and s.target==4 then return cross(snapshot,arg.method)
     elseif command=="choice" and s.mode=="event" then return resolve(snapshot,arg.id)
-    elseif command=="battle_start" and s.mode=="combat_select" then return combat.start(s,s.encounter,arg.team)
+    elseif command=="battle_back" and M.can_back_to_event(s) then
+        if s.return_rng then s.rng.combat=s.return_rng end
+        s.battle=nil;s.encounter=nil;s.return_rng=nil;s.mode="event"
+        return true
+    elseif command=="battle_start" and s.mode=="combat_select" then
+        local before=s.rng.combat
+        local ok,why=combat.start(s,s.encounter,arg.team)
+        if ok and s.pending then s.return_rng=before end
+        return ok,why
     elseif command=="battle_step" and s.mode=="combat" then
         local ok,outcome=combat.step(s)
         if ok then
+            commit_encounter(s)
             local entry=s.battle.history[#s.battle.history]
             log(s,"Exchange "..entry.round..": "..table.concat(entry.notes," ").." "..entry.summary)
             if outcome then battle_end(snapshot,outcome) end
@@ -458,7 +500,7 @@ function M.command(snapshot,command,arg)
             if outcome then battle_end(snapshot,outcome) end
         end
         return ok,not ok and outcome or nil
-    elseif command=="withdraw" and (s.mode=="combat" or s.mode=="combat_select") then battle_end(snapshot,"withdraw"); return true
+    elseif command=="withdraw" and (s.mode=="combat" or s.mode=="combat_select") then commit_encounter(s);battle_end(snapshot,"withdraw"); return true
     elseif command=="return" and s.mode~="preparation" then return M.finish(snapshot,"returned","You call for help and bring the crew home. The delivery waits for another journey.")
     end
     return false,"That action is unavailable right now"

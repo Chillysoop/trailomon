@@ -1,0 +1,13 @@
+# Road-choice clarity
+
+2026-10-30: Owner FINISH on journey-1 revision 5 approved J1–J4, no notes or blanks. Imported and consumed automatically in the active session. S15 is this coherent implementation batch; the earlier N3/S5, N5/N6 and N7 queue remains approved.
+
+J1 keeps the original pending event until the first exchange or withdrawal. Setup and the first intent can return freely, restoring combat RNG; later withdrawal retains its original cost. Legacy saved setups without the original event retain their existing exit. No invented event is reconstructed. Repeated inspection, save/resume, same next intent and subsequent peaceful choice are covered by exact-state comparisons.
+
+J2 forecasts the real invitation payment, daily meals and food days using the current crew and rations. Both recruitable species and all ration settings are covered. J3 adds authored outcomes and actual net receipts to shelter aid, peaceful scavengers and spare-brace repair; capped repair reports the actual gain. J4 adds optional travel_speed to settings; older saves default to calm. The controller still loads paused. Combat viewing speed remains separate.
+
+Focused actual Windows checks, isolated profile and seed 1848: day-two setup Back restored the original choices with 87 provisions, 98% cargo and Moss at 96 energy. Choosing food then reported -6 provisions and left 81. Day-six shelter aid reported Medicine -1 without spoiling the later invitation. Day-ten recruitment preview 57→53 provisions, 3→4 meals and 19→13 food days matched the clicked result. Invitation and outcome text fit at 1280×720. A normal restart restored day ten, 53 food, three companions, brisk viewing and paused travel. A five-row Options overlap found during this pass was fixed with tighter row spacing and a native bounds regression.
+
+45 Lua and 18 Python checks pass; 36 native GUI states plus save/recovery and interaction checks pass. The final spacing fix was rebuilt and the native suite repeated. The prior 120-run baseline remains unchanged. Actual UI combat completed normally; tool latency prevented a pre-first-exchange Back click, so that narrow path is verified by native input and deterministic save checks, not claimed as a successful timed manual click.
+
+Evidence is in reviews/evidence/journey-1-j*.png. No balance changes. Native activation crash, physical keyboard, listening and independent human pacing remain S10 limitations; this batch does not claim to resolve them.

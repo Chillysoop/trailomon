@@ -8,7 +8,7 @@ return {
    {id="wait", label="Unload and pull it clear", days=1, effects={traveler=-3}}}},
  {id="axle", title="A worrying creak", text="The axle has worked loose under the load. The next rough stretch could make it worse.", kind="choice", condition="worn",
   choices={
-   {id="fix", label="Fit a spare brace", cost={repairs=1}, effects={wagon=12}},
+   {id="fix", label="Fit a spare brace", cost={repairs=1}, effects={wagon=12}, outcome="The new brace holds. The axle turns quietly again."},
    {id="anchor", label="Have Slatewhorl steady a field repair", species="slatewhorl", effort=15, effects={wagon=8}},
    {id="slow", label="Take a day to refit the axle", days=1, effects={wagon=6}},
    {id="risk", label="Lash it and carry on", effects={wagon=-12}}}},
@@ -48,7 +48,7 @@ return {
  {id="play", title="A moment of play", text="A windblown leaf becomes a very important chase. The road feels shorter afterward.", kind="ambient", condition="any"},
  {id="cinder_shelter", title="Warmth beneath the stones", text="A small shelter holds a frightened Cindercoil. Its nest has been soaked through.", kind="discovery", condition="cinder_lead",
   choices={
-   {id="help", label="Leave medicine and dry bedding", cost={medicine=1}, flag="cinder_helped", discovery="cindercoil"},
+   {id="help", label="Leave medicine and dry bedding", cost={medicine=1}, flag="cinder_helped", discovery="cindercoil", outcome="The Cindercoil settles into the dry bedding. Its trembling eases."},
    {id="observe", label="Record the shelter and move on", discovery="cindercoil"}}},
  {id="cinder_return", title="A little ember follows", text="The Cindercoil you helped has followed your wheel tracks. It curls beside the wagon as if waiting for an invitation.", kind="discovery", condition="cinder_follow",
   choices={
@@ -65,7 +65,7 @@ return {
    {id="part", label="Thank it and leave it on its home trail"}}},
  {id="scavengers", title="Visitors at the wagon", text="Hungry Loamlings circle the provisions. You can leave them a meal, distract them, or defend the load.", kind="encounter", condition="any",
   choices={
-   {id="food", label="Leave food away from the wagon", cost={food=6}},
+   {id="food", label="Leave food away from the wagon", cost={food=6}, outcome="The Loamlings gather around the meal, leaving the wagon a clear path."},
    {id="distract", label="Let Bellmoth lead them away", species="bellmoth", effort=18},
    {id="battle", label="Protect the cargo", battle="scavengers"}}},
  {id="territorial", title="The narrow path", text="A wild Slatewhorl blocks the track, unsettled by your approach. Give it space or persuade it to move.", kind="encounter", condition="upland",
