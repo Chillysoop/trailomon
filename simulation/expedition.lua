@@ -9,6 +9,7 @@ local route = require "content.route"
 local wagons = require "content.wagons"
 local equipment=require "simulation.equipment"
 local forks=require "content.forks"
+local aims=require "simulation.journal_aims"
 local M = {SCHEMA=1, CONTENT=1, route=route, species=species, resources=resources, events=events, combat=combat, equipment=equipment, trail_reports=require "simulation.trail_reports"}
 
 local function log(s,text)
@@ -425,6 +426,7 @@ function M.command(snapshot,command,arg)
         for i,c in ipairs(s.crew) do if species.defs[c.species].draft then draft=i; break end end
         if not draft then return false,"Choose a companion that can pull the wagon" end
         s.hauler=draft; s.mode="stopped"
+        aims.depart(s)
         log(s,"Left Fernwake with " .. #s.crew .. " companions. Space follows the road; every decision waits for you.")
         return true
     elseif command=="equip_work_item" then return equipment.equip(s,arg.member,arg.item)
@@ -535,6 +537,7 @@ function M.command(snapshot,command,arg)
     elseif command=="battle_step" and s.mode=="combat" then
         local ok,outcome=combat.step(s)
         if ok then
+            aims.exchange(s)
             commit_encounter(s)
             local entry=s.battle.history[#s.battle.history]
             log(s,"Exchange "..entry.round..": "..table.concat(entry.notes," ").." "..entry.summary)
@@ -546,6 +549,7 @@ function M.command(snapshot,command,arg)
     elseif command=="round" and s.mode=="combat" then
         local ok,outcome=combat.round(s,arg.actions)
         if ok then
+            aims.exchange(s)
             log(s,s.battle.last)
             if outcome then battle_end(snapshot,outcome) end
         end

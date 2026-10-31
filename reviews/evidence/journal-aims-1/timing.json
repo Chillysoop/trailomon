@@ -1,0 +1,11 @@
+{
+  "scenes": [
+    "aims_departure",
+    "aims_fresh",
+    "aims_progress",
+    "aims_result",
+    "aims_complete",
+    "aims_legacy"
+  ],
+  "seconds": 5.511
+}

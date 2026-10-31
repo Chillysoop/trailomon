@@ -98,6 +98,24 @@ local function run()
         assert(model.command(p,"ack_story"));assert(save.write(p));p=assert(save.load())
         assert(not p.run.road_story and p.run.food==food and p.run.wagon==wagon)
     end
+    -- Goals survive native serialization, including a spent peaceful attempt.
+    local goals=model.new(1848);assert(model.command(goals,"depart"))
+    assert(save.write(goals));goals=assert(save.load())
+    assert(goals.run.aim_journey.pair=="brindlehorn+loamling" and not goals.run.aim_journey.fought)
+    assert(model.debug(goals,"event","scavengers"));assert(model.command(goals,"choice",{id="battle"}))
+    assert(model.command(goals,"battle_start",{team={1,2}}));assert(model.command(goals,"battle_step"))
+    assert(save.write(goals));goals=assert(save.load());assert(goals.run.aim_journey.fought)
+    goals.run.branches.last="ridge";assert(model.finish(goals,"delivered","Fixture arrival"))
+    assert(save.write(goals));goals=assert(save.load())
+    assert(goals.profile.aims.paths.ridge==1 and not goals.profile.aims.completed.peaceful)
+    assert(model.command(goals,"new"));assert(model.command(goals,"crew",{species="loamling"}))
+    assert(model.command(goals,"crew",{species="bellmoth"}));assert(model.command(goals,"depart"))
+    goals.run.branches.last="gorge";assert(model.finish(goals,"delivered","Fixture arrival"))
+    assert(save.write(goals));goals=assert(save.load())
+    for _,id in ipairs({"company","paths","peaceful"}) do assert(goals.profile.aims.completed[id]==2) end
+    assert(not model.finish(goals,"delivered","Duplicate"));assert(model.command(goals,"new"))
+    assert(save.write(goals));goals=assert(save.load())
+    assert(goals.profile.aims.completed.company==2 and not goals.run.aim_journey)
     for _,path in ipairs({primary,backup}) do
         local f=assert(io.open(path,"wb"));f:write("corrupt");f:close()
     end

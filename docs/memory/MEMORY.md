@@ -20,3 +20,5 @@
 - [work-items.md](work-items.md): N1 checkpoint, three work items, save/slot rules, targeted validation and remaining balance limits.
 - [trail-reports.md](trail-reports.md): N9 fork facts, uncertain outlooks, crew/item guidance and focused validation.
 - [event-consequences.md](event-consequences.md): N10 tree/axle follow-ups, save rules, receipts and focused validation.
+
+- [journal-aims.md](journal-aims.md): N11 optional accomplishments, compatibility, award rules and focused validation.
