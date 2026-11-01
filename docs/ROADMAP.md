@@ -57,6 +57,8 @@ Updated October 31, 2026. Scope: one polished Windows expedition before new regi
 
 ## Working rules
 
+November 1 identity/combat audit: [analysis](IDENTITY_AUDIT.md) and [new A1–A3 review](../reviews/identity-1.html) distinguish subjective identity from measured simulation-command share. An isolated two-team combat prototype, Discovery defaults and Trust UI removal are proposed, not approved steps. Existing S5 now has current-source evidence that searching every stretch can conflict with delivery closure; compare targeted searches and adaptive pace before changing costs. D4/D5 remain open, with a recommendation to postpone them pending the combat/pacing test. No roadmap feature is silently replaced.
+
 October 31 post-creature audit: all S22–S25 are shipped. [Next discovery loop](../reviews/next-2.html) proposes only new D1–D5 choices, with D1→D2→D3 recommended. The owner then said proceed; D1–D3 are approved in chat and implemented as S26/S27. D4/D5 remain undecided. S5 tuning and S10 reliability remain authorized work; current saves/settings and tests work. Art stays deferred.
 
 October 31 creature-direction brainstorm: [wild-1](../reviews/wild-1.html) proposes sightings, field observations and one courier spar, with later relationship/acquisition/growth options. [Integration analysis](CREATURE_ENCOUNTERS.md) distinguishes reusable systems from new work. The owner approved W1–W6 in hosted revision 7. S22–S25 schedule the bounded additions; existing balance/reliability work remains open.

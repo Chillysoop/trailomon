@@ -1,0 +1,3049 @@
+{
+  "cohorts": [
+    {
+      "actions": 1155,
+      "battles": 0,
+      "by_kind": {},
+      "combat_actions": 0,
+      "combat_command_percent": 0,
+      "exchanges": 0,
+      "id": "classic_peaceful",
+      "max_battles": 0,
+      "mean_battles": 0,
+      "mean_exchanges": 0,
+      "min_battles": 0,
+      "outcomes": {
+        "delivered": 8,
+        "late": 15,
+        "rescued": 1
+      },
+      "repeated_exactly": true,
+      "runs": 24,
+      "searches": 0,
+      "travel_days": 555,
+      "zero_battle_runs": 24
+    },
+    {
+      "actions": 1275,
+      "battles": 19,
+      "by_kind": {
+        "scavengers": 12,
+        "territorial": 7
+      },
+      "combat_actions": 121,
+      "combat_command_percent": 9.490196078431373,
+      "exchanges": 64,
+      "id": "classic_fighter",
+      "max_battles": 2,
+      "mean_battles": 0.7916666666666666,
+      "mean_exchanges": 2.6666666666666665,
+      "min_battles": 0,
+      "outcomes": {
+        "delivered": 5,
+        "late": 18,
+        "rescued": 1
+      },
+      "repeated_exactly": true,
+      "runs": 24,
+      "searches": 0,
+      "travel_days": 555,
+      "zero_battle_runs": 11
+    },
+    {
+      "actions": 1384,
+      "battles": 39,
+      "by_kind": {
+        "courier": 24,
+        "scavengers": 10,
+        "territorial": 5
+      },
+      "combat_actions": 263,
+      "combat_command_percent": 19.002890173410403,
+      "exchanges": 122,
+      "id": "classic_fighter_practice",
+      "max_battles": 3,
+      "mean_battles": 1.625,
+      "mean_exchanges": 5.083333333333333,
+      "min_battles": 1,
+      "outcomes": {
+        "delivered": 4,
+        "late": 20
+      },
+      "repeated_exactly": true,
+      "runs": 24,
+      "searches": 0,
+      "travel_days": 552,
+      "zero_battle_runs": 0
+    },
+    {
+      "actions": 1201,
+      "battles": 0,
+      "by_kind": {},
+      "combat_actions": 0,
+      "combat_command_percent": 0,
+      "exchanges": 0,
+      "id": "discovery_brindle_peaceful",
+      "max_battles": 0,
+      "mean_battles": 0,
+      "mean_exchanges": 0,
+      "min_battles": 0,
+      "outcomes": {
+        "delivered": 1,
+        "late": 23
+      },
+      "repeated_exactly": true,
+      "runs": 24,
+      "searches": 0,
+      "travel_days": 551,
+      "zero_battle_runs": 24
+    },
+    {
+      "actions": 1519,
+      "battles": 40,
+      "by_kind": {
+        "courier": 24,
+        "scavengers": 9,
+        "territorial": 7
+      },
+      "combat_actions": 271,
+      "combat_command_percent": 17.84068466096116,
+      "exchanges": 127,
+      "id": "discovery_brindle_fighter_practice",
+      "max_battles": 3,
+      "mean_battles": 1.6666666666666667,
+      "mean_exchanges": 5.291666666666667,
+      "min_battles": 1,
+      "outcomes": {
+        "delivered": 1,
+        "late": 22,
+        "rescued": 1
+      },
+      "repeated_exactly": true,
+      "runs": 24,
+      "searches": 0,
+      "travel_days": 548,
+      "zero_battle_runs": 0
+    },
+    {
+      "actions": 1564,
+      "battles": 39,
+      "by_kind": {
+        "courier": 24,
+        "scavengers": 9,
+        "territorial": 6
+      },
+      "combat_actions": 264,
+      "combat_command_percent": 16.879795396419436,
+      "exchanges": 123,
+      "id": "discovery_reed_fighter_practice",
+      "max_battles": 3,
+      "mean_battles": 1.625,
+      "mean_exchanges": 5.125,
+      "min_battles": 1,
+      "outcomes": {
+        "delivered": 1,
+        "late": 20,
+        "rescued": 3
+      },
+      "repeated_exactly": true,
+      "runs": 24,
+      "searches": 0,
+      "travel_days": 553,
+      "zero_battle_runs": 0
+    },
+    {
+      "actions": 1707,
+      "battles": 34,
+      "by_kind": {
+        "courier": 24,
+        "scavengers": 7,
+        "territorial": 3
+      },
+      "combat_actions": 231,
+      "combat_command_percent": 13.532513181019333,
+      "exchanges": 105,
+      "id": "discovery_brindle_explorer",
+      "max_battles": 2,
+      "mean_battles": 1.4166666666666667,
+      "mean_exchanges": 4.375,
+      "min_battles": 1,
+      "outcomes": {
+        "late": 6,
+        "rescued": 18
+      },
+      "repeated_exactly": true,
+      "runs": 24,
+      "searches": 108,
+      "travel_days": 539,
+      "zero_battle_runs": 0
+    },
+    {
+      "actions": 1734,
+      "battles": 37,
+      "by_kind": {
+        "courier": 24,
+        "scavengers": 9,
+        "territorial": 4
+      },
+      "combat_actions": 250,
+      "combat_command_percent": 14.41753171856978,
+      "exchanges": 115,
+      "id": "discovery_reed_explorer",
+      "max_battles": 3,
+      "mean_battles": 1.5416666666666667,
+      "mean_exchanges": 4.791666666666667,
+      "min_battles": 1,
+      "outcomes": {
+        "late": 3,
+        "rescued": 21
+      },
+      "repeated_exactly": true,
+      "runs": 24,
+      "searches": 108,
+      "travel_days": 532,
+      "zero_battle_runs": 0
+    }
+  ],
+  "runs": [
+    {
+      "actions": 45,
+      "battles": 0,
+      "by_kind": {},
+      "cohort": "classic_peaceful",
+      "combat_actions": 0,
+      "day": 25,
+      "ending": "The orchard cuttings reach Lantern Reach in time. There will be new trees here next spring.",
+      "exchanges": 0,
+      "outcome": "delivered",
+      "searches": 0,
+      "seed": 1
+    },
+    {
+      "actions": 50,
+      "battles": 0,
+      "by_kind": {},
+      "cohort": "classic_peaceful",
+      "combat_actions": 0,
+      "day": 28,
+      "ending": "You reach Lantern Reach, but the delivery is past its preferred date.",
+      "exchanges": 0,
+      "outcome": "late",
+      "searches": 0,
+      "seed": 2
+    },
+    {
+      "actions": 51,
+      "battles": 0,
+      "by_kind": {},
+      "cohort": "classic_peaceful",
+      "combat_actions": 0,
+      "day": 29,
+      "ending": "You reach Lantern Reach, but the delivery is past its preferred date.",
+      "exchanges": 0,
+      "outcome": "late",
+      "searches": 0,
+      "seed": 3
+    },
+    {
+      "actions": 53,
+      "battles": 0,
+      "by_kind": {},
+      "cohort": "classic_peaceful",
+      "combat_actions": 0,
+      "day": 29,
+      "ending": "You reach Lantern Reach, but the delivery is past its preferred date.",
+      "exchanges": 0,
+      "outcome": "late",
+      "searches": 0,
+      "seed": 4
+    },
+    {
+      "actions": 50,
+      "battles": 0,
+      "by_kind": {},
+      "cohort": "classic_peaceful",
+      "combat_actions": 0,
+      "day": 29,
+      "ending": "You reach Lantern Reach, but the delivery is past its preferred date.",
+      "exchanges": 0,
+      "outcome": "late",
+      "searches": 0,
+      "seed": 5
+    },
+    {
+      "actions": 51,
+      "battles": 0,
+      "by_kind": {},
+      "cohort": "classic_peaceful",
+      "combat_actions": 0,
+      "day": 29,
+      "ending": "You reach Lantern Reach, but the delivery is past its preferred date.",
+      "exchanges": 0,
+      "outcome": "late",
+      "searches": 0,
+      "seed": 6
+    },
+    {
+      "actions": 48,
+      "battles": 0,
+      "by_kind": {},
+      "cohort": "classic_peaceful",
+      "combat_actions": 0,
+      "day": 28,
+      "ending": "You reach Lantern Reach, but the delivery is past its preferred date.",
+      "exchanges": 0,
+      "outcome": "late",
+      "searches": 0,
+      "seed": 7
+    },
+    {
+      "actions": 47,
+      "battles": 0,
+      "by_kind": {},
+      "cohort": "classic_peaceful",
+      "combat_actions": 0,
+      "day": 26,
+      "ending": "The orchard cuttings reach Lantern Reach in time. There will be new trees here next spring.",
+      "exchanges": 0,
+      "outcome": "delivered",
+      "searches": 0,
+      "seed": 8
+    },
+    {
+      "actions": 47,
+      "battles": 0,
+      "by_kind": {},
+      "cohort": "classic_peaceful",
+      "combat_actions": 0,
+      "day": 27,
+      "ending": "You reach Lantern Reach, but the delivery is past its preferred date.",
+      "exchanges": 0,
+      "outcome": "late",
+      "searches": 0,
+      "seed": 9
+    },
+    {
+      "actions": 46,
+      "battles": 0,
+      "by_kind": {},
+      "cohort": "classic_peaceful",
+      "combat_actions": 0,
+      "day": 26,
+      "ending": "The orchard cuttings reach Lantern Reach in time. There will be new trees here next spring.",
+      "exchanges": 0,
+      "outcome": "delivered",
+      "searches": 0,
+      "seed": 10
+    },
+    {
+      "actions": 43,
+      "battles": 0,
+      "by_kind": {},
+      "cohort": "classic_peaceful",
+      "combat_actions": 0,
+      "day": 26,
+      "ending": "The orchard cuttings reach Lantern Reach in time. There will be new trees here next spring.",
+      "exchanges": 0,
+      "outcome": "delivered",
+      "searches": 0,
+      "seed": 11
+    },
+    {
+      "actions": 55,
+      "battles": 0,
+      "by_kind": {},
+      "cohort": "classic_peaceful",
+      "combat_actions": 0,
+      "day": 29,
+      "ending": "You reach Lantern Reach, but the delivery is past its preferred date.",
+      "exchanges": 0,
+      "outcome": "late",
+      "searches": 0,
+      "seed": 12
+    },
+    {
+      "actions": 47,
+      "battles": 0,
+      "by_kind": {},
+      "cohort": "classic_peaceful",
+      "combat_actions": 0,
+      "day": 26,
+      "ending": "The orchard cuttings reach Lantern Reach in time. There will be new trees here next spring.",
+      "exchanges": 0,
+      "outcome": "delivered",
+      "searches": 0,
+      "seed": 13
+    },
+    {
+      "actions": 49,
+      "battles": 0,
+      "by_kind": {},
+      "cohort": "classic_peaceful",
+      "combat_actions": 0,
+      "day": 27,
+      "ending": "You reach Lantern Reach, but the delivery is past its preferred date.",
+      "exchanges": 0,
+      "outcome": "late",
+      "searches": 0,
+      "seed": 14
+    },
+    {
+      "actions": 54,
+      "battles": 0,
+      "by_kind": {},
+      "cohort": "classic_peaceful",
+      "combat_actions": 0,
+      "day": 32,
+      "ending": "The upland road has closed. A road crew helps the whole wagon home.",
+      "exchanges": 0,
+      "outcome": "rescued",
+      "searches": 0,
+      "seed": 15
+    },
+    {
+      "actions": 46,
+      "battles": 0,
+      "by_kind": {},
+      "cohort": "classic_peaceful",
+      "combat_actions": 0,
+      "day": 27,
+      "ending": "You reach Lantern Reach, but the delivery is past its preferred date.",
+      "exchanges": 0,
+      "outcome": "late",
+      "searches": 0,
+      "seed": 16
+    },
+    {
+      "actions": 50,
+      "battles": 0,
+      "by_kind": {},
+      "cohort": "classic_peaceful",
+      "combat_actions": 0,
+      "day": 29,
+      "ending": "You reach Lantern Reach, but the delivery is past its preferred date.",
+      "exchanges": 0,
+      "outcome": "late",
+      "searches": 0,
+      "seed": 17
+    },
+    {
+      "actions": 43,
+      "battles": 0,
+      "by_kind": {},
+      "cohort": "classic_peaceful",
+      "combat_actions": 0,
+      "day": 26,
+      "ending": "The orchard cuttings reach Lantern Reach in time. There will be new trees here next spring.",
+      "exchanges": 0,
+      "outcome": "delivered",
+      "searches": 0,
+      "seed": 18
+    },
+    {
+      "actions": 47,
+      "battles": 0,
+      "by_kind": {},
+      "cohort": "classic_peaceful",
+      "combat_actions": 0,
+      "day": 27,
+      "ending": "You reach Lantern Reach, but the delivery is past its preferred date.",
+      "exchanges": 0,
+      "outcome": "late",
+      "searches": 0,
+      "seed": 19
+    },
+    {
+      "actions": 45,
+      "battles": 0,
+      "by_kind": {},
+      "cohort": "classic_peaceful",
+      "combat_actions": 0,
+      "day": 28,
+      "ending": "You reach Lantern Reach, but the delivery is past its preferred date.",
+      "exchanges": 0,
+      "outcome": "late",
+      "searches": 0,
+      "seed": 20
+    },
+    {
+      "actions": 49,
+      "battles": 0,
+      "by_kind": {},
+      "cohort": "classic_peaceful",
+      "combat_actions": 0,
+      "day": 27,
+      "ending": "You reach Lantern Reach, but the delivery is past its preferred date.",
+      "exchanges": 0,
+      "outcome": "late",
+      "searches": 0,
+      "seed": 21
+    },
+    {
+      "actions": 44,
+      "battles": 0,
+      "by_kind": {},
+      "cohort": "classic_peaceful",
+      "combat_actions": 0,
+      "day": 24,
+      "ending": "The orchard cuttings reach Lantern Reach in time. There will be new trees here next spring.",
+      "exchanges": 0,
+      "outcome": "delivered",
+      "searches": 0,
+      "seed": 22
+    },
+    {
+      "actions": 48,
+      "battles": 0,
+      "by_kind": {},
+      "cohort": "classic_peaceful",
+      "combat_actions": 0,
+      "day": 27,
+      "ending": "You reach Lantern Reach, but the delivery is past its preferred date.",
+      "exchanges": 0,
+      "outcome": "late",
+      "searches": 0,
+      "seed": 23
+    },
+    {
+      "actions": 47,
+      "battles": 0,
+      "by_kind": {},
+      "cohort": "classic_peaceful",
+      "combat_actions": 0,
+      "day": 26,
+      "ending": "The orchard cuttings reach Lantern Reach in time. There will be new trees here next spring.",
+      "exchanges": 0,
+      "outcome": "delivered",
+      "searches": 0,
+      "seed": 24
+    },
+    {
+      "actions": 60,
+      "battles": 2,
+      "by_kind": {
+        "scavengers": 1,
+        "territorial": 1
+      },
+      "cohort": "classic_fighter",
+      "combat_actions": 13,
+      "day": 28,
+      "ending": "You reach Lantern Reach, but the delivery is past its preferred date.",
+      "exchanges": 7,
+      "outcome": "late",
+      "searches": 0,
+      "seed": 1
+    },
+    {
+      "actions": 64,
+      "battles": 2,
+      "by_kind": {
+        "scavengers": 1,
+        "territorial": 1
+      },
+      "cohort": "classic_fighter",
+      "combat_actions": 13,
+      "day": 29,
+      "ending": "You reach Lantern Reach, but the delivery is past its preferred date.",
+      "exchanges": 7,
+      "outcome": "late",
+      "searches": 0,
+      "seed": 2
+    },
+    {
+      "actions": 53,
+      "battles": 1,
+      "by_kind": {
+        "scavengers": 1
+      },
+      "cohort": "classic_fighter",
+      "combat_actions": 6,
+      "day": 28,
+      "ending": "You reach Lantern Reach, but the delivery is past its preferred date.",
+      "exchanges": 3,
+      "outcome": "late",
+      "searches": 0,
+      "seed": 3
+    },
+    {
+      "actions": 53,
+      "battles": 0,
+      "by_kind": {},
+      "cohort": "classic_fighter",
+      "combat_actions": 0,
+      "day": 29,
+      "ending": "You reach Lantern Reach, but the delivery is past its preferred date.",
+      "exchanges": 0,
+      "outcome": "late",
+      "searches": 0,
+      "seed": 4
+    },
+    {
+      "actions": 56,
+      "battles": 1,
+      "by_kind": {
+        "scavengers": 1
+      },
+      "cohort": "classic_fighter",
+      "combat_actions": 6,
+      "day": 30,
+      "ending": "You reach Lantern Reach, but the delivery is past its preferred date.",
+      "exchanges": 3,
+      "outcome": "late",
+      "searches": 0,
+      "seed": 5
+    },
+    {
+      "actions": 51,
+      "battles": 0,
+      "by_kind": {},
+      "cohort": "classic_fighter",
+      "combat_actions": 0,
+      "day": 29,
+      "ending": "You reach Lantern Reach, but the delivery is past its preferred date.",
+      "exchanges": 0,
+      "outcome": "late",
+      "searches": 0,
+      "seed": 6
+    },
+    {
+      "actions": 61,
+      "battles": 2,
+      "by_kind": {
+        "scavengers": 1,
+        "territorial": 1
+      },
+      "cohort": "classic_fighter",
+      "combat_actions": 13,
+      "day": 28,
+      "ending": "You reach Lantern Reach, but the delivery is past its preferred date.",
+      "exchanges": 7,
+      "outcome": "late",
+      "searches": 0,
+      "seed": 7
+    },
+    {
+      "actions": 47,
+      "battles": 0,
+      "by_kind": {},
+      "cohort": "classic_fighter",
+      "combat_actions": 0,
+      "day": 26,
+      "ending": "The orchard cuttings reach Lantern Reach in time. There will be new trees here next spring.",
+      "exchanges": 0,
+      "outcome": "delivered",
+      "searches": 0,
+      "seed": 8
+    },
+    {
+      "actions": 60,
+      "battles": 2,
+      "by_kind": {
+        "scavengers": 1,
+        "territorial": 1
+      },
+      "cohort": "classic_fighter",
+      "combat_actions": 13,
+      "day": 28,
+      "ending": "You reach Lantern Reach, but the delivery is past its preferred date.",
+      "exchanges": 7,
+      "outcome": "late",
+      "searches": 0,
+      "seed": 9
+    },
+    {
+      "actions": 46,
+      "battles": 0,
+      "by_kind": {},
+      "cohort": "classic_fighter",
+      "combat_actions": 0,
+      "day": 26,
+      "ending": "The orchard cuttings reach Lantern Reach in time. There will be new trees here next spring.",
+      "exchanges": 0,
+      "outcome": "delivered",
+      "searches": 0,
+      "seed": 10
+    },
+    {
+      "actions": 50,
+      "battles": 1,
+      "by_kind": {
+        "scavengers": 1
+      },
+      "cohort": "classic_fighter",
+      "combat_actions": 6,
+      "day": 27,
+      "ending": "You reach Lantern Reach, but the delivery is past its preferred date.",
+      "exchanges": 3,
+      "outcome": "late",
+      "searches": 0,
+      "seed": 11
+    },
+    {
+      "actions": 62,
+      "battles": 1,
+      "by_kind": {
+        "territorial": 1
+      },
+      "cohort": "classic_fighter",
+      "combat_actions": 7,
+      "day": 29,
+      "ending": "You reach Lantern Reach, but the delivery is past its preferred date.",
+      "exchanges": 4,
+      "outcome": "late",
+      "searches": 0,
+      "seed": 12
+    },
+    {
+      "actions": 54,
+      "battles": 1,
+      "by_kind": {
+        "scavengers": 1
+      },
+      "cohort": "classic_fighter",
+      "combat_actions": 6,
+      "day": 28,
+      "ending": "You reach Lantern Reach, but the delivery is past its preferred date.",
+      "exchanges": 3,
+      "outcome": "late",
+      "searches": 0,
+      "seed": 13
+    },
+    {
+      "actions": 54,
+      "battles": 1,
+      "by_kind": {
+        "scavengers": 1
+      },
+      "cohort": "classic_fighter",
+      "combat_actions": 6,
+      "day": 27,
+      "ending": "You reach Lantern Reach, but the delivery is past its preferred date.",
+      "exchanges": 3,
+      "outcome": "late",
+      "searches": 0,
+      "seed": 14
+    },
+    {
+      "actions": 54,
+      "battles": 0,
+      "by_kind": {},
+      "cohort": "classic_fighter",
+      "combat_actions": 0,
+      "day": 32,
+      "ending": "The upland road has closed. A road crew helps the whole wagon home.",
+      "exchanges": 0,
+      "outcome": "rescued",
+      "searches": 0,
+      "seed": 15
+    },
+    {
+      "actions": 46,
+      "battles": 0,
+      "by_kind": {},
+      "cohort": "classic_fighter",
+      "combat_actions": 0,
+      "day": 27,
+      "ending": "You reach Lantern Reach, but the delivery is past its preferred date.",
+      "exchanges": 0,
+      "outcome": "late",
+      "searches": 0,
+      "seed": 16
+    },
+    {
+      "actions": 50,
+      "battles": 0,
+      "by_kind": {},
+      "cohort": "classic_fighter",
+      "combat_actions": 0,
+      "day": 29,
+      "ending": "You reach Lantern Reach, but the delivery is past its preferred date.",
+      "exchanges": 0,
+      "outcome": "late",
+      "searches": 0,
+      "seed": 17
+    },
+    {
+      "actions": 43,
+      "battles": 0,
+      "by_kind": {},
+      "cohort": "classic_fighter",
+      "combat_actions": 0,
+      "day": 26,
+      "ending": "The orchard cuttings reach Lantern Reach in time. There will be new trees here next spring.",
+      "exchanges": 0,
+      "outcome": "delivered",
+      "searches": 0,
+      "seed": 18
+    },
+    {
+      "actions": 47,
+      "battles": 0,
+      "by_kind": {},
+      "cohort": "classic_fighter",
+      "combat_actions": 0,
+      "day": 27,
+      "ending": "You reach Lantern Reach, but the delivery is past its preferred date.",
+      "exchanges": 0,
+      "outcome": "late",
+      "searches": 0,
+      "seed": 19
+    },
+    {
+      "actions": 57,
+      "battles": 2,
+      "by_kind": {
+        "scavengers": 1,
+        "territorial": 1
+      },
+      "cohort": "classic_fighter",
+      "combat_actions": 13,
+      "day": 28,
+      "ending": "You reach Lantern Reach, but the delivery is past its preferred date.",
+      "exchanges": 7,
+      "outcome": "late",
+      "searches": 0,
+      "seed": 20
+    },
+    {
+      "actions": 64,
+      "battles": 2,
+      "by_kind": {
+        "scavengers": 1,
+        "territorial": 1
+      },
+      "cohort": "classic_fighter",
+      "combat_actions": 13,
+      "day": 29,
+      "ending": "You reach Lantern Reach, but the delivery is past its preferred date.",
+      "exchanges": 7,
+      "outcome": "late",
+      "searches": 0,
+      "seed": 21
+    },
+    {
+      "actions": 44,
+      "battles": 0,
+      "by_kind": {},
+      "cohort": "classic_fighter",
+      "combat_actions": 0,
+      "day": 24,
+      "ending": "The orchard cuttings reach Lantern Reach in time. There will be new trees here next spring.",
+      "exchanges": 0,
+      "outcome": "delivered",
+      "searches": 0,
+      "seed": 22
+    },
+    {
+      "actions": 48,
+      "battles": 0,
+      "by_kind": {},
+      "cohort": "classic_fighter",
+      "combat_actions": 0,
+      "day": 27,
+      "ending": "You reach Lantern Reach, but the delivery is past its preferred date.",
+      "exchanges": 0,
+      "outcome": "late",
+      "searches": 0,
+      "seed": 23
+    },
+    {
+      "actions": 51,
+      "battles": 1,
+      "by_kind": {
+        "scavengers": 1
+      },
+      "cohort": "classic_fighter",
+      "combat_actions": 6,
+      "day": 25,
+      "ending": "The orchard cuttings reach Lantern Reach in time. There will be new trees here next spring.",
+      "exchanges": 3,
+      "outcome": "delivered",
+      "searches": 0,
+      "seed": 24
+    },
+    {
+      "actions": 61,
+      "battles": 3,
+      "by_kind": {
+        "courier": 1,
+        "scavengers": 1,
+        "territorial": 1
+      },
+      "cohort": "classic_fighter_practice",
+      "combat_actions": 20,
+      "day": 26,
+      "ending": "The orchard cuttings reach Lantern Reach in time. There will be new trees here next spring.",
+      "exchanges": 10,
+      "outcome": "delivered",
+      "searches": 0,
+      "seed": 1
+    },
+    {
+      "actions": 61,
+      "battles": 2,
+      "by_kind": {
+        "courier": 1,
+        "scavengers": 1
+      },
+      "cohort": "classic_fighter_practice",
+      "combat_actions": 13,
+      "day": 28,
+      "ending": "You reach Lantern Reach, but the delivery is past its preferred date.",
+      "exchanges": 6,
+      "outcome": "late",
+      "searches": 0,
+      "seed": 2
+    },
+    {
+      "actions": 58,
+      "battles": 1,
+      "by_kind": {
+        "courier": 1
+      },
+      "cohort": "classic_fighter_practice",
+      "combat_actions": 7,
+      "day": 30,
+      "ending": "You reach Lantern Reach, but the delivery is past its preferred date.",
+      "exchanges": 3,
+      "outcome": "late",
+      "searches": 0,
+      "seed": 3
+    },
+    {
+      "actions": 61,
+      "battles": 2,
+      "by_kind": {
+        "courier": 1,
+        "scavengers": 1
+      },
+      "cohort": "classic_fighter_practice",
+      "combat_actions": 13,
+      "day": 29,
+      "ending": "You reach Lantern Reach, but the delivery is past its preferred date.",
+      "exchanges": 6,
+      "outcome": "late",
+      "searches": 0,
+      "seed": 4
+    },
+    {
+      "actions": 65,
+      "battles": 2,
+      "by_kind": {
+        "courier": 1,
+        "territorial": 1
+      },
+      "cohort": "classic_fighter_practice",
+      "combat_actions": 14,
+      "day": 31,
+      "ending": "You reach Lantern Reach, but the delivery is past its preferred date.",
+      "exchanges": 7,
+      "outcome": "late",
+      "searches": 0,
+      "seed": 5
+    },
+    {
+      "actions": 56,
+      "battles": 1,
+      "by_kind": {
+        "courier": 1
+      },
+      "cohort": "classic_fighter_practice",
+      "combat_actions": 7,
+      "day": 29,
+      "ending": "You reach Lantern Reach, but the delivery is past its preferred date.",
+      "exchanges": 3,
+      "outcome": "late",
+      "searches": 0,
+      "seed": 6
+    },
+    {
+      "actions": 61,
+      "battles": 2,
+      "by_kind": {
+        "courier": 1,
+        "territorial": 1
+      },
+      "cohort": "classic_fighter_practice",
+      "combat_actions": 14,
+      "day": 28,
+      "ending": "You reach Lantern Reach, but the delivery is past its preferred date.",
+      "exchanges": 7,
+      "outcome": "late",
+      "searches": 0,
+      "seed": 7
+    },
+    {
+      "actions": 53,
+      "battles": 1,
+      "by_kind": {
+        "courier": 1
+      },
+      "cohort": "classic_fighter_practice",
+      "combat_actions": 7,
+      "day": 28,
+      "ending": "You reach Lantern Reach, but the delivery is past its preferred date.",
+      "exchanges": 3,
+      "outcome": "late",
+      "searches": 0,
+      "seed": 8
+    },
+    {
+      "actions": 67,
+      "battles": 3,
+      "by_kind": {
+        "courier": 1,
+        "scavengers": 1,
+        "territorial": 1
+      },
+      "cohort": "classic_fighter_practice",
+      "combat_actions": 20,
+      "day": 29,
+      "ending": "You reach Lantern Reach, but the delivery is past its preferred date.",
+      "exchanges": 10,
+      "outcome": "late",
+      "searches": 0,
+      "seed": 9
+    },
+    {
+      "actions": 48,
+      "battles": 1,
+      "by_kind": {
+        "courier": 1
+      },
+      "cohort": "classic_fighter_practice",
+      "combat_actions": 7,
+      "day": 24,
+      "ending": "The orchard cuttings reach Lantern Reach in time. There will be new trees here next spring.",
+      "exchanges": 3,
+      "outcome": "delivered",
+      "searches": 0,
+      "seed": 10
+    },
+    {
+      "actions": 50,
+      "battles": 1,
+      "by_kind": {
+        "courier": 1
+      },
+      "cohort": "classic_fighter_practice",
+      "combat_actions": 7,
+      "day": 27,
+      "ending": "You reach Lantern Reach, but the delivery is past its preferred date.",
+      "exchanges": 3,
+      "outcome": "late",
+      "searches": 0,
+      "seed": 11
+    },
+    {
+      "actions": 65,
+      "battles": 2,
+      "by_kind": {
+        "courier": 1,
+        "scavengers": 1
+      },
+      "cohort": "classic_fighter_practice",
+      "combat_actions": 13,
+      "day": 28,
+      "ending": "You reach Lantern Reach, but the delivery is past its preferred date.",
+      "exchanges": 6,
+      "outcome": "late",
+      "searches": 0,
+      "seed": 12
+    },
+    {
+      "actions": 57,
+      "battles": 2,
+      "by_kind": {
+        "courier": 1,
+        "scavengers": 1
+      },
+      "cohort": "classic_fighter_practice",
+      "combat_actions": 13,
+      "day": 26,
+      "ending": "The orchard cuttings reach Lantern Reach in time. There will be new trees here next spring.",
+      "exchanges": 6,
+      "outcome": "delivered",
+      "searches": 0,
+      "seed": 13
+    },
+    {
+      "actions": 56,
+      "battles": 2,
+      "by_kind": {
+        "courier": 1,
+        "scavengers": 1
+      },
+      "cohort": "classic_fighter_practice",
+      "combat_actions": 13,
+      "day": 27,
+      "ending": "You reach Lantern Reach, but the delivery is past its preferred date.",
+      "exchanges": 6,
+      "outcome": "late",
+      "searches": 0,
+      "seed": 14
+    },
+    {
+      "actions": 65,
+      "battles": 2,
+      "by_kind": {
+        "courier": 1,
+        "scavengers": 1
+      },
+      "cohort": "classic_fighter_practice",
+      "combat_actions": 13,
+      "day": 30,
+      "ending": "You reach Lantern Reach, but the delivery is past its preferred date.",
+      "exchanges": 6,
+      "outcome": "late",
+      "searches": 0,
+      "seed": 15
+    },
+    {
+      "actions": 55,
+      "battles": 1,
+      "by_kind": {
+        "courier": 1
+      },
+      "cohort": "classic_fighter_practice",
+      "combat_actions": 7,
+      "day": 27,
+      "ending": "You reach Lantern Reach, but the delivery is past its preferred date.",
+      "exchanges": 3,
+      "outcome": "late",
+      "searches": 0,
+      "seed": 16
+    },
+    {
+      "actions": 55,
+      "battles": 1,
+      "by_kind": {
+        "courier": 1
+      },
+      "cohort": "classic_fighter_practice",
+      "combat_actions": 7,
+      "day": 29,
+      "ending": "You reach Lantern Reach, but the delivery is past its preferred date.",
+      "exchanges": 3,
+      "outcome": "late",
+      "searches": 0,
+      "seed": 17
+    },
+    {
+      "actions": 61,
+      "battles": 2,
+      "by_kind": {
+        "courier": 1,
+        "territorial": 1
+      },
+      "cohort": "classic_fighter_practice",
+      "combat_actions": 14,
+      "day": 28,
+      "ending": "You reach Lantern Reach, but the delivery is past its preferred date.",
+      "exchanges": 7,
+      "outcome": "late",
+      "searches": 0,
+      "seed": 18
+    },
+    {
+      "actions": 54,
+      "battles": 1,
+      "by_kind": {
+        "courier": 1
+      },
+      "cohort": "classic_fighter_practice",
+      "combat_actions": 7,
+      "day": 29,
+      "ending": "You reach Lantern Reach, but the delivery is past its preferred date.",
+      "exchanges": 3,
+      "outcome": "late",
+      "searches": 0,
+      "seed": 19
+    },
+    {
+      "actions": 58,
+      "battles": 2,
+      "by_kind": {
+        "courier": 1,
+        "scavengers": 1
+      },
+      "cohort": "classic_fighter_practice",
+      "combat_actions": 13,
+      "day": 28,
+      "ending": "You reach Lantern Reach, but the delivery is past its preferred date.",
+      "exchanges": 6,
+      "outcome": "late",
+      "searches": 0,
+      "seed": 20
+    },
+    {
+      "actions": 54,
+      "battles": 1,
+      "by_kind": {
+        "courier": 1
+      },
+      "cohort": "classic_fighter_practice",
+      "combat_actions": 7,
+      "day": 27,
+      "ending": "You reach Lantern Reach, but the delivery is past its preferred date.",
+      "exchanges": 3,
+      "outcome": "late",
+      "searches": 0,
+      "seed": 21
+    },
+    {
+      "actions": 54,
+      "battles": 1,
+      "by_kind": {
+        "courier": 1
+      },
+      "cohort": "classic_fighter_practice",
+      "combat_actions": 7,
+      "day": 27,
+      "ending": "You reach Lantern Reach, but the delivery is past its preferred date.",
+      "exchanges": 3,
+      "outcome": "late",
+      "searches": 0,
+      "seed": 22
+    },
+    {
+      "actions": 54,
+      "battles": 1,
+      "by_kind": {
+        "courier": 1
+      },
+      "cohort": "classic_fighter_practice",
+      "combat_actions": 7,
+      "day": 27,
+      "ending": "You reach Lantern Reach, but the delivery is past its preferred date.",
+      "exchanges": 3,
+      "outcome": "late",
+      "searches": 0,
+      "seed": 23
+    },
+    {
+      "actions": 55,
+      "battles": 2,
+      "by_kind": {
+        "courier": 1,
+        "scavengers": 1
+      },
+      "cohort": "classic_fighter_practice",
+      "combat_actions": 13,
+      "day": 26,
+      "ending": "The orchard cuttings reach Lantern Reach in time. There will be new trees here next spring.",
+      "exchanges": 6,
+      "outcome": "delivered",
+      "searches": 0,
+      "seed": 24
+    },
+    {
+      "actions": 49,
+      "battles": 0,
+      "by_kind": {},
+      "cohort": "discovery_brindle_peaceful",
+      "combat_actions": 0,
+      "day": 27,
+      "ending": "You reach Lantern Reach, but the delivery is past its preferred date.",
+      "exchanges": 0,
+      "outcome": "late",
+      "searches": 0,
+      "seed": 1
+    },
+    {
+      "actions": 50,
+      "battles": 0,
+      "by_kind": {},
+      "cohort": "discovery_brindle_peaceful",
+      "combat_actions": 0,
+      "day": 27,
+      "ending": "You reach Lantern Reach, but the delivery is past its preferred date.",
+      "exchanges": 0,
+      "outcome": "late",
+      "searches": 0,
+      "seed": 2
+    },
+    {
+      "actions": 51,
+      "battles": 0,
+      "by_kind": {},
+      "cohort": "discovery_brindle_peaceful",
+      "combat_actions": 0,
+      "day": 28,
+      "ending": "You reach Lantern Reach, but the delivery is past its preferred date.",
+      "exchanges": 0,
+      "outcome": "late",
+      "searches": 0,
+      "seed": 3
+    },
+    {
+      "actions": 53,
+      "battles": 0,
+      "by_kind": {},
+      "cohort": "discovery_brindle_peaceful",
+      "combat_actions": 0,
+      "day": 29,
+      "ending": "You reach Lantern Reach, but the delivery is past its preferred date.",
+      "exchanges": 0,
+      "outcome": "late",
+      "searches": 0,
+      "seed": 4
+    },
+    {
+      "actions": 53,
+      "battles": 0,
+      "by_kind": {},
+      "cohort": "discovery_brindle_peaceful",
+      "combat_actions": 0,
+      "day": 31,
+      "ending": "You reach Lantern Reach, but the delivery is past its preferred date.",
+      "exchanges": 0,
+      "outcome": "late",
+      "searches": 0,
+      "seed": 5
+    },
+    {
+      "actions": 51,
+      "battles": 0,
+      "by_kind": {},
+      "cohort": "discovery_brindle_peaceful",
+      "combat_actions": 0,
+      "day": 29,
+      "ending": "You reach Lantern Reach, but the delivery is past its preferred date.",
+      "exchanges": 0,
+      "outcome": "late",
+      "searches": 0,
+      "seed": 6
+    },
+    {
+      "actions": 49,
+      "battles": 0,
+      "by_kind": {},
+      "cohort": "discovery_brindle_peaceful",
+      "combat_actions": 0,
+      "day": 29,
+      "ending": "You reach Lantern Reach, but the delivery is past its preferred date.",
+      "exchanges": 0,
+      "outcome": "late",
+      "searches": 0,
+      "seed": 7
+    },
+    {
+      "actions": 49,
+      "battles": 0,
+      "by_kind": {},
+      "cohort": "discovery_brindle_peaceful",
+      "combat_actions": 0,
+      "day": 28,
+      "ending": "You reach Lantern Reach, but the delivery is past its preferred date.",
+      "exchanges": 0,
+      "outcome": "late",
+      "searches": 0,
+      "seed": 8
+    },
+    {
+      "actions": 49,
+      "battles": 0,
+      "by_kind": {},
+      "cohort": "discovery_brindle_peaceful",
+      "combat_actions": 0,
+      "day": 29,
+      "ending": "You reach Lantern Reach, but the delivery is past its preferred date.",
+      "exchanges": 0,
+      "outcome": "late",
+      "searches": 0,
+      "seed": 9
+    },
+    {
+      "actions": 44,
+      "battles": 0,
+      "by_kind": {},
+      "cohort": "discovery_brindle_peaceful",
+      "combat_actions": 0,
+      "day": 24,
+      "ending": "The orchard cuttings reach Lantern Reach in time. There will be new trees here next spring.",
+      "exchanges": 0,
+      "outcome": "delivered",
+      "searches": 0,
+      "seed": 10
+    },
+    {
+      "actions": 44,
+      "battles": 0,
+      "by_kind": {},
+      "cohort": "discovery_brindle_peaceful",
+      "combat_actions": 0,
+      "day": 27,
+      "ending": "You reach Lantern Reach, but the delivery is past its preferred date.",
+      "exchanges": 0,
+      "outcome": "late",
+      "searches": 0,
+      "seed": 11
+    },
+    {
+      "actions": 54,
+      "battles": 0,
+      "by_kind": {},
+      "cohort": "discovery_brindle_peaceful",
+      "combat_actions": 0,
+      "day": 27,
+      "ending": "You reach Lantern Reach, but the delivery is past its preferred date.",
+      "exchanges": 0,
+      "outcome": "late",
+      "searches": 0,
+      "seed": 12
+    },
+    {
+      "actions": 52,
+      "battles": 0,
+      "by_kind": {},
+      "cohort": "discovery_brindle_peaceful",
+      "combat_actions": 0,
+      "day": 27,
+      "ending": "You reach Lantern Reach, but the delivery is past its preferred date.",
+      "exchanges": 0,
+      "outcome": "late",
+      "searches": 0,
+      "seed": 13
+    },
+    {
+      "actions": 48,
+      "battles": 0,
+      "by_kind": {},
+      "cohort": "discovery_brindle_peaceful",
+      "combat_actions": 0,
+      "day": 27,
+      "ending": "You reach Lantern Reach, but the delivery is past its preferred date.",
+      "exchanges": 0,
+      "outcome": "late",
+      "searches": 0,
+      "seed": 14
+    },
+    {
+      "actions": 55,
+      "battles": 0,
+      "by_kind": {},
+      "cohort": "discovery_brindle_peaceful",
+      "combat_actions": 0,
+      "day": 31,
+      "ending": "You reach Lantern Reach, but the delivery is past its preferred date.",
+      "exchanges": 0,
+      "outcome": "late",
+      "searches": 0,
+      "seed": 15
+    },
+    {
+      "actions": 49,
+      "battles": 0,
+      "by_kind": {},
+      "cohort": "discovery_brindle_peaceful",
+      "combat_actions": 0,
+      "day": 27,
+      "ending": "You reach Lantern Reach, but the delivery is past its preferred date.",
+      "exchanges": 0,
+      "outcome": "late",
+      "searches": 0,
+      "seed": 16
+    },
+    {
+      "actions": 50,
+      "battles": 0,
+      "by_kind": {},
+      "cohort": "discovery_brindle_peaceful",
+      "combat_actions": 0,
+      "day": 29,
+      "ending": "You reach Lantern Reach, but the delivery is past its preferred date.",
+      "exchanges": 0,
+      "outcome": "late",
+      "searches": 0,
+      "seed": 17
+    },
+    {
+      "actions": 49,
+      "battles": 0,
+      "by_kind": {},
+      "cohort": "discovery_brindle_peaceful",
+      "combat_actions": 0,
+      "day": 28,
+      "ending": "You reach Lantern Reach, but the delivery is past its preferred date.",
+      "exchanges": 0,
+      "outcome": "late",
+      "searches": 0,
+      "seed": 18
+    },
+    {
+      "actions": 50,
+      "battles": 0,
+      "by_kind": {},
+      "cohort": "discovery_brindle_peaceful",
+      "combat_actions": 0,
+      "day": 30,
+      "ending": "You reach Lantern Reach, but the delivery is past its preferred date.",
+      "exchanges": 0,
+      "outcome": "late",
+      "searches": 0,
+      "seed": 19
+    },
+    {
+      "actions": 50,
+      "battles": 0,
+      "by_kind": {},
+      "cohort": "discovery_brindle_peaceful",
+      "combat_actions": 0,
+      "day": 28,
+      "ending": "You reach Lantern Reach, but the delivery is past its preferred date.",
+      "exchanges": 0,
+      "outcome": "late",
+      "searches": 0,
+      "seed": 20
+    },
+    {
+      "actions": 50,
+      "battles": 0,
+      "by_kind": {},
+      "cohort": "discovery_brindle_peaceful",
+      "combat_actions": 0,
+      "day": 27,
+      "ending": "You reach Lantern Reach, but the delivery is past its preferred date.",
+      "exchanges": 0,
+      "outcome": "late",
+      "searches": 0,
+      "seed": 21
+    },
+    {
+      "actions": 50,
+      "battles": 0,
+      "by_kind": {},
+      "cohort": "discovery_brindle_peaceful",
+      "combat_actions": 0,
+      "day": 27,
+      "ending": "You reach Lantern Reach, but the delivery is past its preferred date.",
+      "exchanges": 0,
+      "outcome": "late",
+      "searches": 0,
+      "seed": 22
+    },
+    {
+      "actions": 51,
+      "battles": 0,
+      "by_kind": {},
+      "cohort": "discovery_brindle_peaceful",
+      "combat_actions": 0,
+      "day": 27,
+      "ending": "You reach Lantern Reach, but the delivery is past its preferred date.",
+      "exchanges": 0,
+      "outcome": "late",
+      "searches": 0,
+      "seed": 23
+    },
+    {
+      "actions": 51,
+      "battles": 0,
+      "by_kind": {},
+      "cohort": "discovery_brindle_peaceful",
+      "combat_actions": 0,
+      "day": 29,
+      "ending": "You reach Lantern Reach, but the delivery is past its preferred date.",
+      "exchanges": 0,
+      "outcome": "late",
+      "searches": 0,
+      "seed": 24
+    },
+    {
+      "actions": 62,
+      "battles": 2,
+      "by_kind": {
+        "courier": 1,
+        "scavengers": 1
+      },
+      "cohort": "discovery_brindle_fighter_practice",
+      "combat_actions": 13,
+      "day": 27,
+      "ending": "You reach Lantern Reach, but the delivery is past its preferred date.",
+      "exchanges": 6,
+      "outcome": "late",
+      "searches": 0,
+      "seed": 1
+    },
+    {
+      "actions": 73,
+      "battles": 3,
+      "by_kind": {
+        "courier": 1,
+        "scavengers": 1,
+        "territorial": 1
+      },
+      "cohort": "discovery_brindle_fighter_practice",
+      "combat_actions": 20,
+      "day": 29,
+      "ending": "You reach Lantern Reach, but the delivery is past its preferred date.",
+      "exchanges": 10,
+      "outcome": "late",
+      "searches": 0,
+      "seed": 2
+    },
+    {
+      "actions": 64,
+      "battles": 2,
+      "by_kind": {
+        "courier": 1,
+        "scavengers": 1
+      },
+      "cohort": "discovery_brindle_fighter_practice",
+      "combat_actions": 13,
+      "day": 28,
+      "ending": "You reach Lantern Reach, but the delivery is past its preferred date.",
+      "exchanges": 6,
+      "outcome": "late",
+      "searches": 0,
+      "seed": 3
+    },
+    {
+      "actions": 61,
+      "battles": 1,
+      "by_kind": {
+        "courier": 1
+      },
+      "cohort": "discovery_brindle_fighter_practice",
+      "combat_actions": 7,
+      "day": 28,
+      "ending": "You reach Lantern Reach, but the delivery is past its preferred date.",
+      "exchanges": 3,
+      "outcome": "late",
+      "searches": 0,
+      "seed": 4
+    },
+    {
+      "actions": 58,
+      "battles": 1,
+      "by_kind": {
+        "courier": 1
+      },
+      "cohort": "discovery_brindle_fighter_practice",
+      "combat_actions": 7,
+      "day": 29,
+      "ending": "You reach Lantern Reach, but the delivery is past its preferred date.",
+      "exchanges": 3,
+      "outcome": "late",
+      "searches": 0,
+      "seed": 5
+    },
+    {
+      "actions": 60,
+      "battles": 1,
+      "by_kind": {
+        "courier": 1
+      },
+      "cohort": "discovery_brindle_fighter_practice",
+      "combat_actions": 7,
+      "day": 30,
+      "ending": "You reach Lantern Reach, but the delivery is past its preferred date.",
+      "exchanges": 3,
+      "outcome": "late",
+      "searches": 0,
+      "seed": 6
+    },
+    {
+      "actions": 66,
+      "battles": 2,
+      "by_kind": {
+        "courier": 1,
+        "scavengers": 1
+      },
+      "cohort": "discovery_brindle_fighter_practice",
+      "combat_actions": 13,
+      "day": 30,
+      "ending": "You reach Lantern Reach, but the delivery is past its preferred date.",
+      "exchanges": 6,
+      "outcome": "late",
+      "searches": 0,
+      "seed": 7
+    },
+    {
+      "actions": 64,
+      "battles": 2,
+      "by_kind": {
+        "courier": 1,
+        "territorial": 1
+      },
+      "cohort": "discovery_brindle_fighter_practice",
+      "combat_actions": 14,
+      "day": 29,
+      "ending": "You reach Lantern Reach, but the delivery is past its preferred date.",
+      "exchanges": 7,
+      "outcome": "late",
+      "searches": 0,
+      "seed": 8
+    },
+    {
+      "actions": 68,
+      "battles": 2,
+      "by_kind": {
+        "courier": 1,
+        "territorial": 1
+      },
+      "cohort": "discovery_brindle_fighter_practice",
+      "combat_actions": 14,
+      "day": 30,
+      "ending": "You reach Lantern Reach, but the delivery is past its preferred date.",
+      "exchanges": 7,
+      "outcome": "late",
+      "searches": 0,
+      "seed": 9
+    },
+    {
+      "actions": 54,
+      "battles": 1,
+      "by_kind": {
+        "courier": 1
+      },
+      "cohort": "discovery_brindle_fighter_practice",
+      "combat_actions": 7,
+      "day": 25,
+      "ending": "The orchard cuttings reach Lantern Reach in time. There will be new trees here next spring.",
+      "exchanges": 3,
+      "outcome": "delivered",
+      "searches": 0,
+      "seed": 10
+    },
+    {
+      "actions": 56,
+      "battles": 1,
+      "by_kind": {
+        "courier": 1
+      },
+      "cohort": "discovery_brindle_fighter_practice",
+      "combat_actions": 7,
+      "day": 28,
+      "ending": "You reach Lantern Reach, but the delivery is past its preferred date.",
+      "exchanges": 3,
+      "outcome": "late",
+      "searches": 0,
+      "seed": 11
+    },
+    {
+      "actions": 70,
+      "battles": 2,
+      "by_kind": {
+        "courier": 1,
+        "scavengers": 1
+      },
+      "cohort": "discovery_brindle_fighter_practice",
+      "combat_actions": 13,
+      "day": 30,
+      "ending": "You reach Lantern Reach, but the delivery is past its preferred date.",
+      "exchanges": 6,
+      "outcome": "late",
+      "searches": 0,
+      "seed": 12
+    },
+    {
+      "actions": 65,
+      "battles": 2,
+      "by_kind": {
+        "courier": 1,
+        "scavengers": 1
+      },
+      "cohort": "discovery_brindle_fighter_practice",
+      "combat_actions": 13,
+      "day": 29,
+      "ending": "You reach Lantern Reach, but the delivery is past its preferred date.",
+      "exchanges": 6,
+      "outcome": "late",
+      "searches": 0,
+      "seed": 13
+    },
+    {
+      "actions": 66,
+      "battles": 2,
+      "by_kind": {
+        "courier": 1,
+        "scavengers": 1
+      },
+      "cohort": "discovery_brindle_fighter_practice",
+      "combat_actions": 13,
+      "day": 29,
+      "ending": "You reach Lantern Reach, but the delivery is past its preferred date.",
+      "exchanges": 6,
+      "outcome": "late",
+      "searches": 0,
+      "seed": 14
+    },
+    {
+      "actions": 71,
+      "battles": 2,
+      "by_kind": {
+        "courier": 1,
+        "territorial": 1
+      },
+      "cohort": "discovery_brindle_fighter_practice",
+      "combat_actions": 14,
+      "day": 32,
+      "ending": "The upland road has closed. A road crew helps the whole wagon home.",
+      "exchanges": 7,
+      "outcome": "rescued",
+      "searches": 0,
+      "seed": 15
+    },
+    {
+      "actions": 65,
+      "battles": 2,
+      "by_kind": {
+        "courier": 1,
+        "territorial": 1
+      },
+      "cohort": "discovery_brindle_fighter_practice",
+      "combat_actions": 14,
+      "day": 27,
+      "ending": "You reach Lantern Reach, but the delivery is past its preferred date.",
+      "exchanges": 7,
+      "outcome": "late",
+      "searches": 0,
+      "seed": 16
+    },
+    {
+      "actions": 61,
+      "battles": 1,
+      "by_kind": {
+        "courier": 1
+      },
+      "cohort": "discovery_brindle_fighter_practice",
+      "combat_actions": 7,
+      "day": 29,
+      "ending": "You reach Lantern Reach, but the delivery is past its preferred date.",
+      "exchanges": 3,
+      "outcome": "late",
+      "searches": 0,
+      "seed": 17
+    },
+    {
+      "actions": 58,
+      "battles": 1,
+      "by_kind": {
+        "courier": 1
+      },
+      "cohort": "discovery_brindle_fighter_practice",
+      "combat_actions": 7,
+      "day": 28,
+      "ending": "You reach Lantern Reach, but the delivery is past its preferred date.",
+      "exchanges": 3,
+      "outcome": "late",
+      "searches": 0,
+      "seed": 18
+    },
+    {
+      "actions": 59,
+      "battles": 1,
+      "by_kind": {
+        "courier": 1
+      },
+      "cohort": "discovery_brindle_fighter_practice",
+      "combat_actions": 7,
+      "day": 28,
+      "ending": "You reach Lantern Reach, but the delivery is past its preferred date.",
+      "exchanges": 3,
+      "outcome": "late",
+      "searches": 0,
+      "seed": 19
+    },
+    {
+      "actions": 71,
+      "battles": 3,
+      "by_kind": {
+        "courier": 1,
+        "scavengers": 1,
+        "territorial": 1
+      },
+      "cohort": "discovery_brindle_fighter_practice",
+      "combat_actions": 20,
+      "day": 30,
+      "ending": "You reach Lantern Reach, but the delivery is past its preferred date.",
+      "exchanges": 10,
+      "outcome": "late",
+      "searches": 0,
+      "seed": 20
+    },
+    {
+      "actions": 59,
+      "battles": 1,
+      "by_kind": {
+        "courier": 1
+      },
+      "cohort": "discovery_brindle_fighter_practice",
+      "combat_actions": 7,
+      "day": 27,
+      "ending": "You reach Lantern Reach, but the delivery is past its preferred date.",
+      "exchanges": 3,
+      "outcome": "late",
+      "searches": 0,
+      "seed": 21
+    },
+    {
+      "actions": 66,
+      "battles": 2,
+      "by_kind": {
+        "courier": 1,
+        "territorial": 1
+      },
+      "cohort": "discovery_brindle_fighter_practice",
+      "combat_actions": 14,
+      "day": 28,
+      "ending": "You reach Lantern Reach, but the delivery is past its preferred date.",
+      "exchanges": 7,
+      "outcome": "late",
+      "searches": 0,
+      "seed": 22
+    },
+    {
+      "actions": 57,
+      "battles": 1,
+      "by_kind": {
+        "courier": 1
+      },
+      "cohort": "discovery_brindle_fighter_practice",
+      "combat_actions": 7,
+      "day": 27,
+      "ending": "You reach Lantern Reach, but the delivery is past its preferred date.",
+      "exchanges": 3,
+      "outcome": "late",
+      "searches": 0,
+      "seed": 23
+    },
+    {
+      "actions": 65,
+      "battles": 2,
+      "by_kind": {
+        "courier": 1,
+        "scavengers": 1
+      },
+      "cohort": "discovery_brindle_fighter_practice",
+      "combat_actions": 13,
+      "day": 29,
+      "ending": "You reach Lantern Reach, but the delivery is past its preferred date.",
+      "exchanges": 6,
+      "outcome": "late",
+      "searches": 0,
+      "seed": 24
+    },
+    {
+      "actions": 75,
+      "battles": 3,
+      "by_kind": {
+        "courier": 1,
+        "scavengers": 1,
+        "territorial": 1
+      },
+      "cohort": "discovery_reed_fighter_practice",
+      "combat_actions": 20,
+      "day": 31,
+      "ending": "You reach Lantern Reach, but the delivery is past its preferred date.",
+      "exchanges": 10,
+      "outcome": "late",
+      "searches": 0,
+      "seed": 1
+    },
+    {
+      "actions": 69,
+      "battles": 2,
+      "by_kind": {
+        "courier": 1,
+        "scavengers": 1
+      },
+      "cohort": "discovery_reed_fighter_practice",
+      "combat_actions": 13,
+      "day": 29,
+      "ending": "You reach Lantern Reach, but the delivery is past its preferred date.",
+      "exchanges": 6,
+      "outcome": "late",
+      "searches": 0,
+      "seed": 2
+    },
+    {
+      "actions": 61,
+      "battles": 1,
+      "by_kind": {
+        "courier": 1
+      },
+      "cohort": "discovery_reed_fighter_practice",
+      "combat_actions": 7,
+      "day": 30,
+      "ending": "You reach Lantern Reach, but the delivery is past its preferred date.",
+      "exchanges": 3,
+      "outcome": "late",
+      "searches": 0,
+      "seed": 3
+    },
+    {
+      "actions": 66,
+      "battles": 2,
+      "by_kind": {
+        "courier": 1,
+        "scavengers": 1
+      },
+      "cohort": "discovery_reed_fighter_practice",
+      "combat_actions": 13,
+      "day": 29,
+      "ending": "You reach Lantern Reach, but the delivery is past its preferred date.",
+      "exchanges": 6,
+      "outcome": "late",
+      "searches": 0,
+      "seed": 4
+    },
+    {
+      "actions": 69,
+      "battles": 2,
+      "by_kind": {
+        "courier": 1,
+        "territorial": 1
+      },
+      "cohort": "discovery_reed_fighter_practice",
+      "combat_actions": 14,
+      "day": 32,
+      "ending": "The upland road has closed. A road crew helps the whole wagon home.",
+      "exchanges": 7,
+      "outcome": "rescued",
+      "searches": 0,
+      "seed": 5
+    },
+    {
+      "actions": 71,
+      "battles": 2,
+      "by_kind": {
+        "courier": 1,
+        "territorial": 1
+      },
+      "cohort": "discovery_reed_fighter_practice",
+      "combat_actions": 14,
+      "day": 32,
+      "ending": "The upland road has closed. A road crew helps the whole wagon home.",
+      "exchanges": 7,
+      "outcome": "rescued",
+      "searches": 0,
+      "seed": 6
+    },
+    {
+      "actions": 68,
+      "battles": 2,
+      "by_kind": {
+        "courier": 1,
+        "territorial": 1
+      },
+      "cohort": "discovery_reed_fighter_practice",
+      "combat_actions": 14,
+      "day": 31,
+      "ending": "You reach Lantern Reach, but the delivery is past its preferred date.",
+      "exchanges": 7,
+      "outcome": "late",
+      "searches": 0,
+      "seed": 7
+    },
+    {
+      "actions": 61,
+      "battles": 1,
+      "by_kind": {
+        "courier": 1
+      },
+      "cohort": "discovery_reed_fighter_practice",
+      "combat_actions": 7,
+      "day": 29,
+      "ending": "You reach Lantern Reach, but the delivery is past its preferred date.",
+      "exchanges": 3,
+      "outcome": "late",
+      "searches": 0,
+      "seed": 8
+    },
+    {
+      "actions": 66,
+      "battles": 2,
+      "by_kind": {
+        "courier": 1,
+        "territorial": 1
+      },
+      "cohort": "discovery_reed_fighter_practice",
+      "combat_actions": 14,
+      "day": 31,
+      "ending": "You reach Lantern Reach, but the delivery is past its preferred date.",
+      "exchanges": 7,
+      "outcome": "late",
+      "searches": 0,
+      "seed": 9
+    },
+    {
+      "actions": 55,
+      "battles": 1,
+      "by_kind": {
+        "courier": 1
+      },
+      "cohort": "discovery_reed_fighter_practice",
+      "combat_actions": 7,
+      "day": 25,
+      "ending": "The orchard cuttings reach Lantern Reach in time. There will be new trees here next spring.",
+      "exchanges": 3,
+      "outcome": "delivered",
+      "searches": 0,
+      "seed": 10
+    },
+    {
+      "actions": 56,
+      "battles": 1,
+      "by_kind": {
+        "courier": 1
+      },
+      "cohort": "discovery_reed_fighter_practice",
+      "combat_actions": 7,
+      "day": 28,
+      "ending": "You reach Lantern Reach, but the delivery is past its preferred date.",
+      "exchanges": 3,
+      "outcome": "late",
+      "searches": 0,
+      "seed": 11
+    },
+    {
+      "actions": 71,
+      "battles": 2,
+      "by_kind": {
+        "courier": 1,
+        "scavengers": 1
+      },
+      "cohort": "discovery_reed_fighter_practice",
+      "combat_actions": 13,
+      "day": 30,
+      "ending": "You reach Lantern Reach, but the delivery is past its preferred date.",
+      "exchanges": 6,
+      "outcome": "late",
+      "searches": 0,
+      "seed": 12
+    },
+    {
+      "actions": 69,
+      "battles": 2,
+      "by_kind": {
+        "courier": 1,
+        "scavengers": 1
+      },
+      "cohort": "discovery_reed_fighter_practice",
+      "combat_actions": 13,
+      "day": 30,
+      "ending": "You reach Lantern Reach, but the delivery is past its preferred date.",
+      "exchanges": 6,
+      "outcome": "late",
+      "searches": 0,
+      "seed": 13
+    },
+    {
+      "actions": 67,
+      "battles": 2,
+      "by_kind": {
+        "courier": 1,
+        "scavengers": 1
+      },
+      "cohort": "discovery_reed_fighter_practice",
+      "combat_actions": 13,
+      "day": 29,
+      "ending": "You reach Lantern Reach, but the delivery is past its preferred date.",
+      "exchanges": 6,
+      "outcome": "late",
+      "searches": 0,
+      "seed": 14
+    },
+    {
+      "actions": 69,
+      "battles": 2,
+      "by_kind": {
+        "courier": 1,
+        "scavengers": 1
+      },
+      "cohort": "discovery_reed_fighter_practice",
+      "combat_actions": 13,
+      "day": 32,
+      "ending": "The upland road has closed. A road crew helps the whole wagon home.",
+      "exchanges": 6,
+      "outcome": "rescued",
+      "searches": 0,
+      "seed": 15
+    },
+    {
+      "actions": 60,
+      "battles": 1,
+      "by_kind": {
+        "courier": 1
+      },
+      "cohort": "discovery_reed_fighter_practice",
+      "combat_actions": 7,
+      "day": 28,
+      "ending": "You reach Lantern Reach, but the delivery is past its preferred date.",
+      "exchanges": 3,
+      "outcome": "late",
+      "searches": 0,
+      "seed": 16
+    },
+    {
+      "actions": 61,
+      "battles": 1,
+      "by_kind": {
+        "courier": 1
+      },
+      "cohort": "discovery_reed_fighter_practice",
+      "combat_actions": 7,
+      "day": 29,
+      "ending": "You reach Lantern Reach, but the delivery is past its preferred date.",
+      "exchanges": 3,
+      "outcome": "late",
+      "searches": 0,
+      "seed": 17
+    },
+    {
+      "actions": 69,
+      "battles": 2,
+      "by_kind": {
+        "courier": 1,
+        "territorial": 1
+      },
+      "cohort": "discovery_reed_fighter_practice",
+      "combat_actions": 14,
+      "day": 30,
+      "ending": "You reach Lantern Reach, but the delivery is past its preferred date.",
+      "exchanges": 7,
+      "outcome": "late",
+      "searches": 0,
+      "seed": 18
+    },
+    {
+      "actions": 59,
+      "battles": 1,
+      "by_kind": {
+        "courier": 1
+      },
+      "cohort": "discovery_reed_fighter_practice",
+      "combat_actions": 7,
+      "day": 30,
+      "ending": "You reach Lantern Reach, but the delivery is past its preferred date.",
+      "exchanges": 3,
+      "outcome": "late",
+      "searches": 0,
+      "seed": 19
+    },
+    {
+      "actions": 67,
+      "battles": 2,
+      "by_kind": {
+        "courier": 1,
+        "scavengers": 1
+      },
+      "cohort": "discovery_reed_fighter_practice",
+      "combat_actions": 13,
+      "day": 30,
+      "ending": "You reach Lantern Reach, but the delivery is past its preferred date.",
+      "exchanges": 6,
+      "outcome": "late",
+      "searches": 0,
+      "seed": 20
+    },
+    {
+      "actions": 62,
+      "battles": 1,
+      "by_kind": {
+        "courier": 1
+      },
+      "cohort": "discovery_reed_fighter_practice",
+      "combat_actions": 7,
+      "day": 29,
+      "ending": "You reach Lantern Reach, but the delivery is past its preferred date.",
+      "exchanges": 3,
+      "outcome": "late",
+      "searches": 0,
+      "seed": 21
+    },
+    {
+      "actions": 62,
+      "battles": 1,
+      "by_kind": {
+        "courier": 1
+      },
+      "cohort": "discovery_reed_fighter_practice",
+      "combat_actions": 7,
+      "day": 29,
+      "ending": "You reach Lantern Reach, but the delivery is past its preferred date.",
+      "exchanges": 3,
+      "outcome": "late",
+      "searches": 0,
+      "seed": 22
+    },
+    {
+      "actions": 63,
+      "battles": 1,
+      "by_kind": {
+        "courier": 1
+      },
+      "cohort": "discovery_reed_fighter_practice",
+      "combat_actions": 7,
+      "day": 29,
+      "ending": "You reach Lantern Reach, but the delivery is past its preferred date.",
+      "exchanges": 3,
+      "outcome": "late",
+      "searches": 0,
+      "seed": 23
+    },
+    {
+      "actions": 68,
+      "battles": 2,
+      "by_kind": {
+        "courier": 1,
+        "scavengers": 1
+      },
+      "cohort": "discovery_reed_fighter_practice",
+      "combat_actions": 13,
+      "day": 29,
+      "ending": "You reach Lantern Reach, but the delivery is past its preferred date.",
+      "exchanges": 6,
+      "outcome": "late",
+      "searches": 0,
+      "seed": 24
+    },
+    {
+      "actions": 65,
+      "battles": 1,
+      "by_kind": {
+        "courier": 1
+      },
+      "cohort": "discovery_brindle_explorer",
+      "combat_actions": 7,
+      "day": 32,
+      "ending": "The upland road has closed. A road crew helps the whole wagon home.",
+      "exchanges": 3,
+      "outcome": "rescued",
+      "searches": 5,
+      "seed": 1
+    },
+    {
+      "actions": 73,
+      "battles": 2,
+      "by_kind": {
+        "courier": 1,
+        "scavengers": 1
+      },
+      "cohort": "discovery_brindle_explorer",
+      "combat_actions": 13,
+      "day": 32,
+      "ending": "The upland road has closed. A road crew helps the whole wagon home.",
+      "exchanges": 6,
+      "outcome": "rescued",
+      "searches": 5,
+      "seed": 2
+    },
+    {
+      "actions": 70,
+      "battles": 1,
+      "by_kind": {
+        "courier": 1
+      },
+      "cohort": "discovery_brindle_explorer",
+      "combat_actions": 7,
+      "day": 31,
+      "ending": "You reach Lantern Reach, but the delivery is past its preferred date.",
+      "exchanges": 3,
+      "outcome": "late",
+      "searches": 4,
+      "seed": 3
+    },
+    {
+      "actions": 73,
+      "battles": 1,
+      "by_kind": {
+        "courier": 1
+      },
+      "cohort": "discovery_brindle_explorer",
+      "combat_actions": 7,
+      "day": 32,
+      "ending": "The upland road has closed. A road crew helps the whole wagon home.",
+      "exchanges": 3,
+      "outcome": "rescued",
+      "searches": 4,
+      "seed": 4
+    },
+    {
+      "actions": 67,
+      "battles": 1,
+      "by_kind": {
+        "courier": 1
+      },
+      "cohort": "discovery_brindle_explorer",
+      "combat_actions": 7,
+      "day": 32,
+      "ending": "The upland road has closed. A road crew helps the whole wagon home.",
+      "exchanges": 3,
+      "outcome": "rescued",
+      "searches": 4,
+      "seed": 5
+    },
+    {
+      "actions": 69,
+      "battles": 1,
+      "by_kind": {
+        "courier": 1
+      },
+      "cohort": "discovery_brindle_explorer",
+      "combat_actions": 7,
+      "day": 32,
+      "ending": "The upland road has closed. A road crew helps the whole wagon home.",
+      "exchanges": 3,
+      "outcome": "rescued",
+      "searches": 4,
+      "seed": 6
+    },
+    {
+      "actions": 77,
+      "battles": 2,
+      "by_kind": {
+        "courier": 1,
+        "territorial": 1
+      },
+      "cohort": "discovery_brindle_explorer",
+      "combat_actions": 14,
+      "day": 32,
+      "ending": "The upland road has closed. A road crew helps the whole wagon home.",
+      "exchanges": 7,
+      "outcome": "rescued",
+      "searches": 5,
+      "seed": 7
+    },
+    {
+      "actions": 67,
+      "battles": 1,
+      "by_kind": {
+        "courier": 1
+      },
+      "cohort": "discovery_brindle_explorer",
+      "combat_actions": 7,
+      "day": 32,
+      "ending": "The upland road has closed. A road crew helps the whole wagon home.",
+      "exchanges": 3,
+      "outcome": "rescued",
+      "searches": 5,
+      "seed": 8
+    },
+    {
+      "actions": 69,
+      "battles": 1,
+      "by_kind": {
+        "courier": 1
+      },
+      "cohort": "discovery_brindle_explorer",
+      "combat_actions": 7,
+      "day": 32,
+      "ending": "The upland road has closed. A road crew helps the whole wagon home.",
+      "exchanges": 3,
+      "outcome": "rescued",
+      "searches": 5,
+      "seed": 9
+    },
+    {
+      "actions": 73,
+      "battles": 2,
+      "by_kind": {
+        "courier": 1,
+        "scavengers": 1
+      },
+      "cohort": "discovery_brindle_explorer",
+      "combat_actions": 13,
+      "day": 32,
+      "ending": "The upland road has closed. A road crew helps the whole wagon home.",
+      "exchanges": 6,
+      "outcome": "rescued",
+      "searches": 5,
+      "seed": 10
+    },
+    {
+      "actions": 67,
+      "battles": 1,
+      "by_kind": {
+        "courier": 1
+      },
+      "cohort": "discovery_brindle_explorer",
+      "combat_actions": 7,
+      "day": 32,
+      "ending": "The upland road has closed. A road crew helps the whole wagon home.",
+      "exchanges": 3,
+      "outcome": "rescued",
+      "searches": 4,
+      "seed": 11
+    },
+    {
+      "actions": 76,
+      "battles": 2,
+      "by_kind": {
+        "courier": 1,
+        "scavengers": 1
+      },
+      "cohort": "discovery_brindle_explorer",
+      "combat_actions": 13,
+      "day": 32,
+      "ending": "The upland road has closed. A road crew helps the whole wagon home.",
+      "exchanges": 6,
+      "outcome": "rescued",
+      "searches": 5,
+      "seed": 12
+    },
+    {
+      "actions": 75,
+      "battles": 2,
+      "by_kind": {
+        "courier": 1,
+        "scavengers": 1
+      },
+      "cohort": "discovery_brindle_explorer",
+      "combat_actions": 13,
+      "day": 32,
+      "ending": "The upland road has closed. A road crew helps the whole wagon home.",
+      "exchanges": 6,
+      "outcome": "rescued",
+      "searches": 4,
+      "seed": 13
+    },
+    {
+      "actions": 74,
+      "battles": 2,
+      "by_kind": {
+        "courier": 1,
+        "scavengers": 1
+      },
+      "cohort": "discovery_brindle_explorer",
+      "combat_actions": 13,
+      "day": 31,
+      "ending": "You reach Lantern Reach, but the delivery is past its preferred date.",
+      "exchanges": 6,
+      "outcome": "late",
+      "searches": 4,
+      "seed": 14
+    },
+    {
+      "actions": 69,
+      "battles": 1,
+      "by_kind": {
+        "courier": 1
+      },
+      "cohort": "discovery_brindle_explorer",
+      "combat_actions": 7,
+      "day": 32,
+      "ending": "The upland road has closed. A road crew helps the whole wagon home.",
+      "exchanges": 3,
+      "outcome": "rescued",
+      "searches": 4,
+      "seed": 15
+    },
+    {
+      "actions": 71,
+      "battles": 1,
+      "by_kind": {
+        "courier": 1
+      },
+      "cohort": "discovery_brindle_explorer",
+      "combat_actions": 7,
+      "day": 31,
+      "ending": "You reach Lantern Reach, but the delivery is past its preferred date.",
+      "exchanges": 3,
+      "outcome": "late",
+      "searches": 4,
+      "seed": 16
+    },
+    {
+      "actions": 71,
+      "battles": 1,
+      "by_kind": {
+        "courier": 1
+      },
+      "cohort": "discovery_brindle_explorer",
+      "combat_actions": 7,
+      "day": 32,
+      "ending": "The upland road has closed. A road crew helps the whole wagon home.",
+      "exchanges": 3,
+      "outcome": "rescued",
+      "searches": 5,
+      "seed": 17
+    },
+    {
+      "actions": 77,
+      "battles": 2,
+      "by_kind": {
+        "courier": 1,
+        "territorial": 1
+      },
+      "cohort": "discovery_brindle_explorer",
+      "combat_actions": 14,
+      "day": 32,
+      "ending": "The upland road has closed. A road crew helps the whole wagon home.",
+      "exchanges": 7,
+      "outcome": "rescued",
+      "searches": 5,
+      "seed": 18
+    },
+    {
+      "actions": 67,
+      "battles": 1,
+      "by_kind": {
+        "courier": 1
+      },
+      "cohort": "discovery_brindle_explorer",
+      "combat_actions": 7,
+      "day": 32,
+      "ending": "The upland road has closed. A road crew helps the whole wagon home.",
+      "exchanges": 3,
+      "outcome": "rescued",
+      "searches": 5,
+      "seed": 19
+    },
+    {
+      "actions": 69,
+      "battles": 1,
+      "by_kind": {
+        "courier": 1
+      },
+      "cohort": "discovery_brindle_explorer",
+      "combat_actions": 7,
+      "day": 32,
+      "ending": "The upland road has closed. A road crew helps the whole wagon home.",
+      "exchanges": 3,
+      "outcome": "rescued",
+      "searches": 5,
+      "seed": 20
+    },
+    {
+      "actions": 73,
+      "battles": 2,
+      "by_kind": {
+        "courier": 1,
+        "scavengers": 1
+      },
+      "cohort": "discovery_brindle_explorer",
+      "combat_actions": 13,
+      "day": 31,
+      "ending": "You reach Lantern Reach, but the delivery is past its preferred date.",
+      "exchanges": 6,
+      "outcome": "late",
+      "searches": 4,
+      "seed": 21
+    },
+    {
+      "actions": 78,
+      "battles": 2,
+      "by_kind": {
+        "courier": 1,
+        "territorial": 1
+      },
+      "cohort": "discovery_brindle_explorer",
+      "combat_actions": 14,
+      "day": 32,
+      "ending": "The upland road has closed. A road crew helps the whole wagon home.",
+      "exchanges": 7,
+      "outcome": "rescued",
+      "searches": 5,
+      "seed": 22
+    },
+    {
+      "actions": 64,
+      "battles": 1,
+      "by_kind": {
+        "courier": 1
+      },
+      "cohort": "discovery_brindle_explorer",
+      "combat_actions": 7,
+      "day": 31,
+      "ending": "You reach Lantern Reach, but the delivery is past its preferred date.",
+      "exchanges": 3,
+      "outcome": "late",
+      "searches": 4,
+      "seed": 23
+    },
+    {
+      "actions": 73,
+      "battles": 2,
+      "by_kind": {
+        "courier": 1,
+        "scavengers": 1
+      },
+      "cohort": "discovery_brindle_explorer",
+      "combat_actions": 13,
+      "day": 30,
+      "ending": "You reach Lantern Reach, but the delivery is past its preferred date.",
+      "exchanges": 6,
+      "outcome": "late",
+      "searches": 4,
+      "seed": 24
+    },
+    {
+      "actions": 68,
+      "battles": 1,
+      "by_kind": {
+        "courier": 1
+      },
+      "cohort": "discovery_reed_explorer",
+      "combat_actions": 7,
+      "day": 32,
+      "ending": "The upland road has closed. A road crew helps the whole wagon home.",
+      "exchanges": 3,
+      "outcome": "rescued",
+      "searches": 4,
+      "seed": 1
+    },
+    {
+      "actions": 80,
+      "battles": 3,
+      "by_kind": {
+        "courier": 1,
+        "scavengers": 1,
+        "territorial": 1
+      },
+      "cohort": "discovery_reed_explorer",
+      "combat_actions": 20,
+      "day": 32,
+      "ending": "The upland road has closed. A road crew helps the whole wagon home.",
+      "exchanges": 10,
+      "outcome": "rescued",
+      "searches": 5,
+      "seed": 2
+    },
+    {
+      "actions": 76,
+      "battles": 2,
+      "by_kind": {
+        "courier": 1,
+        "scavengers": 1
+      },
+      "cohort": "discovery_reed_explorer",
+      "combat_actions": 13,
+      "day": 32,
+      "ending": "The upland road has closed. A road crew helps the whole wagon home.",
+      "exchanges": 6,
+      "outcome": "rescued",
+      "searches": 4,
+      "seed": 3
+    },
+    {
+      "actions": 73,
+      "battles": 1,
+      "by_kind": {
+        "courier": 1
+      },
+      "cohort": "discovery_reed_explorer",
+      "combat_actions": 7,
+      "day": 32,
+      "ending": "The upland road has closed. A road crew helps the whole wagon home.",
+      "exchanges": 3,
+      "outcome": "rescued",
+      "searches": 4,
+      "seed": 4
+    },
+    {
+      "actions": 68,
+      "battles": 1,
+      "by_kind": {
+        "courier": 1
+      },
+      "cohort": "discovery_reed_explorer",
+      "combat_actions": 7,
+      "day": 32,
+      "ending": "The upland road has closed. A road crew helps the whole wagon home.",
+      "exchanges": 3,
+      "outcome": "rescued",
+      "searches": 4,
+      "seed": 5
+    },
+    {
+      "actions": 67,
+      "battles": 1,
+      "by_kind": {
+        "courier": 1
+      },
+      "cohort": "discovery_reed_explorer",
+      "combat_actions": 7,
+      "day": 31,
+      "ending": "You reach Lantern Reach, but the delivery is past its preferred date.",
+      "exchanges": 3,
+      "outcome": "late",
+      "searches": 4,
+      "seed": 6
+    },
+    {
+      "actions": 74,
+      "battles": 2,
+      "by_kind": {
+        "courier": 1,
+        "territorial": 1
+      },
+      "cohort": "discovery_reed_explorer",
+      "combat_actions": 14,
+      "day": 32,
+      "ending": "The upland road has closed. A road crew helps the whole wagon home.",
+      "exchanges": 7,
+      "outcome": "rescued",
+      "searches": 5,
+      "seed": 7
+    },
+    {
+      "actions": 68,
+      "battles": 1,
+      "by_kind": {
+        "courier": 1
+      },
+      "cohort": "discovery_reed_explorer",
+      "combat_actions": 7,
+      "day": 32,
+      "ending": "The upland road has closed. A road crew helps the whole wagon home.",
+      "exchanges": 3,
+      "outcome": "rescued",
+      "searches": 5,
+      "seed": 8
+    },
+    {
+      "actions": 68,
+      "battles": 1,
+      "by_kind": {
+        "courier": 1
+      },
+      "cohort": "discovery_reed_explorer",
+      "combat_actions": 7,
+      "day": 32,
+      "ending": "The upland road has closed. A road crew helps the whole wagon home.",
+      "exchanges": 3,
+      "outcome": "rescued",
+      "searches": 5,
+      "seed": 9
+    },
+    {
+      "actions": 73,
+      "battles": 2,
+      "by_kind": {
+        "courier": 1,
+        "scavengers": 1
+      },
+      "cohort": "discovery_reed_explorer",
+      "combat_actions": 13,
+      "day": 32,
+      "ending": "The upland road has closed. A road crew helps the whole wagon home.",
+      "exchanges": 6,
+      "outcome": "rescued",
+      "searches": 5,
+      "seed": 10
+    },
+    {
+      "actions": 69,
+      "battles": 1,
+      "by_kind": {
+        "courier": 1
+      },
+      "cohort": "discovery_reed_explorer",
+      "combat_actions": 7,
+      "day": 32,
+      "ending": "The upland road has closed. A road crew helps the whole wagon home.",
+      "exchanges": 3,
+      "outcome": "rescued",
+      "searches": 4,
+      "seed": 11
+    },
+    {
+      "actions": 71,
+      "battles": 1,
+      "by_kind": {
+        "courier": 1
+      },
+      "cohort": "discovery_reed_explorer",
+      "combat_actions": 7,
+      "day": 32,
+      "ending": "The upland road has closed. A road crew helps the whole wagon home.",
+      "exchanges": 3,
+      "outcome": "rescued",
+      "searches": 5,
+      "seed": 12
+    },
+    {
+      "actions": 74,
+      "battles": 2,
+      "by_kind": {
+        "courier": 1,
+        "scavengers": 1
+      },
+      "cohort": "discovery_reed_explorer",
+      "combat_actions": 13,
+      "day": 32,
+      "ending": "The upland road has closed. A road crew helps the whole wagon home.",
+      "exchanges": 6,
+      "outcome": "rescued",
+      "searches": 5,
+      "seed": 13
+    },
+    {
+      "actions": 75,
+      "battles": 2,
+      "by_kind": {
+        "courier": 1,
+        "scavengers": 1
+      },
+      "cohort": "discovery_reed_explorer",
+      "combat_actions": 13,
+      "day": 32,
+      "ending": "The upland road has closed. A road crew helps the whole wagon home.",
+      "exchanges": 6,
+      "outcome": "rescued",
+      "searches": 4,
+      "seed": 14
+    },
+    {
+      "actions": 71,
+      "battles": 1,
+      "by_kind": {
+        "courier": 1
+      },
+      "cohort": "discovery_reed_explorer",
+      "combat_actions": 7,
+      "day": 32,
+      "ending": "The upland road has closed. A road crew helps the whole wagon home.",
+      "exchanges": 3,
+      "outcome": "rescued",
+      "searches": 4,
+      "seed": 15
+    },
+    {
+      "actions": 77,
+      "battles": 2,
+      "by_kind": {
+        "courier": 1,
+        "scavengers": 1
+      },
+      "cohort": "discovery_reed_explorer",
+      "combat_actions": 13,
+      "day": 32,
+      "ending": "The upland road has closed. A road crew helps the whole wagon home.",
+      "exchanges": 6,
+      "outcome": "rescued",
+      "searches": 4,
+      "seed": 16
+    },
+    {
+      "actions": 71,
+      "battles": 1,
+      "by_kind": {
+        "courier": 1
+      },
+      "cohort": "discovery_reed_explorer",
+      "combat_actions": 7,
+      "day": 32,
+      "ending": "The upland road has closed. A road crew helps the whole wagon home.",
+      "exchanges": 3,
+      "outcome": "rescued",
+      "searches": 5,
+      "seed": 17
+    },
+    {
+      "actions": 75,
+      "battles": 2,
+      "by_kind": {
+        "courier": 1,
+        "scavengers": 1
+      },
+      "cohort": "discovery_reed_explorer",
+      "combat_actions": 13,
+      "day": 31,
+      "ending": "You reach Lantern Reach, but the delivery is past its preferred date.",
+      "exchanges": 6,
+      "outcome": "late",
+      "searches": 4,
+      "seed": 18
+    },
+    {
+      "actions": 69,
+      "battles": 1,
+      "by_kind": {
+        "courier": 1
+      },
+      "cohort": "discovery_reed_explorer",
+      "combat_actions": 7,
+      "day": 32,
+      "ending": "The upland road has closed. A road crew helps the whole wagon home.",
+      "exchanges": 3,
+      "outcome": "rescued",
+      "searches": 5,
+      "seed": 19
+    },
+    {
+      "actions": 75,
+      "battles": 2,
+      "by_kind": {
+        "courier": 1,
+        "territorial": 1
+      },
+      "cohort": "discovery_reed_explorer",
+      "combat_actions": 14,
+      "day": 32,
+      "ending": "The upland road has closed. A road crew helps the whole wagon home.",
+      "exchanges": 7,
+      "outcome": "rescued",
+      "searches": 5,
+      "seed": 20
+    },
+    {
+      "actions": 73,
+      "battles": 2,
+      "by_kind": {
+        "courier": 1,
+        "scavengers": 1
+      },
+      "cohort": "discovery_reed_explorer",
+      "combat_actions": 13,
+      "day": 32,
+      "ending": "The upland road has closed. A road crew helps the whole wagon home.",
+      "exchanges": 6,
+      "outcome": "rescued",
+      "searches": 5,
+      "seed": 21
+    },
+    {
+      "actions": 72,
+      "battles": 1,
+      "by_kind": {
+        "courier": 1
+      },
+      "cohort": "discovery_reed_explorer",
+      "combat_actions": 7,
+      "day": 32,
+      "ending": "The upland road has closed. A road crew helps the whole wagon home.",
+      "exchanges": 3,
+      "outcome": "rescued",
+      "searches": 5,
+      "seed": 22
+    },
+    {
+      "actions": 72,
+      "battles": 2,
+      "by_kind": {
+        "courier": 1,
+        "territorial": 1
+      },
+      "cohort": "discovery_reed_explorer",
+      "combat_actions": 14,
+      "day": 32,
+      "ending": "The upland road has closed. A road crew helps the whole wagon home.",
+      "exchanges": 7,
+      "outcome": "rescued",
+      "searches": 4,
+      "seed": 23
+    },
+    {
+      "actions": 75,
+      "battles": 2,
+      "by_kind": {
+        "courier": 1,
+        "scavengers": 1
+      },
+      "cohort": "discovery_reed_explorer",
+      "combat_actions": 13,
+      "day": 31,
+      "ending": "You reach Lantern Reach, but the delivery is past its preferred date.",
+      "exchanges": 6,
+      "outcome": "late",
+      "searches": 4,
+      "seed": 24
+    }
+  ],
+  "seed_first": 1,
+  "seed_last": 24,
+  "version": 1
+}
