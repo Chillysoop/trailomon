@@ -29,5 +29,5 @@
 - [discovery-tracks.md](discovery-tracks.md): D1–D3 chat approval, missing-hauler recruitment, field clues, saved searches and validation.
 - [identity-audit.md](identity-audit.md): Oregon Trail/creature identity, measured combat frequency, exploration pressure and unapproved A1–A3 choices.
 
-- [creature-direction.md](creature-direction.md): 300-species minimum, habitat and food/combat scope, ability-first alternatives.
+- [creature-direction.md](creature-direction.md): 300-species minimum, approved ability-first design, rejected terrain effects and roster pipeline.
 - [wagon-ambush.md](wagon-ambush.md): S28 independent combat, prototype access, checkpoint isolation, validation and limits.
