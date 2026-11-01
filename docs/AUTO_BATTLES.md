@@ -1,6 +1,8 @@
 # Trailomon auto battles and gathering
 
-Design proposal | October 30, 2026
+Historical design | October 30, 2026
+
+**Superseded November 1, 2026:** the owner authorized mechanics closely following Astronarch, combined with a defendable wagon. [WAGON_COMBAT.md](WAGON_COMBAT.md) is the current combat target. The two-active cap, shared Resolve, once-only skills and three/four-exchange limits below describe the old implementation; they are not constraints on the replacement.
 
 Keep Oregon Trail's expedition structure and growing distance from dependable help. Use Astronarch as the primary combat reference to move combat decisions into crew selection, positioning, preparation, and useful combinations. A short automatic encounter should reveal how well that preparation suits the situation, with consequences that matter on the following travel days.
 

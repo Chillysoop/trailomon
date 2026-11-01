@@ -1,5 +1,7 @@
 # Next gameplay batch
 
+2026-11-01 latest steering: S28 is next, an authorized playable Astronarch-style wagon-defense slice. Owner wants the attack system closely matched, wagon as a distinct protected target. Follow docs/WAGON_COMBAT.md; continue S29/S30 after validation. This supersedes the unapproved-A1 statement below; A2/A3, D4/D5 and E1/E2 remain unanswered.
+
 2026-11-01 audit revises the recommendation: prioritize an isolated two-team Mara test (new A1, not approved) and already-authorized S5 targeted exploration/pace comparisons before adding D4 scripts or D5 aims. New A2/A3 propose Discovery defaults and removing inert Trust. See identity-audit.md and identity-1; preserve prior codes/decisions, no gameplay implementation from the audit alone.
 
 2026-10-31: the owner said “proceed” after the explicit recommendation D1→D2→D3. Hosted next-2 has no draft or FINISH votes; chat authorizes those three recommendations. No approval inferred for D4/D5 or earlier balance E1/E2. D1–D3 now implemented; see discovery-tracks.md. The review collapses their original descriptions as completed history, preserving codes and all stored votes. Do not re-propose them.

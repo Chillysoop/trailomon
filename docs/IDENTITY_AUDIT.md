@@ -1,5 +1,7 @@
 # Expedition identity and combat audit
 
+Later November 1 owner direction: the combat replacement is now authorized and expanded toward Astronarch's attack system with wagon defense. See [WAGON_COMBAT.md](WAGON_COMBAT.md). A1's narrower proposal below is historical; A2/A3 remain unanswered. The measurements describe the unchanged PR37 build.
+
 November 1, 2026. Game source/build: `b8fcf2cb890c652a09e0fbe219e43ada9dbfec03` (PR #37). This is a source, rendered-evidence and deterministic simulation audit, not an independent human enjoyment study. No gameplay rules were changed.
 
 ## What it feels closest to

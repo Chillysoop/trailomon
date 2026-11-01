@@ -1,6 +1,6 @@
 # Trailomon roadmap
 
-Updated October 31, 2026. Scope: one polished Windows expedition before new regions. The playable foundation already shipped in [PR 1](https://github.com/Chillysoop/trailomon/pull/1), including the complete route, the original manual battles, foraging, saves, and progression. The owner approved plan-1 P1–P5 (hosted revision 7); combat comes first, equipment follows its testing. Statuses describe shipped work, not approvals.
+Updated November 1, 2026. Scope: one polished Windows expedition before new regions. The playable foundation already shipped in [PR 1](https://github.com/Chillysoop/trailomon/pull/1), including the complete route, the original manual battles, foraging, saves, and progression. The owner approved plan-1 P1–P5 (hosted revision 7); combat comes first, equipment follows its testing. Statuses describe shipped work, not approvals.
 
 ## Playable prototype
 
@@ -19,6 +19,9 @@ Updated October 31, 2026. Scope: one polished Windows expedition before new regi
 | S17 | Compare an authored guardian sequence, N3 / C2 | Optional developer encounter with cargo shove, warning and heavy rush; setup preview, compatible saves and comparison against current rules | Four-stage save/forecast regressions; actual rendered screens; fixed crews and matched full-journey continuations | done (PR #18) |
 | S6 | Clarify bounded gathering, P2 / N4 | Existing foraging gives clear place, effort, depletion, carrying, and net-food feedback; hunting stays deferred under approved P2 | Resource accounting scenarios, depleted and full-load previews, player can explain the cost of a gathering day | done (PR #7) |
 | S14 | Explain crew readiness and establish shared symbols, N2 / owner note | Canonical icon catalog and Journal guide; combat trigger reasons and energy costs; contextual travel-duty result | Shared-resolver forecast and threshold scenarios; native guide/input checks; actual Windows readability and combat playtest | done (PR #7) |
+| S28 | Astronarch-style wagon-defense vertical slice, November 1 chat | Playable isolated ambush: independent unit HP/attack/ability clocks, repeating skills/passives, three sample companions, real wagon target and two contrasting formations | Deterministic tick/save/fast/pause equivalence; targeting/intercept/KO/retreat/stalemate scenarios; actual setup/fight/result captures | todo |
+| S29 | Build-changing crew kits and equipment | Six original kits, bounded item/supply sample and Mara practice; multiple useful team plans | Kit/item interaction checks, practice isolation, same-start build comparisons and player explanation test | todo |
+| S30 | Integrate replacement combat with expeditions | New-run encounters use validated model; wagon/condition/energy/supplies settle once; old battle saves remain completable | Native saves at every boundary, both depot modes, whole-journey comparisons, human pacing and peaceful-route check | todo |
 
 ## Content
 
@@ -56,6 +59,8 @@ Updated October 31, 2026. Scope: one polished Windows expedition before new regi
 | S13 | Publish the owner-approved release | Owner explicitly authorizes public publication of the tested candidate; release notes and download link match that artifact | Recheck approval, hash/revision, downloadable asset and launch instructions | todo |
 
 ## Working rules
+
+November 1 owner steering supersedes the narrower A1 proposal: combat should closely follow Astronarch, adding the wagon as a defendable objective. [WAGON_COMBAT.md](WAGON_COMBAT.md) is authoritative for S28–S30, which are approved and not yet built. It replaces the old shared-Resolve/once-only/three-exchange constraints and the two-active target. A2/A3 and D4/D5 remain unanswered; no synthetic review votes.
 
 November 1 identity/combat audit: [analysis](IDENTITY_AUDIT.md) and [new A1–A3 review](../reviews/identity-1.html) distinguish subjective identity from measured simulation-command share. An isolated two-team combat prototype, Discovery defaults and Trust UI removal are proposed, not approved steps. Existing S5 now has current-source evidence that searching every stretch can conflict with delivery closure; compare targeted searches and adaptive pace before changing costs. D4/D5 remain open, with a recommendation to postpone them pending the combat/pacing test. No roadmap feature is silently replaced.
 
