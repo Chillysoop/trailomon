@@ -2,13 +2,13 @@
 
 Owner direction, November 1, 2026. The intended game has a minimum of 300 original creature species. Six currently exist in code and lore. The owner wants a broad animal world: fighters, predators, prey, food animals, protectors, fast creatures, companions and odd wildlife. Every species should have a relationship to its environment. A travel utility is not required. Art production remains deferred to the owner's overhaul.
 
-The owner questioned whether classes/types are needed at all. A proposed twelve-class scheme was withdrawn before publication. Species-specific abilities and other alternatives are being explored in `reviews/bestiary-1.html`; no type chart, fixed archetype count, or new runtime ecosystem is approved by that exploration alone. S28 remains authorized and independent of those decisions.
+The owner approved ability-first identities without a universal type chart or fixed classes (bestiary-1 B1/B2, revision 9), plus bounded symbiosis, learning, food-web and migration experiments (B4–B7) and the B8 production pipeline. B3 creature-created battlefield terrain was rejected. S28 has shipped; S29 develops the six existing kits before the later experiments.
 
-## Recommended identity: what it does, how it lives
+## Approved identity: what it does, how it lives
 
 Give a creature a memorable behavior, then derive its body, strengths, limitations, diet and habitat from it. Its useful combat identity can be an active ability and a passive interaction. A species need not justify itself by hauling, healing or providing another service. Some are desirable because they are beautiful, alarming, elusive, stubborn, funny or extraordinarily good at fighting.
 
-An ecological explanation is not an environmental lock. A ravine glider should remain useful away from a ravine; its origin explains its kit. Habitat bonuses, field conditions and regional learning are separate optional mechanics. Avoid turning every species into a renamed element, universal worker, or forced role in a twelve-bin taxonomy.
+An ecological explanation is not an environmental lock. A ravine glider should remain useful away from a ravine; its origin explains its kit. Do not introduce the rejected creature-created terrain system. B5 permits one learned local trick; it does not imply universal habitat bonuses. Avoid turning every species into a renamed element, universal worker, or forced role in a twelve-bin taxonomy.
 
 Borrow Pokémon's discoverable numbered collection, memorable identities and readable individual records. Its official Pokédex separates species identity, category, ability and type ([example](https://www.pokemon.com/us/pokedex/electrode)); those dimensions need not remain bundled in our design. Its [regional-form description](https://swordshield.pokemon.com/en-us/expansionpass/pokemon/) connects variation to local adaptation. Our proposed distinction is ecological behavior and ability interactions without a universal elemental matchup chart.
 
@@ -19,11 +19,11 @@ Borrow Pokémon's discoverable numbered collection, memorable identities and rea
 | Guttersail | Narrow ravines with brief updrafts | Folds a deep membrane around its body on the ground, opens it to ride rising air | Builds momentum between attacks; grounded after its dive. Fast wildlife, no mandatory wagon job. |
 | Hushgrub | Soft soil under noisy reed beds | Locates moving prey through pressure in the earth | Buries itself, then strikes whoever attacks most frequently. A deliberate vibration can expose it. |
 | Tallowback | Dry pasture with long lean seasons | Stores reserves along its back; grazes slowly and refuses waste | Spends stored reserves to endure damage. A domesticated food animal can still defend its herd fiercely. |
-| Rattleloom | Loose-stone gullies | Suspends pebbles in taut fibers to sense footsteps | A tether catches a rushing attacker; an ally can exploit the pause. Creates a hazard without being a generic stone type. |
+| Rattleloom | Loose-stone gullies | Suspends pebbles in taut fibers to sense footsteps | Binds one rushing attacker so an ally can exploit the pause. No field trap or changed terrain. |
 | Borrowbill | Floodplain herds | Picks parasites from large animals and shelters beneath them | Perches on an ally, trades its own attacks for mutual protection. The same behavior explains its feeding and friendships. |
 | Stillmouth | Dark pools below forest roots | Waits almost motionless until prey repeats a movement | Remembers the last attack pattern; repeating it becomes dangerous. Primarily a predator and combat specialist. |
 
-Names and silhouettes need editorial review before becoming canonical. These are examples of a design method, not six promises of immediate implementation.
+The first [24 briefs](../reviews/creature-index.html) expand these examples across five regions from the lore. The [index schema](bestiary/SCHEMA.md) distinguishes six existing species, proposed kits, new briefs and 276 unfilled slots. Names and silhouettes remain first drafts; the catalog is not 24 playable kits.
 
 ## How to reach 300 without filler
 
@@ -37,6 +37,6 @@ Count genuinely distinct species. A recolor, alternate posture or regional skin 
 
 Broader geography, content volume, collecting capacity and a roster service will exceed the current six-species prototype architecture. Current departure/crew caps remain in place until separately designed; do not casually expand the traveling party to carry the entire collection. Keep Oregon Trail's increasing remoteness: each region reveals another local slice of a much larger world.
 
-## What to decide now
+## Approved delivery order
 
-The review separates a small recommended foundation (ability-first identities, behavior combinations, 300-entry content pipeline) from larger experiments (habitat effects, social pairing, learning, food ecology, migration). The world scope, environmental connection and non-utilitarian species are already owner requirements and are not repeat YES/NO questions.
+S31 delivers B8's schema and first 24 briefs. S29 applies B1/B2 to the existing six kits and equipment. S32–S35 then prove the bounded B4–B7 experiments; S36 continues authoring batches toward the minimum 300. B6 adds diet notes and one encounter, not hunting or eating the crew. The first expedition remains the playable milestone. No repeat vote is needed for these approved steps.

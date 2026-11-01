@@ -1,0 +1,2438 @@
+{
+  "schema": 1,
+  "minimum_species": 300,
+  "updated": "2026-11-01",
+  "regions": [
+    {
+      "id": "fernwake_road",
+      "name": "Fernwake–Lantern road",
+      "environment": "Settled pasture gives way to woodland, marsh crossings and upland scree.",
+      "first": 1,
+      "last": 60
+    },
+    {
+      "id": "shifting_flats",
+      "name": "The shifting flats",
+      "environment": "Seasonal channels, reed islands and exposed banks change where animals feed.",
+      "first": 61,
+      "last": 120
+    },
+    {
+      "id": "buried_orchard",
+      "name": "The buried orchard",
+      "environment": "Abandoned fruit terraces, shaded pools and hollow old trees support a tangled food web.",
+      "first": 121,
+      "last": 180
+    },
+    {
+      "id": "dry_shelves",
+      "name": "The dry shelves",
+      "environment": "Wind-cut ledges and short growing seasons favor reserves, grip and careful movement.",
+      "first": 181,
+      "last": 240
+    },
+    {
+      "id": "unmarked_valley",
+      "name": "The unmarked valley",
+      "environment": "Secluded forest basins, seasonal pools and cave streams reward observation.",
+      "first": 241,
+      "last": 300
+    }
+  ],
+  "verbs": {
+    "strike": "A direct creature attack.",
+    "brace": "A deliberate defensive stance.",
+    "intercept": "Take an attack that was heading for another target.",
+    "interrupt": "Stop or delay a pending action.",
+    "bind": "Briefly restrict an individual opponent.",
+    "expose": "An individual is temporarily vulnerable.",
+    "shield": "A finite damage-absorbing layer.",
+    "shed": "Remove a bounded effect from an individual.",
+    "charge": "A visible attack windup or momentum gain.",
+    "perch": "Attach one small companion to one suitable host.",
+    "stagger": "Delay an individual attack clock.",
+    "recover": "Regain a bounded resource at a stated cost.",
+    "repeat": "A repeated action or recorded pattern.",
+    "fall": "A combatant becomes unable to act."
+  },
+  "entries": [
+    {
+      "index_id": "TR-001",
+      "region_id": "fernwake_road",
+      "design_status": "brief",
+      "species_id": "brindlehorn",
+      "name": "Brindlehorn",
+      "game_status": "implemented",
+      "kit_status": "sample",
+      "art_status": "existing",
+      "role": "Herd grazer and established working companion.",
+      "body": "A low, heavy neck carries broad hollow antlers with blunt openings; its weight sits behind the head.",
+      "habitat": "Open scrub and grassland margins with enough wind to carry herd calls.",
+      "diet": "Coarse grass, tender brush and fallen orchard leaves.",
+      "ecology": "Antler chambers carry a low call beyond a rise. Herds keep loose contact without needing a clear view.",
+      "behavior": "Stops twice at a ridge: once to listen, once to set its feet.",
+      "encounter": "Existing depot companion and grassland wildlife; listen for the answering herd before approaching.",
+      "recruitment": "existing",
+      "active": {
+        "name": "Antler brace",
+        "behavior": "Shields itself and explicitly shields the wagon.",
+        "trigger": "Focus full.",
+        "bound": "Shield cannot restore lost HP or wagon integrity."
+      },
+      "passive": {
+        "name": "Rooted",
+        "behavior": "Gains defense in a front position.",
+        "trigger": "Occupying the front.",
+        "bound": "The extra defense does not follow it to the rear."
+      },
+      "emits": [
+        "brace",
+        "shield",
+        "intercept"
+      ],
+      "responds_to": [
+        "strike"
+      ],
+      "counterplay": "Disrupt its attack clock, attack the uncovered lane or force a formation choice.",
+      "tradeoff": "Reliable protection costs the party a faster attacker’s position.",
+      "integration": "Species, art and S28 kit exist. The expanded lore is a brief; S30 must integrate the kit with expedition costs.",
+      "related_species": []
+    },
+    {
+      "index_id": "TR-002",
+      "region_id": "fernwake_road",
+      "design_status": "brief",
+      "species_id": "reedskipper",
+      "name": "Reedskipper",
+      "game_status": "implemented",
+      "kit_status": "proposed",
+      "art_status": "existing",
+      "role": "Social shallows dweller, swimmer and working companion.",
+      "body": "Broad body, webbed feet and a thick tail ending in a flat paddle; the tail changes its direction rather than acting as a sail.",
+      "habitat": "Shallow shelves, reed margins and side channels rather than deep open water.",
+      "diet": "Water shoots, soft stems and small shellfish found along the bottom.",
+      "ecology": "Feels a sideways current through its tail and changes course before its body is swept away.",
+      "behavior": "Pushes a floating object aside, then waits for it to drift back.",
+      "encounter": "Existing depot companion; Willowford observations and invitations already use its swimming ecology.",
+      "recruitment": "existing",
+      "active": {
+        "name": "Paddle sweep",
+        "behavior": "Interrupts a charging enemy and redirects its next basic strike toward Reedskipper.",
+        "trigger": "Focus full; prefer a charging enemy.",
+        "bound": "Redirects one basic strike, never an entire ability or a wagon-only attack."
+      },
+      "passive": {
+        "name": "Give with it",
+        "behavior": "After redirecting a hit, advances its own next attack.",
+        "trigger": "A redirected hit lands.",
+        "bound": "One response per redirection; no recursive counters."
+      },
+      "emits": [
+        "interrupt",
+        "strike"
+      ],
+      "responds_to": [
+        "charge"
+      ],
+      "counterplay": "Use steady low-pressure attacks instead of telegraphed rushes.",
+      "tradeoff": "Redirecting a strong hit puts its own HP at risk.",
+      "integration": "Existing species and legacy kit; this repeatable kit is proposed for S29. B5 later offers one learned channel or still-pool trick.",
+      "related_species": []
+    },
+    {
+      "index_id": "TR-003",
+      "region_id": "fernwake_road",
+      "design_status": "brief",
+      "species_id": "loamling",
+      "name": "Loamling",
+      "game_status": "implemented",
+      "kit_status": "proposed",
+      "art_status": "existing",
+      "role": "Root-forager, food-cache maker and opportunistic scavenger.",
+      "body": "Compact burrower with broad digging forelimbs, a sensitive muzzle and soil-catching short fur.",
+      "habitat": "Soft margins below orchards and open woodland; shallow tunnels rather than deep cave systems.",
+      "diet": "Bulbs, buried roots and occasional spilled grain.",
+      "ecology": "Forgotten food chambers germinate. Its searching uncovers resources while sometimes undermining a path.",
+      "behavior": "Presses its nose to an ordinary-looking patch, then excavates a fan of soil.",
+      "encounter": "Existing companion and hungry road wildlife. Cache fans are the clue, not a glowing collection marker.",
+      "recruitment": "existing",
+      "active": {
+        "name": "Underhook",
+        "behavior": "Hooks under one opponent’s guard and briefly exposes that individual.",
+        "trigger": "Focus full.",
+        "bound": "Affects one enemy; creates no altered terrain or battlefield slot."
+      },
+      "passive": {
+        "name": "Quick paws",
+        "behavior": "Its first attack against a newly exposed enemy advances the next attack clock.",
+        "trigger": "A fresh expose event.",
+        "bound": "Consume the opening once; it cannot refresh itself indefinitely."
+      },
+      "emits": [
+        "expose",
+        "strike"
+      ],
+      "responds_to": [
+        "expose"
+      ],
+      "counterplay": "Cleanse the opening or protect the threatened individual before the follow-up.",
+      "tradeoff": "Low staying power makes prolonged front-line fighting costly.",
+      "integration": "Existing species; S28 uses a Loamling as the raider, not this companion kit. S29 can test Underhook without B3 terrain mutation.",
+      "related_species": []
+    },
+    {
+      "index_id": "TR-004",
+      "region_id": "fernwake_road",
+      "design_status": "brief",
+      "species_id": "bellmoth",
+      "name": "Bellmoth",
+      "game_status": "implemented",
+      "kit_status": "sample",
+      "art_status": "existing",
+      "role": "Dusk pollinator and watchful companion.",
+      "body": "Broad folded wings make a hanging-bell silhouette; reflective scales flash briefly when a wing turns.",
+      "habitat": "Dry crevices beside pale flowers, mineral faces and woodland edges.",
+      "diet": "Nectar, mineral moisture and soft fruit juices.",
+      "ecology": "Dusk reflections guide it to flowers and sometimes to pale clay trail marks. Rain mats its wing surface.",
+      "behavior": "Opens one wing before turning, revealing a brief narrow flash.",
+      "encounter": "Existing companion and dusk sighting; observe where several moths circle rather than assuming every glint is a human marker.",
+      "recruitment": "existing",
+      "active": {
+        "name": "Dusk shimmer",
+        "behavior": "Interrupts the caller with a brief stun.",
+        "trigger": "Focus full; prefer the opposing caller.",
+        "bound": "The interruption wears off; it is not permanent control."
+      },
+      "passive": {
+        "name": "Shimmer echo",
+        "behavior": "A successful stun gives Focus to the lowest-ready ally.",
+        "trigger": "An enemy survives the strike and is stunned.",
+        "bound": "One ally receives the gain; it does not trigger another passive recursively."
+      },
+      "emits": [
+        "interrupt"
+      ],
+      "responds_to": [
+        "interrupt"
+      ],
+      "counterplay": "Field several independent threats so one interruption cannot halt the whole team.",
+      "tradeoff": "Fragile and weak at direct damage; its value depends on stopping a meaningful action.",
+      "integration": "Species, art and S28 companion kit exist. S29 should preserve its readable timing and S30 should price expedition effort.",
+      "related_species": []
+    },
+    {
+      "index_id": "TR-005",
+      "region_id": "fernwake_road",
+      "design_status": "brief",
+      "species_id": "cindercoil",
+      "name": "Cindercoil",
+      "game_status": "implemented",
+      "kit_status": "sample",
+      "art_status": "existing",
+      "role": "Shelter-seeking small animal with a stored-warmth defense.",
+      "body": "A rounded body coils tightly around a warm center; expression comes from opening and closing the coil.",
+      "habitat": "Insulated pockets under timber, stones and old depot walls.",
+      "diet": "Small invertebrates and fallen fruit; food and basking replenish stored warmth.",
+      "ecology": "Conserving heat matters through cold nights. Sudden displays spend a reserve rather than producing endless fire.",
+      "behavior": "Uncurls one small section to test a resting place, then folds back if it is cold.",
+      "encounter": "Existing soaked-nest recruitment. A warm empty resting dish can be a sign of past companionship.",
+      "recruitment": "existing",
+      "active": {
+        "name": "Heat spill",
+        "behavior": "Releases a concentrated single-target strike.",
+        "trigger": "Focus full.",
+        "bound": "A creature action, not a fire-type multiplier or a terrain effect."
+      },
+      "passive": {
+        "name": "Warm follow-up",
+        "behavior": "Follows an ally’s interception with a short strike; its front stance also attacks faster.",
+        "trigger": "An ally intercepts; front stance changes basic timing.",
+        "bound": "At most one follow-up per tick; it cannot trigger itself."
+      },
+      "emits": [
+        "strike"
+      ],
+      "responds_to": [
+        "intercept"
+      ],
+      "counterplay": "Attack the open lane or interrupt Cindercoil when its defender is under pressure.",
+      "tradeoff": "The faster front stance exposes a frail body and can leave the wagon lane open.",
+      "integration": "Species, art and S28 kit exist. Biological reserve is flavor here, not an extra travel-food charge per hit.",
+      "related_species": []
+    },
+    {
+      "index_id": "TR-006",
+      "region_id": "fernwake_road",
+      "design_status": "brief",
+      "species_id": "slatewhorl",
+      "name": "Slatewhorl",
+      "game_status": "implemented",
+      "kit_status": "proposed",
+      "art_status": "existing",
+      "role": "Slow upland browser and territorial anchor.",
+      "body": "Overlapping living plates form a low spiral around a broad body; spreading feet brace the whole animal.",
+      "habitat": "Scree ledges with stable gravel beds and a few favored sunning places.",
+      "diet": "Low-growing lichens, hardy shoots and mineral-rich grit.",
+      "ecology": "A secure resting shelf is scarce. It blocks an approach to hold that refuge rather than pursuing intruders far.",
+      "behavior": "Turns through several deliberate shuffles; its plates settle with dry ticks.",
+      "encounter": "Existing track-and-assistance recruitment near the uplands. Circular resting scrapes identify a frequently used shelf.",
+      "recruitment": "existing",
+      "active": {
+        "name": "Stone shelter",
+        "behavior": "Shields one vulnerable companion, with itself as the fallback.",
+        "trigger": "Focus full; prefer the lowest unshielded ally.",
+        "bound": "Names creature targets only; it does not quietly repair or shield the wagon."
+      },
+      "passive": {
+        "name": "Settled plates",
+        "behavior": "Absorbing a hit advances its next protective ability.",
+        "trigger": "Its own shield absorbs damage.",
+        "bound": "Bound the gain per attack, including multihit attacks."
+      },
+      "emits": [
+        "shield"
+      ],
+      "responds_to": [
+        "strike"
+      ],
+      "counterplay": "Pressure an unprotected target or interrupt the slow protective cycle.",
+      "tradeoff": "Low damage and a slow attack clock make an all-defensive team vulnerable to stalls.",
+      "integration": "Existing species and legacy ability. This repeatable kit is proposed for S29, distinct from Moss’s explicit wagon shield.",
+      "related_species": []
+    },
+    {
+      "index_id": "TR-007",
+      "region_id": "fernwake_road",
+      "design_status": "reserved"
+    },
+    {
+      "index_id": "TR-008",
+      "region_id": "fernwake_road",
+      "design_status": "reserved"
+    },
+    {
+      "index_id": "TR-009",
+      "region_id": "fernwake_road",
+      "design_status": "reserved"
+    },
+    {
+      "index_id": "TR-010",
+      "region_id": "fernwake_road",
+      "design_status": "reserved"
+    },
+    {
+      "index_id": "TR-011",
+      "region_id": "fernwake_road",
+      "design_status": "reserved"
+    },
+    {
+      "index_id": "TR-012",
+      "region_id": "fernwake_road",
+      "design_status": "reserved"
+    },
+    {
+      "index_id": "TR-013",
+      "region_id": "fernwake_road",
+      "design_status": "reserved"
+    },
+    {
+      "index_id": "TR-014",
+      "region_id": "fernwake_road",
+      "design_status": "reserved"
+    },
+    {
+      "index_id": "TR-015",
+      "region_id": "fernwake_road",
+      "design_status": "reserved"
+    },
+    {
+      "index_id": "TR-016",
+      "region_id": "fernwake_road",
+      "design_status": "reserved"
+    },
+    {
+      "index_id": "TR-017",
+      "region_id": "fernwake_road",
+      "design_status": "reserved"
+    },
+    {
+      "index_id": "TR-018",
+      "region_id": "fernwake_road",
+      "design_status": "reserved"
+    },
+    {
+      "index_id": "TR-019",
+      "region_id": "fernwake_road",
+      "design_status": "reserved"
+    },
+    {
+      "index_id": "TR-020",
+      "region_id": "fernwake_road",
+      "design_status": "reserved"
+    },
+    {
+      "index_id": "TR-021",
+      "region_id": "fernwake_road",
+      "design_status": "reserved"
+    },
+    {
+      "index_id": "TR-022",
+      "region_id": "fernwake_road",
+      "design_status": "reserved"
+    },
+    {
+      "index_id": "TR-023",
+      "region_id": "fernwake_road",
+      "design_status": "reserved"
+    },
+    {
+      "index_id": "TR-024",
+      "region_id": "fernwake_road",
+      "design_status": "reserved"
+    },
+    {
+      "index_id": "TR-025",
+      "region_id": "fernwake_road",
+      "design_status": "reserved"
+    },
+    {
+      "index_id": "TR-026",
+      "region_id": "fernwake_road",
+      "design_status": "reserved"
+    },
+    {
+      "index_id": "TR-027",
+      "region_id": "fernwake_road",
+      "design_status": "reserved"
+    },
+    {
+      "index_id": "TR-028",
+      "region_id": "fernwake_road",
+      "design_status": "reserved"
+    },
+    {
+      "index_id": "TR-029",
+      "region_id": "fernwake_road",
+      "design_status": "reserved"
+    },
+    {
+      "index_id": "TR-030",
+      "region_id": "fernwake_road",
+      "design_status": "reserved"
+    },
+    {
+      "index_id": "TR-031",
+      "region_id": "fernwake_road",
+      "design_status": "reserved"
+    },
+    {
+      "index_id": "TR-032",
+      "region_id": "fernwake_road",
+      "design_status": "reserved"
+    },
+    {
+      "index_id": "TR-033",
+      "region_id": "fernwake_road",
+      "design_status": "reserved"
+    },
+    {
+      "index_id": "TR-034",
+      "region_id": "fernwake_road",
+      "design_status": "reserved"
+    },
+    {
+      "index_id": "TR-035",
+      "region_id": "fernwake_road",
+      "design_status": "reserved"
+    },
+    {
+      "index_id": "TR-036",
+      "region_id": "fernwake_road",
+      "design_status": "reserved"
+    },
+    {
+      "index_id": "TR-037",
+      "region_id": "fernwake_road",
+      "design_status": "reserved"
+    },
+    {
+      "index_id": "TR-038",
+      "region_id": "fernwake_road",
+      "design_status": "reserved"
+    },
+    {
+      "index_id": "TR-039",
+      "region_id": "fernwake_road",
+      "design_status": "reserved"
+    },
+    {
+      "index_id": "TR-040",
+      "region_id": "fernwake_road",
+      "design_status": "reserved"
+    },
+    {
+      "index_id": "TR-041",
+      "region_id": "fernwake_road",
+      "design_status": "reserved"
+    },
+    {
+      "index_id": "TR-042",
+      "region_id": "fernwake_road",
+      "design_status": "reserved"
+    },
+    {
+      "index_id": "TR-043",
+      "region_id": "fernwake_road",
+      "design_status": "reserved"
+    },
+    {
+      "index_id": "TR-044",
+      "region_id": "fernwake_road",
+      "design_status": "reserved"
+    },
+    {
+      "index_id": "TR-045",
+      "region_id": "fernwake_road",
+      "design_status": "reserved"
+    },
+    {
+      "index_id": "TR-046",
+      "region_id": "fernwake_road",
+      "design_status": "reserved"
+    },
+    {
+      "index_id": "TR-047",
+      "region_id": "fernwake_road",
+      "design_status": "reserved"
+    },
+    {
+      "index_id": "TR-048",
+      "region_id": "fernwake_road",
+      "design_status": "reserved"
+    },
+    {
+      "index_id": "TR-049",
+      "region_id": "fernwake_road",
+      "design_status": "reserved"
+    },
+    {
+      "index_id": "TR-050",
+      "region_id": "fernwake_road",
+      "design_status": "reserved"
+    },
+    {
+      "index_id": "TR-051",
+      "region_id": "fernwake_road",
+      "design_status": "reserved"
+    },
+    {
+      "index_id": "TR-052",
+      "region_id": "fernwake_road",
+      "design_status": "reserved"
+    },
+    {
+      "index_id": "TR-053",
+      "region_id": "fernwake_road",
+      "design_status": "reserved"
+    },
+    {
+      "index_id": "TR-054",
+      "region_id": "fernwake_road",
+      "design_status": "reserved"
+    },
+    {
+      "index_id": "TR-055",
+      "region_id": "fernwake_road",
+      "design_status": "reserved"
+    },
+    {
+      "index_id": "TR-056",
+      "region_id": "fernwake_road",
+      "design_status": "reserved"
+    },
+    {
+      "index_id": "TR-057",
+      "region_id": "fernwake_road",
+      "design_status": "reserved"
+    },
+    {
+      "index_id": "TR-058",
+      "region_id": "fernwake_road",
+      "design_status": "reserved"
+    },
+    {
+      "index_id": "TR-059",
+      "region_id": "fernwake_road",
+      "design_status": "reserved"
+    },
+    {
+      "index_id": "TR-060",
+      "region_id": "fernwake_road",
+      "design_status": "reserved"
+    },
+    {
+      "index_id": "TR-061",
+      "region_id": "shifting_flats",
+      "design_status": "brief",
+      "species_id": "hushgrub",
+      "name": "Hushgrub",
+      "game_status": "planned",
+      "kit_status": "proposed",
+      "art_status": "deferred",
+      "role": "Small ambush predator; an alarming fighter rather than a worker.",
+      "body": "A blunt segmented body has broad pressure-sensitive belly pads and a narrow opening mouth; no eyes project above the soil.",
+      "habitat": "Wet root mats under reed beds, where vision is blocked but footsteps travel well.",
+      "diet": "Insect larvae, worms and tiny fish stranded in shallow mud.",
+      "ecology": "It locates repeated movement through the mat, then waits beneath the most regular source.",
+      "behavior": "A row of reeds trembles toward a footstep, then goes still.",
+      "encounter": "Look for movement against the wind at a recently exposed bank; watching safely records it.",
+      "recruitment": "planned_companion",
+      "active": {
+        "name": "Underbeat",
+        "behavior": "Strikes the opponent that made the most basic attacks during the last short window.",
+        "trigger": "Focus full.",
+        "bound": "A visible target mark precedes the strike; it does not rewrite attack history."
+      },
+      "passive": {
+        "name": "Still listening",
+        "behavior": "Gains a modest shield during a quiet spell without taking a hit.",
+        "trigger": "A bounded uninterrupted interval.",
+        "bound": "A hit breaks the interval; shield cannot stack beyond the normal cap."
+      },
+      "emits": [
+        "strike",
+        "shield"
+      ],
+      "responds_to": [
+        "repeat"
+      ],
+      "counterplay": "Interrupt the marked ambush or divide pressure among several attackers.",
+      "tradeoff": "Loses its advantage against slow, irregular attack patterns.",
+      "integration": "New design only. Requires a bounded recent-attack counter and visible mark, not a burrowed terrain state.",
+      "related_species": [
+        "siltbelly"
+      ]
+    },
+    {
+      "index_id": "TR-062",
+      "region_id": "shifting_flats",
+      "design_status": "brief",
+      "species_id": "borrowbill",
+      "name": "Borrowbill",
+      "game_status": "planned",
+      "kit_status": "proposed",
+      "art_status": "deferred",
+      "role": "Parasite-picker and potential symbiotic companion.",
+      "body": "A narrow hooked bill, short grasping legs and a flattened chest let it lie close against a larger animal’s back.",
+      "habitat": "Floodplain herds and the dry margins where grazers gather after rain.",
+      "diet": "Ticks, biting flies and loose skin removed from larger hosts.",
+      "ecology": "The host gains relief; Borrowbill gains food and a moving lookout. It cannot choose a perch that cannot carry it.",
+      "behavior": "Checks the same shoulder fold before settling beneath the host’s mane.",
+      "encounter": "A patient herd approach reveals it on a Tallowback. Gaining the host’s calm makes the small animal easier to meet.",
+      "recruitment": "planned_companion",
+      "active": {
+        "name": "Shared perch",
+        "behavior": "Attaches to a willing large ally, giving up its own basic attacks for shared protection.",
+        "trigger": "Focus full with a suitable unattached host.",
+        "bound": "One host and one passenger; detaches when the host falls. No invulnerability or chained hosting."
+      },
+      "passive": {
+        "name": "Clean coat",
+        "behavior": "While perched, periodically removes one minor disabling effect from its host.",
+        "trigger": "A bounded interval on the same living host.",
+        "bound": "Does not remove every effect at once or refill supplies."
+      },
+      "emits": [
+        "perch",
+        "recover"
+      ],
+      "responds_to": [
+        "fall"
+      ],
+      "counterplay": "Disrupt or isolate the host; pressure the passenger after separation.",
+      "tradeoff": "Two crew slots become one attacking body, a serious cost in a three-creature party.",
+      "integration": "New design and the bounded B4 symbiosis candidate, scheduled after S29. No dedicated art yet.",
+      "related_species": [
+        "tallowback"
+      ]
+    },
+    {
+      "index_id": "TR-063",
+      "region_id": "shifting_flats",
+      "design_status": "brief",
+      "species_id": "mireglass",
+      "name": "Mireglass",
+      "game_status": "planned",
+      "kit_status": "proposed",
+      "art_status": "deferred",
+      "role": "Wary wading hunter with a deceptive display.",
+      "body": "Long jointed legs support a narrow body; a thin side membrane turns edge-on, then reflects the sky toward the water.",
+      "habitat": "Bright shallow flats with intermittent open water and sparse reeds.",
+      "diet": "Small fish and swimming insects surprised beneath the reflection.",
+      "ecology": "Its reflection hides the shadow that would warn prey. The same turn can momentarily misdirect a land predator.",
+      "behavior": "Appears to vanish when it turns sideways, although its feet stay plainly visible.",
+      "encounter": "Still water with an extra piece of sky moving across it is the clue; a noisy approach drives it off.",
+      "recruitment": "planned_companion",
+      "active": {
+        "name": "False opening",
+        "behavior": "Creates one decoy that takes the next incoming basic hit.",
+        "trigger": "Focus full.",
+        "bound": "Exactly one hit; area effects and later hits are unaffected."
+      },
+      "passive": {
+        "name": "Glancing step",
+        "behavior": "After the decoy is struck, advances its own attack clock.",
+        "trigger": "Its current decoy is consumed.",
+        "bound": "One response per decoy; decoys cannot trigger each other."
+      },
+      "emits": [
+        "expose",
+        "strike"
+      ],
+      "responds_to": [
+        "strike"
+      ],
+      "counterplay": "Use a cheap fast strike to consume the decoy before the heavy ability.",
+      "tradeoff": "Very little protection once the decoy is gone.",
+      "integration": "New design only. Implement as an individual decoy charge with clear UI, never an altered ground slot.",
+      "related_species": [
+        "siltbelly"
+      ]
+    },
+    {
+      "index_id": "TR-064",
+      "region_id": "shifting_flats",
+      "design_status": "brief",
+      "species_id": "raftrook",
+      "name": "Raftrook",
+      "game_status": "planned",
+      "kit_status": "proposed",
+      "art_status": "deferred",
+      "role": "Brood-protecting wetland animal; some settlements keep it for eggs.",
+      "body": "A broad low chest rests on four paddle feet; two long folding side limbs hold gathered reeds close around its brood.",
+      "habitat": "Quiet reed islands that can break loose in a rising channel.",
+      "diet": "Water seeds, snails and soft reeds.",
+      "ecology": "It gathers and grips a small raft rather than building a permanent nest. Eggs survive short rises because the parent moves with them.",
+      "behavior": "Counts its brood with repeated touches before it will settle.",
+      "encounter": "Floating nests appear after high water; observe from the bank. Domestic eggs can enter later provision trades.",
+      "recruitment": "planned_companion",
+      "active": {
+        "name": "Draw close",
+        "behavior": "Transfers part of its own shield to the least protected ally.",
+        "trigger": "Focus full and a shield is available.",
+        "bound": "Transfers existing shield; it never duplicates it or includes the wagon."
+      },
+      "passive": {
+        "name": "Brood alarm",
+        "behavior": "Gains a bounded burst of Focus when an ally first falls.",
+        "trigger": "First allied fall in the fight.",
+        "bound": "Once per fight; no farming repeated revival events."
+      },
+      "emits": [
+        "shield"
+      ],
+      "responds_to": [
+        "fall"
+      ],
+      "counterplay": "Strip its shield before the transfer or spread pressure so one transfer is insufficient.",
+      "tradeoff": "Giving protection away leaves its own slow body exposed.",
+      "integration": "New design only. Eggs are a food-web/trade direction, not an implemented laying resource or slaughter mechanic.",
+      "related_species": []
+    },
+    {
+      "index_id": "TR-065",
+      "region_id": "shifting_flats",
+      "design_status": "brief",
+      "species_id": "siltbelly",
+      "name": "Siltbelly",
+      "game_status": "planned",
+      "kit_status": "proposed",
+      "art_status": "deferred",
+      "role": "Filter-feeding prey animal and a possible settlement food fish.",
+      "body": "A deep soft belly hangs below a small armored back; fine feeding combs fold into grooves beside the mouth.",
+      "habitat": "Muddy backwaters that stay wet when the main channel shifts.",
+      "diet": "Suspended algae and tiny organic particles sifted from the water.",
+      "ecology": "Its feeding clears small pockets of water used by other wildlife. The unarmored belly makes it vulnerable when lifted from cover.",
+      "behavior": "Closes every feeding comb at once when a shadow passes overhead.",
+      "encounter": "Clear ovals in otherwise cloudy water reveal resting groups. Best documented in place.",
+      "recruitment": "observation_only",
+      "active": {
+        "name": "Close the comb",
+        "behavior": "Folds its vulnerable feeding surfaces and shields itself.",
+        "trigger": "Focus full.",
+        "bound": "Pauses its basic attacks while folded; does not become immune."
+      },
+      "passive": {
+        "name": "Silt purge",
+        "behavior": "Sheds one slowing effect when its folded defense ends.",
+        "trigger": "Its own shield breaks or expires.",
+        "bound": "One cleanse per cycle, not every damage tick."
+      },
+      "emits": [
+        "shield",
+        "shed"
+      ],
+      "responds_to": [
+        "strike"
+      ],
+      "counterplay": "Wait for the feeding surfaces to reopen or interrupt the folding action.",
+      "tradeoff": "A defensive wildlife kit with little offensive value and no planned travel utility.",
+      "integration": "New design only. B6 may introduce it as food through trade; observation-only does not promise recruitment.",
+      "related_species": [
+        "hushgrub",
+        "mireglass"
+      ]
+    },
+    {
+      "index_id": "TR-066",
+      "region_id": "shifting_flats",
+      "design_status": "reserved"
+    },
+    {
+      "index_id": "TR-067",
+      "region_id": "shifting_flats",
+      "design_status": "reserved"
+    },
+    {
+      "index_id": "TR-068",
+      "region_id": "shifting_flats",
+      "design_status": "reserved"
+    },
+    {
+      "index_id": "TR-069",
+      "region_id": "shifting_flats",
+      "design_status": "reserved"
+    },
+    {
+      "index_id": "TR-070",
+      "region_id": "shifting_flats",
+      "design_status": "reserved"
+    },
+    {
+      "index_id": "TR-071",
+      "region_id": "shifting_flats",
+      "design_status": "reserved"
+    },
+    {
+      "index_id": "TR-072",
+      "region_id": "shifting_flats",
+      "design_status": "reserved"
+    },
+    {
+      "index_id": "TR-073",
+      "region_id": "shifting_flats",
+      "design_status": "reserved"
+    },
+    {
+      "index_id": "TR-074",
+      "region_id": "shifting_flats",
+      "design_status": "reserved"
+    },
+    {
+      "index_id": "TR-075",
+      "region_id": "shifting_flats",
+      "design_status": "reserved"
+    },
+    {
+      "index_id": "TR-076",
+      "region_id": "shifting_flats",
+      "design_status": "reserved"
+    },
+    {
+      "index_id": "TR-077",
+      "region_id": "shifting_flats",
+      "design_status": "reserved"
+    },
+    {
+      "index_id": "TR-078",
+      "region_id": "shifting_flats",
+      "design_status": "reserved"
+    },
+    {
+      "index_id": "TR-079",
+      "region_id": "shifting_flats",
+      "design_status": "reserved"
+    },
+    {
+      "index_id": "TR-080",
+      "region_id": "shifting_flats",
+      "design_status": "reserved"
+    },
+    {
+      "index_id": "TR-081",
+      "region_id": "shifting_flats",
+      "design_status": "reserved"
+    },
+    {
+      "index_id": "TR-082",
+      "region_id": "shifting_flats",
+      "design_status": "reserved"
+    },
+    {
+      "index_id": "TR-083",
+      "region_id": "shifting_flats",
+      "design_status": "reserved"
+    },
+    {
+      "index_id": "TR-084",
+      "region_id": "shifting_flats",
+      "design_status": "reserved"
+    },
+    {
+      "index_id": "TR-085",
+      "region_id": "shifting_flats",
+      "design_status": "reserved"
+    },
+    {
+      "index_id": "TR-086",
+      "region_id": "shifting_flats",
+      "design_status": "reserved"
+    },
+    {
+      "index_id": "TR-087",
+      "region_id": "shifting_flats",
+      "design_status": "reserved"
+    },
+    {
+      "index_id": "TR-088",
+      "region_id": "shifting_flats",
+      "design_status": "reserved"
+    },
+    {
+      "index_id": "TR-089",
+      "region_id": "shifting_flats",
+      "design_status": "reserved"
+    },
+    {
+      "index_id": "TR-090",
+      "region_id": "shifting_flats",
+      "design_status": "reserved"
+    },
+    {
+      "index_id": "TR-091",
+      "region_id": "shifting_flats",
+      "design_status": "reserved"
+    },
+    {
+      "index_id": "TR-092",
+      "region_id": "shifting_flats",
+      "design_status": "reserved"
+    },
+    {
+      "index_id": "TR-093",
+      "region_id": "shifting_flats",
+      "design_status": "reserved"
+    },
+    {
+      "index_id": "TR-094",
+      "region_id": "shifting_flats",
+      "design_status": "reserved"
+    },
+    {
+      "index_id": "TR-095",
+      "region_id": "shifting_flats",
+      "design_status": "reserved"
+    },
+    {
+      "index_id": "TR-096",
+      "region_id": "shifting_flats",
+      "design_status": "reserved"
+    },
+    {
+      "index_id": "TR-097",
+      "region_id": "shifting_flats",
+      "design_status": "reserved"
+    },
+    {
+      "index_id": "TR-098",
+      "region_id": "shifting_flats",
+      "design_status": "reserved"
+    },
+    {
+      "index_id": "TR-099",
+      "region_id": "shifting_flats",
+      "design_status": "reserved"
+    },
+    {
+      "index_id": "TR-100",
+      "region_id": "shifting_flats",
+      "design_status": "reserved"
+    },
+    {
+      "index_id": "TR-101",
+      "region_id": "shifting_flats",
+      "design_status": "reserved"
+    },
+    {
+      "index_id": "TR-102",
+      "region_id": "shifting_flats",
+      "design_status": "reserved"
+    },
+    {
+      "index_id": "TR-103",
+      "region_id": "shifting_flats",
+      "design_status": "reserved"
+    },
+    {
+      "index_id": "TR-104",
+      "region_id": "shifting_flats",
+      "design_status": "reserved"
+    },
+    {
+      "index_id": "TR-105",
+      "region_id": "shifting_flats",
+      "design_status": "reserved"
+    },
+    {
+      "index_id": "TR-106",
+      "region_id": "shifting_flats",
+      "design_status": "reserved"
+    },
+    {
+      "index_id": "TR-107",
+      "region_id": "shifting_flats",
+      "design_status": "reserved"
+    },
+    {
+      "index_id": "TR-108",
+      "region_id": "shifting_flats",
+      "design_status": "reserved"
+    },
+    {
+      "index_id": "TR-109",
+      "region_id": "shifting_flats",
+      "design_status": "reserved"
+    },
+    {
+      "index_id": "TR-110",
+      "region_id": "shifting_flats",
+      "design_status": "reserved"
+    },
+    {
+      "index_id": "TR-111",
+      "region_id": "shifting_flats",
+      "design_status": "reserved"
+    },
+    {
+      "index_id": "TR-112",
+      "region_id": "shifting_flats",
+      "design_status": "reserved"
+    },
+    {
+      "index_id": "TR-113",
+      "region_id": "shifting_flats",
+      "design_status": "reserved"
+    },
+    {
+      "index_id": "TR-114",
+      "region_id": "shifting_flats",
+      "design_status": "reserved"
+    },
+    {
+      "index_id": "TR-115",
+      "region_id": "shifting_flats",
+      "design_status": "reserved"
+    },
+    {
+      "index_id": "TR-116",
+      "region_id": "shifting_flats",
+      "design_status": "reserved"
+    },
+    {
+      "index_id": "TR-117",
+      "region_id": "shifting_flats",
+      "design_status": "reserved"
+    },
+    {
+      "index_id": "TR-118",
+      "region_id": "shifting_flats",
+      "design_status": "reserved"
+    },
+    {
+      "index_id": "TR-119",
+      "region_id": "shifting_flats",
+      "design_status": "reserved"
+    },
+    {
+      "index_id": "TR-120",
+      "region_id": "shifting_flats",
+      "design_status": "reserved"
+    },
+    {
+      "index_id": "TR-121",
+      "region_id": "buried_orchard",
+      "design_status": "brief",
+      "species_id": "stillmouth",
+      "name": "Stillmouth",
+      "game_status": "planned",
+      "kit_status": "proposed",
+      "art_status": "deferred",
+      "role": "Large patient pool predator and dangerous combat specialist.",
+      "body": "A flattened jaw spans most of a squat body; sensory whiskers lie along the lip instead of projecting like teeth.",
+      "habitat": "Dark pools beneath exposed forest roots, with one narrow feeding approach.",
+      "diet": "Fish and young animals that return repeatedly to the same drinking place.",
+      "ecology": "Learns the rhythm of a repeated movement, then lunges into where the prey will be.",
+      "behavior": "Lets the first two disturbances pass without moving at all.",
+      "encounter": "Repeated missing ripples near a root overhang suggest a predator. Watching from safety can fill its record.",
+      "recruitment": "planned_companion",
+      "active": {
+        "name": "Third ripple",
+        "behavior": "Strikes a visibly marked opponent after it repeats a basic-attack pattern.",
+        "trigger": "Focus full; prefer a marked repeat attacker.",
+        "bound": "The mark has a short expiry and only one stored strike."
+      },
+      "passive": {
+        "name": "Remembered motion",
+        "behavior": "Reduces one repeated hit from the same source after observing that source.",
+        "trigger": "A bounded sequence of hits from one attacker.",
+        "bound": "The protection resets when a different attacker hits."
+      },
+      "emits": [
+        "strike"
+      ],
+      "responds_to": [
+        "repeat"
+      ],
+      "counterplay": "Alternate sources of pressure or interrupt its marked windup.",
+      "tradeoff": "Slow to establish a pattern, especially against varied teams.",
+      "integration": "New design only. Needs visible source tracking, not a hidden damage-type resistance.",
+      "related_species": [
+        "reedskipper"
+      ]
+    },
+    {
+      "index_id": "TR-122",
+      "region_id": "buried_orchard",
+      "design_status": "brief",
+      "species_id": "gnawlock",
+      "name": "Gnawlock",
+      "game_status": "planned",
+      "kit_status": "proposed",
+      "art_status": "deferred",
+      "role": "Climbing nut-eater with a stubborn close-contact defense.",
+      "body": "A short flexible body hangs from gripping forefeet; paired lower incisors can close around a tough stem without constant effort.",
+      "habitat": "Old orchard tangles where thin branches cannot support a heavy pursuer.",
+      "diet": "Hard nuts, seed cases and dry outer bark.",
+      "ecology": "Locks its bite around a support while the rest of the body shifts to another branch. Pursuers find it difficult to shake loose.",
+      "behavior": "Hangs from its jaws while calmly reaching for the next branch.",
+      "encounter": "Neatly split nutshells high above the trail reveal its feeding stations.",
+      "recruitment": "planned_companion",
+      "active": {
+        "name": "Latch",
+        "behavior": "Binds one enemy’s basic attack clock while also slowing its own attacks.",
+        "trigger": "Focus full; one unattached target.",
+        "bound": "One target and a short duration; cannot chain a permanent bind."
+      },
+      "passive": {
+        "name": "Lever bite",
+        "behavior": "Its next strike against that bound target ignores part of defense.",
+        "trigger": "Its own bind is still active.",
+        "bound": "Consume the advantage on one strike, including multihit cases."
+      },
+      "emits": [
+        "bind",
+        "strike"
+      ],
+      "responds_to": [
+        "bind"
+      ],
+      "counterplay": "Interrupt the grip or attack Gnawlock with a second creature.",
+      "tradeoff": "Trades its own attack rate for control and commits to one opponent.",
+      "integration": "New design only. B2 binding applies to a creature, not to the battlefield.",
+      "related_species": []
+    },
+    {
+      "index_id": "TR-123",
+      "region_id": "buried_orchard",
+      "design_status": "brief",
+      "species_id": "thimbleback",
+      "name": "Thimbleback",
+      "game_status": "planned",
+      "kit_status": "proposed",
+      "art_status": "deferred",
+      "role": "Shy fungus-browser; an appealing small companion without a work requirement.",
+      "body": "A tall domed back encloses a very small face and tucked limbs; overlapping rim plates close like a drawstring.",
+      "habitat": "Damp fallen logs with sheltered dry cavities nearby.",
+      "diet": "Soft fungi, decaying fruit and tender shoots.",
+      "ecology": "Feeds in damp places but retreats to a dry pocket before spores and rain foul its breathing folds.",
+      "behavior": "Carries one uneaten mushroom cap around until it finds a quiet place.",
+      "encounter": "A tidy empty sleeping hollow beside a messy feeding patch reveals its routine.",
+      "recruitment": "planned_companion",
+      "active": {
+        "name": "Inward curl",
+        "behavior": "Converts a bounded part of its shield into its own HP over a short recovery.",
+        "trigger": "Focus full.",
+        "bound": "No shield means no healing; attacks pause during recovery."
+      },
+      "passive": {
+        "name": "Leave the coat",
+        "behavior": "Sheds one disabling effect when it uncurls.",
+        "trigger": "Recovery finishes uninterrupted.",
+        "bound": "One effect per cycle; no automatic group cleanse."
+      },
+      "emits": [
+        "recover",
+        "shed"
+      ],
+      "responds_to": [
+        "shield"
+      ],
+      "counterplay": "Break its shield or interrupt the recovery before it finishes.",
+      "tradeoff": "Excellent self-preservation can contribute little to saving an exposed wagon.",
+      "integration": "New design only. Its charm and behavior justify its existence even without a gathering or hauling bonus.",
+      "related_species": []
+    },
+    {
+      "index_id": "TR-124",
+      "region_id": "buried_orchard",
+      "design_status": "brief",
+      "species_id": "veilhen",
+      "name": "Veilhen",
+      "game_status": "planned",
+      "kit_status": "proposed",
+      "art_status": "deferred",
+      "role": "Flightless cover-nesting bird, prey animal and domestic food species.",
+      "body": "A rounded low body has a short neck and broad overlapping flank feathers that open outward rather than upward.",
+      "habitat": "Leaf litter below old orchard terraces and low brush at pasture edges.",
+      "diet": "Seeds, fallen fruit and small grubs.",
+      "ecology": "A sudden spread of flank feathers breaks its outline while chicks scatter beneath cover.",
+      "behavior": "Freezes with one flank half-open, leaving a gap for its young to escape.",
+      "encounter": "Scratched feeding circles and soft contact calls identify a family. Settled flocks supply eggs and meat through later trade.",
+      "recruitment": "planned_companion",
+      "active": {
+        "name": "Scatter display",
+        "behavior": "Redirects one enemy’s next basic strike onto itself and gains a brief decoy charge.",
+        "trigger": "Focus full.",
+        "bound": "One attacker and one hit; does not hide the whole team."
+      },
+      "passive": {
+        "name": "Make room",
+        "behavior": "An ally below half HP gains a little Focus when Veilhen takes the redirected hit.",
+        "trigger": "A redirected hit is consumed.",
+        "bound": "One lowest-health ally; no recursive reaction."
+      },
+      "emits": [
+        "expose"
+      ],
+      "responds_to": [
+        "strike"
+      ],
+      "counterplay": "Follow the small redirected strike with another source of pressure.",
+      "tradeoff": "Protective misdirection is fragile when several attackers act together.",
+      "integration": "New design only. Food use belongs to B6 trade/encounter work, not automatic meat after every battle.",
+      "related_species": [
+        "hushgrub"
+      ]
+    },
+    {
+      "index_id": "TR-125",
+      "region_id": "buried_orchard",
+      "design_status": "brief",
+      "species_id": "sapstilt",
+      "name": "Sapstilt",
+      "game_status": "planned",
+      "kit_status": "proposed",
+      "art_status": "deferred",
+      "role": "Patient orchard ambush insect and specialist fighter.",
+      "body": "A narrow body stands on long angular legs; flattened joints align with broken twigs when it settles.",
+      "habitat": "Old sap wounds and fruit splits where feeding insects return repeatedly.",
+      "diet": "Sap-feeding insects; sugary moisture supplements scarce prey.",
+      "ecology": "Waits at a reliable feeding place instead of chasing. The first precise movement matters more than sustained speed.",
+      "behavior": "Moves one foot at a time while the rest of the body stays perfectly aligned.",
+      "encounter": "An apparent twig changes which fruit split it points toward between observations.",
+      "recruitment": "planned_companion",
+      "active": {
+        "name": "Patient strike",
+        "behavior": "A long windup delivers a strong single hit if uninterrupted.",
+        "trigger": "Focus full.",
+        "bound": "Taking a direct hit during the windup reduces its payoff."
+      },
+      "passive": {
+        "name": "Still outline",
+        "behavior": "The first basic attack directed at it is delayed briefly.",
+        "trigger": "First time an enemy selects it.",
+        "bound": "Once per fight; named attacks that explicitly reveal it ignore the delay."
+      },
+      "emits": [
+        "charge",
+        "strike"
+      ],
+      "responds_to": [
+        "interrupt"
+      ],
+      "counterplay": "Apply an early inexpensive hit, then keep interrupting the windup.",
+      "tradeoff": "Little defense after its first concealment and poor response to scattered targets.",
+      "integration": "New design only. A visible per-creature windup and spent concealment indicator are required.",
+      "related_species": [
+        "bellmoth"
+      ]
+    },
+    {
+      "index_id": "TR-126",
+      "region_id": "buried_orchard",
+      "design_status": "reserved"
+    },
+    {
+      "index_id": "TR-127",
+      "region_id": "buried_orchard",
+      "design_status": "reserved"
+    },
+    {
+      "index_id": "TR-128",
+      "region_id": "buried_orchard",
+      "design_status": "reserved"
+    },
+    {
+      "index_id": "TR-129",
+      "region_id": "buried_orchard",
+      "design_status": "reserved"
+    },
+    {
+      "index_id": "TR-130",
+      "region_id": "buried_orchard",
+      "design_status": "reserved"
+    },
+    {
+      "index_id": "TR-131",
+      "region_id": "buried_orchard",
+      "design_status": "reserved"
+    },
+    {
+      "index_id": "TR-132",
+      "region_id": "buried_orchard",
+      "design_status": "reserved"
+    },
+    {
+      "index_id": "TR-133",
+      "region_id": "buried_orchard",
+      "design_status": "reserved"
+    },
+    {
+      "index_id": "TR-134",
+      "region_id": "buried_orchard",
+      "design_status": "reserved"
+    },
+    {
+      "index_id": "TR-135",
+      "region_id": "buried_orchard",
+      "design_status": "reserved"
+    },
+    {
+      "index_id": "TR-136",
+      "region_id": "buried_orchard",
+      "design_status": "reserved"
+    },
+    {
+      "index_id": "TR-137",
+      "region_id": "buried_orchard",
+      "design_status": "reserved"
+    },
+    {
+      "index_id": "TR-138",
+      "region_id": "buried_orchard",
+      "design_status": "reserved"
+    },
+    {
+      "index_id": "TR-139",
+      "region_id": "buried_orchard",
+      "design_status": "reserved"
+    },
+    {
+      "index_id": "TR-140",
+      "region_id": "buried_orchard",
+      "design_status": "reserved"
+    },
+    {
+      "index_id": "TR-141",
+      "region_id": "buried_orchard",
+      "design_status": "reserved"
+    },
+    {
+      "index_id": "TR-142",
+      "region_id": "buried_orchard",
+      "design_status": "reserved"
+    },
+    {
+      "index_id": "TR-143",
+      "region_id": "buried_orchard",
+      "design_status": "reserved"
+    },
+    {
+      "index_id": "TR-144",
+      "region_id": "buried_orchard",
+      "design_status": "reserved"
+    },
+    {
+      "index_id": "TR-145",
+      "region_id": "buried_orchard",
+      "design_status": "reserved"
+    },
+    {
+      "index_id": "TR-146",
+      "region_id": "buried_orchard",
+      "design_status": "reserved"
+    },
+    {
+      "index_id": "TR-147",
+      "region_id": "buried_orchard",
+      "design_status": "reserved"
+    },
+    {
+      "index_id": "TR-148",
+      "region_id": "buried_orchard",
+      "design_status": "reserved"
+    },
+    {
+      "index_id": "TR-149",
+      "region_id": "buried_orchard",
+      "design_status": "reserved"
+    },
+    {
+      "index_id": "TR-150",
+      "region_id": "buried_orchard",
+      "design_status": "reserved"
+    },
+    {
+      "index_id": "TR-151",
+      "region_id": "buried_orchard",
+      "design_status": "reserved"
+    },
+    {
+      "index_id": "TR-152",
+      "region_id": "buried_orchard",
+      "design_status": "reserved"
+    },
+    {
+      "index_id": "TR-153",
+      "region_id": "buried_orchard",
+      "design_status": "reserved"
+    },
+    {
+      "index_id": "TR-154",
+      "region_id": "buried_orchard",
+      "design_status": "reserved"
+    },
+    {
+      "index_id": "TR-155",
+      "region_id": "buried_orchard",
+      "design_status": "reserved"
+    },
+    {
+      "index_id": "TR-156",
+      "region_id": "buried_orchard",
+      "design_status": "reserved"
+    },
+    {
+      "index_id": "TR-157",
+      "region_id": "buried_orchard",
+      "design_status": "reserved"
+    },
+    {
+      "index_id": "TR-158",
+      "region_id": "buried_orchard",
+      "design_status": "reserved"
+    },
+    {
+      "index_id": "TR-159",
+      "region_id": "buried_orchard",
+      "design_status": "reserved"
+    },
+    {
+      "index_id": "TR-160",
+      "region_id": "buried_orchard",
+      "design_status": "reserved"
+    },
+    {
+      "index_id": "TR-161",
+      "region_id": "buried_orchard",
+      "design_status": "reserved"
+    },
+    {
+      "index_id": "TR-162",
+      "region_id": "buried_orchard",
+      "design_status": "reserved"
+    },
+    {
+      "index_id": "TR-163",
+      "region_id": "buried_orchard",
+      "design_status": "reserved"
+    },
+    {
+      "index_id": "TR-164",
+      "region_id": "buried_orchard",
+      "design_status": "reserved"
+    },
+    {
+      "index_id": "TR-165",
+      "region_id": "buried_orchard",
+      "design_status": "reserved"
+    },
+    {
+      "index_id": "TR-166",
+      "region_id": "buried_orchard",
+      "design_status": "reserved"
+    },
+    {
+      "index_id": "TR-167",
+      "region_id": "buried_orchard",
+      "design_status": "reserved"
+    },
+    {
+      "index_id": "TR-168",
+      "region_id": "buried_orchard",
+      "design_status": "reserved"
+    },
+    {
+      "index_id": "TR-169",
+      "region_id": "buried_orchard",
+      "design_status": "reserved"
+    },
+    {
+      "index_id": "TR-170",
+      "region_id": "buried_orchard",
+      "design_status": "reserved"
+    },
+    {
+      "index_id": "TR-171",
+      "region_id": "buried_orchard",
+      "design_status": "reserved"
+    },
+    {
+      "index_id": "TR-172",
+      "region_id": "buried_orchard",
+      "design_status": "reserved"
+    },
+    {
+      "index_id": "TR-173",
+      "region_id": "buried_orchard",
+      "design_status": "reserved"
+    },
+    {
+      "index_id": "TR-174",
+      "region_id": "buried_orchard",
+      "design_status": "reserved"
+    },
+    {
+      "index_id": "TR-175",
+      "region_id": "buried_orchard",
+      "design_status": "reserved"
+    },
+    {
+      "index_id": "TR-176",
+      "region_id": "buried_orchard",
+      "design_status": "reserved"
+    },
+    {
+      "index_id": "TR-177",
+      "region_id": "buried_orchard",
+      "design_status": "reserved"
+    },
+    {
+      "index_id": "TR-178",
+      "region_id": "buried_orchard",
+      "design_status": "reserved"
+    },
+    {
+      "index_id": "TR-179",
+      "region_id": "buried_orchard",
+      "design_status": "reserved"
+    },
+    {
+      "index_id": "TR-180",
+      "region_id": "buried_orchard",
+      "design_status": "reserved"
+    },
+    {
+      "index_id": "TR-181",
+      "region_id": "dry_shelves",
+      "design_status": "brief",
+      "species_id": "guttersail",
+      "name": "Guttersail",
+      "game_status": "planned",
+      "kit_status": "proposed",
+      "art_status": "deferred",
+      "role": "Ravine glider, quick hunter and potential speed specialist.",
+      "body": "A deep membrane folds down the sides of a slender body; long forelimbs open it like a gutter catching rising air.",
+      "habitat": "Narrow ravines with brief updrafts and many grounded resting ledges.",
+      "diet": "Flying insects and small shelf-dwelling animals.",
+      "ecology": "Most travel happens in short lifts between ledges. A spectacular dive must be followed by an awkward grounded recovery.",
+      "behavior": "Tests a draft with one membrane edge before opening both sides.",
+      "encounter": "A scrape high on one ledge and another much lower across the gap reveal a landing route.",
+      "recruitment": "planned_companion",
+      "active": {
+        "name": "Folded dive",
+        "behavior": "Spends accumulated momentum on a strong strike, then becomes exposed briefly.",
+        "trigger": "Focus full.",
+        "bound": "Momentum has a cap; the recovery cannot be skipped by immediately recasting."
+      },
+      "passive": {
+        "name": "Find the lift",
+        "behavior": "Uninterrupted attacks build a small momentum reserve.",
+        "trigger": "Basic attack completes.",
+        "bound": "Interruptions remove part of the reserve; no terrain bonus is required."
+      },
+      "emits": [
+        "charge",
+        "strike",
+        "expose"
+      ],
+      "responds_to": [
+        "interrupt"
+      ],
+      "counterplay": "Interrupt it before the dive or concentrate pressure during grounded recovery.",
+      "tradeoff": "Speed creates a predictable vulnerable window.",
+      "integration": "New design only. Momentum is an individual resource, not a new creature type or field-weather state.",
+      "related_species": []
+    },
+    {
+      "index_id": "TR-182",
+      "region_id": "dry_shelves",
+      "design_status": "brief",
+      "species_id": "tallowback",
+      "name": "Tallowback",
+      "game_status": "planned",
+      "kit_status": "proposed",
+      "art_status": "deferred",
+      "role": "Drought-country herd grazer; domestic milk and meat animal in some settlements.",
+      "body": "Short sturdy legs carry a heavy back with visible reserve folds; its head stays low while it walks.",
+      "habitat": "Dry pasture and shelves, descending to floodplain margins after scarce rain.",
+      "diet": "Tough dry grasses and seed heads; long grazing supports stored reserves.",
+      "ecology": "Survives lean seasons by spending body reserves slowly. A defending parent can expend them much faster.",
+      "behavior": "Refuses a fresh patch until the herd has finished the one underfoot.",
+      "encounter": "Broad grazing lines converge at a reliable water approach. Domestic animals can appear at provision markets.",
+      "recruitment": "planned_companion",
+      "active": {
+        "name": "Spend the reserve",
+        "behavior": "Converts part of an internal reserve into self-protection.",
+        "trigger": "Focus full and reserve remains.",
+        "bound": "Reserve is finite within a fight; no repeated consumption of expedition food."
+      },
+      "passive": {
+        "name": "Keep grazing",
+        "behavior": "Builds a small reserve during intervals without taking damage.",
+        "trigger": "A bounded quiet interval.",
+        "bound": "Reserve cannot exceed its cap or carry an infinite battle stall."
+      },
+      "emits": [
+        "shield"
+      ],
+      "responds_to": [
+        "strike"
+      ],
+      "counterplay": "Keep steady pressure on it so reserve cannot recover.",
+      "tradeoff": "A tough body with little burst damage; reserve exhaustion is visible.",
+      "integration": "New design only. B6 supports settlement food trade; B4 may use its body as a Borrowbill host.",
+      "related_species": [
+        "borrowbill"
+      ]
+    },
+    {
+      "index_id": "TR-183",
+      "region_id": "dry_shelves",
+      "design_status": "brief",
+      "species_id": "rattleloom",
+      "name": "Rattleloom",
+      "game_status": "planned",
+      "kit_status": "proposed",
+      "art_status": "deferred",
+      "role": "Solitary gully hunter and binding specialist.",
+      "body": "A low many-jointed body has broad grasping ends on two limbs and fine fiber-producing grooves beneath the abdomen.",
+      "habitat": "Loose-stone gullies where moving pebbles announce passing prey.",
+      "diet": "Small crawling invertebrates caught near its listening fibers.",
+      "ecology": "Suspended pebbles transmit movement through taut fibers. It holds its own listening rig rather than changing the entire ground.",
+      "behavior": "Lifts one pebble to silence it while listening through another.",
+      "encounter": "A pebble hangs just clear of the ground without wind moving it.",
+      "recruitment": "planned_companion",
+      "active": {
+        "name": "Catch the rush",
+        "behavior": "Binds one charging opponent and exposes it to a follow-up.",
+        "trigger": "Focus full; prefer a charging target.",
+        "bound": "Short individual bind only; no battlefield trap, changed tile or permanent terrain state."
+      },
+      "passive": {
+        "name": "Taut line",
+        "behavior": "Gains a small shield when an ally strikes its currently bound target.",
+        "trigger": "An allied basic hit on that target.",
+        "bound": "One gain per binding cycle, not a response to its own strike."
+      },
+      "emits": [
+        "bind",
+        "expose"
+      ],
+      "responds_to": [
+        "charge",
+        "strike"
+      ],
+      "counterplay": "Use a low-commitment attack to interrupt the catch or cleanse the bind.",
+      "tradeoff": "A poor direct attacker if the team cannot use the brief opening.",
+      "integration": "New design only. This is the B2 combination candidate; explicitly respects the rejection of B3.",
+      "related_species": []
+    },
+    {
+      "index_id": "TR-184",
+      "region_id": "dry_shelves",
+      "design_status": "brief",
+      "species_id": "chalkmaw",
+      "name": "Chalkmaw",
+      "game_status": "planned",
+      "kit_status": "proposed",
+      "art_status": "deferred",
+      "role": "Territorial cliff browser with an unusually forceful bite.",
+      "body": "A broad chisel jaw sits close to the ground; powerful cheek muscles make the head wider than the shoulders.",
+      "habitat": "Sparse ledges with hard lichen crusts and wind-polished surfaces.",
+      "diet": "Lichens and tough shelf plants scraped with the jaw edge.",
+      "ecology": "Grinding through hard food favors force over speed. The jaw needs a pause after a full bite.",
+      "behavior": "Wipes the lower jaw against a ledge, leaving paired pale streaks.",
+      "encounter": "Follow scrape marks, then watch whether they face a feeding patch or an approach it is guarding.",
+      "recruitment": "planned_companion",
+      "active": {
+        "name": "Shear bite",
+        "behavior": "Ignores a portion of one target’s defense on a heavy strike.",
+        "trigger": "Focus full.",
+        "bound": "The follow-up recovery slows its basic attacks; no universal armor immunity."
+      },
+      "passive": {
+        "name": "Reset the jaw",
+        "behavior": "After an uninterrupted recovery, its next basic hit gains a modest bonus.",
+        "trigger": "Its own recovery ends.",
+        "bound": "One stored hit, lost if interrupted before use."
+      },
+      "emits": [
+        "strike",
+        "recover"
+      ],
+      "responds_to": [
+        "interrupt"
+      ],
+      "counterplay": "Interrupt recovery or protect against a single large strike instead of relying only on defense.",
+      "tradeoff": "Strong against armor, unreliable against frequent disruption.",
+      "integration": "New design only. Its geology explains its feeding anatomy, not a stone-element classification.",
+      "related_species": []
+    },
+    {
+      "index_id": "TR-185",
+      "region_id": "dry_shelves",
+      "design_status": "reserved"
+    },
+    {
+      "index_id": "TR-186",
+      "region_id": "dry_shelves",
+      "design_status": "reserved"
+    },
+    {
+      "index_id": "TR-187",
+      "region_id": "dry_shelves",
+      "design_status": "reserved"
+    },
+    {
+      "index_id": "TR-188",
+      "region_id": "dry_shelves",
+      "design_status": "reserved"
+    },
+    {
+      "index_id": "TR-189",
+      "region_id": "dry_shelves",
+      "design_status": "reserved"
+    },
+    {
+      "index_id": "TR-190",
+      "region_id": "dry_shelves",
+      "design_status": "reserved"
+    },
+    {
+      "index_id": "TR-191",
+      "region_id": "dry_shelves",
+      "design_status": "reserved"
+    },
+    {
+      "index_id": "TR-192",
+      "region_id": "dry_shelves",
+      "design_status": "reserved"
+    },
+    {
+      "index_id": "TR-193",
+      "region_id": "dry_shelves",
+      "design_status": "reserved"
+    },
+    {
+      "index_id": "TR-194",
+      "region_id": "dry_shelves",
+      "design_status": "reserved"
+    },
+    {
+      "index_id": "TR-195",
+      "region_id": "dry_shelves",
+      "design_status": "reserved"
+    },
+    {
+      "index_id": "TR-196",
+      "region_id": "dry_shelves",
+      "design_status": "reserved"
+    },
+    {
+      "index_id": "TR-197",
+      "region_id": "dry_shelves",
+      "design_status": "reserved"
+    },
+    {
+      "index_id": "TR-198",
+      "region_id": "dry_shelves",
+      "design_status": "reserved"
+    },
+    {
+      "index_id": "TR-199",
+      "region_id": "dry_shelves",
+      "design_status": "reserved"
+    },
+    {
+      "index_id": "TR-200",
+      "region_id": "dry_shelves",
+      "design_status": "reserved"
+    },
+    {
+      "index_id": "TR-201",
+      "region_id": "dry_shelves",
+      "design_status": "reserved"
+    },
+    {
+      "index_id": "TR-202",
+      "region_id": "dry_shelves",
+      "design_status": "reserved"
+    },
+    {
+      "index_id": "TR-203",
+      "region_id": "dry_shelves",
+      "design_status": "reserved"
+    },
+    {
+      "index_id": "TR-204",
+      "region_id": "dry_shelves",
+      "design_status": "reserved"
+    },
+    {
+      "index_id": "TR-205",
+      "region_id": "dry_shelves",
+      "design_status": "reserved"
+    },
+    {
+      "index_id": "TR-206",
+      "region_id": "dry_shelves",
+      "design_status": "reserved"
+    },
+    {
+      "index_id": "TR-207",
+      "region_id": "dry_shelves",
+      "design_status": "reserved"
+    },
+    {
+      "index_id": "TR-208",
+      "region_id": "dry_shelves",
+      "design_status": "reserved"
+    },
+    {
+      "index_id": "TR-209",
+      "region_id": "dry_shelves",
+      "design_status": "reserved"
+    },
+    {
+      "index_id": "TR-210",
+      "region_id": "dry_shelves",
+      "design_status": "reserved"
+    },
+    {
+      "index_id": "TR-211",
+      "region_id": "dry_shelves",
+      "design_status": "reserved"
+    },
+    {
+      "index_id": "TR-212",
+      "region_id": "dry_shelves",
+      "design_status": "reserved"
+    },
+    {
+      "index_id": "TR-213",
+      "region_id": "dry_shelves",
+      "design_status": "reserved"
+    },
+    {
+      "index_id": "TR-214",
+      "region_id": "dry_shelves",
+      "design_status": "reserved"
+    },
+    {
+      "index_id": "TR-215",
+      "region_id": "dry_shelves",
+      "design_status": "reserved"
+    },
+    {
+      "index_id": "TR-216",
+      "region_id": "dry_shelves",
+      "design_status": "reserved"
+    },
+    {
+      "index_id": "TR-217",
+      "region_id": "dry_shelves",
+      "design_status": "reserved"
+    },
+    {
+      "index_id": "TR-218",
+      "region_id": "dry_shelves",
+      "design_status": "reserved"
+    },
+    {
+      "index_id": "TR-219",
+      "region_id": "dry_shelves",
+      "design_status": "reserved"
+    },
+    {
+      "index_id": "TR-220",
+      "region_id": "dry_shelves",
+      "design_status": "reserved"
+    },
+    {
+      "index_id": "TR-221",
+      "region_id": "dry_shelves",
+      "design_status": "reserved"
+    },
+    {
+      "index_id": "TR-222",
+      "region_id": "dry_shelves",
+      "design_status": "reserved"
+    },
+    {
+      "index_id": "TR-223",
+      "region_id": "dry_shelves",
+      "design_status": "reserved"
+    },
+    {
+      "index_id": "TR-224",
+      "region_id": "dry_shelves",
+      "design_status": "reserved"
+    },
+    {
+      "index_id": "TR-225",
+      "region_id": "dry_shelves",
+      "design_status": "reserved"
+    },
+    {
+      "index_id": "TR-226",
+      "region_id": "dry_shelves",
+      "design_status": "reserved"
+    },
+    {
+      "index_id": "TR-227",
+      "region_id": "dry_shelves",
+      "design_status": "reserved"
+    },
+    {
+      "index_id": "TR-228",
+      "region_id": "dry_shelves",
+      "design_status": "reserved"
+    },
+    {
+      "index_id": "TR-229",
+      "region_id": "dry_shelves",
+      "design_status": "reserved"
+    },
+    {
+      "index_id": "TR-230",
+      "region_id": "dry_shelves",
+      "design_status": "reserved"
+    },
+    {
+      "index_id": "TR-231",
+      "region_id": "dry_shelves",
+      "design_status": "reserved"
+    },
+    {
+      "index_id": "TR-232",
+      "region_id": "dry_shelves",
+      "design_status": "reserved"
+    },
+    {
+      "index_id": "TR-233",
+      "region_id": "dry_shelves",
+      "design_status": "reserved"
+    },
+    {
+      "index_id": "TR-234",
+      "region_id": "dry_shelves",
+      "design_status": "reserved"
+    },
+    {
+      "index_id": "TR-235",
+      "region_id": "dry_shelves",
+      "design_status": "reserved"
+    },
+    {
+      "index_id": "TR-236",
+      "region_id": "dry_shelves",
+      "design_status": "reserved"
+    },
+    {
+      "index_id": "TR-237",
+      "region_id": "dry_shelves",
+      "design_status": "reserved"
+    },
+    {
+      "index_id": "TR-238",
+      "region_id": "dry_shelves",
+      "design_status": "reserved"
+    },
+    {
+      "index_id": "TR-239",
+      "region_id": "dry_shelves",
+      "design_status": "reserved"
+    },
+    {
+      "index_id": "TR-240",
+      "region_id": "dry_shelves",
+      "design_status": "reserved"
+    },
+    {
+      "index_id": "TR-241",
+      "region_id": "unmarked_valley",
+      "design_status": "brief",
+      "species_id": "foldwake",
+      "name": "Foldwake",
+      "game_status": "planned",
+      "kit_status": "proposed",
+      "art_status": "deferred",
+      "role": "Secretive pool-edge predator with an explosive first movement.",
+      "body": "Six long limbs fold flat along a broad ribbon-like body; opened, the animal is much taller than its resting outline.",
+      "habitat": "Seasonal forest pools with narrow damp hollows beneath fallen timber.",
+      "diet": "Small pool animals and invertebrates sheltering under wet logs.",
+      "ecology": "The flattened resting shape fits disappearing pools and hides its true reach from passing prey.",
+      "behavior": "A thin dark seam under a log briefly becomes a tall shape, then folds away.",
+      "encounter": "Observe a shallow pool as it drains; do not assume every hollow is empty.",
+      "recruitment": "observation_only",
+      "active": {
+        "name": "Unfurl",
+        "behavior": "A clearly telegraphed long-reach strike can reach a rear opponent.",
+        "trigger": "Focus full.",
+        "bound": "Long windup; an interruption cancels the reach advantage."
+      },
+      "passive": {
+        "name": "Fold away",
+        "behavior": "Gains brief protection after completing a strike.",
+        "trigger": "Its own active strike finishes.",
+        "bound": "Protection ends before its next windup; no permanent hiding."
+      },
+      "emits": [
+        "charge",
+        "strike"
+      ],
+      "responds_to": [
+        "interrupt"
+      ],
+      "counterplay": "Interrupt the windup or prepare protection for the announced rear target.",
+      "tradeoff": "Predictable cycle and weak sustained basic attacks.",
+      "integration": "New design only. An observation-first threat; recruitment is not promised.",
+      "related_species": []
+    },
+    {
+      "index_id": "TR-242",
+      "region_id": "unmarked_valley",
+      "design_status": "brief",
+      "species_id": "mourningrail",
+      "name": "Mourningrail",
+      "game_status": "planned",
+      "kit_status": "proposed",
+      "art_status": "deferred",
+      "role": "Forest call-mimic and possible unpredictable companion.",
+      "body": "A long throat folds against a slim chest; a short fan of tail feathers opens when it listens rather than when it calls.",
+      "habitat": "Layered forest margins where distant calls are clearer than silhouettes.",
+      "diet": "Berries, insects and fallen seeds.",
+      "ecology": "Imitates useful contact and alarm calls to move between feeding groups. A poor imitation attracts unwanted attention.",
+      "behavior": "Repeats only the last part of a call, leaving a recognizable gap.",
+      "encounter": "A familiar creature’s call comes from the wrong height or answers itself too quickly.",
+      "recruitment": "planned_companion",
+      "active": {
+        "name": "Borrowed phrase",
+        "behavior": "Echoes a reduced version of the last eligible ally ability.",
+        "trigger": "Focus full with a recorded eligible ability.",
+        "bound": "Cannot copy copies, consumables, revival or attachment; the eligible set is explicit."
+      },
+      "passive": {
+        "name": "Listen first",
+        "behavior": "Gains a little Focus when a different ally casts.",
+        "trigger": "A non-copy allied cast.",
+        "bound": "Once per source in a short window; echo casts do not feed the loop."
+      },
+      "emits": [
+        "repeat"
+      ],
+      "responds_to": [
+        "repeat"
+      ],
+      "counterplay": "Interrupt it after a useful ally cast or exploit the weak fallback when no ability can be copied.",
+      "tradeoff": "Its value depends on team order; copying must not become a universally best fourth ability.",
+      "integration": "New design only. Higher implementation risk: bounded eligible effect copying needs dedicated tests before runtime content.",
+      "related_species": []
+    },
+    {
+      "index_id": "TR-243",
+      "region_id": "unmarked_valley",
+      "design_status": "brief",
+      "species_id": "trenchwink",
+      "name": "Trenchwink",
+      "game_status": "planned",
+      "kit_status": "proposed",
+      "art_status": "deferred",
+      "role": "Small drought sleeper and resilient prey animal.",
+      "body": "A narrow soft body tucks short limbs into sealed folds; translucent eyelid caps close over a small face.",
+      "habitat": "Seasonal drainage trenches where damp pockets outlast surface water.",
+      "diet": "Tiny crustaceans and soft shoots exposed as water retreats.",
+      "ecology": "Brief dormancy lets it endure drying pools. It must choose when to reopen, because recovery leaves it vulnerable.",
+      "behavior": "Seems inert until a faint blink passes beneath a sealed eyelid cap.",
+      "encounter": "After rain, seemingly empty drainage cracks begin producing fresh feeding trails.",
+      "recruitment": "planned_companion",
+      "active": {
+        "name": "Open again",
+        "behavior": "Recovers a little HP while becoming briefly exposed.",
+        "trigger": "Focus full.",
+        "bound": "The recovery never repairs the wagon or revives an ally."
+      },
+      "passive": {
+        "name": "Last damp pocket",
+        "behavior": "The first lethal hit leaves it dormant at minimal HP for a short interval.",
+        "trigger": "First lethal hit.",
+        "bound": "Once per fight; no attacks or protection of the wagon while dormant, and defeat detection must remain bounded."
+      },
+      "emits": [
+        "recover",
+        "expose"
+      ],
+      "responds_to": [
+        "fall"
+      ],
+      "counterplay": "Wait out dormancy and pressure the exposed recovery instead of wasting a large hit.",
+      "tradeoff": "Staying alive does not guarantee useful damage or wagon defense.",
+      "integration": "New design only. Dormancy must be visible and must not create a soft-lock or repeatable resurrection loop.",
+      "related_species": []
+    },
+    {
+      "index_id": "TR-244",
+      "region_id": "unmarked_valley",
+      "design_status": "brief",
+      "species_id": "knellfin",
+      "name": "Knellfin",
+      "game_status": "planned",
+      "kit_status": "proposed",
+      "art_status": "deferred",
+      "role": "Cave-stream hunter adapted to darkness.",
+      "body": "A narrow fish has an enlarged throat chamber and low fins held close to its body; its jaw opens sideways into a broad listening surface.",
+      "habitat": "Dark cave channels and sheltered pools at the edge of the unmarked valley.",
+      "diet": "Small fish and drifting cave invertebrates.",
+      "ecology": "A throat pulse returns from nearby bodies. Closely spaced echoes reveal moving prey without sight.",
+      "behavior": "A small surface ring appears, followed by another from beneath an overhang.",
+      "encounter": "Record the repeated rings at a cave entrance. Its aquatic life does not justify a mandatory tank on every wagon.",
+      "recruitment": "observation_only",
+      "active": {
+        "name": "Aftertone",
+        "behavior": "A strike leaves one delayed second pulse on its announced target.",
+        "trigger": "Focus full.",
+        "bound": "One delayed pulse per cast; the pulse cannot schedule another pulse."
+      },
+      "passive": {
+        "name": "Read the echo",
+        "behavior": "The pulse is stronger against an exposed target.",
+        "trigger": "Its own delayed pulse resolves.",
+        "bound": "No bonus on the initial strike; keep source attribution after a knockout."
+      },
+      "emits": [
+        "strike",
+        "repeat"
+      ],
+      "responds_to": [
+        "expose"
+      ],
+      "counterplay": "Shield the marked target before the delayed pulse or clear the exposure.",
+      "tradeoff": "Damage arrives late and may be wasted if the target is already out.",
+      "integration": "New design only. Requires one bounded delayed action record; no elemental sonic class.",
+      "related_species": [
+        "siltbelly"
+      ]
+    },
+    {
+      "index_id": "TR-245",
+      "region_id": "unmarked_valley",
+      "design_status": "reserved"
+    },
+    {
+      "index_id": "TR-246",
+      "region_id": "unmarked_valley",
+      "design_status": "reserved"
+    },
+    {
+      "index_id": "TR-247",
+      "region_id": "unmarked_valley",
+      "design_status": "reserved"
+    },
+    {
+      "index_id": "TR-248",
+      "region_id": "unmarked_valley",
+      "design_status": "reserved"
+    },
+    {
+      "index_id": "TR-249",
+      "region_id": "unmarked_valley",
+      "design_status": "reserved"
+    },
+    {
+      "index_id": "TR-250",
+      "region_id": "unmarked_valley",
+      "design_status": "reserved"
+    },
+    {
+      "index_id": "TR-251",
+      "region_id": "unmarked_valley",
+      "design_status": "reserved"
+    },
+    {
+      "index_id": "TR-252",
+      "region_id": "unmarked_valley",
+      "design_status": "reserved"
+    },
+    {
+      "index_id": "TR-253",
+      "region_id": "unmarked_valley",
+      "design_status": "reserved"
+    },
+    {
+      "index_id": "TR-254",
+      "region_id": "unmarked_valley",
+      "design_status": "reserved"
+    },
+    {
+      "index_id": "TR-255",
+      "region_id": "unmarked_valley",
+      "design_status": "reserved"
+    },
+    {
+      "index_id": "TR-256",
+      "region_id": "unmarked_valley",
+      "design_status": "reserved"
+    },
+    {
+      "index_id": "TR-257",
+      "region_id": "unmarked_valley",
+      "design_status": "reserved"
+    },
+    {
+      "index_id": "TR-258",
+      "region_id": "unmarked_valley",
+      "design_status": "reserved"
+    },
+    {
+      "index_id": "TR-259",
+      "region_id": "unmarked_valley",
+      "design_status": "reserved"
+    },
+    {
+      "index_id": "TR-260",
+      "region_id": "unmarked_valley",
+      "design_status": "reserved"
+    },
+    {
+      "index_id": "TR-261",
+      "region_id": "unmarked_valley",
+      "design_status": "reserved"
+    },
+    {
+      "index_id": "TR-262",
+      "region_id": "unmarked_valley",
+      "design_status": "reserved"
+    },
+    {
+      "index_id": "TR-263",
+      "region_id": "unmarked_valley",
+      "design_status": "reserved"
+    },
+    {
+      "index_id": "TR-264",
+      "region_id": "unmarked_valley",
+      "design_status": "reserved"
+    },
+    {
+      "index_id": "TR-265",
+      "region_id": "unmarked_valley",
+      "design_status": "reserved"
+    },
+    {
+      "index_id": "TR-266",
+      "region_id": "unmarked_valley",
+      "design_status": "reserved"
+    },
+    {
+      "index_id": "TR-267",
+      "region_id": "unmarked_valley",
+      "design_status": "reserved"
+    },
+    {
+      "index_id": "TR-268",
+      "region_id": "unmarked_valley",
+      "design_status": "reserved"
+    },
+    {
+      "index_id": "TR-269",
+      "region_id": "unmarked_valley",
+      "design_status": "reserved"
+    },
+    {
+      "index_id": "TR-270",
+      "region_id": "unmarked_valley",
+      "design_status": "reserved"
+    },
+    {
+      "index_id": "TR-271",
+      "region_id": "unmarked_valley",
+      "design_status": "reserved"
+    },
+    {
+      "index_id": "TR-272",
+      "region_id": "unmarked_valley",
+      "design_status": "reserved"
+    },
+    {
+      "index_id": "TR-273",
+      "region_id": "unmarked_valley",
+      "design_status": "reserved"
+    },
+    {
+      "index_id": "TR-274",
+      "region_id": "unmarked_valley",
+      "design_status": "reserved"
+    },
+    {
+      "index_id": "TR-275",
+      "region_id": "unmarked_valley",
+      "design_status": "reserved"
+    },
+    {
+      "index_id": "TR-276",
+      "region_id": "unmarked_valley",
+      "design_status": "reserved"
+    },
+    {
+      "index_id": "TR-277",
+      "region_id": "unmarked_valley",
+      "design_status": "reserved"
+    },
+    {
+      "index_id": "TR-278",
+      "region_id": "unmarked_valley",
+      "design_status": "reserved"
+    },
+    {
+      "index_id": "TR-279",
+      "region_id": "unmarked_valley",
+      "design_status": "reserved"
+    },
+    {
+      "index_id": "TR-280",
+      "region_id": "unmarked_valley",
+      "design_status": "reserved"
+    },
+    {
+      "index_id": "TR-281",
+      "region_id": "unmarked_valley",
+      "design_status": "reserved"
+    },
+    {
+      "index_id": "TR-282",
+      "region_id": "unmarked_valley",
+      "design_status": "reserved"
+    },
+    {
+      "index_id": "TR-283",
+      "region_id": "unmarked_valley",
+      "design_status": "reserved"
+    },
+    {
+      "index_id": "TR-284",
+      "region_id": "unmarked_valley",
+      "design_status": "reserved"
+    },
+    {
+      "index_id": "TR-285",
+      "region_id": "unmarked_valley",
+      "design_status": "reserved"
+    },
+    {
+      "index_id": "TR-286",
+      "region_id": "unmarked_valley",
+      "design_status": "reserved"
+    },
+    {
+      "index_id": "TR-287",
+      "region_id": "unmarked_valley",
+      "design_status": "reserved"
+    },
+    {
+      "index_id": "TR-288",
+      "region_id": "unmarked_valley",
+      "design_status": "reserved"
+    },
+    {
+      "index_id": "TR-289",
+      "region_id": "unmarked_valley",
+      "design_status": "reserved"
+    },
+    {
+      "index_id": "TR-290",
+      "region_id": "unmarked_valley",
+      "design_status": "reserved"
+    },
+    {
+      "index_id": "TR-291",
+      "region_id": "unmarked_valley",
+      "design_status": "reserved"
+    },
+    {
+      "index_id": "TR-292",
+      "region_id": "unmarked_valley",
+      "design_status": "reserved"
+    },
+    {
+      "index_id": "TR-293",
+      "region_id": "unmarked_valley",
+      "design_status": "reserved"
+    },
+    {
+      "index_id": "TR-294",
+      "region_id": "unmarked_valley",
+      "design_status": "reserved"
+    },
+    {
+      "index_id": "TR-295",
+      "region_id": "unmarked_valley",
+      "design_status": "reserved"
+    },
+    {
+      "index_id": "TR-296",
+      "region_id": "unmarked_valley",
+      "design_status": "reserved"
+    },
+    {
+      "index_id": "TR-297",
+      "region_id": "unmarked_valley",
+      "design_status": "reserved"
+    },
+    {
+      "index_id": "TR-298",
+      "region_id": "unmarked_valley",
+      "design_status": "reserved"
+    },
+    {
+      "index_id": "TR-299",
+      "region_id": "unmarked_valley",
+      "design_status": "reserved"
+    },
+    {
+      "index_id": "TR-300",
+      "region_id": "unmarked_valley",
+      "design_status": "reserved"
+    }
+  ]
+}
