@@ -19,6 +19,7 @@ These are standing user requirements, established October 30, 2026. Apply them f
 ## Technical direction
 
 - Use Defold and Lua. Preserve the Oregon Trail expedition loop, the small creature crew, and the calm decision rhythm described in `docs/GAME_DESIGN.md`.
+- November 1, 2026 combat direction: follow `docs/WAGON_COMBAT.md`. The owner authorized an Astronarch-like attack/ability/party system with the wagon as a defendable target. Independent attacks, repeating skills, passive/item interactions and up to three active travelers replace the old shared-Resolve/exchange-limited target. S28–S30 are authorized staged implementation; preserve old saves. Do not ask again whether this direction or an isolated slice is wanted.
 - Keep simulation state deterministic and separate from rendering. Do not use cosmetic randomness for game outcomes.
 - Use `tools/test.ps1` for simulation and native persistence checks and `tools/build.ps1` for a Windows release bundle.
 - Keep credentials out of repository files, art records, logs, and player builds.

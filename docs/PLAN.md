@@ -1,6 +1,6 @@
 # Trailomon plan
 
-Updated October 31, 2026. Owner-approved scope: one polished expedition first, Windows only. Defold and Lua remain the engine and language. The existing playable foundation is merged in [PR 1](https://github.com/Chillysoop/trailomon/pull/1).
+Updated November 1, 2026. Owner-approved scope: one polished expedition first, Windows only. Defold and Lua remain the engine and language. The existing playable foundation is merged in [PR 1](https://github.com/Chillysoop/trailomon/pull/1).
 
 ## Pitch
 
@@ -10,7 +10,7 @@ Trailomon is a calm expedition game about one traveler, a wagon, and a small cre
 
 Prepare a crew and load at Fernwake, travel toward a landmark, observe changing conditions, choose an approach to a problem or opportunity, recover or resupply, and continue toward Lantern Reach. At an ending, retain eligible companions, discoveries, and memories and prepare another trip.
 
-During a typical half-minute the player watches the wagon travel, reads a change in circumstances, or makes one consequential choice. Important decisions pause time. Automatic combat replaces new manual battles and remains a short part of the journey. Astronarch is the primary combat reference; Automon informs the creature-party appeal.
+During a typical half-minute the player watches the wagon travel, reads a change in circumstances, or makes one consequential choice. Important decisions pause time. Automatic combat replaces new manual battles and remains a short part of the journey. The owner now wants combat mechanically close to Astronarch, with the wagon as an additional defendable objective. Independent unit attacks, repeating abilities, passives and equipment replace the scripted shared-Resolve model. See [WAGON_COMBAT.md](WAGON_COMBAT.md). Automon informs the creature-party appeal.
 
 ## Pillars
 
@@ -25,8 +25,8 @@ During a typical half-minute the player watches the wagon travel, reads a change
 | Area | First polished expedition |
 | --- | --- |
 | Journey | One complete route, six landmarks, two branch choices, one river crossing; target 20–35 minutes |
-| Crew | Six original species; one or two at departure and at most three traveling; two active in encounters; optional Discovery depot starts with one chosen hauler |
-| Combat | Two road scenarios plus optional courier practice, readable abilities and two positions; preserve peaceful alternatives and persistent costs; tune against the whole journey |
+| Crew | Six original species; one or two at departure and at most three traveling; replacement combat uses up to all three traveling companions (current build uses two); optional Discovery depot starts with one chosen hauler |
+| Combat | Target: independent units/attack clocks, repeatable skills, formation, equipment and wagon defense; two road scenarios plus practice. Current scripted encounters remain until the replacement is validated; preserve peaceful alternatives and expedition consequences |
 | Provisioning | Food, medicine, repairs, coins, cargo, and capacity; existing foraging with finite local yields; hunting deferred by approved P2 |
 | Survival | Weather, pace, rations, hauling, stamina, injuries, wagon wear, and cargo condition |
 | Progression | Named companions, species observations, courier recognition, selectable learned habits, memories, ten journey summaries, and standard/covered wagon alternatives |
