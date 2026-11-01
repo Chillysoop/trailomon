@@ -24,6 +24,8 @@ function M.handle(self,action_id,action)
             local button=self.buttons[self.focus or 1]
             if button and button.enabled then button.fn() end;return true
         elseif action_id==hash("back") then self.open_page("trail");return true
+        elseif action_id==hash("pause") and self.page=="ambush" then
+            require("services.ambush_controller").command(self,"pause");return true
         elseif action_id==hash("pause") and self.page=="trail" then
             local mode=self.snapshot.run.mode
             if mode=="stopped" then self.perform("resume") elseif mode=="traveling" then self.perform("pause") end

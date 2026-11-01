@@ -4,6 +4,7 @@ local clock=require "services.travel_clock"
 local screens=require "ui.screens"
 local input=require "ui.input"
 local scene=require "presentation.scene"
+local ambush=require "services.ambush_controller"
 
 local function feedback(self,arrival)
     if self.snapshot.settings.sound then sound.play(arrival and "#arrival" or "#decision") end
@@ -52,6 +53,7 @@ function init(self)
     end
     self.open_page=function(destination)
         if self.save_blocked then return end
+        if self.page=="ambush" then ambush.pause(self) end
         if self.snapshot.run.mode=="combat" then self.combat_paused=true end
         if self.snapshot.run.mode=="traveling" then model.command(self.snapshot,"pause");self.save_now() end
         self.reset_clock();self.page=destination;self.redraw()
@@ -90,6 +92,7 @@ function init(self)
     window.set_listener(function(_,event,data)
         if event==window.WINDOW_EVENT_FOCUS_LOST or event==window.WINDOW_EVENT_ICONIFIED then
             self.has_focus=false;self.reset_clock()
+            ambush.pause(self)
             if self.snapshot.run.mode=="combat" then self.combat_paused=true;self.redraw() end
             if self.snapshot.run.mode=="traveling" then model.command(self.snapshot,"pause");self.save_now();self.redraw() end
         elseif event==window.WINDOW_EVENT_FOCUS_GAINED or event==window.WINDOW_EVENT_DEICONIFIED then self.has_focus=true end
@@ -102,6 +105,7 @@ end
 
 function update(self,dt)
     self.time=self.time+math.min(dt,0.1)
+    ambush.update(self,dt)
     local active=self.page=="trail" and self.snapshot.run.mode=="traveling" and not self.edit and not self.save_blocked and self.has_focus
     local fighting=self.page=="trail" and self.snapshot.run.mode=="combat" and model.combat.automatic(self.snapshot.run.battle) and not self.combat_paused and not self.edit and not self.save_blocked and not self.save_error and self.has_focus
     if fighting then
@@ -116,6 +120,7 @@ function on_input(self,action_id,action)
 end
 
 function final(self)
+    ambush.pause(self)
     self.save_now()
     window.set_listener(nil)
 end

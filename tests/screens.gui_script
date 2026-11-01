@@ -273,7 +273,7 @@ function update(self,dt)
         local ok,why=coroutine.resume(self.interactions)
         if not ok or coroutine.status(self.interactions)=="dead" then
             local report=assert(io.open(sys.get_config_string("trailomon.check_report","engine-check-report.txt"),"a"))
-            report:write(ok and "PASS: battle readiness, automatic steps, positions, result acknowledgement, modal keyboard routing, editing, and persistent focus.\n" or "FAIL: interaction checks / "..tostring(why).."\n")
+            report:write(ok and "PASS: battle readiness, automatic steps, positions, result acknowledgement, modal keyboard routing, editing, and persistent focus.\nPASS: isolated wagon ambush controls, keyboard, playback, reload and retreat.\n" or "FAIL: interaction checks / "..tostring(why).."\n")
             report:close();self.interactions=nil
             msg.post("@system:","exit",{code=ok and 0 or 1})
         end
@@ -286,7 +286,10 @@ function update(self,dt)
         local report=assert(io.open(sys.get_config_string("trailomon.check_report","engine-check-report.txt"),"a"))
         report:write(ok and "PASS: 36 native GUI states, icon rendering, scene motion, and button bounds.\n" or "FAIL: GUI case "..self.index.." / "..tostring(why).."\n")
         report:close();self.index=nil
-        if ok then self.interactions=coroutine.create(function() interaction_checks(self) end)
+        if ok then self.interactions=coroutine.create(function()
+            interaction_checks(self)
+            require("tests.ambush_native").controls(self,button)
+        end)
         else msg.post("@system:","exit",{code=1}) end
     else self.index=self.index+1 end
 end

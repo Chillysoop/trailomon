@@ -45,6 +45,8 @@ function update(self,dt)
             self.frames=1
         elseif #self.capture_actions>0 then
             fixtures.click(self,table.remove(self.capture_actions,1));self.frames=1
+        elseif self.capture_settle then
+            local settle=self.capture_settle;self.capture_settle=nil;settle();self.frames=1
         elseif self.frames<4 then self.frames=self.frames+1
         else
             if self.capture_assert then self.capture_assert() end

@@ -382,7 +382,8 @@ local function debug(self)
     local s=self.snapshot.run
     label(self,28,611,"DEVELOPER CONTROLS / F3 TO CLOSE")
     w.text(self,28,575,"Explore the authored encounters.",25,"ink")
-    label(self,28,538,"Forces a test event. Only available while traveling or stopped.")
+    w.button(self,548,535,314,32,"Wagon ambush / new combat",function() require("services.ambush_controller").open(self) end,{key="ambush_open",primary=true,size=13})
+    label(self,28,538,"Force an event while traveling or stopped.")
     local list={};for _,event in ipairs(model.events.defs) do if event.choices then list[#list+1]=event end end
     local total=math.ceil(#list/14);local current=math.min(self.debug_page or 1,total);self.debug_page=current
     for row=1,14 do
@@ -418,7 +419,11 @@ local function overlay(self)
     end
 end
 function M.draw(self)
-    w.begin(self);w.rect(self,0,0,1280,720,"bg");header(self)
+    w.begin(self);w.rect(self,0,0,1280,720,"bg")
+    if self.page=="ambush" and self.ambush then
+        require("ui.wagon_ambush").draw(self);w.finish(self);return
+    end
+    header(self)
     local s=self.snapshot.run
     if self.page=="trail" and s.mode=="preparation" then preparation(self)
     else

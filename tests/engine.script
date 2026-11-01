@@ -2,6 +2,7 @@ local model=require "simulation.expedition"
 local save=require "services.save"
 
 local function run()
+    require("tests.ambush_native").persistence()
     assert(screenshot==nil,"Capture extension leaked into the ordinary game test engine")
     local primary,backup=save.paths()
     -- Refuse to touch anything until the isolated namespace has been verified.

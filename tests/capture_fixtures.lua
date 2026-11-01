@@ -5,7 +5,7 @@ local function reset(self,page)
     self.page=page;self.speed=1;self.focus=1;self.time=0
     self.battle_team={};self.battle_actions={};self.edit=nil;self.save_blocked=false
     self.combat_paused=true;self.combat_speed=1;self.combat_log=nil
-    self.capture_actions={};self.capture_assert=nil
+    self.capture_actions={};self.capture_assert=nil;self.capture_settle=nil
     self.toast="Automated fixture / isolated / no player save"
 end
 function M.click(self,key)
@@ -117,6 +117,37 @@ function M.guardian_rush(self)
     self.capture_assert=function() assert(self.snapshot.run.battle.intent.kind=="heavy" and self.snapshot.run.battle.round==3) end
 end
 function M.developer(self) reset(self,"debug");self.debug_page=1;self.redraw() end
+function M.ambush_setup(self)
+    reset(self,"debug")
+    local memory
+    self.ambush={battle=require("simulation.wagon_combat").new(),carry=0,speed=1,paused=true,
+        storage={load=function() return require("simulation.util").copy(memory) end,write=function(v) memory=require("simulation.util").copy(v);return true end}}
+    self.capture_actions={"ambush_open"};self.redraw()
+    self.capture_assert=function() assert(self.page=="ambush" and self.ambush.battle.phase=="setup") end
+end
+function M.ambush_fight(self)
+    M.ambush_setup(self);self.page="ambush";self.capture_actions={"ambush_start"}
+    self.capture_settle=function() require("simulation.wagon_combat").step(self.ambush.battle,80);self.ambush.paused=true;self.redraw() end
+    self.capture_assert=function()
+        assert(self.ambush.battle.phase=="fight")
+    end
+end
+local function ambush_result(self,preset)
+    M.ambush_setup(self);self.page="ambush";self.capture_actions={"ambush_"..preset,"ambush_start"}
+    self.capture_settle=function() require("simulation.wagon_combat").step(self.ambush.battle,1800);self.redraw() end
+    self.capture_assert=function()
+        assert(self.ambush.battle.result=="victory")
+    end
+end
+function M.ambush_guard_result(self) ambush_result(self,"guard") end
+function M.ambush_rush_result(self) ambush_result(self,"rush") end
+function M.ambush_wagon_lost(self)
+    M.ambush_setup(self);self.page="ambush";self.capture_actions={"ambush_rush","ambush_start"}
+    self.capture_settle=function() self.ambush.battle.wagon.hp=1;require("simulation.wagon_combat").step(self.ambush.battle,1800);self.redraw() end
+    self.capture_assert=function()
+        assert(self.ambush.battle.result=="wagon_lost")
+    end
+end
 function M.developer_next(self) M.developer(self);self.capture_actions={"debug_next"} end
 function M.route_depot(self) reset(self,"trail");self.redraw() end
 local function stop(self,target)

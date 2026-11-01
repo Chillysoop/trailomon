@@ -2,7 +2,7 @@
 -- Extend a category when a feature ships; never borrow an unrelated glyph.
 local M={groups={
     {label="Supplies & time",ids={"food","coins","repairs","medicine","wagon","cargo","capacity","time"}},
-    {label="Crew & encounters",ids={"condition","stamina","haul","approach","pressure","guard","assist","crew"}},
+    {label="Crew & encounters",ids={"condition","stamina","haul","approach","pressure","guard","assist","crew","focus"}},
     {label="On the road",ids={"trail","map","flag","rest","forage","dig","water","scout","warm","journal","settings"}},
 }}
 M.defs={
@@ -16,6 +16,7 @@ M.defs={
     time={label="Time",meaning="Days spent, time remaining, or playback speed.",shape="sun dial"},
     condition={label="Condition",meaning="Health; zero means care is needed.",shape="heart"},
     stamina={label="Energy",meaning="Effort available for travel and abilities.",shape="hoof print"},
+    focus={label="Focus",meaning="Combat ability meter; refills during a fight.",shape="concentric open brackets and center"},
     haul={label="Hauling",meaning="A draft companion pulling the wagon.",shape="yoke"},
     approach={label="Approach",meaning="Forward encounter position; full pressure.",shape="arrow at a boundary"},
     pressure={label="Pressure",meaning="Reduces a threat's resolve.",shape="angular strike"},
@@ -42,7 +43,7 @@ local tones={
     brass={"coins","time","stamina","haul","warm"},
     rose={"condition","medicine"},
     river={"guard","water","rest"},
-    violet={"assist","scout","crew","journal"},
+    violet={"assist","scout","crew","journal","focus"},
     stone={"repairs","wagon","capacity","settings"},
     clay={"pressure"},linen={"trail","map","flag","approach"},
 }
