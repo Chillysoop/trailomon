@@ -27,3 +27,4 @@
 - [creature-encounters.md](creature-encounters.md): W1–W6 approvals, wildlife/guide/courier/acquisition/habit integration and verification.
 
 - [discovery-tracks.md](discovery-tracks.md): D1–D3 chat approval, missing-hauler recruitment, field clues, saved searches and validation.
+- [identity-audit.md](identity-audit.md): Oregon Trail/creature identity, measured combat frequency, exploration pressure and unapproved A1–A3 choices.
