@@ -48,3 +48,7 @@ Combat results connect remaining Energy/Condition to an existing hauling, crossi
 First write the player's decision and the distinction the new symbol must convey. Reuse an existing concept only when the meaning is genuinely the same. Otherwise add one original silhouette and metadata to the catalog, place it in the appropriate group, and use the shared renderer. Do not populate the game with icons for systems that do not exist yet.
 
 Inspect the new mark beside every current symbol at its intended size, without color, and in a real decision screen. Check contrast, negative space, labels, and keyboard navigation. The catalog test rejects missing entries, duplicate drawings, malformed grids, and fractional pixel geometry. Native GUI checks cover all guide groups; rendered inspection is still required before accepting a mark.
+
+## Wagon ambush (S28)
+
+Focus uses concentric open brackets around a center, violet like abilities. It is a separate combat resource, not travel Energy. HP uses the existing health/Condition mark and a written HP value; shields use Cover with a Shield label. Attack timers use written seconds, including while slowed or stunned. Focus is in the Crew & encounters guide group.

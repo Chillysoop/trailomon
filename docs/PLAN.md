@@ -59,3 +59,7 @@ The owner approved P1–P5 in [plan-1](../reviews/plan-1.html) on October 30, 20
 No reliable calendar estimate has been set. Ship small tested steps, measure the result, and revise content ambitions before promising dates. The owner's programming experience is unspecified; setup explanations should remain beginner-friendly.
 
 October 31 wild-1 revision 7 approves the bounded creature additions in [CREATURE_ENCOUNTERS.md](CREATURE_ENCOUNTERS.md): sightings, field observations, courier practice/recognition, an optional discovery-led profile and selectable learned habits. Keep one route, six species, current art and horizontal tradeoffs; no evolution, breeding or combat XP. See S22–S25.
+
+## Expanded creature direction — November 1, 2026
+
+The intended expanded game has a minimum of 300 distinct species. The first expedition remains the immediate playable milestone; only six species are currently implemented. Creatures relate to their environments and can be fighters, food animals, protectors, fast creatures or unusual wildlife without a mandatory wagon utility. No fixed type chart or class roster has been selected. See [CREATURE_DIRECTION.md](CREATURE_DIRECTION.md) for the recorded direction and the open ability-first alternatives. Art remains deferred; neither regional skins nor unfilled index slots count as additional implemented species.

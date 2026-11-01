@@ -1,6 +1,7 @@
 -- Original field-guide marks on a 12 x 12 grid. X = ink; + = accent.
 -- Every use retains a text label. Horizontal runs reduce GUI node count.
 local M={glyphs={
+ focus="..XX....XX../.X........X./X..XX..XX..X/X.X......X.X/X.X..XX..X.X/X.X..XX..X.X/X.X......X.X/X..XX..XX..X/.X........X./..XX....XX../............/............",
  haul=".XX......XX./.XX......XX./..XXXXXXXX../..X......X../..X......X../..X......X../..XX....XX../...XXXXXX.../.....XX...../.....XX...../............/............",
  approach="........X.../........X.../..X.....X.../...X....X.../....X...X.../XXXXX...X.../....X...X.../...X....X.../..X.....X.../........X.../........X.../............",
  forage=".....X....../...X.X.X..../....XXX...../.....X....../.X.......X../.XXXXXXXXX../..X.X.X.X.../..X.X.X.X.../...XXXXX..../............/............/............",

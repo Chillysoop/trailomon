@@ -63,6 +63,16 @@ return function(test,command,valid,equal)
         old.battle_team={1,2};old.switch_depot("discovery");assert(old.snapshot.profile.start_mode=="discovery" and old.page=="trail" and #old.battle_team==0 and old.combat_paused)
         fail_save=true;old.switch_depot("classic");assert(old.snapshot.profile.start_mode=="discovery" and old.toast=="No space")
         fail_save=false;old.switch_depot("classic");equal(old.snapshot,classic)
-
+        local ambush=require "services.ambush_controller";local checkpoint
+        local memory={load=function() return util.copy(checkpoint) end,write=function(v) checkpoint=util.copy(v);return true end}
+        ambush.open(old,memory);ambush.command(old,"start");env.update(old,0.2)
+        assert(old.ambush.battle.tick==2)
+        listener(nil,1);assert(old.ambush.paused)
+        env.update(old,0.25);assert(old.ambush.battle.tick==2)
+        listener(nil,2);assert(old.ambush.paused)
+        ambush.command(old,"pause");old.open_page("journal");assert(old.ambush.paused)
+        env.update(old,0.25);assert(old.ambush.battle.tick==2)
+        old.open_page("ambush");ambush.command(old,"pause");env.final(old)
+        assert(old.ambush.paused and checkpoint.battle.tick==2);equal(old.snapshot,classic)
     end)
 end

@@ -245,6 +245,7 @@ test("all authored choices have a reachable resolution",function()
     end
 end)
 require("tests.tracking")(test,command,valid,assert_equal)
+require("tests.wagon_combat")(test,assert_equal)
 require("tests.discovery_habits")(test,command,valid,assert_equal)
 require("tests.courier")(test,command,valid,assert_equal)
 require("tests.wildlife")(test,command,valid,assert_equal)

@@ -1,6 +1,6 @@
 # Astronarch-style combat, defending the wagon
 
-Approved direction, November 1, 2026. The owner requested combat very close to Astronarch, then explicitly added the wagon as a defendable target. This supersedes the earlier two-position, shared-Resolve, three/four-exchange design and A1's narrower two-team experiment. The replacement is authorized; this document records the target, not an implemented feature.
+Approved direction, November 1, 2026. The owner requested combat very close to Astronarch, then explicitly added the wagon as a defendable target. This supersedes the earlier two-position, shared-Resolve, three/four-exchange design and A1's narrower two-team experiment. The replacement is authorized; this document records the target. S28 is now an isolated playable sample; S29/S30 are still planned.
 
 ## The intended experience
 
@@ -56,3 +56,13 @@ For every step: deterministic simulation independent of rendering; saved unit cl
 Keep S5 exploration/time balance in view. More forced fights must not worsen the current conflict between collecting and the delivery deadline. The former 15–20% attention target is provisional, not a constraint that justifies cutting this model back into three scripted exchanges. Measure human pacing before fixing a combat share.
 
 A2 Discovery defaults, A3 Trust removal, D4 lineup variants and D5 collection aims are still separate unanswered choices. The owner's combat direction authorizes none of those automatically.
+
+## Implemented S28 rules
+
+Open F3 → Wagon ambush / new combat. The original three-kit sample lives in `content/ambush.lua` and `simulation/wagon_combat.lua`; it does not alter expedition combat. Two lanes each have a front and rear slot. Any living front occupant intercepts the lane-1 raider; ordinary crew attacks prefer same-lane fronts, other fronts, then rear opponents. Lumen’s skill explicitly prefers the caller. Position swaps are setup-only.
+
+The deterministic step is 100 ms. Each live unstunned unit gains one Focus; separate attack clocks count down. Stun suspends both, slow halves attack-clock progress. Abilities resolve before basic attacks in saved unit order; KO cancels remaining actions. Reactions resolve last, at most once per source each tick, and cannot recursively trigger another reaction. End checks prioritize wagon failure, crew collapse, victory, then the 180-second stalemate escape. An initial seeded 0–0.3-second attack offset survives checkpoints.
+
+Moss gains 55 extra DEF in front and repeatedly shields himself (22) and the wagon (8). Ember’s attack interval is 1.5 seconds in rear / 0.8 seconds in front, with an intercepted-hit follow-up and a repeated single-target skill. Lumen stuns the caller for 1.4 seconds and grants 6 Focus to the lowest-ready ally. Enemy ordinary attacks and their repeating rush/slow skills use individual HP and targets. Shields cap at maximum HP, do not repair lost integrity, and armor uses the reference diminishing-mitigation formula. No permanent death, cargo loss or travel Energy charge exists in this sample.
+
+The `wagon_ambush_v1` checkpoint uses a separate file and backup inside the active save namespace. It retains the snapshot, RNG, effect sources/expirations, target IDs, attack clocks, Focus, speed and partial tick. Reload, focus loss and leaving the sample pause it. Save failures pause playback. The production journey schema is unchanged.

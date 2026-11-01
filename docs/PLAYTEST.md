@@ -63,3 +63,9 @@ Earlier choices can return later: clearing the fallen tree lets a grateful cart 
 **Journey → Wildlife nearby** opens a free preview while stopped outside encounters. **Follow these tracks** spends one day and the displayed meals. One search per stretch; the clue and hidden result are saved when you enter the stretch. Some tracks end at empty shelter. Passing or reopening menus costs nothing, and reloads cannot reroll the result. The day uses normal weather and recovery; any invitation or assistance afterward shows its own additional cost. Searches require enough food and stop before the last closing day.
 
 **Journal → Species field guide** now gives habitat and method hints, separating unconfirmed reports from firsthand sightings. Existing saved journeys keep their original rules and enable searches on the next departure. The new hauler meetings are available in existing Discovery journeys when you reach their landmarks.
+
+## New wagon-combat sample (S28)
+
+Press F3, then **Wagon ambush / new combat**. Choose **Guard the lane** or **Race the raid**, or use each companion’s Move button. Start the ambush; attacks and abilities repeat automatically. Space pauses; Tab and Enter select controls. Speed changes viewing rate. Reload sample returns to its separate saved checkpoint, paused. Withdraw ends the sample.
+
+This isolated sample has three companion kits and two foes. Front lane 1 intercepts the raider; leaving it open exposes the wagon. Moss shields himself and the wagon, Ember follows interceptions and attacks faster in front, and Lumen interrupts the caller. Results show damage, interceptions, follow-ups and repeated abilities. Sample HP/Focus and wagon integrity never charge expedition resources. Normal expedition battles remain on the previous rules until S30.
