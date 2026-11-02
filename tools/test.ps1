@@ -1,5 +1,11 @@
 param([switch]$SkipEngine, [switch]$Headless, [ValidateSet('All','Game','Review','Report')][string]$Suite='All', [ValidateSet('', 'scavengers', 'territorial', 'legacy')][string]$Fixture='')
 . (Join-Path $PSScriptRoot 'common.ps1')
+# The stock headless engine includes debug TCP/UDP services. Never launch it on
+# the owner's desktop: fresh bundle paths otherwise trigger new firewall prompts.
+if ($Headless -and -not $SkipEngine -and $Suite -in @('All','Game') -and $env:GITHUB_ACTIONS -ne 'true') {
+    throw 'Local headless launches are disabled because Defold starts debug network services. Run ./tools/test.ps1 -Suite Game for offline release-renderer checks. -Headless is reserved for GitHub Actions.'
+}
+
 if ($Fixture -and $Suite -notin @('All','Game')) { throw 'Fixtures require the All or Game suite.' }
 if ($Suite -in @('All','Game','Report')) { $luaPath = Initialize-TrailomonLua }
 Push-Location $TrailomonRoot

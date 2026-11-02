@@ -16,7 +16,7 @@ The previous batch mixed two whole journeys, four follow-up changes, native cras
 | Balance/pacing/route | Relevant fixed-seed comparisons, then a focused human-style playtest | Broad matrix and two-role complete journeys until a milestone |
 | Release candidate | Full checks, fresh/resumed journeys, physical input/audio, clean archive | Nothing relevant to release quality |
 
-Commands: `./tools/test.ps1 -Suite Game -SkipEngine`, `-Suite Game -Headless`, `-Suite Review`, `-Suite Report`. The default remains `All`. CI's explicit documentation/review classification is covered by regression tests; unknown paths and tooling changes run everything. One PR event runs CI; manual full verification remains available. New pushes cancel stale runs.
+Commands: `./tools/test.ps1 -Suite Game -SkipEngine`, `-Suite Game` (offline release renderer; `-Headless` is GitHub Actions only), `-Suite Review`, `-Suite Report`. The default remains `All`. CI's explicit documentation/review classification is covered by regression tests; unknown paths and tooling changes run everything. One PR event runs CI; manual full verification remains available. New pushes cancel stale runs.
 
 ## Evidence and delivery
 

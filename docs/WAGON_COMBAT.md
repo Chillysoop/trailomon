@@ -1,6 +1,6 @@
 # Astronarch-style combat, defending the wagon
 
-Approved direction, November 1, 2026. The owner requested combat very close to Astronarch, then explicitly added the wagon as a defendable target. This supersedes the earlier two-position, shared-Resolve, three/four-exchange design and A1's narrower two-team experiment. The replacement is authorized; this document records the target. S28 is now an isolated playable sample; S29/S30 are still planned.
+Approved direction, November 1, 2026. The owner requested combat very close to Astronarch, then explicitly added the wagon as a defendable target. This supersedes the earlier two-position, shared-Resolve, three/four-exchange design and A1's narrower two-team experiment. The replacement is authorized; this document records the target. S28/S29 are implemented as selectable samples and Mara wagon practice. S30 road integration is still planned. See [CREW_BUILDS.md](CREW_BUILDS.md) for current kits, equipment, costs and comparisons.
 
 ## The intended experience
 

@@ -201,7 +201,7 @@ local function landmark(self)
         options={
             {label="Visit the supply counter",detail="Buy provisions, repair materials, and medicine",fn=page(self,"shop")},
             {label="Make a quiet camp",detail="Rest, forage, and repair before the next stretch",fn=page(self,"camp")},
-            {label="Meet Mara for practice",detail="Optional / energy spent / cargo and health safe",fn=cmd(self,"courier"),key="courier",enabled=require("simulation.courier").enabled(s) and not s.flags.courier_done,icon="crew"},
+            {label=s.wagon_practice and "Resume Mara's wagon drill" or "Mara's wagon drill",detail="Start: -6 Energy each / cargo and health safe",fn=function() require("services.ambush_controller").open_practice(self,self.practice_writer) end,key="wagon_practice",enabled=require("simulation.wagon_practice").available(s),icon="crew"},
             {label="Set out for Willowford",detail="28 km / marsh road / a river crossing ahead",fn=cmd(self,"leave")}}
     elseif s.target==4 then
         if s.flags.river_crossed then

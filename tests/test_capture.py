@@ -66,3 +66,18 @@ class CaptureProjectTests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, "escapes capture project"):
             self.prepare()
         self.assertTrue((self.root / "game.project").exists())
+
+
+class OfflineEngineTests(unittest.TestCase):
+    def test_local_headless_is_rejected_before_a_build_or_launch(self):
+        import os
+        import shutil
+        import subprocess
+        shell = shutil.which("pwsh")
+        if not shell:
+            self.skipTest("PowerShell test launcher is not installed")
+        env = dict(os.environ, GITHUB_ACTIONS="false")
+        result = subprocess.run([shell, "-NoProfile", "-File", str(Path(__file__).resolve().parents[1] / "tools/test.ps1"), "-Suite", "Game", "-Headless"], env=env, capture_output=True, text=True, timeout=10)
+        self.assertNotEqual(result.returncode, 0)
+        self.assertIn("Local headless launches are disabled", result.stdout + result.stderr)
+        self.assertNotIn("Bundling", result.stdout + result.stderr)

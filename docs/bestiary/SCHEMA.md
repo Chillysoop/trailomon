@@ -16,7 +16,7 @@ Approved B8 first deliverable, November 1, 2026. `index.json` is an authoring le
 | --- | --- |
 | `species_id`, `name` | Unique lowercase slug and display name |
 | `game_status` | `implemented` or `planned`; implemented IDs must exactly match the runtime roster |
-| `kit_status` | `sample` or `proposed`; sample means the S28 companion kit exists, not expedition integration |
+| `kit_status` | `sample` or `proposed`; sample means the sample companion kit exists, not expedition integration |
 | `art_status` | `existing` or `deferred`; existing means there is an asset, not that the owner's overhaul is finished |
 | `role` | Plain description of life in the world; descriptive tags do not form classes or a matchup chart |
 | `body` | Distinct silhouette/anatomy that supports the behavior; no asset request |

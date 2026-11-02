@@ -37,6 +37,7 @@ function init(self)
         local previous_mode=self.snapshot.run.mode
         local ok,why=model.command(self.snapshot,id,args)
         if ok then
+            if id=="new" then self.ambush=nil end
             self.reset_clock()
             self.speed=self.snapshot.settings.travel_speed or 1
             if id=="battle_start" then self.combat_paused=false;self.combat_log=nil end
@@ -63,6 +64,7 @@ function init(self)
         local next_snapshot,notice=save.select(self.snapshot,slot)
         if not next_snapshot then self.toast=notice;self.redraw();return end
         self.snapshot=next_snapshot;self.toast=notice;self.save_error=nil;self.page="trail";self.detail=nil
+        self.ambush=nil
         self.battle_team={};self.battle_actions={};self.combat_paused=true;self.combat_log=nil
         self.speed=self.snapshot.settings.travel_speed or 1;self.reset_clock()
         if self.snapshot.run.mode=="traveling" then model.command(self.snapshot,"pause");self.save_now() end

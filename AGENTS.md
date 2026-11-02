@@ -16,6 +16,8 @@ These are standing user requirements, established October 30, 2026. Apply them f
 - Favor a readable expedition interface that belongs to this world. Avoid dashboard decoration, excessive cards or badges, generic gradients, and ornamental detail that competes with the journey or a decision.
 - Verify the actual game at its intended window size. Check icon recognition, text contrast, clipping, spacing, and keyboard operation. A successful build is not evidence that the interface works visually.
 
+- November 1, 2026: combat should visually follow Astronarch: a shared battlefield, opposing formations, overhead HP/Focus/attack meters, target-local hit feedback and compact inspection. Keep the wagon visible behind defenders. Use our original creatures and semantic icons; the larger art overhaul remains deferred.
+
 ## Technical direction
 
 - Use Defold and Lua. Preserve the Oregon Trail expedition loop, the small creature crew, and the calm decision rhythm described in `docs/GAME_DESIGN.md`.
@@ -60,7 +62,7 @@ Keep chat short and plain. Lead with the result or decision and its link. Do rev
 ## Commands and delivery
 
 - Run the game: `./tools/build.ps1`, then launch the executable path it prints. A Defold editor can also open `game.project`.
-- Tests: `./tools/test.ps1` retains all checks. Use `-Suite Game -SkipEngine` for simulation/controller work, `-Suite Game -Headless` for native game checks, `-Suite Review` for review infrastructure, and `-Suite Report` for Python report tooling. CI runs full game coverage for game/tool/unknown changes; docs-only changes skip game tests/build, review-only changes run review checks. Scope selector: `python -m unittest discover -s tests -p test_ci_scope.py`.
+- Tests: `./tools/test.ps1` retains all checks. Use `-Suite Game -SkipEngine` for simulation/controller work, `-Suite Game` for local native game checks (release renderer; `-Headless` is CI-only), `-Suite Review` for review infrastructure, and `-Suite Report` for Python report tooling. CI runs full game coverage for game/tool/unknown changes; docs-only changes skip game tests/build, review-only changes run review checks. Scope selector: `python -m unittest discover -s tests -p test_ci_scope.py`.
 - Expedition reports: `./tools/expedition_report.ps1 -Compare`; see `docs/EXPEDITION_REPORTS.md`. Keep fixed seeds/policies and source fingerprints with evidence. Read net command deltas as net, and do not substitute headless decision gates for human playtime.
 - Rendered UI captures: `./tools/capture.ps1 -Scenes options,options_brisk,combat_setup,combat_ready`; inspect its PNGs directly. See `docs/SCREENSHOTS.md`. Add focused fixtures as game features need them. This release renderer is isolated from player saves and does not test physical input or audio.
 - Review-server tests: `py -m unittest discover -s tests -p "test_review*.py"`.

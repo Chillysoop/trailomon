@@ -97,7 +97,7 @@ def render(data):
     lookup = {e['species_id']: e for e in briefs}
     sections = []
     for e in briefs:
-        status = ('Existing species / S28 companion kit' if e['kit_status'] == 'sample' else
+        status = ('Existing species / sample companion kit' if e['kit_status'] == 'sample' else
                   ('Existing species / proposed repeatable kit' if e['game_status'] == 'implemented' else 'New species brief / not in game'))
         rows = [('Body', e['body']), ('Habitat', e['habitat']), ('Diet', e['diet']), ('Why it lives this way', e['ecology']),
                 ('Watch for', e['behavior']), ('Encounter', e['encounter'])]
@@ -132,7 +132,7 @@ function reset(){$('search').value='';$('region').value='';$('production').value
 function anchor(){const e=document.getElementById(location.hash.slice(1));if(e&&e.classList.contains('species')){reset();e.open=true;e.scrollIntoView();}}
 ['search','region','production'].forEach(id=>$(id).addEventListener('input',filter));$('reset').onclick=reset;window.addEventListener('hashchange',anchor);filter();anchor();})();
 </script></body></html>'''
-    return (page.replace('COUNTS', f"<strong>{counts['briefs']} briefs</strong> / {counts['implemented']} species in game / {counts['sample_kits']} S28 companion kits / {counts['reserved']} unfilled slots")
+    return (page.replace('COUNTS', f"<strong>{counts['briefs']} briefs</strong> / {counts['implemented']} species in game / {counts['sample_kits']} sample companion kits / {counts['reserved']} unfilled slots")
             .replace('OPTIONS', options).replace('SECTIONS', '\n'.join(sections)).replace('ALLOCATIONS', allocations)
             .replace('276 slots', f"{counts['reserved']} slots"))
 

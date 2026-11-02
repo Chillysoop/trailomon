@@ -9,7 +9,7 @@ class BestiaryTests(unittest.TestCase):
         self.data=json.loads(bestiary.INDEX.read_text(encoding='utf-8'))
 
     def test_current_ledger_counts_and_generated_page(self):
-        self.assertEqual(bestiary.validate(self.data), {'slots':300,'briefs':24,'reserved':276,'implemented':6,'sample_kits':3})
+        self.assertEqual(bestiary.validate(self.data), {'slots':300,'briefs':24,'reserved':276,'implemented':6,'sample_kits':6})
         self.assertEqual(bestiary.render(self.data), bestiary.PAGE.read_text(encoding='utf-8'))
 
     def test_reserved_slots_and_duplicate_ids_cannot_inflate_roster(self):
