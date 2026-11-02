@@ -1,0 +1,13 @@
+# Collection and its fiction
+
+2026-11-02 owner explicitly requested up to four active companions and Pokemon-like unlimited collecting. Implement individual UID records including duplicates; ownership is separate from the traveling party. This overrides the old 3-person road cap and integration-1 I1's narrower proposal. No repeat approval needed for that mechanic.
+
+S37: Collection list with All/Party/At depot filters and six rows per page. Depot swaps only, four active including duplicate species; reserves do not consume food or act. Existing invitation costs apply, full party collects into reserve. Preserve names/habits/memories, retain ownership on endings, remember party next trip, gear unassigned to pack on storage. Old saves upgrade IDs without rerolling live fights; legacy combat/recovery resolver remains. Six species implemented, 300 still a future content target.
+
+Owner then asked for a fun in-world reason, method and home. Published collecting-1 C1 Wayhome Commons, C2 species-specific befriending/waybeds, C3 origin/arrival stories (recommended), C4 Foldyard alternate magical home. C1/C4 are alternatives; comments can blend them. These are unapproved fiction/gameplay additions. Current neutral depot is the functional base. No new ranch art or building pass. No collecting-1 or integration-1 submission existed at the latest read; other hosted revisions unchanged. Re-read before next work.
+
+Validation: 164 Lua cases, native 1,000-companion save/resume plus four-member fights/controls, 11 rendered screens; report/review suites and isolated browser pass. Eight four-member journeys repeated exactly (11/73/1848/2047; careful/fighter) finish 1 delivered, 5 late, 2 rescued; food/time pressure remains S5 work, not claimed balanced. Source metadata and images: reviews/evidence/collection-1. Physical input/audio S10 gaps unchanged.
+
+Engineering: battle IDs derive stable occurrence suffixes (moss, moss_2) while kit lookup uses base ID. Party order stays fixed through fights. Profile.roster remains a compatibility species index; profile.collection is ownership authority. Reporter minima use individual UID keys for new saves. Defold scans even function-local require calls: keep collection constructors free of a progression dependency to avoid a build cycle. Render fixtures use tests/collection_fixture, not native persistence helpers that pull excluded report modules into capture builds.
+
+Previous delivery was PR49/dbf36f26, Windows ZIP SHA256 0d8c01f319a9d7faa70c0b4f3c082bc356c587a96a4a77cc52b968612c2df96a (see .tools/integration-delivery.json for authoritative provenance). New build provenance is recorded locally after merge.

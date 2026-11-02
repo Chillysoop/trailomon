@@ -25,10 +25,10 @@ function M.eligible(s, event, profile)
     if condition == "woods" then return s.terrain == "woodland" end
     if condition == "soft" then return s.terrain == "woodland" or s.terrain == "meadow" end
     if condition == "upland" then return s.target >= 5 end
-    if condition == "cinder_lead" then return s.target >= 3 and not profile.roster.cindercoil end
-    if condition == "slate_lead" then return s.target >= 5 and not profile.roster.slatewhorl end
-    if condition == "cinder_follow" then return s.flags.cinder_helped and not profile.roster.cindercoil end
-    if condition == "slate_follow" then return s.flags.slate_helped and not profile.roster.slatewhorl end
+    if condition == "cinder_lead" then return s.target >= 3 and (s.collection_rules or not profile.roster.cindercoil) end
+    if condition == "slate_lead" then return s.target >= 5 and (s.collection_rules or not profile.roster.slatewhorl) end
+    if condition == "cinder_follow" then return s.flags.cinder_helped and (s.collection_rules or not profile.roster.cindercoil) end
+    if condition == "slate_follow" then return s.flags.slate_helped and (s.collection_rules or not profile.roster.slatewhorl) end
     return false
 end
 
@@ -56,7 +56,7 @@ function M.available(s, choice, profile)
     local ok, why = resources.can_pay(s, choice.cost)
     if not ok then return false, why end
     if choice.species and not resources.find(s, choice.species, choice.effort,"event") then return false, "Needs a ready " .. species.defs[choice.species].name end
-    if choice.recruit then
+    if choice.recruit and not s.collection_rules then
         if #s.crew >= 3 then return false, "Crew is full (3 companions)" end
         if profile.roster[choice.recruit] then return false, "Already at your depot" end
         for _, c in ipairs(s.crew) do if c.species == choice.recruit then return false, "Already traveling with you" end end
@@ -74,9 +74,10 @@ function M.recruit_preview(s, choice)
     if not choice.recruit then return nil end
     local after=util.copy(s)
     resources.pay(after,choice.cost)
-    after.crew[#after.crew+1]={species=choice.recruit}
+    local reserve=s.collection_rules and #s.crew>=4
+    if not reserve then after.crew[#after.crew+1]={species=choice.recruit} end
     local before_meals,after_meals=resources.daily_food(s),resources.daily_food(after)
-    return {food_before=s.food,food_after=after.food,meals_before=before_meals,meals_after=after_meals,
+    return {reserve=reserve,food_before=s.food,food_after=after.food,meals_before=before_meals,meals_after=after_meals,
         days_before=math.floor(s.food/before_meals),days_after=math.floor(after.food/after_meals)}
 end
 
@@ -100,7 +101,7 @@ end
 function M.cost_text(s, choice)
     if choice.recruit then
         local p=M.recruit_preview(s,choice)
-        return "Provisions "..p.food_before.." -> "..p.food_after.." / Meals per day "..p.meals_before.." -> "..p.meals_after.." / Food days "..p.days_before.." -> "..p.days_after
+        return (s.collection_rules and (p.reserve and "To depot / " or "Join party / ") or "").."Provisions "..p.food_before.." -> "..p.food_after.." / Meals per day "..p.meals_before.." -> "..p.meals_after.." / Food days "..p.days_before.." -> "..p.days_after
     end
     local pieces = {}
     for _, key in ipairs({"coins","food","repairs","medicine"}) do

@@ -8,8 +8,7 @@ function M.available(s)
 end
 function M.ready(s,b)
     for _,u in ipairs(combat.crew(b)) do
-        local found
-        for _,c in ipairs(s.crew) do if c.species==combat.kits[u.id].species then found=c end end
+        local found=combat.member(s,u.id)
         if not found or found.stamina<M.EFFORT or found.condition<=0 then return false,"Each companion needs 6 Energy and positive Condition" end
     end
     return true
@@ -17,9 +16,9 @@ end
 function M.record(s)
     if not M.available(s) then return nil,"Practice is unavailable" end
     if s.wagon_practice then return util.copy(s.wagon_practice) end
-    local crew={};for _,c in ipairs(s.crew) do crew[#crew+1]=content.by_species[c.species] end
+    local crew=combat.ids(s.crew)
     local b=combat.new("guard",s.seed,crew,"mara")
-    for i,u in ipairs(combat.crew(b)) do u.item=s.crew[i].work_item or "";u.name=s.crew[i].name end
+    for i,u in ipairs(combat.crew(b)) do u.item=s.crew[i].work_item or "";u.name=combat.name(s,s.crew[i]) end
     return {battle=b,speed=1,carry=0}
 end
 function M.commit(snapshot,record)
@@ -30,7 +29,7 @@ function M.commit(snapshot,record)
     if prior and prior.battle.phase~="setup" and record.battle.phase=="setup" then return nil,"Practice already used" end
     if #combat.crew(record.battle)~=#s.crew then return nil,"Practice crew changed" end
     for _,u in ipairs(combat.crew(record.battle)) do
-        local found;for _,c in ipairs(s.crew) do if c.species==combat.kits[u.id].species then found=true end end
+        local found=combat.member(s,u.id)
         if not found or (u.item~="" and not (s.work_items or {})[u.item]) then return nil,"Use your traveling crew and carried items" end
     end
     local paying=record.battle.phase~="setup" and (not prior or prior.battle.phase=="setup")

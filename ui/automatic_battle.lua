@@ -17,17 +17,17 @@ function M.select(self)
     text(self,28,541,model.combat.setup_text(s),12,"muted",834)
     if s.encounter=="courier" then w.sprite(self,"brindlehorn",751,585,65);w.sprite(self,"bellmoth",821,585,65) end
     for i,c in ipairs(s.crew) do
-        local idx=i;local x=28+(i-1)*280;local position
+        local idx=i;local compact=#s.crew==4;local x=28+(i-1)*(compact and 210 or 280);local position
         for n,j in ipairs(team) do if i==j then position=n end end
-        w.panel(self,x,240,263,270)
-        text(self,x+16,484,c.name,20,"ink");text(self,x+16,460,model.species.defs[c.species].name)
-        w.sprite(self,c.species,x+60,408,90);stats(self,x+115,423,c)
-        text(self,x+115,376,model.equipment.label(c),10,"gold")
+        w.panel(self,x,240,compact and 204 or 263,270)
+        text(self,x+16,484,c.name,compact and 16 or 20,"ink");text(self,x+16,460,model.species.defs[c.species].name)
+        w.sprite(self,c.species,x+(compact and 169 or 60),408,compact and 50 or 90);stats(self,x+(compact and 10 or 115),423,c)
+        text(self,x+(compact and 10 or 115),376,model.equipment.label(c),10,"gold")
         local p,g=model.combat.ordinary(s,i,position or 1)
-        w.reading(self,x+16,355,"pressure",p,{size=12,icon_size=12})
-        w.reading(self,x+143,355,"guard",g,{size=12,icon_size=12})
-        text(self,x+16,332,model.combat.ability_text(s,c.species,c),12,"ink",229)
-        w.button(self,x+16,254,231,32,position and (position==1 and "1 / Approach" or "2 / Wagon") or "Choose",function()
+        w.reading(self,x+(compact and 10 or 16),355,"pressure",p,{size=compact and 11 or 12,icon_size=12})
+        w.reading(self,x+(compact and 112 or 143),355,"guard",g,{size=compact and 11 or 12,icon_size=12})
+        text(self,x+16,332,model.combat.ability_text(s,c.species,c),12,"ink",compact and 176 or 229)
+        w.button(self,x+16,254,compact and 172 or 231,32,position and (position==1 and "1 / Approach" or "2 / Wagon") or "Choose",function()
             if position then table.remove(team,position) elseif #team<2 then team[#team+1]=idx end
             self.redraw()
         end,{key="battler"..i,selected=position~=nil,enabled=position~=nil or (#team<2 and model.resources.ready(c,ordinary)),size=13,icon=position==2 and "wagon" or "approach"})

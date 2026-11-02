@@ -15,7 +15,7 @@ local function observe(p)
         load=model.resources.weight(s),capacity=model.resources.capacity(s),hauler=s.hauler,
         hauler_ready=not not model.resources.hauler(s),crew=json.array(),outcome=s.outcome}
     for _,key in ipairs(resources) do out[key]=s[key] end
-    for i,c in ipairs(s.crew) do out.crew[i]={species=c.species,name=c.name,energy=c.stamina,condition=c.condition,duty=c.duty} end
+    for i,c in ipairs(s.crew) do out.crew[i]={uid=c.uid,species=c.species,name=c.name,energy=c.stamina,condition=c.condition,duty=c.duty} end
     if s.pending then out.event=s.pending.id end
     if s.battle then out.battle={kind=s.battle.kind,round=s.battle.round,resolve=s.battle.resolve,outcome=s.battle.outcome,intent=util.copy(s.battle.intent)} end
     if s.wagon_battle then
@@ -30,7 +30,7 @@ local function delta(a,b)
     for _,key in ipairs(resources) do out[key]=b[key]-a[key] end
     for i,c in ipairs(b.crew) do
         local prior=a.crew[i]
-        out.crew[i]={species=c.species,added=not prior or prior.species~=c.species}
+        out.crew[i]={uid=c.uid,species=c.species,added=not prior or prior.species~=c.species or prior.uid~=c.uid}
         if not out.crew[i].added then out.crew[i].energy=c.energy-prior.energy;out.crew[i].condition=c.condition-prior.condition end
     end
     return out
@@ -71,9 +71,10 @@ function M.run(initial,strategy,opts)
             if not report.minimum[key] or o[key]<report.minimum[key].value then report.minimum[key]={value=o[key],day=o.day,action=at} end
         end
         for _,c in ipairs(o.crew) do
-            local m=report.crew_minimum[c.species] or {energy={value=101},condition={value=101}}
+            local key=c.uid and c.species.."#"..c.uid or c.species
+            local m=report.crew_minimum[key] or {energy={value=101},condition={value=101}}
             for _,key in ipairs({'energy','condition'}) do if c[key]<m[key].value then m[key]={value=c[key],day=o.day,action=at} end end
-            report.crew_minimum[c.species]=m
+            report.crew_minimum[key]=m
         end
         return o
     end

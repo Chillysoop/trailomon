@@ -21,11 +21,13 @@ These are standing user requirements, established October 30, 2026. Apply them f
 ## Technical direction
 
 - Use Defold and Lua. Preserve the Oregon Trail expedition loop, the small creature crew, and the calm decision rhythm described in `docs/GAME_DESIGN.md`.
-- November 1, 2026 combat direction: follow `docs/WAGON_COMBAT.md`. The owner authorized an Astronarch-like attack/ability/party system with the wagon as a defendable target. Independent attacks, repeating skills, passive/item interactions and up to three active travelers replace the old shared-Resolve/exchange-limited target. S28–S30 are authorized staged implementation; preserve old saves. Do not ask again whether this direction or an isolated slice is wanted.
+- November 1, 2026 combat direction: follow `docs/WAGON_COMBAT.md`. The owner authorized an Astronarch-like attack/ability/party system with the wagon as a defendable target. Independent attacks, repeating skills, passive/item interactions and up to four active travelers replace the old shared-Resolve/exchange-limited target. S28–S30 are authorized staged implementation; preserve old saves. Do not ask again whether this direction or an isolated slice is wanted.
 - November 1 roster direction: the intended expanded game has a minimum of 300 distinct species, grounded in their environments, including fighters, food animals, protectors, fast creatures and wildlife without mandatory travel utility. Six currently exist. Approved bestiary-1 B1/B2 select individual abilities and bounded behavior combinations without a universal type chart or fixed classes. B3 creature-created battlefield terrain is rejected. Follow `docs/CREATURE_DIRECTION.md` and actual review answers, keeping planned versus implemented counts explicit.
 - Keep simulation state deterministic and separate from rendering. Do not use cosmetic randomness for game outcomes.
 - Use `tools/test.ps1` for simulation and native persistence checks and `tools/build.ps1` for a Windows release bundle.
 - Keep credentials out of repository files, art records, logs, and player builds.
+
+- November 2 collecting direction: four active companions; an uncapped persistent collection of individual creatures, including duplicates. Swap at Fernwake before departure; reserves do not eat or fight. Preserve old saves and individual names/habits. See `docs/COLLECTION.md`. Collection fiction and befriending proposals are in collecting-1; do not assume unvoted story choices are approved.
 
 ## Owner and project workflow
 

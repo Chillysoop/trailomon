@@ -47,11 +47,11 @@ local function sidebar(self)
     w.rect(self,910,432,322,1,"edge")
     label(self,910,411,"CREW")
     for i,c in ipairs(s.crew) do
-        local y=315-(i-1)*88
-        w.sprite(self,c.species,944,y+34,76,c.condition<=0)
-        w.text(self,987,y+59,c.name,16,"ink")
+        local y=(#s.crew==4 and 333 or 315)-(i-1)*(#s.crew==4 and 67 or 88)
+        w.sprite(self,c.species,944,y+34,#s.crew==4 and 60 or 76,c.condition<=0)
+        w.text(self,987,y+(#s.crew==4 and 50 or 59),c.name..(c.uid and " #"..c.uid or ""),15,"ink")
         local duty=c.condition<=0 and "NEEDS CARE" or (c.stamina<=0 and "EXHAUSTED" or (i==s.hauler and "HAULING" or c.duty:upper()))
-        w.text(self,987,y+39,duty,11,(c.condition<=0 or c.stamina<=0) and "red" or "muted")
+        w.text(self,987,y+(#s.crew==4 and 35 or 39),duty,11,(c.condition<=0 or c.stamina<=0) and "red" or "muted")
         w.icon(self,987,y+13,"stamina",12);w.text(self,1006,y+20,"Energy "..util.round(c.stamina),11,"ink")
         w.bar(self,1120,y+17,100,c.stamina,w.tint("stamina"),5)
         w.icon(self,987,y-7,"condition",12);w.text(self,1006,y,"Condition "..util.round(c.condition),11,"ink")
@@ -77,6 +77,7 @@ local function recent_log(self,x,y,width,count)
 end
 local function preparation(self)
     local s=self.snapshot.run;local p=self.snapshot.profile
+    if p.collection then require("ui.collection").departure(self) else
     label(self,28,611,"FERNWAKE DEPOT  /  DEPARTURE "..s.seed)
     w.text(self,28,572,"A small crew. A long road.",30,"ink")
     w.text(self,28,537,"Up to 2 companions. At least 1 hauler.",15,"muted")
@@ -97,6 +98,7 @@ local function preparation(self)
         label(self,x+15,y+59,def.role)
         local starter=p.start_mode=="discovery" and p.last_committed==0 and s.id==1 and (id=="brindlehorn" or id=="reedskipper")
         w.button(self,x+15,y+14,233,29,starter and (selected[id] and "First hauler" or "Choose first hauler") or (p.roster[id] and (selected[id] and "Selected" or "Choose") or "Meet on the trail"),cmd(self,starter and "starter" or "crew",{species=id}),{enabled=starter or p.roster[id]~=nil,selected=selected[id],size=12,key="select_"..id})
+    end
     end
     w.panel(self,890,58,362,562)
     label(self,910,593,"THE FIRST DELIVERY")
@@ -176,7 +178,7 @@ local function event(self)
         local enabled,why=model.events.available(s,choice,self.snapshot.profile)
         local icon=choice.species and iconography.role(choice.species) or (choice.battle and "pressure" or (choice.days and "time" or (choice.recruit and "crew" or "journal")))
         if choice.cost and not choice.species and not choice.recruit then for _,key in ipairs({"food","coins","medicine","repairs"}) do if choice.cost[key] then icon=key;break end end end
-        options[#options+1]={label=choice.label,enabled=enabled,detail=enabled and model.events.cost_text(s,choice) or why,fn=cmd(self,"choice",{id=choice.id}),key="event_"..choice.id,icon=icon}
+        options[#options+1]={label=(s.collection_rules and choice.recruit and #s.crew>=4) and ("Collect "..model.species.defs[choice.recruit].name.." / to depot") or choice.label,enabled=enabled,detail=enabled and model.events.cost_text(s,choice) or why,fn=cmd(self,"choice",{id=choice.id}),key="event_"..choice.id,icon=icon}
     end
     if definition.kind=="encounter" then
         options[#options+1]={label="Lead the crew away",detail=model.combat.withdraw_text(definition.id,s),fn=cmd(self,"withdraw"),key="event_withdraw",icon="trail"}
@@ -258,34 +260,35 @@ local function shop(self)
         {label="Return to the outpost",icon="trail",detail="Review the road ahead",fn=page(self,"trail")}},"MOSSBELL / "..s.coins.." COINS")
 end
 local function crew(self)
-    w.button(self,440,550,190,31,"Learned habits",page(self,"habits"),{key="open_habits",icon="assist",size=12})
+    if self.snapshot.profile.collection then w.button(self,422,550,139,31,"Collection",page(self,"collection"),{key="open_collection",icon="collection",size=12}) end
+    w.button(self,self.snapshot.profile.collection and 570 or 440,550,self.snapshot.profile.collection and 141 or 190,31,"Learned habits",page(self,"habits"),{key="open_habits",icon="assist",size=12})
     local s=self.snapshot.run
-    w.button(self,642,550,220,31,"Work items",page(self,"work_items"),{icon="capacity",key="open_items",size=13})
+    w.button(self,self.snapshot.profile.collection and 720 or 642,550,self.snapshot.profile.collection and 142 or 220,31,"Work items",page(self,"work_items"),{icon="capacity",key="open_items",size=13})
     label(self,28,611,"COMPANIONS / SMALL CREW, SHARED HISTORY")
     w.text(self,28,575,"Your traveling crew.",27,"ink")
     local _,camp_condition=require("simulation.recovery").values(s)
     w.reading(self,28,546,"medicine",nil,{label="1 day + meals + 1 medicine / +35 Condition; fed camp +"..camp_condition.." to crew.",size=12,icon_size=12})
     local can=s.mode=="preparation" or s.mode=="stopped" or s.mode=="landmark" or s.mode=="traveling"
     for i,c in ipairs(s.crew) do
-        local idx=i;local def=model.species.defs[c.species];local y=391-(i-1)*156
-        w.panel(self,28,y,834,143)
-        w.sprite(self,c.species,94,y+74,128,c.condition<=0)
-        w.text(self,169,y+113,c.name.." / "..def.name,19,"ink")
-        label(self,169,y+88,c.temperament.." / Trust "..c.trust)
-        w.reading(self,444,y+88,"stamina",util.round(c.stamina),{size=12,icon_size=12})
-        w.reading(self,620,y+88,"condition",util.round(c.condition),{size=12,icon_size=12})
-        w.reading(self,169,y+71,iconography.role(c.species),nil,{label="Road: "..def.role,size=12,icon_size=12})
+        local idx=i;local def=model.species.defs[c.species];local y=(#s.crew==4 and 416 or 391)-(i-1)*(#s.crew==4 and 115 or 156)
+        w.panel(self,28,y,834,#s.crew==4 and 108 or 143)
+        w.sprite(self,c.species,94,y+(#s.crew==4 and 59 or 74),#s.crew==4 and 90 or 128,c.condition<=0)
+        w.text(self,169,y+(#s.crew==4 and 95 or 113),c.name..(c.uid and " #"..c.uid or "").." / "..def.name,18,"ink")
+        if #s.crew<4 then label(self,169,y+88,c.temperament.." / Trust "..c.trust) end
+        w.reading(self,444,y+(#s.crew==4 and 76 or 88),"stamina",util.round(c.stamina),{size=12,icon_size=12})
+        w.reading(self,620,y+(#s.crew==4 and 76 or 88),"condition",util.round(c.condition),{size=12,icon_size=12})
+        w.reading(self,169,y+(#s.crew==4 and 56 or 71),iconography.role(c.species),nil,{label="Road: "..def.role,size=12,icon_size=12})
         if s.road_combat_rules=="wagon-road-v1" then
             local content=require "content.ambush";local kit=content.kits[content.by_species[c.species]]
-            w.reading(self,478,y+71,"assist",nil,{label="Combat: "..kit.skill,size=12,icon_size=12})
+            w.reading(self,478,y+(#s.crew==4 and 56 or 71),"assist",nil,{label="Combat: "..kit.skill,size=12,icon_size=12})
         end
-        w.reading(self,169,y+53,"capacity",nil,{label="Equipped: "..model.equipment.label(c),size=11,icon_size=12})
-        w.button(self,169,y+15,145,30,"Duty: "..c.duty,cmd(self,"duty",{member=idx}),{enabled=can,size=12,key="duty"..idx})
-        w.button(self,324,y+15,144,30,i==s.hauler and "Hauler" or "Assign haul",cmd(self,"hauler",{member=idx}),{enabled=can and def.draft,selected=i==s.hauler,size=12,key="haul"..idx,icon="haul"})
-        w.button(self,478,y+15,170,30,"Treat & rest",cmd(self,"treat",{member=idx}),{enabled=can and s.mode~="preparation" and s.medicine>0 and c.condition<100,size=12,key="treat"..idx,icon="medicine"})
-        w.button(self,658,y+15,184,30,"Abilities & story",function() self.detail=idx;self.open_page("companion") end,{size=12,key="detail"..idx})
+        w.reading(self,169,y+(#s.crew==4 and 76 or 53),"capacity",nil,{label="Equipped: "..model.equipment.label(c),size=11,icon_size=12})
+        w.button(self,169,y+(#s.crew==4 and 9 or 15),145,30,"Duty: "..c.duty,cmd(self,"duty",{member=idx}),{enabled=can,size=12,key="duty"..idx})
+        w.button(self,324,y+(#s.crew==4 and 9 or 15),144,30,i==s.hauler and "Hauler" or "Assign haul",cmd(self,"hauler",{member=idx}),{enabled=can and def.draft,selected=i==s.hauler,size=12,key="haul"..idx,icon="haul"})
+        w.button(self,478,y+(#s.crew==4 and 9 or 15),170,30,"Treat & rest",cmd(self,"treat",{member=idx}),{enabled=can and s.mode~="preparation" and s.medicine>0 and c.condition<100,size=12,key="treat"..idx,icon="medicine"})
+        w.button(self,658,y+(#s.crew==4 and 9 or 15),184,30,"Abilities & story",function() self.detail=idx;self.open_page("companion") end,{size=12,key="detail"..idx})
     end
-    if #s.crew<3 then w.text(self,28,75,"Make room for a friend you have not met yet.",14,"muted") end
+    if #s.crew<3 then w.text(self,28,75,self.snapshot.profile.collection and "New friends join your collection even when the party is full." or "Make room for a friend you have not met yet.",14,"muted") end
 end
 local function companion(self)
     local s=self.snapshot.run;local c=s.crew[self.detail or 1]
@@ -450,7 +453,8 @@ function M.draw(self)
     if self.page=="trail" and s.mode=="preparation" then preparation(self)
     else
         sidebar(self)
-        if self.page=="crew" then crew(self)
+        if self.page=="collection" then require("ui.collection").draw(self)
+        elseif self.page=="crew" then crew(self)
         elseif self.page=="companion" then companion(self)
         elseif self.page=="work_items" then work_items.draw(self)
         elseif self.page=="map" then map(self)

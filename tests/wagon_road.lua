@@ -115,6 +115,7 @@ return function(test,equal)
             local p=model.new(19,mode);cmd(p,"depart")
             local ids={"brindlehorn","loamling","bellmoth"};p.run.crew={}
             for i=1,n do p.run.crew[i]=require("simulation.progression").companion(ids[i]) end
+            require("simulation.collection").ensure(p)
             assert(model.debug(p,"event",kind));cmd(p,"choice",{id="battle"});cmd(p,"road_start")
             while p.run.wagon_battle.battle.phase=="fight" do
                 local copy=util.copy(p);cmd(copy,"road_step",{ticks=10});cmd(p,"road_step",{ticks=10});equal(p,copy)

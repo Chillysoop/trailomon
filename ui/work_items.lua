@@ -14,7 +14,7 @@ function M.draw(self)
     w.text(self,410,536,can and "Repack for each expedition. No time cost to swap." or "Locked until stopped outside an encounter.",12,can and "muted" or "gold")
     for i,member in ipairs(s.crew) do
         local idx=i
-        w.button(self,28+(i-1)*280,480,263,35,"For "..member.name,function() self.work_member=idx;self.redraw() end,{key="item_member"..i,selected=selected==i,size=14})
+        w.button(self,28+(i-1)*(#s.crew==4 and 212 or 280),480,#s.crew==4 and 198 or 263,35,"For "..require("presentation.ambush").short(member.name,14)..(member.uid and " #"..member.uid or ""),function() self.work_member=idx;self.redraw() end,{key="item_member"..i,selected=selected==i,size=14})
     end
     if not c then w.text(self,28,496,"Choose a crew at the depot before assigning items.",13,"muted") end
     for n,id in ipairs(gear.order) do

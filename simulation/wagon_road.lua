@@ -5,7 +5,7 @@ local content=require "content.ambush"
 local M={RULES="wagon-road-v1",EFFORT=6}
 local function clamp(v) return math.max(0,math.min(100,v)) end
 local function member(s,id)
-    for i,c in ipairs(s.crew) do if content.by_species[c.species]==id then return c,i end end
+    return combat.member(s,id)
 end
 function M.active(s) return s.mode=="wagon_combat" and s.wagon_battle~=nil end
 function M.ready(s,b)
@@ -15,14 +15,14 @@ function M.ready(s,b)
 end
 function M.open(s,kind)
     if not content.road[kind] then return false end
-    local ids={};for _,c in ipairs(s.crew) do ids[#ids+1]=content.by_species[c.species] end
+    local ids=combat.ids(s.crew)
     local b=combat.new("guard",s.rng.combat,ids,kind)
     local initial={crew={},wagon=s.wagon,food=s.food,cargo=s.cargo,day=s.day,medicine=s.medicine,repairs=s.repairs}
     for _,u in ipairs(combat.crew(b)) do
         local c=member(s,u.id)
         local active=c.stamina>=M.EFFORT and c.condition>0
         u.hp=active and math.max(1,math.floor(u.max_hp*c.condition/100)) or 0
-        u.item=c.work_item or "";u.name=c.name
+        u.item=c.work_item or "";u.name=combat.name(s,c)
         initial.crew[u.id]={condition=c.condition,stamina=c.stamina,hp=u.hp,active=active}
     end
     b.wagon.hp=math.floor(s.wagon);initial.wagon_hp=b.wagon.hp

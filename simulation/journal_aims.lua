@@ -9,9 +9,11 @@ M.defs={
 }
 function M.empty() return {pairs={},paths={},completed={}} end
 function M.pair(crew)
-    if #crew~=2 then return nil end
-    local ids={crew[1].species,crew[2].species};table.sort(ids)
-    return table.concat(ids,"+")
+    if #crew<1 or #crew>4 then return nil end
+    local ids={};for _,c in ipairs(crew) do ids[#ids+1]=c.species end;table.sort(ids)
+    if #crew==2 and ids[1]~=ids[2] then return table.concat(ids,"+") end
+    if crew[1].uid then return "crew:"..table.concat(ids,"+") end
+    return nil -- Historical solo and trio saves did not record departure pairs.
 end
 local function count(t) local n=0;for _ in pairs(t) do n=n+1 end;return n end
 local function arrived(s) return s.outcome=="delivered" or s.outcome=="late" end
@@ -66,8 +68,14 @@ function M.rows(snapshot)
     local progress={company=math.min(2,count(a.pairs)).." / 2 pairs",paths=count(a.paths).." / 2 paths",peaceful="0 / 1 arrival"}
     for _,id in ipairs(M.order) do
         local d=M.defs[id];local done=a.completed[id]
-        rows[#rows+1]={id=id,title=d.title,icon=d.icon,description=d.description,done=done~=nil,
+        rows[#rows+1]={id=id,title=d.title,icon=d.icon,description=(id=="company" and s.collection_rules) and "Deliver on time with two different departure crews. Order and names do not matter; recruits do not change the starting crew." or d.description,done=done~=nil,
             status=done and "COMPLETED" or progress[id],note=done and ("Recorded on journey "..done..". This accomplishment stays in your journal.") or notes[id]}
+    end
+    if s.collection_rules then
+        for _,row in ipairs(rows) do if row.id=="company" then
+            row.note=row.note:gsub("departure%-pair","departure-crew"):gsub("pair","crew"):gsub("Choose two companions","Choose 1 to 4 companions")
+            row.status=row.status:gsub("pairs","crews")
+        end end
     end
     return rows
 end
@@ -75,6 +83,13 @@ end
 local function identity(n,max) return util.finite(n) and n>=1 and n<=max and n==math.floor(n) end
 local function valid_pair(key)
     if type(key)~="string" then return false end
+    if key:sub(1,5)=="crew:" then
+        local ids={};for id in key:sub(6):gmatch("[^+]+") do
+            if not species.defs[id] or (#ids>0 and ids[#ids]>id) then return false end
+            ids[#ids+1]=id
+        end
+        return #ids>=1 and #ids<=4 and "crew:"..table.concat(ids,"+")==key
+    end
     local a,b=key:match("^([a-z]+)%+([a-z]+)$")
     return a and b and a<b and species.defs[a]~=nil and species.defs[b]~=nil
 end

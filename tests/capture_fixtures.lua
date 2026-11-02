@@ -448,4 +448,36 @@ end
 function M.clarity_ability_legacy(self)
     M.clarity_ability(self);self.snapshot.run.road_combat_rules=nil;self.redraw()
 end
+function M.collection_depot(self)
+    reset(self,"trail");self.snapshot=require("tests.collection_fixture")();self.redraw()
+end
+function M.collection_roster(self)
+    M.collection_depot(self);self.capture_actions={"open_collection","collection_next"}
+    self.capture_assert=function() assert(self.page=="collection" and self.collection_page==2) end
+end
+function M.collection_crew(self)
+    M.collection_depot(self);assert(model.command(self.snapshot,"depart"));self.page="crew";self.redraw()
+end
+function M.collection_invite(self)
+    M.collection_crew(self);self.page="trail";assert(model.debug(self.snapshot,"event","cinder_return"));self.redraw()
+end
+function M.collection_combat(self)
+    M.collection_crew(self);self.page="trail";assert(model.debug(self.snapshot,"event","scavengers"));assert(model.command(self.snapshot,"choice",{id="battle"}));self.redraw()
+end
+function M.collection_legacy(self)
+    M.collection_crew(self);self.page="trail";self.snapshot.run.road_combat_rules=nil
+    assert(model.debug(self.snapshot,"event","scavengers"));assert(model.command(self.snapshot,"choice",{id="battle"}));self.redraw()
+end
+function M.collection_aims(self) M.collection_depot(self);self.page="aims";self.redraw() end
+function M.collection_items(self) M.collection_crew(self);self.page="work_items";self.redraw() end
+function M.collection_habits(self) M.collection_crew(self);self.page="habits";self.redraw() end
+function M.collection_starter(self)
+    reset(self,"trail");self.snapshot=require("simulation.expedition").new(1848,"discovery");self.redraw()
+    self.capture_actions={"select_reedskipper"};self.capture_assert=function() assert(#self.snapshot.profile.collection==1 and self.snapshot.run.crew[1].species=="reedskipper") end
+end
+function M.collection_twins(self)
+    M.collection_depot(self);local p=self.snapshot
+    assert(model.command(p,"collect_select",{uid=p.run.crew[2].uid}));assert(model.command(p,"collect_select",{uid=5}));assert(model.command(p,"depart"))
+    assert(model.debug(p,"event","territorial"));assert(model.command(p,"choice",{id="battle"}));assert(model.command(p,"road_start"));assert(model.command(p,"road_step",{ticks=60}));self.redraw()
+end
 return M

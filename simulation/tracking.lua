@@ -9,10 +9,10 @@ M.signs={brindlehorn="Split hoofprints",reedskipper="Reed platforms",loamling="F
 local allowed={meet_brindlehorn="brindlehorn",meet_reedskipper="reedskipper",wild_brindlehorn="brindlehorn",wild_reedskipper="reedskipper",track_loamling="loamling",discover_loamling="loamling",wild_bellmoth="bellmoth",discover_bellmoth="bellmoth",cinder_shelter="cindercoil",cinder_return="cindercoil",slate_tracks="slatewhorl",slate_return="slatewhorl"}
 local function event_for(snapshot,id)
     local s,p=snapshot.run,snapshot.profile
-    if id=="cindercoil" then return s.flags.cinder_helped and not p.roster[id] and not s.seen.cinder_return and "cinder_return" or "cinder_shelter" end
-    if id=="slatewhorl" then return s.flags.slate_helped and not p.roster[id] and not s.seen.slate_return and "slate_return" or "slate_tracks" end
-    if p.start_mode=="discovery" and not p.roster[id] then
-        for _,c in ipairs(s.crew) do if c.species==id then return id=="loamling" and "track_loamling" or "wild_"..id end end
+    if id=="cindercoil" then return s.flags.cinder_helped and (s.collection_rules or not p.roster[id]) and not s.seen.cinder_return and "cinder_return" or "cinder_shelter" end
+    if id=="slatewhorl" then return s.flags.slate_helped and (s.collection_rules or not p.roster[id]) and not s.seen.slate_return and "slate_return" or "slate_tracks" end
+    if s.collection_rules or (p.start_mode=="discovery" and not p.roster[id]) then
+        for _,c in ipairs(s.crew) do if not s.collection_rules and c.species==id then return id=="loamling" and "track_loamling" or "wild_"..id end end
         return (id=="brindlehorn" or id=="reedskipper") and "meet_"..id or "discover_"..id
     end
     return id=="loamling" and "track_loamling" or "wild_"..id

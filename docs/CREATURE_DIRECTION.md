@@ -35,7 +35,7 @@ The first [24 briefs](../reviews/creature-index.html) expand these examples acro
 
 Count genuinely distinct species. A recolor, alternate posture or regional skin does not satisfy another index slot. Any evolved form counted separately needs its own substantial identity and kit; evolution itself is not yet a selected system. Track **planned**, **designed**, **implemented**, **tested**, and **art-ready** separately. Existing saves and index IDs must survive roster growth.
 
-Broader geography, content volume, collecting capacity and a roster service will exceed the current six-species prototype architecture. Current departure/crew caps remain in place until separately designed; do not casually expand the traveling party to carry the entire collection. Keep Oregon Trail's increasing remoteness: each region reveals another local slice of a much larger world.
+Broader geography, content volume, collecting capacity and a roster service will exceed the current six-species prototype architecture. The owner authorized four active companions and an uncapped individual collection on November 2. The collection includes duplicate species; the traveling party remains separate. See [COLLECTION.md](COLLECTION.md). Keep Oregon Trail's increasing remoteness: each region reveals another local slice of a much larger world.
 
 ## Approved delivery order
 
