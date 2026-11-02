@@ -26,7 +26,7 @@ Two original species can join after you help them on the trail. Companions, obse
 
 Wild sightings offer **Watch**, **Help**, or **Pass** along suitable habitats. **Journal → Species field guide** distinguishes known species, wild sightings, and companions you have traveled with. Records are kept when a journey ends, including an early return.
 
-Meet courier Mara at Split Oak, then find her again at Mossbell. Her optional practice uses the same automatic combat and spends real crew energy, but damages a practice load instead of your cargo or companions. You can skip, leave setup, or withdraw freely. She remembers help and completed practice across trips. An actual practice exchange counts as combat for the peaceful-journey aim.
+Meet Mara at Split Oak and find her wagon drill at Mossbell. It uses the new six-kit combat with your traveling crew and carried equipment. Start costs 6 Energy per companion once; positive Condition is required. Combat HP, wagon and supplies are temporary. Inspect for free or withdraw; the first actual attack/skill counts against the peaceful-journey aim. Old saved courier encounters retain their earlier rules.
 
 After three well-fed working travel days, a companion learns a habit. Choose **Crew → Learned habits** at the departure depot to turn it on or off. Each habit offers a travel benefit and a cost; it is optional and never adds combat levels. Habit progress and selection remain with that companion between journeys.
 
@@ -64,8 +64,10 @@ Earlier choices can return later: clearing the fallen tree lets a grateful cart 
 
 **Journal → Species field guide** now gives habitat and method hints, separating unconfirmed reports from firsthand sightings. Existing saved journeys keep their original rules and enable searches on the next departure. The new hauler meetings are available in existing Discovery journeys when you reach their landmarks.
 
-## New wagon-combat sample (S28)
+## Six-kit wagon combat (S29)
 
-Press F3, then **Wagon ambush / new combat**. Choose **Guard the lane** or **Race the raid**, or use each companion’s Move button. Start the ambush; attacks and abilities repeat automatically. Space pauses; Tab and Enter select controls. Speed changes viewing rate. Reload sample returns to its separate saved checkpoint, paused. Withdraw ends the sample.
+Press F3 → **Wagon ambush / new combat** for free experiments. Choose Guard the lane, Race the raid or Open & punish; swap companions, move positions and cycle gear before Start. One copy of each work item, one slot per creature. The setup explains each item's benefit and drawback.
 
-This isolated sample has three companion kits and two foes. Front lane 1 intercepts the raider; leaving it open exposes the wagon. Moss shields himself and the wagon, Ember follows interceptions and attacks faster in front, and Lumen interrupts the caller. Results show damage, interceptions, follow-ups and repeated abilities. Sample HP/Focus and wagon integrity never charge expedition resources. Normal expedition battles remain on the previous rules until S30.
+All six original species have automatic repeating abilities. Front lane 1 intercepts the raider; leaving it open exposes the wagon. Space pauses; Tab and Enter select controls. Pause to use one medicine or repair charge. The button shows its actual gain; full targets do not consume a charge. Speed changes viewing rate. Reload resumes paused; Withdraw always ends the fight.
+
+The free sample never spends expedition resources. Mara's Mossbell drill charges only its stated Energy cost and saves with that journey. Results attribute damage, protection, openings and item triggers. Normal road encounters remain on their earlier rules until S30. Existing v1 ambush checkpoints keep their original three-kit resolver.

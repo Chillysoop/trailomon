@@ -1,0 +1,87 @@
+{
+  "policy": "No supplies; fixed formation; seeds 1-24; checkpoint at tick 37",
+  "rows": [
+    {
+      "crew_hp": 86.5,
+      "gear": false,
+      "item_triggers": 0,
+      "max_ticks": 150,
+      "max_wagon": 100,
+      "min_ticks": 150,
+      "min_wagon": 100,
+      "preset": "guard",
+      "seeds": 24,
+      "wins": 24
+    },
+    {
+      "crew_hp": 90.6,
+      "gear": true,
+      "item_triggers": 612,
+      "max_ticks": 153,
+      "max_wagon": 100,
+      "min_ticks": 150,
+      "min_wagon": 100,
+      "preset": "guard",
+      "seeds": 24,
+      "wins": 24
+    },
+    {
+      "crew_hp": 82,
+      "gear": false,
+      "item_triggers": 0,
+      "max_ticks": 144,
+      "max_wagon": 34,
+      "min_ticks": 138,
+      "min_wagon": 18,
+      "preset": "rush",
+      "seeds": 24,
+      "wins": 24
+    },
+    {
+      "crew_hp": 79.3,
+      "gear": true,
+      "item_triggers": 576,
+      "max_ticks": 144,
+      "max_wagon": 26,
+      "min_ticks": 144,
+      "min_wagon": 18,
+      "preset": "rush",
+      "seeds": 24,
+      "wins": 24
+    },
+    {
+      "crew_hp": 71.8,
+      "gear": false,
+      "item_triggers": 0,
+      "max_ticks": 159,
+      "max_wagon": 100,
+      "min_ticks": 145,
+      "min_wagon": 100,
+      "preset": "control",
+      "seeds": 24,
+      "wins": 24
+    },
+    {
+      "crew_hp": 78.5,
+      "gear": true,
+      "item_triggers": 716,
+      "max_ticks": 150,
+      "max_wagon": 100,
+      "min_ticks": 145,
+      "min_wagon": 100,
+      "preset": "control",
+      "seeds": 24,
+      "wins": 24
+    }
+  ],
+  "rules": "wagon-ambush-v2",
+  "source_base": "d0a5aaf280e5789f11e552ca927a87288cf2be14",
+  "inputs": {
+    "simulation/wagon_combat.lua": "7c32048f713c44d71badceb7de8512896f66082e75a3b84333efc7bece52292a",
+    "simulation/wagon_combat_v1.lua": "3bcd1ee72fa4265f3219c161a3c15365ac14ed0f13777f04ce34d9ddd9c99119",
+    "content/ambush.lua": "664c0566b748c963fb4897f911b1e32a3f1ceaaf41c175eba9f442d399ef384c",
+    "content/ambush_v1.lua": "a5b1a0defa813badc4ce59666ff23a5dba9f75a3f65a9a01ebd4b0201da664be",
+    "content/work_items.lua": "4b53bd431be8239795a90a452e285538647782176b2029412fa97d2566b29c76",
+    "tools/crew_build_report.lua": "5128d4693980a4f659a6ff2f52732dba826ecb135f0a67bfc5c216f918b84fd7"
+  }
+}

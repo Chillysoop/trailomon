@@ -81,6 +81,7 @@ local function validate(snapshot)
     for _,key in ipairs({"road_cleared","road_repaid","axle_lashed","courier_helped","courier_greeted","courier_done","courier_sparred"}) do
         if s.flags[key]~=nil and type(s.flags[key])~="boolean" then return false,"Invalid road consequence" end
     end
+    if not require("simulation.wagon_practice").valid(s.wagon_practice,s) then return false,"Invalid wagon practice" end
     if s.road_story~=nil and (type(s.road_story)~="string" or #s.road_story>1000) then return false,"Invalid road story" end
     for _,name in ipairs({"weather","events","combat"}) do if not integer(s.rng[name],1,2147483646) then return false,"Invalid random state" end end
     if not number(s.river_roll,0,1) or #s.log>70 then return false,"Invalid journal" end

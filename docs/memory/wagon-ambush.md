@@ -2,7 +2,7 @@
 
 2026-11-01: S28 implemented as F3 → Wagon ambush / new combat. Three original kits (Moss, Ember, Lumen), two enemies, individual HP/DEF/shields, independent attack clocks, Focus +10/s, repeated active/passive interactions. Two lanes, front/rear positions; front lane 1 intercepts the raider. A faster exposed Ember formation trades wagon integrity for time. No types needed or introduced.
 
-The sample is separate from expedition state and saves to wagon_ambush_v1 plus backup in the active namespace. No travel Energy, food, cargo, condition, history or real-wagon costs. Existing manual/automatic battle completion paths unchanged. S29 six-kit/equipment depth and S30 integration remain pending.
+The sample is separate from expedition state and saves to wagon_ambush_v1 plus backup in the active namespace. No travel Energy, food, cargo, condition, history or real-wagon costs. Existing manual/automatic battle completion paths unchanged. S29 extends this slice; see crew-builds.md. S30 road integration remains pending. The rest of this note records the original S28 baseline, not current v2 values.
 
 Fixed 100ms ticks; saved seeded starting offsets, clocks, targets, effect source/expiry, Focus and partial tick. Abilities precede basic attacks in saved unit order; KO cancels actions; one follow-up per source/tick, no recursive reactions. Wagon failure precedes victory on simultaneous outcomes; retreat and 180s stalemate end safely. Stun pauses attack/Focus; slow halves attack-clock progress. HP does not regenerate in this sample; shield never repairs the wagon.
 

@@ -6,6 +6,7 @@ local function reset(self,page)
     self.battle_team={};self.battle_actions={};self.edit=nil;self.save_blocked=false
     self.combat_paused=true;self.combat_speed=1;self.combat_log=nil
     self.capture_actions={};self.capture_assert=nil;self.capture_settle=nil
+    self.practice_writer=nil
     self.toast="Automated fixture / isolated / no player save"
 end
 function M.click(self,key)
@@ -131,6 +132,30 @@ function M.ambush_fight(self)
     self.capture_assert=function()
         assert(self.ambush.battle.phase=="fight")
     end
+end
+function M.crew_build_setup(self)
+    M.ambush_setup(self);self.page="ambush";self.capture_actions={"ambush_control"}
+    self.capture_assert=function() assert(self.ambush.battle.preset=="control" and self.ambush.battle.units[2].item=="release_rope") end
+end
+function M.crew_build_swap(self)
+    M.ambush_setup(self);self.page="ambush";self.capture_actions={"ambush_swap_moss","ambush_item_ripple"}
+    self.capture_assert=function() assert(self.ambush.battle.units[1].id=="ripple" and self.ambush.battle.units[1].item=="padded_trace") end
+end
+function M.crew_build_fight(self)
+    M.crew_build_setup(self);self.capture_actions={"ambush_control","ambush_start","ambush_pause"}
+    self.capture_settle=function() require("simulation.wagon_combat").step(self.ambush.battle,110);self.redraw() end
+    self.capture_assert=function() assert(self.ambush.paused and self.ambush.battle.phase=="fight") end
+end
+function M.crew_build_result(self)
+    M.crew_build_setup(self);self.capture_actions={"ambush_control","ambush_start"}
+    self.capture_settle=function() require("simulation.wagon_combat").step(self.ambush.battle,1800);self.redraw() end
+    self.capture_assert=function() assert(self.ambush.battle.phase=="result") end
+end
+function M.wagon_practice(self)
+    reset(self,"trail");local s=self.snapshot.run;s.target=3;s.progress=s.distance;s.mode="landmark"
+    self.practice_writer=function(value) assert(require("services.save").validate(value));return true end
+    self.ambush=nil;self.redraw();self.capture_actions={"wagon_practice"}
+    self.capture_assert=function() assert(self.ambush.practice and self.ambush.battle.scenario=="mara") end
 end
 local function ambush_result(self,preset)
     M.ambush_setup(self);self.page="ambush";self.capture_actions={"ambush_"..preset,"ambush_start"}

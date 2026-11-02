@@ -2,7 +2,7 @@
 
 Owner direction, November 1, 2026. The intended game has a minimum of 300 original creature species. Six currently exist in code and lore. The owner wants a broad animal world: fighters, predators, prey, food animals, protectors, fast creatures, companions and odd wildlife. Every species should have a relationship to its environment. A travel utility is not required. Art production remains deferred to the owner's overhaul.
 
-The owner approved ability-first identities without a universal type chart or fixed classes (bestiary-1 B1/B2, revision 9), plus bounded symbiosis, learning, food-web and migration experiments (B4–B7) and the B8 production pipeline. B3 creature-created battlefield terrain was rejected. S28 has shipped; S29 develops the six existing kits before the later experiments.
+The owner approved ability-first identities without a universal type chart or fixed classes (bestiary-1 B1/B2, revision 9), plus bounded symbiosis, learning, food-web and migration experiments (B4–B7) and the B8 production pipeline. B3 creature-created battlefield terrain was rejected. S28/S29 have shipped the six existing kits; S30 road integration precedes the later experiments.
 
 ## Approved identity: what it does, how it lives
 

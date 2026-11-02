@@ -95,7 +95,7 @@
       ],
       "counterplay": "Disrupt its attack clock, attack the uncovered lane or force a formation choice.",
       "tradeoff": "Reliable protection costs the party a faster attacker’s position.",
-      "integration": "Species, art and S28 kit exist. The expanded lore is a brief; S30 must integrate the kit with expedition costs.",
+      "integration": "Species and art exist. The repeatable kit is playable in S29 samples and Mara practice; S30 must integrate it with road encounters.",
       "related_species": []
     },
     {
@@ -105,7 +105,7 @@
       "species_id": "reedskipper",
       "name": "Reedskipper",
       "game_status": "implemented",
-      "kit_status": "proposed",
+      "kit_status": "sample",
       "art_status": "existing",
       "role": "Social shallows dweller, swimmer and working companion.",
       "body": "Broad body, webbed feet and a thick tail ending in a flat paddle; the tail changes its direction rather than acting as a sail.",
@@ -136,7 +136,7 @@
       ],
       "counterplay": "Use steady low-pressure attacks instead of telegraphed rushes.",
       "tradeoff": "Redirecting a strong hit puts its own HP at risk.",
-      "integration": "Existing species and legacy kit; this repeatable kit is proposed for S29. B5 later offers one learned channel or still-pool trick.",
+      "integration": "Species and art exist. The repeatable kit is playable in S29 samples and Mara practice; S30 must integrate it with road encounters.",
       "related_species": []
     },
     {
@@ -146,7 +146,7 @@
       "species_id": "loamling",
       "name": "Loamling",
       "game_status": "implemented",
-      "kit_status": "proposed",
+      "kit_status": "sample",
       "art_status": "existing",
       "role": "Root-forager, food-cache maker and opportunistic scavenger.",
       "body": "Compact burrower with broad digging forelimbs, a sensitive muzzle and soil-catching short fur.",
@@ -177,7 +177,7 @@
       ],
       "counterplay": "Cleanse the opening or protect the threatened individual before the follow-up.",
       "tradeoff": "Low staying power makes prolonged front-line fighting costly.",
-      "integration": "Existing species; S28 uses a Loamling as the raider, not this companion kit. S29 can test Underhook without B3 terrain mutation.",
+      "integration": "Species and art exist. The repeatable kit is playable in S29 samples and Mara practice; S30 must integrate it with road encounters.",
       "related_species": []
     },
     {
@@ -217,7 +217,7 @@
       ],
       "counterplay": "Field several independent threats so one interruption cannot halt the whole team.",
       "tradeoff": "Fragile and weak at direct damage; its value depends on stopping a meaningful action.",
-      "integration": "Species, art and S28 companion kit exist. S29 should preserve its readable timing and S30 should price expedition effort.",
+      "integration": "Species and art exist. The repeatable kit is playable in S29 samples and Mara practice; S30 must integrate it with road encounters.",
       "related_species": []
     },
     {
@@ -257,7 +257,7 @@
       ],
       "counterplay": "Attack the open lane or interrupt Cindercoil when its defender is under pressure.",
       "tradeoff": "The faster front stance exposes a frail body and can leave the wagon lane open.",
-      "integration": "Species, art and S28 kit exist. Biological reserve is flavor here, not an extra travel-food charge per hit.",
+      "integration": "Species and art exist. The repeatable kit is playable in S29 samples and Mara practice; S30 must integrate it with road encounters.",
       "related_species": []
     },
     {
@@ -267,7 +267,7 @@
       "species_id": "slatewhorl",
       "name": "Slatewhorl",
       "game_status": "implemented",
-      "kit_status": "proposed",
+      "kit_status": "sample",
       "art_status": "existing",
       "role": "Slow upland browser and territorial anchor.",
       "body": "Overlapping living plates form a low spiral around a broad body; spreading feet brace the whole animal.",
@@ -297,7 +297,7 @@
       ],
       "counterplay": "Pressure an unprotected target or interrupt the slow protective cycle.",
       "tradeoff": "Low damage and a slow attack clock make an all-defensive team vulnerable to stalls.",
-      "integration": "Existing species and legacy ability. This repeatable kit is proposed for S29, distinct from Moss’s explicit wagon shield.",
+      "integration": "Species and art exist. The repeatable kit is playable in S29 samples and Mara practice; S30 must integrate it with road encounters.",
       "related_species": []
     },
     {

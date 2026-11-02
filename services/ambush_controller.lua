@@ -9,6 +9,7 @@ local function checkpoint(self)
     return ok
 end
 function M.open(self,storage)
+    if self.ambush and self.ambush.practice then self.ambush=nil end
     if not self.ambush then
         storage=storage or persistence
         local record,notice=storage.load()
@@ -17,10 +18,45 @@ function M.open(self,storage)
     end
     self.open_page("ambush")
 end
+function M.open_practice(self,writer)
+    local practice=require "simulation.wagon_practice"
+    local util=require "simulation.util"
+    if self.save_blocked then return false end
+    M.pause(self)
+    local record,why=practice.record(self.snapshot.run)
+    if not record then self.toast=why;self.redraw();return false end
+    local journey=self.snapshot.run.id
+    local storage={load=function() return util.copy(self.snapshot.run.wagon_practice) end}
+    storage.write=function(value)
+        if self.save_blocked or self.snapshot.run.id~=journey then return false,"Journey changed" end
+        local candidate,reason=practice.commit(self.snapshot,value)
+        if not candidate then return false,reason end
+        local ok,err=(writer or require("services.save").write)(candidate)
+        if not ok then return false,err end
+        self.snapshot=candidate;return true
+    end
+    self.ambush={battle=record.battle,speed=record.speed,carry=record.carry,paused=true,storage=storage,practice=true}
+    if record.battle.phase=="setup" then local ready,message=practice.ready(self.snapshot.run,record.battle);if not ready then self.ambush.notice=message end end
+    checkpoint(self);self.open_page("ambush");return true
+end
 function M.command(self,action,arg)
     local a=self.ambush;if not a then return false end
-    if action=="new" then a.battle=combat.new(arg or "guard");a.carry=0;a.paused=true;a.notice=nil
-    elseif action=="start" then if not combat.start(a.battle) then return false end;a.paused=false
+    if action=="new" then
+        if a.practice then return false end
+        a.battle=combat.new(arg or "guard");a.carry=0;a.paused=true;a.notice=nil
+    elseif action=="start" then
+        if a.practice then
+            local ok,why=require("simulation.wagon_practice").ready(self.snapshot.run,a.battle)
+            if not ok then a.notice=why;self.redraw();return false end
+        end
+        if not combat.start(a.battle) then return false end;a.paused=false
+    elseif action=="replace" then
+        if a.practice or not combat.replace(a.battle,arg.id,arg.replacement) then return false end
+    elseif action=="equip" then
+        if a.practice and arg.item~="" and not (self.snapshot.run.work_items or {})[arg.item] then return false end
+        if not combat.equip(a.battle,arg.id,arg.item) then return false end
+    elseif action=="supply" then
+        if not a.paused or not combat.supply(a.battle,arg) then return false end
     elseif action=="move" then if not combat.move(a.battle,arg.id,arg.position) then return false end
     elseif action=="pause" then
         if a.battle.phase~="fight" then return false end
