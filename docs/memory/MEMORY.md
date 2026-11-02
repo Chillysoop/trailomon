@@ -38,3 +38,5 @@
 - [trailer.md](trailer.md): 20-second private hype trailer, source footage, soundtrack and rebuild/delivery limits.
 
 - [road-combat.md](road-combat.md): S30 expedition accounting, compatibility, motion, replay evidence and remaining balance limits.
+
+- [journey-2.md](journey-2.md): S10 rendered full trips, care/equipment fixes, evidence and remaining hands-on limits.

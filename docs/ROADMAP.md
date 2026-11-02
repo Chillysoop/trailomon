@@ -1,5 +1,7 @@
 # Trailomon roadmap
 
+November 2 S10: [two full rendered walkthroughs](../reviews/journey-2.html) deliver on days 26/24 with two searches each. Recovery-heavy and prepared-party approaches both finish; solo combat remains costly. Fixed treatment totals and stale equipment descriptions, preserving legacy rules. S10 is doing: desktop input interrupted the hands-on attempt, so physical controls, listening, real-time pacing and activation reliability remain open. No new balance or art work.
+
 November 2 S5 Discovery recovery pass: new journeys use fed camp recovery of 40 Energy / 20 Condition; repair days also grant camp recovery. Legacy saves retain 25/8 and old repair behavior. [Study and limits](DISCOVERY_BALANCE.md): 1,152 matched journeys, each repeated exactly, 154 Lua checks, native saves and four rendered recovery screens. Brindlehorn adaptive two-search deliveries improve 13→20/24. Deadlines, search costs and enemies remain unchanged. S5 stays doing; human pacing and wider balance remain open.
 
 November 2 post-S30 audit: still core systems. [The current work queue](../reviews/after-combat.html) recommends already-authorized S5 full-trip balance and S10 feel/reliability, then S32 symbiosis as the first new mechanic. S33/S35/S34/S36 follow. All 148 simulation checks pass; new combat's solo/Discovery outcomes and selective-search timing need investigation. Human enjoyment, physical input/audio and release-candidate checks remain open. No new approval, stat change or gameplay feature is implied by this audit.
@@ -56,7 +58,7 @@ Updated November 1, 2026. Scope: one polished Windows expedition before new regi
 
 | ID | Goal and review link | Done means | Validation | Status |
 | --- | --- | --- | --- | --- |
-| S10 | Finish sound, settings, and interface basics | Audio controls persist; sounds reviewed; focus, readable costs, disabled explanations, and timing consistent | Settings persistence, mouse/keyboard journeys, listening review, actual window inspection | todo |
+| S10 | Finish sound, settings, and interface basics | Audio controls persist; sounds reviewed; focus, readable costs, disabled explanations, and timing consistent | Settings persistence, mouse/keyboard journeys, listening review, actual window inspection | doing |
 | S15 | Make road decisions readable and reversible, J1–J4 | Free return before combat's first exchange; exact recruitment food outlook; three authored road receipts; remembered viewing speed | Repeated inspection/RNG, old-save and native persistence checks; actual setup/receipt/recruit/restart screens | done (PR #14) |
 | S16 | Capture rendered test screens automatically, F1 | One CLI command opens isolated production UI fixtures, performs actions, saves 1280×720 PNGs and exits | Options/speed and combat setup/first-intent captures inspected; isolation regressions; no player-save access | done (PR #17) |
 | S21 | Player clarity: consistent color and symbol meanings | Shared recognition palette, labeled Energy/Condition meters, clear crew points, depot pack costs and separate Pressure/Cover readings | 90 Lua scenarios including contrast and pack accounting; native persistence/GUI and buy/return controls; 12 actual rendered screens | done (PR #30) |

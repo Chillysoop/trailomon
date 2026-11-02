@@ -1,0 +1,4594 @@
+[
+  {
+    "step": 2,
+    "day": 1,
+    "mode": "preparation",
+    "target": 2,
+    "food": 90,
+    "wagon": 100,
+    "cargo": 100,
+    "coins": 50,
+    "medicine": 2,
+    "repairs": 3,
+    "crew": [
+      {
+        "species": "brindlehorn",
+        "energy": 100,
+        "condition": 100,
+        "item": null
+      }
+    ]
+  },
+  {
+    "step": 3,
+    "day": 1,
+    "mode": "stopped",
+    "target": 2,
+    "food": 90,
+    "wagon": 100,
+    "cargo": 100,
+    "coins": 50,
+    "medicine": 2,
+    "repairs": 3,
+    "crew": [
+      {
+        "species": "brindlehorn",
+        "energy": 100,
+        "condition": 100,
+        "item": null
+      }
+    ]
+  },
+  {
+    "step": 4,
+    "day": 1,
+    "mode": "traveling",
+    "target": 2,
+    "food": 90,
+    "wagon": 100,
+    "cargo": 100,
+    "coins": 50,
+    "medicine": 2,
+    "repairs": 3,
+    "crew": [
+      {
+        "species": "brindlehorn",
+        "energy": 100,
+        "condition": 100,
+        "item": null
+      }
+    ]
+  },
+  {
+    "step": 5,
+    "day": 2,
+    "mode": "event",
+    "target": 2,
+    "food": 87,
+    "wagon": 98.8,
+    "cargo": 98,
+    "coins": 50,
+    "medicine": 2,
+    "repairs": 3,
+    "crew": [
+      {
+        "species": "brindlehorn",
+        "energy": 96,
+        "condition": 100,
+        "item": null
+      }
+    ]
+  },
+  {
+    "step": 6,
+    "day": 2,
+    "mode": "wagon_combat",
+    "target": 2,
+    "food": 87,
+    "wagon": 98.8,
+    "cargo": 98,
+    "coins": 50,
+    "medicine": 2,
+    "repairs": 3,
+    "crew": [
+      {
+        "species": "brindlehorn",
+        "energy": 96,
+        "condition": 100,
+        "item": null
+      }
+    ]
+  },
+  {
+    "step": 7,
+    "day": 2,
+    "mode": "wagon_combat",
+    "target": 2,
+    "food": 87,
+    "wagon": 98.8,
+    "cargo": 98,
+    "coins": 50,
+    "medicine": 2,
+    "repairs": 3,
+    "crew": [
+      {
+        "species": "brindlehorn",
+        "energy": 96,
+        "condition": 100,
+        "item": null
+      }
+    ]
+  },
+  {
+    "step": 8,
+    "day": 2,
+    "mode": "wagon_combat",
+    "target": 2,
+    "food": 87,
+    "wagon": 98.8,
+    "cargo": 98,
+    "coins": 50,
+    "medicine": 2,
+    "repairs": 3,
+    "crew": [
+      {
+        "species": "brindlehorn",
+        "energy": 90,
+        "condition": 100,
+        "item": null
+      }
+    ]
+  },
+  {
+    "step": 9,
+    "day": 2,
+    "mode": "wagon_combat",
+    "target": 2,
+    "food": 87,
+    "wagon": 98.8,
+    "cargo": 98,
+    "coins": 50,
+    "medicine": 2,
+    "repairs": 3,
+    "crew": [
+      {
+        "species": "brindlehorn",
+        "energy": 90,
+        "condition": 100,
+        "item": null
+      }
+    ]
+  },
+  {
+    "step": 10,
+    "day": 2,
+    "mode": "wagon_combat",
+    "target": 2,
+    "food": 87,
+    "wagon": 98.8,
+    "cargo": 98,
+    "coins": 50,
+    "medicine": 2,
+    "repairs": 3,
+    "crew": [
+      {
+        "species": "brindlehorn",
+        "energy": 90,
+        "condition": 100,
+        "item": null
+      }
+    ]
+  },
+  {
+    "step": 11,
+    "day": 2,
+    "mode": "wagon_combat",
+    "target": 2,
+    "food": 87,
+    "wagon": 98.8,
+    "cargo": 98,
+    "coins": 50,
+    "medicine": 1,
+    "repairs": 3,
+    "crew": [
+      {
+        "species": "brindlehorn",
+        "energy": 90,
+        "condition": 100,
+        "item": null
+      }
+    ]
+  },
+  {
+    "step": 12,
+    "day": 2,
+    "mode": "wagon_combat",
+    "target": 2,
+    "food": 87,
+    "wagon": 98.8,
+    "cargo": 98,
+    "coins": 50,
+    "medicine": 1,
+    "repairs": 3,
+    "crew": [
+      {
+        "species": "brindlehorn",
+        "energy": 90,
+        "condition": 100,
+        "item": null
+      }
+    ]
+  },
+  {
+    "step": 13,
+    "day": 2,
+    "mode": "wagon_combat",
+    "target": 2,
+    "food": 87,
+    "wagon": 98.8,
+    "cargo": 98,
+    "coins": 50,
+    "medicine": 1,
+    "repairs": 3,
+    "crew": [
+      {
+        "species": "brindlehorn",
+        "energy": 90,
+        "condition": 100,
+        "item": null
+      }
+    ]
+  },
+  {
+    "step": 14,
+    "day": 2,
+    "mode": "wagon_combat",
+    "target": 2,
+    "food": 79,
+    "wagon": 98.8,
+    "cargo": 90,
+    "coins": 50,
+    "medicine": 1,
+    "repairs": 3,
+    "crew": [
+      {
+        "species": "brindlehorn",
+        "energy": 90,
+        "condition": 16.379310344828,
+        "item": null
+      }
+    ]
+  },
+  {
+    "step": 15,
+    "day": 2,
+    "mode": "stopped",
+    "target": 2,
+    "food": 79,
+    "wagon": 98.8,
+    "cargo": 90,
+    "coins": 50,
+    "medicine": 1,
+    "repairs": 3,
+    "crew": [
+      {
+        "species": "brindlehorn",
+        "energy": 90,
+        "condition": 16.379310344828,
+        "item": null
+      }
+    ]
+  },
+  {
+    "step": 16,
+    "day": 2,
+    "mode": "stopped",
+    "target": 2,
+    "food": 79,
+    "wagon": 98.8,
+    "cargo": 90,
+    "coins": 50,
+    "medicine": 1,
+    "repairs": 3,
+    "crew": [
+      {
+        "species": "brindlehorn",
+        "energy": 90,
+        "condition": 16.379310344828,
+        "item": null
+      }
+    ]
+  },
+  {
+    "step": 17,
+    "day": 2,
+    "mode": "stopped",
+    "target": 2,
+    "food": 79,
+    "wagon": 98.8,
+    "cargo": 90,
+    "coins": 50,
+    "medicine": 1,
+    "repairs": 3,
+    "crew": [
+      {
+        "species": "brindlehorn",
+        "energy": 90,
+        "condition": 16.379310344828,
+        "item": null
+      }
+    ]
+  },
+  {
+    "step": 18,
+    "day": 3,
+    "mode": "stopped",
+    "target": 2,
+    "food": 76,
+    "wagon": 98.8,
+    "cargo": 90,
+    "coins": 50,
+    "medicine": 0,
+    "repairs": 3,
+    "crew": [
+      {
+        "species": "brindlehorn",
+        "energy": 100,
+        "condition": 71.379310344828,
+        "item": null
+      }
+    ]
+  },
+  {
+    "step": 19,
+    "day": 3,
+    "mode": "stopped",
+    "target": 2,
+    "food": 76,
+    "wagon": 98.8,
+    "cargo": 90,
+    "coins": 50,
+    "medicine": 0,
+    "repairs": 3,
+    "crew": [
+      {
+        "species": "brindlehorn",
+        "energy": 100,
+        "condition": 71.379310344828,
+        "item": null
+      }
+    ]
+  },
+  {
+    "step": 20,
+    "day": 3,
+    "mode": "traveling",
+    "target": 2,
+    "food": 76,
+    "wagon": 98.8,
+    "cargo": 90,
+    "coins": 50,
+    "medicine": 0,
+    "repairs": 3,
+    "crew": [
+      {
+        "species": "brindlehorn",
+        "energy": 100,
+        "condition": 71.379310344828,
+        "item": null
+      }
+    ]
+  },
+  {
+    "step": 21,
+    "day": 4,
+    "mode": "traveling",
+    "target": 2,
+    "food": 73,
+    "wagon": 98,
+    "cargo": 90,
+    "coins": 50,
+    "medicine": 0,
+    "repairs": 3,
+    "crew": [
+      {
+        "species": "brindlehorn",
+        "energy": 99,
+        "condition": 71.379310344828,
+        "item": null
+      }
+    ]
+  },
+  {
+    "step": 22,
+    "day": 5,
+    "mode": "traveling",
+    "target": 2,
+    "food": 70,
+    "wagon": 97.2,
+    "cargo": 90,
+    "coins": 50,
+    "medicine": 0,
+    "repairs": 3,
+    "crew": [
+      {
+        "species": "brindlehorn",
+        "energy": 95,
+        "condition": 71.379310344828,
+        "item": null
+      }
+    ]
+  },
+  {
+    "step": 23,
+    "day": 6,
+    "mode": "event",
+    "target": 2,
+    "food": 67,
+    "wagon": 96.4,
+    "cargo": 90,
+    "coins": 50,
+    "medicine": 0,
+    "repairs": 3,
+    "crew": [
+      {
+        "species": "brindlehorn",
+        "energy": 91,
+        "condition": 71.379310344828,
+        "item": null
+      }
+    ]
+  },
+  {
+    "step": 24,
+    "day": 6,
+    "mode": "event",
+    "target": 2,
+    "food": 64,
+    "wagon": 96.4,
+    "cargo": 90,
+    "coins": 50,
+    "medicine": 0,
+    "repairs": 3,
+    "crew": [
+      {
+        "species": "brindlehorn",
+        "energy": 91,
+        "condition": 71.379310344828,
+        "item": null
+      }
+    ]
+  },
+  {
+    "step": 25,
+    "day": 6,
+    "mode": "landmark",
+    "target": 2,
+    "food": 60,
+    "wagon": 96.4,
+    "cargo": 90,
+    "coins": 50,
+    "medicine": 0,
+    "repairs": 3,
+    "crew": [
+      {
+        "species": "brindlehorn",
+        "energy": 91,
+        "condition": 71.379310344828,
+        "item": null
+      },
+      {
+        "species": "loamling",
+        "energy": 100,
+        "condition": 100,
+        "item": null
+      }
+    ]
+  },
+  {
+    "step": 26,
+    "day": 6,
+    "mode": "landmark",
+    "target": 2,
+    "food": 60,
+    "wagon": 96.4,
+    "cargo": 90,
+    "coins": 50,
+    "medicine": 0,
+    "repairs": 3,
+    "crew": [
+      {
+        "species": "brindlehorn",
+        "energy": 91,
+        "condition": 71.379310344828,
+        "item": null
+      },
+      {
+        "species": "loamling",
+        "energy": 100,
+        "condition": 100,
+        "item": null
+      }
+    ]
+  },
+  {
+    "step": 27,
+    "day": 6,
+    "mode": "landmark",
+    "target": 2,
+    "food": 60,
+    "wagon": 96.4,
+    "cargo": 90,
+    "coins": 50,
+    "medicine": 0,
+    "repairs": 3,
+    "crew": [
+      {
+        "species": "brindlehorn",
+        "energy": 91,
+        "condition": 71.379310344828,
+        "item": null
+      },
+      {
+        "species": "loamling",
+        "energy": 100,
+        "condition": 100,
+        "item": null
+      }
+    ]
+  },
+  {
+    "step": 28,
+    "day": 6,
+    "mode": "traveling",
+    "target": 3,
+    "food": 60,
+    "wagon": 96.4,
+    "cargo": 90,
+    "coins": 50,
+    "medicine": 0,
+    "repairs": 3,
+    "crew": [
+      {
+        "species": "brindlehorn",
+        "energy": 91,
+        "condition": 71.379310344828,
+        "item": null
+      },
+      {
+        "species": "loamling",
+        "energy": 100,
+        "condition": 100,
+        "item": null
+      }
+    ]
+  },
+  {
+    "step": 29,
+    "day": 6,
+    "mode": "stopped",
+    "target": 3,
+    "food": 60,
+    "wagon": 96.4,
+    "cargo": 90,
+    "coins": 50,
+    "medicine": 0,
+    "repairs": 3,
+    "crew": [
+      {
+        "species": "brindlehorn",
+        "energy": 91,
+        "condition": 71.379310344828,
+        "item": null
+      },
+      {
+        "species": "loamling",
+        "energy": 100,
+        "condition": 100,
+        "item": null
+      }
+    ]
+  },
+  {
+    "step": 30,
+    "day": 7,
+    "mode": "stopped",
+    "target": 3,
+    "food": 57,
+    "wagon": 96.4,
+    "cargo": 90,
+    "coins": 50,
+    "medicine": 0,
+    "repairs": 3,
+    "crew": [
+      {
+        "species": "brindlehorn",
+        "energy": 98,
+        "condition": 71.379310344828,
+        "item": null
+      },
+      {
+        "species": "loamling",
+        "energy": 100,
+        "condition": 100,
+        "item": null
+      }
+    ]
+  },
+  {
+    "step": 31,
+    "day": 7,
+    "mode": "stopped",
+    "target": 3,
+    "food": 57,
+    "wagon": 96.4,
+    "cargo": 90,
+    "coins": 50,
+    "medicine": 0,
+    "repairs": 3,
+    "crew": [
+      {
+        "species": "brindlehorn",
+        "energy": 98,
+        "condition": 71.379310344828,
+        "item": null
+      },
+      {
+        "species": "loamling",
+        "energy": 100,
+        "condition": 100,
+        "item": null
+      }
+    ]
+  },
+  {
+    "step": 32,
+    "day": 7,
+    "mode": "traveling",
+    "target": 3,
+    "food": 57,
+    "wagon": 96.4,
+    "cargo": 90,
+    "coins": 50,
+    "medicine": 0,
+    "repairs": 3,
+    "crew": [
+      {
+        "species": "brindlehorn",
+        "energy": 98,
+        "condition": 71.379310344828,
+        "item": null
+      },
+      {
+        "species": "loamling",
+        "energy": 100,
+        "condition": 100,
+        "item": null
+      }
+    ]
+  },
+  {
+    "step": 33,
+    "day": 8,
+    "mode": "traveling",
+    "target": 3,
+    "food": 54,
+    "wagon": 95.6,
+    "cargo": 90,
+    "coins": 50,
+    "medicine": 0,
+    "repairs": 3,
+    "crew": [
+      {
+        "species": "brindlehorn",
+        "energy": 94,
+        "condition": 71.379310344828,
+        "item": null
+      },
+      {
+        "species": "loamling",
+        "energy": 100,
+        "condition": 100,
+        "item": null
+      }
+    ]
+  },
+  {
+    "step": 34,
+    "day": 9,
+    "mode": "traveling",
+    "target": 3,
+    "food": 51,
+    "wagon": 94.8,
+    "cargo": 90,
+    "coins": 50,
+    "medicine": 0,
+    "repairs": 3,
+    "crew": [
+      {
+        "species": "brindlehorn",
+        "energy": 90,
+        "condition": 71.379310344828,
+        "item": null
+      },
+      {
+        "species": "loamling",
+        "energy": 100,
+        "condition": 100,
+        "item": null
+      }
+    ]
+  },
+  {
+    "step": 35,
+    "day": 10,
+    "mode": "event",
+    "target": 3,
+    "food": 48,
+    "wagon": 93.6,
+    "cargo": 88,
+    "coins": 50,
+    "medicine": 0,
+    "repairs": 3,
+    "crew": [
+      {
+        "species": "brindlehorn",
+        "energy": 86,
+        "condition": 71.379310344828,
+        "item": null
+      },
+      {
+        "species": "loamling",
+        "energy": 100,
+        "condition": 100,
+        "item": null
+      }
+    ]
+  },
+  {
+    "step": 36,
+    "day": 10,
+    "mode": "stopped",
+    "target": 3,
+    "food": 48,
+    "wagon": 90.6,
+    "cargo": 88,
+    "coins": 50,
+    "medicine": 0,
+    "repairs": 3,
+    "crew": [
+      {
+        "species": "brindlehorn",
+        "energy": 86,
+        "condition": 71.379310344828,
+        "item": null
+      },
+      {
+        "species": "loamling",
+        "energy": 84,
+        "condition": 100,
+        "item": null
+      }
+    ]
+  },
+  {
+    "step": 37,
+    "day": 10,
+    "mode": "traveling",
+    "target": 3,
+    "food": 48,
+    "wagon": 90.6,
+    "cargo": 88,
+    "coins": 50,
+    "medicine": 0,
+    "repairs": 3,
+    "crew": [
+      {
+        "species": "brindlehorn",
+        "energy": 86,
+        "condition": 71.379310344828,
+        "item": null
+      },
+      {
+        "species": "loamling",
+        "energy": 84,
+        "condition": 100,
+        "item": null
+      }
+    ]
+  },
+  {
+    "step": 38,
+    "day": 11,
+    "mode": "event",
+    "target": 3,
+    "food": 45,
+    "wagon": 89.8,
+    "cargo": 88,
+    "coins": 50,
+    "medicine": 0,
+    "repairs": 3,
+    "crew": [
+      {
+        "species": "brindlehorn",
+        "energy": 82,
+        "condition": 71.379310344828,
+        "item": null
+      },
+      {
+        "species": "loamling",
+        "energy": 85,
+        "condition": 100,
+        "item": null
+      }
+    ]
+  },
+  {
+    "step": 39,
+    "day": 11,
+    "mode": "event",
+    "target": 3,
+    "food": 45,
+    "wagon": 89.8,
+    "cargo": 88,
+    "coins": 50,
+    "medicine": 0,
+    "repairs": 3,
+    "crew": [
+      {
+        "species": "brindlehorn",
+        "energy": 82,
+        "condition": 71.379310344828,
+        "item": null
+      },
+      {
+        "species": "loamling",
+        "energy": 85,
+        "condition": 100,
+        "item": null
+      }
+    ]
+  },
+  {
+    "step": 40,
+    "day": 11,
+    "mode": "landmark",
+    "target": 3,
+    "food": 41,
+    "wagon": 89.8,
+    "cargo": 88,
+    "coins": 50,
+    "medicine": 0,
+    "repairs": 3,
+    "crew": [
+      {
+        "species": "brindlehorn",
+        "energy": 82,
+        "condition": 71.379310344828,
+        "item": null
+      },
+      {
+        "species": "loamling",
+        "energy": 85,
+        "condition": 100,
+        "item": null
+      },
+      {
+        "species": "bellmoth",
+        "energy": 100,
+        "condition": 100,
+        "item": null
+      }
+    ]
+  },
+  {
+    "step": 41,
+    "day": 11,
+    "mode": "landmark",
+    "target": 3,
+    "food": 41,
+    "wagon": 89.8,
+    "cargo": 88,
+    "coins": 50,
+    "medicine": 0,
+    "repairs": 3,
+    "crew": [
+      {
+        "species": "brindlehorn",
+        "energy": 82,
+        "condition": 71.379310344828,
+        "item": null
+      },
+      {
+        "species": "loamling",
+        "energy": 85,
+        "condition": 100,
+        "item": null
+      },
+      {
+        "species": "bellmoth",
+        "energy": 100,
+        "condition": 100,
+        "item": null
+      }
+    ]
+  },
+  {
+    "step": 42,
+    "day": 11,
+    "mode": "landmark",
+    "target": 3,
+    "food": 51,
+    "wagon": 89.8,
+    "cargo": 88,
+    "coins": 44,
+    "medicine": 0,
+    "repairs": 3,
+    "crew": [
+      {
+        "species": "brindlehorn",
+        "energy": 82,
+        "condition": 71.379310344828,
+        "item": null
+      },
+      {
+        "species": "loamling",
+        "energy": 85,
+        "condition": 100,
+        "item": null
+      },
+      {
+        "species": "bellmoth",
+        "energy": 100,
+        "condition": 100,
+        "item": null
+      }
+    ]
+  },
+  {
+    "step": 43,
+    "day": 11,
+    "mode": "landmark",
+    "target": 3,
+    "food": 61,
+    "wagon": 89.8,
+    "cargo": 88,
+    "coins": 38,
+    "medicine": 0,
+    "repairs": 3,
+    "crew": [
+      {
+        "species": "brindlehorn",
+        "energy": 82,
+        "condition": 71.379310344828,
+        "item": null
+      },
+      {
+        "species": "loamling",
+        "energy": 85,
+        "condition": 100,
+        "item": null
+      },
+      {
+        "species": "bellmoth",
+        "energy": 100,
+        "condition": 100,
+        "item": null
+      }
+    ]
+  },
+  {
+    "step": 44,
+    "day": 11,
+    "mode": "landmark",
+    "target": 3,
+    "food": 71,
+    "wagon": 89.8,
+    "cargo": 88,
+    "coins": 32,
+    "medicine": 0,
+    "repairs": 3,
+    "crew": [
+      {
+        "species": "brindlehorn",
+        "energy": 82,
+        "condition": 71.379310344828,
+        "item": null
+      },
+      {
+        "species": "loamling",
+        "energy": 85,
+        "condition": 100,
+        "item": null
+      },
+      {
+        "species": "bellmoth",
+        "energy": 100,
+        "condition": 100,
+        "item": null
+      }
+    ]
+  },
+  {
+    "step": 45,
+    "day": 11,
+    "mode": "landmark",
+    "target": 3,
+    "food": 81,
+    "wagon": 89.8,
+    "cargo": 88,
+    "coins": 26,
+    "medicine": 0,
+    "repairs": 3,
+    "crew": [
+      {
+        "species": "brindlehorn",
+        "energy": 82,
+        "condition": 71.379310344828,
+        "item": null
+      },
+      {
+        "species": "loamling",
+        "energy": 85,
+        "condition": 100,
+        "item": null
+      },
+      {
+        "species": "bellmoth",
+        "energy": 100,
+        "condition": 100,
+        "item": null
+      }
+    ]
+  },
+  {
+    "step": 46,
+    "day": 11,
+    "mode": "landmark",
+    "target": 3,
+    "food": 91,
+    "wagon": 89.8,
+    "cargo": 88,
+    "coins": 20,
+    "medicine": 0,
+    "repairs": 3,
+    "crew": [
+      {
+        "species": "brindlehorn",
+        "energy": 82,
+        "condition": 71.379310344828,
+        "item": null
+      },
+      {
+        "species": "loamling",
+        "energy": 85,
+        "condition": 100,
+        "item": null
+      },
+      {
+        "species": "bellmoth",
+        "energy": 100,
+        "condition": 100,
+        "item": null
+      }
+    ]
+  },
+  {
+    "step": 47,
+    "day": 11,
+    "mode": "landmark",
+    "target": 3,
+    "food": 91,
+    "wagon": 89.8,
+    "cargo": 88,
+    "coins": 13,
+    "medicine": 1,
+    "repairs": 3,
+    "crew": [
+      {
+        "species": "brindlehorn",
+        "energy": 82,
+        "condition": 71.379310344828,
+        "item": null
+      },
+      {
+        "species": "loamling",
+        "energy": 85,
+        "condition": 100,
+        "item": null
+      },
+      {
+        "species": "bellmoth",
+        "energy": 100,
+        "condition": 100,
+        "item": null
+      }
+    ]
+  },
+  {
+    "step": 48,
+    "day": 11,
+    "mode": "landmark",
+    "target": 3,
+    "food": 91,
+    "wagon": 89.8,
+    "cargo": 88,
+    "coins": 13,
+    "medicine": 1,
+    "repairs": 3,
+    "crew": [
+      {
+        "species": "brindlehorn",
+        "energy": 82,
+        "condition": 71.379310344828,
+        "item": null
+      },
+      {
+        "species": "loamling",
+        "energy": 85,
+        "condition": 100,
+        "item": null
+      },
+      {
+        "species": "bellmoth",
+        "energy": 100,
+        "condition": 100,
+        "item": null
+      }
+    ]
+  },
+  {
+    "step": 49,
+    "day": 11,
+    "mode": "landmark",
+    "target": 3,
+    "food": 91,
+    "wagon": 89.8,
+    "cargo": 88,
+    "coins": 13,
+    "medicine": 1,
+    "repairs": 3,
+    "crew": [
+      {
+        "species": "brindlehorn",
+        "energy": 82,
+        "condition": 71.379310344828,
+        "item": null
+      },
+      {
+        "species": "loamling",
+        "energy": 85,
+        "condition": 100,
+        "item": null
+      },
+      {
+        "species": "bellmoth",
+        "energy": 100,
+        "condition": 100,
+        "item": null
+      }
+    ]
+  },
+  {
+    "step": 50,
+    "day": 12,
+    "mode": "landmark",
+    "target": 3,
+    "food": 87,
+    "wagon": 100,
+    "cargo": 88,
+    "coins": 13,
+    "medicine": 1,
+    "repairs": 2,
+    "crew": [
+      {
+        "species": "brindlehorn",
+        "energy": 100,
+        "condition": 91.379310344828,
+        "item": null
+      },
+      {
+        "species": "loamling",
+        "energy": 100,
+        "condition": 100,
+        "item": null
+      },
+      {
+        "species": "bellmoth",
+        "energy": 100,
+        "condition": 100,
+        "item": null
+      }
+    ]
+  },
+  {
+    "step": 51,
+    "day": 12,
+    "mode": "landmark",
+    "target": 3,
+    "food": 87,
+    "wagon": 100,
+    "cargo": 88,
+    "coins": 13,
+    "medicine": 1,
+    "repairs": 2,
+    "crew": [
+      {
+        "species": "brindlehorn",
+        "energy": 100,
+        "condition": 91.379310344828,
+        "item": null
+      },
+      {
+        "species": "loamling",
+        "energy": 100,
+        "condition": 100,
+        "item": null
+      },
+      {
+        "species": "bellmoth",
+        "energy": 100,
+        "condition": 100,
+        "item": null
+      }
+    ]
+  },
+  {
+    "step": 52,
+    "day": 12,
+    "mode": "traveling",
+    "target": 4,
+    "food": 87,
+    "wagon": 100,
+    "cargo": 88,
+    "coins": 13,
+    "medicine": 1,
+    "repairs": 2,
+    "crew": [
+      {
+        "species": "brindlehorn",
+        "energy": 100,
+        "condition": 91.379310344828,
+        "item": null
+      },
+      {
+        "species": "loamling",
+        "energy": 100,
+        "condition": 100,
+        "item": null
+      },
+      {
+        "species": "bellmoth",
+        "energy": 100,
+        "condition": 100,
+        "item": null
+      }
+    ]
+  },
+  {
+    "step": 54,
+    "day": 13,
+    "mode": "traveling",
+    "target": 4,
+    "food": 83,
+    "wagon": 99.2,
+    "cargo": 88,
+    "coins": 13,
+    "medicine": 1,
+    "repairs": 2,
+    "crew": [
+      {
+        "species": "brindlehorn",
+        "energy": 96,
+        "condition": 91.379310344828,
+        "item": null
+      },
+      {
+        "species": "loamling",
+        "energy": 100,
+        "condition": 100,
+        "item": null
+      },
+      {
+        "species": "bellmoth",
+        "energy": 100,
+        "condition": 100,
+        "item": null
+      }
+    ]
+  },
+  {
+    "step": 55,
+    "day": 14,
+    "mode": "traveling",
+    "target": 4,
+    "food": 79,
+    "wagon": 98.4,
+    "cargo": 88,
+    "coins": 13,
+    "medicine": 1,
+    "repairs": 2,
+    "crew": [
+      {
+        "species": "brindlehorn",
+        "energy": 90,
+        "condition": 91.379310344828,
+        "item": null
+      },
+      {
+        "species": "loamling",
+        "energy": 99,
+        "condition": 100,
+        "item": null
+      },
+      {
+        "species": "bellmoth",
+        "energy": 99,
+        "condition": 100,
+        "item": null
+      }
+    ]
+  },
+  {
+    "step": 56,
+    "day": 15,
+    "mode": "event",
+    "target": 4,
+    "food": 75,
+    "wagon": 97.6,
+    "cargo": 88,
+    "coins": 13,
+    "medicine": 1,
+    "repairs": 2,
+    "crew": [
+      {
+        "species": "brindlehorn",
+        "energy": 84,
+        "condition": 91.379310344828,
+        "item": null
+      },
+      {
+        "species": "loamling",
+        "energy": 98,
+        "condition": 100,
+        "item": null
+      },
+      {
+        "species": "bellmoth",
+        "energy": 98,
+        "condition": 100,
+        "item": null
+      }
+    ]
+  },
+  {
+    "step": 57,
+    "day": 15,
+    "mode": "stopped",
+    "target": 4,
+    "food": 75,
+    "wagon": 97.6,
+    "cargo": 88,
+    "coins": 13,
+    "medicine": 1,
+    "repairs": 2,
+    "crew": [
+      {
+        "species": "brindlehorn",
+        "energy": 84,
+        "condition": 91.379310344828,
+        "item": null
+      },
+      {
+        "species": "loamling",
+        "energy": 98,
+        "condition": 100,
+        "item": null
+      },
+      {
+        "species": "bellmoth",
+        "energy": 98,
+        "condition": 100,
+        "item": null
+      }
+    ]
+  },
+  {
+    "step": 58,
+    "day": 15,
+    "mode": "stopped",
+    "target": 4,
+    "food": 75,
+    "wagon": 97.6,
+    "cargo": 88,
+    "coins": 13,
+    "medicine": 1,
+    "repairs": 2,
+    "crew": [
+      {
+        "species": "brindlehorn",
+        "energy": 84,
+        "condition": 91.379310344828,
+        "item": null
+      },
+      {
+        "species": "loamling",
+        "energy": 98,
+        "condition": 100,
+        "item": null
+      },
+      {
+        "species": "bellmoth",
+        "energy": 98,
+        "condition": 100,
+        "item": null
+      }
+    ]
+  },
+  {
+    "step": 59,
+    "day": 16,
+    "mode": "event",
+    "target": 4,
+    "food": 71,
+    "wagon": 97.6,
+    "cargo": 88,
+    "coins": 13,
+    "medicine": 1,
+    "repairs": 2,
+    "crew": [
+      {
+        "species": "brindlehorn",
+        "energy": 89,
+        "condition": 91.379310344828,
+        "item": null
+      },
+      {
+        "species": "loamling",
+        "energy": 100,
+        "condition": 100,
+        "item": null
+      },
+      {
+        "species": "bellmoth",
+        "energy": 100,
+        "condition": 100,
+        "item": null
+      }
+    ]
+  },
+  {
+    "step": 60,
+    "day": 16,
+    "mode": "stopped",
+    "target": 4,
+    "food": 71,
+    "wagon": 97.6,
+    "cargo": 88,
+    "coins": 13,
+    "medicine": 0,
+    "repairs": 2,
+    "crew": [
+      {
+        "species": "brindlehorn",
+        "energy": 89,
+        "condition": 91.379310344828,
+        "item": null
+      },
+      {
+        "species": "loamling",
+        "energy": 100,
+        "condition": 100,
+        "item": null
+      },
+      {
+        "species": "bellmoth",
+        "energy": 100,
+        "condition": 100,
+        "item": null
+      }
+    ]
+  },
+  {
+    "step": 61,
+    "day": 16,
+    "mode": "traveling",
+    "target": 4,
+    "food": 71,
+    "wagon": 97.6,
+    "cargo": 88,
+    "coins": 13,
+    "medicine": 0,
+    "repairs": 2,
+    "crew": [
+      {
+        "species": "brindlehorn",
+        "energy": 89,
+        "condition": 91.379310344828,
+        "item": null
+      },
+      {
+        "species": "loamling",
+        "energy": 100,
+        "condition": 100,
+        "item": null
+      },
+      {
+        "species": "bellmoth",
+        "energy": 100,
+        "condition": 100,
+        "item": null
+      }
+    ]
+  },
+  {
+    "step": 62,
+    "day": 17,
+    "mode": "traveling",
+    "target": 4,
+    "food": 67,
+    "wagon": 96.8,
+    "cargo": 88,
+    "coins": 13,
+    "medicine": 0,
+    "repairs": 2,
+    "crew": [
+      {
+        "species": "brindlehorn",
+        "energy": 83,
+        "condition": 91.379310344828,
+        "item": null
+      },
+      {
+        "species": "loamling",
+        "energy": 99,
+        "condition": 100,
+        "item": null
+      },
+      {
+        "species": "bellmoth",
+        "energy": 99,
+        "condition": 100,
+        "item": null
+      }
+    ]
+  },
+  {
+    "step": 63,
+    "day": 18,
+    "mode": "landmark",
+    "target": 4,
+    "food": 63,
+    "wagon": 96,
+    "cargo": 88,
+    "coins": 13,
+    "medicine": 0,
+    "repairs": 2,
+    "crew": [
+      {
+        "species": "brindlehorn",
+        "energy": 79,
+        "condition": 91.379310344828,
+        "item": null
+      },
+      {
+        "species": "loamling",
+        "energy": 100,
+        "condition": 100,
+        "item": null
+      },
+      {
+        "species": "bellmoth",
+        "energy": 100,
+        "condition": 100,
+        "item": null
+      }
+    ]
+  },
+  {
+    "step": 64,
+    "day": 18,
+    "mode": "landmark",
+    "target": 4,
+    "food": 63,
+    "wagon": 96,
+    "cargo": 88,
+    "coins": 13,
+    "medicine": 0,
+    "repairs": 2,
+    "crew": [
+      {
+        "species": "brindlehorn",
+        "energy": 79,
+        "condition": 91.379310344828,
+        "item": null
+      },
+      {
+        "species": "loamling",
+        "energy": 100,
+        "condition": 100,
+        "item": null
+      },
+      {
+        "species": "bellmoth",
+        "energy": 100,
+        "condition": 100,
+        "item": null
+      }
+    ]
+  },
+  {
+    "step": 65,
+    "day": 19,
+    "mode": "landmark",
+    "target": 4,
+    "food": 59,
+    "wagon": 96,
+    "cargo": 88,
+    "coins": 1,
+    "medicine": 0,
+    "repairs": 2,
+    "crew": [
+      {
+        "species": "brindlehorn",
+        "energy": 84,
+        "condition": 91.379310344828,
+        "item": null
+      },
+      {
+        "species": "loamling",
+        "energy": 100,
+        "condition": 100,
+        "item": null
+      },
+      {
+        "species": "bellmoth",
+        "energy": 100,
+        "condition": 100,
+        "item": null
+      }
+    ]
+  },
+  {
+    "step": 66,
+    "day": 19,
+    "mode": "traveling",
+    "target": 5,
+    "food": 59,
+    "wagon": 96,
+    "cargo": 88,
+    "coins": 1,
+    "medicine": 0,
+    "repairs": 2,
+    "crew": [
+      {
+        "species": "brindlehorn",
+        "energy": 84,
+        "condition": 91.379310344828,
+        "item": null
+      },
+      {
+        "species": "loamling",
+        "energy": 100,
+        "condition": 100,
+        "item": null
+      },
+      {
+        "species": "bellmoth",
+        "energy": 100,
+        "condition": 100,
+        "item": null
+      }
+    ]
+  },
+  {
+    "step": 67,
+    "day": 19,
+    "mode": "traveling",
+    "target": 5,
+    "food": 59,
+    "wagon": 96,
+    "cargo": 88,
+    "coins": 1,
+    "medicine": 0,
+    "repairs": 2,
+    "crew": [
+      {
+        "species": "brindlehorn",
+        "energy": 84,
+        "condition": 91.379310344828,
+        "item": null
+      },
+      {
+        "species": "loamling",
+        "energy": 100,
+        "condition": 100,
+        "item": null
+      },
+      {
+        "species": "bellmoth",
+        "energy": 100,
+        "condition": 100,
+        "item": null
+      }
+    ]
+  },
+  {
+    "step": 68,
+    "day": 20,
+    "mode": "event",
+    "target": 5,
+    "food": 55,
+    "wagon": 94,
+    "cargo": 88,
+    "coins": 1,
+    "medicine": 0,
+    "repairs": 2,
+    "crew": [
+      {
+        "species": "brindlehorn",
+        "energy": 76,
+        "condition": 91.379310344828,
+        "item": null
+      },
+      {
+        "species": "loamling",
+        "energy": 100,
+        "condition": 100,
+        "item": null
+      },
+      {
+        "species": "bellmoth",
+        "energy": 100,
+        "condition": 100,
+        "item": null
+      }
+    ]
+  },
+  {
+    "step": 69,
+    "day": 20,
+    "mode": "stopped",
+    "target": 5,
+    "food": 55,
+    "wagon": 94,
+    "cargo": 88,
+    "coins": 1,
+    "medicine": 0,
+    "repairs": 2,
+    "crew": [
+      {
+        "species": "brindlehorn",
+        "energy": 76,
+        "condition": 91.379310344828,
+        "item": null
+      },
+      {
+        "species": "loamling",
+        "energy": 100,
+        "condition": 100,
+        "item": null
+      },
+      {
+        "species": "bellmoth",
+        "energy": 100,
+        "condition": 100,
+        "item": null
+      }
+    ]
+  },
+  {
+    "step": 70,
+    "day": 20,
+    "mode": "traveling",
+    "target": 5,
+    "food": 55,
+    "wagon": 94,
+    "cargo": 88,
+    "coins": 1,
+    "medicine": 0,
+    "repairs": 2,
+    "crew": [
+      {
+        "species": "brindlehorn",
+        "energy": 76,
+        "condition": 91.379310344828,
+        "item": null
+      },
+      {
+        "species": "loamling",
+        "energy": 100,
+        "condition": 100,
+        "item": null
+      },
+      {
+        "species": "bellmoth",
+        "energy": 100,
+        "condition": 100,
+        "item": null
+      }
+    ]
+  },
+  {
+    "step": 71,
+    "day": 21,
+    "mode": "traveling",
+    "target": 5,
+    "food": 51,
+    "wagon": 92,
+    "cargo": 88,
+    "coins": 1,
+    "medicine": 0,
+    "repairs": 2,
+    "crew": [
+      {
+        "species": "brindlehorn",
+        "energy": 66,
+        "condition": 91.379310344828,
+        "item": null
+      },
+      {
+        "species": "loamling",
+        "energy": 99,
+        "condition": 100,
+        "item": null
+      },
+      {
+        "species": "bellmoth",
+        "energy": 99,
+        "condition": 100,
+        "item": null
+      }
+    ]
+  },
+  {
+    "step": 72,
+    "day": 22,
+    "mode": "landmark",
+    "target": 5,
+    "food": 47,
+    "wagon": 90,
+    "cargo": 88,
+    "coins": 1,
+    "medicine": 0,
+    "repairs": 2,
+    "crew": [
+      {
+        "species": "brindlehorn",
+        "energy": 58,
+        "condition": 91.379310344828,
+        "item": null
+      },
+      {
+        "species": "loamling",
+        "energy": 100,
+        "condition": 100,
+        "item": null
+      },
+      {
+        "species": "bellmoth",
+        "energy": 100,
+        "condition": 100,
+        "item": null
+      }
+    ]
+  },
+  {
+    "step": 73,
+    "day": 22,
+    "mode": "traveling",
+    "target": 6,
+    "food": 47,
+    "wagon": 90,
+    "cargo": 88,
+    "coins": 1,
+    "medicine": 0,
+    "repairs": 2,
+    "crew": [
+      {
+        "species": "brindlehorn",
+        "energy": 58,
+        "condition": 91.379310344828,
+        "item": null
+      },
+      {
+        "species": "loamling",
+        "energy": 100,
+        "condition": 100,
+        "item": null
+      },
+      {
+        "species": "bellmoth",
+        "energy": 100,
+        "condition": 100,
+        "item": null
+      }
+    ]
+  },
+  {
+    "step": 74,
+    "day": 23,
+    "mode": "traveling",
+    "target": 6,
+    "food": 43,
+    "wagon": 87.4,
+    "cargo": 86,
+    "coins": 1,
+    "medicine": 0,
+    "repairs": 2,
+    "crew": [
+      {
+        "species": "brindlehorn",
+        "energy": 50,
+        "condition": 91.379310344828,
+        "item": null
+      },
+      {
+        "species": "loamling",
+        "energy": 100,
+        "condition": 100,
+        "item": null
+      },
+      {
+        "species": "bellmoth",
+        "energy": 100,
+        "condition": 100,
+        "item": null
+      }
+    ]
+  },
+  {
+    "step": 75,
+    "day": 24,
+    "mode": "traveling",
+    "target": 6,
+    "food": 39,
+    "wagon": 84.4,
+    "cargo": 82,
+    "coins": 1,
+    "medicine": 0,
+    "repairs": 2,
+    "crew": [
+      {
+        "species": "brindlehorn",
+        "energy": 42,
+        "condition": 91.379310344828,
+        "item": null
+      },
+      {
+        "species": "loamling",
+        "energy": 100,
+        "condition": 100,
+        "item": null
+      },
+      {
+        "species": "bellmoth",
+        "energy": 100,
+        "condition": 100,
+        "item": null
+      }
+    ]
+  },
+  {
+    "step": 76,
+    "day": 25,
+    "mode": "event",
+    "target": 6,
+    "food": 35,
+    "wagon": 81.8,
+    "cargo": 80,
+    "coins": 1,
+    "medicine": 0,
+    "repairs": 2,
+    "crew": [
+      {
+        "species": "brindlehorn",
+        "energy": 34,
+        "condition": 91.379310344828,
+        "item": null
+      },
+      {
+        "species": "loamling",
+        "energy": 100,
+        "condition": 100,
+        "item": null
+      },
+      {
+        "species": "bellmoth",
+        "energy": 100,
+        "condition": 100,
+        "item": null
+      }
+    ]
+  },
+  {
+    "step": 77,
+    "day": 25,
+    "mode": "stopped",
+    "target": 6,
+    "food": 35,
+    "wagon": 93.8,
+    "cargo": 80,
+    "coins": 1,
+    "medicine": 0,
+    "repairs": 1,
+    "crew": [
+      {
+        "species": "brindlehorn",
+        "energy": 34,
+        "condition": 91.379310344828,
+        "item": null
+      },
+      {
+        "species": "loamling",
+        "energy": 100,
+        "condition": 100,
+        "item": null
+      },
+      {
+        "species": "bellmoth",
+        "energy": 100,
+        "condition": 100,
+        "item": null
+      }
+    ]
+  },
+  {
+    "step": 78,
+    "day": 25,
+    "mode": "traveling",
+    "target": 6,
+    "food": 35,
+    "wagon": 93.8,
+    "cargo": 80,
+    "coins": 1,
+    "medicine": 0,
+    "repairs": 1,
+    "crew": [
+      {
+        "species": "brindlehorn",
+        "energy": 34,
+        "condition": 91.379310344828,
+        "item": null
+      },
+      {
+        "species": "loamling",
+        "energy": 100,
+        "condition": 100,
+        "item": null
+      },
+      {
+        "species": "bellmoth",
+        "energy": 100,
+        "condition": 100,
+        "item": null
+      }
+    ]
+  },
+  {
+    "step": 79,
+    "day": 26,
+    "mode": "result",
+    "target": 6,
+    "food": 31,
+    "wagon": 91.2,
+    "cargo": 78,
+    "coins": 1,
+    "medicine": 0,
+    "repairs": 1,
+    "crew": [
+      {
+        "species": "brindlehorn",
+        "energy": 24,
+        "condition": 91.379310344828,
+        "item": null
+      },
+      {
+        "species": "loamling",
+        "energy": 99,
+        "condition": 100,
+        "item": null
+      },
+      {
+        "species": "bellmoth",
+        "energy": 99,
+        "condition": 100,
+        "item": null
+      }
+    ]
+  },
+  {
+    "step": 80,
+    "day": 1,
+    "mode": "preparation",
+    "target": 2,
+    "food": 90,
+    "wagon": 100,
+    "cargo": 100,
+    "coins": 50,
+    "medicine": 2,
+    "repairs": 3,
+    "crew": [
+      {
+        "species": "brindlehorn",
+        "energy": 100,
+        "condition": 100,
+        "item": null
+      }
+    ]
+  },
+  {
+    "step": 81,
+    "day": 1,
+    "mode": "stopped",
+    "target": 2,
+    "food": 90,
+    "wagon": 100,
+    "cargo": 100,
+    "coins": 50,
+    "medicine": 2,
+    "repairs": 3,
+    "crew": [
+      {
+        "species": "brindlehorn",
+        "energy": 100,
+        "condition": 100,
+        "item": null
+      }
+    ]
+  },
+  {
+    "step": 82,
+    "day": 1,
+    "mode": "traveling",
+    "target": 2,
+    "food": 90,
+    "wagon": 100,
+    "cargo": 100,
+    "coins": 50,
+    "medicine": 2,
+    "repairs": 3,
+    "crew": [
+      {
+        "species": "brindlehorn",
+        "energy": 100,
+        "condition": 100,
+        "item": null
+      }
+    ]
+  },
+  {
+    "step": 83,
+    "day": 2,
+    "mode": "event",
+    "target": 2,
+    "food": 87,
+    "wagon": 98.8,
+    "cargo": 98,
+    "coins": 50,
+    "medicine": 2,
+    "repairs": 3,
+    "crew": [
+      {
+        "species": "brindlehorn",
+        "energy": 96,
+        "condition": 100,
+        "item": null
+      }
+    ]
+  },
+  {
+    "step": 84,
+    "day": 2,
+    "mode": "stopped",
+    "target": 2,
+    "food": 81,
+    "wagon": 98.8,
+    "cargo": 98,
+    "coins": 50,
+    "medicine": 2,
+    "repairs": 3,
+    "crew": [
+      {
+        "species": "brindlehorn",
+        "energy": 96,
+        "condition": 100,
+        "item": null
+      }
+    ]
+  },
+  {
+    "step": 85,
+    "day": 2,
+    "mode": "traveling",
+    "target": 2,
+    "food": 81,
+    "wagon": 98.8,
+    "cargo": 98,
+    "coins": 50,
+    "medicine": 2,
+    "repairs": 3,
+    "crew": [
+      {
+        "species": "brindlehorn",
+        "energy": 96,
+        "condition": 100,
+        "item": null
+      }
+    ]
+  },
+  {
+    "step": 86,
+    "day": 3,
+    "mode": "traveling",
+    "target": 2,
+    "food": 78,
+    "wagon": 97.6,
+    "cargo": 96,
+    "coins": 50,
+    "medicine": 2,
+    "repairs": 3,
+    "crew": [
+      {
+        "species": "brindlehorn",
+        "energy": 95,
+        "condition": 100,
+        "item": null
+      }
+    ]
+  },
+  {
+    "step": 87,
+    "day": 4,
+    "mode": "traveling",
+    "target": 2,
+    "food": 75,
+    "wagon": 96.8,
+    "cargo": 96,
+    "coins": 50,
+    "medicine": 2,
+    "repairs": 3,
+    "crew": [
+      {
+        "species": "brindlehorn",
+        "energy": 91,
+        "condition": 100,
+        "item": null
+      }
+    ]
+  },
+  {
+    "step": 88,
+    "day": 5,
+    "mode": "event",
+    "target": 2,
+    "food": 72,
+    "wagon": 96,
+    "cargo": 96,
+    "coins": 50,
+    "medicine": 2,
+    "repairs": 3,
+    "crew": [
+      {
+        "species": "brindlehorn",
+        "energy": 87,
+        "condition": 100,
+        "item": null
+      }
+    ]
+  },
+  {
+    "step": 89,
+    "day": 5,
+    "mode": "event",
+    "target": 2,
+    "food": 69,
+    "wagon": 96,
+    "cargo": 96,
+    "coins": 50,
+    "medicine": 2,
+    "repairs": 3,
+    "crew": [
+      {
+        "species": "brindlehorn",
+        "energy": 87,
+        "condition": 100,
+        "item": null
+      }
+    ]
+  },
+  {
+    "step": 90,
+    "day": 5,
+    "mode": "landmark",
+    "target": 2,
+    "food": 65,
+    "wagon": 96,
+    "cargo": 96,
+    "coins": 50,
+    "medicine": 2,
+    "repairs": 3,
+    "crew": [
+      {
+        "species": "brindlehorn",
+        "energy": 87,
+        "condition": 100,
+        "item": null
+      },
+      {
+        "species": "loamling",
+        "energy": 100,
+        "condition": 100,
+        "item": null
+      }
+    ]
+  },
+  {
+    "step": 91,
+    "day": 5,
+    "mode": "traveling",
+    "target": 3,
+    "food": 65,
+    "wagon": 96,
+    "cargo": 96,
+    "coins": 50,
+    "medicine": 2,
+    "repairs": 3,
+    "crew": [
+      {
+        "species": "brindlehorn",
+        "energy": 87,
+        "condition": 100,
+        "item": null
+      },
+      {
+        "species": "loamling",
+        "energy": 100,
+        "condition": 100,
+        "item": null
+      }
+    ]
+  },
+  {
+    "step": 92,
+    "day": 5,
+    "mode": "traveling",
+    "target": 3,
+    "food": 65,
+    "wagon": 96,
+    "cargo": 96,
+    "coins": 50,
+    "medicine": 2,
+    "repairs": 3,
+    "crew": [
+      {
+        "species": "brindlehorn",
+        "energy": 87,
+        "condition": 100,
+        "item": null
+      },
+      {
+        "species": "loamling",
+        "energy": 100,
+        "condition": 100,
+        "item": null
+      }
+    ]
+  },
+  {
+    "step": 93,
+    "day": 6,
+    "mode": "traveling",
+    "target": 3,
+    "food": 62,
+    "wagon": 94,
+    "cargo": 96,
+    "coins": 50,
+    "medicine": 2,
+    "repairs": 3,
+    "crew": [
+      {
+        "species": "brindlehorn",
+        "energy": 79,
+        "condition": 100,
+        "item": null
+      },
+      {
+        "species": "loamling",
+        "energy": 100,
+        "condition": 100,
+        "item": null
+      }
+    ]
+  },
+  {
+    "step": 94,
+    "day": 7,
+    "mode": "traveling",
+    "target": 3,
+    "food": 59,
+    "wagon": 92,
+    "cargo": 96,
+    "coins": 50,
+    "medicine": 2,
+    "repairs": 3,
+    "crew": [
+      {
+        "species": "brindlehorn",
+        "energy": 71,
+        "condition": 100,
+        "item": null
+      },
+      {
+        "species": "loamling",
+        "energy": 100,
+        "condition": 100,
+        "item": null
+      }
+    ]
+  },
+  {
+    "step": 95,
+    "day": 8,
+    "mode": "event",
+    "target": 3,
+    "food": 56,
+    "wagon": 90,
+    "cargo": 96,
+    "coins": 50,
+    "medicine": 2,
+    "repairs": 3,
+    "crew": [
+      {
+        "species": "brindlehorn",
+        "energy": 63,
+        "condition": 100,
+        "item": null
+      },
+      {
+        "species": "loamling",
+        "energy": 100,
+        "condition": 100,
+        "item": null
+      }
+    ]
+  },
+  {
+    "step": 96,
+    "day": 8,
+    "mode": "event",
+    "target": 3,
+    "food": 56,
+    "wagon": 90,
+    "cargo": 96,
+    "coins": 50,
+    "medicine": 2,
+    "repairs": 3,
+    "crew": [
+      {
+        "species": "brindlehorn",
+        "energy": 63,
+        "condition": 100,
+        "item": null
+      },
+      {
+        "species": "loamling",
+        "energy": 100,
+        "condition": 100,
+        "item": null
+      }
+    ]
+  },
+  {
+    "step": 97,
+    "day": 8,
+    "mode": "landmark",
+    "target": 3,
+    "food": 52,
+    "wagon": 90,
+    "cargo": 96,
+    "coins": 50,
+    "medicine": 2,
+    "repairs": 3,
+    "crew": [
+      {
+        "species": "brindlehorn",
+        "energy": 63,
+        "condition": 100,
+        "item": null
+      },
+      {
+        "species": "loamling",
+        "energy": 100,
+        "condition": 100,
+        "item": null
+      },
+      {
+        "species": "bellmoth",
+        "energy": 100,
+        "condition": 100,
+        "item": null
+      }
+    ]
+  },
+  {
+    "step": 98,
+    "day": 8,
+    "mode": "landmark",
+    "target": 3,
+    "food": 52,
+    "wagon": 90,
+    "cargo": 96,
+    "coins": 50,
+    "medicine": 2,
+    "repairs": 3,
+    "crew": [
+      {
+        "species": "brindlehorn",
+        "energy": 63,
+        "condition": 100,
+        "item": null
+      },
+      {
+        "species": "loamling",
+        "energy": 100,
+        "condition": 100,
+        "item": null
+      },
+      {
+        "species": "bellmoth",
+        "energy": 100,
+        "condition": 100,
+        "item": null
+      }
+    ]
+  },
+  {
+    "step": 99,
+    "day": 8,
+    "mode": "landmark",
+    "target": 3,
+    "food": 52,
+    "wagon": 90,
+    "cargo": 96,
+    "coins": 50,
+    "medicine": 2,
+    "repairs": 3,
+    "crew": [
+      {
+        "species": "brindlehorn",
+        "energy": 57,
+        "condition": 100,
+        "item": null
+      },
+      {
+        "species": "loamling",
+        "energy": 94,
+        "condition": 100,
+        "item": null
+      },
+      {
+        "species": "bellmoth",
+        "energy": 94,
+        "condition": 100,
+        "item": null
+      }
+    ]
+  },
+  {
+    "step": 100,
+    "day": 8,
+    "mode": "landmark",
+    "target": 3,
+    "food": 52,
+    "wagon": 90,
+    "cargo": 96,
+    "coins": 50,
+    "medicine": 2,
+    "repairs": 3,
+    "crew": [
+      {
+        "species": "brindlehorn",
+        "energy": 57,
+        "condition": 100,
+        "item": null
+      },
+      {
+        "species": "loamling",
+        "energy": 94,
+        "condition": 100,
+        "item": null
+      },
+      {
+        "species": "bellmoth",
+        "energy": 94,
+        "condition": 100,
+        "item": null
+      }
+    ]
+  },
+  {
+    "step": 101,
+    "day": 8,
+    "mode": "landmark",
+    "target": 3,
+    "food": 52,
+    "wagon": 90,
+    "cargo": 96,
+    "coins": 50,
+    "medicine": 2,
+    "repairs": 3,
+    "crew": [
+      {
+        "species": "brindlehorn",
+        "energy": 57,
+        "condition": 100,
+        "item": null
+      },
+      {
+        "species": "loamling",
+        "energy": 94,
+        "condition": 100,
+        "item": null
+      },
+      {
+        "species": "bellmoth",
+        "energy": 94,
+        "condition": 100,
+        "item": null
+      }
+    ]
+  },
+  {
+    "step": 102,
+    "day": 8,
+    "mode": "landmark",
+    "target": 3,
+    "food": 52,
+    "wagon": 90,
+    "cargo": 96,
+    "coins": 50,
+    "medicine": 2,
+    "repairs": 3,
+    "crew": [
+      {
+        "species": "brindlehorn",
+        "energy": 57,
+        "condition": 100,
+        "item": null
+      },
+      {
+        "species": "loamling",
+        "energy": 94,
+        "condition": 100,
+        "item": null
+      },
+      {
+        "species": "bellmoth",
+        "energy": 94,
+        "condition": 100,
+        "item": null
+      }
+    ]
+  },
+  {
+    "step": 103,
+    "day": 8,
+    "mode": "landmark",
+    "target": 3,
+    "food": 52,
+    "wagon": 90,
+    "cargo": 96,
+    "coins": 50,
+    "medicine": 2,
+    "repairs": 3,
+    "crew": [
+      {
+        "species": "brindlehorn",
+        "energy": 57,
+        "condition": 100,
+        "item": null
+      },
+      {
+        "species": "loamling",
+        "energy": 94,
+        "condition": 100,
+        "item": null
+      },
+      {
+        "species": "bellmoth",
+        "energy": 94,
+        "condition": 100,
+        "item": null
+      }
+    ]
+  },
+  {
+    "step": 104,
+    "day": 8,
+    "mode": "landmark",
+    "target": 3,
+    "food": 52,
+    "wagon": 90,
+    "cargo": 96,
+    "coins": 50,
+    "medicine": 2,
+    "repairs": 3,
+    "crew": [
+      {
+        "species": "brindlehorn",
+        "energy": 57,
+        "condition": 100,
+        "item": null
+      },
+      {
+        "species": "loamling",
+        "energy": 94,
+        "condition": 100,
+        "item": null
+      },
+      {
+        "species": "bellmoth",
+        "energy": 94,
+        "condition": 100,
+        "item": null
+      }
+    ]
+  },
+  {
+    "step": 105,
+    "day": 8,
+    "mode": "landmark",
+    "target": 3,
+    "food": 52,
+    "wagon": 90,
+    "cargo": 96,
+    "coins": 50,
+    "medicine": 2,
+    "repairs": 3,
+    "crew": [
+      {
+        "species": "brindlehorn",
+        "energy": 57,
+        "condition": 100,
+        "item": null
+      },
+      {
+        "species": "loamling",
+        "energy": 94,
+        "condition": 100,
+        "item": null
+      },
+      {
+        "species": "bellmoth",
+        "energy": 94,
+        "condition": 100,
+        "item": null
+      }
+    ]
+  },
+  {
+    "step": 106,
+    "day": 8,
+    "mode": "landmark",
+    "target": 3,
+    "food": 52,
+    "wagon": 90,
+    "cargo": 96,
+    "coins": 50,
+    "medicine": 2,
+    "repairs": 3,
+    "crew": [
+      {
+        "species": "brindlehorn",
+        "energy": 57,
+        "condition": 100,
+        "item": null
+      },
+      {
+        "species": "loamling",
+        "energy": 94,
+        "condition": 100,
+        "item": null
+      },
+      {
+        "species": "bellmoth",
+        "energy": 94,
+        "condition": 100,
+        "item": null
+      }
+    ]
+  },
+  {
+    "step": 107,
+    "day": 8,
+    "mode": "landmark",
+    "target": 3,
+    "food": 62,
+    "wagon": 90,
+    "cargo": 96,
+    "coins": 44,
+    "medicine": 2,
+    "repairs": 3,
+    "crew": [
+      {
+        "species": "brindlehorn",
+        "energy": 57,
+        "condition": 100,
+        "item": null
+      },
+      {
+        "species": "loamling",
+        "energy": 94,
+        "condition": 100,
+        "item": null
+      },
+      {
+        "species": "bellmoth",
+        "energy": 94,
+        "condition": 100,
+        "item": null
+      }
+    ]
+  },
+  {
+    "step": 108,
+    "day": 8,
+    "mode": "landmark",
+    "target": 3,
+    "food": 72,
+    "wagon": 90,
+    "cargo": 96,
+    "coins": 38,
+    "medicine": 2,
+    "repairs": 3,
+    "crew": [
+      {
+        "species": "brindlehorn",
+        "energy": 57,
+        "condition": 100,
+        "item": null
+      },
+      {
+        "species": "loamling",
+        "energy": 94,
+        "condition": 100,
+        "item": null
+      },
+      {
+        "species": "bellmoth",
+        "energy": 94,
+        "condition": 100,
+        "item": null
+      }
+    ]
+  },
+  {
+    "step": 109,
+    "day": 8,
+    "mode": "landmark",
+    "target": 3,
+    "food": 82,
+    "wagon": 90,
+    "cargo": 96,
+    "coins": 32,
+    "medicine": 2,
+    "repairs": 3,
+    "crew": [
+      {
+        "species": "brindlehorn",
+        "energy": 57,
+        "condition": 100,
+        "item": null
+      },
+      {
+        "species": "loamling",
+        "energy": 94,
+        "condition": 100,
+        "item": null
+      },
+      {
+        "species": "bellmoth",
+        "energy": 94,
+        "condition": 100,
+        "item": null
+      }
+    ]
+  },
+  {
+    "step": 110,
+    "day": 8,
+    "mode": "landmark",
+    "target": 3,
+    "food": 92,
+    "wagon": 90,
+    "cargo": 96,
+    "coins": 26,
+    "medicine": 2,
+    "repairs": 3,
+    "crew": [
+      {
+        "species": "brindlehorn",
+        "energy": 57,
+        "condition": 100,
+        "item": null
+      },
+      {
+        "species": "loamling",
+        "energy": 94,
+        "condition": 100,
+        "item": null
+      },
+      {
+        "species": "bellmoth",
+        "energy": 94,
+        "condition": 100,
+        "item": null
+      }
+    ]
+  },
+  {
+    "step": 111,
+    "day": 8,
+    "mode": "landmark",
+    "target": 3,
+    "food": 92,
+    "wagon": 90,
+    "cargo": 96,
+    "coins": 26,
+    "medicine": 2,
+    "repairs": 3,
+    "crew": [
+      {
+        "species": "brindlehorn",
+        "energy": 57,
+        "condition": 100,
+        "item": null
+      },
+      {
+        "species": "loamling",
+        "energy": 94,
+        "condition": 100,
+        "item": null
+      },
+      {
+        "species": "bellmoth",
+        "energy": 94,
+        "condition": 100,
+        "item": null
+      }
+    ]
+  },
+  {
+    "step": 112,
+    "day": 8,
+    "mode": "landmark",
+    "target": 3,
+    "food": 92,
+    "wagon": 90,
+    "cargo": 96,
+    "coins": 14,
+    "medicine": 2,
+    "repairs": 3,
+    "crew": [
+      {
+        "species": "brindlehorn",
+        "energy": 57,
+        "condition": 100,
+        "item": null
+      },
+      {
+        "species": "loamling",
+        "energy": 94,
+        "condition": 100,
+        "item": null
+      },
+      {
+        "species": "bellmoth",
+        "energy": 94,
+        "condition": 100,
+        "item": null
+      }
+    ]
+  },
+  {
+    "step": 113,
+    "day": 8,
+    "mode": "landmark",
+    "target": 3,
+    "food": 92,
+    "wagon": 90,
+    "cargo": 96,
+    "coins": 14,
+    "medicine": 2,
+    "repairs": 3,
+    "crew": [
+      {
+        "species": "brindlehorn",
+        "energy": 57,
+        "condition": 100,
+        "item": null
+      },
+      {
+        "species": "loamling",
+        "energy": 94,
+        "condition": 100,
+        "item": null
+      },
+      {
+        "species": "bellmoth",
+        "energy": 94,
+        "condition": 100,
+        "item": null
+      }
+    ]
+  },
+  {
+    "step": 114,
+    "day": 8,
+    "mode": "landmark",
+    "target": 3,
+    "food": 92,
+    "wagon": 90,
+    "cargo": 96,
+    "coins": 14,
+    "medicine": 2,
+    "repairs": 3,
+    "crew": [
+      {
+        "species": "brindlehorn",
+        "energy": 57,
+        "condition": 100,
+        "item": null
+      },
+      {
+        "species": "loamling",
+        "energy": 94,
+        "condition": 100,
+        "item": null
+      },
+      {
+        "species": "bellmoth",
+        "energy": 94,
+        "condition": 100,
+        "item": null
+      }
+    ]
+  },
+  {
+    "step": 115,
+    "day": 8,
+    "mode": "landmark",
+    "target": 3,
+    "food": 92,
+    "wagon": 90,
+    "cargo": 96,
+    "coins": 14,
+    "medicine": 2,
+    "repairs": 3,
+    "crew": [
+      {
+        "species": "brindlehorn",
+        "energy": 57,
+        "condition": 100,
+        "item": null
+      },
+      {
+        "species": "loamling",
+        "energy": 94,
+        "condition": 100,
+        "item": null
+      },
+      {
+        "species": "bellmoth",
+        "energy": 94,
+        "condition": 100,
+        "item": null
+      }
+    ]
+  },
+  {
+    "step": 116,
+    "day": 9,
+    "mode": "landmark",
+    "target": 3,
+    "food": 88,
+    "wagon": 100,
+    "cargo": 96,
+    "coins": 14,
+    "medicine": 2,
+    "repairs": 2,
+    "crew": [
+      {
+        "species": "brindlehorn",
+        "energy": 97,
+        "condition": 100,
+        "item": null
+      },
+      {
+        "species": "loamling",
+        "energy": 100,
+        "condition": 100,
+        "item": null
+      },
+      {
+        "species": "bellmoth",
+        "energy": 100,
+        "condition": 100,
+        "item": null
+      }
+    ]
+  },
+  {
+    "step": 117,
+    "day": 9,
+    "mode": "landmark",
+    "target": 3,
+    "food": 88,
+    "wagon": 100,
+    "cargo": 96,
+    "coins": 14,
+    "medicine": 2,
+    "repairs": 2,
+    "crew": [
+      {
+        "species": "brindlehorn",
+        "energy": 97,
+        "condition": 100,
+        "item": null
+      },
+      {
+        "species": "loamling",
+        "energy": 100,
+        "condition": 100,
+        "item": null
+      },
+      {
+        "species": "bellmoth",
+        "energy": 100,
+        "condition": 100,
+        "item": null
+      }
+    ]
+  },
+  {
+    "step": 118,
+    "day": 9,
+    "mode": "traveling",
+    "target": 4,
+    "food": 88,
+    "wagon": 100,
+    "cargo": 96,
+    "coins": 14,
+    "medicine": 2,
+    "repairs": 2,
+    "crew": [
+      {
+        "species": "brindlehorn",
+        "energy": 97,
+        "condition": 100,
+        "item": null
+      },
+      {
+        "species": "loamling",
+        "energy": 100,
+        "condition": 100,
+        "item": null
+      },
+      {
+        "species": "bellmoth",
+        "energy": 100,
+        "condition": 100,
+        "item": null
+      }
+    ]
+  },
+  {
+    "step": 119,
+    "day": 10,
+    "mode": "traveling",
+    "target": 4,
+    "food": 84,
+    "wagon": 97.6,
+    "cargo": 94,
+    "coins": 14,
+    "medicine": 2,
+    "repairs": 2,
+    "crew": [
+      {
+        "species": "brindlehorn",
+        "energy": 89,
+        "condition": 100,
+        "item": null
+      },
+      {
+        "species": "loamling",
+        "energy": 100,
+        "condition": 100,
+        "item": null
+      },
+      {
+        "species": "bellmoth",
+        "energy": 100,
+        "condition": 100,
+        "item": null
+      }
+    ]
+  },
+  {
+    "step": 120,
+    "day": 11,
+    "mode": "traveling",
+    "target": 4,
+    "food": 80,
+    "wagon": 95.6,
+    "cargo": 94,
+    "coins": 14,
+    "medicine": 2,
+    "repairs": 2,
+    "crew": [
+      {
+        "species": "brindlehorn",
+        "energy": 81,
+        "condition": 100,
+        "item": null
+      },
+      {
+        "species": "loamling",
+        "energy": 100,
+        "condition": 100,
+        "item": null
+      },
+      {
+        "species": "bellmoth",
+        "energy": 100,
+        "condition": 100,
+        "item": null
+      }
+    ]
+  },
+  {
+    "step": 121,
+    "day": 12,
+    "mode": "event",
+    "target": 4,
+    "food": 76,
+    "wagon": 93.6,
+    "cargo": 94,
+    "coins": 14,
+    "medicine": 2,
+    "repairs": 2,
+    "crew": [
+      {
+        "species": "brindlehorn",
+        "energy": 73,
+        "condition": 100,
+        "item": null
+      },
+      {
+        "species": "loamling",
+        "energy": 100,
+        "condition": 100,
+        "item": null
+      },
+      {
+        "species": "bellmoth",
+        "energy": 100,
+        "condition": 100,
+        "item": null
+      }
+    ]
+  },
+  {
+    "step": 122,
+    "day": 12,
+    "mode": "stopped",
+    "target": 4,
+    "food": 76,
+    "wagon": 93.6,
+    "cargo": 94,
+    "coins": 14,
+    "medicine": 2,
+    "repairs": 2,
+    "crew": [
+      {
+        "species": "brindlehorn",
+        "energy": 73,
+        "condition": 100,
+        "item": null
+      },
+      {
+        "species": "loamling",
+        "energy": 100,
+        "condition": 100,
+        "item": null
+      },
+      {
+        "species": "bellmoth",
+        "energy": 100,
+        "condition": 100,
+        "item": null
+      }
+    ]
+  },
+  {
+    "step": 123,
+    "day": 12,
+    "mode": "stopped",
+    "target": 4,
+    "food": 76,
+    "wagon": 93.6,
+    "cargo": 94,
+    "coins": 14,
+    "medicine": 2,
+    "repairs": 2,
+    "crew": [
+      {
+        "species": "brindlehorn",
+        "energy": 73,
+        "condition": 100,
+        "item": null
+      },
+      {
+        "species": "loamling",
+        "energy": 100,
+        "condition": 100,
+        "item": null
+      },
+      {
+        "species": "bellmoth",
+        "energy": 100,
+        "condition": 100,
+        "item": null
+      }
+    ]
+  },
+  {
+    "step": 124,
+    "day": 12,
+    "mode": "stopped",
+    "target": 4,
+    "food": 76,
+    "wagon": 93.6,
+    "cargo": 94,
+    "coins": 14,
+    "medicine": 2,
+    "repairs": 2,
+    "crew": [
+      {
+        "species": "brindlehorn",
+        "energy": 73,
+        "condition": 100,
+        "item": null
+      },
+      {
+        "species": "loamling",
+        "energy": 100,
+        "condition": 100,
+        "item": null
+      },
+      {
+        "species": "bellmoth",
+        "energy": 100,
+        "condition": 100,
+        "item": null
+      }
+    ]
+  },
+  {
+    "step": 125,
+    "day": 12,
+    "mode": "stopped",
+    "target": 4,
+    "food": 76,
+    "wagon": 93.6,
+    "cargo": 94,
+    "coins": 14,
+    "medicine": 2,
+    "repairs": 2,
+    "crew": [
+      {
+        "species": "brindlehorn",
+        "energy": 73,
+        "condition": 100,
+        "item": "padded_trace"
+      },
+      {
+        "species": "loamling",
+        "energy": 100,
+        "condition": 100,
+        "item": null
+      },
+      {
+        "species": "bellmoth",
+        "energy": 100,
+        "condition": 100,
+        "item": null
+      }
+    ]
+  },
+  {
+    "step": 126,
+    "day": 12,
+    "mode": "stopped",
+    "target": 4,
+    "food": 76,
+    "wagon": 93.6,
+    "cargo": 94,
+    "coins": 14,
+    "medicine": 2,
+    "repairs": 2,
+    "crew": [
+      {
+        "species": "brindlehorn",
+        "energy": 73,
+        "condition": 100,
+        "item": "padded_trace"
+      },
+      {
+        "species": "loamling",
+        "energy": 100,
+        "condition": 100,
+        "item": null
+      },
+      {
+        "species": "bellmoth",
+        "energy": 100,
+        "condition": 100,
+        "item": null
+      }
+    ]
+  },
+  {
+    "step": 127,
+    "day": 12,
+    "mode": "stopped",
+    "target": 4,
+    "food": 76,
+    "wagon": 93.6,
+    "cargo": 94,
+    "coins": 14,
+    "medicine": 2,
+    "repairs": 2,
+    "crew": [
+      {
+        "species": "brindlehorn",
+        "energy": 73,
+        "condition": 100,
+        "item": "padded_trace"
+      },
+      {
+        "species": "loamling",
+        "energy": 100,
+        "condition": 100,
+        "item": null
+      },
+      {
+        "species": "bellmoth",
+        "energy": 100,
+        "condition": 100,
+        "item": null
+      }
+    ]
+  },
+  {
+    "step": 128,
+    "day": 13,
+    "mode": "event",
+    "target": 4,
+    "food": 72,
+    "wagon": 93.6,
+    "cargo": 94,
+    "coins": 14,
+    "medicine": 2,
+    "repairs": 2,
+    "crew": [
+      {
+        "species": "brindlehorn",
+        "energy": 80,
+        "condition": 100,
+        "item": "padded_trace"
+      },
+      {
+        "species": "loamling",
+        "energy": 100,
+        "condition": 100,
+        "item": null
+      },
+      {
+        "species": "bellmoth",
+        "energy": 100,
+        "condition": 100,
+        "item": null
+      }
+    ]
+  },
+  {
+    "step": 129,
+    "day": 13,
+    "mode": "stopped",
+    "target": 4,
+    "food": 72,
+    "wagon": 93.6,
+    "cargo": 94,
+    "coins": 14,
+    "medicine": 2,
+    "repairs": 2,
+    "crew": [
+      {
+        "species": "brindlehorn",
+        "energy": 80,
+        "condition": 100,
+        "item": "padded_trace"
+      },
+      {
+        "species": "loamling",
+        "energy": 100,
+        "condition": 100,
+        "item": null
+      },
+      {
+        "species": "bellmoth",
+        "energy": 100,
+        "condition": 100,
+        "item": null
+      }
+    ]
+  },
+  {
+    "step": 130,
+    "day": 13,
+    "mode": "traveling",
+    "target": 4,
+    "food": 72,
+    "wagon": 93.6,
+    "cargo": 94,
+    "coins": 14,
+    "medicine": 2,
+    "repairs": 2,
+    "crew": [
+      {
+        "species": "brindlehorn",
+        "energy": 80,
+        "condition": 100,
+        "item": "padded_trace"
+      },
+      {
+        "species": "loamling",
+        "energy": 100,
+        "condition": 100,
+        "item": null
+      },
+      {
+        "species": "bellmoth",
+        "energy": 100,
+        "condition": 100,
+        "item": null
+      }
+    ]
+  },
+  {
+    "step": 131,
+    "day": 14,
+    "mode": "landmark",
+    "target": 4,
+    "food": 68,
+    "wagon": 91.6,
+    "cargo": 94,
+    "coins": 14,
+    "medicine": 2,
+    "repairs": 2,
+    "crew": [
+      {
+        "species": "brindlehorn",
+        "energy": 73,
+        "condition": 100,
+        "item": "padded_trace"
+      },
+      {
+        "species": "loamling",
+        "energy": 99,
+        "condition": 100,
+        "item": null
+      },
+      {
+        "species": "bellmoth",
+        "energy": 99,
+        "condition": 100,
+        "item": null
+      }
+    ]
+  },
+  {
+    "step": 132,
+    "day": 14,
+    "mode": "landmark",
+    "target": 4,
+    "food": 68,
+    "wagon": 91.6,
+    "cargo": 94,
+    "coins": 14,
+    "medicine": 2,
+    "repairs": 2,
+    "crew": [
+      {
+        "species": "brindlehorn",
+        "energy": 73,
+        "condition": 100,
+        "item": "padded_trace"
+      },
+      {
+        "species": "loamling",
+        "energy": 99,
+        "condition": 100,
+        "item": null
+      },
+      {
+        "species": "bellmoth",
+        "energy": 99,
+        "condition": 100,
+        "item": null
+      }
+    ]
+  },
+  {
+    "step": 133,
+    "day": 15,
+    "mode": "landmark",
+    "target": 4,
+    "food": 64,
+    "wagon": 91.6,
+    "cargo": 94,
+    "coins": 2,
+    "medicine": 2,
+    "repairs": 2,
+    "crew": [
+      {
+        "species": "brindlehorn",
+        "energy": 78,
+        "condition": 100,
+        "item": "padded_trace"
+      },
+      {
+        "species": "loamling",
+        "energy": 100,
+        "condition": 100,
+        "item": null
+      },
+      {
+        "species": "bellmoth",
+        "energy": 100,
+        "condition": 100,
+        "item": null
+      }
+    ]
+  },
+  {
+    "step": 134,
+    "day": 15,
+    "mode": "traveling",
+    "target": 5,
+    "food": 64,
+    "wagon": 91.6,
+    "cargo": 94,
+    "coins": 2,
+    "medicine": 2,
+    "repairs": 2,
+    "crew": [
+      {
+        "species": "brindlehorn",
+        "energy": 78,
+        "condition": 100,
+        "item": "padded_trace"
+      },
+      {
+        "species": "loamling",
+        "energy": 100,
+        "condition": 100,
+        "item": null
+      },
+      {
+        "species": "bellmoth",
+        "energy": 100,
+        "condition": 100,
+        "item": null
+      }
+    ]
+  },
+  {
+    "step": 135,
+    "day": 16,
+    "mode": "traveling",
+    "target": 5,
+    "food": 60,
+    "wagon": 89.6,
+    "cargo": 94,
+    "coins": 2,
+    "medicine": 2,
+    "repairs": 2,
+    "crew": [
+      {
+        "species": "brindlehorn",
+        "energy": 71,
+        "condition": 100,
+        "item": "padded_trace"
+      },
+      {
+        "species": "loamling",
+        "energy": 99,
+        "condition": 100,
+        "item": null
+      },
+      {
+        "species": "bellmoth",
+        "energy": 99,
+        "condition": 100,
+        "item": null
+      }
+    ]
+  },
+  {
+    "step": 136,
+    "day": 17,
+    "mode": "event",
+    "target": 5,
+    "food": 56,
+    "wagon": 87.6,
+    "cargo": 94,
+    "coins": 2,
+    "medicine": 2,
+    "repairs": 2,
+    "crew": [
+      {
+        "species": "brindlehorn",
+        "energy": 64,
+        "condition": 100,
+        "item": "padded_trace"
+      },
+      {
+        "species": "loamling",
+        "energy": 98,
+        "condition": 100,
+        "item": null
+      },
+      {
+        "species": "bellmoth",
+        "energy": 98,
+        "condition": 100,
+        "item": null
+      }
+    ]
+  },
+  {
+    "step": 137,
+    "day": 17,
+    "mode": "stopped",
+    "target": 5,
+    "food": 50,
+    "wagon": 87.6,
+    "cargo": 94,
+    "coins": 2,
+    "medicine": 2,
+    "repairs": 2,
+    "crew": [
+      {
+        "species": "brindlehorn",
+        "energy": 70,
+        "condition": 100,
+        "item": "padded_trace"
+      },
+      {
+        "species": "loamling",
+        "energy": 100,
+        "condition": 100,
+        "item": null
+      },
+      {
+        "species": "bellmoth",
+        "energy": 100,
+        "condition": 100,
+        "item": null
+      }
+    ]
+  },
+  {
+    "step": 138,
+    "day": 17,
+    "mode": "stopped",
+    "target": 5,
+    "food": 50,
+    "wagon": 87.6,
+    "cargo": 94,
+    "coins": 2,
+    "medicine": 2,
+    "repairs": 2,
+    "crew": [
+      {
+        "species": "brindlehorn",
+        "energy": 70,
+        "condition": 100,
+        "item": "padded_trace"
+      },
+      {
+        "species": "loamling",
+        "energy": 100,
+        "condition": 100,
+        "item": null
+      },
+      {
+        "species": "bellmoth",
+        "energy": 100,
+        "condition": 100,
+        "item": null
+      }
+    ]
+  },
+  {
+    "step": 139,
+    "day": 18,
+    "mode": "event",
+    "target": 5,
+    "food": 46,
+    "wagon": 87.6,
+    "cargo": 94,
+    "coins": 2,
+    "medicine": 2,
+    "repairs": 2,
+    "crew": [
+      {
+        "species": "brindlehorn",
+        "energy": 77,
+        "condition": 100,
+        "item": "padded_trace"
+      },
+      {
+        "species": "loamling",
+        "energy": 100,
+        "condition": 100,
+        "item": null
+      },
+      {
+        "species": "bellmoth",
+        "energy": 100,
+        "condition": 100,
+        "item": null
+      }
+    ]
+  },
+  {
+    "step": 140,
+    "day": 18,
+    "mode": "stopped",
+    "target": 5,
+    "food": 46,
+    "wagon": 87.6,
+    "cargo": 94,
+    "coins": 2,
+    "medicine": 2,
+    "repairs": 2,
+    "crew": [
+      {
+        "species": "brindlehorn",
+        "energy": 77,
+        "condition": 100,
+        "item": "padded_trace"
+      },
+      {
+        "species": "loamling",
+        "energy": 100,
+        "condition": 100,
+        "item": null
+      },
+      {
+        "species": "bellmoth",
+        "energy": 100,
+        "condition": 100,
+        "item": null
+      }
+    ]
+  },
+  {
+    "step": 141,
+    "day": 18,
+    "mode": "traveling",
+    "target": 5,
+    "food": 46,
+    "wagon": 87.6,
+    "cargo": 94,
+    "coins": 2,
+    "medicine": 2,
+    "repairs": 2,
+    "crew": [
+      {
+        "species": "brindlehorn",
+        "energy": 77,
+        "condition": 100,
+        "item": "padded_trace"
+      },
+      {
+        "species": "loamling",
+        "energy": 100,
+        "condition": 100,
+        "item": null
+      },
+      {
+        "species": "bellmoth",
+        "energy": 100,
+        "condition": 100,
+        "item": null
+      }
+    ]
+  },
+  {
+    "step": 142,
+    "day": 19,
+    "mode": "landmark",
+    "target": 5,
+    "food": 42,
+    "wagon": 85.6,
+    "cargo": 94,
+    "coins": 2,
+    "medicine": 2,
+    "repairs": 2,
+    "crew": [
+      {
+        "species": "brindlehorn",
+        "energy": 70,
+        "condition": 100,
+        "item": "padded_trace"
+      },
+      {
+        "species": "loamling",
+        "energy": 99,
+        "condition": 100,
+        "item": null
+      },
+      {
+        "species": "bellmoth",
+        "energy": 99,
+        "condition": 100,
+        "item": null
+      }
+    ]
+  },
+  {
+    "step": 143,
+    "day": 19,
+    "mode": "traveling",
+    "target": 6,
+    "food": 42,
+    "wagon": 85.6,
+    "cargo": 94,
+    "coins": 2,
+    "medicine": 2,
+    "repairs": 2,
+    "crew": [
+      {
+        "species": "brindlehorn",
+        "energy": 70,
+        "condition": 100,
+        "item": "padded_trace"
+      },
+      {
+        "species": "loamling",
+        "energy": 99,
+        "condition": 100,
+        "item": null
+      },
+      {
+        "species": "bellmoth",
+        "energy": 99,
+        "condition": 100,
+        "item": null
+      }
+    ]
+  },
+  {
+    "step": 144,
+    "day": 20,
+    "mode": "traveling",
+    "target": 6,
+    "food": 38,
+    "wagon": 83.6,
+    "cargo": 94,
+    "coins": 2,
+    "medicine": 2,
+    "repairs": 2,
+    "crew": [
+      {
+        "species": "brindlehorn",
+        "energy": 65,
+        "condition": 100,
+        "item": "padded_trace"
+      },
+      {
+        "species": "loamling",
+        "energy": 100,
+        "condition": 100,
+        "item": null
+      },
+      {
+        "species": "bellmoth",
+        "energy": 100,
+        "condition": 100,
+        "item": null
+      }
+    ]
+  },
+  {
+    "step": 145,
+    "day": 21,
+    "mode": "traveling",
+    "target": 6,
+    "food": 34,
+    "wagon": 81.6,
+    "cargo": 94,
+    "coins": 2,
+    "medicine": 2,
+    "repairs": 2,
+    "crew": [
+      {
+        "species": "brindlehorn",
+        "energy": 58,
+        "condition": 100,
+        "item": "padded_trace"
+      },
+      {
+        "species": "loamling",
+        "energy": 99,
+        "condition": 100,
+        "item": null
+      },
+      {
+        "species": "bellmoth",
+        "energy": 99,
+        "condition": 100,
+        "item": null
+      }
+    ]
+  },
+  {
+    "step": 146,
+    "day": 22,
+    "mode": "traveling",
+    "target": 6,
+    "food": 30,
+    "wagon": 79.6,
+    "cargo": 94,
+    "coins": 2,
+    "medicine": 2,
+    "repairs": 2,
+    "crew": [
+      {
+        "species": "brindlehorn",
+        "energy": 53,
+        "condition": 100,
+        "item": "padded_trace"
+      },
+      {
+        "species": "loamling",
+        "energy": 100,
+        "condition": 100,
+        "item": null
+      },
+      {
+        "species": "bellmoth",
+        "energy": 100,
+        "condition": 100,
+        "item": null
+      }
+    ]
+  },
+  {
+    "step": 147,
+    "day": 23,
+    "mode": "event",
+    "target": 6,
+    "food": 26,
+    "wagon": 77.6,
+    "cargo": 94,
+    "coins": 2,
+    "medicine": 2,
+    "repairs": 2,
+    "crew": [
+      {
+        "species": "brindlehorn",
+        "energy": 48,
+        "condition": 100,
+        "item": "padded_trace"
+      },
+      {
+        "species": "loamling",
+        "energy": 100,
+        "condition": 100,
+        "item": null
+      },
+      {
+        "species": "bellmoth",
+        "energy": 100,
+        "condition": 100,
+        "item": null
+      }
+    ]
+  },
+  {
+    "step": 148,
+    "day": 23,
+    "mode": "wagon_combat",
+    "target": 6,
+    "food": 26,
+    "wagon": 77.6,
+    "cargo": 94,
+    "coins": 2,
+    "medicine": 2,
+    "repairs": 2,
+    "crew": [
+      {
+        "species": "brindlehorn",
+        "energy": 48,
+        "condition": 100,
+        "item": "padded_trace"
+      },
+      {
+        "species": "loamling",
+        "energy": 100,
+        "condition": 100,
+        "item": null
+      },
+      {
+        "species": "bellmoth",
+        "energy": 100,
+        "condition": 100,
+        "item": null
+      }
+    ]
+  },
+  {
+    "step": 149,
+    "day": 23,
+    "mode": "wagon_combat",
+    "target": 6,
+    "food": 26,
+    "wagon": 77.6,
+    "cargo": 94,
+    "coins": 2,
+    "medicine": 2,
+    "repairs": 2,
+    "crew": [
+      {
+        "species": "brindlehorn",
+        "energy": 48,
+        "condition": 100,
+        "item": "padded_trace"
+      },
+      {
+        "species": "loamling",
+        "energy": 100,
+        "condition": 100,
+        "item": null
+      },
+      {
+        "species": "bellmoth",
+        "energy": 100,
+        "condition": 100,
+        "item": null
+      }
+    ]
+  },
+  {
+    "step": 150,
+    "day": 23,
+    "mode": "wagon_combat",
+    "target": 6,
+    "food": 26,
+    "wagon": 77.6,
+    "cargo": 94,
+    "coins": 2,
+    "medicine": 2,
+    "repairs": 2,
+    "crew": [
+      {
+        "species": "brindlehorn",
+        "energy": 42,
+        "condition": 100,
+        "item": "padded_trace"
+      },
+      {
+        "species": "loamling",
+        "energy": 94,
+        "condition": 100,
+        "item": null
+      },
+      {
+        "species": "bellmoth",
+        "energy": 94,
+        "condition": 100,
+        "item": null
+      }
+    ]
+  },
+  {
+    "step": 151,
+    "day": 23,
+    "mode": "wagon_combat",
+    "target": 6,
+    "food": 26,
+    "wagon": 77.6,
+    "cargo": 94,
+    "coins": 2,
+    "medicine": 2,
+    "repairs": 2,
+    "crew": [
+      {
+        "species": "brindlehorn",
+        "energy": 42,
+        "condition": 100,
+        "item": "padded_trace"
+      },
+      {
+        "species": "loamling",
+        "energy": 94,
+        "condition": 100,
+        "item": null
+      },
+      {
+        "species": "bellmoth",
+        "energy": 94,
+        "condition": 100,
+        "item": null
+      }
+    ]
+  },
+  {
+    "step": 152,
+    "day": 23,
+    "mode": "wagon_combat",
+    "target": 6,
+    "food": 26,
+    "wagon": 77.6,
+    "cargo": 94,
+    "coins": 2,
+    "medicine": 2,
+    "repairs": 2,
+    "crew": [
+      {
+        "species": "brindlehorn",
+        "energy": 42,
+        "condition": 100,
+        "item": "padded_trace"
+      },
+      {
+        "species": "loamling",
+        "energy": 94,
+        "condition": 100,
+        "item": null
+      },
+      {
+        "species": "bellmoth",
+        "energy": 94,
+        "condition": 100,
+        "item": null
+      }
+    ]
+  },
+  {
+    "step": 153,
+    "day": 23,
+    "mode": "wagon_combat",
+    "target": 6,
+    "food": 26,
+    "wagon": 77.6,
+    "cargo": 94,
+    "coins": 2,
+    "medicine": 2,
+    "repairs": 1,
+    "crew": [
+      {
+        "species": "brindlehorn",
+        "energy": 42,
+        "condition": 100,
+        "item": "padded_trace"
+      },
+      {
+        "species": "loamling",
+        "energy": 94,
+        "condition": 100,
+        "item": null
+      },
+      {
+        "species": "bellmoth",
+        "energy": 94,
+        "condition": 100,
+        "item": null
+      }
+    ]
+  },
+  {
+    "step": 154,
+    "day": 23,
+    "mode": "wagon_combat",
+    "target": 6,
+    "food": 26,
+    "wagon": 77.6,
+    "cargo": 94,
+    "coins": 2,
+    "medicine": 2,
+    "repairs": 1,
+    "crew": [
+      {
+        "species": "brindlehorn",
+        "energy": 42,
+        "condition": 100,
+        "item": "padded_trace"
+      },
+      {
+        "species": "loamling",
+        "energy": 94,
+        "condition": 100,
+        "item": null
+      },
+      {
+        "species": "bellmoth",
+        "energy": 94,
+        "condition": 100,
+        "item": null
+      }
+    ]
+  },
+  {
+    "step": 155,
+    "day": 23,
+    "mode": "wagon_combat",
+    "target": 6,
+    "food": 26,
+    "wagon": 77.6,
+    "cargo": 94,
+    "coins": 2,
+    "medicine": 2,
+    "repairs": 1,
+    "crew": [
+      {
+        "species": "brindlehorn",
+        "energy": 42,
+        "condition": 100,
+        "item": "padded_trace"
+      },
+      {
+        "species": "loamling",
+        "energy": 94,
+        "condition": 100,
+        "item": null
+      },
+      {
+        "species": "bellmoth",
+        "energy": 94,
+        "condition": 100,
+        "item": null
+      }
+    ]
+  },
+  {
+    "step": 156,
+    "day": 23,
+    "mode": "wagon_combat",
+    "target": 6,
+    "food": 26,
+    "wagon": 77.6,
+    "cargo": 94,
+    "coins": 2,
+    "medicine": 2,
+    "repairs": 1,
+    "crew": [
+      {
+        "species": "brindlehorn",
+        "energy": 42,
+        "condition": 100,
+        "item": "padded_trace"
+      },
+      {
+        "species": "loamling",
+        "energy": 94,
+        "condition": 100,
+        "item": null
+      },
+      {
+        "species": "bellmoth",
+        "energy": 94,
+        "condition": 100,
+        "item": null
+      }
+    ]
+  },
+  {
+    "step": 157,
+    "day": 23,
+    "mode": "wagon_combat",
+    "target": 6,
+    "food": 26,
+    "wagon": 77.6,
+    "cargo": 94,
+    "coins": 2,
+    "medicine": 1,
+    "repairs": 1,
+    "crew": [
+      {
+        "species": "brindlehorn",
+        "energy": 42,
+        "condition": 100,
+        "item": "padded_trace"
+      },
+      {
+        "species": "loamling",
+        "energy": 94,
+        "condition": 100,
+        "item": null
+      },
+      {
+        "species": "bellmoth",
+        "energy": 94,
+        "condition": 100,
+        "item": null
+      }
+    ]
+  },
+  {
+    "step": 158,
+    "day": 23,
+    "mode": "wagon_combat",
+    "target": 6,
+    "food": 26,
+    "wagon": 77.6,
+    "cargo": 94,
+    "coins": 2,
+    "medicine": 1,
+    "repairs": 1,
+    "crew": [
+      {
+        "species": "brindlehorn",
+        "energy": 42,
+        "condition": 100,
+        "item": "padded_trace"
+      },
+      {
+        "species": "loamling",
+        "energy": 94,
+        "condition": 100,
+        "item": null
+      },
+      {
+        "species": "bellmoth",
+        "energy": 94,
+        "condition": 100,
+        "item": null
+      }
+    ]
+  },
+  {
+    "step": 159,
+    "day": 23,
+    "mode": "wagon_combat",
+    "target": 6,
+    "food": 26,
+    "wagon": 97.6,
+    "cargo": 94,
+    "coins": 2,
+    "medicine": 1,
+    "repairs": 1,
+    "crew": [
+      {
+        "species": "brindlehorn",
+        "energy": 42,
+        "condition": 96.551724137931,
+        "item": "padded_trace"
+      },
+      {
+        "species": "loamling",
+        "energy": 94,
+        "condition": 100,
+        "item": null
+      },
+      {
+        "species": "bellmoth",
+        "energy": 94,
+        "condition": 100,
+        "item": null
+      }
+    ]
+  },
+  {
+    "step": 160,
+    "day": 23,
+    "mode": "stopped",
+    "target": 6,
+    "food": 26,
+    "wagon": 97.6,
+    "cargo": 94,
+    "coins": 2,
+    "medicine": 1,
+    "repairs": 1,
+    "crew": [
+      {
+        "species": "brindlehorn",
+        "energy": 42,
+        "condition": 96.551724137931,
+        "item": "padded_trace"
+      },
+      {
+        "species": "loamling",
+        "energy": 94,
+        "condition": 100,
+        "item": null
+      },
+      {
+        "species": "bellmoth",
+        "energy": 94,
+        "condition": 100,
+        "item": null
+      }
+    ]
+  },
+  {
+    "step": 161,
+    "day": 23,
+    "mode": "traveling",
+    "target": 6,
+    "food": 26,
+    "wagon": 97.6,
+    "cargo": 94,
+    "coins": 2,
+    "medicine": 1,
+    "repairs": 1,
+    "crew": [
+      {
+        "species": "brindlehorn",
+        "energy": 42,
+        "condition": 96.551724137931,
+        "item": "padded_trace"
+      },
+      {
+        "species": "loamling",
+        "energy": 94,
+        "condition": 100,
+        "item": null
+      },
+      {
+        "species": "bellmoth",
+        "energy": 94,
+        "condition": 100,
+        "item": null
+      }
+    ]
+  },
+  {
+    "step": 162,
+    "day": 24,
+    "mode": "result",
+    "target": 6,
+    "food": 22,
+    "wagon": 95.2,
+    "cargo": 92,
+    "coins": 2,
+    "medicine": 1,
+    "repairs": 1,
+    "crew": [
+      {
+        "species": "brindlehorn",
+        "energy": 37,
+        "condition": 96.551724137931,
+        "item": "padded_trace"
+      },
+      {
+        "species": "loamling",
+        "energy": 95,
+        "condition": 100,
+        "item": null
+      },
+      {
+        "species": "bellmoth",
+        "energy": 95,
+        "condition": 100,
+        "item": null
+      }
+    ]
+  }
+]

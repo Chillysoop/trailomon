@@ -423,4 +423,13 @@ function M.discovery_repair(self)
     self.capture_assert=function() assert(self.snapshot.run.day==before.day+1 and self.snapshot.run.repairs==before.repairs-1 and self.snapshot.run.crew[1].condition==math.min(100,before.crew[1].condition+20)) end
 end
 function M.legacy_camp(self) reset(self,"camp");self.redraw() end
+function M.care_readings(self)
+    reset(self,"crew");self.snapshot=require("simulation.expedition").new(1848,"discovery")
+    assert(require("simulation.expedition").command(self.snapshot,"depart"))
+    self.snapshot.run.crew[1].condition=16;self.redraw()
+end
+function M.care_legacy(self) M.care_readings(self);self.snapshot.run.recovery_rules=nil;self.redraw() end
+function M.items_current(self)
+    reset(self,"work_items");self.snapshot=require("simulation.expedition").new(1848,"discovery");self.redraw()
+end
 return M

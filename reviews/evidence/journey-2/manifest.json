@@ -1,0 +1,44 @@
+{
+  "date": "2026-11-02",
+  "source_commit": "9b9424bd02fbee9a286d4680ed026db041c5ad4d",
+  "engine": "Defold 1.13.2 release renderer",
+  "seed": 1848,
+  "mode": "fresh Discovery, Brindlehorn, normal rations, open wagon",
+  "method": "Developer-selected production UI callbacks, 1280x720 native rendering; test driver advances travel days and combat time. No forced encounters or resource edits in either completed journey. Separate fresh profiles.",
+  "first_run_steps": [
+    2,
+    79
+  ],
+  "second_run_steps": [
+    80,
+    162
+  ],
+  "limits": [
+    "Not two hands-on desktop journeys: desktop attempt stopped on day 1 after repeated user-input interruptions.",
+    "No independent new-player rating, subjective audio listening, physical keyboard, real-time pacing or activation reliability claim.",
+    "Different timings/weather/route/gear prevent causal attribution between these two runs.",
+    "Capture fixtures for copy fixes use deliberately constructed states."
+  ],
+  "files": {
+    "arrival-cautious.json": "6e6944b6bc7ede795183cc2928becb32544d73a3e86db151b7d33e3911c58334",
+    "arrival-cautious.png": "7d9d19f29baa52ff568a7c5672782f80a57761901b148d46f4356823645b51a8",
+    "arrival-prepared.json": "afeb3271c0dc517349d34634455179cd479e0f090290f3fcdf7de2b114da959d",
+    "arrival-prepared.png": "bc7e39ce584660f7117846e9a255a3a758cc5db6da99a5601496b84a54fad3e3",
+    "care-before.png": "8e48a68d922008f22c0794c2e3c26f666965edbfc70da65b6bfc8a6968f26908",
+    "care_legacy.png": "61be31cf3e6edd9c28ccc8ad79009520284dd8dae235e59614864f7bf4c8afc6",
+    "care_readings.png": "8644ba3ac0a718bee28971aa47acb9991eaa2c6d9df817134d30e9237cb5c9d8",
+    "checkpoints.json": "ad5a38584984107901b560ee964892006c6d3467238255a1948803285af1190b",
+    "departure.png": "0e168ad406b8ffdc8e2831ad471fbca6a4e8a483f3084f393f07913a543778e0",
+    "fix-captures-source.json": "097487501fe9589ad6deec4c22c701e693b4e0ea51f545925b52b5f373db14b2",
+    "full-crew-invitation.png": "d68b7c094fd2f8db59e4328c473f0b1f20185a37923774d4817290589f5babb5",
+    "guardian-team.json": "0fc22bcd8c9a366b63978780b84175cdef9d05db28df0d5a3e6e10899ebfc488",
+    "guardian-team.png": "c21953920d1db3a4fa95714008d93a58ee08f8af4eeb97a9c12c23a56aadca08",
+    "items_current.png": "d3d6cd0a80d208a81917b359c755c7704fbcdf7f09274080dfb8fc886a176d0c",
+    "items_depot.png": "46efba3b5093f339a5d244222e712d8b9c2f5d845474877cfdc5cc874cb9e25c",
+    "practice-team.png": "8f039d005cb8a0482ed05e564e43bc87e656dc4261cf3460e2cdeada49c6e68b",
+    "solo-fight.png": "f19b14e9937f765119762abfc021713a0b0b1f50c3150ed7ed47cc11cff89de4",
+    "solo-result.json": "9e5f635820d1e5b468d8e2efdeac65d3471070747d47b753fb1a6a2ae7956b02",
+    "solo-result.png": "57a98be513a3879fcf6c484b45e4628ee118276d1aca5172c75997cb82b99003",
+    "walkthrough-driver.lua": "12b005ba33be20417c6b0c7b888e0ea068a4c94e36e8cb357ce17d976a9ff29b"
+  }
+}

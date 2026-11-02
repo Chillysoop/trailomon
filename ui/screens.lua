@@ -261,7 +261,8 @@ local function crew(self)
     w.button(self,642,550,220,31,"Work items",page(self,"work_items"),{icon="capacity",key="open_items",size=13})
     label(self,28,611,"COMPANIONS / SMALL CREW, SHARED HISTORY")
     w.text(self,28,575,"Your traveling crew.",27,"ink")
-    w.reading(self,28,546,"medicine",nil,{label="Treat: 1 day + meals + 1 medicine; up to +35 condition.",size=12,icon_size=12})
+    local _,camp_condition=require("simulation.recovery").values(s)
+    w.reading(self,28,546,"medicine",nil,{label="1 day + meals + 1 medicine / +35 Condition; fed camp +"..camp_condition.." to crew.",size=12,icon_size=12})
     local can=s.mode=="preparation" or s.mode=="stopped" or s.mode=="landmark" or s.mode=="traveling"
     for i,c in ipairs(s.crew) do
         local idx=i;local def=model.species.defs[c.species];local y=391-(i-1)*156
@@ -275,7 +276,7 @@ local function crew(self)
         w.text(self,169,y+48,"Work item: "..model.equipment.label(c),11,"gold")
         w.button(self,169,y+15,145,30,"Duty: "..c.duty,cmd(self,"duty",{member=idx}),{enabled=can,size=12,key="duty"..idx})
         w.button(self,324,y+15,144,30,i==s.hauler and "Hauler" or "Assign haul",cmd(self,"hauler",{member=idx}),{enabled=can and def.draft,selected=i==s.hauler,size=12,key="haul"..idx,icon="haul"})
-        w.button(self,478,y+15,170,30,"Treat (+35)",cmd(self,"treat",{member=idx}),{enabled=can and s.mode~="preparation" and s.medicine>0 and c.condition<100,size=12,key="treat"..idx,icon="medicine"})
+        w.button(self,478,y+15,170,30,"Treat & rest",cmd(self,"treat",{member=idx}),{enabled=can and s.mode~="preparation" and s.medicine>0 and c.condition<100,size=12,key="treat"..idx,icon="medicine"})
         w.button(self,658,y+15,184,30,"Name & memories",function() self.detail=idx;self.open_page("companion") end,{size=12,key="detail"..idx})
     end
     if #s.crew<3 then w.text(self,28,75,"Make room for a friend you have not met yet.",14,"muted") end
