@@ -1,0 +1,11 @@
+# Discovery recovery
+
+2026-11-02 owner authorized S5 focused on solo Discovery, recovery costs and enough exploration time. New journeys use camp-v2: fed rest up to40 Energy/20 Condition instead of25/8; repair days also rest the crew. Medicine keeps +35 plus camp recovery. Same days/meals/materials, no enemy/reward/search/deadline changes. Absent marker preserves old saves; fresh next journey gets new rules. Legacy test fixture explicitly removes recovery marker as well as S30 marker.
+
+Evidence /discovery-balance.html and docs/DISCOVERY_BALANCE.md. Fixed seeds1–24, two starters×ten policies×old/current=960 Discovery journeys; Classic four policies×old/current=192. All repeated exactly (2304 executions). Policy tools/discovery_balance.lua uses visible state only; same actual commands and per-action save validation through report runner. Adaptive pace: hurried at35+ Energy, otherwise steady; target two searches on targets3/5; default formation and paid supplies. Fresh recruitment is separate from deliberately staying solo. It does not claim optimal play.
+
+Brindlehorn adaptive/recruit/two-search on-time13→20/24, recovery1.67→1.25 days and6.67→5 meals; cargo84.4→82.7. Staying solo12→19/24 for either starter. Reedskipper with recruitment24→24; it can rotate the early Brindlehorn. Meadow/recruit/two-search Brindlehorn20→24. All-search Brindlehorn only3/24; steady woodland with two searches usually late. No global difficulty or fun claim. S5 remains doing; S10 human feel/audio/physical input/native activation issue remains open.
+
+154 Lua tests, native new/legacy repair-rest replay in both depot files, four actual renders. Solo capture uses a real fight with Reedskipper in rear, loses, then clicks production Rest/Repair; this exposes wagon damage and is not advised positioning. No Computer Use or firewall prompt. Core game inputs and policy-function fingerprints, runs and capture provenance are committed in reviews/evidence/discovery-balance. Classical comparison added after Discovery driver run; the decision policy/game inputs stayed unchanged.
+
+E1/E2 and other old unanswered decisions unchanged; no new vote required. Broader art deferred. New content and S32 remain after focused journey-feel validation. Rebuild Windows archive once after the gameplay PR is merged; record exact source in local build provenance.
