@@ -6,10 +6,10 @@
     1280,
     720
   ],
-  "source_commit": "984a81b53dfa4bd7a6c51484b2c08a06968b6c3f",
-  "capture_inputs_sha256": "2fe3fc7b621319e8fa63f7aff39bb9e8de4cab39f7e35c5429517d8f65068456",
-  "capture_script_sha256": "96f88188c7252e33199b45b355a154243f561b4be042ccd3aaf4c31d360d2e37",
-  "video_sha256": "a210805e280c4ff3fc6541739523a0e0a638d7e5c666d5977b7d14b660495889",
+  "source_commit": "cd85374892b51282d768c6c2364d10eb2d25891d",
+  "capture_inputs_sha256": "6de237ab8eec3d6ae9cc6bfde3987710cbd8e456411f9c0c693f05f9670abd29",
+  "capture_script_sha256": "258279b4e63231dc44f1daeaa190619546100cfce1ab4ce6de47700c1e58299e",
+  "video_sha256": "e434a01dabd8cc65200554f50cd45f2d38ac77daceb845d1693b93cef8d3cee3",
   "audio": {
     "sample_rate": 48000,
     "samples": 960000,
@@ -17,6 +17,5 @@
     "rms_dbfs": -21.48
   },
   "music": "Original synthesized E-minor trail motif; no third-party recording",
-  "note": "Edited prototype fixtures. Wagon autobattle is a playable sample/practice, not yet expedition-integrated.",
-  "capture_script_hash_encoding": "UTF-8, newlines normalized to LF"
+  "note": "Edited prototype fixtures. Real S30 expedition encounters, actual crew and carried gear; automatic combat shown at 2x. No reference-game art or footage."
 }

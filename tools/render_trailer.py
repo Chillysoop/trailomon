@@ -35,35 +35,35 @@ def sprite(canvas,name,x,y,size):
 def frame(i):
  im=Image.open(footage/f'frame-{i:04d}.png').convert('RGB');c=Image.new('RGB',(W,H),DARK)
  d=ImageDraw.Draw(c)
- if i<90:
+ if i<75:
   paste_crop(c,im,(28,183,862,413),(0,267,1280,355))
   text(c,'WHAT IF THE OREGON TRAIL',(640,91),36,center=True)
-  text(c,'HAD A CREATURE CREW?',(640,148),52,GOLD,True)
-  text(c,'A SMALL WAGON. A WILDER WORLD.',(640,642),24,center=True)
- elif i<180:
+  text(c,'WAS A CREATURE COLLECTOR?',(640,148),46,GOLD,True)
+  text(c,'BEFRIEND THE WILD. BRAVE THE TRAIL.',(640,642),24,center=True)
+ elif i<150:
   text(c,'FIND YOUR CREW.',(56,42),52)
   sprite(c,'loamling',152,384,230)
   paste_crop(c,im,(28,130,862,580),(305,151,927,500))
   text(c,'SHARE FOOD. MAKE A FRIEND.',(56,657),24,GOLD)
- elif i<240:
-  text(c,'BUILD YOUR CREW.',(56,42),52)
+ elif i<210:
+  text(c,'BUILD YOUR BATTLE TEAM.',(56,42),52)
   paste_crop(c,im,(20,94,1260,665),(28,126,1224,563))
- elif i<283:
+ elif i<245:
   text(c,'PACK.',(64,199),86)
   text(c,'PUSH ON.',(64,310),64,GOLD)
   text(c,'FOOD. TOOLS. TOUGH CHOICES.',(64,525),24)
   paste_crop(c,im,(890,280,1252,650),(693,116,500,525))
- elif i<330:
+ elif i<285:
   text(c,'MAKE EVERY DAY COUNT.',(56,42),46)
   paste_crop(c,im,(28,110,1252,665),(28,130,1224,555))
- elif i<390:
+ elif i<330:
   text(c,'CHOOSE YOUR CROSSING.',(56,42),46)
   sprite(c,'reedskipper',142,388,235)
   paste_crop(c,im,(28,130,862,620),(280,133,972,555))
- elif i<510:
-  text(c,'DEFEND YOUR WAGON.',(56,40),52)
+ elif i<525:
+  text(c,'THEY FIGHT. YOU SURVIVE.',(56,40),46)
   paste_crop(c,im,(20,94,1260,665),(20,119,1240,571))
-  text(c,'AUTOBATTLE / 2x / PRACTICE',(56,101),14,MUTED)
+  text(c,'POSITION. EQUIP. UNLEASH REPEATING ABILITIES.',(56,101),18,GOLD)
  else:
   paste_crop(c,im,(28,183,862,384),(0,175,1280,310))
   text(c,'TRAILOMON',(640,72),86,GOLD,True)
@@ -121,10 +121,10 @@ def soundtrack():
 
 if __name__=='__main__':
  assert len(list(footage.glob('frame-*.png')))==600,'Expected exactly 20s at30fps'
- for i in [45,105,150,195,255,305,345,435,540]:frame(i).save(out/f'preview-{i:03d}.png')
- frame(540).save(out/'poster.jpg',quality=92)
+ for i in [45,90,135,180,230,270,310,405,555]:frame(i).save(out/f'preview-{i:03d}.png')
+ frame(555).save(out/'poster.jpg',quality=92)
  contact=Image.new('RGB',(960,540),DARK)
- for j,i in enumerate([45,105,150,195,255,305,345,435,540]):contact.paste(frame(i).resize((320,180)),((j%3)*320,(j//3)*180))
+ for j,i in enumerate([45,90,135,180,230,270,310,405,555]):contact.paste(frame(i).resize((320,180)),((j%3)*320,(j//3)*180))
  contact.save(ROOT/'.tools/trailer-contact.png')
  audio,stats=soundtrack();mp4=out/'Trailomon-20s.mp4'
  command=[ffmpeg,'-y','-loglevel','warning','-f','rawvideo','-pix_fmt','rgb24','-s','1280x720','-r','30','-i','pipe:0','-i',str(audio),'-t','20','-c:v','libx264','-preset','fast','-crf','19','-pix_fmt','yuv420p','-c:a','aac','-b:a','192k','-ar','48000','-af','loudnorm=I=-16:TP=-1.5:LRA=9','-movflags','+faststart',str(mp4)]
@@ -132,6 +132,6 @@ if __name__=='__main__':
  for i in range(600):proc.stdin.write(frame(i).tobytes())
  proc.stdin.close();errors=proc.stderr.read().decode();assert proc.wait()==0,errors
  source=json.loads((footage/'source.json').read_text())
- manifest={'duration_seconds':20,'fps':30,'frames':600,'resolution':[1280,720],'source_commit':source['source_commit'],'capture_inputs_sha256':source['inputs_sha256'],'capture_script_sha256':hashlib.sha256((ROOT/'tools/trailer_capture.gui_script').read_text(encoding='utf-8').encode('utf-8')).hexdigest(),'video_sha256':hashlib.sha256(mp4.read_bytes()).hexdigest(),'audio':stats,'music':'Original synthesized E-minor trail motif; no third-party recording','note':'Edited prototype fixtures. Wagon autobattle is a playable sample/practice, not yet expedition-integrated.'}
+ manifest={'duration_seconds':20,'fps':30,'frames':600,'resolution':[1280,720],'source_commit':source['source_commit'],'capture_inputs_sha256':source['inputs_sha256'],'capture_script_sha256':hashlib.sha256((ROOT/'tools/trailer_capture.gui_script').read_text(encoding='utf-8').encode('utf-8')).hexdigest(),'video_sha256':hashlib.sha256(mp4.read_bytes()).hexdigest(),'audio':stats,'music':'Original synthesized E-minor trail motif; no third-party recording','note':'Edited prototype fixtures. Real S30 expedition encounters, actual crew and carried gear; automatic combat shown at 2x. No reference-game art or footage.'}
  (out/'manifest.json').write_text(json.dumps(manifest,indent=2)+'\n')
  print(json.dumps({'video':str(mp4),'megabytes':round(mp4.stat().st_size/1048576,2),'audio':stats}))

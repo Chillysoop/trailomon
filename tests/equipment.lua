@@ -1,4 +1,4 @@
-local model=require "simulation.expedition"
+local model=require "tests.legacy_model"
 local util=require "simulation.util"
 local save=require "services.save"
 local progression=require "simulation.progression"

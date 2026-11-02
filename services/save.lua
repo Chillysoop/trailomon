@@ -7,7 +7,7 @@ local active_slot="classic"
 local selected=false
 function M.slot() return active_slot end
 local function selection_path() return sys.get_save_file(sys.get_config_string("trailomon.save_namespace","trailomon"),"depot_selection") end
-local modes={preparation=true,traveling=true,stopped=true,event=true,landmark=true,combat_select=true,combat=true,combat_result=true,result=true}
+local modes={preparation=true,traveling=true,stopped=true,event=true,landmark=true,combat_select=true,combat=true,combat_result=true,wagon_combat=true,result=true}
 local outcomes={delivered=true,late=true,returned=true,rescued=true}
 local function number(n,lo,hi) return util.finite(n) and n>=lo and n<=hi end
 local function integer(n,lo,hi) return number(n,lo,hi) and n==math.floor(n) end
@@ -82,6 +82,7 @@ local function validate(snapshot)
         if s.flags[key]~=nil and type(s.flags[key])~="boolean" then return false,"Invalid road consequence" end
     end
     if not require("simulation.wagon_practice").valid(s.wagon_practice,s) then return false,"Invalid wagon practice" end
+    if not require("simulation.wagon_road").valid(s) then return false,"Invalid road combat" end
     if s.road_story~=nil and (type(s.road_story)~="string" or #s.road_story>1000) then return false,"Invalid road story" end
     for _,name in ipairs({"weather","events","combat"}) do if not integer(s.rng[name],1,2147483646) then return false,"Invalid random state" end end
     if not number(s.river_roll,0,1) or #s.log>70 then return false,"Invalid journal" end
@@ -91,7 +92,7 @@ local function validate(snapshot)
         if type(s.pending)~="table" or not model.events.by_id[s.pending.id] or not model.events.by_id[s.pending.id].choices or not number(s.pending.roll,0,1) then return false,"Missing pending event" end
         if s.pending.pattern~=nil and (s.pending.id~="territorial" or s.pending.pattern~=model.combat.GUARDIAN_PATTERN) then return false,"Invalid pending guardian pattern" end
         if s.mode~="event" then
-            if s.mode~="combat_select" and s.mode~="combat" then return false,"Unexpected pending event" end
+            if s.mode~="combat_select" and s.mode~="combat" and s.mode~="wagon_combat" then return false,"Unexpected pending event" end
             local matching=false
             for _,choice in ipairs(model.events.by_id[s.pending.id].choices) do
                 if choice.battle and choice.battle==s.encounter then matching=true end

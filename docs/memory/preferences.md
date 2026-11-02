@@ -16,10 +16,12 @@
 
 2026-10-30: Owner steers via short review pages; developer builds, tests, opens PRs, and merges when green without further PR approval. Ask before large deletion/history removal, changes outside the repo, public releases, or spending. YES builds; NO rejects; comments override; blank ideas after FINISH are deferred without nagging. Do not re-ask settled choices.
 
-2026-10-30: plan-1 revision 7 approved P1–P5 without amendments. Keep bounded foraging and defer hunting for this milestone; prioritize automatic combat, wilderness presentation, six-species art refinement, and the three-item equipment experiment after combat. P5 is approved even though it was not a top pick. No review proposals rejected. The owner's development experience is unspecified; use beginner-friendly explanations.
+2026-10-30: plan-1 revision 7 approved P1â€“P5 without amendments. Keep bounded foraging and defer hunting for this milestone; prioritize automatic combat, wilderness presentation, six-species art refinement, and the three-item equipment experiment after combat. P5 is approved even though it was not a top pick. No review proposals rejected. The owner's development experience is unspecified; use beginner-friendly explanations.
 
 2026-10-30: Owner clarified Astronarch is the stronger reference for actual automatic combat: positions, distinct roles, and partner-triggered abilities. Automon informs the original creature-party appeal. Preserve the quiet expedition pace.
 
 2026-10-30: next-1 N1-N8 all approved. The general comment makes visible clarity and simplicity critical path: a thoughtful iconography system must cover existing resources and provide rules for future features. Prioritize a coherent semantic catalog, recognizable silhouettes, consistent labels, and contextual reasons over adding ornamental symbols.
 
 2026-10-31: Only send/open YES/NO reviews for genuinely unanswered decisions. Hide previous YES (and other settled votes) by default, keeping history available explicitly. Approved but unfinished development is not an open owner decision. No completed-review links after routine feature delivery. New drafts stay visible for notes until FINISH; do not invent proposals just to populate a page.
+
+2026-11-01: Owner requests subtle forward attack lunges and upward ability accents during S30. The later request for a stronger Astronarch/creature-collector versus Oregon Trail feel was explicitly corrected to mean the hype trailer, not a new game feature pass. Revise the trailer after the current updates using new road-combat footage; large art overhaul remains deferred.

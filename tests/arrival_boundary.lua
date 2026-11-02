@@ -1,4 +1,4 @@
-local model=require "simulation.expedition"
+local model=require "tests.legacy_model"
 local util=require "simulation.util"
 return function(test,command,valid,equal)
     test("encounter entry uses the same energy threshold as battle setup",function()

@@ -23,6 +23,7 @@ function M.crew(s)
 end
 function M.kit(s,id)
     local k=util.copy(content.kits[id])
+    for key,value in pairs(((content.road[s.scenario] or {})[id]) or {}) do k[key]=value end
     local u=M.unit(s,id);if u and u.name then k.name=u.name end
     if s.scenario=="mara" and content.mara[id] then for key,value in pairs(content.mara[id]) do k[key]=value end end
     return k
@@ -33,7 +34,7 @@ local function log(s,kind,source,target,value)
     if #s.events>90 then table.remove(s.events,1) end
 end
 local function add(s,id,side,position)
-    local k=content.kits[id]
+    local k=M.kit(s,id)
     s.units[#s.units+1]={id=id,side=side,position=position,hp=k.hp,max_hp=k.hp,def=k.def,shield=0,
         focus=0,cost=k.cost,attack_left=k.interval+rng.int(s,"rng",0,3),target="",effects={},item="",opening=0,proc_tick=-1,
         stats={damage=0,absorbed=0,intercepts=0,attacks=0,casts=0,reactions=0,stuns=0,shielded=0,openings=0,item_procs=0}}
@@ -271,10 +272,10 @@ function M.validate(s)
     if not integer(s.tick,0,M.LIMIT) or not integer(s.seed,0,2147483646) or not integer(s.rng,1,2147483646) then return false,"Invalid ambush clock" end
     if s.phase=="result" and not results[s.result] or s.phase~="result" and s.result~="" then return false,"Invalid ambush result" end
     if not content.presets[s.preset] and s.preset~="custom" then return false,"Invalid formation" end
-    if s.scenario~="ambush" and s.scenario~="mara" then return false,"Invalid encounter" end
+    if s.scenario~="ambush" and s.scenario~="mara" and not content.road[s.scenario] then return false,"Invalid encounter" end
     if type(s.supplies)~="table" or type(s.used)~="table" then return false,"Missing supplies" end
     for _,id in ipairs({"medicine","repairs"}) do
-        if not integer(s.supplies[id],0,1) or not integer(s.used[id],0,1) or s.supplies[id]+s.used[id]~=1 then return false,"Invalid supplies" end
+        if not integer(s.supplies[id],0,1) or not integer(s.used[id],0,1) or s.supplies[id]+s.used[id]>(1) or (not content.road[s.scenario] and s.supplies[id]+s.used[id]~=1) then return false,"Invalid supplies" end
     end
     local wagon=s.wagon
     if type(wagon)~="table" or wagon.id~="wagon" or wagon.max_hp~=100 or wagon.def~=0 or not integer(wagon.hp,0,100) or not integer(wagon.shield,0,100) then return false,"Invalid wagon" end
@@ -282,7 +283,7 @@ function M.validate(s)
     local seen,slots,gear={},{},{}
     for _,u in ipairs(s.units) do
         if type(u)~="table" or not content.kits[u.id] or seen[u.id] then return false,"Invalid unit" end
-        local k=content.kits[u.id];seen[u.id]=true
+        local k=M.kit(s,u.id);seen[u.id]=true
         if u.name~=nil and (type(u.name)~="string" or #u.name>72) then return false,"Invalid companion name" end
         if type(u.item)~="string" or (u.item~="" and (not items.defs[u.item] or gear[u.item] or u.side~="crew")) then return false,"Invalid equipment" end
         if u.item~="" then gear[u.item]=true end

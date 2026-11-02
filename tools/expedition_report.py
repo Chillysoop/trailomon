@@ -120,6 +120,7 @@ def csv_row(run):
             'crew_condition_min': min(v['condition']['value'] for v in run['crew_minimum'].values()),
             'food_decreases': t['food_decreases'], 'energy_decreases': t['energy_decreases'],
             'condition_decreases': t['condition_decreases'], 'combat_exchanges': t['combat_exchanges'],
+            'combat_seconds': t.get('combat_seconds', 0),
             'travel_ticks': t['travel_ticks'], 'longest_travel_stretch':t['longest_travel_stretch'], 'decision_gates': len(run['waits']),
             'failure': run.get('failure', {}).get('message', '')}
 

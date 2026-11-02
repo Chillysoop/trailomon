@@ -419,6 +419,9 @@ local function overlay(self)
     end
 end
 function M.draw(self)
+    if self.page=="trail" and require("simulation.wagon_road").active(self.snapshot.run) and not self.save_blocked then
+        require("services.ambush_controller").open_road(self,self.road_writer)
+    end
     w.begin(self);w.rect(self,0,0,1280,720,"bg")
     if self.page=="ambush" and self.ambush then
         require("ui.wagon_ambush").draw(self);w.finish(self);return
