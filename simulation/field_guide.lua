@@ -9,11 +9,11 @@ M.notes={
     slatewhorl="Broad feet and low plates grip loose upland shale.",
 }
 M.clues={
-    brindlehorn={place="Meadows / Split Oak",method="Discovery: meet the youngster at Split Oak. Leave room and 4 food."},
-    reedskipper={place="River margins / Willowford",method="Discovery: meet it at Willowford. Leave room and 4 food."},
-    loamling={place="Meadows and woodland",method="Watch root diggings; Discovery invitations also wait at Split Oak."},
-    bellmoth={place="Woodland / Mossbell",method="Watch sheltered roosts; Discovery invitations also wait at Mossbell."},
-    cindercoil={place="Woodland, marsh and uplands",method="Help with medicine, then watch for its return. Keep room and 4 food."},
+    brindlehorn={place="Meadows / Split Oak",method="Discovery: meet the youngster at Split Oak. Offer 4 food. A full party sends it to the Commons."},
+    reedskipper={place="River margins / Willowford",method="Discovery: meet it at Willowford. Offer 4 food. A full party sends it to the Commons."},
+    loamling={place="Meadows and woodland",method="Lead it with roots into a straw waybasket: 4 food. Search soft ground or meet it at Split Oak."},
+    bellmoth={place="Woodland / Mossbell",method="Shade a roost cloth and leave a meal: 4 food. Search woodland or meet it at Mossbell."},
+    cindercoil={place="Woodland, marsh and uplands",method="Help with medicine, then watch for its return. Keep 4 food; a full party sends it to the Commons."},
     slatewhorl={place="Beyond Willowford / high country",method="Free it with a board or a day's work, then watch for its return."},
 }
 local encounters={scavengers="loamling",territorial="slatewhorl",cinder_shelter="cindercoil",cinder_return="cindercoil",slate_tracks="slatewhorl",slate_return="slatewhorl",meet_brindlehorn="brindlehorn",meet_reedskipper="reedskipper",discover_loamling="loamling",discover_bellmoth="bellmoth"}

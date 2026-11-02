@@ -27,7 +27,7 @@ These are standing user requirements, established October 30, 2026. Apply them f
 - Use `tools/test.ps1` for simulation and native persistence checks and `tools/build.ps1` for a Windows release bundle.
 - Keep credentials out of repository files, art records, logs, and player builds.
 
-- November 2 collecting direction: four active companions; an uncapped persistent collection of individual creatures, including duplicates. Swap at Fernwake before departure; reserves do not eat or fight. Preserve old saves and individual names/habits. See `docs/COLLECTION.md`. Collection fiction and befriending proposals are in collecting-1; do not assume unvoted story choices are approved.
+- November 2 collecting direction: four active companions; an uncapped persistent collection of individual creatures, including duplicates. Swap at Fernwake before departure; reserves do not eat or fight. Preserve old saves and individual names/habits. See `docs/COLLECTION.md`. November 2 follow-up Proceed accepts the recommended collecting-1 C1–C3 direction: Wayhome Commons, quick species-specific waybeds (Loamling/Bellmoth first), and saved origin/homecoming stories. C4 Foldyard was not selected. No ranch construction or art overhaul is authorized by this pass.
 
 ## Owner and project workflow
 

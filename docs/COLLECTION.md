@@ -11,9 +11,15 @@ Owner direction, November 2, 2026. The active party can contain up to four indiv
 - Collecting is saved immediately with the existing transactional game save. Delivery, voluntary return, rescue and replay do not duplicate or erase ownership. Ending a trip restores returning companions as before and remembers the chosen party for the next departure.
 - Existing saves gain individual records on load without rerolling pending events or changing a saved battle. Old combat and recovery rules continue for those trips. Historical test fixtures explicitly retain the previous collection rules.
 
-## Fiction still under review
+## Wayhome Commons and waybeds
 
-[Collecting-1](../reviews/collecting-1.html) proposes the Wayhome Commons, species-specific waybeds/befriending, and arrival stories, with the Foldyard as a more magical alternate home. These proposals are not implemented or approved merely because the storage system exists. Current UI uses the neutral existing depot. The Commons' return escort and Foldyard's magical transport are proposed explanations, not simulated services. No ranch building, new art, capture items, affection grinding, hunting or release/delete control is introduced here.
+The owner's follow-up **Proceed** accepts the recommended C1–C3 direction. Wayhome Commons is a neglected animal waystation behind Fernwake. Creatures bring its empty habitats back to life; they need not earn their place through work. Collection → About the Commons shows the resident ledger and first homecomings. This is a functional ledger with short writing, not a walkable ranch or construction simulation.
+
+Loamling follows a visible root trail into a straw waybasket; Bellmoth chooses a shaded roost cloth with a meal. Each is one choice, the existing 4-food cost, a settling receipt, and an individual record. No extra day, hidden affection roll, new inventory material or knock-out requirement. Encounter/choice IDs and costs stay stable so pending old invitations still resolve. Cindercoil/Slatewhorl keep their rescue chains; Brindlehorn/Reedskipper keep their existing meetings. All six now have a habitat, waybed and homecoming vignette; the next bespoke encounter treatments can follow the first two.
+
+Four travel; reserves receive safe off-screen roadkeeper escorts to the Commons in their waybeds. Their food and transport are included, with no extra turn. They cannot replace active travelers mid-trip. This is an explicit fiction for the existing reserve abstraction, not simulated traffic or a way to teleport cargo.
+
+Story buttons show each individual's meeting event, journey/day, route area, home habitat and waybed. Returning active friends receive a first-homecoming record at any ending; escorted reserves receive theirs immediately. Only the first arrival of each species establishes its Commons vignette; duplicates retain separate origins. Existing friends receive honest unrecorded origins, without inventing their history. These records never modify combat, recovery, RNG or the original bounded memories. The Foldyard alternative was not selected; no universal capture item, ranch building, new art or affection grind is included.
 
 The owner's four-member collection request supersedes integration-1 I1's narrower three-member Cindercoil rendezvous. I2/I3 remain unanswered.
 

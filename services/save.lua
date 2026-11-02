@@ -16,6 +16,7 @@ local function companion(c)
     if type(c)~="table" or not species.defs[c.species] or type(c.name)~="string" or #c.name>72 then return false end
     if not number(c.condition,0,100) or not number(c.stamina,0,100) or not integer(c.trust,1,3) then return false end
     if not require("simulation.habits").valid(c) then return false end
+    if not collection.valid_origin(c) then return false end
     if c.work_item~=nil and not model.equipment.defs[c.work_item] then return false end
     if c.duty~="work" and c.duty~="rest" then return false end
     if type(c.temperament)~="string" or type(c.memories)~="table" or #c.memories>6 then return false end

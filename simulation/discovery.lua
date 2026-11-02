@@ -34,9 +34,9 @@ function M.starter(snapshot,id)
     if id~="brindlehorn" and id~="reedskipper" then return false,"Choose Brindlehorn or Reedskipper" end
     local c=progression.companion(id)
     if s.crew[1] then c.work_item=s.crew[1].work_item end
-    if p.collection then p.collection={};p.next_companion_id=1;p.party=nil end
+    if p.collection then p.collection={};p.next_companion_id=1;p.party=nil;p.commons_first={} end
     p.starter=id;p.roster={[id]=progression.companion(id)};p.discoveries={[id]=true};s.crew={c};s.hauler=1
-    if p.collection then c.uid=require("simulation.collection").add(p,c).uid end
+    if p.collection then c.uid=require("simulation.collection").add(p,c).uid;require("simulation.collection").ensure(snapshot) end
     return true
 end
 return M

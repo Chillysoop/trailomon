@@ -14,6 +14,12 @@ function M.persistence()
     assert(save.write(q));local r=assert(save.load());assert(#r.run.wagon_battle.battle.units==6)
     assert(require("tools.report.json").encode(q)==require("tools.report.json").encode(r))
     assert(save.write(current))
+    local origins=model.new(91,save.slot());assert(model.command(origins,"depart"))
+    assert(model.debug(origins,"event","discover_loamling"));assert(model.command(origins,"choice",{id="invite"}))
+    assert(save.write(origins));assert(require("tools.report.json").encode(origins)==require("tools.report.json").encode(assert(save.load())))
+    assert(model.command(origins,"return"));assert(save.write(origins))
+    assert(require("tools.report.json").encode(origins)==require("tools.report.json").encode(assert(save.load())))
+    assert(save.write(current))
 end
 function M.controls(self,button)
     self.ambush=nil;self.snapshot=M.fixture();self.page="trail"
@@ -21,6 +27,10 @@ function M.controls(self,button)
     self.open_page=function(page) self.page=page;self.redraw() end
     self.redraw();coroutine.yield()
     button(self,"open_collection").fn();coroutine.yield();assert(self.page=="collection")
+    button(self,"commons_about").fn();coroutine.yield();assert(self.collection_detail=="home")
+    button(self,"commons_back").fn();coroutine.yield()
+    button(self,"collection_story_1").fn();coroutine.yield();assert(self.collection_detail==1)
+    button(self,"commons_back").fn();coroutine.yield()
     local p=self.snapshot;local stored=p.run.crew[1].uid
     assert(not button(self,"collection_select_5").enabled)
     button(self,"collection_select_"..stored).fn();coroutine.yield()

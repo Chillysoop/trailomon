@@ -6,6 +6,12 @@ A traveler leaves a familiar depot with a wagon and a few animals that know thin
 
 This is the proposed setting for Trailomon. The six existing species, six landmarks, orchard delivery, and companion relationships are its foundations. The histories, people, ecological details, and later regions below are new creative proposals, not implemented content. The [game design](GAME_DESIGN.md) remains the authority for the playable scope; the [auto-battle proposal](AUTO_BATTLES.md) develops the combat direction.
 
+## Adopted collecting direction — November 2, 2026
+
+The owner selected Wayhome Commons (collecting-1 C1–C3). Behind Fernwake stands an old animal waystation: quiet reed pools, an empty lantern shed, orchard beds, a meadow paddock and stone shelters. The traveler brings willing companions here, restoring life to the place by gathering residents rather than extracting resources from all of them. Four accompany a journey; others have a home of their own.
+
+A **waybed** is the creature's familiar portable resting place: a straw basket, shaded cloth, reed cradle or low bed suited to its body. It is mundane shelter, not magical containment. Befriending begins with noticing an animal's behavior and making an inviting place. Roadkeepers arrange safe return escorts for reserves; this is an off-screen abstraction with no extra expedition cost, and does not transport the traveler or cargo. The initial implementation is a ledger and short encounters, not a ranch-building system. See [COLLECTION.md](COLLECTION.md).
+
 ## The country beyond the road
 
 The settled valleys are small patches of dependable ground in a much larger, poorly mapped country. People have mills, orchards, ferries, iron tools, printed notices, and glass windows. They can repair a wagon very well. They cannot promise that the road will still be where the map puts it after a wet spring.
