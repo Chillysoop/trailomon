@@ -1,5 +1,7 @@
 # Trailomon roadmap
 
+November 2 post-S30 audit: still core systems. [The current work queue](../reviews/after-combat.html) recommends already-authorized S5 full-trip balance and S10 feel/reliability, then S32 symbiosis as the first new mechanic. S33/S35/S34/S36 follow. All 148 simulation checks pass; new combat's solo/Discovery outcomes and selective-search timing need investigation. Human enjoyment, physical input/audio and release-candidate checks remain open. No new approval, stat change or gameplay feature is implied by this audit.
+
 Updated November 1, 2026. Scope: one polished Windows expedition before new regions. The playable foundation already shipped in [PR 1](https://github.com/Chillysoop/trailomon/pull/1), including the complete route, the original manual battles, foraging, saves, and progression. The owner approved plan-1 P1–P5 (hosted revision 7); combat comes first, equipment follows its testing. Statuses describe shipped work, not approvals.
 
 ## Playable prototype

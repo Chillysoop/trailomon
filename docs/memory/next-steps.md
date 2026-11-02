@@ -1,6 +1,6 @@
 # Next gameplay batch
 
-2026-11-01 latest steering: S28 is next, an authorized playable Astronarch-style wagon-defense slice. Owner wants the attack system closely matched, wagon as a distinct protected target. Follow docs/WAGON_COMBAT.md; continue S29/S30 after validation. This supersedes the unapproved-A1 statement below; A2/A3, D4/D5 and E1/E2 remain unanswered.
+2026-11-02 post-S30 audit: S28/S29/S30 shipped; main 4a9c1fe retains gameplay a422352. All148 simulation checks pass again. Recommend S5 matched whole-trip balance (solo/Discovery, sensible crews/supplies, selective searches/adaptive pace) with S10 feel/reliability, then approved S32 symbiosis as the first new mechanic. S33/S35/S34/S36 follow. Report /after-combat.html lists seven already-approved work items; no new YES/NO page or repeat approval. No gameplay tuning performed by the audit. Existing S30 data: Discovery19/29 fight wins versus Classic33/33; fixed default/no-supply bots, not proof of an enemy nerf. Human pacing/enjoyment and historical activation issue remain unresolved. A2/A3, D4/D5 and E1/E2 remain unanswered and retain original pages/codes.
 
 2026-11-01 audit revises the recommendation: prioritize an isolated two-team Mara test (new A1, not approved) and already-authorized S5 targeted exploration/pace comparisons before adding D4 scripts or D5 aims. New A2/A3 propose Discovery defaults and removing inert Trust. See identity-audit.md and identity-1; preserve prior codes/decisions, no gameplay implementation from the audit alone.
 
