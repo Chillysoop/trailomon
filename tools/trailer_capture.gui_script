@@ -13,10 +13,10 @@ local function setup(self,shot)
     self.ambush=nil
     if shot==1 then fixtures.route_meadow(self)
     elseif shot==2 then fixtures.discovery_recruit(self)
-    elseif shot==3 then fixtures.crew_build_setup(self)
+    elseif shot==3 then fixtures.road_setup(self)
     elseif shot==4 then fixtures.items_prep(self)
     elseif shot==5 then fixtures.route_river(self)
-    elseif shot==6 then fixtures.crew_build_fight(self)
+    elseif shot==6 then fixtures.road_fight(self)
     else fixtures.route_ridge(self) end
     -- Fixture actions run one per engine frame, just like normal capture QA.
     self.shot=shot;self.ready=false;self.prepared=false
@@ -36,27 +36,27 @@ function update(self,dt)
     local ok,why=pcall(function()
         if self.frame>=600 then finish(self,true);return end
         local f=self.frame
-        local shot=f<90 and 1 or f<180 and 2 or f<240 and 3 or f<330 and 4 or f<390 and 5 or f<510 and 6 or 7
+        local shot=f<75 and 1 or f<150 and 2 or f<210 and 3 or f<285 and 4 or f<330 and 5 or f<525 and 6 or 7
         if shot~=self.shot then setup(self,shot);screens.draw(self);self.needs_draw=false;return end
         if not self.ready then
             if #self.capture_actions>0 then fixtures.click(self,table.remove(self.capture_actions,1))
             else
                 self.capture_settle=nil;self.ready=true;self.toast="Prototype footage / isolated capture"
                 if (shot==1 or shot==7) and self.snapshot.run.mode=="stopped" then assert(model.command(self.snapshot,"resume")) end
-                if shot==6 then combat.step(self.ambush.battle,70);self.ambush.paused=false;self.ambush.speed=2 end
+                if shot==6 then self.has_focus=true;self.ambush.paused=false;self.ambush.speed=2 end
             end
             if self.needs_draw then screens.draw(self);self.needs_draw=false end
             return
         end
         if not self.prepared then
             -- Commands are real production actions; only elapsed clocks are scripted.
-            if shot==2 and f==135 then self.perform("choice",{id="invite"});self.page="crew" end
-            if shot==3 and f==210 then fixtures.click(self,"ambush_select_pip") end
-            if shot==4 and f==263 then self.perform("buy",{item="food"}) end
-            if shot==4 and f==283 then self.perform("depart",nil,"trail");self.perform("resume") end
-            if shot==4 and (f==296 or f==315) and self.snapshot.run.mode=="traveling" then self.perform("step") end
-            if shot==5 and f==360 then self.perform("river",{method="ferry"}) end
-            if shot==6 and (f-390)%3==0 then combat.step(self.ambush.battle,2) end
+            if shot==2 and f==112 then self.perform("choice",{id="invite"});self.page="crew" end
+            if shot==3 and f==180 then fixtures.click(self,"ambush_select_pip") end
+            if shot==4 and f==232 then self.perform("buy",{item="food"}) end
+            if shot==4 and f==245 then self.perform("depart",nil,"trail");self.perform("resume") end
+            if shot==4 and (f==258 or f==274) and self.snapshot.run.mode=="traveling" then self.perform("step") end
+            if shot==5 and f==307 then self.perform("river",{method="ferry"}) end
+            if shot==6 then require("services.ambush_controller").update(self,1/30) end
             self.time=f/30;screens.draw(self);scene.update(self,self.time,shot==1 or shot==7 or shot==4,true)
             self.prepared=true;return
         end
