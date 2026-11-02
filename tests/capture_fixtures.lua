@@ -151,6 +151,17 @@ function M.crew_build_result(self)
     self.capture_settle=function() require("simulation.wagon_combat").step(self.ambush.battle,1800);self.redraw() end
     self.capture_assert=function() assert(self.ambush.battle.phase=="result") end
 end
+function M.crew_build_log(self)
+    M.crew_build_fight(self)
+    local settle=self.capture_settle
+    self.capture_settle=function() settle();self.ambush.show_log=true;self.redraw() end
+end
+function M.crew_build_name(self)
+    M.crew_build_setup(self)
+    self.capture_settle=function()
+        local u=self.ambush.battle.units[1];u.name="A very long companion name for the road";self.redraw()
+    end
+end
 function M.wagon_practice(self)
     reset(self,"trail");local s=self.snapshot.run;s.target=3;s.progress=s.distance;s.mode="landmark"
     self.practice_writer=function(value) assert(require("services.save").validate(value));return true end

@@ -13,6 +13,19 @@ local function drill()
     local p=model.new(1848);assert(model.command(p,"depart"));p.run.mode="landmark";p.run.target=3;p.run.progress=p.run.distance;return p
 end
 return function(test,equal)
+    test("battlefield feedback expires, names fit, and inspection cannot alter combat",function()
+        local view=require "presentation.ambush"
+        local s=c.new();c.start(s);c.step(s,55);local before=util.copy(s)
+        for _,u in ipairs(s.units) do
+            local x,y=view.point(u);assert(x>0 and y>0);view.feedback(s,u.id)
+        end
+        equal(s,before)
+        assert(view.short("Long player companion name",12)=="Long play...")
+        assert(view.short("יייייייי",6)=="ייי...")
+        s.events={{tick=50,kind="attack",source="pip",target="wagon",value=5}}
+        assert(view.feedback(s,"wagon").hit.value==5)
+        s.tick=58;assert(not view.feedback(s,"wagon").hit)
+    end)
     test("v1 ambush checkpoints keep their exact original resolver",function()
         local a=old.new("rush",22);old.start(a);old.step(a,32)
         local b=util.copy(a);assert(c.validate(b));c.step(b,1800);old.step(a,1800);equal(a,b)

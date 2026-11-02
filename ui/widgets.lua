@@ -80,7 +80,7 @@ function M.finish(self)
 end
 function M.highlight(self,x,y,keyboard)
     for i,b in ipairs(self.buttons) do
-        local hovered=x and gui.pick_node(b.node,x,y)
+        local hovered=x and (gui.pick_node(b.node,x,y) or (b.hit_node and gui.pick_node(b.hit_node,x,y)))
         local active=b.enabled and (hovered or (keyboard and i==self.focus))
         gui.set_color(b.node,M.color(not b.enabled and "panel" or (active and (b.primary and "gold" or "edge") or b.base)))
         gui.set_enabled(b.focus_mark,b.enabled and keyboard and i==self.focus or false)
@@ -89,7 +89,7 @@ end
 function M.activate(self,x,y)
     for i=#self.buttons,1,-1 do
         local b=self.buttons[i]
-        if b.enabled and gui.pick_node(b.node,x,y) then self.focus=i; b.fn(); return true end
+        if b.enabled and (gui.pick_node(b.node,x,y) or (b.hit_node and gui.pick_node(b.hit_node,x,y))) then self.focus=i; b.fn(); return true end
     end
 end
 function M.focus_next(self,direction)
