@@ -18,7 +18,7 @@ The [visual-direction guide](docs/VISUAL_DIRECTION.md) and [persistent project r
 
 ## First playable
 
-One complete expedition from preparation to an ending: six landmarks, two route choices, six creature species, eighteen authored event definitions, two optional battle scenarios, changing weather, fatigue and supplies, recruitment, local saving, and persistent companions and discoveries. A covered wagon unlock provides a different preparation choice.
+One complete expedition from preparation to an ending: six landmarks, two route choices, six creature species, twenty-eight authored event definitions, two optional battle scenarios, changing weather, fatigue and supplies, recruitment, local saving, and persistent companions and discoveries. A covered wagon unlock provides a different preparation choice. Select up to four active companions from an uncapped persistent collection, including duplicate species; new invitations remain collectable when the party is full. See [collection rules](docs/COLLECTION.md).
 
 Read the [playtest guide](docs/PLAYTEST.md) for controls, saves, and the current limitations. The art remains a selected concept pass with simple motion; final animation, richer scenery, and pacing need further playtesting and polish.
 
@@ -34,7 +34,7 @@ Install Java 25 or use the JDK bundled with Defold. From PowerShell in this dire
 ./tools/expedition_report.ps1 -Compare
 ```
 
-The scripts download the pinned official Defold builder and verify its checksum. Testing runs deterministic Lua checks, review/reporter integration checks, native save/load recovery, and 34 GUI state checks in an isolated save namespace. `-SkipEngine` skips native checks. CI uses `-Headless` for machines without a graphics driver; local checks use the release renderer. Headless checks exercise screen construction and bounds but do not verify rendered pixels or human input.
+The scripts download the pinned official Defold builder and verify its checksum. Testing runs deterministic Lua checks, review/reporter integration checks, native save/load recovery, and 36 GUI state checks in an isolated save namespace. `-SkipEngine` skips native checks. CI uses `-Headless` for machines without a graphics driver; local checks use the release renderer. Headless checks exercise screen construction and bounds but do not verify rendered pixels or human input.
 
 The build script creates a fresh `dist/Windows-0.1.0-<timestamp>/Trailomon/` folder and a ZIP alongside it. Run `Trailomon.exe` with the four `game.*` files beside it. Release builds do not start the engine's development server. The scripts avoid replacing a running executable and work around OneDrive directory attributes by using fresh output folders.
 
