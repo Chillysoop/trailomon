@@ -25,8 +25,8 @@ During a typical half-minute the player watches the wagon travel, reads a change
 | Area | First polished expedition |
 | --- | --- |
 | Journey | One complete route, six landmarks, two branch choices, one river crossing; target 20–35 minutes |
-| Crew | Six original species; one or two at departure and at most three traveling; samples and Mara wagon practice use up to three; existing road combat still uses two until S30; optional Discovery depot starts with one chosen hauler |
-| Combat | Target: independent units/attack clocks, repeatable skills, formation, equipment and wagon defense; two road scenarios plus practice. Current scripted encounters remain until the replacement is validated; preserve peaceful alternatives and expedition consequences |
+| Crew | Six original species; one or two at departure and at most three traveling; new-run road fights and Mara practice use up to three ready travelers; optional Discovery depot starts with one chosen hauler |
+| Combat | Implemented in S28–S30: independent units/attack clocks, repeatable skills, formation, equipment and wagon defense; two road scenarios plus practice. Peaceful alternatives remain. Old journeys retain their original combat; new journeys use the replacement and persist real expedition consequences |
 | Provisioning | Food, medicine, repairs, coins, cargo, and capacity; existing foraging with finite local yields; hunting deferred by approved P2 |
 | Survival | Weather, pace, rations, hauling, stamina, injuries, wagon wear, and cargo condition |
 | Progression | Named companions, species observations, courier recognition, selectable learned habits, memories, ten journey summaries, and standard/covered wagon alternatives |
