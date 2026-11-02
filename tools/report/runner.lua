@@ -18,6 +18,10 @@ local function observe(p)
     for i,c in ipairs(s.crew) do out.crew[i]={species=c.species,name=c.name,energy=c.stamina,condition=c.condition,duty=c.duty} end
     if s.pending then out.event=s.pending.id end
     if s.battle then out.battle={kind=s.battle.kind,round=s.battle.round,resolve=s.battle.resolve,outcome=s.battle.outcome,intent=util.copy(s.battle.intent)} end
+    if s.wagon_battle then
+        local b=s.wagon_battle.battle
+        out.battle={kind=b.scenario,phase=b.phase,tick=b.tick,seconds=b.tick/10,outcome=b.result}
+    end
     return out
 end
 M.observe=observe
@@ -92,7 +96,7 @@ function M.run(initial,strategy,opts)
                     if p.run.mode=='event' then
                         local pick=assert(policy.choice(p,intervention=='peaceful' and 'peaceful' or 'fight'),'Intervention unavailable')
                         return 'choice',{id=pick.id},'matched intervention: '..intervention
-                    elseif intervention=='withdraw' and p.run.mode=='combat_select' then return 'withdraw',{},'matched intervention: withdraw before the first exchange' end
+                    elseif intervention=='withdraw' and (p.run.mode=='combat_select' or p.run.mode=='wagon_combat') then return 'withdraw',{},'matched intervention: withdraw before the first exchange' end
                 end
                 return (opts.policy or policy.next)(p,strategy)
             end)
@@ -123,10 +127,11 @@ function M.run(initial,strategy,opts)
                 t.longest_travel_stretch=math.max(t.longest_travel_stretch,travel_stretch)
             else travel_stretch=0 end
             if id=='battle_step' then t.combat_exchanges=t.combat_exchanges+1 end
-            if gates[after.mode] and (after.mode~=before.mode or id=='choice' or id=='battle_continue') then
+            if id=='road_step' then t.combat_seconds=(t.combat_seconds or 0)+((after.battle and after.battle.tick or before.battle.tick)-before.battle.tick)/10 end
+            if (gates[after.mode] or after.mode=='wagon_combat' and after.battle.phase~='fight') and (after.mode~=before.mode or id=='choice' or id=='battle_continue' or id=='road_continue' or after.battle and before.battle and after.battle.phase~=before.battle.phase) then
                 report.waits[#report.waits+1]={action=index,day=after.day,mode=after.mode,event=after.event,notice=p.run.notice}
             end
-            if intervention and not report.intervention_result and p.run.mode~='event' and p.run.mode~='combat_select' and p.run.mode~='combat' then
+            if intervention and not report.intervention_result and p.run.mode~='event' and p.run.mode~='combat_select' and p.run.mode~='combat' and (p.run.mode~='wagon_combat' or p.run.wagon_battle.settled) then
                 report.intervention_result={action=index,method=intervention,delta=delta(initial_observation,after),after=util.copy(after)}
             end
             if p.run.mode=='result' then break end

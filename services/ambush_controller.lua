@@ -9,7 +9,7 @@ local function checkpoint(self)
     return ok
 end
 function M.open(self,storage)
-    if self.ambush and self.ambush.practice then self.ambush=nil end
+    if self.ambush and (self.ambush.practice or self.ambush.road) then M.pause(self);self.ambush=nil end
     if not self.ambush then
         storage=storage or persistence
         local record,notice=storage.load()
@@ -17,6 +17,36 @@ function M.open(self,storage)
             carry=record and record.carry or 0,paused=true,storage=storage,notice=notice}
     end
     self.open_page("ambush")
+end
+function M.open_road(self,writer)
+    local util=require "simulation.util"
+    local road=require "simulation.wagon_road"
+    if self.save_blocked or not road.active(self.snapshot.run) then return false end
+    local journey=self.snapshot.run.id
+    local record=util.copy(self.snapshot.run.wagon_battle)
+    local storage={load=function() return util.copy(self.snapshot.run.wagon_battle) end}
+    storage.write=function(value)
+        if self.save_blocked or self.snapshot.run.id~=journey then return false,"Journey changed" end
+        local candidate,why=road.commit(self.snapshot,value)
+        if not candidate then return false,why end
+        local ok,err=(writer or require("services.save").write)(candidate)
+        if not ok then return false,err end
+        self.snapshot=candidate
+        if candidate.run.mode=="result" then self.page="trail" end
+        return true
+    end
+    self.ambush={battle=record.battle,speed=record.speed,carry=record.carry,paused=true,storage=storage,road=true,writer=writer}
+    self.page="ambush";self.redraw();return true
+end
+function M.road_exit(self)
+    local a=self.ambush
+    if not a or not a.road or not checkpoint(self) then return false end
+    local candidate=require("simulation.util").copy(self.snapshot)
+    local action=candidate.run.wagon_battle.settled and "road_continue" or "battle_back"
+    local ok,why=require("simulation.expedition").command(candidate,action)
+    if ok then ok,why=(a.writer or require("services.save").write)(candidate) end
+    if not ok then a.error=why;a.paused=true;self.redraw();return false end
+    self.snapshot=candidate;self.ambush=nil;self.page="trail";self.redraw();return true
 end
 function M.open_practice(self,writer)
     local practice=require "simulation.wagon_practice"
@@ -42,18 +72,22 @@ end
 function M.command(self,action,arg)
     local a=self.ambush;if not a then return false end
     if action=="new" then
-        if a.practice then return false end
+        if a.practice or a.road then return false end
         a.battle=combat.new(arg or "guard");a.carry=0;a.paused=true;a.notice=nil
     elseif action=="start" then
+        if a.road then
+            local ok,why=require("simulation.wagon_road").ready(self.snapshot.run,a.battle)
+            if not ok then a.notice=why;self.redraw();return false end
+        end
         if a.practice then
             local ok,why=require("simulation.wagon_practice").ready(self.snapshot.run,a.battle)
             if not ok then a.notice=why;self.redraw();return false end
         end
         if not combat.start(a.battle) then return false end;a.paused=false
     elseif action=="replace" then
-        if a.practice or not combat.replace(a.battle,arg.id,arg.replacement) then return false end
+        if a.practice or a.road or not combat.replace(a.battle,arg.id,arg.replacement) then return false end
     elseif action=="equip" then
-        if a.practice and arg.item~="" and not (self.snapshot.run.work_items or {})[arg.item] then return false end
+        if (a.practice or a.road) and arg.item~="" and not (self.snapshot.run.work_items or {})[arg.item] then return false end
         if not combat.equip(a.battle,arg.id,arg.item) then return false end
     elseif action=="supply" then
         if not a.paused or not combat.supply(a.battle,arg) then return false end
@@ -62,7 +96,9 @@ function M.command(self,action,arg)
         if a.battle.phase~="fight" then return false end
         a.paused=not a.paused
     elseif action=="speed" then a.speed=a.speed==1 and 2 or 1
-    elseif action=="retreat" then if not combat.retreat(a.battle) then return false end;a.paused=true
+    elseif action=="retreat" then
+        if a.road and a.battle.phase=="setup" then combat.start(a.battle) end
+        if not combat.retreat(a.battle) then return false end;a.paused=true
     elseif action=="reload" then
         local record,notice=a.storage.load()
         if not record then a.notice=notice or "No ambush checkpoint";self.redraw();return false end
@@ -72,7 +108,11 @@ function M.command(self,action,arg)
     checkpoint(self);self.redraw();return true
 end
 function M.pause(self)
-    if self.ambush then self.ambush.paused=true;checkpoint(self);self.redraw() end
+    if self.ambush then
+        self.ambush.paused=true
+        if not self.ambush.road or require("simulation.wagon_road").active(self.snapshot.run) then checkpoint(self) end
+        self.redraw()
+    end
 end
 function M.update(self,dt)
     local a=self.ambush

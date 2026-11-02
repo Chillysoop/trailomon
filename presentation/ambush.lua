@@ -22,4 +22,22 @@ function M.feedback(s,id)
     end
     return result
 end
+-- Sprite-only, read-only accents. Positive Y is upward in Defold.
+-- Saved combat time makes pause/reload stable; no cosmetic RNG or outcome changes.
+function M.motion(s,u,carry,enabled)
+    if not enabled or s.phase~="fight" or u.hp<=0 then return 0,0 end
+    local dx,dy=0,0
+    for i=#s.events,1,-1 do
+        local e=s.events[i];local age=(s.tick-e.tick)*0.1+(carry or 0)
+        if age>0.4 then break end
+        if e.source==u.id then
+            if e.kind=="cast" then
+                dy=math.max(dy,6*math.sin(math.pi*math.min(1,age/0.4)))
+            elseif e.kind=="attack" or e.kind=="follow" then
+                dx=math.max(dx,8*math.sin(math.pi*math.min(1,age/0.3)))
+            end
+        end
+    end
+    return dx*(u.side=="crew" and 1 or -1),dy
+end
 return M

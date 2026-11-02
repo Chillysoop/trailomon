@@ -30,6 +30,11 @@ M.mara={
     caller={species="bellmoth",name="Mara's Bellmoth",skill="Practice rattle",active="Hit + slow defender for 3s",passive="Targets exposed crew"},
 }
 M.by_species={brindlehorn="moss",reedskipper="ripple",loamling="pip",bellmoth="lumen",cindercoil="ember",slatewhorl="flint"}
+-- Fixed road opponents, not scaled to the player's crew. Quiet options remain.
+M.road={
+    scavengers={raider={hp=110,name="Grain raider"},caller={hp=60,name="Thicket lookout"}},
+    territorial={raider={hp=184,species="slatewhorl",name="Ridge warden",skill="Boundary rush"},caller={hp=108,name="Ridge caller"}},
+}
 M.item_order={"", "padded_trace","release_rope","dry_wrap"}
 -- 1/2: front lanes 1/2. 3/4: rear lanes 1/2.
 M.positions={"Front 1","Front 2","Rear 1","Rear 2"}

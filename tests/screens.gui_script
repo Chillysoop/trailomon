@@ -1,4 +1,4 @@
-local model=require "simulation.expedition"
+local model=require "tests.legacy_model"
 local screens=require "ui.screens"
 local scene=require "presentation.scene"
 local input=require "ui.input"
@@ -289,6 +289,7 @@ function update(self,dt)
         if ok then self.interactions=coroutine.create(function()
             interaction_checks(self)
             require("tests.ambush_native").controls(self,button)
+            require("tests.road_native").controls(self,button)
         end)
         else msg.post("@system:","exit",{code=1}) end
     else self.index=self.index+1 end

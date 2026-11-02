@@ -12,7 +12,7 @@ end
 local function next_item(self,u)
     local order=content.item_order;local index=1
     for i,key in ipairs(order) do if key==(u.item or "") then index=i end end
-    for n=1,#order do local key=order[(index+n-1)%#order+1];if key=="" or not self.ambush.practice or (self.snapshot.run.work_items or {})[key] then return key end end
+    for n=1,#order do local key=order[(index+n-1)%#order+1];if key=="" or not (self.ambush.practice or self.ambush.road) or (self.snapshot.run.work_items or {})[key] then return key end end
 end
 local results={victory="Wagon defended",wagon_lost="Wagon disabled",crew_down="Crew needs care",retreated="Withdrew safely",stalemate="Stalemate / withdrew"}
 local function action(self,id,arg) return function() controller.command(self,id,arg) end end
@@ -77,7 +77,9 @@ local function unit(self,u)
     local selected=a.selected==u.id
     w.rect(self,x-41,y+1,82,5,"45543e")
     if selected then w.rect(self,x-49,y-3,98,3,"gold") end
-    local node=w.sprite(self,k.species,x,y+43,104,u.hp==0)
+    local dx,dy=view.motion(s,u,a.carry,self.snapshot.settings.motion)
+    local node=w.sprite(self,k.species,x+dx,y+43+dy,104,u.hp==0)
+    self.animated[#self.animated+1]={node=node,x=x,y=y+43,ambush=u.id}
     if u.side=="foe" then gui.set_scale(node,vmath.vector3(-1,1,1)) end
     meters(self,u,x,y)
     local status={}
@@ -87,7 +89,12 @@ local function unit(self,u)
     if #status>0 then center(self,x,y+138,table.concat(status," / "),11,"ink") end
     w.button(self,x-80,y-26,160,23,view.short(k.name,20),function() selection(self,u) end,{key="ambush_select_"..u.id,selected=selected,size=12})
     self.buttons[#self.buttons].hit_node=node
-    if s.phase=="setup" then center(self,x,y-39,combat.positions[u.position],10,"dark") end
+    if s.phase=="setup" then
+        local label=combat.positions[u.position]
+        local initial=a.road and self.snapshot.run.wagon_battle.initial.crew[u.id]
+        if initial then label=label.." / Energy "..math.floor(initial.stamina)..(initial.active and "" or " / resting") end
+        center(self,x,y-39,label,10,"dark")
+    end
     local f=view.feedback(s,u.id)
     if s.phase=="fight" then
         if f.hit then center(self,x+66,y+56,"-"..f.hit.value,21,"ink") end
@@ -142,7 +149,7 @@ local function inspector(self,u)
     w.text(self,300,139,k.passive,11,"muted",300)
     local gear=items.defs[u.item]
     if setup and u.side=="crew" then
-        if not a.practice and s.rules==combat.RULES then
+        if not a.practice and not a.road and s.rules==combat.RULES then
             local next_id=next_creature(s,u.id)
             w.button(self,620,173,196,31,"Swap > "..view.short(combat.kits[next_id].species,16),function()
                 a.selected=next_id;controller.command(self,"replace",{id=u.id,replacement=next_id})
@@ -174,13 +181,15 @@ function M.draw(self)
     if setup then a.show_log=false end
     local selected=combat.unit(s,a.selected or "")
     if not selected or selected.id=="wagon" then selected=combat.crew(s)[1];a.selected=selected.id end
-    w.text(self,28,689,a.practice and "MARA / WAGON DRILL" or "WAGON AMBUSH",24,"ink")
-    w.text(self,28,664,a.practice and "Practice / health and cargo safe" or "Sample / loaned crew and gear",12,"muted")
+    w.text(self,28,689,a.practice and "MARA / WAGON DRILL" or (a.road and (s.scenario=="scavengers" and "GRAIN RAID" or "RIDGE TERRITORY") or "WAGON AMBUSH"),24,"ink")
+    w.text(self,28,664,a.practice and "Practice / health and cargo safe" or (a.road and "Real crew / wagon / carried supplies" or "Sample / loaned crew and gear"),12,"muted")
     center(self,690,688,setup and "FORM YOUR CREW" or (s.phase=="result" and results[s.result] or (a.paused and "PAUSED" or "DEFEND THE WAGON")),19,"gold")
     if not setup then center(self,690,662,string.format("%.1fs",s.tick/10).." / "..a.speed.."x",12,"muted") end
-    w.button(self,870,666,170,32,"Reload sample",action(self,"reload"),{key="ambush_reload",size=12})
-    w.button(self,1052,666,200,32,"Back to journey",function() controller.pause(self);self.open_page("trail") end,{key="ambush_back",size=12})
-    if setup and not a.practice then
+    w.button(self,870,666,170,32,a.road and "Reload checkpoint" or "Reload sample",action(self,"reload"),{key="ambush_reload",size=12})
+    w.button(self,1052,666,200,32,a.road and (s.phase=="result" and "Continue journey" or "Back to choices") or "Back to journey",function()
+        if a.road then controller.road_exit(self) else controller.pause(self);self.open_page("trail") end
+    end,{key="ambush_back",size=12,enabled=not a.road or s.phase=="result" or require("simulation.wagon_road").can_back(self.snapshot.run)})
+    if setup and not a.practice and not a.road then
         for i,id in ipairs({"guard","rush","control"}) do w.button(self,28+(i-1)*170,631,162,27,combat.presets[id].label,action(self,"new",id),{key="ambush_"..id,selected=s.preset==id,size=12}) end
     else w.text(self,28,641,setup and "Your traveling crew / your carried gear" or "Select a creature to inspect",12,"muted") end
     w.text(self,916,641,"HP / Focus / attack clock",11,"muted")
@@ -196,10 +205,12 @@ function M.draw(self)
     for _,near in ipairs({false,true}) do for _,u in ipairs(s.units) do local _,y=view.point(u);if (y<400)==near then unit(self,u) end end end
     inspector(self,selected)
     if setup then
-        w.button(self,850,169,402,44,a.practice and "Start drill / -6 Energy each" or "Start ambush",action(self,"start"),{key="ambush_start",primary=true,size=16,enabled=not a.practice or require("simulation.wagon_practice").ready(self.snapshot.run,s)})
+        local ready=not a.road or require("simulation.wagon_road").ready(self.snapshot.run,s)
+        w.button(self,850,169,402,44,(a.practice or a.road) and "Start / -6 Energy per fighter" or "Start ambush",action(self,"start"),{key="ambush_start",primary=true,size=16,enabled=ready and (not a.practice or require("simulation.wagon_practice").ready(self.snapshot.run,s))})
         w.text(self,850,145,"Attacks and abilities repeat automatically.",13,"ink")
-        w.text(self,850,119,"Select a creature / set position and gear.",12,"muted")
-        w.text(self,850,91,a.practice and "Borrowed medicine and repair / no rewards" or "One copy per item / setup locks at Start",11,"muted")
+        w.text(self,850,119,a.road and "OUT: needs 6 Energy + positive Condition" or "Select a creature / set position and gear.",12,"muted")
+        w.text(self,850,91,a.practice and "Borrowed medicine and repair / no rewards" or (a.road and "Max 1 carried medicine + 1 repair / no new rewards" or "One copy per item / setup locks at Start"),11,"muted")
+        if a.road then w.button(self,850,56,402,28,"Withdraw / "..(s.scenario=="scavengers" and ("up to "..require("simulation.equipment").retreat_loss(self.snapshot.run).." food + cargo") or "+1 day / meals"),action(self,"retreat"),{key="ambush_retreat",size=12}) end
     elseif s.phase=="fight" then
         w.button(self,850,177,194,36,a.paused and "Resume" or "Pause",action(self,"pause"),{key="ambush_pause",primary=true,size=14})
         w.button(self,1056,177,196,36,"Speed "..a.speed.."x",action(self,"speed"),{key="ambush_speed",size=14})
@@ -209,15 +220,19 @@ function M.draw(self)
             w.button(self,850+(i-1)*206,135,196,32,label,action(self,"supply",id),{key="ambush_supply_"..id,size=11,icon=id,enabled=a.paused and target~=nil})
         end end
         w.text(self,850,119,"Pause for supplies / SPACE pause",11,"muted")
-        w.button(self,850,66,194,33,"Withdraw",action(self,"retreat"),{key="ambush_retreat",size=13})
+        w.button(self,850,66,194,33,a.road and (s.scenario=="scavengers" and "Withdraw / food + cargo" or "Withdraw / +1 day") or "Withdraw",action(self,"retreat"),{key="ambush_retreat",size=11})
+        if a.road then w.text(self,850,106,s.scenario=="scavengers" and ("Up to "..require("simulation.equipment").retreat_loss(self.snapshot.run).." food + cargo on defeat / withdrawal") or "Defeat / withdrawal: +1 day and meals",10,"muted") end
     else
-        w.text(self,850,195,"Wagon damage: "..(100-s.wagon.hp),18,"ink")
-        w.text(self,850,168,a.practice and "6 Energy each spent once / health safe" or "Sample / no expedition penalties",12,"muted")
-        if not a.practice then w.button(self,850,111,402,40,"New sample",action(self,"new",s.preset),{key="ambush_new",primary=true,size=14}) end
+        local receipt=a.road and self.snapshot.run.wagon_battle and self.snapshot.run.wagon_battle.receipt
+        w.text(self,850,195,receipt and string.format("Wagon %+.0f / Cargo %+.0f",receipt.wagon,receipt.cargo) or ("Wagon damage: "..(100-s.wagon.hp)),18,"ink")
+        w.text(self,850,168,receipt and string.format("Food %+d / Days +%d / Med %d / Fix %d",receipt.food,receipt.days,receipt.medicine,receipt.repairs) or (a.practice and "6 Energy each spent once / health safe" or "Sample / no expedition penalties"),12,"muted")
+        if receipt then
+            for i,u in ipairs(combat.crew(s)) do local v=receipt.crew[u.id];w.text(self,850,143-(i-1)*19,string.format("%s  Energy %+.0f / Condition %+.0f",view.short(name(s,u.id),14),v.energy,v.condition),11,"ink") end
+        elseif not a.practice and not a.road then w.button(self,850,111,402,40,"New sample",action(self,"new",s.preset),{key="ambush_new",primary=true,size=14}) end
     end
     if not setup then w.button(self,1056,66,196,33,a.show_log and "Close log" or "Battle log",function() a.show_log=not a.show_log;self.redraw() end,{key="ambush_log",selected=a.show_log,size=13}) end
     log_panel(self)
     w.text(self,28,36,"Select / TAB + ENTER",11,"muted")
-    w.text(self,300,36,a.error or a.notice or (a.practice and "Saved with journey / reload pauses" or "Separate checkpoint / reload pauses"),11,a.error and "red" or "muted")
+    w.text(self,300,36,a.error or a.notice or ((a.practice or a.road) and "Saved with journey / reload pauses" or "Separate checkpoint / reload pauses"),11,a.error and "red" or "muted")
 end
 return M

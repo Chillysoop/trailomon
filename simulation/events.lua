@@ -61,7 +61,7 @@ function M.available(s, choice, profile)
         if profile.roster[choice.recruit] then return false, "Already at your depot" end
         for _, c in ipairs(s.crew) do if c.species == choice.recruit then return false, "Already traveling with you" end end
     end
-    if choice.battle then
+    if choice.battle and not (s.road_combat_rules=="wagon-road-v1" and choice.battle~="courier") then
         local ready = false
         local ordinary=combat.costs(s)
         for _, c in ipairs(s.crew) do if resources.ready(c, ordinary) then ready = true end end
@@ -115,7 +115,7 @@ function M.cost_text(s, choice)
         end
     end
     if choice.gamble then pieces[#pieces+1]="Chance of saved distance or wagon damage" end
-    if choice.battle then pieces[#pieces+1]="Short battle; injuries and fatigue persist" end
+    if choice.battle then pieces[#pieces+1]=s.road_combat_rules=="wagon-road-v1" and choice.battle~="courier" and "Inspect freely / auto-combat / -6 Energy per fighter / injuries + wagon damage persist" or "Short battle; injuries and fatigue persist" end
     if choice.hint then pieces[#pieces+1]=choice.hint end
     return #pieces > 0 and table.concat(pieces, " / ") or "No supplies required"
 end

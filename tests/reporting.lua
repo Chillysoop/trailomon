@@ -1,4 +1,4 @@
-local model=require 'simulation.expedition'
+local model=require 'tests.legacy_model'
 local util=require 'simulation.util'
 local runner=require 'tools.report.runner'
 local policy=require 'tools.report.policy'

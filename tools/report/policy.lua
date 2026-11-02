@@ -1,7 +1,7 @@
 -- Frozen reference policies from tests/run.lua. These are benchmark behaviors,
 -- not optimal players. Keep versioning explicit when a policy changes.
 local model=require 'simulation.expedition'
-local M={VERSION='reference-v1+road-receipts',names={'careful','peaceful','fighter'}}
+local M={VERSION='reference-v1+road-receipts+wagon-v1',names={'careful','peaceful','fighter'}}
 function M.choice(p,kind)
     local event=model.events.by_id[p.run.pending.id]
     for _,c in ipairs(event.choices) do
@@ -32,6 +32,13 @@ function M.next(p,strategy)
         if strategy=='fighter' then pick=M.choice(p,'fight') or pick end
         assert(pick,'No available event choice')
         return 'choice',{id=pick.id},strategy=='fighter' and 'prefer battle when available' or 'first available reference choice'
+    elseif s.mode=='wagon_combat' then
+        local b=s.wagon_battle.battle
+        if b.phase=='setup' then
+            if require('simulation.wagon_road').ready(s,b) then return 'road_start',{},'traveling crew / default formation' end
+            return 'withdraw',{},'no ready fighters or disabled wagon'
+        elseif b.phase=='fight' then return 'road_step',{ticks=50},'five seconds of automatic combat / no supplies'
+        else return 'road_continue',{},'acknowledge wagon encounter result' end
     elseif s.mode=='combat_select' then
         local team={}
         for i,c in ipairs(s.crew) do if #team<2 and model.resources.ready(c,4) then team[#team+1]=i end end

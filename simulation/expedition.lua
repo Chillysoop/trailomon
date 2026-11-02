@@ -14,6 +14,7 @@ local field_guide=require "simulation.field_guide"
 local courier=require "simulation.courier"
 local habits=require "simulation.habits"
 local tracking=require "simulation.tracking"
+local road=require "simulation.wagon_road"
 local M = {SCHEMA=1, CONTENT=1, route=route, species=species, resources=resources, events=events, combat=combat, equipment=equipment, trail_reports=require "simulation.trail_reports"}
 
 local function log(s,text)
@@ -39,7 +40,7 @@ local function prepare(snapshot,seed)
         crew=crew,hauler=1,
         rng={weather=rng.seed(seed+11),events=rng.seed(seed+173),combat=rng.seed(seed+1019)},
         seen={},flags={},discoveries={},branches={},forage={},tracks={},cooldown=1,log={},warnings={},
-        outcome="",ending="",wildlife_rules="wildlife-v1",courier_rules=courier.RULES,combat_effort=combat.EFFORT,river_roll=rng.seed(seed+923)%100/100}
+        outcome="",ending="",road_combat_rules=road.RULES,wildlife_rules="wildlife-v1",courier_rules=courier.RULES,combat_effort=combat.EFFORT,river_roll=rng.seed(seed+923)%100/100}
     p.next_id=p.next_id+1
     snapshot.run=s
     log(s,"Orchard cuttings for Lantern Reach. Preferred arrival: day 26. Road closes on day 32.")
@@ -57,6 +58,7 @@ function M.finish(snapshot,outcome,description)
     if s.mode=="result" then return false end
     s.mode,s.outcome,s.ending="result",outcome,description
     s.pending,s.battle,s.encounter=nil,nil,nil
+    s.wagon_battle=nil
     s.return_rng=nil
     log(s,description)
     progression.commit(snapshot.profile,s)
@@ -329,6 +331,7 @@ local function resolve(snapshot,id)
     local ok,why=events.available(s,choice,snapshot.profile)
     if not ok then return false,why end
     if choice.battle then
+        if s.road_combat_rules==road.RULES and choice.battle~="courier" then return road.open(s,choice.battle) end
         -- Looking at positions is reversible. Keep the event's fixed roll and
         -- quiet-day counter until an exchange or withdrawal commits the choice.
         s.mode="combat_select";s.encounter=choice.battle
@@ -374,6 +377,7 @@ local function resolve(snapshot,id)
 end
 
 function M.can_back_to_event(s)
+    if road.active(s) then return road.can_back(s) end
     return s.pending~=nil and (s.mode=="combat_select" or
         (s.mode=="combat" and combat.automatic(s.battle) and #s.battle.history==0))
 end
@@ -419,6 +423,24 @@ local function battle_end(snapshot,outcome)
     end
 end
 
+function M.road_end(snapshot,outcome)
+    local s=snapshot.run
+    if outcome=="victory" then
+        log(s,"Wagon defended. Condition and wagon damage carry forward.")
+        for _,u in ipairs(require("simulation.wagon_combat").crew(s.wagon_battle.battle)) do
+            if s.wagon_battle.initial.crew[u.id].active then
+                for _,c in ipairs(s.crew) do if c.species==require("content.ambush").kits[u.id].species then progression.memory(c,"Helped protect the wagon on the trail.") end end
+            end
+        end
+    elseif s.encounter=="scavengers" then
+        local loss=equipment.retreat_loss(s)
+        effects(s,{food=-loss,cargo=-loss});log(s,"Withdraw: up to "..loss.." food and "..loss.." cargo left behind.")
+    else
+        log(s,"Withdraw: one day around the ridge territory.");day(snapshot,false,false)
+    end
+    check_warnings(s)
+end
+
 local function stopped(s)
     return s.mode=="stopped" or s.mode=="landmark" or s.mode=="traveling"
 end
@@ -426,6 +448,8 @@ end
 function M.command(snapshot,command,arg)
     local s=snapshot.run
     arg=arg or {}
+    if command:sub(1,5)=="road_" then return road.command(snapshot,command:sub(6),arg) end
+    if road.active(s) and command=="withdraw" then return road.command(snapshot,"retreat") end
     if command=="habit" then return habits.toggle(snapshot,arg.species) end
     if command=="meet_wild" then return require("simulation.discovery").meet(snapshot) end
     if command=="starter" then return require("simulation.discovery").starter(snapshot,arg.species) end
@@ -586,6 +610,7 @@ function M.command(snapshot,command,arg)
     elseif command=="river" and s.mode=="landmark" and s.target==4 then return cross(snapshot,arg.method)
     elseif command=="choice" and s.mode=="event" then return resolve(snapshot,arg.id)
     elseif command=="battle_back" and M.can_back_to_event(s) then
+        s.wagon_battle=nil
         if s.return_rng then s.rng.combat=s.return_rng end
         s.battle=nil;s.encounter=nil;s.return_rng=nil;s.mode="event"
         return true
@@ -646,4 +671,6 @@ function M.debug(snapshot,action,value)
     return false,"Debug action unavailable"
 end
 
+road.log=log
+road.on_end=M.road_end
 return M

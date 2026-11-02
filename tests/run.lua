@@ -1,5 +1,5 @@
 package.path="./?.lua;./?/init.lua;"..package.path
-local model=require "simulation.expedition"
+local model=require "tests.legacy_model"
 local save=require "services.save"
 local util=require "simulation.util"
 local progression=require "simulation.progression"
@@ -247,6 +247,7 @@ end)
 require("tests.tracking")(test,command,valid,assert_equal)
 require("tests.wagon_combat")(test,assert_equal)
 require("tests.crew_builds")(test,assert_equal)
+require("tests.wagon_road")(test,assert_equal)
 require("tests.discovery_habits")(test,command,valid,assert_equal)
 require("tests.courier")(test,command,valid,assert_equal)
 require("tests.wildlife")(test,command,valid,assert_equal)

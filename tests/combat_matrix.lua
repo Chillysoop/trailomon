@@ -1,6 +1,6 @@
 -- Deterministic balance evidence; stdout is CSV, suitable for a saved report.
 package.path="./?.lua;./?/init.lua;"..package.path
-local model=require "simulation.expedition"
+local model=require "tests.legacy_model"
 local progression=require "simulation.progression"
 local save=require "services.save"
 print("seed,scenario,terrain,weather,approach,wagon,starting_energy,outcome,exchanges,cargo_loss,condition_loss,energy_spent,days,food_loss")

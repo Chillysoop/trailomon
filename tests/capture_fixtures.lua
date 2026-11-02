@@ -1,4 +1,4 @@
-local model=require "simulation.expedition"
+local model=require "tests.legacy_model"
 local M={}
 local function reset(self,page)
     self.snapshot=model.new(1848);assert(model.command(self.snapshot,"depart"))
@@ -6,7 +6,7 @@ local function reset(self,page)
     self.battle_team={};self.battle_actions={};self.edit=nil;self.save_blocked=false
     self.combat_paused=true;self.combat_speed=1;self.combat_log=nil
     self.capture_actions={};self.capture_assert=nil;self.capture_settle=nil
-    self.practice_writer=nil
+    self.practice_writer=nil;self.road_writer=nil
     self.toast="Automated fixture / isolated / no player save"
 end
 function M.click(self,key)
@@ -348,5 +348,54 @@ function M.closure_arrival(self)
     reset(self,"trail");local s=self.snapshot.run;s.target=6;s.distance=35;s.progress=34.5;s.day=31
     assert(model.command(self.snapshot,"resume"));assert(model.command(self.snapshot,"step"))
     assert(s.outcome=="rescued" and s.progress==35);self.redraw()
+end
+-- S30 actual road encounter callbacks, with an in-memory save writer.
+function M.road_setup(self)
+    reset(self,"trail");self.ambush=nil
+    local current=require "simulation.expedition"
+    self.snapshot=current.new(73);assert(current.command(self.snapshot,"depart"))
+    self.snapshot.run.food=70;self.snapshot.run.work_items={padded_trace=true,release_rope=true}
+    self.snapshot.run.crew[1].work_item="padded_trace";self.snapshot.run.crew[2].work_item="release_rope"
+    assert(current.debug(self.snapshot,"event","scavengers"));assert(current.command(self.snapshot,"choice",{id="battle"}))
+    self.road_writer=function(p) assert(require("services.save").validate(p));return true end
+    self.redraw()
+    self.capture_assert=function() assert(self.page=="ambush" and self.ambush.road and self.ambush.battle.phase=="setup") end
+end
+function M.road_fight(self)
+    M.road_setup(self);self.capture_actions={"ambush_start"}
+    self.capture_settle=function()
+        local controller=require "services.ambush_controller"
+        self.has_focus=true
+        for _=1,18 do controller.update(self,0.1) end
+        controller.pause(self);self.redraw()
+    end
+    self.capture_assert=function() assert(self.ambush.battle.tick==18 and self.ambush.paused and self.snapshot.run.wagon_battle.charged) end
+end
+function M.road_ability(self)
+    M.road_fight(self)
+    self.capture_settle=function()
+        local controller=require "services.ambush_controller";self.has_focus=true
+        for _=1,41 do controller.update(self,0.1) end
+        controller.pause(self);self.ambush.selected="pip";self.redraw()
+    end
+    self.capture_assert=function() assert(self.ambush.battle.tick==41 and self.ambush.battle.units[2].stats.casts>0) end
+end
+function M.road_result(self)
+    M.road_fight(self)
+    self.capture_settle=function()
+        local controller=require "services.ambush_controller";self.has_focus=true
+        for _=1,720 do controller.update(self,0.25);if self.ambush.battle.phase=="result" then break end end
+        self.redraw()
+    end
+    self.capture_assert=function() assert(self.snapshot.run.wagon_battle.settled) end
+end
+function M.road_exhausted(self)
+    M.road_setup(self)
+    local current=require "simulation.expedition"
+    assert(current.command(self.snapshot,"battle_back"))
+    for _,c in ipairs(self.snapshot.run.crew) do c.stamina=0 end
+    self.snapshot.run.medicine=0;self.snapshot.run.repairs=0
+    assert(current.command(self.snapshot,"choice",{id="battle"}));self.redraw()
+    self.capture_assert=function() assert(not require("simulation.wagon_road").ready(self.snapshot.run,self.ambush.battle)) end
 end
 return M

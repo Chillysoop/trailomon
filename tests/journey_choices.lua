@@ -1,4 +1,4 @@
-local model=require "simulation.expedition"
+local model=require "tests.legacy_model"
 local save=require "services.save"
 local util=require "simulation.util"
 return function(test,command,valid,equal)

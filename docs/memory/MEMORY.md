@@ -9,9 +9,9 @@
 - [next-steps.md](next-steps.md): current phase audit, next-1 codes, priority semantics, and cross-page decision mapping.
 - [clarity.md](clarity.md): shared icon system, N2/N4 implementation, preview limits, and focused playtest evidence.
 - [reporting.md](reporting.md): N1/S2 report commands, reproducibility, committed baseline, findings and measurement limits.
-- [journey-playtest.md](journey-playtest.md): N8 whole-trip outcomes, new J1–J4 proposals, crash/recovery evidence and remaining physical checks.
+- [journey-playtest.md](journey-playtest.md): N8 whole-trip outcomes, new J1â€“J4 proposals, crash/recovery evidence and remaining physical checks.
 - [native-crash.md](native-crash.md): verified Windows fault symbol/offset, binary provenance, investigation limits and next reproduction.
-- [choice-clarity.md](choice-clarity.md): J1–J4 approvals, reversible combat setup, exact food previews, road receipts and saved viewing speed.
+- [choice-clarity.md](choice-clarity.md): J1â€“J4 approvals, reversible combat setup, exact food previews, road receipts and saved viewing speed.
 - [iteration.md](iteration.md): owner-requested fast workflow, scoped verification, batching, direct Git push and optional testing tools.
 - [guardian.md](guardian.md): N3 authored-pattern experiment, historical comparisons and capture gotchas.
 - [combat-costs.md](combat-costs.md): N1/S5 reduced effort, guardian adoption, compatibility and remaining balance limits.
@@ -24,10 +24,10 @@
 - [journal-aims.md](journal-aims.md): N11 optional accomplishments, compatibility, award rules and focused validation.
 - [balance-study.md](balance-study.md): S5 crew/item/route comparison, encounter/save fixes, evidence limits and new E1/E2 choices.
 
-- [creature-encounters.md](creature-encounters.md): W1–W6 approvals, wildlife/guide/courier/acquisition/habit integration and verification.
+- [creature-encounters.md](creature-encounters.md): W1â€“W6 approvals, wildlife/guide/courier/acquisition/habit integration and verification.
 
-- [discovery-tracks.md](discovery-tracks.md): D1–D3 chat approval, missing-hauler recruitment, field clues, saved searches and validation.
-- [identity-audit.md](identity-audit.md): Oregon Trail/creature identity, measured combat frequency, exploration pressure and unapproved A1–A3 choices.
+- [discovery-tracks.md](discovery-tracks.md): D1â€“D3 chat approval, missing-hauler recruitment, field clues, saved searches and validation.
+- [identity-audit.md](identity-audit.md): Oregon Trail/creature identity, measured combat frequency, exploration pressure and unapproved A1â€“A3 choices.
 
 - [creature-direction.md](creature-direction.md): 300-species minimum, approved ability-first design, rejected terrain effects and roster pipeline.
 - [wagon-ambush.md](wagon-ambush.md): S28 independent combat, prototype access, checkpoint isolation, validation and limits.
@@ -35,3 +35,5 @@
 - [crew-builds.md](crew-builds.md): S29 six kits, equipment, paid Mara practice, save compatibility and build comparisons.
 
 - [trailer.md](trailer.md): 20-second private hype trailer, source footage, soundtrack and rebuild/delivery limits.
+
+- [road-combat.md](road-combat.md): S30 expedition accounting, compatibility, motion, replay evidence and remaining balance limits.

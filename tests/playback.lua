@@ -1,5 +1,5 @@
 -- Exercise the actual GUI controller with no rendering, sound, or disk side effects.
-local model=require "simulation.expedition"
+local model=require "tests.legacy_model"
 local util=require "simulation.util"
 return function(test,command,valid,equal)
     test("actual controller coalesces redraws and pauses on focus, menus and reload",function()
