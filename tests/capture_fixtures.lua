@@ -432,4 +432,20 @@ function M.care_legacy(self) M.care_readings(self);self.snapshot.run.recovery_ru
 function M.items_current(self)
     reset(self,"work_items");self.snapshot=require("simulation.expedition").new(1848,"discovery");self.redraw()
 end
+function M.clarity_kits(self)
+    reset(self,"crew");self.snapshot=require("simulation.expedition").new(1848)
+    assert(require("simulation.expedition").command(self.snapshot,"depart"))
+    local companion=require("simulation.progression").companion
+    self.snapshot.run.crew={companion("brindlehorn"),companion("loamling"),companion("bellmoth")}
+    self.redraw()
+end
+function M.clarity_ability(self)
+    M.clarity_kits(self)
+    self.snapshot.run.crew[2].memories={"Met at Split Oak.","Found roots together.","Crossed Willowford.","Held the wagon's lane.","Rested below Cairn Gate.","Arrived at Lantern Reach."}
+    self.redraw();self.capture_actions={"detail2"}
+    self.capture_assert=function() assert(self.page=="companion" and self.detail==2) end
+end
+function M.clarity_ability_legacy(self)
+    M.clarity_ability(self);self.snapshot.run.road_combat_rules=nil;self.redraw()
+end
 return M
