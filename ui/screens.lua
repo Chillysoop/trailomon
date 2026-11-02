@@ -38,6 +38,7 @@ local function sidebar(self)
     w.panel(self,890,58,362,562)
     w.icon(self,910,584,"time",22)
     label(self,942,595,"DAY "..string.format("%02d",s.day).."  /  "..s.weather:upper())
+    label(self,942,578,"Due D26 / road closes D32")
     local stats={{"PROVISIONS",s.food,"food"},{"COINS",s.coins,"coins"},{"WAGON",util.round(s.wagon).."%","wagon"},{"CARGO",util.round(s.cargo).."%","cargo"},{"TRAVELER",util.round(s.traveler).."%","condition"},{"FOOD DAYS",model.forecast(s).days,"time"}}
     for i,stat in ipairs(stats) do
         local x=910+((i-1)%3)*111; local y=562-math.floor((i-1)/3)*68
@@ -136,7 +137,7 @@ local function travel(self)
     local main_label=s.mode=="traveling" and "Pause the wagon" or "Follow the road"
     local main_command=s.mode=="traveling" and "pause" or "resume"
     w.button(self,44,232,250,40,main_label,cmd(self,main_command),{primary=true,size=15,icon="trail"})
-    w.button(self,306,232,162,40,(self.snapshot.settings.travel_speed or 1)==1 and "Speed: calm" or "Speed: brisk",cmd(self,"settings",{key="travel_speed"}),{key="travel_speed",size=13})
+    w.button(self,306,232,162,40,(self.snapshot.settings.travel_speed or 1)==1 and "Playback: calm" or "Playback: brisk",cmd(self,"settings",{key="travel_speed"}),{key="travel_speed",size=12,icon="time"})
     w.button(self,480,232,170,40,"Pace: "..s.pace,function()
         local next={easy="steady",steady="hurried",hurried="easy"};self.perform("policy",{key="pace",value=next[s.pace]})
     end,{size=12})
@@ -244,6 +245,7 @@ local function camp(self)
         {label="Repair the wagon",icon="repairs",key="camp_repair",detail=s.wagon>=100 and "The wagon needs no repairs." or (s.repairs<1 and "Needs 1 repair material." or "1 day + meals + 1 repair / +30 wagon"..(recovery.repair_rests(s) and " + crew rest" or "")..(s.flags.axle_lashed and " / secures axle" or "")),enabled=available and s.repairs>0 and s.wagon<100,fn=cmd(self,"repair")},
         {label="Treat the traveler",icon="medicine",detail=s.traveler>=100 and "The traveler is already in good condition." or (s.medicine<1 and "Needs 1 medicine." or "1 day + meals + 1 medicine / +35 condition and rest"),enabled=available and s.medicine>0 and s.traveler<100,fn=cmd(self,"treat")}},"CAMP / THE CLOCK IS STOPPED")
     w.button(self,50,151,220,31,"Back to the journey",page(self,"trail"),{size=12,icon="trail"})
+    w.button(self,580,151,260,31,"Choose crew to treat",page(self,"crew"),{key="camp_crew",size=12,icon="medicine"})
 end
 local function shop(self)
     local s=self.snapshot.run
@@ -272,12 +274,16 @@ local function crew(self)
         label(self,169,y+88,c.temperament.." / Trust "..c.trust)
         w.reading(self,444,y+88,"stamina",util.round(c.stamina),{size=12,icon_size=12})
         w.reading(self,620,y+88,"condition",util.round(c.condition),{size=12,icon_size=12})
-        w.text(self,169,y+66,def.ability,12,"muted")
-        w.text(self,169,y+48,"Work item: "..model.equipment.label(c),11,"gold")
+        w.reading(self,169,y+71,iconography.role(c.species),nil,{label="Road: "..def.role,size=12,icon_size=12})
+        if s.road_combat_rules=="wagon-road-v1" then
+            local content=require "content.ambush";local kit=content.kits[content.by_species[c.species]]
+            w.reading(self,478,y+71,"assist",nil,{label="Combat: "..kit.skill,size=12,icon_size=12})
+        end
+        w.reading(self,169,y+53,"capacity",nil,{label="Equipped: "..model.equipment.label(c),size=11,icon_size=12})
         w.button(self,169,y+15,145,30,"Duty: "..c.duty,cmd(self,"duty",{member=idx}),{enabled=can,size=12,key="duty"..idx})
         w.button(self,324,y+15,144,30,i==s.hauler and "Hauler" or "Assign haul",cmd(self,"hauler",{member=idx}),{enabled=can and def.draft,selected=i==s.hauler,size=12,key="haul"..idx,icon="haul"})
         w.button(self,478,y+15,170,30,"Treat & rest",cmd(self,"treat",{member=idx}),{enabled=can and s.mode~="preparation" and s.medicine>0 and c.condition<100,size=12,key="treat"..idx,icon="medicine"})
-        w.button(self,658,y+15,184,30,"Name & memories",function() self.detail=idx;self.open_page("companion") end,{size=12,key="detail"..idx})
+        w.button(self,658,y+15,184,30,"Abilities & story",function() self.detail=idx;self.open_page("companion") end,{size=12,key="detail"..idx})
     end
     if #s.crew<3 then w.text(self,28,75,"Make room for a friend you have not met yet.",14,"muted") end
 end
@@ -289,12 +295,23 @@ local function companion(self)
     w.sprite(self,c.species,164,443,190)
     w.text(self,304,517,c.name,30,"ink")
     w.text(self,304,481,model.species.defs[c.species].name.." / "..c.temperament,16,"muted")
-    w.text(self,304,449,model.species.defs[c.species].ability,14,"muted",500)
-    w.button(self,304,365,232,36,"Give a new name",function() self.edit={kind="name",member=self.detail or 1,value=c.name};self.redraw() end,{size=13})
-    label(self,50,317,"THINGS YOU HAVE SHARED")
-    if #c.memories==0 then w.text(self,50,279,"The first page is still blank.",15,"muted") end
-    for i,memory in ipairs(c.memories) do w.text(self,50,285-(i-1)*26,memory,13,"ink") end
-    w.button(self,50,111,200,34,"Back to the crew",page(self,"crew"),{size=13})
+    w.reading(self,304,447,iconography.role(c.species),nil,{label="Road / "..model.species.defs[c.species].role,size=14,icon_size=16})
+    w.text(self,304,427,model.species.defs[c.species].ability,12,"muted",520)
+    if s.road_combat_rules=="wagon-road-v1" then
+        local content=require "content.ambush";local kit=content.kits[content.by_species[c.species]]
+        w.reading(self,304,385,"assist",nil,{label="Combat / "..kit.skill,size=16,icon_size=16})
+        w.text(self,304,361,kit.active,13,"ink")
+        w.text(self,304,337,kit.passive,12,"muted")
+        w.reading(self,304,309,"focus",kit.cost.." Focus",{label="Repeats at",size=12,icon_size=12})
+        w.text(self,304,284,"Condition sets starting HP. Energy pays for the fight.",11,"muted")
+    else
+        w.reading(self,304,380,"assist",nil,{label="Encounter / "..model.species.defs[c.species].assist,size=14,icon_size=16})
+    end
+    w.button(self,50,315,232,34,"Give a new name",function() self.edit={kind="name",member=self.detail or 1,value=c.name};self.redraw() end,{size=13})
+    label(self,50,250,"THINGS YOU HAVE SHARED")
+    if #c.memories==0 then w.text(self,50,220,"The first page is still blank.",15,"muted") end
+    for i,memory in ipairs(c.memories) do w.text(self,50,225-(i-1)*16,memory,12,"ink") end
+    w.button(self,50,96,200,34,"Back to the crew",page(self,"crew"),{size=13})
 end
 local function map(self)
     local s=self.snapshot.run
@@ -357,7 +374,7 @@ local function settings(self)
     choices(self,"Make yourself comfortable.","The expedition is saved after every completed day and decision. Menus pause travel. Calm speed takes 20 seconds per day; brisk speed takes 2.5.",{
         {label="Sound: "..(self.snapshot.settings.sound and "on" or "off"),detail="Quiet feedback for decisions and arrivals",fn=cmd(self,"settings",{key="sound"})},
         {label="Motion: "..(self.snapshot.settings.motion and "gentle" or "reduced"),detail="Stops ambient movement when reduced",fn=cmd(self,"settings",{key="motion"})},
-        {label="Travel view: "..((self.snapshot.settings.travel_speed or 1)==1 and "calm" or "brisk"),detail="Remembered between visits; travel pace and daily costs stay the same",fn=cmd(self,"settings",{key="travel_speed"}),key="travel_speed",icon="time"},
+        {label="Playback: "..((self.snapshot.settings.travel_speed or 1)==1 and "calm" or "brisk"),detail="View only / travel pace and daily costs stay the same",fn=cmd(self,"settings",{key="travel_speed"}),key="travel_speed",icon="time"},
         {label="Save this moment",detail="Save now; it is safe to close the window afterward",fn=function() self.save_now();self.redraw() end},
         {label="Expedition seed: "..s.seed,detail=s.mode=="preparation" and "Change the seed before leaving the depot" or "Replay this seed from the result screen",enabled=s.mode=="preparation",key="settings_seed",fn=function() self.edit={kind="seed",value=tostring(s.seed)};self.redraw() end}},"OPTIONS")
     local destination=self.snapshot.profile.start_mode=="discovery" and "classic" or "discovery"

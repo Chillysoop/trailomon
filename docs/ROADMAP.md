@@ -1,5 +1,7 @@
 # Trailomon roadmap
 
+November 2 integration audit: [fresh reference comparison](INTEGRATION_AUDIT.md) and [three new I1–I3 decisions](../reviews/integration-1.html). Crew Road/Combat descriptions, kit details, direct camp care, playback naming and persistent deadline readings improve S10 clarity. No balance or art changes; S10 remains doing for its existing hands-on gaps. S32–S36 stay approved. Full-crew invitations, learned threat reports and distinct road-opponent plans remain proposals until answered; old identity percentages are not current-build measurements.
+
 November 2 S10: [two full rendered walkthroughs](../reviews/journey-2.html) deliver on days 26/24 with two searches each. Recovery-heavy and prepared-party approaches both finish; solo combat remains costly. Fixed treatment totals and stale equipment descriptions, preserving legacy rules. S10 is doing: desktop input interrupted the hands-on attempt, so physical controls, listening, real-time pacing and activation reliability remain open. No new balance or art work.
 
 November 2 S5 Discovery recovery pass: new journeys use fed camp recovery of 40 Energy / 20 Condition; repair days also grant camp recovery. Legacy saves retain 25/8 and old repair behavior. [Study and limits](DISCOVERY_BALANCE.md): 1,152 matched journeys, each repeated exactly, 154 Lua checks, native saves and four rendered recovery screens. Brindlehorn adaptive two-search deliveries improve 13→20/24. Deadlines, search costs and enemies remain unchanged. S5 stays doing; human pacing and wider balance remain open.

@@ -1,5 +1,7 @@
 # Project memory
 
+- [integration-audit.md](integration-audit.md): fresh three-reference audit, I1–I3 open proposals, Road/Combat clarity and capture-preview gotcha.
+
 - [preferences.md](preferences.md): owner decisions, scope, tone, art requirements, and deferred directions.
 - [setup.md](setup.md): verified environment, tool access, review delivery, and setup progress.
 - [review-pages.md](review-pages.md): published review codes, answers acted on, and pending submissions.
