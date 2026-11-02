@@ -56,6 +56,8 @@ end
 function M.finish(snapshot,outcome,description)
     local s=snapshot.run
     if s.mode=="result" then return false end
+    -- Calling for help must not erase injuries already taken in a road fight.
+    if road.active(s) and not s.wagon_battle.settled then road.apply_condition(s) end
     s.mode,s.outcome,s.ending="result",outcome,description
     s.pending,s.battle,s.encounter=nil,nil,nil
     s.wagon_battle=nil

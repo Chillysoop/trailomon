@@ -35,6 +35,15 @@ local function exchanged(b)
     for _,u in ipairs(b.units) do if u.stats.attacks>0 or u.stats.casts>0 then return true end end
     return false
 end
+function M.apply_condition(s)
+    local r=s.wagon_battle;local b=r.battle
+    s.wagon=clamp(r.initial.wagon+(b.wagon.hp-r.initial.wagon_hp))
+    if b.wagon.hp==0 then s.wagon=0 end
+    for _,u in ipairs(combat.crew(b)) do
+        local c=member(s,u.id);local before=r.initial.crew[u.id]
+        if before.active then c.condition=u.hp==0 and 0 or clamp(before.condition+(u.hp-before.hp)*100/u.max_hp) end
+    end
+end
 local function commit_choice(s,b)
     if s.pending then
         M.log(s,"Defend the wagon / "..b.scenario..".")
@@ -72,12 +81,7 @@ function M.apply(snapshot,record)
     s.wagon_battle=r
     if b.phase=="result" and not r.settled then
         commit_choice(s,b)
-        s.wagon=clamp(r.initial.wagon+(b.wagon.hp-r.initial.wagon_hp))
-        if b.wagon.hp==0 then s.wagon=0 end
-        for _,u in ipairs(combat.crew(b)) do
-            local c=member(s,u.id);local before=r.initial.crew[u.id]
-            if before.active then c.condition=u.hp==0 and 0 or clamp(before.condition+(u.hp-before.hp)*100/u.max_hp) end
-        end
+        M.apply_condition(s)
         r.settled=true
         M.on_end(snapshot,b.result)
         r.receipt={wagon=s.wagon-r.initial.wagon,food=s.food-r.initial.food,cargo=s.cargo-r.initial.cargo,
