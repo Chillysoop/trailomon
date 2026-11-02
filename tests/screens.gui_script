@@ -290,6 +290,7 @@ function update(self,dt)
             interaction_checks(self)
             require("tests.ambush_native").controls(self,button)
             require("tests.road_native").controls(self,button)
+            require("tests.care_readings_native").controls(self,button)
         end)
         else msg.post("@system:","exit",{code=1}) end
     else self.index=self.index+1 end
