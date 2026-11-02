@@ -23,6 +23,7 @@
 
 - [journal-aims.md](journal-aims.md): N11 optional accomplishments, compatibility, award rules and focused validation.
 - [balance-study.md](balance-study.md): S5 crew/item/route comparison, encounter/save fixes, evidence limits and new E1/E2 choices.
+- [discovery-balance.md](discovery-balance.md): S5 solo-start recovery tuning, versioned camps, exploration comparisons and remaining pacing limits.
 
 - [creature-encounters.md](creature-encounters.md): W1–W6 approvals, wildlife/guide/courier/acquisition/habit integration and verification.
 

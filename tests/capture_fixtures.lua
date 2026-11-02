@@ -398,4 +398,29 @@ function M.road_exhausted(self)
     assert(current.command(self.snapshot,"choice",{id="battle"}));self.redraw()
     self.capture_assert=function() assert(not require("simulation.wagon_road").ready(self.snapshot.run,self.ambush.battle)) end
 end
+function M.discovery_camp(self)
+    reset(self,"camp")
+    local current=require "simulation.expedition"
+    self.snapshot=current.new(1,"discovery")
+    assert(current.command(self.snapshot,"starter",{species="reedskipper"}));assert(current.command(self.snapshot,"depart"))
+    assert(current.debug(self.snapshot,"event","scavengers"));assert(current.command(self.snapshot,"choice",{id="battle"}))
+    assert(current.command(self.snapshot,"road_move",{id="ripple",position=3}));assert(current.command(self.snapshot,"road_start"))
+    for _=1,100 do
+        if self.snapshot.run.wagon_battle.battle.phase=="result" then break end
+        assert(current.command(self.snapshot,"road_step",{ticks=20}))
+    end
+    assert(current.command(self.snapshot,"road_continue"));self.redraw()
+    self.capture_assert=function() assert(self.page=="camp" and self.snapshot.run.crew[1].condition<50) end
+end
+function M.discovery_rest(self)
+    M.discovery_camp(self);local before=require("simulation.util").copy(self.snapshot.run)
+    self.capture_actions={"camp_rest"}
+    self.capture_assert=function() assert(self.snapshot.run.day==before.day+1 and self.snapshot.run.crew[1].condition==math.min(100,before.crew[1].condition+20)) end
+end
+function M.discovery_repair(self)
+    M.discovery_camp(self);local before=require("simulation.util").copy(self.snapshot.run)
+    self.capture_actions={"camp_repair"}
+    self.capture_assert=function() assert(self.snapshot.run.day==before.day+1 and self.snapshot.run.repairs==before.repairs-1 and self.snapshot.run.crew[1].condition==math.min(100,before.crew[1].condition+20)) end
+end
+function M.legacy_camp(self) reset(self,"camp");self.redraw() end
 return M

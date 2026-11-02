@@ -236,11 +236,12 @@ local function landmark(self)
 end
 local function camp(self)
     local s=self.snapshot.run;local forage=model.forage_preview(s);local food=model.resources.daily_food(s)
+    local recovery=require "simulation.recovery";local energy,condition=recovery.values(s)
     local available=s.mode=="stopped" or s.mode=="landmark" or s.mode=="traveling"
     choices(self,"A little time to recover.","Each action: 1 day + meals.",{
-        {label="Rest the whole crew",icon="rest",detail="1 day / "..food.." food / up to +25 energy and +8 condition",enabled=available,fn=cmd(self,"rest")},
+        {label="Rest the whole crew",icon="rest",key="camp_rest",detail="1 day / "..food.." food / up to +"..energy.." Energy / +"..condition.." Condition",enabled=available,fn=cmd(self,"rest")},
         {label="Gather nearby provisions",icon="forage",detail=forage.closing and "The road closes tomorrow; no harvest can be brought back." or (forage.gross<=0 and "This stretch has been gathered clean." or "Review 1 day, meals, carrying room and "..(forage.net>=0 and "+" or "")..forage.net.." expected provisions."),enabled=available and forage.gross>0 and not forage.closing,fn=page(self,"forage"),key="gather_preview"},
-        {label="Repair the wagon",icon="repairs",detail=s.wagon>=100 and "The wagon needs no repairs." or (s.repairs<1 and "Needs 1 repair material." or "1 day + meals + 1 repair material / +30 wagon"..(s.flags.axle_lashed and " / secures the loose axle" or " condition")),enabled=available and s.repairs>0 and s.wagon<100,fn=cmd(self,"repair")},
+        {label="Repair the wagon",icon="repairs",key="camp_repair",detail=s.wagon>=100 and "The wagon needs no repairs." or (s.repairs<1 and "Needs 1 repair material." or "1 day + meals + 1 repair / +30 wagon"..(recovery.repair_rests(s) and " + crew rest" or "")..(s.flags.axle_lashed and " / secures axle" or "")),enabled=available and s.repairs>0 and s.wagon<100,fn=cmd(self,"repair")},
         {label="Treat the traveler",icon="medicine",detail=s.traveler>=100 and "The traveler is already in good condition." or (s.medicine<1 and "Needs 1 medicine." or "1 day + meals + 1 medicine / +35 condition and rest"),enabled=available and s.medicine>0 and s.traveler<100,fn=cmd(self,"treat")}},"CAMP / THE CLOCK IS STOPPED")
     w.button(self,50,151,220,31,"Back to the journey",page(self,"trail"),{size=12,icon="trail"})
 end

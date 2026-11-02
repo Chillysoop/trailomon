@@ -1,5 +1,7 @@
 # Trailomon roadmap
 
+November 2 S5 Discovery recovery pass: new journeys use fed camp recovery of 40 Energy / 20 Condition; repair days also grant camp recovery. Legacy saves retain 25/8 and old repair behavior. [Study and limits](DISCOVERY_BALANCE.md): 1,152 matched journeys, each repeated exactly, 154 Lua checks, native saves and four rendered recovery screens. Brindlehorn adaptive two-search deliveries improve 13→20/24. Deadlines, search costs and enemies remain unchanged. S5 stays doing; human pacing and wider balance remain open.
+
 November 2 post-S30 audit: still core systems. [The current work queue](../reviews/after-combat.html) recommends already-authorized S5 full-trip balance and S10 feel/reliability, then S32 symbiosis as the first new mechanic. S33/S35/S34/S36 follow. All 148 simulation checks pass; new combat's solo/Discovery outcomes and selective-search timing need investigation. Human enjoyment, physical input/audio and release-candidate checks remain open. No new approval, stat change or gameplay feature is implied by this audit.
 
 Updated November 1, 2026. Scope: one polished Windows expedition before new regions. The playable foundation already shipped in [PR 1](https://github.com/Chillysoop/trailomon/pull/1), including the complete route, the original manual battles, foraging, saves, and progression. The owner approved plan-1 P1–P5 (hosted revision 7); combat comes first, equipment follows its testing. Statuses describe shipped work, not approvals.

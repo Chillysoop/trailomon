@@ -15,6 +15,7 @@ local courier=require "simulation.courier"
 local habits=require "simulation.habits"
 local tracking=require "simulation.tracking"
 local road=require "simulation.wagon_road"
+local recovery_rules=require "simulation.recovery"
 local M = {SCHEMA=1, CONTENT=1, route=route, species=species, resources=resources, events=events, combat=combat, equipment=equipment, trail_reports=require "simulation.trail_reports"}
 
 local function log(s,text)
@@ -40,7 +41,7 @@ local function prepare(snapshot,seed)
         crew=crew,hauler=1,
         rng={weather=rng.seed(seed+11),events=rng.seed(seed+173),combat=rng.seed(seed+1019)},
         seen={},flags={},discoveries={},branches={},forage={},tracks={},cooldown=1,log={},warnings={},
-        outcome="",ending="",road_combat_rules=road.RULES,wildlife_rules="wildlife-v1",courier_rules=courier.RULES,combat_effort=combat.EFFORT,river_roll=rng.seed(seed+923)%100/100}
+        outcome="",ending="",recovery_rules=recovery_rules.RULES,road_combat_rules=road.RULES,wildlife_rules="wildlife-v1",courier_rules=courier.RULES,combat_effort=combat.EFFORT,river_roll=rng.seed(seed+923)%100/100}
     p.next_id=p.next_id+1
     snapshot.run=s
     log(s,"Orchard cuttings for Lantern Reach. Preferred arrival: day 26. Road closes on day 32.")
@@ -180,6 +181,7 @@ local function day(snapshot,moving,resting)
     local fed=s.food>=need
     s.food=math.max(0,s.food-need)
     local recovery=resources.rations[s.rations].recovery
+    local rest_energy,rest_condition=recovery_rules.values(s)
     local warmer=resources.find(s,"cindercoil",8)
     local warm=warmer and warmer.duty=="work" and s.weather=="cold"
     if warm then warmer.stamina=math.max(0,warmer.stamina-5) end
@@ -196,10 +198,10 @@ local function day(snapshot,moving,resting)
         end
         local effort=c==hauler and resources.haul_effort(s,c) or (working and 2 or 0)
         if c==hauler and c.species=="reedskipper" and s.weather=="clear" and s.terrain~="marsh" then effort=effort+2+habits.dry_haul(c) end
-        local gain=fed and (resting and 25 or recovery+(working and 0 or 4)) or 0
+        local gain=fed and (resting and rest_energy or recovery+(working and 0 or 4)) or 0
         if fed and s.weather=="rain" and equipment.has(c,"dry_wrap") then gain=gain+3 end
         c.stamina=util.clamp(c.stamina-effort+gain-exposure,0,100)
-        c.condition=util.clamp(c.condition+(fed and (resting and 8 or 0) or -6),0,100)
+        c.condition=util.clamp(c.condition+(fed and (resting and rest_condition or 0) or -6),0,100)
     end
     if not fed then log(s,"There was not enough food today. The crew is weaker.") end
     if moving then
@@ -552,13 +554,14 @@ function M.command(snapshot,command,arg)
     elseif command=="step" and s.mode=="traveling" then return day(snapshot,true,false)
     elseif command=="rest" and stopped(s) then
         local ok,why=day(snapshot,false,true)
-        log(s,"Spent a quiet day recovering. Well-fed companions regain up to 25 stamina and 8 condition.")
+        local energy,condition=recovery_rules.values(s)
+        log(s,"Spent a quiet day recovering. Well-fed companions regain up to "..energy.." stamina and "..condition.." condition.")
         if s.mode=="traveling" then s.mode="stopped" end
         return ok,why
     elseif command=="repair" and stopped(s) then
         if s.repairs<1 then return false,"Need one repair material" end
         if s.wagon>=100 then return false,"The wagon is already sound" end
-        s.repairs=s.repairs-1; day(snapshot,false,false)
+        s.repairs=s.repairs-1; day(snapshot,false,recovery_rules.repair_rests(s))
         if s.mode~="result" then s.wagon=math.min(100,s.wagon+30); log(s,"Refitted the wagon. Condition +30."); secure_axle(s); if s.mode=="traveling" then s.mode="stopped" end end
         return true
     elseif command=="treat" and stopped(s) then
