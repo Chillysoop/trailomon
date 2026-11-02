@@ -1,0 +1,74 @@
+-- Offline promotional footage; copied only into the isolated capture project.
+local model=require "simulation.expedition"
+local screens=require "ui.screens"
+local scene=require "presentation.scene"
+local fixtures=require "tests.capture_fixtures"
+local combat=require "simulation.wagon_combat"
+local function finish(self,ok,why)
+    self.finished=true
+    local f=assert(io.open("trailer-capture.json","wb"));f:write(json.encode({ok=ok,error=why or "",frames=self.frame,fps=30}));f:close()
+    msg.post("@system:","exit",{code=ok and 0 or 1})
+end
+local function setup(self,shot)
+    self.ambush=nil
+    if shot==1 then fixtures.route_meadow(self)
+    elseif shot==2 then fixtures.discovery_recruit(self)
+    elseif shot==3 then fixtures.crew_build_setup(self)
+    elseif shot==4 then fixtures.items_prep(self)
+    elseif shot==5 then fixtures.route_river(self)
+    elseif shot==6 then fixtures.crew_build_fight(self)
+    else fixtures.route_ridge(self) end
+    -- Fixture actions run one per engine frame, just like normal capture QA.
+    self.shot=shot;self.ready=false;self.prepared=false
+end
+function init(self)
+    window.set_size(1280,720)
+    self.frame=0;self.time=0;self.frames=0
+    self.redraw=function() self.needs_draw=true end
+    self.perform=function(id,arg,page) assert(model.command(self.snapshot,id,arg));self.page=page or self.page;self.redraw() end
+    self.open_page=function(page) self.page=page;self.redraw() end
+    self.reset_clock=function() end
+    self.save_now=function() error("Trailer must never save player data") end
+    self.toggle_combat=function() self.combat_paused=not self.combat_paused;self.redraw() end
+end
+function update(self,dt)
+    if self.finished or self.pending then return end
+    local ok,why=pcall(function()
+        if self.frame>=600 then finish(self,true);return end
+        local f=self.frame
+        local shot=f<90 and 1 or f<180 and 2 or f<240 and 3 or f<330 and 4 or f<390 and 5 or f<510 and 6 or 7
+        if shot~=self.shot then setup(self,shot);screens.draw(self);self.needs_draw=false;return end
+        if not self.ready then
+            if #self.capture_actions>0 then fixtures.click(self,table.remove(self.capture_actions,1))
+            else
+                self.capture_settle=nil;self.ready=true;self.toast="Prototype footage / isolated capture"
+                if (shot==1 or shot==7) and self.snapshot.run.mode=="stopped" then assert(model.command(self.snapshot,"resume")) end
+                if shot==6 then combat.step(self.ambush.battle,70);self.ambush.paused=false;self.ambush.speed=2 end
+            end
+            if self.needs_draw then screens.draw(self);self.needs_draw=false end
+            return
+        end
+        if not self.prepared then
+            -- Commands are real production actions; only elapsed clocks are scripted.
+            if shot==2 and f==135 then self.perform("choice",{id="invite"});self.page="crew" end
+            if shot==3 and f==210 then fixtures.click(self,"ambush_select_pip") end
+            if shot==4 and f==263 then self.perform("buy",{item="food"}) end
+            if shot==4 and f==283 then self.perform("depart",nil,"trail");self.perform("resume") end
+            if shot==4 and (f==296 or f==315) and self.snapshot.run.mode=="traveling" then self.perform("step") end
+            if shot==5 and f==360 then self.perform("river",{method="ferry"}) end
+            if shot==6 and (f-390)%3==0 then combat.step(self.ambush.battle,2) end
+            self.time=f/30;screens.draw(self);scene.update(self,self.time,shot==1 or shot==7 or shot==4,true)
+            self.prepared=true;return
+        end
+        self.pending=true
+        screenshot.png(function(_,png,width,height)
+            local saved,err=pcall(function()
+                assert(width==1280 and height==720)
+                local file=assert(io.open(string.format("frame-%04d.png",self.frame),"wb"));file:write(png);file:close()
+                self.frame=self.frame+1;self.pending=false;self.prepared=false
+            end)
+            if not saved then finish(self,false,tostring(err)) end
+        end)
+    end)
+    if not ok then finish(self,false,tostring(why)) end
+end

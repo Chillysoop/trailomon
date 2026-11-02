@@ -33,3 +33,5 @@
 - [wagon-ambush.md](wagon-ambush.md): S28 independent combat, prototype access, checkpoint isolation, validation and limits.
 
 - [crew-builds.md](crew-builds.md): S29 six kits, equipment, paid Mara practice, save compatibility and build comparisons.
+
+- [trailer.md](trailer.md): 20-second private hype trailer, source footage, soundtrack and rebuild/delivery limits.
