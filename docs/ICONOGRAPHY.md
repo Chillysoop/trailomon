@@ -52,3 +52,7 @@ Inspect the new mark beside every current symbol at its intended size, without c
 ## Wagon ambush (S28)
 
 Focus uses concentric open brackets around a center, violet like abilities. It is a separate combat resource, not travel Energy. HP uses the existing health/Condition mark and a written HP value; shields use Cover with a Shield label. Attack timers use written seconds, including while slowed or stunned. Focus is in the Crew & encounters guide group.
+
+## Collection — November 2, 2026
+
+Collection uses three cubbies beneath a pitched roof, violet like creature records. It means all owned individuals, distinct from the paw-marked active Crew/Party. Shared labels distinguish Collected, Party and At depot; numbered identities distinguish duplicate species. The four-member sidebar retains Energy/Condition words, values and separate meters. New collection departures replace crew points with a four-slot limit and a hauler requirement.

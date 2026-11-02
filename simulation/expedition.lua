@@ -16,6 +16,7 @@ local habits=require "simulation.habits"
 local tracking=require "simulation.tracking"
 local road=require "simulation.wagon_road"
 local recovery_rules=require "simulation.recovery"
+local collection=require "simulation.collection"
 local M = {SCHEMA=1, CONTENT=1, route=route, species=species, resources=resources, events=events, combat=combat, equipment=equipment, trail_reports=require "simulation.trail_reports"}
 
 local function log(s,text)
@@ -44,6 +45,7 @@ local function prepare(snapshot,seed)
         outcome="",ending="",recovery_rules=recovery_rules.RULES,road_combat_rules=road.RULES,wildlife_rules="wildlife-v1",courier_rules=courier.RULES,combat_effort=combat.EFFORT,river_roll=rng.seed(seed+923)%100/100}
     p.next_id=p.next_id+1
     snapshot.run=s
+    if p.collection then collection.prepare(snapshot) end
     log(s,"Orchard cuttings for Lantern Reach. Preferred arrival: day 26. Road closes on day 32.")
     return s
 end
@@ -51,6 +53,7 @@ end
 function M.new(seed,mode)
     local snapshot={schema=M.SCHEMA,content=M.CONTENT,profile=progression.profile(mode),settings={sound=true,motion=true,travel_speed=1}}
     prepare(snapshot,seed or 1848)
+    collection.ensure(snapshot)
     return snapshot
 end
 
@@ -367,9 +370,14 @@ local function resolve(snapshot,id)
     if choice.observe then field_guide.observe(s,choice.observe) end
     if choice.discovery then s.discoveries[choice.discovery]=true end
     if choice.recruit then
-        s.crew[#s.crew+1]=progression.companion(choice.recruit)
-        s.discoveries[choice.recruit]=true
-        log(s,species.defs[choice.recruit].name .. " joins the wagon. Food now costs " .. resources.daily_food(s) .. " per day.")
+        if collection.enabled(s) then
+            local c,traveling=collection.collect(snapshot,choice.recruit)
+            log(s,species.defs[c.species].name.." #"..c.uid..(traveling and " joins the party / "..#s.crew.." of 4 / "..resources.daily_food(s).." meals per day." or " joins your depot collection / party stays 4 of 4."))
+        else
+            s.crew[#s.crew+1]=progression.companion(choice.recruit)
+            s.discoveries[choice.recruit]=true
+            log(s,species.defs[choice.recruit].name .. " joins the wagon. Food now costs " .. resources.daily_food(s) .. " per day.")
+        end
     end
     if choice.memory then
         if helper then progression.memory(helper,choice.memory)
@@ -433,7 +441,7 @@ function M.road_end(snapshot,outcome)
         log(s,"Wagon defended. Condition and wagon damage carry forward.")
         for _,u in ipairs(require("simulation.wagon_combat").crew(s.wagon_battle.battle)) do
             if s.wagon_battle.initial.crew[u.id].active then
-                for _,c in ipairs(s.crew) do if c.species==require("content.ambush").kits[u.id].species then progression.memory(c,"Helped protect the wagon on the trail.") end end
+                local c=require("simulation.wagon_combat").member(s,u.id);progression.memory(c,"Helped protect the wagon on the trail.")
             end
         end
     elseif s.encounter=="scavengers" then
@@ -454,7 +462,8 @@ function M.command(snapshot,command,arg)
     arg=arg or {}
     if command:sub(1,5)=="road_" then return road.command(snapshot,command:sub(6),arg) end
     if road.active(s) and command=="withdraw" then return road.command(snapshot,"retreat") end
-    if command=="habit" then return habits.toggle(snapshot,arg.species) end
+    if command=="collect_select" then return collection.select(snapshot,arg.uid) end
+    if command=="habit" then return habits.toggle(snapshot,arg.species,arg.uid) end
     if command=="meet_wild" then return require("simulation.discovery").meet(snapshot) end
     if command=="starter" then return require("simulation.discovery").starter(snapshot,arg.species) end
     if command=="settings" then
@@ -477,6 +486,11 @@ function M.command(snapshot,command,arg)
         s.river_roll=rng.seed(n+923)%100/100; return true
     elseif command=="crew" and s.mode=="preparation" then
         local id=arg.species
+        if collection.enabled(s) then
+            for _,c in ipairs(s.crew) do if c.species==id then return collection.select(snapshot,c.uid) end end
+            for _,c in ipairs(snapshot.profile.collection) do if c.species==id then return collection.select(snapshot,c.uid) end end
+            return false,"Meet this companion on the trail first"
+        end
         if not snapshot.profile.roster[id] then return false,"Meet this companion on the trail first" end
         for i,c in ipairs(s.crew) do if c.species==id then table.remove(s.crew,i); s.hauler=1; return true end end
         if #s.crew>=2 then return false,"Choose at most two companions at departure" end
@@ -489,11 +503,12 @@ function M.command(snapshot,command,arg)
         if resources.weight(s)>wagons[arg.id].capacity then return false,"Reduce supplies to fit this wagon" end
         s.wagon_type=arg.id; return true
     elseif command=="depart" and s.mode=="preparation" then
-        if #s.crew<1 or #s.crew>2 then return false,"Choose one or two companions" end
+        if #s.crew<1 or #s.crew>(collection.enabled(s) and 4 or 2) then return false,"Choose 1 to "..(collection.enabled(s) and 4 or 2).." companions" end
         local draft
         for i,c in ipairs(s.crew) do if species.defs[c.species].draft then draft=i; break end end
         if not draft then return false,"Choose a companion that can pull the wagon" end
         s.hauler=draft; s.mode="stopped"
+        if collection.enabled(s) then collection.remember_party(snapshot) end
         aims.depart(s)
         tracking.enter(snapshot)
         log(s,"Left Fernwake with " .. #s.crew .. " companions. Space follows the road; every decision waits for you.")

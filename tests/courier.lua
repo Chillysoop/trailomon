@@ -1,4 +1,4 @@
-local model=require "simulation.expedition"
+local model=require "tests.pre_collection_model"
 local util=require "simulation.util"
 local progression=require "simulation.progression"
 local courier=require "simulation.courier"

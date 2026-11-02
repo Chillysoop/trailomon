@@ -27,12 +27,15 @@ function M.valid(c)
     if c.habit_days~=nil and (type(c.habit_days)~="number" or c.habit_days~=math.floor(c.habit_days) or c.habit_days<0 or c.habit_days>3) then return false end
     return (c.habit==nil or c.habit==true) and (not c.habit or c.habit_days==3)
 end
-function M.toggle(snapshot,id)
+function M.toggle(snapshot,id,uid)
     local s,p=snapshot.run,snapshot.profile
     if s.mode~="preparation" then return false,"Choose habits at the departure depot" end
-    for _,c in ipairs(s.crew) do if c.species==id then
+    for _,c in ipairs(s.crew) do if (uid and c.uid==uid) or (not uid and c.species==id) then
         if c.habit_days~=3 then return false,"Share three well-fed working travel days first" end
-        if c.habit then c.habit=nil else c.habit=true end;p.roster[id].habit=c.habit
+        if c.habit then c.habit=nil else c.habit=true end
+        if p.collection then
+            local owned=require("simulation.collection").find(p,c.uid);owned.habit=c.habit;owned.habit_days=c.habit_days
+        else p.roster[id].habit=c.habit end
         return true
     end end
     return false,"Choose this companion for the journey first"

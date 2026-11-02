@@ -2,10 +2,11 @@
 -- Extend a category when a feature ships; never borrow an unrelated glyph.
 local M={groups={
     {label="Supplies & time",ids={"food","coins","repairs","medicine","wagon","cargo","capacity","time"}},
-    {label="Crew & encounters",ids={"condition","stamina","haul","approach","pressure","guard","assist","crew","focus"}},
+    {label="Crew & encounters",ids={"condition","stamina","haul","approach","pressure","guard","assist","crew","focus","collection"}},
     {label="On the road",ids={"trail","map","flag","rest","forage","dig","water","scout","warm","journal","settings"}},
 }}
 M.defs={
+    collection={label="Collection",meaning="All owned companions, including depot reserves.",shape="three cubbies beneath a pitched roof"},
     food={label="Provisions",meaning="Food packed for daily meals.",shape="grain stalk"},
     coins={label="Coins",meaning="Money available for trade and fares.",shape="ringed coin"},
     repairs={label="Repairs",meaning="Materials used to mend the wagon.",shape="hammer"},
@@ -43,7 +44,7 @@ local tones={
     brass={"coins","time","stamina","haul","warm"},
     rose={"condition","medicine"},
     river={"guard","water","rest"},
-    violet={"assist","scout","crew","journal","focus"},
+    violet={"assist","scout","crew","journal","focus","collection"},
     stone={"repairs","wagon","capacity","settings"},
     clay={"pressure"},linen={"trail","map","flag","approach"},
 }

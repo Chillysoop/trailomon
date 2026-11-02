@@ -1,4 +1,4 @@
-local model=require "simulation.expedition"
+local model=require "tests.pre_collection_model"
 local tracking=require "simulation.tracking"
 local discovery=require "simulation.discovery"
 local guide=require "simulation.field_guide"

@@ -66,3 +66,7 @@ The deterministic step is 100 ms. Each live unstunned unit gains one Focus; sepa
 Moss gains 55 extra DEF in front and repeatedly shields himself (22) and the wagon (8). Ember’s attack interval is 1.5 seconds in rear / 0.8 seconds in front, with an intercepted-hit follow-up and a repeated single-target skill. Lumen stuns the caller for 1.4 seconds and grants 6 Focus to the lowest-ready ally. Enemy ordinary attacks and their repeating rush/slow skills use individual HP and targets. Shields cap at maximum HP, do not repair lost integrity, and armor uses the reference diminishing-mitigation formula. No permanent death, cargo loss or travel Energy charge exists in this sample.
 
 The `wagon_ambush_v1` checkpoint uses a separate file and backup inside the active save namespace. It retains the snapshot, RNG, effect sources/expirations, target IDs, attack clocks, Focus, speed and partial tick. Reload, focus loss and leaving the sample pause it. Save failures pause playback. The production journey schema is unchanged.
+
+## Four-companion collection integration — November 2, 2026
+
+The owner expanded the active party to four. All four may enter a wagon encounter, including separate individuals of the same species. The existing four formation positions are used; each individual has its own clocks, HP, Focus, item and accounting. Existing v1/v2 saves remain valid and old battle outcomes retain their resolver. Enemy statistics and per-fighter costs are unchanged.

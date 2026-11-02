@@ -2,10 +2,7 @@ local species=require "content.species"
 local util=require "simulation.util"
 local aims=require "simulation.journal_aims"
 local M={}
-function M.companion(id)
-    local def=species.defs[id]
-    return {species=id,name=def.friend,temperament=def.temperament,condition=100,stamina=100,trust=1,memories={},duty="work"}
-end
+function M.companion(id) return require("simulation.collection").companion(id) end
 function M.profile(mode)
     local p={roster={},discoveries={},history={},covered=false,next_id=1,last_committed=0,aims=aims.empty(),start_mode=mode=="discovery" and "discovery" or nil}
     if mode=="discovery" then p.starter="brindlehorn";p.roster.brindlehorn=M.companion("brindlehorn");p.discoveries.brindlehorn=true;return p end
@@ -34,12 +31,14 @@ function M.commit(p,s)
         home.work_item=nil -- Supplies are packed afresh for each expedition.
         home.trust=math.min(3,home.trust+1)
         p.roster[c.species]=home
+        if p.collection then require("simulation.collection").home(p,home) end
         p.discoveries[c.species]=true
     end
     for id in pairs(s.discoveries) do p.discoveries[id]=true end
     if s.flags.river_inspected and s.flags.river_crossed then p.covered=true end
     p.history[#p.history+1]={id=s.id,seed=s.seed,day=s.day,outcome=s.outcome,cargo=s.cargo,route=util.copy(s.branches),summary=s.ending}
     if #p.history>10 then table.remove(p.history,1) end
+    if p.collection then require("simulation.collection").remember_party({profile=p,run=s}) end
     p.last_committed=s.id
     return true
 end

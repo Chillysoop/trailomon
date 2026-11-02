@@ -2,6 +2,7 @@ local util=require "simulation.util"
 local model=require "simulation.expedition"
 local species=require "content.species"
 local aims=require "simulation.journal_aims"
+local collection=require "simulation.collection"
 local M={}
 local active_slot="classic"
 local selected=false
@@ -44,7 +45,7 @@ local function validate(snapshot)
         if not companion(c) or c.species~=id or c.work_item~=nil then return false,"Invalid saved companion" end
         roster_count=roster_count+1
     end
-    if roster_count>6 then return false,"Roster too large" end
+    if roster_count>#species.order then return false,"Roster too large" end
     if p.start_mode=="discovery" then
         if (p.starter~="brindlehorn" and p.starter~="reedskipper") or not p.roster[p.starter] then return false,"Missing discovery hauler" end
     elseif p.start_mode~=nil then return false,"Unknown depot mode"
@@ -52,7 +53,7 @@ local function validate(snapshot)
     for _,record in ipairs(p.history) do
         if type(record)~="table" or not integer(record.id,1,p.last_committed) or not outcomes[record.outcome] or not integer(record.seed,0,2147483646) or not number(record.day,1,32) or not number(record.cargo,0,100) or type(record.summary)~="string" or type(record.route)~="table" then return false,"Invalid history" end
     end
-    if not integer(s.seed,0,2147483646) or not integer(s.day,1,32) or not integer(s.target,2,6) or not integer(s.hauler,1,3) then return false,"Invalid journey position" end
+    if not integer(s.seed,0,2147483646) or not integer(s.day,1,32) or not integer(s.target,2,6) or not integer(s.hauler,1,collection.enabled(s) and 4 or 3) then return false,"Invalid journey position" end
     if not number(s.progress,0,100) or not number(s.distance,1,100) or s.progress>s.distance then return false,"Invalid route progress" end
     if s.wagon_type~="standard" and s.wagon_type~="covered" then return false,"Invalid wagon" end
     if not model.resources.paces[s.pace] or not model.resources.rations[s.rations] then return false,"Invalid travel policies" end
@@ -68,16 +69,17 @@ local function validate(snapshot)
         end
     end
     if model.resources.weight(s)>model.resources.capacity(s) then return false,"Wagon is over capacity" end
-    if type(s.crew)~="table" or #s.crew>3 or (s.mode~="preparation" and #s.crew<1) then return false,"Invalid crew" end
+    if type(s.crew)~="table" or #s.crew>(collection.enabled(s) and 4 or 3) or (s.mode~="preparation" and #s.crew<1) then return false,"Invalid crew" end
     local crew,assigned={},{}
     for _,c in ipairs(s.crew) do
-        if not companion(c) or crew[c.species] then return false,"Invalid crew member" end
-        crew[c.species]=true
+        if not companion(c) or crew[c.uid or c.species] then return false,"Invalid crew member" end
+        crew[c.uid or c.species]=true
         if c.work_item then
             if not (s.work_items or {})[c.work_item] or assigned[c.work_item] then return false,"Invalid work-item assignment" end
             assigned[c.work_item]=true
         end
     end
+    if not collection.valid(p,s,companion) then return false,"Invalid companion collection" end
     for _,key in ipairs({"seen","flags","discoveries","branches","forage","warnings","rng","log"}) do if type(s[key])~="table" then return false,"Missing " .. key end end
     for _,key in ipairs({"road_cleared","road_repaid","axle_lashed","courier_helped","courier_greeted","courier_done","courier_sparred"}) do
         if s.flags[key]~=nil and type(s.flags[key])~="boolean" then return false,"Invalid road consequence" end
@@ -184,7 +186,12 @@ local function load_valid(path)
         return nil,"empty"
     end
     local valid,why=M.validate(data)
-    if valid then return data end
+    if valid then
+        collection.ensure(data)
+        local upgraded,problem=M.validate(data)
+        if not upgraded then return nil,problem end
+        return data
+    end
     return nil,why
 end
 local function load_pair(slot)

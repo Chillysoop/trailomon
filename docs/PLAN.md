@@ -25,7 +25,7 @@ During a typical half-minute the player watches the wagon travel, reads a change
 | Area | First polished expedition |
 | --- | --- |
 | Journey | One complete route, six landmarks, two branch choices, one river crossing; target 20–35 minutes |
-| Crew | Six original species; one or two at departure and at most three traveling; new-run road fights and Mara practice use up to three ready travelers; optional Discovery depot starts with one chosen hauler |
+| Crew | Six original species; four active companions, uncapped persistent collection including duplicate individuals; road fights and Mara practice use up to four ready travelers; optional Discovery depot starts with one chosen hauler |
 | Combat | Implemented in S28–S30: independent units/attack clocks, repeatable skills, formation, equipment and wagon defense; two road scenarios plus practice. Peaceful alternatives remain. Old journeys retain their original combat; new journeys use the replacement and persist real expedition consequences |
 | Provisioning | Food, medicine, repairs, coins, cargo, and capacity; existing foraging with finite local yields; hunting deferred by approved P2 |
 | Survival | Weather, pace, rations, hauling, stamina, injuries, wagon wear, and cargo condition |
@@ -63,3 +63,7 @@ October 31 wild-1 revision 7 approves the bounded creature additions in [CREATUR
 ## Expanded creature direction — November 1, 2026
 
 The intended expanded game has a minimum of 300 distinct species. The first expedition remains the immediate playable milestone; only six species are currently implemented. Creatures relate to their environments and can be fighters, food animals, protectors, fast creatures or unusual wildlife without a mandatory wagon utility. Approved B1/B2 select individual abilities and behavior combinations without a universal type chart or fixed classes. B3 battlefield terrain effects are rejected; B4–B8 authorize bounded experiments and the roster pipeline. See [CREATURE_DIRECTION.md](CREATURE_DIRECTION.md) and the [first 24 briefs](../reviews/creature-index.html). Art remains deferred; neither regional skins nor unfilled index slots count as additional implemented species.
+
+## Collection update — November 2, 2026
+
+Four active companions, with an uncapped persistent collection of individuals including duplicates. New recruits join the party if it has room; otherwise they enter the depot reserve. Choose the party before departure. Reserves do not consume expedition food or provide mid-trip replacements. Six species remain implemented; the eventual index target is at least 300. The home fiction and species-specific collecting methods are proposals in collecting-1, awaiting owner direction.

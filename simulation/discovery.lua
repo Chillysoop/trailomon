@@ -5,8 +5,8 @@ function M.invitation(snapshot)
     local s,p=snapshot.run,snapshot.profile
     if p.start_mode~="discovery" or s.mode~="landmark" or s.road_story then return end
     local id=s.target==2 and "brindlehorn" or (s.target==4 and "reedskipper")
-    if not id or p.roster[id] or s.seen["meet_"..id] then return end
-    for _,c in ipairs(s.crew) do if c.species==id then return end end
+    if not id or (not s.collection_rules and p.roster[id]) or s.seen["meet_"..id] then return end
+    for _,c in ipairs(s.crew) do if not s.collection_rules and c.species==id then return end end
     return id
 end
 function M.meet(snapshot)
@@ -21,8 +21,8 @@ function M.arrive(snapshot)
     local s,p=snapshot.run,snapshot.profile
     if p.start_mode~="discovery" or s.mode~="landmark" then return end
     local id=s.target==2 and "loamling" or (s.target==3 and "bellmoth")
-    if not id or p.roster[id] then return end
-    for _,c in ipairs(s.crew) do if c.species==id then return end end
+    if not id or (not s.collection_rules and p.roster[id]) then return end
+    for _,c in ipairs(s.crew) do if not s.collection_rules and c.species==id then return end end
     local event="discover_"..id
     if s.seen[event] then return end
     s.seen[event]=true;s.pending={id=event,roll=0};s.mode="event"
@@ -34,7 +34,9 @@ function M.starter(snapshot,id)
     if id~="brindlehorn" and id~="reedskipper" then return false,"Choose Brindlehorn or Reedskipper" end
     local c=progression.companion(id)
     if s.crew[1] then c.work_item=s.crew[1].work_item end
+    if p.collection then p.collection={};p.next_companion_id=1;p.party=nil end
     p.starter=id;p.roster={[id]=progression.companion(id)};p.discoveries={[id]=true};s.crew={c};s.hauler=1
+    if p.collection then c.uid=require("simulation.collection").add(p,c).uid end
     return true
 end
 return M

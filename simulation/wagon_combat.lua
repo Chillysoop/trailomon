@@ -5,6 +5,22 @@ local content=require "content.ambush"
 local legacy=require "simulation.wagon_combat_v1"
 local items=require "content.work_items"
 local M={RULES="wagon-ambush-v2",TICK=0.1,LIMIT=1800,kits=content.kits,presets=content.presets,positions=content.positions}
+local function base(id) return type(id)=="string" and id:gsub("_[2-4]$","") or id end
+function M.ids(crew)
+    local ids,counts={},{}
+    for _,c in ipairs(crew) do
+        local id=assert(content.by_species[c.species]);counts[id]=(counts[id] or 0)+1
+        ids[#ids+1]=id..(counts[id]>1 and "_"..counts[id] or "")
+    end
+    return ids
+end
+function M.name(s,c)
+    local count=0;for _,v in ipairs(s.crew) do if v.species==c.species then count=count+1 end end
+    return c.name..(count>1 and c.uid and " #"..c.uid or "")
+end
+function M.member(s,id)
+    for i,key in ipairs(M.ids(s.crew)) do if key==id then return s.crew[i],i end end
+end
 local function alive(u) return u and u.hp>0 end
 local function lane(u) return (u.position-1)%2+1 end
 function M.unit(s,id)
@@ -12,17 +28,17 @@ function M.unit(s,id)
     for _,u in ipairs(s.units) do if u.id==id then return u end end
 end
 function M.interval(u)
-    local n=u.id=="ember" and u.position<=2 and 8 or content.kits[u.id].interval
+    local n=base(u.id)=="ember" and u.position<=2 and 8 or content.kits[base(u.id)].interval
     return math.min(50,n+(u.item=="padded_trace" and 2 or 0))
 end
 function M.defense(u)
-    return math.max(0,u.def+(u.id=="moss" and u.position<=2 and 55 or 0)+(u.item=="padded_trace" and 18 or 0)-(u.item=="release_rope" and 5 or 0))
+    return math.max(0,u.def+(base(u.id)=="moss" and u.position<=2 and 55 or 0)+(u.item=="padded_trace" and 18 or 0)-(u.item=="release_rope" and 5 or 0))
 end
 function M.crew(s)
     local list={};for _,u in ipairs(s.units) do if u.side=="crew" then list[#list+1]=u end end;return list
 end
 function M.kit(s,id)
-    local k=util.copy(content.kits[id])
+    local k=util.copy(content.kits[base(id)])
     for key,value in pairs(((content.road[s.scenario] or {})[id]) or {}) do k[key]=value end
     local u=M.unit(s,id);if u and u.name then k.name=u.name end
     if s.scenario=="mara" and content.mara[id] then for key,value in pairs(content.mara[id]) do k[key]=value end end
@@ -44,12 +60,12 @@ function M.new(preset,seed,crew,scenario)
     local s={rules=M.RULES,phase="setup",preset=preset,seed=seed or 1848,rng=rng.seed(seed or 1848),tick=0,
         scenario=scenario or "ambush",supplies={medicine=1,repairs=1},used={medicine=0,repairs=0},units={},events={},wagon={id="wagon",hp=100,max_hp=100,def=0,shield=0},result=""}
     for i,id in ipairs(crew or content.presets[preset].crew or {"moss","ember","lumen"}) do
-        assert(content.kits[id] and id~="raider" and id~="caller","Unknown companion")
+        assert(content.kits[base(id)] and base(id)~="raider" and base(id)~="caller","Unknown companion")
         assert(not M.unit(s,id),"Duplicate companion")
-        add(s,id,"crew",content.presets[preset].positions[id] or ({1,3,4})[i])
+        add(s,id,"crew",content.presets[preset].positions[id] or ({1,3,4,2})[i])
         s.units[#s.units].item=(content.presets[preset].items or {})[id] or ""
     end
-    assert(#s.units>=1 and #s.units<=3,"One to three companions required")
+    assert(#s.units>=1 and #s.units<=4,"One to four companions required")
     -- Fill any colliding default positions for arbitrary teams.
     local occupied={}
     for _,u in ipairs(s.units) do
@@ -94,7 +110,7 @@ function M.start(s)
     if s.rules==legacy.RULES then return legacy.start(s) end
     if s.phase~="setup" then return false end
     s.phase="fight"
-    for _,u in ipairs(s.units) do u.attack_left=M.interval(u)+(u.attack_left-content.kits[u.id].interval) end
+    for _,u in ipairs(s.units) do u.attack_left=M.interval(u)+(u.attack_left-content.kits[base(u.id)].interval) end
     targets(s);return true
 end
 function M.effect(s,target,kind,source,value,duration)
@@ -130,21 +146,22 @@ local function damage(s,source,target,amount,kind,intercept,queue)
     log(s,kind,source.id,target.id,lost)
     if absorbed>0 then
         log(s,"absorbed",target.id,source.id,absorbed)
-        if target.id=="flint" and target.proc_tick~=s.tick and alive(target) then
+        if base(target.id)=="flint" and target.proc_tick~=s.tick and alive(target) then
             target.proc_tick=s.tick;target.focus=math.min(target.cost,target.focus+4);log(s,"focus",target.id,target.id,4)
         end
     end
     if intercept then
         target.stats.intercepts=target.stats.intercepts+1;log(s,"intercept",target.id,source.id,hit)
-        if target.id=="ripple" and target.proc_tick~=s.tick and alive(target) then
+        if base(target.id)=="ripple" and target.proc_tick~=s.tick and alive(target) then
             target.proc_tick=s.tick;target.attack_left=math.max(0,target.attack_left-5);log(s,"quick",target.id,target.id,5)
         end
         if target.item=="padded_trace" and target.item_tick~=s.tick and alive(target) then
             target.item_tick=s.tick;target.focus=math.min(target.cost,target.focus+3);target.stats.item_procs=target.stats.item_procs+1
             log(s,"focus",target.id,target.id,3)
         end
-        local ember=M.unit(s,"ember")
-        if queue and alive(ember) and target.id~=ember.id and not M.has(ember,"stun") then queue[ember.id]=source.id end
+        for _,ember in ipairs(s.units) do
+            if base(ember.id)=="ember" and queue and alive(ember) and target.id~=ember.id and not M.has(ember,"stun") then queue[ember.id]=source.id end
+        end
     end
     if target.hp==0 then target.shield=0;target.effects=target.effects and {} or nil;log(s,"down",source.id,target.id) end
 end
@@ -161,7 +178,7 @@ local function strike(s,u,power,kind,queue,chosen)
         if u.item=="release_rope" and M.has(t,"expose") then
             power=power+4;u.stats.item_procs=u.stats.item_procs+1;log(s,"rope",u.id,t.id,4)
         end
-        if u.id=="pip" then for _,e in ipairs(t.effects) do
+        if base(u.id)=="pip" then for _,e in ipairs(t.effects) do
             if e.kind=="expose" and e.until_tick~=u.opening then
                 u.opening=e.until_tick;u.attack_left=math.max(0,u.attack_left-5);u.stats.openings=u.stats.openings+1;log(s,"quick",u.id,u.id,5);break
             end
@@ -171,10 +188,10 @@ local function strike(s,u,power,kind,queue,chosen)
 end
 local function cast(s,u,queue)
     u.focus=u.focus-u.cost;u.stats.casts=u.stats.casts+1;log(s,"cast",u.id,"",u.stats.casts)
-    if u.id=="moss" then
+    if base(u.id)=="moss" then
         M.shield(s,u,22,u.id);M.shield(s,s.wagon,8,u.id)
-    elseif u.id=="ember" then strike(s,u,26,"skill",queue)
-    elseif u.id=="lumen" then
+    elseif base(u.id)=="ember" then strike(s,u,26,"skill",queue)
+    elseif base(u.id)=="lumen" then
         local t=M.unit(s,"caller");if not alive(t) then t=M.target(s,u) end
         if t then
             strike(s,u,8,"skill",queue,t)
@@ -185,7 +202,7 @@ local function cast(s,u,queue)
                 if ally then ally.focus=math.min(ally.cost,ally.focus+6);log(s,"focus",u.id,ally.id,6) end
             end
         end
-    elseif u.id=="ripple" then
+    elseif base(u.id)=="ripple" then
         local t=M.unit(s,"raider");if not alive(t) then t=M.target(s,u) end
         if t then
             strike(s,u,10,"skill",queue,t)
@@ -194,11 +211,11 @@ local function cast(s,u,queue)
                 u.stats.stuns=u.stats.stuns+1;log(s,"stun",u.id,t.id,6)
             end
         end
-    elseif u.id=="pip" then
+    elseif base(u.id)=="pip" then
         local t=M.target(s,u);if t then
             strike(s,u,12,"skill",queue,t);M.effect(s,t,"expose",u.id,25,30);log(s,"expose",u.id,t.id,30)
         end
-    elseif u.id=="flint" then
+    elseif base(u.id)=="flint" then
         local ally
         for _,v in ipairs(s.units) do if alive(v) and v.side==u.side and v~=u and (not ally or v.shield/v.max_hp<ally.shield/ally.max_hp) then ally=v end end
         M.shield(s,ally or u,22,u.id)
@@ -251,7 +268,7 @@ function M.step(s,count)
         for _,u in ipairs(s.units) do
             if alive(u) and not M.has(u,"stun") and u.attack_left<=0 then
                 u.attack_left=M.interval(u);u.stats.attacks=u.stats.attacks+1
-                strike(s,u,content.kits[u.id].attack,"attack",reactions)
+                strike(s,u,content.kits[base(u.id)].attack,"attack",reactions)
             end
         end
         for _,u in ipairs(s.units) do
@@ -279,10 +296,11 @@ function M.validate(s)
     end
     local wagon=s.wagon
     if type(wagon)~="table" or wagon.id~="wagon" or wagon.max_hp~=100 or wagon.def~=0 or not integer(wagon.hp,0,100) or not integer(wagon.shield,0,100) then return false,"Invalid wagon" end
-    if type(s.units)~="table" or #s.units<3 or #s.units>5 or type(s.events)~="table" or #s.events>90 then return false,"Invalid units or log" end
+    if type(s.units)~="table" or #s.units<3 or #s.units>6 or type(s.events)~="table" or #s.events>90 then return false,"Invalid units or log" end
     local seen,slots,gear={},{},{}
     for _,u in ipairs(s.units) do
-        if type(u)~="table" or not content.kits[u.id] or seen[u.id] then return false,"Invalid unit" end
+        if type(u)~="table" or not content.kits[base(u.id)] or seen[u.id] then return false,"Invalid unit" end
+        if (base(u.id)=="raider" or base(u.id)=="caller") and u.id~=base(u.id) then return false,"Invalid opponent identity" end
         local k=M.kit(s,u.id);seen[u.id]=true
         if u.name~=nil and (type(u.name)~="string" or #u.name>72) then return false,"Invalid companion name" end
         if type(u.item)~="string" or (u.item~="" and (not items.defs[u.item] or gear[u.item] or u.side~="crew")) then return false,"Invalid equipment" end
@@ -294,7 +312,7 @@ function M.validate(s)
         if type(u.effects)~="table" or #u.effects>10 or type(u.stats)~="table" or type(u.target)~="string" then return false,"Invalid unit state" end
         for _,key in ipairs({"damage","absorbed","intercepts","attacks","casts","reactions","stuns","shielded","openings","item_procs"}) do if not integer(u.stats[key],0,100000) then return false,"Invalid statistics" end end
         for _,e in ipairs(u.effects) do
-            if type(e)~="table" or (e.kind~="stun" and e.kind~="slow" and e.kind~="expose" and e.kind~="lure") or not integer(e.value,1,100) or not integer(e.until_tick,s.tick+1,M.LIMIT+30) or not content.kits[e.source] then return false,"Invalid effect" end
+            if type(e)~="table" or (e.kind~="stun" and e.kind~="slow" and e.kind~="expose" and e.kind~="lure") or not integer(e.value,1,100) or not integer(e.until_tick,s.tick+1,M.LIMIT+30) or not M.unit(s,e.source) then return false,"Invalid effect" end
         end
     end
     if not seen.raider or not seen.caller then return false,"Missing opponent" end
