@@ -1,5 +1,5 @@
 {
-  "video_sha256": "e434a01dabd8cc65200554f50cd45f2d38ac77daceb845d1693b93cef8d3cee3",
+  "video_sha256": "4f7c3a6bf4e4d5eb9802003370890c2b36e3142954b3ab03f0c308affeab93b3",
   "decoded_frames": 600,
   "duration_seconds": 20,
   "width": 1280,
@@ -7,7 +7,13 @@
   "fps": 30,
   "audio_sample_rate": 48000,
   "audio_peak_dbfs": -1.5,
-  "phone_browser": "390x844 light/dark: playback advances; 20s 1280x720 metadata; no console errors or overflow; road report layout also checked",
-  "visual_check": "Nine revised storyboard frames inspected; original engine footage and sprites; enlarged captions, S30 road combat",
-  "listening": "No human listening review claimed"
+  "phone_browser": "390x844 light/dark: playback advances; 20s 1280x720 metadata; no console errors or overflow",
+  "visual_check": "Nine story frames plus full-size combat/end card inspected; one crew; clear resource icons; no clipped silhouettes; three 0.4-second dissolves",
+  "listening": "No human listening review claimed",
+  "story_holds_seconds": [
+    6,
+    4,
+    6,
+    4
+  ]
 }

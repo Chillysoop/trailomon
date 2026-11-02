@@ -6,10 +6,10 @@
     1280,
     720
   ],
-  "source_commit": "cd85374892b51282d768c6c2364d10eb2d25891d",
-  "capture_inputs_sha256": "6de237ab8eec3d6ae9cc6bfde3987710cbd8e456411f9c0c693f05f9670abd29",
-  "capture_script_sha256": "258279b4e63231dc44f1daeaa190619546100cfce1ab4ce6de47700c1e58299e",
-  "video_sha256": "e434a01dabd8cc65200554f50cd45f2d38ac77daceb845d1693b93cef8d3cee3",
+  "source_commit": "a42235214e2c9875f9e2c2770c48d4bd9f23620e",
+  "capture_inputs_sha256": "1c11f9073ca505db5d51a5705cbd555c3d7693bfafe2e03ab084766ec2193c69",
+  "capture_script_sha256": "660d6a460b9bb557a57f53ca11f306c566fb720b4e2552bb68bf2b8ebb8012c7",
+  "video_sha256": "4f7c3a6bf4e4d5eb9802003370890c2b36e3142954b3ab03f0c308affeab93b3",
   "audio": {
     "sample_rate": 48000,
     "samples": 960000,
@@ -17,5 +17,28 @@
     "rms_dbfs": -21.48
   },
   "music": "Original synthesized E-minor trail motif; no third-party recording",
-  "note": "Edited prototype fixtures. Real S30 expedition encounters, actual crew and carried gear; automatic combat shown at 2x. No reference-game art or footage."
+  "note": "Four held story beats follow the same Brindlehorn and recruited Loamling. Geography is staged and the entrance is editorial; recruitment, food costs and S30 combat use the real model. Combat at 2x. No reference-game art or footage.",
+  "story_beats": [
+    {
+      "start": 0.0,
+      "end": 6.0,
+      "caption": "Find a companion. Find a reason to keep going."
+    },
+    {
+      "start": 6.0,
+      "end": 10.0,
+      "caption": "Supplies run low. The road gets wilder."
+    },
+    {
+      "start": 10.0,
+      "end": 16.0,
+      "caption": "Build your crew. Protect what you carry."
+    },
+    {
+      "start": 16.0,
+      "end": 20.0,
+      "caption": "TRAILOMON Creature collecting. Old-school trail survival."
+    }
+  ],
+  "transition_frames": 12
 }

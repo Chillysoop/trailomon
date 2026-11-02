@@ -46,5 +46,5 @@ class TrailerArtifactTests(unittest.TestCase):
         self.assertLess(verification["audio_peak_dbfs"],0)
     def test_phone_delivery_retains_controls_and_prototype_context(self):
         page=(ROOT/"reviews/trailer.html").read_text(encoding="utf-8")
-        for text in ["controls playsinline", "Trailomon-20s.mp4", "Download MP4", "prototype footage", "practice", "Text version"]:
+        for text in ["controls playsinline", "Trailomon-20s.mp4", "Download MP4", "prototype footage", "staged in-engine", "same crew", "Text version"]:
             self.assertIn(text.lower(),page.lower())

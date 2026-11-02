@@ -1,73 +1,92 @@
--- Offline promotional footage; copied only into the isolated capture project.
+-- Promotional vignettes in the release renderer. One persistent crew;
+-- staging skips geography, never invents game abilities or edits player saves.
 local model=require "simulation.expedition"
-local screens=require "ui.screens"
 local scene=require "presentation.scene"
-local fixtures=require "tests.capture_fixtures"
-local combat=require "simulation.wagon_combat"
+local w=require "ui.widgets"
+local battle_view=require "ui.wagon_ambush"
+local controller=require "services.ambush_controller"
+local save=require "services.save"
 local function finish(self,ok,why)
     self.finished=true
     local f=assert(io.open("trailer-capture.json","wb"));f:write(json.encode({ok=ok,error=why or "",frames=self.frame,fps=30}));f:close()
     msg.post("@system:","exit",{code=ok and 0 or 1})
 end
-local function setup(self,shot)
-    self.ambush=nil
-    if shot==1 then fixtures.route_meadow(self)
-    elseif shot==2 then fixtures.discovery_recruit(self)
-    elseif shot==3 then fixtures.road_setup(self)
-    elseif shot==4 then fixtures.items_prep(self)
-    elseif shot==5 then fixtures.route_river(self)
-    elseif shot==6 then fixtures.road_fight(self)
-    else fixtures.route_ridge(self) end
-    -- Fixture actions run one per engine frame, just like normal capture QA.
-    self.shot=shot;self.ready=false;self.prepared=false
-end
+local function command(self,id,arg) assert(model.command(self.snapshot,id,arg)) end
 function init(self)
     window.set_size(1280,720)
-    self.frame=0;self.time=0;self.frames=0
-    self.redraw=function() self.needs_draw=true end
-    self.perform=function(id,arg,page) assert(model.command(self.snapshot,id,arg));self.page=page or self.page;self.redraw() end
-    self.open_page=function(page) self.page=page;self.redraw() end
-    self.reset_clock=function() end
-    self.save_now=function() error("Trailer must never save player data") end
-    self.toggle_combat=function() self.combat_paused=not self.combat_paused;self.redraw() end
+    self.frame=0;self.time=0;self.prepared=false;self.has_focus=true
+    self.redraw=function() end
+    self.open_page=function(page) self.page=page end
+    self.snapshot=model.new(1848,"discovery");command(self,"depart")
+    -- Meet one actual recruit along the first stretch; retain this snapshot.
+    self.snapshot.run.progress=self.snapshot.run.distance*0.45
+    assert(model.debug(self.snapshot,"event","discover_loamling"))
+    self.writer=function(candidate) assert(save.validate(candidate));return true end
+end
+local function travel(self,f)
+    local s=self.snapshot.run
+    w.begin(self);w.rect(self,0,0,1280,720,"142620")
+    scene.draw(self,0,150,1280,390,s)
+    scene.update(self,f/30,f>=110,true)
+    -- A short editorial entrance makes the invitation visible without a menu cut.
+    if f<90 then
+        local node=w.sprite(self,"loamling",390,268,76)
+        gui.set_position(node,vmath.vector3(390,268+math.sin(f/20),0))
+    elseif f<135 then
+        local a=self.animated[2];local t=(f-90)/45;t=t*t*(3-2*t)
+        gui.set_position(a.node,vmath.vector3(390+(a.x-390)*t,a.y+math.sin(f/6),0))
+    end
+    if f<480 then
+        w.reading(self,405,103,"food",s.food,{label="Provisions",size=19,icon_size=22})
+        w.reading(self,675,103,"crew",#s.crew,{label="Companions",size=19,icon_size=22})
+    end
+    w.finish(self)
 end
 function update(self,dt)
     if self.finished or self.pending then return end
     local ok,why=pcall(function()
         if self.frame>=600 then finish(self,true);return end
         local f=self.frame
-        local shot=f<75 and 1 or f<150 and 2 or f<210 and 3 or f<285 and 4 or f<330 and 5 or f<525 and 6 or 7
-        if shot~=self.shot then setup(self,shot);screens.draw(self);self.needs_draw=false;return end
-        if not self.ready then
-            if #self.capture_actions>0 then fixtures.click(self,table.remove(self.capture_actions,1))
-            else
-                self.capture_settle=nil;self.ready=true;self.toast="Prototype footage / isolated capture"
-                if (shot==1 or shot==7) and self.snapshot.run.mode=="stopped" then assert(model.command(self.snapshot,"resume")) end
-                if shot==6 then self.has_focus=true;self.ambush.paused=false;self.ambush.speed=2 end
-            end
-            if self.needs_draw then screens.draw(self);self.needs_draw=false end
-            return
-        end
         if not self.prepared then
-            -- Commands are real production actions; only elapsed clocks are scripted.
-            if shot==2 and f==112 then self.perform("choice",{id="invite"});self.page="crew" end
-            if shot==3 and f==180 then fixtures.click(self,"ambush_select_pip") end
-            if shot==4 and f==232 then self.perform("buy",{item="food"}) end
-            if shot==4 and f==245 then self.perform("depart",nil,"trail");self.perform("resume") end
-            if shot==4 and (f==258 or f==274) and self.snapshot.run.mode=="traveling" then self.perform("step") end
-            if shot==5 and f==307 then self.perform("river",{method="ferry"}) end
-            if shot==6 then require("services.ambush_controller").update(self,1/30) end
-            self.time=f/30;screens.draw(self);scene.update(self,self.time,shot==1 or shot==7 or shot==4,true)
+            if f==90 then command(self,"choice",{id="invite"}) end
+            if f==180 then
+                -- Time-compress arrival at Split Oak, then use the real route choice.
+                local s=self.snapshot.run;s.mode="landmark";s.progress=s.distance
+                command(self,"leave",{branch="woodland"})
+                s.progress=s.distance*0.2
+                if s.mode=="stopped" then command(self,"resume") end
+            end
+            if f==210 or f==255 then command(self,"step") end
+            if f==300 then
+                if self.snapshot.run.mode=="traveling" then command(self,"pause") end
+                assert(model.debug(self.snapshot,"event","scavengers"));command(self,"choice",{id="battle"})
+                assert(controller.open_road(self,self.writer));controller.command(self,"speed");controller.command(self,"start")
+                -- Begin the held battle moment near the first repeating skill.
+                for _=1,10 do controller.update(self,0.1) end
+            end
+            if f>=300 and f<480 then
+                controller.update(self,1/30)
+                w.begin(self);w.rect(self,0,0,1280,720,"142620");battle_view.draw(self);w.finish(self)
+                scene.update(self,f/30,false,true)
+            else
+                if f==480 then
+                    while self.snapshot.run.wagon_battle.battle.phase=="fight" do command(self,"road_step",{ticks=50}) end
+                    command(self,"road_continue");self.ambush=nil;self.page="trail"
+                    -- A destination vignette: same companions after the actual fight.
+                    local s=self.snapshot.run;s.target=6;s.terrain="ridge";s.progress=12;s.distance=45;s.mode="traveling";s.weather="clear"
+                end
+                travel(self,f)
+            end
             self.prepared=true;return
         end
         self.pending=true
         screenshot.png(function(_,png,width,height)
-            local saved,err=pcall(function()
+            local captured,err=pcall(function()
                 assert(width==1280 and height==720)
                 local file=assert(io.open(string.format("frame-%04d.png",self.frame),"wb"));file:write(png);file:close()
                 self.frame=self.frame+1;self.pending=false;self.prepared=false
             end)
-            if not saved then finish(self,false,tostring(err)) end
+            if not captured then finish(self,false,tostring(err)) end
         end)
     end)
     if not ok then finish(self,false,tostring(why)) end
