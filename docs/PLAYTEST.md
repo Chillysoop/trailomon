@@ -2,7 +2,7 @@
 
 Run `Trailomon.exe` beside the four `game.*` data files. This is an offline Windows build; the Defold editor is not required. Unzip the whole folder before starting.
 
-New expeditions use the guardian's readable four-exchange sequence: cargo shove, harmless warning, heavy approach rush, heavy cargo rush. Ordinary actions cost 3 energy, abilities add 6 once, and the warning costs 1. Existing saved journeys retain their earlier rules until the next expedition. To inspect the sequence directly, begin a journey, press F3 and choose **Guardian pattern / test encounter**, then **Secure passage**.
+New expeditions use the wagon battlefield for scavenger and territorial encounters. Your traveling creatures attack and cast repeatable abilities automatically. Existing saved journeys retain their old combat until the next expedition. For a quick test on a new trip, press F3, choose a scavenger/territorial encounter and inspect the battle choice.
 
 ## Take a journey
 
@@ -16,11 +16,11 @@ Deliver the orchard cuttings by day 26 if possible. The road closes on day 32. C
 
 Use **Crew** to rotate haulers, set duties, treat injuries, rename companions, and read memories. Camp actions cost a day and meals. Foraging can find food, but each stretch depletes. The landscape changes from nursery rows and maintained tracks to sparse cairns and open high country. Landmark screens show the place alongside its choices. Mossbell is labeled as the last supply shop, and Cairn Gate as the last maintained shelter. Mossbell is the only intermediate supply shop. Willowford offers a reliable paid ferry and riskier alternatives.
 
-**Camp → Gather nearby provisions** opens the day's preview: food found, carrying room after meals, food packed, creature energy spent, and expected net provisions. Confirm once to spend the day; the journal records the actual receipt. **Journal → Symbol guide** explains all resource, role, and action marks. In combat, each ability now states its next trigger or the reason it will not fire; the result connects remaining energy to the crew's next job.
+**Camp → Gather nearby provisions** opens the day's preview: food found, carrying room after meals, food packed, creature energy spent, and expected net provisions. Confirm once to spend the day; the journal records the actual receipt. **Journal → Symbol guide** explains all resource, role, and action marks. In combat, select a creature to inspect its repeating skill, passive, equipment and target. Results show remaining travel consequences.
 
 **Crew → Work items** buys and assigns the padded trace, release rope and dry wrap. The depot and Mossbell also link to this page. Items use coins and carrying room; one slot per companion. Swap only while stopped outside an encounter. Returns are available before departure. Items are packed afresh for each journey.
 
-Battles are optional. Choose up to two companions and their positions: approach for pressure, wagon for cover. Each species acts automatically, with one additional ability when its visible trigger occurs. Use Pause or Space to inspect, Step exchange to advance once, and Resume to watch. Calm runs at five seconds per exchange; brisk at 1.5. Menus, focus loss, and loading pause combat. Withdraw before the next exchange to pay the displayed loss once. The result screen shows actual energy, condition, cargo, provisions, and days spent. Older saved manual encounters keep their original action buttons until finished.
+Battles are optional. All ready travelers (up to three) defend the wagon from front/rear positions using carried gear. Setup shows HP, Energy, abilities and costs; companions below 6 Energy or without positive Condition sit out. Back returns to the same event before the first attack, skill or supply. The first action costs 6 Energy per fighter once. Pause/Space lets you inspect or use at most one carried medicine and repair. Speed 1x/2x affects playback only. Withdrawal always works and shows its food/cargo or day cost. Result receipts apply real injuries, wagon damage and supplies once. Older manual/automatic saves retain their original controls.
 
 Two original species can join after you help them on the trail. Companions, observations, and memories persist across expeditions. Inspecting and crossing Willowford unlocks a covered wagon after that trip ends. The cover protects against rain but reduces carrying capacity.
 
@@ -38,7 +38,7 @@ After three well-fed working travel days, a companion learns a habit. Choose **C
 - Escape: return to the journey or cancel text entry.
 - F3: developer controls, including forced encounters and resupply. These alter the active trip and are intended for testing.
 
-The game saves after decisions, completed days, and exchange boundaries. Options includes a manual Save action. Save failures are shown in the footer. Keep the application open if a save error appears and retry when local storage is available.
+The game saves after decisions and completed days; wagon fights checkpoint about once per second and on actions/results. Reload, focus loss and menus pause combat. Options includes a manual Save action. Save failures are shown in the footer. Keep the application open if a save error appears and retry when local storage is available.
 
 Saves use Defold's application save directory for `trailomon`, with an active snapshot and a last-good backup. A damaged active save loads the backup with a recovery message. If both files fail validation, the game offers an explicit fresh start. Test scripts use a separate namespace.
 
@@ -70,4 +70,4 @@ Press F3 → **Wagon ambush / new combat** for free experiments. Choose Guard th
 
 All six original species have automatic repeating abilities. Front lane 1 intercepts the raider; leaving it open exposes the wagon. Space pauses; Tab and Enter select controls. Pause to use one medicine or repair charge. The button shows its actual gain; full targets do not consume a charge. Speed changes viewing rate. Reload resumes paused; Withdraw always ends the fight.
 
-The free sample never spends expedition resources. Mara's Mossbell drill charges only its stated Energy cost and saves with that journey. Results attribute damage, protection, openings and item triggers. Normal road encounters remain on their earlier rules until S30. Existing v1 ambush checkpoints keep their original three-kit resolver.
+The free sample never spends expedition resources. Mara's Mossbell drill charges only its stated Energy cost and saves with that journey. Results attribute damage, protection, openings and item triggers. New journeys now use this battlefield on the road, with real Condition, wagon integrity, carried supplies and bounded effort; old journeys keep their prior rules. Existing v1 ambush checkpoints keep their original three-kit resolver.

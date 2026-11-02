@@ -7,3 +7,5 @@ Road checkpoints live under run.wagon_battle. Candidate write succeeds before re
 Requested motion is cosmetic and bounded: 8px forward attack, 6px upward ability, reduced-motion toggle, pause/reload stable. No new art. User clarified subsequent stronger Astronarch/Pokémon versus Oregon Trail direction applies to the hype trailer, not another game feature pass. Revise trailer with real road footage after S30.
 
 Defold Bob detects even deferred literal require cycles. Road adapter receives settlement/log callbacks from expedition instead of requiring it. Native interaction harness must yield between controller redraws (production coalesces them); otherwise deferred node deletion exhausts the pool. Legacy model helper is test-only and explicitly removes only the new road marker. S10 physical input/audio/human pacing/native activation issues remain open.
+
+PR #44 includes implementation, report and revised trailer. Private report /road-combat.html and /trailer.html published on the existing owner-only Site; late submissions unchanged. No repeat review page. Shareable build provenance is recorded locally after merge.
