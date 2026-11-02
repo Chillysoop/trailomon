@@ -8,7 +8,7 @@
   ],
   "source_commit": "984a81b53dfa4bd7a6c51484b2c08a06968b6c3f",
   "capture_inputs_sha256": "2fe3fc7b621319e8fa63f7aff39bb9e8de4cab39f7e35c5429517d8f65068456",
-  "capture_script_sha256": "39be870fe8628f78cf40d46f0e36b05ade9805138a62e7456dcc12a8fffdb865",
+  "capture_script_sha256": "96f88188c7252e33199b45b355a154243f561b4be042ccd3aaf4c31d360d2e37",
   "video_sha256": "a210805e280c4ff3fc6541739523a0e0a638d7e5c666d5977b7d14b660495889",
   "audio": {
     "sample_rate": 48000,
@@ -17,5 +17,6 @@
     "rms_dbfs": -21.48
   },
   "music": "Original synthesized E-minor trail motif; no third-party recording",
-  "note": "Edited prototype fixtures. Wagon autobattle is a playable sample/practice, not yet expedition-integrated."
+  "note": "Edited prototype fixtures. Wagon autobattle is a playable sample/practice, not yet expedition-integrated.",
+  "capture_script_hash_encoding": "UTF-8, newlines normalized to LF"
 }

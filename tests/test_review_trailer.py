@@ -42,7 +42,7 @@ class TrailerArtifactTests(unittest.TestCase):
         sha=hashlib.sha256((MEDIA/"Trailomon-20s.mp4").read_bytes()).hexdigest()
         self.assertEqual(sha,manifest["video_sha256"])
         self.assertEqual(sha,verification["video_sha256"])
-        self.assertEqual(manifest["capture_script_sha256"],hashlib.sha256((ROOT/"tools/trailer_capture.gui_script").read_bytes()).hexdigest())
+        self.assertEqual(manifest["capture_script_sha256"],hashlib.sha256((ROOT/"tools/trailer_capture.gui_script").read_text(encoding="utf-8").encode("utf-8")).hexdigest())
         self.assertLess(verification["audio_peak_dbfs"],0)
     def test_phone_delivery_retains_controls_and_prototype_context(self):
         page=(ROOT/"reviews/trailer.html").read_text(encoding="utf-8")

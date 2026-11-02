@@ -132,6 +132,6 @@ if __name__=='__main__':
  for i in range(600):proc.stdin.write(frame(i).tobytes())
  proc.stdin.close();errors=proc.stderr.read().decode();assert proc.wait()==0,errors
  source=json.loads((footage/'source.json').read_text())
- manifest={'duration_seconds':20,'fps':30,'frames':600,'resolution':[1280,720],'source_commit':source['source_commit'],'capture_inputs_sha256':source['inputs_sha256'],'capture_script_sha256':hashlib.sha256((ROOT/'tools/trailer_capture.gui_script').read_bytes()).hexdigest(),'video_sha256':hashlib.sha256(mp4.read_bytes()).hexdigest(),'audio':stats,'music':'Original synthesized E-minor trail motif; no third-party recording','note':'Edited prototype fixtures. Wagon autobattle is a playable sample/practice, not yet expedition-integrated.'}
+ manifest={'duration_seconds':20,'fps':30,'frames':600,'resolution':[1280,720],'source_commit':source['source_commit'],'capture_inputs_sha256':source['inputs_sha256'],'capture_script_sha256':hashlib.sha256((ROOT/'tools/trailer_capture.gui_script').read_text(encoding='utf-8').encode('utf-8')).hexdigest(),'video_sha256':hashlib.sha256(mp4.read_bytes()).hexdigest(),'audio':stats,'music':'Original synthesized E-minor trail motif; no third-party recording','note':'Edited prototype fixtures. Wagon autobattle is a playable sample/practice, not yet expedition-integrated.'}
  (out/'manifest.json').write_text(json.dumps(manifest,indent=2)+'\n')
  print(json.dumps({'video':str(mp4),'megabytes':round(mp4.stat().st_size/1048576,2),'audio':stats}))
