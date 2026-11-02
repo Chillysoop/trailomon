@@ -2,8 +2,8 @@
   "project_id": "appgprj_6ae516c6754c8191a04fcfcf15434bc8",
   "url": "https://trailomon-owner-reviews.chillysoop.chatgpt.site",
   "audience": "owner-private",
-  "version_id": "appgprj_6ae516c6754c8191a04fcfcf15434bc8~appgver_4ed3531157948191a231c809166434a0",
-  "source_commit": "4c3aa93de543655684c89ecb5fee5f00b84d6ea6",
+  "version_id": "appgprj_6ae516c6754c8191a04fcfcf15434bc8~appgver_bc6996c747248191b5c44fd2c74e2e97",
+  "source_commit": "8b4a16d7e6b23ced2e9154fa0527e827cd5870f2",
   "checkout": ".tools/phone-review-site",
   "binding": "DB",
   "submission_table": "review_submissions"

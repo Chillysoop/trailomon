@@ -29,11 +29,11 @@ end
 function M.courier_active(self) M.courier_setup(self);self.capture_actions={"battler1","battler2","battle_begin","combat_step"} end
 function M.courier_result(self) M.courier_setup(self);self.capture_actions={"battler1","battler2","battle_begin","combat_step","combat_step","combat_step"} end
 function M.discovery_start(self)
-    reset(self,"trail");self.snapshot=model.new(1848,"discovery");self.redraw()
+    reset(self,"trail");self.snapshot=require("simulation.expedition").new(1848,"discovery");self.redraw()
     self.capture_actions={"select_reedskipper"};self.capture_assert=function() assert(self.snapshot.run.crew[1].species=="reedskipper") end
 end
 function M.discovery_recruit(self)
-    reset(self,"trail");self.snapshot=model.new(1848,"discovery");assert(model.command(self.snapshot,"depart"))
+    reset(self,"trail");self.snapshot=require("simulation.expedition").new(1848,"discovery");assert(model.command(self.snapshot,"depart"))
     assert(model.debug(self.snapshot,"event","discover_loamling"));self.redraw()
 end
 function M.habits(self)
@@ -64,7 +64,7 @@ function M.tracks_spent(self)
     self.capture_assert=function() assert(not require("simulation.tracking").preview(self.snapshot).available) end
 end
 function M.hauler_meeting(self)
-    reset(self,"trail");self.snapshot=model.new(1848,"discovery");assert(model.command(self.snapshot,"depart"))
+    reset(self,"trail");self.snapshot=require("simulation.expedition").new(1848,"discovery");assert(model.command(self.snapshot,"depart"))
     local s=self.snapshot.run;s.target=4;s.terrain="marsh";s.progress=s.distance;s.mode="landmark"
     self.redraw();self.capture_actions={"open_tracking","meet_wild"}
     self.capture_assert=function() assert(s.pending.id=="meet_reedskipper" and s.day==1) end
@@ -479,5 +479,30 @@ function M.collection_twins(self)
     M.collection_depot(self);local p=self.snapshot
     assert(model.command(p,"collect_select",{uid=p.run.crew[2].uid}));assert(model.command(p,"collect_select",{uid=5}));assert(model.command(p,"depart"))
     assert(model.debug(p,"event","territorial"));assert(model.command(p,"choice",{id="battle"}));assert(model.command(p,"road_start"));assert(model.command(p,"road_step",{ticks=60}));self.redraw()
+end
+function M.commons_roster(self)
+    M.collection_depot(self);self.collection_detail=nil;self.page="collection";self.redraw()
+end
+function M.commons_home(self)
+    M.commons_roster(self);self.capture_actions={"commons_about"}
+    self.capture_assert=function() assert(self.collection_detail=="home") end
+end
+function M.commons_loamling(self)
+    reset(self,"trail");self.collection_detail=nil;self.snapshot=require("simulation.expedition").new(1848,"discovery")
+    assert(model.command(self.snapshot,"depart"));assert(model.debug(self.snapshot,"event","discover_loamling"));self.redraw()
+end
+function M.commons_bellmoth(self)
+    M.commons_loamling(self);assert(model.command(self.snapshot,"choice",{id="pass"}))
+    assert(model.debug(self.snapshot,"event","discover_bellmoth"));self.redraw()
+end
+function M.commons_settled(self)
+    M.commons_loamling(self);self.capture_actions={"event_invite"}
+    self.capture_assert=function() assert(#self.snapshot.run.crew==2 and self.snapshot.run.crew[2].origin.kind=="met") end
+end
+function M.commons_story(self)
+    M.commons_loamling(self);assert(model.command(self.snapshot,"choice",{id="invite"}))
+    assert(model.command(self.snapshot,"return"));assert(model.command(self.snapshot,"new"))
+    self.page="collection";self.redraw();self.capture_actions={"collection_story_2"}
+    self.capture_assert=function() assert(self.collection_detail==2) end
 end
 return M

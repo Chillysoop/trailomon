@@ -371,8 +371,8 @@ local function resolve(snapshot,id)
     if choice.discovery then s.discoveries[choice.discovery]=true end
     if choice.recruit then
         if collection.enabled(s) then
-            local c,traveling=collection.collect(snapshot,choice.recruit)
-            log(s,species.defs[c.species].name.." #"..c.uid..(traveling and " joins the party / "..#s.crew.." of 4 / "..resources.daily_food(s).." meals per day." or " joins your depot collection / party stays 4 of 4."))
+            local c,traveling=collection.collect(snapshot,choice.recruit,event.id)
+            log(s,species.defs[c.species].name.." #"..c.uid.." / "..(choice.settle and choice.settle.." " or "")..(traveling and "Party / "..#s.crew.." of 4 / "..resources.daily_food(s).." meals per day." or "Return escort to Commons / party 4 of 4."))
         else
             s.crew[#s.crew+1]=progression.companion(choice.recruit)
             s.discoveries[choice.recruit]=true

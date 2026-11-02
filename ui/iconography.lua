@@ -6,7 +6,7 @@ local M={groups={
     {label="On the road",ids={"trail","map","flag","rest","forage","dig","water","scout","warm","journal","settings"}},
 }}
 M.defs={
-    collection={label="Collection",meaning="All owned companions, including depot reserves.",shape="three cubbies beneath a pitched roof"},
+    collection={label="Collection",meaning="All owned companions, including residents at Wayhome Commons.",shape="three cubbies beneath a pitched roof"},
     food={label="Provisions",meaning="Food packed for daily meals.",shape="grain stalk"},
     coins={label="Coins",meaning="Money available for trade and fares.",shape="ringed coin"},
     repairs={label="Repairs",meaning="Materials used to mend the wagon.",shape="hammer"},

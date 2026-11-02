@@ -6,7 +6,7 @@ New expeditions use the wagon battlefield for scavenger and territorial encounte
 
 ## Take a journey
 
-Choose one to four companions at Fernwake Depot. Open **Collection** to browse all owned individuals, store a party member, or take another along. Duplicate species are allowed; the collection has no game-imposed count cap. Bring a draft companion: Brindlehorn or Reedskipper initially. Buy supplies, then begin the journey. The default crew and loadout are playable starting choices.
+Choose one to four companions at Fernwake Depot. Open **Collection** to browse all owned individuals, store a party member, or take another along. **Collection → About the Commons** explains your creature home. Each resident has a **Story** with its habitat, waybed, meeting and first homecoming. Duplicate species are allowed; the collection has no game-imposed count cap. Bring a draft companion: Brindlehorn or Reedskipper initially. Buy supplies, then begin the journey. The default crew and loadout are playable starting choices.
 
 For a discovery-led start, choose **Options → Open discovery depot**. This keeps a separate save. Pick Brindlehorn or Reedskipper before your first departure, then meet Loamling at Split Oak and Bellmoth at Mossbell. Their optional invitations each cost four provisions, with the extra daily meals shown before you accept. Recruited companions stay available for later trips. Switch back through Options to resume the Classic depot. To meet the other starting hauler, choose **Wildlife nearby** at Split Oak (Brindlehorn) or Willowford (Reedskipper). Meeting takes no time; invitation costs four provisions. A full party sends the new friend to your depot collection; reserves do not eat or fight, and party swaps happen before departure.
 
@@ -22,7 +22,7 @@ Use **Crew** to rotate haulers, set duties, treat injuries, rename companions, a
 
 Battles are optional. All ready travelers (up to four) defend the wagon from front/rear positions using carried gear. Setup shows HP, Energy, abilities and costs; companions below 6 Energy or without positive Condition sit out. Back returns to the same event before the first attack, skill or supply. The first action costs 6 Energy per fighter once. Pause/Space lets you inspect or use at most one carried medicine and repair. Speed 1x/2x affects playback only. Withdrawal always works and shows its food/cargo or day cost. Result receipts apply real injuries, wagon damage and supplies once. Older manual/automatic saves retain their original controls.
 
-Two original species can join after you help them on the trail. Companions, observations, and memories persist across expeditions. Inspecting and crossing Willowford unlocks a covered wagon after that trip ends. The cover protects against rain but reduces carrying capacity.
+Loamling follows a root trail into a straw waybasket; Bellmoth accepts a shaded roost cloth and meal. Both cost 4 provisions without an extra day. Two other species can join after you help them on the trail. With four already traveling, a return escort takes the new friend to the Commons. Companions, observations, and memories persist across expeditions. Inspecting and crossing Willowford unlocks a covered wagon after that trip ends. The cover protects against rain but reduces carrying capacity.
 
 Wild sightings offer **Watch**, **Help**, or **Pass** along suitable habitats. **Journal → Species field guide** distinguishes known species, wild sightings, and companions you have traveled with. Records are kept when a journey ends, including an early return.
 

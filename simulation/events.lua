@@ -101,7 +101,7 @@ end
 function M.cost_text(s, choice)
     if choice.recruit then
         local p=M.recruit_preview(s,choice)
-        return (s.collection_rules and (p.reserve and "To depot / " or "Join party / ") or "").."Provisions "..p.food_before.." -> "..p.food_after.." / Meals per day "..p.meals_before.." -> "..p.meals_after.." / Food days "..p.days_before.." -> "..p.days_after
+        return (s.collection_rules and (p.reserve and "To Commons / " or "Join party / ") or "").."Provisions "..p.food_before.." -> "..p.food_after.." / Meals per day "..p.meals_before.." -> "..p.meals_after.." / Food days "..p.days_before.." -> "..p.days_after
     end
     local pieces = {}
     for _, key in ipairs({"coins","food","repairs","medicine"}) do

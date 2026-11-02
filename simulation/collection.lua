@@ -1,6 +1,7 @@
 -- Owned individuals live at Fernwake; only the selected party travels/eats/fights.
 local util=require "simulation.util"
 local species=require "content.species"
+local commons=require "content.commons"
 local M={RULES="collection-v1",LIMIT=4}
 function M.companion(id)
     local def=species.defs[id]
@@ -12,7 +13,11 @@ function M.find(p,uid)
 end
 function M.add(p,c)
     local owned=util.copy(c);owned.uid=p.next_companion_id;p.next_companion_id=p.next_companion_id+1
+    owned.origin=owned.origin or {kind="known"}
+    if owned.home_seen==nil then owned.home_seen=true end
     owned.work_item=nil;p.collection[#p.collection+1]=owned
+    p.commons_first=p.commons_first or {}
+    if owned.home_seen and not p.commons_first[owned.species] then p.commons_first[owned.species]=owned.uid end
     return owned
 end
 function M.ensure(snapshot)
@@ -21,11 +26,20 @@ function M.ensure(snapshot)
         p.collection={};p.next_companion_id=1
         for _,id in ipairs(species.order) do if p.roster[id] then M.add(p,p.roster[id]) end end
     end
+    p.commons_first=p.commons_first or {}
+    for _,c in ipairs(p.collection) do
+        c.origin=c.origin or {kind="known"} -- Old saves do not tell us where a friend was met.
+        if c.home_seen==nil then c.home_seen=true end
+        if c.home_seen and not p.commons_first[c.species] then p.commons_first[c.species]=c.uid end
+    end
     for _,c in ipairs(s.crew) do
         if not c.uid then
             for _,owned in ipairs(p.collection) do if owned.species==c.species then c.uid=owned.uid;break end end
             if not c.uid then c.uid=M.add(p,c).uid end
         end
+        local owned=M.find(p,c.uid)
+        c.origin=c.origin or util.copy(owned.origin)
+        if c.home_seen==nil then c.home_seen=owned.home_seen end
     end
     s.collection_rules=M.RULES
 end
@@ -37,11 +51,17 @@ function M.prepare(snapshot)
         for _,uid in ipairs(p.party) do s.crew[#s.crew+1]=util.copy(assert(M.find(p,uid))) end
     end
 end
-function M.collect(snapshot,id)
+function M.collect(snapshot,id,event)
     local p,s=snapshot.profile,snapshot.run
-    local owned=M.add(p,M.companion(id))
-    p.roster[id]=p.roster[id] or util.copy(owned);p.discoveries[id]=true;s.discoveries[id]=true
     local traveling=#s.crew<M.LIMIT
+    local c=M.companion(id)
+    if event then
+        assert(commons.defs[id].event==event,"Unknown befriending encounter")
+        c.origin={kind="met",event=event,day=s.day,journey=s.id,target=s.target,terrain=s.terrain}
+        c.home_seen=not traveling -- Return escorts handle reserves off screen.
+    end
+    local owned=M.add(p,c)
+    p.roster[id]=p.roster[id] or util.copy(owned);p.discoveries[id]=true;s.discoveries[id]=true
     if traveling then s.crew[#s.crew+1]=util.copy(owned) end
     return owned,traveling
 end
@@ -66,7 +86,20 @@ end
 function M.home(p,c)
     local _,index=M.find(p,c.uid)
     assert(index,"Missing collected companion")
-    p.collection[index]=util.copy(c)
+    local home=util.copy(c);home.home_seen=true;p.collection[index]=home
+    p.commons_first=p.commons_first or {}
+    if not p.commons_first[c.species] then p.commons_first[c.species]=c.uid end
+end
+function M.valid_origin(c)
+    if c.home_seen~=nil and type(c.home_seen)~="boolean" then return false end
+    local o=c.origin
+    if o==nil then return true end -- Pre-Commons saves are upgraded on load.
+    if type(o)~="table" then return false end
+    if o.kind=="known" then return o.event==nil and o.day==nil and o.journey==nil and o.target==nil and o.terrain==nil end
+    if o.kind~="met" or not commons.defs[c.species] or o.event~=commons.defs[c.species].event then return false end
+    local function integer(n,lo,hi) return util.finite(n) and n%1==0 and n>=lo and n<=hi end
+    return integer(o.day,1,32) and integer(o.journey,1,1e9) and integer(o.target,2,6)
+        and ({meadow=true,woodland=true,marsh=true,upland=true,ridge=true,gorge=true})[o.terrain]==true
 end
 function M.valid(p,s,companion)
     if not p.collection then return s.collection_rules==nil and p.next_companion_id==nil and p.party==nil end
@@ -78,6 +111,12 @@ function M.valid(p,s,companion)
         found[c.uid]=c;count=count+1
     end
     if count~=#p.collection then return false end
+    if p.commons_first~=nil then
+        if type(p.commons_first)~="table" then return false end
+        for id,uid in pairs(p.commons_first) do
+            if not species.defs[id] or not found[uid] or found[uid].species~=id or not found[uid].home_seen then return false end
+        end
+    end
     local crew={}
     for _,c in ipairs(s.crew) do
         if not found[c.uid] or found[c.uid].species~=c.species or crew[c.uid] then return false end

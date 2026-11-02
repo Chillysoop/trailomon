@@ -178,7 +178,7 @@ local function event(self)
         local enabled,why=model.events.available(s,choice,self.snapshot.profile)
         local icon=choice.species and iconography.role(choice.species) or (choice.battle and "pressure" or (choice.days and "time" or (choice.recruit and "crew" or "journal")))
         if choice.cost and not choice.species and not choice.recruit then for _,key in ipairs({"food","coins","medicine","repairs"}) do if choice.cost[key] then icon=key;break end end end
-        options[#options+1]={label=(s.collection_rules and choice.recruit and #s.crew>=4) and ("Collect "..model.species.defs[choice.recruit].name.." / to depot") or choice.label,enabled=enabled,detail=enabled and model.events.cost_text(s,choice) or why,fn=cmd(self,"choice",{id=choice.id}),key="event_"..choice.id,icon=icon}
+        options[#options+1]={label=choice.label,enabled=enabled,detail=enabled and model.events.cost_text(s,choice) or why,fn=cmd(self,"choice",{id=choice.id}),key="event_"..choice.id,icon=icon}
     end
     if definition.kind=="encounter" then
         options[#options+1]={label="Lead the crew away",detail=model.combat.withdraw_text(definition.id,s),fn=cmd(self,"withdraw"),key="event_withdraw",icon="trail"}
