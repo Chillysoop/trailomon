@@ -1,0 +1,13 @@
+{
+  "video_sha256": "a210805e280c4ff3fc6541739523a0e0a638d7e5c666d5977b7d14b660495889",
+  "decoded_frames": 600,
+  "duration_seconds": 20,
+  "width": 1280,
+  "height": 720,
+  "fps": 30,
+  "audio_sample_rate": 48000,
+  "audio_peak_dbfs": -1.5,
+  "phone_browser": "390x844 light and dark; play advances; no errors/overflow; metadata matches",
+  "visual_check": "Nine storyboard frames inspected; real engine footage, six original sprites; readable captions and end card",
+  "listening": "No human listening review claimed"
+}
