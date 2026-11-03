@@ -44,3 +44,5 @@
 - [journey-2.md](journey-2.md): S10 rendered full trips, care/equipment fixes, evidence and remaining hands-on limits.
 
 - [collection.md](collection.md): Four active companions, uncapped individual collection, migration, duplicate-species fights and pending collecting fiction.
+
+- [launcher.md](launcher.md): Auto-following desktop shortcut, installation, local build selection and validation.

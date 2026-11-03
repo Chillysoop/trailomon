@@ -30,4 +30,4 @@ Build one shareable ZIP after a meaningful gameplay batch or on request. Generat
 
 ## Optional next investment
 
-The owner approved speed-1 F1 in chat. `./tools/capture.ps1` now captures actual Options and combat screens through a test-only release renderer; see [SCREENSHOTS.md](SCREENSHOTS.md). Inspect affected PNGs directly and add cases as features need them. F2 (stable launcher) and F3 (evidence-reuse ledger) remain unapproved. Return to approved gameplay rather than building the rest of the tooling backlog.
+The owner approved speed-1 F1 in chat. `./tools/capture.ps1` now captures actual Options and combat screens through a test-only release renderer; see [SCREENSHOTS.md](SCREENSHOTS.md). Inspect affected PNGs directly and add cases as features need them. The November 3 desktop-shortcut request authorizes F2: `tools/play.ps1` resolves the existing successful-build pointer on each click, with a complete-bundle fallback. `tools/install_shortcut.ps1` creates the desktop link once. F3 (evidence-reuse ledger) remains unapproved. Return to approved gameplay rather than building the rest of the tooling backlog.

@@ -4,6 +4,12 @@ A relaxed wagon expedition game about traveling with a small crew of original cr
 
 The first playable uses **Defold 1.13.2**, Lua, and 2D presentation. It runs offline on Windows with mouse and keyboard controls.
 
+## Desktop shortcut
+
+Run `./tools/install_shortcut.ps1` once to create **Trailomon** on your Windows desktop. The shortcut opens the latest successful local player build every time; future `tools/build.ps1` builds update its destination automatically. Existing saves remain in the game's normal save location. Keep this project folder in place. This launcher follows local builds; it does not download GitHub releases or compile the game on every click.
+
+For command-line launch, use `./tools/play.ps1`; add `-ResolveOnly` to print the current executable without launching. If the latest-build record is missing, the launcher finds the newest complete player bundle in `dist/`.
+
 ## Design
 
 Start with the [current plan](docs/PLAN.md), [roadmap](docs/ROADMAP.md), and [project memory](docs/memory/MEMORY.md). The owner has selected one polished Windows expedition before additional regions. The [private plan review](https://trailomon-owner-reviews.dusky-owlet-9260.chatgpt.site/plan-1.html) works on a phone or computer after ChatGPT sign-in. [Review workflow instructions](reviews/README.md) include the desktop localhost fallback.
