@@ -33,25 +33,29 @@ class LauncherTests(unittest.TestCase):
     def resolve(self):
         return subprocess.run(['powershell.exe', '-NoProfile', '-NonInteractive', '-ExecutionPolicy', 'Bypass', '-File', str(SCRIPT), '-ResolveOnly', '-ProjectRoot', str(self.root)], capture_output=True, text=True)
 
+    def assert_target(self, result, bundle):
+        self.assertEqual(result.returncode, 0, result.stderr)
+        # Windows may expand RUNNER~1 to runneradmin; compare the actual file.
+        self.assertTrue(Path(result.stdout.strip()).samefile(bundle / 'Trailomon.exe'))
+
     def test_same_launcher_follows_changed_completed_build_pointer(self):
         for bundle in (self.old, self.new):
             self.pointer(bundle)
             result = self.resolve()
-            self.assertEqual(result.returncode, 0, result.stderr)
-            self.assertEqual(Path(result.stdout.strip()), bundle / 'Trailomon.exe')
+            self.assert_target(result, bundle)
 
     def test_missing_or_stale_pointer_finds_newest_complete_bundle(self):
         for pointer in (None, self.root / 'deleted'):
             if pointer:
                 self.pointer(pointer)
-            self.assertEqual(Path(self.resolve().stdout.strip()), self.new / 'Trailomon.exe')
+            self.assert_target(self.resolve(), self.new)
 
     def test_incomplete_and_external_bundles_are_not_launched(self):
         (self.new / 'game.arcd').unlink()
         self.pointer(self.new)
-        self.assertEqual(Path(self.resolve().stdout.strip()), self.old / 'Trailomon.exe')
+        self.assert_target(self.resolve(), self.old)
         self.pointer(self.root.parent)
-        self.assertEqual(Path(self.resolve().stdout.strip()), self.old / 'Trailomon.exe')
+        self.assert_target(self.resolve(), self.old)
 
     def test_missing_game_has_clear_failure(self):
         for folder in (self.old, self.new):

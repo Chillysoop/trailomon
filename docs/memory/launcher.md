@@ -9,3 +9,5 @@ If the pointer is missing/stale/incomplete/outside repo dist, choose the newest 
 Validation: four Windows PowerShell regression scenarios cover changed pointers, stale/missing pointers, incomplete/external bundles and no game. Actual installed .lnk launched the expected release executable with a Trailomon window in 1.62 seconds; left open for the owner. Existing gameplay evidence reused because game inputs are unchanged. CI retains full checks for tooling changes.
 
 Current player build: PR51/e0bbbea688e9b2b37fefbf499b70e0b0e75e741a, built 2026-11-02, SHA256 f35a3f686aca421115aac03101d200ef61ed49f5ff82fb7a1f8f9c27e73a9499. See .tools/commons-delivery.json. This launcher-only change needs no new player ZIP. Hosted answers unchanged at start; no new review decision or page.
+
+CI gotcha: runner temp paths use RUNNER~1 while PowerShell expands runneradmin. Regression assertions compare actual file identity (samefile), not equivalent path spellings.
