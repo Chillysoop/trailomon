@@ -1,6 +1,6 @@
 # Desktop launcher
 
-2026-11-03 owner asked for a desktop shortcut that automatically updates to the latest game. This explicitly authorizes creating Trailomon.lnk on the Windows desktop and supersedes speed-1 F2's previous unapproved state. Implemented as S39: a stable tools/play.ps1 target resolves .tools/latest-bundle.txt at each click. build.ps1 already writes that pointer only at successful completion. It follows local built versions, not remote GitHub releases, and does not rebuild on launch.
+2026-11-03 owner asked for a desktop shortcut that automatically updates to the latest game. This explicitly authorizes creating Trailomon.lnk on the Windows desktop and supersedes speed-1 F2's previous unapproved state. Implemented as S39 / PR #52: a stable tools/play.ps1 target resolves .tools/latest-bundle.txt at each click. build.ps1 already writes that pointer only at successful completion. It follows local built versions, not remote GitHub releases, and does not rebuild on launch.
 
 Installed at the OS-resolved Desktop (currently C:/Users/conne/OneDrive/Desktop/Trailomon.lnk). Windows PowerShell runs hidden, starts the release game normally, and exits. The icon is copied from the existing executable into ignored .tools/trailomon-launcher.ico so old build cleanup cannot break it. No firewall rules, engine mode or save namespace changed. The project folder must remain in place; rerun tools/install_shortcut.ps1 after moving it.
 
