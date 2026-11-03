@@ -63,7 +63,7 @@ Keep chat short and plain. Lead with the result or decision and its link. Do rev
 
 ## Commands and delivery
 
-- Run the game: `./tools/build.ps1`, then launch the executable path it prints. A Defold editor can also open `game.project`.
+- Run the game: `./tools/play.ps1` or the installed Trailomon desktop shortcut opens the latest successful local player build. Build changes with `./tools/build.ps1`; its existing latest-bundle record updates the shortcut automatically. Recreate the shortcut with `./tools/install_shortcut.ps1`. A Defold editor can also open `game.project`.
 - Tests: `./tools/test.ps1` retains all checks. Use `-Suite Game -SkipEngine` for simulation/controller work, `-Suite Game` for local native game checks (release renderer; `-Headless` is CI-only), `-Suite Review` for review infrastructure, and `-Suite Report` for Python report tooling. CI runs full game coverage for game/tool/unknown changes; docs-only changes skip game tests/build, review-only changes run review checks. Scope selector: `python -m unittest discover -s tests -p test_ci_scope.py`.
 - Expedition reports: `./tools/expedition_report.ps1 -Compare`; see `docs/EXPEDITION_REPORTS.md`. Keep fixed seeds/policies and source fingerprints with evidence. Read net command deltas as net, and do not substitute headless decision gates for human playtime.
 - Rendered UI captures: `./tools/capture.ps1 -Scenes options,options_brisk,combat_setup,combat_ready`; inspect its PNGs directly. See `docs/SCREENSHOTS.md`. Add focused fixtures as game features need them. This release renderer is isolated from player saves and does not test physical input or audio.

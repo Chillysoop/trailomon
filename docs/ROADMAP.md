@@ -74,6 +74,7 @@ Updated November 1, 2026. Scope: one polished Windows expedition before new regi
 
 | ID | Goal and review link | Done means | Validation | Status |
 | --- | --- | --- | --- | --- |
+| S39 | Desktop launcher that follows new builds, November 3 owner request / F2 | One desktop shortcut launches the latest completed local bundle; existing saves and offline release engine retained | Pointer-update, stale/missing/incomplete bundle tests; actual shortcut launch and executable identity | done (PR #52) |
 | S12 | Prepare a shareable Windows candidate | Rebuildable `builds/Trailomon-windows.zip` with controls, launch instructions, source revision, and known limits; no credentials or test profile | Clean extraction and launch, release renderer, save round trip, CI green, ZIP contents and provenance checked | todo |
 | S13 | Publish the owner-approved release | Owner explicitly authorizes public publication of the tested candidate; release notes and download link match that artifact | Recheck approval, hash/revision, downloadable asset and launch instructions | todo |
 
