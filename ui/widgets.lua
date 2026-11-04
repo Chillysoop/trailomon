@@ -14,7 +14,7 @@ function M.begin(self)
     if self.buttons and self.buttons[self.focus or 1] then self.focus_key=self.buttons[self.focus or 1].key end
     if self.root then gui.delete_node(self.root) end
     self.root=gui.new_box_node(vmath.vector3(),vmath.vector3())
-    self.buttons={};self.animated={};self.focus=1
+    self.buttons={};self.animated={};self.map_actor=nil;self.focus=1
 end
 function M.rect(self,x,y,w,h,color,alpha)
     local n=attach(self,gui.new_box_node(vmath.vector3(x+w/2,y+h/2,0),vmath.vector3(w,h,0)))

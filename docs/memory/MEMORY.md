@@ -1,5 +1,7 @@
 # Project memory
 
+- [overworld.md](overworld.md): map-led main screen, moving wagon, current visual authorization, presentation timing and scoped validation.
+
 - [integration-audit.md](integration-audit.md): fresh three-reference audit, I1–I3 open proposals, Road/Combat clarity and capture-preview gotcha.
 
 - [preferences.md](preferences.md): owner decisions, scope, tone, art requirements, and deferred directions.

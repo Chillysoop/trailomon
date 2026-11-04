@@ -16,13 +16,14 @@ local habits=require "ui.habits"
 local tracking=require "ui.tracking"
 local aims=require "simulation.journal_aims"
 local M={}
+local journey=require "ui.journey"
 local titles={delivered="New roots, at last.",late="You made it through.",returned="There is always another road.",rescued="Everyone comes home."}
 local function cmd(self,id,args,page) return function() self.perform(id,args,page) end end
 local function page(self,id) return function() self.open_page(id) end end
 local function label(self,x,y,text) w.text(self,x,y,text,12,"muted") end
 local function header(self)
     w.text(self,28,681,"TRAILOMON",27,"ink")
-    w.text(self,28,654,self.snapshot.profile.start_mode=="discovery" and "DISCOVERY DEPOT / FERNWAKE" or "CLASSIC DEPOT / FERNWAKE",11,"gold")
+    w.text(self,28,654,self.snapshot.run.mode=="preparation" and "FERNWAKE / PLAN YOUR DEPARTURE" or "FERNWAKE TO LANTERN REACH",11,"gold")
     local pages={{"trail","Journey"},{"crew","Crew"},{"map","Map"},{"journal","Journal"},{"settings","Options"}}
     for i,item in ipairs(pages) do
         w.button(self,657+(i-1)*118,655,108,38,item[2],page(self,item[1]),{selected=self.page==item[1],size=12,icon=item[1]})
@@ -30,8 +31,12 @@ local function header(self)
     w.rect(self,28,639,1224,1,"edge")
     local s=self.snapshot.run
     local status=self.save_error or self.toast or (self.save_blocked and "Saved data needs recovery" or "Journey saved locally")
+    if journey.supports(self) and not self.save_error and not self.save_blocked and (not self.toast or self.toast=="Journey saved locally") and #s.log>0 then
+        local entry=s.log[#s.log]
+        status=require("presentation.ambush").short("D"..entry.day.." / "..entry.text,111)
+    end
     w.text(self,28,22,status,11,self.save_error and "red" or "muted")
-    w.text(self,940,22,"SPACE pause  /  TAB + ENTER",11,"muted")
+    w.text(self,840,22,"SPACE pause  /  TAB + ENTER",11,"muted")
 end
 local function sidebar(self)
     local s=self.snapshot.run
@@ -374,7 +379,7 @@ local function journal(self)
 end
 local function settings(self)
     local s=self.snapshot.run
-    choices(self,"Make yourself comfortable.","The expedition is saved after every completed day and decision. Menus pause travel. Calm speed takes 20 seconds per day; brisk speed takes 2.5.",{
+    choices(self,"Make yourself comfortable.","Every day and decision saves. Menus pause travel. Calm: about 3.6 seconds per day; brisk: 1.2. Costs stay the same.",{
         {label="Sound: "..(self.snapshot.settings.sound and "on" or "off"),detail="Quiet feedback for decisions and arrivals",fn=cmd(self,"settings",{key="sound"})},
         {label="Motion: "..(self.snapshot.settings.motion and "gentle" or "reduced"),detail="Stops ambient movement when reduced",fn=cmd(self,"settings",{key="motion"})},
         {label="Playback: "..((self.snapshot.settings.travel_speed or 1)==1 and "calm" or "brisk"),detail="View only / travel pace and daily costs stay the same",fn=cmd(self,"settings",{key="travel_speed"}),key="travel_speed",icon="time"},
@@ -450,7 +455,8 @@ function M.draw(self)
     end
     header(self)
     local s=self.snapshot.run
-    if self.page=="trail" and s.mode=="preparation" then preparation(self)
+    if journey.supports(self) then journey.draw(self)
+    elseif self.page=="trail" and s.mode=="preparation" then preparation(self)
     else
         sidebar(self)
         if self.page=="collection" then require("ui.collection").draw(self)
@@ -458,6 +464,9 @@ function M.draw(self)
         elseif self.page=="companion" then companion(self)
         elseif self.page=="work_items" then work_items.draw(self)
         elseif self.page=="map" then map(self)
+        elseif self.page=="trail_report" then
+            local report=model.trail_reports.get(s)
+            if report then trail_reports.draw(self,report) else travel(self) end
         elseif self.page=="journal" then journal(self)
         elseif self.page=="habits" then habits.draw(self)
         elseif self.page=="field_guide" then field_guide.draw(self)
@@ -482,7 +491,7 @@ function M.draw(self)
         elseif s.mode=="result" then result(self)
         else travel(self) end
     end
-    if self.page=="trail" and not s.road_story and (s.mode=="stopped" or s.mode=="traveling" or s.mode=="landmark") then
+    if not journey.supports(self) and self.page=="trail" and not s.road_story and (s.mode=="stopped" or s.mode=="traveling" or s.mode=="landmark") then
         w.button(self,650,565,212,31,"Wildlife nearby",page(self,"tracking"),{key="open_tracking",icon="scout",size=12})
     end
     if self.save_blocked or self.edit then self.buttons={};overlay(self) end
