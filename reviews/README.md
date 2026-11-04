@@ -31,3 +31,7 @@ Answers retain the requested page/title/general/answers/finished/finished_at/sav
 Raw responses stay local and are git-ignored by default. Commit concise decisions to `docs/memory/review-pages.md`. For a remote agent, deliberately attach or commit a downloaded response file instead. Never commit credentials mentioned in comments. Read note-only answers and late updates before closing work.
 
 When the server is unavailable, browser storage retains edits. FINISH downloads a JSON file and tries clipboard copy; the status distinguishes successful copying from a download-only fallback. Paste or attach the answers in chat. An HTML file opened directly can use this fallback even without a running server, provided its neighboring CSS and JavaScript files are present.
+
+## Downloadable integration plan
+
+`integration-2.html` offers a dated PDF and standalone offline HTML under `reviews/downloads/`. Both include the full plan, integration blueprint and roadmap; they are reading copies and never read or export owner answers. Run `node reviews/export_plan.cjs` with Playwright available (the same `NODE_PATH` used by browser review tests) to regenerate both from the authored page. Inspect the rendered PDF after changes; the exporter converts expandable details to sections for reliable pagination. Final copies are also written under ignored `output/pdf/`.
