@@ -1,0 +1,16 @@
+{
+  "date": "2026-11-04",
+  "source": "46ac095ab31b74a54e9c68b3873b32dc308fa6ad",
+  "role": "developer following visible choices, new-player lens",
+  "seed": 1848,
+  "mode": "Discovery / Brindlehorn solo",
+  "actions": 46,
+  "outcome": "delivered",
+  "day": 26,
+  "cargo": 80,
+  "food": 0,
+  "crew": 4,
+  "road_battles": 1,
+  "battle_outcome": "crew_down",
+  "validation": "Actual release-rendered screens and button callbacks; explicit presentation/combat clock advances; no events, rewards or resources forced. Does not test physical input, audio or unaided human enjoyment."
+}

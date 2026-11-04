@@ -1,5 +1,7 @@
 # Owner review pages
 
+**November 4 owner update:** PC review is sufficient. Default to the repository local server and local links. Do not republish new pages to the hosted Site unless asked. Keep the Site identity and existing answers; check historical hosted submissions for late responses. Hosted instructions below remain available for those pages.
+
 Only send or open a YES/NO page when the owner has an unanswered decision. Approved work awaiting implementation is not an open decision. Previously voted items are hidden by default; **Show answered items** reveals history without deleting votes or notes. New votes stay visible for comments until FINISH. A fully answered, submitted page says **No open decisions** and hides FINISH/top-pick actions until editing resumes. Top picks never overwrite an existing YES or NO. Report-only updates do not need a review link.
 
 Open the [private hosted review](https://trailomon-owner-reviews.chillysoop.chatgpt.site/plan-1.html) on a phone or computer and sign in with the owner's ChatGPT account. It supports YES/NO toggles, comments, autosave across devices, and FINISH. Hosted answers use private Sites storage. No tokens are included in the page.

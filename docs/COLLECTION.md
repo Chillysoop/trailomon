@@ -1,5 +1,8 @@
 # Four companions and a wider collection
 
+> November 4, 2026: historical/shipped-system record. New direction is governed by [PLAN](PLAN.md), [INTEGRATION_BLUEPRINT](INTEGRATION_BLUEPRINT.md) and [ROADMAP](ROADMAP.md). Old no-battle-XP, one-slot, departure-only reserve and lane-only constraints do not govern newly requested work. Preserve old-save behavior.
+
+
 Owner direction, November 2, 2026. The active party can contain up to four individual companions. The persistent collection has no game-imposed count cap and permits duplicate species. Six species are playable; this does not create the planned 300-species index content.
 
 ## Playable rules
