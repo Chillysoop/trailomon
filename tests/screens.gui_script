@@ -293,6 +293,7 @@ function update(self,dt)
             require("tests.care_readings_native").controls(self,button)
             require("tests.integration_clarity_native").controls(self,button)
             require("tests.collection_native").controls(self,button)
+            require("tests.journey_map_native").controls(self,button)
         end)
         else msg.post("@system:","exit",{code=1}) end
     else self.index=self.index+1 end

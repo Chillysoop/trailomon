@@ -2,6 +2,8 @@
 
 ## Art and interface direction
 
+November 4, 2026 owner priority: replace the spreadsheet-like main journey with an overworld map, visible destination nodes and actual branching paths, compact colored icons and minimal text. The wagon must match creature pixel detail and visibly move into encounters. This explicitly authorizes the main-screen/map/wagon visual overhaul and travel motion; unrelated creature redesign remains deferred. See `docs/OVERWORLD.md`.
+
 Priority update, October 31, 2026: the owner will handle a large art overhaul later. Prioritize gameplay, expedition decisions, combat, replayability and reliability. Defer dedicated creature-art, scenery-polish and animation passes, including N6/S8, until the owner asks to resume them. Keep existing visuals functional and readable; fix confusing icons, clipping or missing gameplay feedback as needed. The visual-quality and consistent-icon rules below still apply to necessary work, but do not justify spending a feature update on cosmetic polish.
 
 These are standing user requirements, established October 30, 2026. Apply them from the beginning of every feature and art pass.

@@ -43,9 +43,9 @@ function M.controls(self,button)
     self.snapshot=model.new(1848);assert(model.command(self.snapshot,"depart"))
     self.page="trail";self.redraw();coroutine.yield()
     before=util.copy(self.snapshot.run)
-    assert(gui.get_text(button(self,"travel_speed").label)=="Playback: calm")
+    assert(gui.get_text(button(self,"travel_speed").label)=="Calm")
     button(self,"travel_speed").fn();coroutine.yield()
-    assert(gui.get_text(button(self,"travel_speed").label)=="Playback: brisk")
+    assert(gui.get_text(button(self,"travel_speed").label)=="Brisk")
     assert(equal(before,self.snapshot.run),"Playback must not change travel pace or resources")
 end
 return M

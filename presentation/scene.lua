@@ -57,6 +57,7 @@ function M.draw(self,x,y,width,height,s)
     end
 end
 function M.update(self,time,moving,enabled)
+    require("presentation.overworld").update(self,time,enabled)
     if not enabled then return end
     for _,a in ipairs(self.animated) do
         if a.ambush then
@@ -64,6 +65,7 @@ function M.update(self,time,moving,enabled)
             local x,y=require("presentation.ambush").motion(b,u,self.ambush.carry,true)
             gui.set_position(a.node,vmath.vector3(a.x+x,a.y+y,0))
         else
+        local moving=a.map_crew and self.journey_motion~=nil or moving
         local offset=a.rain and ((time*45+a.phase*7)%20)-10 or math.sin(time*(moving and 5 or 1.4)+a.phase)*(a.fly and 4 or (moving and 2 or 0.7))
         local lunge=a.combat and self.exchange_started and math.max(0,1-(time-self.exchange_started)/0.6)*6 or 0
         gui.set_position(a.node,vmath.vector3(a.x+lunge,a.y+offset,0))

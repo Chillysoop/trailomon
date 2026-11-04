@@ -8,6 +8,8 @@ Trailomon is a calm expedition game about one traveler, a wagon, and a small cre
 
 ## Core loop
 
+November 4 presentation update: departure and ordinary expedition play center on a living route map. Six destination nodes and both real forks remain visible; the wagon and its companions move along the selected route into encounters. Resources occupy a slim icon strip, the active party sits below the map, and decisions appear at the current stop. Details stay one click away. See [OVERWORLD.md](OVERWORLD.md). This owner request authorizes this map, wagon and UI overhaul while unrelated creature art remains deferred.
+
 Prepare a crew and load at Fernwake, travel toward a landmark, observe changing conditions, choose an approach to a problem or opportunity, recover or resupply, and continue toward Lantern Reach. At an ending, retain eligible companions, discoveries, and memories and prepare another trip.
 
 During a typical half-minute the player watches the wagon travel, reads a change in circumstances, or makes one consequential choice. Important decisions pause time. Automatic combat replaces new manual battles and remains a short part of the journey. The owner now wants combat mechanically close to Astronarch, with the wagon as an additional defendable objective. Independent unit attacks, repeating abilities, passives and equipment replace the scripted shared-Resolve model. See [WAGON_COMBAT.md](WAGON_COMBAT.md). Automon informs the creature-party appeal.

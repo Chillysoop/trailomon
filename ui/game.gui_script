@@ -5,6 +5,7 @@ local screens=require "ui.screens"
 local input=require "ui.input"
 local scene=require "presentation.scene"
 local ambush=require "services.ambush_controller"
+local journey_motion=require "presentation.journey_motion"
 
 local function feedback(self,arrival)
     if self.snapshot.settings.sound then sound.play(arrival and "#arrival" or "#decision") end
@@ -35,8 +36,11 @@ function init(self)
     self.perform=function(id,args,destination)
         if self.save_blocked then return end
         local previous_mode=self.snapshot.run.mode
+        local before={target=self.snapshot.run.target,progress=self.snapshot.run.progress}
         local ok,why=model.command(self.snapshot,id,args)
         if ok then
+            if id=="new" or id=="pause" then journey_motion.cancel(self) end
+            journey_motion.begin(self,before,id)
             if id=="new" then self.ambush=nil end
             self.reset_clock()
             self.speed=self.snapshot.settings.travel_speed or 1
@@ -54,6 +58,7 @@ function init(self)
     end
     self.open_page=function(destination)
         if self.save_blocked then return end
+        journey_motion.cancel(self)
         if self.page=="ambush" then ambush.pause(self) end
         if self.snapshot.run.mode=="combat" then self.combat_paused=true end
         if self.snapshot.run.mode=="traveling" then model.command(self.snapshot,"pause");self.save_now() end
@@ -64,6 +69,7 @@ function init(self)
         local next_snapshot,notice=save.select(self.snapshot,slot)
         if not next_snapshot then self.toast=notice;self.redraw();return end
         self.snapshot=next_snapshot;self.toast=notice;self.save_error=nil;self.page="trail";self.detail=nil
+        journey_motion.cancel(self);self.map_detail=nil;self.journey_details=nil
         self.ambush=nil
         self.battle_team={};self.battle_actions={};self.combat_paused=true;self.combat_log=nil
         self.speed=self.snapshot.settings.travel_speed or 1;self.reset_clock()
@@ -82,6 +88,7 @@ function init(self)
         self.redraw()
     end
     self.force_event=function(id)
+        journey_motion.cancel(self);self.map_detail=nil;self.journey_details=nil
         local ok,why=model.debug(self.snapshot,"event",id)
         if ok then self.page="trail";self.save_now() else self.toast=why end
         self.reset_clock();self.redraw()
@@ -107,12 +114,13 @@ end
 
 function update(self,dt)
     self.time=self.time+math.min(dt,0.1)
+    journey_motion.update(self,dt)
     ambush.update(self,dt)
-    local active=self.page=="trail" and self.snapshot.run.mode=="traveling" and not self.edit and not self.save_blocked and self.has_focus
+    local active=self.page=="trail" and self.snapshot.run.mode=="traveling" and not self.journey_motion and not self.edit and not self.save_blocked and not self.save_error and self.has_focus
     local fighting=self.page=="trail" and self.snapshot.run.mode=="combat" and model.combat.automatic(self.snapshot.run.battle) and not self.combat_paused and not self.edit and not self.save_blocked and not self.save_error and self.has_focus
     if fighting then
         if clock.tick(self.clock,dt,true,self.combat_speed==2 and 1.5 or 5) then self.perform("battle_step") end
-    elseif clock.tick(self.clock,dt,active,self.speed==1 and 20 or 2.5) then self.perform("step") end
+    elseif clock.tick(self.clock,dt,active,self.snapshot.settings.motion and (self.speed==1 and 1.2 or 0.35) or (self.speed==1 and 3.6 or 1.2)) then self.perform("step") end
     if self.needs_redraw then self.needs_redraw=false;screens.draw(self) end
     scene.update(self,self.time,active,self.snapshot.settings.motion)
 end

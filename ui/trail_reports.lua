@@ -14,7 +14,7 @@ function M.draw(self,report)
     for i,path in ipairs(report.routes) do
         local y=321-(i-1)*112
         w.button(self,28,y,834,36,path.label.." / "..path.distance.." km",function()
-            self.perform("leave",{branch=path.id})
+            self.perform("leave",{branch=path.id},"trail")
         end,{key=path.label,size=15,icon="trail"})
         w.text(self,38,y-9,path.facts,12,"muted",814)
         w.reading(self,38,y-48,path.help.icon,nil,{label=path.help.text,size=12,width=770})

@@ -6,7 +6,7 @@ local function reset(self,page)
     self.battle_team={};self.battle_actions={};self.edit=nil;self.save_blocked=false
     self.combat_paused=true;self.combat_speed=1;self.combat_log=nil
     self.capture_actions={};self.capture_assert=nil;self.capture_settle=nil
-    self.practice_writer=nil;self.road_writer=nil
+    self.practice_writer=nil;self.road_writer=nil;self.journey_motion=nil;self.map_detail=nil;self.journey_details=nil
     self.toast="Automated fixture / isolated / no player save"
 end
 function M.click(self,key)
@@ -496,7 +496,7 @@ function M.commons_bellmoth(self)
     assert(model.debug(self.snapshot,"event","discover_bellmoth"));self.redraw()
 end
 function M.commons_settled(self)
-    M.commons_loamling(self);self.capture_actions={"event_invite"}
+    M.commons_loamling(self);self.toast=nil;self.capture_actions={"event_invite"}
     self.capture_assert=function() assert(#self.snapshot.run.crew==2 and self.snapshot.run.crew[2].origin.kind=="met") end
 end
 function M.commons_story(self)
@@ -504,5 +504,36 @@ function M.commons_story(self)
     assert(model.command(self.snapshot,"return"));assert(model.command(self.snapshot,"new"))
     self.page="collection";self.redraw();self.capture_actions={"collection_story_2"}
     self.capture_assert=function() assert(self.collection_detail==2) end
+end
+function M.overworld_departure(self)
+    reset(self,"trail");self.snapshot=require("tests.collection_fixture")();self.redraw()
+end
+function M.overworld_travel(self)
+    M.overworld_departure(self);assert(model.command(self.snapshot,"depart"))
+    self.snapshot.run.progress=13;self.redraw()
+end
+function M.overworld_ambush(self)
+    M.overworld_travel(self);assert(model.debug(self.snapshot,"event","scavengers"));self.redraw()
+end
+local function moving(self,elapsed)
+    M.overworld_ambush(self)
+    require("presentation.journey_motion").begin(self,{target=2,progress=5},"step")
+    self.journey_motion.elapsed=elapsed;self.has_focus=true;self.redraw()
+    self.capture_assert=function()
+        assert(self.journey_motion and self.snapshot.run.mode=="event")
+        for _,b in ipairs(self.buttons) do assert(b.key~="event_battle","Encounter opened before wagon arrived") end
+        local expected=require("presentation.journey_motion").position(self)
+        local actual=gui.get_position(self.map_actor.node)
+        assert(math.abs(actual.x-(self.map_actor.x+expected.x*self.map_actor.sx))<.01)
+    end
+end
+function M.overworld_moving(self) moving(self,0.2) end
+function M.overworld_arriving(self) moving(self,2.0) end
+function M.overworld_wildlife(self)
+    M.overworld_travel(self);assert(model.debug(self.snapshot,"event","discover_loamling"));self.redraw()
+end
+function M.overworld_covered(self)
+    M.overworld_departure(self);self.snapshot.profile.covered=true
+    assert(model.command(self.snapshot,"wagon",{id="covered"}));self.redraw()
 end
 return M

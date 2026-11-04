@@ -64,6 +64,7 @@ Updated November 1, 2026. Scope: one polished Windows expedition before new regi
 
 | ID | Goal and review link | Done means | Validation | Status |
 | --- | --- | --- | --- | --- |
+| S40 | Map-led journey and moving wagon, November 4 owner request | Main departure/travel screen shows six destinations, both playable forks, moving wagon/companions, contextual encounters and compact resource/crew readings; shared detailed wagon in combat; saves preserved | Deterministic map/motion tests, native keyboard/route/encounter controls, affected 1280x720 captures, Windows build | done (PR #53) |
 | S10 | Finish sound, settings, and interface basics | Audio controls persist; sounds reviewed; focus, readable costs, disabled explanations, and timing consistent | Settings persistence, mouse/keyboard journeys, listening review, actual window inspection | doing |
 | S15 | Make road decisions readable and reversible, J1–J4 | Free return before combat's first exchange; exact recruitment food outlook; three authored road receipts; remembered viewing speed | Repeated inspection/RNG, old-save and native persistence checks; actual setup/receipt/recruit/restart screens | done (PR #14) |
 | S16 | Capture rendered test screens automatically, F1 | One CLI command opens isolated production UI fixtures, performs actions, saves 1280×720 PNGs and exits | Options/speed and combat setup/first-intent captures inspected; isolation regressions; no player-save access | done (PR #17) |
