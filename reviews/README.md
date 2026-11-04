@@ -1,5 +1,7 @@
 # Owner review pages
 
+**November 4 owner update:** PC review is sufficient. Default to the repository local server and local links. Do not republish new pages to the hosted Site unless asked. Keep the Site identity and existing answers; check historical hosted submissions for late responses. Hosted instructions below remain available for those pages.
+
 Only send or open a YES/NO page when the owner has an unanswered decision. Approved work awaiting implementation is not an open decision. Previously voted items are hidden by default; **Show answered items** reveals history without deleting votes or notes. New votes stay visible for comments until FINISH. A fully answered, submitted page says **No open decisions** and hides FINISH/top-pick actions until editing resumes. Top picks never overwrite an existing YES or NO. Report-only updates do not need a review link.
 
 Open the [private hosted review](https://trailomon-owner-reviews.chillysoop.chatgpt.site/plan-1.html) on a phone or computer and sign in with the owner's ChatGPT account. It supports YES/NO toggles, comments, autosave across devices, and FINISH. Hosted answers use private Sites storage. No tokens are included in the page.
@@ -29,3 +31,7 @@ Answers retain the requested page/title/general/answers/finished/finished_at/sav
 Raw responses stay local and are git-ignored by default. Commit concise decisions to `docs/memory/review-pages.md`. For a remote agent, deliberately attach or commit a downloaded response file instead. Never commit credentials mentioned in comments. Read note-only answers and late updates before closing work.
 
 When the server is unavailable, browser storage retains edits. FINISH downloads a JSON file and tries clipboard copy; the status distinguishes successful copying from a download-only fallback. Paste or attach the answers in chat. An HTML file opened directly can use this fallback even without a running server, provided its neighboring CSS and JavaScript files are present.
+
+## Downloadable integration plan
+
+`integration-2.html` offers a dated PDF and standalone offline HTML under `reviews/downloads/`. Both include the full plan, integration blueprint and roadmap; they are reading copies and never read or export owner answers. Run `node reviews/export_plan.cjs` with Playwright available (the same `NODE_PATH` used by browser review tests) to regenerate both from the authored page. Inspect the rendered PDF after changes; the exporter converts expandable details to sections for reliable pagination. Final copies are also written under ignored `output/pdf/`.

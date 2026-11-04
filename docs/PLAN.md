@@ -1,71 +1,133 @@
-# Trailomon plan
+# Trailomon — integrated game plan
 
-Updated November 1, 2026. Owner-approved scope: one polished expedition first, Windows only. Defold and Lua remain the engine and language. The existing playable foundation is merged in [PR 1](https://github.com/Chillysoop/trailomon/pull/1).
+**November 4, 2026.** Defold + Lua. Offline Windows. One complete, readable expedition before expanding the world. This replaces the earlier plan, preserved in [the archive](archive/PLAN-2026-11-04.md).
 
-## Pitch
+**The game:** a creature-collecting wagon expedition in which the team you befriend, train and equip determines how you survive increasingly dangerous country. Astronarch-style automatic battles are a central source of tension. The Oregon Trail journey gives those battles a purpose: protecting a delivery, managing a battered wagon, choosing how far to push, and deciding when to seek care. The map and the creatures lead the interface.
 
-Trailomon is a calm expedition game about one traveler, a wagon, and a small crew of original creatures venturing into increasingly unexplored wilderness. Prepare supplies, choose routes, gather resources, and care for companions whose abilities help with travel and short automatic battles. Combat rewards preparation, positioning, and complementary abilities. Each journey leaves discoveries, relationships, and new options for another departure. Deliberate pixel art and consistent labeled icons give the world a recognizable identity.
+This is a development plan, not a claim that proposed systems already exist. [The integration blueprint](INTEGRATION_BLUEPRINT.md) defines system boundaries, visuals and save behavior. [The roadmap](ROADMAP.md) orders playable deliveries. These documents supersede conflicting older design proposals; historical saves still need their original rules.
 
-## Core loop
+## 1. Established direction
 
-November 4 presentation update: departure and ordinary expedition play center on a living route map. Six destination nodes and both real forks remain visible; the wagon and its companions move along the selected route into encounters. Resources occupy a slim icon strip, the active party sits below the map, and decisions appear at the current stop. Details stay one click away. See [OVERWORLD.md](OVERWORLD.md). This owner request authorizes this map, wagon and UI overhaul while unrelated creature art remains deferred.
+- One traveler, one wagon, up to four active companions. An uncapped collection of individuals, including duplicates, lives at Wayhome Commons.
+- Original creatures grounded in habitats, bodies and behavior. Individual abilities replace a universal type chart or fixed class system. Combat specialists and ordinary wildlife do not need mandatory travel utility.
+- The eventual index contains **at least 300 distinct species**. Six are playable; 24 briefs exist. Empty index slots and recolors do not count as species.
+- Combat follows Astronarch's preparation, formation, independent attack clocks, repeating skills and interacting items. The wagon is an additional defendable target. Automon informs collecting appeal rather than the resolver.
+- Battle leveling, heal/revive stops, reserve exchanges, species-specific equipment capacity, individual sheets, item discovery and an implemented-item catalogue are directly requested.
+- A more robust wagon/cargo/repair system is requested; its exact component and packing model is proposed below.
+- Visual clarity is a release requirement: minimal routine text, shared original icons, consistent colors, contextual explanations and meaningful movement. Existing creature assets remain until the later owner-led overhaul.
+- PC/local review is sufficient. Hosted phone publication is no longer a default requirement.
 
-Prepare a crew and load at Fernwake, travel toward a landmark, observe changing conditions, choose an approach to a problem or opportunity, recover or resupply, and continue toward Lantern Reach. At an ending, retain eligible companions, discoveries, and memories and prepare another trip.
+## 2. The connected loop
 
-During a typical half-minute the player watches the wagon travel, reads a change in circumstances, or makes one consequential choice. Important decisions pause time. Automatic combat replaces new manual battles and remains a short part of the journey. The owner now wants combat mechanically close to Astronarch, with the wagon as an additional defendable objective. Independent unit attacks, repeating abilities, passives and equipment replace the scripted shared-Resolve model. See [WAGON_COMBAT.md](WAGON_COMBAT.md). Automon informs the creature-party appeal.
+**Meet → collect → choose four → equip → choose a route → defend the wagon → earn growth and discoveries → repair, heal or exchange → push farther → return with new possibilities.**
 
-## Pillars
+| Decision | Immediate effect | Later consequence | Visible connection |
+| --- | --- | --- | --- |
+| Befriend a creature | New individual joins party or Commons | New formation, skill or equipment capacity | Encounter → portrait → sheet |
+| Equip for combat or travel within available slots | Changes attacks, skills or road assistance | Changes the threat/route the team can handle | Sheet → forecast → result |
+| Take a dangerous branch | More serious encounter/discovery opportunity | XP and gear options versus injuries and damage | Map → battle → receipt |
+| Put a protector in a raider's zone | Redirects pressure away from the wagon | Preserves delivery prospects; protector may need care | Target line → hit → care preview |
+| Exchange an injured fighter | New team composition | Less treatment spending; different hauling/meals | Stop → party → next-leg forecast |
+| Carry more repair supplies | Less load for food/finds | More freedom to take rough routes | Wagon → route outlook |
 
-1. Let the road breathe. Quiet travel and animal behavior belong between consequential decisions.
-2. Make preparation matter. Time, supplies, load, fatigue, and weather create understandable tradeoffs.
-3. Give every companion a life and a useful body. The same adaptations explain travel help and combat behavior.
-4. Carry the player farther from dependable help. Scenery, reports, and route demands express increasing remoteness.
-5. Make another journey worthwhile. Different crews, conditions, discoveries, and horizontal unlocks support replay without mandatory grinding.
+**Feature admission rule:** improve at least two parts of this loop, give the feature one obvious visual home, and explain any new persistent meter. This applies to systems, not a requirement that every species have several utility jobs.
 
-## Systems and content target
+## 3. Five pillars
 
-| Area | First polished expedition |
-| --- | --- |
-| Journey | One complete route, six landmarks, two branch choices, one river crossing; target 20–35 minutes |
-| Crew | Six original species; four active companions, uncapped persistent collection including duplicate individuals; road fights and Mara practice use up to four ready travelers; optional Discovery depot starts with one chosen hauler |
-| Combat | Implemented in S28–S30: independent units/attack clocks, repeatable skills, formation, equipment and wagon defense; two road scenarios plus practice. Peaceful alternatives remain. Old journeys retain their original combat; new journeys use the replacement and persist real expedition consequences |
-| Provisioning | Food, medicine, repairs, coins, cargo, and capacity; existing foraging with finite local yields; hunting deferred by approved P2 |
-| Survival | Weather, pace, rations, hauling, stamina, injuries, wagon wear, and cargo condition |
-| Progression | Named companions, species observations, courier recognition, selectable learned habits, memories, ten journey summaries, and standard/covered wagon alternatives |
-| Narrative | Give existing landmarks and species distinct ecological and local details within the current eighteen original events plus the approved wildlife/courier/discovery-start additions |
-| Usability | Clear goals, labeled icons, mouse and keyboard control, readable 1280 by 720 presentation, pause, save/resume, basic audio controls |
-| Delivery | Offline Windows ZIP, launch instructions, exact source revision, repeatable build and test scripts |
+1. **Preparation becomes visible action.** The player follows targeting, skills, protection and the reason a build worked.
+2. **Battles matter afterward.** Injuries, growth, gear and wagon consequences immediately affect the journey.
+3. **Collect possibilities; remember individuals.** Identity, origin, level and history belong to individuals, including duplicates.
+4. **Push farther from help.** Early stops support and teach; later stretches demand preparation. Calm means time to decide, not an absence of danger.
+5. **Read the world before a ledger.** Geography, creatures, targets and visible damage explain decisions; detailed accounting is available on inspection.
 
-The current game already implements the journey, automatic encounters, foraging, saving, initial progression and the three-work-item experiment (see [WORK_ITEMS.md](WORK_ITEMS.md)). See [GAME_DESIGN.md](GAME_DESIGN.md) for current rules, [AUTO_BATTLES.md](AUTO_BATTLES.md) for the reference study and future proposals, and [WORLD_LORE.md](WORLD_LORE.md) for creative possibilities. Proposal documents do not automatically add every idea to scope. Review votes and the [roadmap](ROADMAP.md) determine implementation priorities.
+## 4. Shipped baseline and gaps
 
-## Art and audio direction
+Playable baseline: **PR #53 / 46ac095**. The installed desktop shortcut follows the latest successful local player build.
 
-Owner direction, October 31, 2026: a large art overhaul will be owner-led later. Defer dedicated creature-art, scenery-polish and animation passes. Use the current assets while prioritizing gameplay decisions and reliability. Keep essential readability, consistent labeled icons and clear feedback; visual polish is not the next milestone.
+| Area | Shipped | Needed connection |
+| --- | --- | --- |
+| Journey | Six stops, two forks, weather, food, deadline, moving map wagon | Stable arrival; visible threats/services; fewer repeated confirmations |
+| Collecting | Four active, uncapped individuals, duplicates, origins, waybeds | Reserve exchange at stops; active/reserve sheets |
+| Combat | Six kits; independent attacks/Focus; front/rear lanes; wagon defense; two road encounters and practice | Two zones, target previews, encounter composition and rewards |
+| Growth | Habits, trust, observations and memories | Individual battle XP/levels and readable stat effects |
+| Equipment | Three work items, one slot, run inventory/weight | Species-specific sockets; catalogue, discovery and interactions |
+| Recovery | Camp, medicine, repairs and lasting injuries | Named heal/revive stops; coherent quotes; reserve access |
+| Wagon/cargo | Wagon %, cargo %, load/capacity; open/covered variants | Better explanation; evaluate components and protected loads |
+| Interface | Main map/party updated; older secondary menus remain | Shared sheets, help, targeting and consequence presentation |
 
-Use intentional pixel art with strong silhouettes, a restrained earthy palette, and a coherent side view. The wagon and landscape lead the composition. Species anatomy must remain recognizable at travel scale. Reuse the original icon language across preparation, travel, gathering, encounters, and the journal; pair icons with labels and values. Follow [VISUAL_DIRECTION.md](VISUAL_DIRECTION.md).
+An **unreleased simulation experiment** exists on `codex/expedition-rpg` (`874cb5d`). It is not player-ready: the old UI does not support its new positions, new-system tests and balance are incomplete, and no build/PR was shipped. Its tentative XP, prices and early-enemy tuning are not commitments. Reuse reviewed pieces in roadmap order, not as one unchecked merge.
 
-The landscape becomes less maintained toward the uplands: fewer roofs, fading wheel ruts, larger horizons, and more wildlife-shaped landmarks. Lantern Reach is a small settlement at the edge of dependable travel. Larger wilderness regions belong to a later expansion.
+### Fresh playthrough evidence
 
-Use restrained work sounds, weather, creature calls, and short feedback tones. Retain the existing sound and reduced-motion options, validate their persistence, and perform a listening review. New paid art generation requires the owner's spending approval under the project workflow; existing approved assets can be edited and integrated within the repository.
+On November 4, a developer-driven Discovery run of the actual release renderer used seed 1848 and a solo Brindlehorn. It delivered on day 26 with 80 cargo, zero food and four companions. It contained **one battle**, lost by crew knockout, followed by field recovery. No encounters/resources were forced. [Recorded evidence and limits](../reviews/evidence/integration-2/baseline.json).
 
-## Platform and scope boundaries
+Observed gaps: opening an encounter resizes the map; care is spread across menus; departure/outcomes often require another Travel click; battles grant no individual growth; one early fight does not sustain combat tension. This is one seeded developer playthrough, not a population balance result or blind human fun score. Updated expert/new-player full runs remain required.
 
-The first milestone supports Windows desktop, offline, with mouse and keyboard. macOS, Linux, and HTML5 are deferred by the owner's October 30, 2026 decision.
+## 5. System direction
 
-Defer additional regions, a large bestiary, breeding, evolution trees, capture devices, elemental charts, repeatable combat XP, permanent stat grinding, a crafting tree, base construction, multiplayer, online accounts, cloud saves, monetization, and a large narrative campaign. Equipment is approved as a small later experiment, scheduled after combat is readable and tested. Public releases and spending require explicit approval; ordinary tested PRs are merged by the developer.
+### Collection, powers and growth
 
-## Open decisions
+Each individual retains ID, name, species, origin, total XP, derived level and memories. The traveling instance also has health, energy, duty and equipment. A duplicate is a new individual, not a species-wide stat upgrade.
 
-The owner approved P1–P5 in [plan-1](../reviews/plan-1.html) on October 30, 2026: automatic combat, bounded foraging with hunting deferred, wilderness presentation, six-species art refinement, and the three-item equipment experiment after combat testing. They then approved N1–N8 in [next-1](../reviews/next-1.html), prioritizing iconography and visible simplicity. Automatic combat, bounded-gathering clarity, the shared symbol system, N2's forecasts/consequences, and N1's S2 full-expedition reports are implemented. Combat tuning and the other approved work retain their roadmap status. The current audit follows the completed N8 developer-role journeys, J1–J4 clarity fixes, F1 captures and N3 guardian experiment. PR #20 delivered the bounded S5 cost pass and guardian adoption for new journeys. N5/S7 now gives all six landmarks distinct scenery and a growing sense of remoteness. The N1 pre-equipment checkpoint and N7/S9 experiment are now implemented. N9 trail reports now explain both existing forks. N10 now adds tree/axle consequences within existing events. N11 now records three optional journal aims across journeys. Next: broader S5 balance and the S10 reliability/feel milestone checks. N6/S8 art and animation are deferred to the owner-led overhaul. Human pacing is still unverified. No repeat approval is needed. Saved later answers and comments take precedence over initial recommendations. Blank ideas after FINISH are deferred without repeated prompting.
+First slice: one repeating active skill, one innate passive, and a field action when ecology supports one. Show these separately. Gear modifies interactions; no second skill tree is necessary. A combat specialist may lack a field action.
 
-No reliable calendar estimate has been set. Ship small tested steps, measure the result, and revise content ambitions before promising dates. The owner's programming experience is unspecified; setup explanations should remain beginner-friendly.
+Battle XP gives modest visible growth. Leveling must not heal, erase damage or lower food needs. Reward eligible participants once per qualifying victory, including creatures knocked out during that fight; exclude those unready at the start. No last-hit competition or unlimited practice XP. Preserve earned progress after an unsuccessful delivery. Tune the curve/cap from full runs; avoid mandatory grind and automatic enemy scaling that cancels growth.
 
-October 31 wild-1 revision 7 approves the bounded creature additions in [CREATURE_ENCOUNTERS.md](CREATURE_ENCOUNTERS.md): sightings, field observations, courier practice/recognition, an optional discovery-led profile and selectable learned habits. Keep one route, six species, current art and horizontal tradeoffs; no evolution, breeding or combat XP. See S22–S25.
+### Combat and encounters
 
-## Expanded creature direction — November 1, 2026
+Two zones per side, each a 2×2 formation area; at most four active companions. Ordinary target priority: **opposing zone → front before rear → nearest eligible position → stable tie-break**. Named skills can override it explicitly. Raiders threaten the wagon through an unguarded zone; that is Trailomon's addition, not an exact Astronarch rule.
 
-The intended expanded game has a minimum of 300 distinct species. The first expedition remains the immediate playable milestone; only six species are currently implemented. Creatures relate to their environments and can be fighters, food animals, protectors, fast creatures or unusual wildlife without a mandatory wagon utility. Approved B1/B2 select individual abilities and behavior combinations without a universal type chart or fixed classes. B3 battlefield terrain effects are rejected; B4–B8 authorize bounded experiments and the roster pipeline. See [CREATURE_DIRECTION.md](CREATURE_DIRECTION.md) and the [first 24 briefs](../reviews/creature-index.html). Art remains deferred; neither regional skins nor unfilled index slots count as additional implemented species.
+Show target lines, incoming threats and click-to-place slots before Start. Attacks and Focus remain separate clocks; skills repeat automatically. Pause for inspection is free. Results show consequences for the actual traveling party and return to the same map location.
 
-## Collection update — November 2, 2026
+Author threats by stretch/habitat with quieter opportunities between them. Initial test target: **four to six combat opportunities per expedition**, some avoidable. This is a tuning hypothesis, not a forced battle quota or measured playtime percentage. A solo opening must be fair with visible information. Later fights should test different preparations. Fixed world difficulty and optional dangerous routes preserve the value of training.
 
-Four active companions, with an uncapped persistent collection of individuals including duplicates. New recruits join the party if it has room; otherwise they enter the depot reserve. Choose the party before departure. Reserves do not consume expedition food or provide mid-trip replacements. Six species remain implemented; the eventual index target is at least 300. The owner's follow-up Proceed selects collecting-1 C1–C3: Wayhome Commons at Fernwake, species-specific befriending/waybeds, and individual origin/homecoming stories. Loamling and Bellmoth are the first two encounter treatments; the other four retain their existing meetings or rescues. No ranch construction, resident simulation or magical storage.
+### Care and reserve exchanges
+
+Marked stops use the Wayhome roadkeeper network to heal/revive, exchange reserves and repack. Price them to leave room for exploration; exact costs belong to balancing. Camp/medicine remain resource-dependent fallback care in remote country.
+
+Exchange only at a stop, outside combat. Preserve outgoing injuries so swapping twice cannot heal. Keep at least one hauler; preview changes to meals/hauling. Outgoing gear stays in the wagon. Reserves neither fight nor eat in the background. Stop recovery and end-of-trip home recovery are explicit transactions.
+
+### Equipment and discovery
+
+One inventory supplies both road and combat. Each item has one ID, source, weight, slot compatibility and implemented effects. No separate battle bag.
+
+First target: the three existing tools plus roughly nine to twelve distinct additions. The catalogue includes **every implemented item**, including consumables, with discovery, source clue, ownership/location, compatibility and exact effect. It does not imply hundreds of finished items. Knowledge persists; first-slice equipment is packed per expedition, matching the existing economy. Reconsider permanent gear only if repeat preparation proves tedious.
+
+Start with three sockets per species: two combat + one utility for combat-oriented bodies; one combat + two utility for hauling/support bodies. Anatomy determines layouts without creating a universal class chart. Old gear goes into a compatible utility socket. Unavailable sockets and available-but-empty sockets look different.
+
+### Wagon/cargo/repair — two open proposals
+
+**G1: three functional components.** Running gear affects mobility/haul strain; frame affects structural safety; cover affects exposure. Show them on the wagon and derive one roadworthiness summary. Select a damaged part to compare a field patch and service repair. Replace the single opaque health abstraction for new runs, rather than adding three permanent HUD bars to it. Keep an escape from every breakdown.
+
+**G2: protected cargo positions.** Retain weight/capacity as the limit, but show two protected positions and an exposed rack. Choose which meaningful loads get shelter: delivery crates, food or valuable finds. Cover, terrain and creature help change that choice. No Tetris grid, item rotation, per-apple durability or repeated stack management.
+
+Only these new refinements need votes on [integration-2](../reviews/integration-2.html). Combat, growth, care, sheets and equipment already have direct authorization. If either proposal is rejected, keep its current underlying resource and improve the explanation; do not block the rest of the loop.
+
+## 6. Visual direction
+
+- **Journey:** the actual map dominates. Wagon, destination, forks, threats and next care stop are readable without opening menus. Arrival never teleports the wagon when a panel opens.
+- **Battle:** shared field, legible zones, opposing formations, target-local feedback, overhead HP/Focus/attack meters and visible wagon danger. Inspection replaces a permanent stat wall.
+- **Sheet:** a recognizable creature with name/level, health/energy, active/passive, sockets and origin/history. Same design for traveling and stored individuals.
+- **Wagon:** locate cargo and damage on the object. Main-screen warnings are short and actionable. Distinguish structure, load and delivery quality.
+- **Help:** underlined keywords provide short explanations on hover, keyboard focus or click. Essential prices, danger and requirements stay visible. A tooltip answers what it means, what changes it and why it matters here.
+- **Color/icons:** use the semantic catalog. Leaf food/cargo, brass time/energy, rose health/care, river shield/rest/water, violet skills/records, stone wagon/load/repairs, clay threat. Shape, words and signed values work without color.
+
+[The visual acceptance contract](INTEGRATION_BLUEPRINT.md#visual-acceptance-contract) specifies screens, interaction and edge cases. Actual 1280×720 renders, keyboard operation and reduced-motion behavior are required; a successful build is not visual evidence.
+
+## 7. Scope and milestone exit
+
+Prove the complete loop with **six species and one route**. Order: map/clarity → zones → growth/care/reserves → sheets/gear/discovery → authored encounter pacing → selected wagon/cargo depth. Older approved experiments follow the integrated foundation. Expand the bestiary after the species/kit/item schema settles.
+
+Keep current sounds and settings, repairing missing feedback. No new regions, breeding, evolution tree, ranch building, crafting tree, multiplayer, cloud saves or public release in this milestone. Creature-created battlefield terrain remains rejected (B3). Dedicated creature art remains deferred.
+
+The milestone is done when:
+
+1. Fresh solo Discovery and prepared four-member expeditions complete/resume without forced resources or events.
+2. Collect → equip → position → battle XP → injury → care/exchange → next route works end to end and is understandable.
+3. At least two builds solve encounters differently. An early mistake is recoverable without mandatory restart/grind.
+4. A purposeful gathering/search detour fits a reasonable delivery plan; fighting/care do not consume all exploration time.
+5. Saves cannot duplicate XP/loot or lose individuals/items. Old journeys and active fights finish correctly.
+6. No clipping, color-only warnings, hidden essential costs or unclear target/arrival behavior; keyboard/click help matches hover.
+7. Evidence records seeds, policies, opportunities/fights, combat seconds, recovery costs, exploration, food lows and outcomes. Simulated time is not substituted for human playtime.
+
+This establishes a coherent playable expedition, not a finished 300-species world or public release.

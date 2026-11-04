@@ -1,5 +1,8 @@
 # Trailomon Game Design
 
+> November 4, 2026: historical/shipped-system record. New direction is governed by [PLAN](PLAN.md), [INTEGRATION_BLUEPRINT](INTEGRATION_BLUEPRINT.md) and [ROADMAP](ROADMAP.md). Old no-battle-XP, one-slot, departure-only reserve and lane-only constraints do not govern newly requested work. Preserve old-save behavior.
+
+
 Version 0.1 | October 30, 2026 | Design baseline for a Defold prototype
 
 Trailomon is a single-player wagon expedition game set in an original world of unusual wildlife. The player travels alone with a small crew of creature companions, carrying supplies and cargo between distant communities. Preparation, changing conditions, and the needs of the crew shape each journey. Creatures help overcome obstacles, find resources, and defend the wagon.

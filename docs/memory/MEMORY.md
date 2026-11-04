@@ -1,5 +1,7 @@
 # Project memory
 
+- [integration-plan.md](integration-plan.md): November4 planning priority, connected-system contracts, S41–S48, PC reviews, baseline playthrough and isolated unfinished spike.
+
 - [overworld.md](overworld.md): map-led main screen, moving wagon, current visual authorization, presentation timing and scoped validation.
 
 - [integration-audit.md](integration-audit.md): fresh three-reference audit, I1–I3 open proposals, Road/Combat clarity and capture-preview gotcha.

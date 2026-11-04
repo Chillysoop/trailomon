@@ -6,7 +6,7 @@
 
 2026-10-31 owner direction: only send or open a YES/NO review when there are genuinely unanswered decisions. Approved implementation work is not an open question. Previously voted items are hidden by default, with explicit Show answered items history. Votes and notes stay saved. New draft votes remain visible for comments until FINISH. Completed pages say No open decisions and hide redundant actions; top picks never overwrite existing answers. Do not resend completed reviews after each feature or invent choices to fill a quota.
 
-Phone reviews use the owner-private Site in reviews/hosted-site.json. Source is maintained through Sites in the ignored .tools/phone-review-site checkout. Preserve identity/audience/codes/answers. Sync with tools/sync_hosted_review.py. Test fixtures only; credentials stay in memory/stdin.
+2026-11-04: PC/local reviews are sufficient; no default Sites publication. Preserve existing hosted identity/answers and check historical submissions. integration-2 G1/G2 are the only new wagon/cargo decisions; see integration-plan.md.
 
 Check hosted review_submissions using database overview and paginated complete rows, then import with tools/import_hosted_review.py. Read every local response, including note-only and late edits. FINISH writes an immutable submission snapshot; later draft autosaves do not alter it. Track imported revision/finished_at to avoid acting twice. Browser FINISH cannot wake an ended turn; check again next session.
 

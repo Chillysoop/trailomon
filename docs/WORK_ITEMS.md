@@ -1,5 +1,8 @@
 # Work-item experiment
 
+> November 4, 2026: historical/shipped-system record. New direction is governed by [PLAN](PLAN.md), [INTEGRATION_BLUEPRINT](INTEGRATION_BLUEPRINT.md) and [ROADMAP](ROADMAP.md). Old no-battle-XP, one-slot, departure-only reserve and lane-only constraints do not govern newly requested work. Preserve old-save behavior.
+
+
 Implemented October 31, 2026 under P5 / N7 / S9. Buy at Fernwake or Mossbell, then open **Crew → Work items**. The depot and shop also link directly to the same screen. Choose a companion, buy an object, and equip it. One copy of each object per expedition; one slot per companion. Moving an object transfers it rather than copying it. Unequipped objects still occupy load.
 
 | Object | Coins / load | Travel | Automatic combat |

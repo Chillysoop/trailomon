@@ -1,5 +1,8 @@
 # Astronarch-style combat, defending the wagon
 
+> November 4, 2026: historical/shipped-system record. New direction is governed by [PLAN](PLAN.md), [INTEGRATION_BLUEPRINT](INTEGRATION_BLUEPRINT.md) and [ROADMAP](ROADMAP.md). Old no-battle-XP, one-slot, departure-only reserve and lane-only constraints do not govern newly requested work. Preserve old-save behavior.
+
+
 Approved direction, November 1, 2026. The owner requested combat very close to Astronarch, then explicitly added the wagon as a defendable target. This supersedes the earlier two-position, shared-Resolve, three/four-exchange design and A1's narrower two-team experiment. The replacement is authorized; this document records the target. S28/S29 are implemented as selectable samples and Mara wagon practice. S30 now integrates new-run road encounters; see [ROAD_COMBAT.md](ROAD_COMBAT.md) for costs, compatibility and evidence. See [CREW_BUILDS.md](CREW_BUILDS.md) for current kits, equipment, costs and comparisons.
 
 ## The intended experience
